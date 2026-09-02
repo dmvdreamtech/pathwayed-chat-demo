@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { coveredParentIds } from "./trial-emails.js"
+import { coveredParentIds, isSchoolDomainEmail, parseSchoolDomains } from "./trial-emails.js"
 
 /**
  * School-covered accounts must never be mailed about a trial or a subscription —
@@ -46,5 +46,65 @@ describe("coveredParentIds", () => {
         row("a", { school_covered: true }),
       ]).has("a"),
     ).toBe(true)
+  })
+})
+
+/**
+ * The second suppression rule: anyone at a domain a licensed school owns, staff
+ * included. Staff are not on the STUDENT roster, so Dean returns covered:false for
+ * them and no school_covered row is ever written — the coverage rule above cannot
+ * see them at all, and they are the people who reported receiving these mails.
+ *
+ * This rule governs MAIL AND STATUS ONLY, never access. That is what makes an
+ * over-broad answer here cheap (an unsent reminder) where the same rule feeding the
+ * access gate would be a paywall bypass for anyone with a school address.
+ */
+describe("parseSchoolDomains", () => {
+  it("reads the domains out of the same map school-login keys on", () => {
+    const domains = parseSchoolDomains('{"pallotti.org":"uuid-1","stjohns.edu":"uuid-2"}')
+    expect(domains && [...domains].sort()).toEqual(["pallotti.org", "stjohns.edu"])
+  })
+
+  it("treats an unset or empty map as no schools configured, not as an error", () => {
+    // The B2C-only deployment. Every account is mailable and nothing is suppressed.
+    expect(parseSchoolDomains(undefined)?.size).toBe(0)
+    expect(parseSchoolDomains("")?.size).toBe(0)
+    expect(parseSchoolDomains("   ")?.size).toBe(0)
+  })
+
+  it("returns null for a malformed map so the caller can refuse to send", () => {
+    // Unparseable config means school and consumer addresses are indistinguishable.
+    // Mailing every school in the pilot is worse than skipping the run.
+    expect(parseSchoolDomains("{not json")).toBeNull()
+    expect(parseSchoolDomains('["pallotti.org"]')).toBeNull()
+    expect(parseSchoolDomains("null")).toBeNull()
+  })
+
+  it("lowercases keys, so a capitalised map entry still suppresses", () => {
+    const domains = parseSchoolDomains('{"Pallotti.ORG":"uuid-1"}')
+    expect(isSchoolDomainEmail("staff@pallotti.org", domains!)).toBe(true)
+  })
+})
+
+describe("isSchoolDomainEmail", () => {
+  const domains = new Set(["pallotti.org"])
+
+  it("suppresses a school address whatever its case", () => {
+    expect(isSchoolDomainEmail("staff@pallotti.org", domains)).toBe(true)
+    expect(isSchoolDomainEmail("Staff@Pallotti.ORG", domains)).toBe(true)
+  })
+
+  it("leaves consumer addresses alone, including lookalikes", () => {
+    expect(isSchoolDomainEmail("parent@gmail.com", domains)).toBe(false)
+    // A subdomain and a suffix match are NOT the school's domain. Matching them
+    // would let notpallotti.org mute its own trial mail.
+    expect(isSchoolDomainEmail("someone@mail.pallotti.org", domains)).toBe(false)
+    expect(isSchoolDomainEmail("someone@notpallotti.org", domains)).toBe(false)
+  })
+
+  it("is false for an address that could not be resolved or has no domain", () => {
+    // The caller treats these as unknown: not mailed, not flipped, retried.
+    expect(isSchoolDomainEmail(null, domains)).toBe(false)
+    expect(isSchoolDomainEmail("nodomain", domains)).toBe(false)
   })
 })

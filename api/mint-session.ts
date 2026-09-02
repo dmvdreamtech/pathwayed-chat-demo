@@ -40,6 +40,37 @@ function signAccessToken(uid: string): { token: string; expiresAt: number } | nu
   return { token: `${data}.${sig}`, expiresAt: exp }
 }
 
+/**
+ * Undo the free trial the signup trigger stamps on a freshly minted identity.
+ *
+ * WHY IT NEEDS UNDOING RATHER THAN SKIPPING. The profiles row is not created here;
+ * handle_new_user creates it inside the createUser transaction, and the BEFORE
+ * INSERT trigger pathwayed_start_trial (migration 0014) stamps free_trial + a
+ * 7-day trial_end on any never-trialed profile. So the row already carries a trial
+ * by the time createUser returns, and the earliest this code can act is after it.
+ *
+ * WHY IT MATTERS AT ALL. A covered K-8 student's school holds the licence, so a
+ * trial is simply not a true statement about their account: they are not 7 days
+ * from losing access, and has_trialed = true would wrongly say they have spent the
+ * one trial their account gets. This is hygiene, not a mail fix — these identities
+ * carry a random @covered.pathwayed.local address that no mailbox receives, and
+ * api/trial-emails.ts suppresses them on coverage anyway.
+ *
+ * BEST EFFORT, NEVER FATAL. This handler's standing rule is that a student who
+ * cannot practice beats a student who cannot sign in, and a stale trial flag costs
+ * a covered student nothing — the access gate short-circuits on coverage before it
+ * ever reads trial state. So a failure is logged and the sign-in continues.
+ */
+async function clearMintedTrial(svc: SupabaseClient, uid: string): Promise<void> {
+  const { error } = await svc
+    .from("profiles")
+    .update({ subscription_status: "inactive", trial_end: null, has_trialed: false })
+    .eq("id", uid)
+  if (error) {
+    console.error("mint-session could not clear the trial flag:", error.message)
+  }
+}
+
 export type MintResult =
   | { localId: string; accessToken: string; expiresAt: number }
   | { error: string }
@@ -80,6 +111,10 @@ export async function provisionAndMint(
     })
     if (created.error || !created.data.user) return { error: "mint_failed" }
     uid = created.data.user.id
+
+    // The signup trigger has just stamped a free trial on this identity's profile.
+    // A school-covered student never had one, so take it back off.
+    await clearMintedTrial(svc, uid)
 
     const ins = await svc
       .from("students")

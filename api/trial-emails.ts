@@ -11,11 +11,24 @@
 //
 // Scheduling lives in vercel.json (crons). GET = Vercel cron; POST = manual flush.
 //
-// SCHOOL-COVERED ACCOUNTS ARE NEVER MAILED. Their school holds the license, so a
-// trial countdown and an "asking you to subscribe" mail are both simply wrong —
-// staff at a licensed school were receiving them. Coverage is decided by the SAME
-// rule the access gate uses (hasCoveredStudent: an active student row carrying
-// school_covered), imported rather than restated so the two can never drift.
+// SCHOOL-AFFILIATED ACCOUNTS ARE NEVER MAILED, and never flipped to 'expired'.
+// Two independent tests, either one of which suppresses:
+//
+//   1. COVERED STUDENT — an active students row carrying school_covered. Decided
+//      by the SAME rule the access gate uses (hasCoveredStudent), imported rather
+//      than restated so the two can never drift.
+//   2. SCHOOL-OWNED EMAIL DOMAIN — the account's email domain appears in
+//      SCHOOL_DOMAIN_MAP. Test 1 alone missed the people who reported this bug:
+//      staff at a licensed school are not on the STUDENT roster, so Dean returns
+//      covered:false for them (school-login logs `not_on_roster`), no
+//      school_covered row is ever written, and they looked exactly like B2C.
+//      Anyone at a domain the school owns is school-affiliated by definition.
+//
+// TEST 2 IS A MAIL-AND-STATUS RULE ONLY. It deliberately does NOT feed the access
+// gate. Suppressing mail on a domain grants nothing, so a wrong answer costs an
+// unsent reminder; granting ACCESS on a domain would be a self-serve paywall
+// bypass for anyone with an address at a mapped school. See the domain-vs-roster
+// note in api/school-login.ts: a MAPPED domain is not itself coverage.
 
 import { createClient, type SupabaseClient } from "@supabase/supabase-js"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
@@ -109,6 +122,81 @@ async function emailFor(supabase: SupabaseClient, userId: string): Promise<strin
   return data.user?.email ?? null
 }
 
+interface Recipient {
+  profile: TrialProfile
+  to: string
+}
+
+/**
+ * Resolve each candidate's address and drop the ones at a school-owned domain.
+ *
+ * Done UP FRONT rather than inside the send loops for two reasons. The dry run
+ * below reports what a live run would send, and it can only do that if the domain
+ * rule has already been applied. And the ended loop's 'expired' flip must not
+ * happen for a school account, so the address has to be known before that write —
+ * resolving here is what makes the flip unreachable for a suppressed account.
+ *
+ * An unresolvable address is an UNKNOWN domain, so it is neither mailed nor
+ * flipped; it is counted as a failure and retried next run, since nothing is
+ * stamped until a mail actually goes out.
+ */
+async function resolveRecipients(
+  supabase: SupabaseClient,
+  profiles: TrialProfile[],
+  schoolDomains: Set<string>,
+): Promise<{ recipients: Recipient[]; skippedDomain: number; unresolved: number }> {
+  const recipients: Recipient[] = []
+  let skippedDomain = 0
+  let unresolved = 0
+
+  for (const profile of profiles) {
+    const to = await emailFor(supabase, profile.id)
+    if (!to) {
+      unresolved++
+      continue
+    }
+    if (isSchoolDomainEmail(to, schoolDomains)) {
+      skippedDomain++
+      continue
+    }
+    recipients.push({ profile, to })
+  }
+  return { recipients, skippedDomain, unresolved }
+}
+
+/**
+ * The domains a licensed school owns, read from the SAME SCHOOL_DOMAIN_MAP
+ * api/school-login.ts maps to a Dean school_id. Only the KEYS matter here; the
+ * school_id values are Dean's business, not this cron's.
+ *
+ * Returns null for a MALFORMED map, and the caller then sends nothing. Unset is
+ * not malformed — it is the legitimate "no schools configured" state and yields
+ * an empty set. The distinction matters: unparseable JSON means we cannot tell a
+ * school address from a consumer one, and mailing every school in the pilot is a
+ * far worse outcome than skipping a run.
+ *
+ * Keys are lowercased on the way in. school-login lowercases only the lookup side
+ * and so assumes lowercase keys; doing both here can only ever suppress MORE mail,
+ * which is the safe direction for a rule that grants nothing.
+ */
+export function parseSchoolDomains(raw: string | undefined): Set<string> | null {
+  if (!raw || raw.trim() === "") return new Set<string>()
+  try {
+    const map = JSON.parse(raw) as Record<string, string>
+    if (typeof map !== "object" || map === null || Array.isArray(map)) return null
+    return new Set(Object.keys(map).map((d) => d.trim().toLowerCase()))
+  } catch {
+    return null
+  }
+}
+
+/** True when this address sits at a domain a licensed school owns. */
+export function isSchoolDomainEmail(email: string | null, domains: Set<string>): boolean {
+  if (!email) return false
+  const domain = email.split("@")[1]?.trim().toLowerCase()
+  return Boolean(domain) && domains.has(domain as string)
+}
+
 /** Chunk size for the parent_id `in` filter, so a long candidate list cannot
  *  overflow the PostgREST request URL. */
 const COVERAGE_BATCH = 200
@@ -179,6 +267,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(500).json({ error: "Server is missing Supabase configuration." })
   }
 
+  // Parsed before anything else: a broken map means we cannot tell a school
+  // address from a consumer one, so there is no safe way to continue.
+  const schoolDomains = parseSchoolDomains(process.env.SCHOOL_DOMAIN_MAP)
+  if (!schoolDomains) {
+    console.error("[trial-emails] SCHOOL_DOMAIN_MAP is not valid JSON — refusing to send.")
+    return res.status(500).json({ error: "SCHOOL_DOMAIN_MAP is not valid JSON" })
+  }
+
   const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY)
   const now = new Date()
   const nowIso = now.toISOString()
@@ -231,29 +327,32 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const skippedCovered =
     reminderCandidates.length - reminders.length + (endedCandidates.length - ended.length)
 
+  // Second suppression rule: anyone at a school-owned domain, staff included.
+  const reminderTargets = await resolveRecipients(supabase, reminders, schoolDomains)
+  const endedTargets = await resolveRecipients(supabase, ended, schoolDomains)
+  // Counted apart from skippedCovered so the two rules can be told apart in the run
+  // output — this is the staff population the coverage rule alone does not catch.
+  const skippedDomain = reminderTargets.skippedDomain + endedTargets.skippedDomain
+
   const providerConfigured = Boolean(EMAIL_PROVIDER_API_KEY && EMAIL_FROM)
 
   if (!providerConfigured) {
     return res.status(200).json({
       provider_configured: false,
-      reminder_candidates: reminders.length,
-      ended_candidates: ended.length,
+      reminder_candidates: reminderTargets.recipients.length,
+      ended_candidates: endedTargets.recipients.length,
       school_covered_skipped: skippedCovered,
+      school_domain_skipped: skippedDomain,
       message: "EMAIL_PROVIDER_API_KEY / EMAIL_FROM not set — no mail sent.",
     })
   }
 
   let remindersSent = 0
   let endedSent = 0
-  let failed = 0
+  let failed = reminderTargets.unresolved + endedTargets.unresolved
 
-  for (const p of reminders) {
+  for (const { profile: p, to } of reminderTargets.recipients) {
     try {
-      const to = await emailFor(supabase, p.id)
-      if (!to) {
-        failed++
-        continue
-      }
       const daysLeft = p.trial_end
         ? Math.max(1, Math.ceil((Date.parse(p.trial_end) - now.getTime()) / DAY_MS))
         : 2
@@ -266,16 +365,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
   }
 
-  for (const p of ended) {
+  // Only accounts that survived BOTH suppression rules reach this loop, so the
+  // 'expired' flip below is unreachable for a school-covered or school-domain
+  // account — which is the point: that status is exactly what must never be
+  // written for them.
+  for (const { profile: p, to } of endedTargets.recipients) {
     try {
-      const to = await emailFor(supabase, p.id)
       // Flip to 'expired' regardless of email success so the account state is
       // truthful; stamp the email marker only when the mail actually went out.
       await supabase.from("profiles").update({ subscription_status: "expired" }).eq("id", p.id)
-      if (!to) {
-        failed++
-        continue
-      }
       await sendEmail(to, endedEmail(p.display_name, origin))
       await supabase.from("profiles").update({ trial_ended_email_sent_at: nowIso }).eq("id", p.id)
       endedSent++
@@ -290,6 +388,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     reminders_sent: remindersSent,
     ended_sent: endedSent,
     school_covered_skipped: skippedCovered,
+    school_domain_skipped: skippedDomain,
     failed,
   })
 }
