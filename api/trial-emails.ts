@@ -10,10 +10,17 @@
 // fires at most once (idempotent across the every-few-hours cron cadence).
 //
 // Scheduling lives in vercel.json (crons). GET = Vercel cron; POST = manual flush.
+//
+// SCHOOL-COVERED ACCOUNTS ARE NEVER MAILED. Their school holds the license, so a
+// trial countdown and an "asking you to subscribe" mail are both simply wrong —
+// staff at a licensed school were receiving them. Coverage is decided by the SAME
+// rule the access gate uses (hasCoveredStudent: an active student row carrying
+// school_covered), imported rather than restated so the two can never drift.
 
 import { createClient, type SupabaseClient } from "@supabase/supabase-js"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 import { requireCronSecret } from "./require-auth.js"
+import { hasCoveredStudent } from "../src/lib/schoolCoverage.js"
 
 const SUPABASE_URL = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL
 const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -102,6 +109,65 @@ async function emailFor(supabase: SupabaseClient, userId: string): Promise<strin
   return data.user?.email ?? null
 }
 
+/** Chunk size for the parent_id `in` filter, so a long candidate list cannot
+ *  overflow the PostgREST request URL. */
+const COVERAGE_BATCH = 200
+
+interface CoverageRow {
+  parent_id: string
+  active: boolean
+  school_covered: boolean
+}
+
+/**
+ * Group student rows by account and ask the gate's own rule about each one.
+ * Grouping is the only part of this that is not hasCoveredStudent itself, which
+ * is why it is the only part written here. Exported for the unit test.
+ */
+export function coveredParentIds(rows: CoverageRow[]): Set<string> {
+  const byParent = new Map<string, CoverageRow[]>()
+  for (const row of rows) {
+    const existing = byParent.get(row.parent_id)
+    if (existing) existing.push(row)
+    else byParent.set(row.parent_id, [row])
+  }
+  const covered = new Set<string>()
+  for (const [parentId, students] of byParent) {
+    if (hasCoveredStudent(students)) covered.add(parentId)
+  }
+  return covered
+}
+
+/**
+ * Which of these accounts a school licence covers, read in batches.
+ *
+ * FAILS CLOSED — a read error returns null and the caller sends NOTHING. A
+ * skipped run costs a reminder a few hours, and the same rows are still there on
+ * the next pass because nothing is stamped until a mail goes out. Sending anyway
+ * would mail a licensed school's staff about a bill they do not owe, which is the
+ * exact failure this guard exists to prevent.
+ */
+async function coveredAccounts(
+  supabase: SupabaseClient,
+  parentIds: string[],
+): Promise<Set<string> | null> {
+  if (parentIds.length === 0) return new Set<string>()
+
+  const rows: CoverageRow[] = []
+  for (let i = 0; i < parentIds.length; i += COVERAGE_BATCH) {
+    const { data, error } = await supabase
+      .from("students")
+      .select("parent_id, active, school_covered")
+      .in("parent_id", parentIds.slice(i, i + COVERAGE_BATCH))
+    if (error) {
+      console.error("[trial-emails] could not read school coverage:", error.message)
+      return null
+    }
+    rows.push(...((data ?? []) as CoverageRow[]))
+  }
+  return coveredParentIds(rows)
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "GET" && req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" })
@@ -141,8 +207,30 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(502).json({ error: "Could not read trial profiles", message })
   }
 
-  const reminders = (reminderRows ?? []) as TrialProfile[]
-  const ended = (endedRows ?? []) as TrialProfile[]
+  const reminderCandidates = (reminderRows ?? []) as TrialProfile[]
+  const endedCandidates = (endedRows ?? []) as TrialProfile[]
+
+  // Drop school-covered accounts from BOTH lists before anything is counted or
+  // sent, so the dry run below reports exactly what a live run would send. One
+  // read covers both lists.
+  //
+  // A covered account keeps 'free_trial' forever — nothing is stamped and the
+  // ended loop no longer flips it to 'expired' — so it re-appears as a candidate
+  // on every run. That is deliberate (stamping a mail that never went out, or
+  // marking a licensed account 'expired', would both be lies) and is why the
+  // read below is batched rather than assuming a short list.
+  const coveredIds = await coveredAccounts(
+    supabase,
+    [...new Set([...reminderCandidates, ...endedCandidates].map((p) => p.id))],
+  )
+  if (!coveredIds) {
+    return res.status(502).json({ error: "Could not read school coverage" })
+  }
+  const reminders = reminderCandidates.filter((p) => !coveredIds.has(p.id))
+  const ended = endedCandidates.filter((p) => !coveredIds.has(p.id))
+  const skippedCovered =
+    reminderCandidates.length - reminders.length + (endedCandidates.length - ended.length)
+
   const providerConfigured = Boolean(EMAIL_PROVIDER_API_KEY && EMAIL_FROM)
 
   if (!providerConfigured) {
@@ -150,6 +238,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       provider_configured: false,
       reminder_candidates: reminders.length,
       ended_candidates: ended.length,
+      school_covered_skipped: skippedCovered,
       message: "EMAIL_PROVIDER_API_KEY / EMAIL_FROM not set — no mail sent.",
     })
   }
@@ -200,6 +289,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     provider_configured: true,
     reminders_sent: remindersSent,
     ended_sent: endedSent,
+    school_covered_skipped: skippedCovered,
     failed,
   })
 }

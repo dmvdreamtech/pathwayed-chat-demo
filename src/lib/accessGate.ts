@@ -97,31 +97,12 @@ export function seatCap(
 }
 
 /**
- * Is this account covered by a school licence, according to the DATABASE?
- *
- * WHY THIS EXISTS ALONGSIDE isSchoolCovered(). The sessionStorage flag is written
- * only after a verified Dean resolve, so it is trustworthy, but it lives for one
- * tab and one session. A covered student who signs in normally (ordinary SSO, no
- * trip through the school station) has no school session at all, so the flag reads
- * false and the trial lock closes on them. students.school_covered is the durable
- * record of the same fact, so the gate consults both.
- *
- * TRUSTING THIS COLUMN IS CONDITIONAL, AND THE CONDITION IS A GRANT. It is only
- * safe to read school_covered as an access grant because migration 0025 revokes
- * INSERT/UPDATE on that column from `authenticated` and `anon`, leaving the service
- * role the only writer. Before that migration a parent could set it from the
- * browser (the students_own policy checks only parent_id = auth.uid()), which would
- * have made this a self-serve paywall bypass. If that grant is ever restored, this
- * function stops being an access check and becomes a hole. Do not read this column
- * as an entitlement anywhere without re-reading migration 0025 first.
- *
- * Inactive children are ignored: an over-seat-cap child the parent switched off
- * must not keep the account's paywall open.
+ * Coverage lives in src/lib/schoolCoverage.ts, which is dependency-free so the
+ * api/ serverless functions can import the SAME rule (accessGate cannot be
+ * imported server-side — it pulls in @/lib/billing, and the `@/` alias is not
+ * configured for api/tsconfig.json). Re-exported here so every existing caller
+ * keeps importing coverage from the gate it belongs to.
  */
-export function hasCoveredStudent(
-  students: { active: boolean; school_covered: boolean }[],
-): boolean {
-  return students.some((s) => s.active && s.school_covered)
-}
+export { hasCoveredStudent, type CoverageStudent } from './schoolCoverage.js'
 
 export type { PlanId }
