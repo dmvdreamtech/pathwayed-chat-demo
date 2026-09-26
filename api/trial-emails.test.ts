@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest"
-import { coveredParentIds, isSchoolDomainEmail, parseSchoolDomains } from "./trial-emails.js"
+import { coveredParentIds, endedEmail, reminderEmail } from "./trial-emails.js"
+import { APP_URL, isSchoolDomainEmail, parseSchoolDomains } from "./email-core.js"
 
 /**
  * School-covered accounts must never be mailed about a trial or a subscription —
@@ -106,5 +107,36 @@ describe("isSchoolDomainEmail", () => {
     // The caller treats these as unknown: not mailed, not flipped, retried.
     expect(isSchoolDomainEmail(null, domains)).toBe(false)
     expect(isSchoolDomainEmail("nodomain", domains)).toBe(false)
+  })
+})
+
+/**
+ * The rendered templates. Links must point at the public app, never at whichever
+ * host the cron happened to call (a Pallotti student received a link to
+ * pathwayed-chat-demo-<hash>.vercel.app), and user-facing copy carries no dashes.
+ */
+describe("trial templates", () => {
+  const dash = /[–—]/
+
+  it("builds every link from the fixed APP_URL", () => {
+    for (const mail of [reminderEmail("Sam", 2), endedEmail("Sam")]) {
+      expect(mail.text).toContain(`${APP_URL}/settings`)
+      expect(mail.html).toContain(`href="${APP_URL}/settings"`)
+      expect(mail.html).not.toMatch(/vercel\.app/)
+    }
+  })
+
+  it("carries no em-dash or en-dash in the ended template", () => {
+    const mail = endedEmail(null)
+    expect(mail.subject).not.toMatch(dash)
+    expect(mail.text).not.toMatch(dash)
+    expect(mail.html).not.toMatch(dash)
+  })
+
+  it("carries no em-dash or en-dash in the reminder template", () => {
+    const mail = reminderEmail(null, 1)
+    expect(mail.subject).not.toMatch(dash)
+    expect(mail.text).not.toMatch(dash)
+    expect(mail.html).not.toMatch(dash)
   })
 })

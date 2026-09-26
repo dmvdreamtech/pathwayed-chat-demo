@@ -6,22 +6,23 @@
 // each send is stamped on the profile (admissions_season_email_sent_at, migration
 // 0019) so a re-trigger never emails the same account twice.
 //
-// Mirrors api/trial-emails.ts exactly: raw Resend HTTP (no SDK dep), the service
-// role for DB access, and graceful degradation — if the email provider isn't
-// configured the run is a no-op that reports what it WOULD send. A required dry-run
-// mode reports the audience count WITHOUT sending or stamping anything.
+// Mirrors api/trial-emails.ts exactly: sends through api/email-core.ts (raw Resend
+// HTTP, no SDK dep, links built from the fixed APP_URL, and the school-domain guard
+// applied on every send), the service role for DB access, and graceful degradation:
+// if the email provider isn't configured the run is a no-op that reports what it
+// WOULD send. A required dry-run mode reports the audience count WITHOUT sending
+// or stamping anything.
 //
-// There is deliberately NO cron entry in vercel.json — this is triggered by hand
+// There is deliberately NO cron entry in vercel.json: this is triggered by hand
 // when admissions season opens. GET and POST both work; guard with CRON_SECRET.
 
 import { createClient, type SupabaseClient } from "@supabase/supabase-js"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 import { requireCronSecret } from "./require-auth.js"
+import { APP_URL, emailProviderConfigured, sendEmail, type RenderedEmail } from "./email-core.js"
 
 const SUPABASE_URL = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL
 const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
-const EMAIL_PROVIDER_API_KEY = process.env.EMAIL_PROVIDER_API_KEY
-const EMAIL_FROM = process.env.EMAIL_FROM
 
 // Plans whose grade coverage reaches a 6-8 prep module (mirrors
 // billing.PLAN_GRADES / planQualifiesForBand: Elementary K-5 is excluded).
@@ -32,12 +33,6 @@ const PRICE_LABEL = "$19/mo per student"
 interface CandidateProfile {
   id: string
   display_name: string | null
-}
-
-interface RenderedEmail {
-  subject: string
-  html: string
-  text: string
 }
 
 function shell(heading: string, bodyHtml: string, ctaLabel: string, ctaUrl: string): string {
@@ -52,7 +47,7 @@ function shell(heading: string, bodyHtml: string, ctaLabel: string, ctaUrl: stri
   </div></body></html>`
 }
 
-function seasonEmail(name: string | null, appUrl: string): RenderedEmail {
+function seasonEmail(name: string | null): RenderedEmail {
   const hi = name ? `Hi ${name},` : "Hi there,"
   return {
     subject: "Admissions test season is coming — HSPT & ISEE prep is built in",
@@ -60,7 +55,7 @@ function seasonEmail(name: string | null, appUrl: string): RenderedEmail {
 
 If your child might take the HSPT or ISEE this year, admissions test season is almost here. PathwayEd now has HSPT and ISEE prep built right into the tutoring your child already uses — the same Nikki, the same saved progress, with timed practice sections and a practice essay. It's ${PRICE_LABEL}, and you can add it to any child from your settings.
 
-Add test prep: ${appUrl}/settings
+Add test prep: ${APP_URL}/settings
 
 — The PathwayEd team`,
     html: shell(
@@ -68,23 +63,8 @@ Add test prep: ${appUrl}/settings
       `<p style="font-size:15px;line-height:1.55;margin:0">${hi}</p>
        <p style="font-size:15px;line-height:1.55;margin:10px 0 0">If your child might take the HSPT or ISEE this year, admissions test season is almost here. PathwayEd now has <b>HSPT and ISEE prep</b> built right into the tutoring your child already uses — the same Nikki, the same saved progress, with timed practice sections and a practice essay. It’s ${PRICE_LABEL}, and you can add it to any child from your settings.</p>`,
       "Add test prep",
-      `${appUrl}/settings`,
+      `${APP_URL}/settings`,
     ),
-  }
-}
-
-async function sendEmail(to: string, mail: RenderedEmail): Promise<void> {
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${EMAIL_PROVIDER_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ from: EMAIL_FROM, to, subject: mail.subject, html: mail.html, text: mail.text }),
-  })
-  if (!res.ok) {
-    const detail = await res.text().catch(() => "")
-    throw new Error(`Email provider responded ${res.status}: ${detail.slice(0, 180)}`)
   }
 }
 
@@ -167,7 +147,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY)
   const nowIso = new Date().toISOString()
-  const origin = req.headers.origin || (req.headers.host ? `https://${req.headers.host}` : "")
 
   const { audience, error } = await computeAudience(supabase)
   if (error) {
@@ -184,8 +163,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     })
   }
 
-  const providerConfigured = Boolean(EMAIL_PROVIDER_API_KEY && EMAIL_FROM)
-  if (!providerConfigured) {
+  if (!emailProviderConfigured()) {
     return res.status(200).json({
       provider_configured: false,
       audience_count: audience.length,
@@ -202,7 +180,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         failed++
         continue
       }
-      await sendEmail(to, seasonEmail(p.display_name, origin))
+      // A school-domain address is refused inside sendEmail (billing template);
+      // it lands in `failed` and is never stamped, so it is re-examined next run.
+      await sendEmail(to, seasonEmail(p.display_name), "admissions_season")
       await supabase.from("profiles").update({ admissions_season_email_sent_at: nowIso }).eq("id", p.id)
       sent++
     } catch (err) {

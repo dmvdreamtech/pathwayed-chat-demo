@@ -4,25 +4,34 @@
 //   Day 7 (trial ended)   -> "Your PathwayEd trial has ended" + flip to 'expired'
 //
 // Mirrors the discipline console's send-email cron: raw Resend HTTP (no SDK dep),
-// the service role for DB access, and graceful degradation — if the email
-// provider isn't configured the run is a no-op that reports what it WOULD send,
-// so a missing key never throws. Each send is stamped on the profile so a mail
-// fires at most once (idempotent across the every-few-hours cron cadence).
+// the service role for DB access, and graceful degradation. If the email provider
+// isn't configured the run is a no-op that reports what it WOULD send, so a
+// missing key never throws. Each send is stamped on the profile so a mail fires
+// at most once (idempotent across the daily cron cadence).
 //
 // Scheduling lives in vercel.json (crons). GET = Vercel cron; POST = manual flush.
+//
+// Every link is built from APP_URL (api/email-core.ts), never from the request.
+// The cron invokes this function on its deployment URL, so a link built from the
+// host header pointed at pathwayed-chat-demo-<hash>.vercel.app.
 //
 // SCHOOL-AFFILIATED ACCOUNTS ARE NEVER MAILED, and never flipped to 'expired'.
 // Two independent tests, either one of which suppresses:
 //
-//   1. COVERED STUDENT — an active students row carrying school_covered. Decided
+//   1. COVERED STUDENT: an active students row carrying school_covered. Decided
 //      by the SAME rule the access gate uses (hasCoveredStudent), imported rather
 //      than restated so the two can never drift.
-//   2. SCHOOL-OWNED EMAIL DOMAIN — the account's email domain appears in
+//   2. SCHOOL-OWNED EMAIL DOMAIN: the account's email domain appears in
 //      SCHOOL_DOMAIN_MAP. Test 1 alone missed the people who reported this bug:
 //      staff at a licensed school are not on the STUDENT roster, so Dean returns
 //      covered:false for them (school-login logs `not_on_roster`), no
 //      school_covered row is ever written, and they looked exactly like B2C.
 //      Anyone at a domain the school owns is school-affiliated by definition.
+//
+// Test 2 is applied twice on purpose. This file filters its candidate lists up
+// front so the dry run and the 'expired' flip see the rule, and sendEmail in
+// api/email-core.ts applies it again on every send, so a future edit to the
+// filtering here cannot reach the provider with a school address.
 //
 // TEST 2 IS A MAIL-AND-STATUS RULE ONLY. It deliberately does NOT feed the access
 // gate. Suppressing mail on a domain grants nothing, so a wrong answer costs an
@@ -33,12 +42,19 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 import { requireCronSecret } from "./require-auth.js"
+import {
+  APP_URL,
+  emailProviderConfigured,
+  isSchoolDomainEmail,
+  parseSchoolDomains,
+  schoolDomainRefusal,
+  sendEmail,
+  type RenderedEmail,
+} from "./email-core.js"
 import { hasCoveredStudent } from "../src/lib/schoolCoverage.js"
 
 const SUPABASE_URL = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL
 const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
-const EMAIL_PROVIDER_API_KEY = process.env.EMAIL_PROVIDER_API_KEY
-const EMAIL_FROM = process.env.EMAIL_FROM
 
 const DAY_MS = 24 * 60 * 60 * 1000
 
@@ -46,12 +62,6 @@ interface TrialProfile {
   id: string
   display_name: string | null
   trial_end: string | null
-}
-
-interface RenderedEmail {
-  subject: string
-  html: string
-  text: string
 }
 
 function shell(heading: string, bodyHtml: string, ctaLabel: string, ctaUrl: string): string {
@@ -66,49 +76,34 @@ function shell(heading: string, bodyHtml: string, ctaLabel: string, ctaUrl: stri
   </div></body></html>`
 }
 
-function reminderEmail(name: string | null, daysLeft: number, appUrl: string): RenderedEmail {
+export function reminderEmail(name: string | null, daysLeft: number): RenderedEmail {
   const hi = name ? `Hi ${name},` : "Hi there,"
   const days = `${daysLeft} ${daysLeft === 1 ? "day" : "days"}`
   return {
     subject: `${daysLeft} ${daysLeft === 1 ? "day" : "days"} left in your PathwayEd trial`,
-    text: `${hi}\n\nYou have ${days} left in your PathwayEd free trial. Subscribe any time to keep your children's learning sessions and homework help going without interruption. Their progress is saved either way.\n\nSubscribe: ${appUrl}/settings\n\n— The PathwayEd team`,
+    text: `${hi}\n\nYou have ${days} left in your PathwayEd free trial. Subscribe any time to keep your children's learning sessions and homework help going without interruption. Their progress is saved either way.\n\nSubscribe: ${APP_URL}/settings\n\nThe PathwayEd team`,
     html: shell(
       `${days} left in your free trial`,
       `<p style="font-size:15px;line-height:1.55;margin:0">${hi}</p>
-       <p style="font-size:15px;line-height:1.55;margin:10px 0 0">You have <b>${days}</b> left in your PathwayEd free trial. Subscribe any time to keep your children’s learning sessions and homework help going without interruption — their progress is saved either way.</p>`,
+       <p style="font-size:15px;line-height:1.55;margin:10px 0 0">You have <b>${days}</b> left in your PathwayEd free trial. Subscribe any time to keep your children’s learning sessions and homework help going without interruption. Their progress is saved either way.</p>`,
       "Subscribe now",
-      `${appUrl}/settings`,
+      `${APP_URL}/settings`,
     ),
   }
 }
 
-function endedEmail(name: string | null, appUrl: string): RenderedEmail {
+export function endedEmail(name: string | null): RenderedEmail {
   const hi = name ? `Hi ${name},` : "Hi there,"
   return {
     subject: "Your PathwayEd trial has ended",
-    text: `${hi}\n\nYour PathwayEd free trial has ended. Learning sessions and homework help are paused until you subscribe — but nothing has been deleted. Every child's saved progress is right where they left it.\n\nSubscribe to pick up where you left off: ${appUrl}/settings\n\n— The PathwayEd team`,
+    text: `${hi}\n\nYour PathwayEd free trial has ended. Learning sessions and homework help are paused until you subscribe, but nothing has been deleted. Every child's saved progress is right where they left it.\n\nSubscribe to pick up where you left off: ${APP_URL}/settings\n\nThe PathwayEd team`,
     html: shell(
       "Your free trial has ended",
       `<p style="font-size:15px;line-height:1.55;margin:0">${hi}</p>
-       <p style="font-size:15px;line-height:1.55;margin:10px 0 0">Your PathwayEd free trial has ended. Learning sessions and homework help are paused until you subscribe — but <b>nothing has been deleted</b>. Every child’s saved progress is right where they left it.</p>`,
+       <p style="font-size:15px;line-height:1.55;margin:10px 0 0">Your PathwayEd free trial has ended. Learning sessions and homework help are paused until you subscribe, but <b>nothing has been deleted</b>. Every child’s saved progress is right where they left it.</p>`,
       "Subscribe to continue",
-      `${appUrl}/settings`,
+      `${APP_URL}/settings`,
     ),
-  }
-}
-
-async function sendEmail(to: string, mail: RenderedEmail): Promise<void> {
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${EMAIL_PROVIDER_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ from: EMAIL_FROM, to, subject: mail.subject, html: mail.html, text: mail.text }),
-  })
-  if (!res.ok) {
-    const detail = await res.text().catch(() => "")
-    throw new Error(`Email provider responded ${res.status}: ${detail.slice(0, 180)}`)
   }
 }
 
@@ -133,8 +128,8 @@ interface Recipient {
  * Done UP FRONT rather than inside the send loops for two reasons. The dry run
  * below reports what a live run would send, and it can only do that if the domain
  * rule has already been applied. And the ended loop's 'expired' flip must not
- * happen for a school account, so the address has to be known before that write —
- * resolving here is what makes the flip unreachable for a suppressed account.
+ * happen for a school account, so the address has to be known before that write.
+ * Resolving here is what makes the flip unreachable for a suppressed account.
  *
  * An unresolvable address is an UNKNOWN domain, so it is neither mailed nor
  * flipped; it is counted as a failure and retried next run, since nothing is
@@ -162,39 +157,6 @@ async function resolveRecipients(
     recipients.push({ profile, to })
   }
   return { recipients, skippedDomain, unresolved }
-}
-
-/**
- * The domains a licensed school owns, read from the SAME SCHOOL_DOMAIN_MAP
- * api/school-login.ts maps to a Dean school_id. Only the KEYS matter here; the
- * school_id values are Dean's business, not this cron's.
- *
- * Returns null for a MALFORMED map, and the caller then sends nothing. Unset is
- * not malformed — it is the legitimate "no schools configured" state and yields
- * an empty set. The distinction matters: unparseable JSON means we cannot tell a
- * school address from a consumer one, and mailing every school in the pilot is a
- * far worse outcome than skipping a run.
- *
- * Keys are lowercased on the way in. school-login lowercases only the lookup side
- * and so assumes lowercase keys; doing both here can only ever suppress MORE mail,
- * which is the safe direction for a rule that grants nothing.
- */
-export function parseSchoolDomains(raw: string | undefined): Set<string> | null {
-  if (!raw || raw.trim() === "") return new Set<string>()
-  try {
-    const map = JSON.parse(raw) as Record<string, string>
-    if (typeof map !== "object" || map === null || Array.isArray(map)) return null
-    return new Set(Object.keys(map).map((d) => d.trim().toLowerCase()))
-  } catch {
-    return null
-  }
-}
-
-/** True when this address sits at a domain a licensed school owns. */
-export function isSchoolDomainEmail(email: string | null, domains: Set<string>): boolean {
-  if (!email) return false
-  const domain = email.split("@")[1]?.trim().toLowerCase()
-  return Boolean(domain) && domains.has(domain as string)
 }
 
 /** Chunk size for the parent_id `in` filter, so a long candidate list cannot
@@ -229,9 +191,9 @@ export function coveredParentIds(rows: CoverageRow[]): Set<string> {
 /**
  * Which of these accounts a school licence covers, read in batches.
  *
- * FAILS CLOSED — a read error returns null and the caller sends NOTHING. A
- * skipped run costs a reminder a few hours, and the same rows are still there on
- * the next pass because nothing is stamped until a mail goes out. Sending anyway
+ * FAILS CLOSED: a read error returns null and the caller sends NOTHING. A
+ * skipped run costs a reminder a day, and the same rows are still there on the
+ * next pass because nothing is stamped until a mail goes out. Sending anyway
  * would mail a licensed school's staff about a bill they do not owe, which is the
  * exact failure this guard exists to prevent.
  */
@@ -271,7 +233,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // address from a consumer one, so there is no safe way to continue.
   const schoolDomains = parseSchoolDomains(process.env.SCHOOL_DOMAIN_MAP)
   if (!schoolDomains) {
-    console.error("[trial-emails] SCHOOL_DOMAIN_MAP is not valid JSON — refusing to send.")
+    console.error("[trial-emails] SCHOOL_DOMAIN_MAP is not valid JSON. Refusing to send.")
     return res.status(500).json({ error: "SCHOOL_DOMAIN_MAP is not valid JSON" })
   }
 
@@ -279,7 +241,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const now = new Date()
   const nowIso = now.toISOString()
   const twoDaysIso = new Date(now.getTime() + 2 * DAY_MS).toISOString()
-  const origin = req.headers.origin || (req.headers.host ? `https://${req.headers.host}` : "")
 
   // Day-5 reminder: still on trial, ≤2 days left, not yet reminded.
   const { data: reminderRows, error: reminderErr } = await supabase
@@ -310,10 +271,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // sent, so the dry run below reports exactly what a live run would send. One
   // read covers both lists.
   //
-  // A covered account keeps 'free_trial' forever — nothing is stamped and the
-  // ended loop no longer flips it to 'expired' — so it re-appears as a candidate
-  // on every run. That is deliberate (stamping a mail that never went out, or
-  // marking a licensed account 'expired', would both be lies) and is why the
+  // A covered account keeps 'free_trial' forever (nothing is stamped and the
+  // ended loop never flips it to 'expired'), so it re-appears as a candidate on
+  // every run. That is deliberate: stamping a mail that never went out, or
+  // marking a licensed account 'expired', would both be lies. It is also why the
   // read below is batched rather than assuming a short list.
   const coveredIds = await coveredAccounts(
     supabase,
@@ -331,19 +292,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const reminderTargets = await resolveRecipients(supabase, reminders, schoolDomains)
   const endedTargets = await resolveRecipients(supabase, ended, schoolDomains)
   // Counted apart from skippedCovered so the two rules can be told apart in the run
-  // output — this is the staff population the coverage rule alone does not catch.
-  const skippedDomain = reminderTargets.skippedDomain + endedTargets.skippedDomain
+  // output. This is the staff population the coverage rule alone does not catch.
+  let skippedDomain = reminderTargets.skippedDomain + endedTargets.skippedDomain
 
-  const providerConfigured = Boolean(EMAIL_PROVIDER_API_KEY && EMAIL_FROM)
-
-  if (!providerConfigured) {
+  if (!emailProviderConfigured()) {
     return res.status(200).json({
       provider_configured: false,
       reminder_candidates: reminderTargets.recipients.length,
       ended_candidates: endedTargets.recipients.length,
       school_covered_skipped: skippedCovered,
       school_domain_skipped: skippedDomain,
-      message: "EMAIL_PROVIDER_API_KEY / EMAIL_FROM not set — no mail sent.",
+      message: "EMAIL_PROVIDER_API_KEY / EMAIL_FROM not set. No mail sent.",
     })
   }
 
@@ -356,7 +315,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const daysLeft = p.trial_end
         ? Math.max(1, Math.ceil((Date.parse(p.trial_end) - now.getTime()) / DAY_MS))
         : 2
-      await sendEmail(to, reminderEmail(p.display_name, daysLeft, origin))
+      await sendEmail(to, reminderEmail(p.display_name, daysLeft), "trial_reminder")
       await supabase.from("profiles").update({ trial_reminder_sent_at: nowIso }).eq("id", p.id)
       remindersSent++
     } catch (err) {
@@ -367,14 +326,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   // Only accounts that survived BOTH suppression rules reach this loop, so the
   // 'expired' flip below is unreachable for a school-covered or school-domain
-  // account — which is the point: that status is exactly what must never be
-  // written for them.
+  // account. That status is exactly what must never be written for them.
   for (const { profile: p, to } of endedTargets.recipients) {
+    // Ask the send guard BEFORE the status write. resolveRecipients has already
+    // applied this rule, so this only fires if that filtering ever drifts, and
+    // when it does the account must keep its status as well as its silence.
+    const refusal = schoolDomainRefusal(to, "trial_ended")
+    if (refusal) {
+      skippedDomain++
+      console.warn(`[trial-emails] ended mail refused for ${p.id}: ${refusal}`)
+      continue
+    }
     try {
       // Flip to 'expired' regardless of email success so the account state is
       // truthful; stamp the email marker only when the mail actually went out.
       await supabase.from("profiles").update({ subscription_status: "expired" }).eq("id", p.id)
-      await sendEmail(to, endedEmail(p.display_name, origin))
+      await sendEmail(to, endedEmail(p.display_name), "trial_ended")
       await supabase.from("profiles").update({ trial_ended_email_sent_at: nowIso }).eq("id", p.id)
       endedSent++
     } catch (err) {
