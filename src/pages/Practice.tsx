@@ -18,6 +18,7 @@ import { QuestionAudio } from '@/components/QuestionAudio'
 import { PictureQuestion } from '@/components/PictureQuestion'
 import { useVoiceMuted } from '@/hooks/useVoiceMuted'
 import { useAutoRead } from '@/hooks/useAutoRead'
+import { useAnswerWrites } from '@/hooks/useAnswerWrites'
 import { speakWithNikki, stopNikkiSpeech } from '@/lib/voice'
 import '@/styles/app-screens.css'
 
@@ -41,7 +42,7 @@ const SESSION_LENGTH = 10
 /**
  * Question Engine, Stage 3 — minimal serve -> score -> mastery Practice flow.
  * One question at a time, immediate feedback + solution, and at session end the
- * aggregate accuracy feeds recordPracticeResult (real scored mastery). Kept
+ * database scores the answers this set recorded (recordPracticeResult). Kept
  * deliberately simple. Encouraging throughout — a low score never feels punishing.
  */
 export function Practice() {
@@ -57,6 +58,9 @@ export function Practice() {
   const [shownAt, setShownAt] = useState(0)
   const [done, setDone] = useState(false)
   const [saving, setSaving] = useState(false)
+  // The end of the set waits for these so the database scores exactly the
+  // answers this set recorded.
+  const answerWrites = useAnswerWrites()
 
   // Auto-read the question aloud in Nikki's voice (respecting the app-wide mute).
   const [muted, toggleMuted] = useVoiceMuted()
@@ -122,19 +126,18 @@ export function Practice() {
     const current = questions[index]
     if (selected !== null || !current) return
     setSelected(choiceIndex)
-    const { isCorrect, misconceptionToken } = scoreChoice(current.choices, choiceIndex)
+    // Instant feedback only. The database grades the recorded answer itself.
+    const { isCorrect } = scoreChoice(current.choices, choiceIndex)
     setResults((r) => [...r, { isCorrect }])
-    // Append-only, fire-and-forget: a mid-session quit still records this answer.
-    void recordQuestionAttempt({
-      studentId: student.id,
-      generatedQuestionId: current.id,
-      skillId: current.skill_id,
-      satAlignment: current.sat_alignment,
-      isCorrect,
-      chosenChoiceIndex: choiceIndex,
-      chosenMisconceptionToken: misconceptionToken,
-      shownAtMs: shownAt,
-    })
+    // Append-only and never awaited here: a mid-session quit still records this answer.
+    answerWrites.track(
+      recordQuestionAttempt({
+        studentId: student.id,
+        generatedQuestionId: current.id,
+        chosenChoiceIndex: choiceIndex,
+        shownAtMs: shownAt,
+      }),
+    )
     // Pre-reader items: Nikki SPEAKS the warm "let's count together" feedback,
     // since the child can't read it. Respects the app-wide mute.
     if (current.render_mode === 'audio_picture' && !muted && current.solution) {
@@ -149,20 +152,20 @@ export function Practice() {
       setShownAt(Date.now())
       return
     }
-    // Last question answered -> finish. One practice session = one mastery
-    // attempt increment, from the session's aggregate accuracy.
+    // Last question answered -> finish. One practice session = one legacy ramp
+    // increment, scored by the database from the answers this set recorded.
     setDone(true)
     setSaving(true)
-    const summary = summarizeAttempts(results)
     try {
-      const update = await recordPracticeResult(student.id, questions[0].skill_id, summary.accuracy)
-      // null means the mastery upsert returned [] (it logged the underlying error
-      // in commitMasterySignals) — surface that the session didn't persist.
+      const attemptIds = await answerWrites.recordedIds()
+      const update = await recordPracticeResult(student.id, questions[0].skill_id, attemptIds)
+      // null means nothing was recorded for this set (the cause is already
+      // logged) — surface that the session didn't persist.
       if (!update) {
         console.error('recordPracticeResult returned null, mastery not written', {
           studentId: student.id,
           skillId: questions[0].skill_id,
-          accuracy: summary.accuracy,
+          answersRecorded: attemptIds.length,
         })
       }
     } catch (err) {

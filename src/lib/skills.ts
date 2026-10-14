@@ -1,7 +1,7 @@
 import { supabase } from '@/lib/supabase'
 import { focusAreasByGrade } from '@/lib/focusAreas'
 import { gradeBand, type GradeBand } from '@/lib/gradeBand'
-import { recordReadiness } from '@/lib/readiness'
+import { refreshReadiness } from '@/lib/readiness'
 import { masteryDisplay, displayRank } from '@/lib/masteryDisplay'
 import type { MasteryStatus } from '@/lib/mastery'
 import type { StoredMessage } from '@/lib/sessions'
@@ -13,8 +13,8 @@ import type { Json } from '@/lib/database.types'
  * The taxonomy (migration 0001 + seed 0001) keys every Skill row by `slug`,
  * which is exactly a focusAreas value (src/lib/focusAreas.ts). So mapping a
  * focus area a student practiced to its skill_id is a clean slug join — no fuzzy
- * name matching. All writes go through the anon client under RLS, which keys on
- * students.parent_id, so a parent can only ever touch their own child's rows.
+ * name matching. Mastery itself is written only by the database (migration
+ * 0031): the browser records answers and asks for results, never sends them.
  *
  * Everything here is deliberately simple and inspectable. No ML.
  */
@@ -108,8 +108,15 @@ export function detectPracticedSlugs(subject: string, grade: string, messages: S
 }
 
 // ---------------------------------------------------------------------------
-// Mastery formula (Phase 1: recency-weighted running accuracy)
+// The legacy self-rating ramp (mastery_percentage / accuracy / attempts)
 // ---------------------------------------------------------------------------
+//
+// Since migration 0031 the database computes this, in record_practice_result,
+// from answers it graded itself, so the browser can no longer send the number.
+// nextMastery below is the readable, unit-tested statement of the same rule;
+// change both together. Nothing reads these three columns for a decision:
+// status and evidence_accuracy drive the path, the dashboards and readiness.
+// They are kept current for history and the nightly snapshot.
 
 // Weight on the latest session signal in the running accuracy average. Higher =
 // more reactive to the most recent practice; lower = smoother / more history-
@@ -182,72 +189,6 @@ async function saveSessionSkills(
 }
 
 /**
- * SHARED CORE for both the tutoring-session and practice paths: given a per-skill
- * 0-100 signal, recency+ramp-update each mastery row via nextMastery (ONE attempt
- * increment per skill per call), upsert on (student_id, skill_id), then recompute
- * readiness/SAT. Keeping both paths on this one function means the mastery ramp,
- * the SAT attempts gate, and readiness behave identically no matter how the
- * signal was produced (self-rating vs. real scored accuracy). Best-effort:
- * returns [] on an empty input or an upsert error, never throws into the caller.
- */
-async function commitMasterySignals(
-  studentId: string,
-  entries: { skill_id: string; slug: string; signal: number }[],
-): Promise<MasteryUpdate[]> {
-  if (!entries.length) return []
-
-  // Prior accuracy/attempts in one round-trip (RLS scopes to the parent's child).
-  const { data: priorRows, error: priorError } = await supabase
-    .from('student_skill_mastery')
-    .select('skill_id, accuracy, attempts')
-    .eq('student_id', studentId)
-    .in(
-      'skill_id',
-      entries.map((e) => e.skill_id),
-    )
-  if (priorError) console.error('student_skill_mastery prior read failed', priorError)
-  const priorById = new Map<string, { accuracy: number; attempts: number }>()
-  for (const r of priorRows ?? []) {
-    priorById.set(r.skill_id, { accuracy: Number(r.accuracy), attempts: r.attempts })
-  }
-
-  const now = new Date().toISOString()
-  const updates: MasteryUpdate[] = []
-  const rows = entries.map((e) => {
-    // One call = one attempts increment (a session/practice run), regardless of
-    // how many questions or transcript turns produced the signal.
-    const comp = nextMastery(priorById.get(e.skill_id) ?? null, e.signal)
-    updates.push({ skill_id: e.skill_id, slug: e.slug, attempts: comp.attempts, accuracy: comp.accuracy, mastery_percentage: comp.mastery_percentage })
-    return {
-      student_id: studentId,
-      skill_id: e.skill_id,
-      mastery_percentage: comp.mastery_percentage,
-      accuracy: comp.accuracy,
-      attempts: comp.attempts,
-      last_practiced: now,
-    }
-  })
-
-  const { error } = await supabase
-    .from('student_skill_mastery')
-    .upsert(rows, { onConflict: 'student_id,skill_id' })
-  if (error) {
-    console.error('student_skill_mastery upsert failed', { error, rows })
-    return []
-  }
-
-  // Recompute readiness / Pathway Score / SAT from the full mastery set (now
-  // including this update). Best-effort — must never block the kid's flow.
-  try {
-    await recordReadiness(studentId)
-  } catch (err) {
-    console.error('readiness recompute failed', err)
-  }
-
-  return updates
-}
-
-/**
  * After a finished tutoring session: detect which skills the transcript shows were
  * practiced and record that summary onto the session row.
  *
@@ -292,94 +233,80 @@ export async function recordSessionMastery(params: {
 }
 
 /**
- * Record ONE practice session's aggregate accuracy (0-100) for a SINGLE skill —
- * the Stage-3 scored path. One practice session = ONE attempts increment (same
- * as a tutoring session), so the mastery ramp and SAT gate behave consistently
- * with the existing path; the granular per-question record lives in
- * question_attempts. Reuses the exact same nextMastery + upsert + recordReadiness
- * core, so a genuinely poor session lowers mastery. Best-effort.
+ * The end of a Practice set: ask the database to update the legacy ramp from the
+ * answers this set recorded, then refresh readiness. The database counts only
+ * this student's graded, non-placement answers on this skill from the last day,
+ * so naming an answer it did not grade, or another child's, changes nothing.
+ * Best-effort: returns null when nothing was recorded, never throws.
  */
 export async function recordPracticeResult(
   studentId: string,
   skillId: string,
-  accuracy: number,
+  attemptIds: string[],
 ): Promise<MasteryUpdate | null> {
-  const signal = clamp(Math.round(accuracy))
-  const updates = await commitMasterySignals(studentId, [{ skill_id: skillId, slug: '', signal }])
-  return updates[0] ?? null
+  const ids = [...new Set(attemptIds.filter(Boolean))]
+  let update: MasteryUpdate | null = null
+  if (ids.length) {
+    const { data, error } = await supabase.rpc('record_practice_result', {
+      p_student_id: studentId,
+      p_skill_id: skillId,
+      p_attempt_ids: ids,
+    })
+    if (error) {
+      console.error('record_practice_result failed', { error, studentId, skillId })
+    } else if (data && typeof data === 'object' && !Array.isArray(data)) {
+      const r = data as Record<string, unknown>
+      update = {
+        skill_id: skillId,
+        slug: '',
+        attempts: Number(r.attempts),
+        accuracy: Number(r.accuracy),
+        mastery_percentage: Number(r.mastery_percentage),
+      }
+    }
+  }
+
+  // The answers themselves moved the evidence, so readiness is refreshed even
+  // when the legacy ramp had nothing to record. Must never block the kid's flow.
+  try {
+    await refreshReadiness(studentId)
+  } catch (err) {
+    console.error('readiness recompute failed', err)
+  }
+  return update
 }
 
-// Placement diagnostic seed (Phase 2). A single diagnostic question is a
-// deliberate probe, so it seeds an initial mastery estimate DIRECTLY (not via the
-// attempts-based practice ramp, which would read one correct answer as ~25%).
-// Explicit, legible numbers; attempts=1 keeps it light so real practice quickly
-// refines it. Correct -> 60, wrong -> 25.
-const DIAGNOSTIC_CORRECT_MASTERY = 60
-const DIAGNOSTIC_WRONG_MASTERY = 25
-
 /**
- * Seed initial student_skill_mastery from a completed placement diagnostic, then
- * recompute readiness so the dashboard/path pick up at the student's real level.
+ * The end of a placement run: ask the database to seed the legacy numbers for
+ * the skills this run asked about (a right placement answer seeds 60, a wrong one
+ * 25), then refresh readiness so the dashboard and path pick up the child's real
+ * level.
  *
- * SAFETY GUARD: never clobbers real earned mastery. A skill is seeded ONLY if the
- * student has no prior NON-diagnostic attempts for it (no real practice history);
- * skills the student has actually practiced keep their earned mastery untouched.
- * So a returning student re-taking the diagnostic refreshes only their still-
- * provisional (diagnostic-only) skills. Meant to run at placement time.
- * Best-effort: returns the number of rows written, 0 on empty/guarded/error.
+ * The database grades from the child's own most recent placement answer on each
+ * skill, skips a skill they never answered in placement, and never touches a
+ * skill with real practice history, so earned mastery is never reset. Callers
+ * must let the run's answer writes land first. Best-effort: returns the number of
+ * rows written, 0 on empty/guarded/error.
  */
-export async function seedDiagnosticMastery(
-  studentId: string,
-  results: { skillId: string; isCorrect: boolean }[],
-): Promise<number> {
-  // Dedupe by skill (one mastery row per skill; a batch upsert can't touch the
-  // same (student, skill) twice), keeping the last answer.
-  const bySkill = new Map<string, boolean>()
-  for (const r of results) bySkill.set(r.skillId, r.isCorrect)
-  if (!bySkill.size) return 0
+export async function seedDiagnosticMastery(studentId: string, skillIds: string[]): Promise<number> {
+  const unique = [...new Set(skillIds.filter(Boolean))]
+  if (!unique.length) return 0
 
-  // Guard: find skills with real (non-diagnostic) practice history and exclude
-  // them, so seeding never resets earned mastery.
-  const { data: practiced, error: practicedError } = await supabase
-    .from('question_attempts')
-    .select('skill_id')
-    .eq('student_id', studentId)
-    .eq('is_diagnostic', false)
-  if (practicedError) {
-    console.error('seedDiagnosticMastery: practice-history read failed', practicedError)
-    return 0 // fail safe: don't seed if we can't verify practice history
-  }
-  const practicedSet = new Set((practiced ?? []).map((r) => r.skill_id))
-  for (const skillId of [...bySkill.keys()]) {
-    if (practicedSet.has(skillId)) bySkill.delete(skillId)
-  }
-  if (!bySkill.size) return 0
-
-  const now = new Date().toISOString()
-  const rows = [...bySkill].map(([skill_id, isCorrect]) => ({
-    student_id: studentId,
-    skill_id,
-    mastery_percentage: isCorrect ? DIAGNOSTIC_CORRECT_MASTERY : DIAGNOSTIC_WRONG_MASTERY,
-    accuracy: isCorrect ? 100 : 0,
-    attempts: 1,
-    last_practiced: now,
-  }))
-
-  const { error } = await supabase
-    .from('student_skill_mastery')
-    .upsert(rows, { onConflict: 'student_id,skill_id' })
+  const { data, error } = await supabase.rpc('seed_placement_mastery', {
+    p_student_id: studentId,
+    p_skill_ids: unique,
+  })
   if (error) {
-    console.error('seedDiagnosticMastery upsert failed', { error, rows })
+    console.error('seed_placement_mastery failed', { error, studentId })
     return 0
   }
 
-  // Recompute readiness/Pathway/SAT from the freshly-seeded mastery.
   try {
-    await recordReadiness(studentId)
+    await refreshReadiness(studentId)
   } catch (err) {
     console.error('readiness recompute after diagnostic failed', err)
   }
-  return rows.length
+  return typeof data === 'number' ? data : 0
 }
 
 /**

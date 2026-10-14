@@ -11,7 +11,8 @@ import { supabase } from '@/lib/supabase'
 //   MASTERED — >= 85% over >= 8 quality attempts, held on a spaced re-check
 //              (>= 3 days later, >= 2 further attempts, still >= 85%).
 
-export type MasteryStatus = 'not_started' | 'practicing' | 'advanced' | 'mastered'
+import type { MasteryStatus } from '@/lib/masteryStatus'
+export type { MasteryStatus }
 
 export const ADVANCE_MIN_ATTEMPTS = 5
 export const ADVANCE_MIN_ACCURACY = 70

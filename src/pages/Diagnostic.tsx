@@ -37,6 +37,7 @@ import { QuestionAudio } from '@/components/QuestionAudio'
 import { PictureQuestion } from '@/components/PictureQuestion'
 import { useVoiceMuted } from '@/hooks/useVoiceMuted'
 import { useAutoRead } from '@/hooks/useAutoRead'
+import { useAnswerWrites } from '@/hooks/useAnswerWrites'
 import { stopNikkiSpeech } from '@/lib/voice'
 import '@/styles/app-screens.css'
 
@@ -110,6 +111,9 @@ export function Diagnostic() {
   const [started, setStarted] = useState(false)
   const [consent, setConsent] = useState(false) // parent OK to show above-grade / SAT framing
   const shownAtRef = useRef(0)
+  // Seeding waits for these, because the database seeds from the answers it
+  // has recorded and graded, not from this page's tally.
+  const answerWrites = useAnswerWrites()
 
   // Auto-read each question aloud once it's shown (after the parent starts the
   // assessment — a user gesture), respecting the app-wide mute.
@@ -250,10 +254,12 @@ export function Diagnostic() {
 
   // Parent-consent step: record the above-grade framing choice, then begin. Either
   // choice proceeds to the same questions — consent governs framing, not learning.
+  // A school-covered student is never asked: students do not consent for
+  // themselves, the school's setting stands, and the database refuses the write.
   const handleStart = (ok: boolean) => {
     if (!student) return
     setConsent(ok)
-    void setAboveGradeConsent(student.id, ok)
+    if (!student.school_covered) void setAboveGradeConsent(student.id, ok)
     setStarted(true)
   }
 
@@ -277,9 +283,11 @@ export function Diagnostic() {
     // child still lands on the positive done screen and can start learning; an
     // unseeded child is simply offered placement again at their next visit.
     if (!early && placementSeeds(allResults.length)) {
+      // Let this run's answer writes land first: the database seeds from them.
+      await answerWrites.recordedIds()
       await seedDiagnosticMastery(
         stu.id,
-        allResults.map((r) => ({ skillId: r.skillId, isCorrect: r.isCorrect })),
+        allResults.map((r) => r.skillId),
       )
     } else if (!early) {
       // Below the floor, so nothing is seeded: a placement is only claimed from
@@ -324,18 +332,17 @@ export function Diagnostic() {
     if (!student || !questions || busy) return
     const current = questions[index]
     if (!current) return
-    const { isCorrect, misconceptionToken } = scoreChoice(current.choices, choiceIndex)
-    void recordQuestionAttempt({
-      studentId: student.id,
-      generatedQuestionId: current.id,
-      skillId: current.skill_id,
-      satAlignment: current.sat_alignment,
-      isCorrect,
-      chosenChoiceIndex: choiceIndex,
-      chosenMisconceptionToken: misconceptionToken,
-      shownAtMs: shownAtRef.current,
-      isDiagnostic: true,
-    })
+    // Drives the ladder on this page only. The database grades the record.
+    const { isCorrect } = scoreChoice(current.choices, choiceIndex)
+    answerWrites.track(
+      recordQuestionAttempt({
+        studentId: student.id,
+        generatedQuestionId: current.id,
+        chosenChoiceIndex: choiceIndex,
+        shownAtMs: shownAtRef.current,
+        isDiagnostic: true,
+      }),
+    )
     const nextResults: DiagnosticResult[] = [
       ...results,
       { skillId: current.skill_id, gradeNum: current.ccss_grade_num ?? currentGrade, isCorrect },
@@ -419,6 +426,28 @@ export function Diagnostic() {
           </div>
           <button className="btn btn-navy" style={{ marginTop: 14 }} onClick={beginEarly}>
             Let’s play →
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  // A school-covered student starts straight away: no consent question, since
+  // students never consent for themselves. The school's setting stands.
+  if (!started && student.school_covered) {
+    return (
+      <div className="kid-screen">
+        <div className="shell">
+          <TopMenu />
+          <h1 className="greet">Let’s find your level, {student.first_name}</h1>
+          <div className="panel">
+            <p className="muted" style={{ margin: 0 }}>
+              A few quick questions help Nikki start you at the right level, not too easy, not too hard. There’s
+              nothing to study; just answer what you can.
+            </p>
+          </div>
+          <button className="btn btn-navy" onClick={() => handleStart(student.above_grade_ok)}>
+            Start
           </button>
         </div>
       </div>

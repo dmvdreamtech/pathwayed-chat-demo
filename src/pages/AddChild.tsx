@@ -11,9 +11,11 @@ import {
   getStudent,
   gradeLabel,
   hasPin,
+  isSeatCapError,
   listStudents,
   setAboveGradeConsent,
   setStudentPin,
+  updateAvatarMode,
   updateStudent,
   type AvatarMode,
   type StudentLevel,
@@ -91,6 +93,10 @@ export function AddChild() {
   const [capBlocked, setCapBlocked] = useState(false)
   const [loading, setLoading] = useState(editing)
   const [saving, setSaving] = useState(false)
+  // A school-covered child: the school sets their name, grade, level and SAT
+  // framing, and the database refuses browser changes to them (0031). Only the
+  // avatar and PIN stay editable here.
+  const [schoolManaged, setSchoolManaged] = useState(false)
   // Billing state (only relevant when adding, not editing).
   const [sub, setSub] = useState<Subscription | null>(null)
   const [childCount, setChildCount] = useState(0)
@@ -115,6 +121,7 @@ export function AddChild() {
       setAvatarMode(avatarModeOf(student))
       setAboveGradeOk(!!student.above_grade_ok)
       setPinSet(hasPin(student))
+      setSchoolManaged(!!student.school_covered)
       setLoading(false)
     })
     return () => {
@@ -192,6 +199,17 @@ export function AddChild() {
 
     const input = { first_name: trimmed, grade, level, avatar_mode: avatarMode }
 
+    if (editing && id && schoolManaged) {
+      const { error: avatarError } = await updateAvatarMode(id, avatarMode)
+      if (avatarError) {
+        setErrMsg('Sorry, something went wrong saving. Please try again.')
+        setSaving(false)
+        return
+      }
+      navigate(returnTo, { replace: true })
+      return
+    }
+
     if (editing && id) {
       // Save the details and the SAT/above-grade framing consent together, both
       // through the existing student update path (consent = above_grade_ok).
@@ -230,8 +248,11 @@ export function AddChild() {
       // clear message with an upgrade path (capBlocked renders the Settings CTA).
       console.error('[add-child] createStudent failed', { error, newId })
       setErrMsg(
-        `We couldn't add ${trimmed}. If you've reached your plan's child limit, add a seat or ` +
-          `change your plan in Settings, then try again.`,
+        isSeatCapError(error)
+          ? `Every seat on your plan is in use, so we couldn't add ${trimmed}. Add a seat or change your ` +
+              `plan in Settings, then try again.`
+          : `We couldn't add ${trimmed}. If you've reached your plan's child limit, add a seat or ` +
+              `change your plan in Settings, then try again.`,
       )
       setCapBlocked(true)
       setSaving(false)
@@ -280,6 +301,12 @@ export function AddChild() {
           <p style={{ color: '#5A6172', fontSize: 14.5 }}>Loading…</p>
         ) : (
           <>
+            {schoolManaged && (
+              <p style={{ color: '#5A6172', fontSize: 14, margin: '0 0 6px', textAlign: 'left' }}>
+                {name}’s school manages their name, grade, and level. You can still change the avatar and PIN
+                here.
+              </p>
+            )}
             <div style={{ margin: '16px 0', textAlign: 'left' }}>
               <label
                 htmlFor="child-name"
@@ -292,6 +319,7 @@ export function AddChild() {
                 value={name}
                 maxLength={20}
                 placeholder="Their first name"
+                disabled={schoolManaged}
                 onChange={(e) => {
                   setName(e.target.value)
                   if (nameError) setNameError(false)
@@ -310,6 +338,7 @@ export function AddChild() {
               <select
                 id="child-grade"
                 value={grade}
+                disabled={schoolManaged}
                 onChange={(e) => {
                   setGrade(e.target.value)
                   if (gradeError) setGradeError(false)
@@ -335,6 +364,7 @@ export function AddChild() {
                   <button
                     key={opt.id}
                     type="button"
+                    disabled={schoolManaged}
                     onClick={() => setLevel(opt.id)}
                     style={{
                       display: 'block',
@@ -408,7 +438,7 @@ export function AddChild() {
                 to the same students.above_grade_ok field the placement step writes.
                 Framing/emphasis only: it enables SAT-readiness framing + the SAT
                 Practice card, never access or advancement (mastery still governs). */}
-            {editing && (
+            {editing && !schoolManaged && (
               <div
                 style={{
                   display: 'flex',

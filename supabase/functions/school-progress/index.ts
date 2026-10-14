@@ -163,8 +163,11 @@ Deno.serve(async (req) => {
   const now = Date.now()
   const nowIso = new Date(now).toISOString()
 
-  // 1) HARD scope: covered students whose dean_student_id is in the list. Nothing
-  //    about parents, billing, or PINs is even selected.
+  // 1) HARD scope: covered students AT THIS SCHOOL whose dean_student_id is in
+  //    the list. Nothing about parents, billing, or PINs is even selected. The
+  //    school_id filter (students.school_id, migration 0030, written only by the
+  //    server at sign-in) means a valid secret plus another school's dean ids
+  //    returns nothing.
   const { data: studentRows, error: studentErr } = await selectInBatches<StudentRow>(
     requestedIds,
     (batch) =>
@@ -172,6 +175,7 @@ Deno.serve(async (req) => {
         .from("students")
         .select("id, dean_student_id, first_name, grade")
         .eq("school_covered", true)
+        .eq("school_id", schoolId)
         .in("dean_student_id", batch),
   )
   if (studentErr) return queryFailed("students", studentErr)

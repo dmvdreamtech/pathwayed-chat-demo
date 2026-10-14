@@ -1,10 +1,13 @@
 import Stripe from "stripe"
+import type { SupabaseClient } from "@supabase/supabase-js"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 import {
   addonPriceEnv,
   extraKids as computeExtraKids,
   isBillingPeriod,
   isPlanId,
+  paidSeats as computePaidSeats,
+  type PlanId,
 } from "./billing-core.js"
 import { requireUser } from "./require-auth.js"
 import { rateLimit, BILLING_LIMIT } from "./rate-limit.js"
@@ -21,6 +24,28 @@ import { rateLimit, BILLING_LIMIT } from "./rate-limit.js"
  */
 interface UpdateSeatsRequest {
   totalKids?: number
+}
+
+/**
+ * Store the seat count Stripe now bills for, straight away.
+ *
+ * WHY NOT LEAVE IT TO THE WEBHOOK. The database refuses adding an active child
+ * beyond profiles.paid_seats (migration 0031), and AddChild adds the child the
+ * moment this route returns. The webhook writes these same two values a little
+ * later; waiting for it would refuse the child the parent just paid for. Both
+ * writers derive the numbers the same way, so whichever lands last agrees.
+ */
+async function storeSeats(
+  supabase: SupabaseClient,
+  userId: string,
+  plan: PlanId,
+  extra: number,
+): Promise<void> {
+  const { error } = await supabase
+    .from("profiles")
+    .update({ extra_kids: extra, paid_seats: computePaidSeats(plan, extra) })
+    .eq("id", userId)
+  if (error) console.error("update-seats: storing the seat count failed", error.message)
 }
 
 // Subscriptions we're willing to mutate seats on. A child added while the
@@ -101,10 +126,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const addonItem = sub.items.data.find((it) => it.price?.id === addonPriceId)
 
     // Already at the desired quantity — nothing to charge (guards double-submits).
+    // The stored count is still brought in line, in case the webhook is behind.
     if (desiredExtra > 0 && addonItem && addonItem.quantity === desiredExtra) {
+      await storeSeats(supabase, userId, plan, desiredExtra)
       return res.status(200).json({ extraKids: desiredExtra, changed: false })
     }
     if (desiredExtra === 0 && !addonItem) {
+      await storeSeats(supabase, userId, plan, 0)
       return res.status(200).json({ extraKids: 0, changed: false })
     }
 
@@ -124,6 +152,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       // billing_period and user_id are preserved.
       metadata: { extra_kids: String(desiredExtra) },
     })
+    await storeSeats(supabase, userId, plan, desiredExtra)
 
     return res.status(200).json({ extraKids: desiredExtra, changed: true, status: updated.status })
   } catch (error) {

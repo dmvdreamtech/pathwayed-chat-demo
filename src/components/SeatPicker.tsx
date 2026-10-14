@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { activeStudents, setStudentActive, type Student } from '@/lib/students'
+import { activeStudents, isSeatCapError, setStudentActive, type Student } from '@/lib/students'
 import { Switch } from '@/components/ui/switch'
 
 const dispFont = '"Baloo 2", "Trebuchet MS", system-ui, sans-serif'
@@ -25,6 +25,7 @@ export function SeatPicker({
   onChange: (next: Student[]) => void
 }) {
   const [busyId, setBusyId] = useState<string | null>(null)
+  const [errMsg, setErrMsg] = useState('')
   const activeCount = activeStudents(students).length
   const overCap = activeCount > cap
 
@@ -33,9 +34,18 @@ export function SeatPicker({
     // Block activating beyond the cap — a seat must be freed first.
     if (next && activeCount >= cap) return
     setBusyId(student.id)
+    setErrMsg('')
     const { error } = await setStudentActive(student.id, next)
     setBusyId(null)
-    if (error) return
+    if (error) {
+      // The database holds the same cap, and is the one that counts (0031).
+      setErrMsg(
+        isSeatCapError(error)
+          ? `Every seat on your plan is in use. Pause another child first, or add a seat in Billing.`
+          : `We couldn't change ${student.first_name} right now. Please try again.`,
+      )
+      return
+    }
     onChange(students.map((s) => (s.id === student.id ? { ...s, active: next } : s)))
   }
 
@@ -88,6 +98,11 @@ export function SeatPicker({
           )
         })}
       </div>
+      {errMsg && (
+        <p role="alert" style={{ color: '#B23A23', fontSize: 13.5, margin: '10px 0 0' }}>
+          {errMsg}
+        </p>
+      )}
     </div>
   )
 }

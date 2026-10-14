@@ -45,6 +45,8 @@ export async function saveTranscript(
   const nowIso = new Date().toISOString()
   // ended_at tracks last activity; started_at is left to the DB default so the
   // on-conflict upsert preserves the original first-touch time (migration 0011).
+  // Since 0031 the database replaces both times with its own clock, so these
+  // values only say "touched now".
   await supabase.from('sessions').upsert(
     {
       student_id: studentId,

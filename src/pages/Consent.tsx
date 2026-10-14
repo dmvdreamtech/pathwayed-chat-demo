@@ -52,13 +52,12 @@ export function Consent() {
     const trimmed = name.trim()
 
     // Record the parent attestation. The checkbox gates this submit; it is not
-    // a stored column.
+    // a stored column. consented_at is stamped by the database clock (0031).
     const { error: consentError } = await supabase.from('consents').insert({
       parent_id: user.id,
       parent_name: trimmed,
       method: 'web_checkbox',
       consent_version: '1.0',
-      consented_at: new Date().toISOString(),
     })
     if (consentError) {
       setError('Sorry, something went wrong saving your permission. Please try again.')

@@ -22,6 +22,18 @@ const DEFAULT_MODEL_ID = "eleven_turbo_v2_5"
 const MAX_CHARS = 2500
 
 /**
+ * The voices a caller may ask for: the configured Nikki voice and the default.
+ * voiceId goes into the ElevenLabs URL path, so it is never passed through as
+ * given. No client sends one today; an unknown id is refused rather than used.
+ */
+export function resolveVoiceId(requested: unknown, configured: string | undefined): string | null {
+  const nikki = configured || DEFAULT_VOICE_ID
+  if (requested === undefined || requested === null || requested === "") return nikki
+  if (requested === nikki || requested === DEFAULT_VOICE_ID) return requested
+  return null
+}
+
+/**
  * Text-to-speech for Nikki's voice, backed by ElevenLabs. The API key is read
  * from the server environment and never exposed to the client. On any failure
  * this returns a JSON error (no audio), so the client can degrade to the
@@ -59,7 +71,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: "text is required" })
     }
 
-    const voice = voiceId || process.env.ELEVENLABS_VOICE_ID || DEFAULT_VOICE_ID
+    const voice = resolveVoiceId(voiceId, process.env.ELEVENLABS_VOICE_ID)
+    if (!voice) {
+      return res.status(400).json({ error: "unknown voice" })
+    }
     const input = text.slice(0, MAX_CHARS)
     const isPcm = format === "pcm"
     const outputFormat = isPcm ? "pcm_24000" : "mp3_44100_128"

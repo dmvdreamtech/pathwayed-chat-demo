@@ -760,11 +760,7 @@ export async function fetchEarlyGradeDiagnostic(
 export interface QuestionAttemptInput {
   studentId: string
   generatedQuestionId: string
-  skillId: string
-  satAlignment: string | null
-  isCorrect: boolean
   chosenChoiceIndex: number | null
-  chosenMisconceptionToken: string | null
   /** Epoch ms when the question was shown; time_ms is computed here (null skips). */
   shownAtMs: number | null
   /** True when recorded by the placement diagnostic (kept out of practice history). */
@@ -773,29 +769,38 @@ export interface QuestionAttemptInput {
 
 /**
  * Record one answered question (append-only). Best-effort and fire-and-forget:
- * callers `void` this so a mid-session quit still persists what was answered, and
- * a failure never blocks the kid's flow. RLS (owns_student) scopes the insert to
- * the signed-in parent's own child.
+ * callers `void` this (or hold the promise) so a mid-session quit still persists
+ * what was answered, and a failure never blocks the kid's flow. RLS
+ * (owns_student) scopes the insert to the signed-in parent's own child.
+ *
+ * ONLY THE INPUTS ARE SENT. Since migration 0031 the database grades the answer
+ * from the stored question and fills is_correct, skill_id, sat_alignment, the
+ * misconception token and created_at itself. The screen still shows right or
+ * wrong straight away from scoreChoice; that is feedback, not the record.
+ *
+ * Resolves to the new row's id (null on failure), so a Practice set can ask the
+ * server to score exactly the answers it recorded.
  */
-export async function recordQuestionAttempt(a: QuestionAttemptInput): Promise<void> {
+export async function recordQuestionAttempt(a: QuestionAttemptInput): Promise<string | null> {
   const timeMs = a.shownAtMs == null ? null : Math.max(0, Date.now() - a.shownAtMs)
   const payload = {
     student_id: a.studentId,
     generated_question_id: a.generatedQuestionId,
-    skill_id: a.skillId,
-    sat_alignment: a.satAlignment,
-    is_correct: a.isCorrect,
     chosen_choice_index: a.chosenChoiceIndex,
-    chosen_misconception_token: a.chosenMisconceptionToken,
     time_ms: timeMs,
     is_diagnostic: a.isDiagnostic ?? false,
   }
   // Surface BOTH a returned error (e.g. RLS) and a thrown rejection — the
   // fire-and-forget caller would otherwise swallow either silently.
   try {
-    const { error } = await supabase.from('question_attempts').insert(payload)
-    if (error) console.error('question_attempt insert failed', { error, payload })
+    const { data, error } = await supabase.from('question_attempts').insert(payload).select('id').single()
+    if (error) {
+      console.error('question_attempt insert failed', { error, payload })
+      return null
+    }
+    return data?.id ?? null
   } catch (err) {
     console.error('question_attempt insert threw', { err, payload })
+    return null
   }
 }

@@ -243,6 +243,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Unknown domain -> not a school student; client falls through to consumer path.
     if (!schoolId) return res.status(200).json({ covered: false })
 
+    // The email decides coverage, and coverage hands this session an existing
+    // student row, so it must be an address the account has proved it owns. SSO
+    // sign-ins arrive confirmed; an unconfirmed email/password sign-up on a
+    // school domain is treated as not covered until it is confirmed.
+    if (!userData?.user?.email_confirmed_at) {
+      logUnresolved(uid, domain, schoolId, "email_not_confirmed", 200)
+      return res.status(200).json({ covered: false })
+    }
+
     const r = await deanPost<ResolveResponse>("resolve-student", {
       school_id: schoolId,
       product: "tutoring",

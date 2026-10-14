@@ -624,13 +624,16 @@ export interface Database {
           // seeding can tell them apart from real practice history.
           is_diagnostic: boolean
         }
+        // Since migration 0031 the browser sends only the inputs (question,
+        // option, time, placement flag). A trigger grades the answer and fills
+        // skill_id, sat_alignment, is_correct and the misconception token.
         Insert: {
           id?: string
           student_id: string
           generated_question_id?: string | null
-          skill_id: string
+          skill_id?: string
           sat_alignment?: string | null
-          is_correct: boolean
+          is_correct?: boolean
           chosen_choice_index?: number | null
           chosen_misconception_token?: string | null
           time_ms?: number | null
@@ -884,6 +887,20 @@ export interface Database {
       }
       prep_essay_finalize: {
         Args: { p_attempt_id: string; p_essay_text?: string | null; p_client_expired?: boolean }
+        Returns: Json
+      }
+      // Server-decided results (migration 0031). Each checks the caller owns
+      // the student and works only from answers the database graded itself.
+      record_practice_result: {
+        Args: { p_student_id: string; p_skill_id: string; p_attempt_ids: string[] }
+        Returns: Json
+      }
+      seed_placement_mastery: {
+        Args: { p_student_id: string; p_skill_ids: string[] }
+        Returns: number
+      }
+      raise_working_grade_if_earned: {
+        Args: { p_student_id: string }
         Returns: Json
       }
       // Staff progress view (migration 0030). Each returns only safe columns:

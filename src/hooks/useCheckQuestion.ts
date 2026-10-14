@@ -134,11 +134,7 @@ export function useCheckQuestion(opts: UseCheckQuestionOptions): CheckQuestionSt
       void recordQuestionAttempt({
         studentId: student.id,
         generatedQuestionId: question.id,
-        skillId: question.skill_id,
-        satAlignment: question.sat_alignment,
-        isCorrect,
         chosenChoiceIndex: index,
-        chosenMisconceptionToken: misconceptionToken,
         shownAtMs: shownAtRef.current || null,
       })
 

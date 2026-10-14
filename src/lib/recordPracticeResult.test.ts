@@ -1,67 +1,85 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-// Shared mutable state for the supabase mock (hoisted above the vi.mock factory).
+// Shared mutable state for the mocks (hoisted above the vi.mock factories).
 const state = vi.hoisted(() => ({
-  prior: [] as { skill_id: string; accuracy: number; attempts: number }[],
-  captured: null as Record<string, unknown>[] | null,
+  rpcCalls: [] as { fn: string; args: Record<string, unknown> }[],
+  rpcResult: { data: null as unknown, error: null as unknown },
+  refreshed: [] as string[],
 }))
 
-// recordReadiness is the downstream recompute — stub it (asserted elsewhere).
-vi.mock('@/lib/readiness', () => ({ recordReadiness: vi.fn().mockResolvedValue(undefined) }))
+// The readiness recompute now runs on the server; only its trigger is asserted.
+vi.mock('@/lib/readiness', () => ({
+  refreshReadiness: vi.fn(async (id: string) => {
+    state.refreshed.push(id)
+  }),
+}))
 
-// Minimal chainable supabase: the prior read resolves to state.prior; upsert
-// captures the rows it was given.
-vi.mock('@/lib/supabase', () => {
-  const builder = {
-    select: () => builder,
-    eq: () => builder,
-    in: () => Promise.resolve({ data: state.prior }),
-    upsert: (rows: Record<string, unknown>[]) => {
-      state.captured = rows
-      return Promise.resolve({ error: null })
+// The database scores the set. The browser only names the answers it recorded.
+vi.mock('@/lib/supabase', () => ({
+  supabase: {
+    rpc: (fn: string, args: Record<string, unknown>) => {
+      state.rpcCalls.push({ fn, args })
+      return Promise.resolve(state.rpcResult)
     },
-  }
-  return { supabase: { from: () => builder } }
-})
+  },
+}))
 
-import { recordPracticeResult, nextMastery } from '@/lib/skills'
+import { recordPracticeResult, seedDiagnosticMastery } from '@/lib/skills'
 
 beforeEach(() => {
-  state.prior = []
-  state.captured = null
+  state.rpcCalls = []
+  state.rpcResult = { data: null, error: null }
+  state.refreshed = []
+  vi.spyOn(console, 'error').mockImplementation(() => {})
 })
 
-describe('recordPracticeResult — accuracy flows through nextMastery', () => {
-  it('first practice (no prior): stores scored accuracy + ramped mastery, one attempt', async () => {
-    state.prior = []
-    const update = await recordPracticeResult('stu-1', 'skill-mult', 30)
-    const expected = nextMastery(null, 30)
+describe('recordPracticeResult — the database scores the recorded answers', () => {
+  it('sends the recorded answer ids, never an accuracy', async () => {
+    state.rpcResult = { data: { attempts: 1, accuracy: 30, mastery_percentage: 8 }, error: null }
+    const update = await recordPracticeResult('stu-1', 'skill-mult', ['a1', 'a2', 'a2', ''])
 
-    expect(state.captured).toHaveLength(1)
-    expect(state.captured![0]).toMatchObject({
-      student_id: 'stu-1',
-      skill_id: 'skill-mult',
-      accuracy: expected.accuracy,
-      mastery_percentage: expected.mastery_percentage,
-      attempts: 1,
-    })
-    expect(update).toMatchObject({ skill_id: 'skill-mult', accuracy: expected.accuracy, attempts: 1 })
+    expect(state.rpcCalls).toEqual([
+      {
+        fn: 'record_practice_result',
+        args: { p_student_id: 'stu-1', p_skill_id: 'skill-mult', p_attempt_ids: ['a1', 'a2'] },
+      },
+    ])
+    expect(update).toEqual({ skill_id: 'skill-mult', slug: '', attempts: 1, accuracy: 30, mastery_percentage: 8 })
+    expect(state.refreshed).toEqual(['stu-1'])
   })
 
-  it('a genuinely poor session LOWERS mastery from a strong prior (the point of Stage 3)', async () => {
-    state.prior = [{ skill_id: 'skill-mult', accuracy: 90, attempts: 4 }]
-    await recordPracticeResult('stu-1', 'skill-mult', 30)
-    const expected = nextMastery({ accuracy: 90, attempts: 4 }, 30)
-
-    expect(state.captured![0].accuracy).toBe(expected.accuracy) // 90*0.6 + 30*0.4 = 66
-    expect(state.captured![0].mastery_percentage).toBe(expected.mastery_percentage)
-    expect(expected.accuracy).toBeLessThan(90) // dropped
-    expect(state.captured![0].attempts).toBe(5) // exactly one increment per practice session
+  it('returns null when the database recorded nothing, and still refreshes readiness', async () => {
+    state.rpcResult = { data: null, error: null }
+    expect(await recordPracticeResult('stu-1', 'skill-mult', ['a1'])).toBeNull()
+    expect(state.refreshed).toEqual(['stu-1'])
   })
 
-  it('clamps out-of-range accuracy before feeding nextMastery', async () => {
-    state.prior = []
-    await recordPracticeResult('stu-1', 'skill-mult', 130)
-    expect(state.captured![0].accuracy).toBe(nextMastery(null, 100).accuracy) // clamped to 100
+  it('returns null on a refused call without throwing', async () => {
+    state.rpcResult = { data: null, error: { message: 'not authorized for this student' } }
+    expect(await recordPracticeResult('stu-1', 'skill-mult', ['a1'])).toBeNull()
+    expect(console.error).toHaveBeenCalled()
+  })
+
+  it('skips the call when no answer was recorded', async () => {
+    expect(await recordPracticeResult('stu-1', 'skill-mult', [])).toBeNull()
+    expect(state.rpcCalls).toEqual([])
+  })
+})
+
+describe('seedDiagnosticMastery — the database seeds from its own grades', () => {
+  it('sends each placement skill once, never a right/wrong flag', async () => {
+    state.rpcResult = { data: 2, error: null }
+    const written = await seedDiagnosticMastery('stu-1', ['s1', 's2', 's1'])
+    expect(state.rpcCalls).toEqual([
+      { fn: 'seed_placement_mastery', args: { p_student_id: 'stu-1', p_skill_ids: ['s1', 's2'] } },
+    ])
+    expect(written).toBe(2)
+    expect(state.refreshed).toEqual(['stu-1'])
+  })
+
+  it('returns 0 on a refused call and does not refresh', async () => {
+    state.rpcResult = { data: null, error: { message: 'nope' } }
+    expect(await seedDiagnosticMastery('stu-1', ['s1'])).toBe(0)
+    expect(state.refreshed).toEqual([])
   })
 })

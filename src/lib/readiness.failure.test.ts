@@ -9,19 +9,22 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
  * when the truth was that we failed to look.
  *
  * These drive the real ensureFreshReadiness against a mocked Supabase client.
+ * The recompute itself is a call to api/readiness.ts (migration 0031 moved it to
+ * the server), so a failed recompute is a failed fetch.
  */
 
 const state: {
   readinessRows: unknown[]
   readinessError: unknown
   masteryError: unknown
-  throwOnUpsert: boolean
-} = { readinessRows: [], readinessError: null, masteryError: null, throwOnUpsert: false }
+  throwOnRefresh: boolean
+  refreshCalls: number
+} = { readinessRows: [], readinessError: null, masteryError: null, throwOnRefresh: false, refreshCalls: 0 }
 
 const NEWER = '2099-01-01T00:00:00.000Z'
 const OLDER = '2000-01-01T00:00:00.000Z'
 
-/** One mastery row and one matching skill: enough for recordReadiness to reach its upsert. */
+/** One mastery row: newer than the stored readiness, so a recompute is due. */
 const MASTERY = [
   {
     skill_id: 'sk-1',
@@ -50,19 +53,14 @@ vi.mock('@/lib/supabase', () => {
   }
   const from = (table: string) => {
     if (table === 'readiness_scores') {
-      return query(() => ({ data: state.readinessRows, error: state.readinessError }), {
-        upsert: async () => {
-          if (state.throwOnUpsert) throw new Error('recompute exploded')
-          return { error: null }
-        },
-      })
+      return query(() => ({ data: state.readinessRows, error: state.readinessError }))
     }
     if (table === 'student_skill_mastery') {
       return query(() => ({ data: state.masteryError ? null : MASTERY, error: state.masteryError }))
     }
     return query(() => ({ data: SKILLS, error: null }))
   }
-  return { supabase: { from } }
+  return { supabase: { from, auth: { getSession: async () => ({ data: { session: null } }) } } }
 })
 
 const storedRow = (over: Record<string, unknown> = {}) => ({
@@ -84,25 +82,34 @@ beforeEach(async () => {
   state.readinessRows = []
   state.readinessError = null
   state.masteryError = null
-  state.throwOnUpsert = false
+  state.throwOnRefresh = false
+  state.refreshCalls = 0
   vi.spyOn(console, 'error').mockImplementation(() => {})
+  vi.stubGlobal('fetch', async () => {
+    state.refreshCalls += 1
+    if (state.throwOnRefresh) throw new Error('recompute exploded')
+    return new Response('{"written":1}', { status: 200 })
+  })
   ;({ ensureFreshReadiness } = await import('./readiness'))
 })
 
-afterEach(() => vi.restoreAllMocks())
+afterEach(() => {
+  vi.restoreAllMocks()
+  vi.unstubAllGlobals()
+})
 
 describe('ensureFreshReadiness failure reporting', () => {
   it('reports loadFailed when the RECOMPUTE THROWS', async () => {
-    // Mastery is newer than readiness, so it recomputes; the upsert blows up.
+    // Mastery is newer than readiness, so it recomputes; the server call blows up.
     state.readinessRows = [storedRow()]
-    state.throwOnUpsert = true
+    state.throwOnRefresh = true
     const view = await ensureFreshReadiness('stu-1')
     expect(view.loadFailed).toBe(true)
   })
 
   it('still logs the failure to the console', async () => {
     state.readinessRows = [storedRow()]
-    state.throwOnUpsert = true
+    state.throwOnRefresh = true
     await ensureFreshReadiness('stu-1')
     expect(console.error).toHaveBeenCalled()
   })
@@ -124,6 +131,13 @@ describe('ensureFreshReadiness failure reporting', () => {
     // Readiness newer than mastery and at the current engine version: no recompute.
     state.readinessRows = [storedRow({ updated_at: NEWER })]
     const view = await ensureFreshReadiness('stu-1')
+    expect(view.loadFailed).toBe(false)
+  })
+
+  it('asks the server to recompute stale rows instead of writing them itself', async () => {
+    state.readinessRows = [storedRow()]
+    const view = await ensureFreshReadiness('stu-1')
+    expect(state.refreshCalls).toBe(1)
     expect(view.loadFailed).toBe(false)
   })
 })

@@ -255,6 +255,10 @@ function strandRank(subject: string): number {
  *
  * Always exactly +1: never skip a rung, never lower. Returns null at grade 12 and
  * whenever no strand has been cleared, so the caller writes nothing.
+ *
+ * The WRITE uses the database's copy of this rule, raise_working_grade_if_earned
+ * (migration 0031), so a browser cannot promote itself. This is the readable,
+ * unit-tested statement of the same rule. Change both together.
  */
 export function shouldRaiseWorkingGrade(
   student: LadderStudent,

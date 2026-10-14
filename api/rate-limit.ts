@@ -43,6 +43,12 @@ export const BILLING_LIMIT = 5
  * call in the product.
  */
 export const ESSAY_FEEDBACK_LIMIT = 3
+/**
+ * A readiness recompute runs after a practice set, a placement, and when a parent
+ * opens the dashboard on stale rows. A parent with several children paging
+ * through them stays well under this.
+ */
+export const READINESS_LIMIT = 30
 
 /** Drop expired buckets so a long-lived instance does not grow unboundedly. */
 function sweep(now: number) {
