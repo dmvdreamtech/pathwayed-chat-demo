@@ -278,6 +278,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       // dean_student_id is written here rather than only on insert, so this same
       // statement LINKS an adopted row and is a no-op rewrite for a row that
       // already matched. The console is authoritative for name and grade.
+      // school_id rides along so staff at this school can see the student
+      // (migration 0030); like school_covered, only this server writes it.
       const upd = await svc
         .from("students")
         .update({
@@ -286,6 +288,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           grade: dean.grade,
           school_covered: true,
           dean_student_id: dean.student_id,
+          school_id: schoolId,
         })
         .eq("id", localId)
 
@@ -319,6 +322,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           level: "on",
           dean_student_id: dean.student_id,
           school_covered: true,
+          school_id: schoolId,
           above_grade_ok: false, // a school does not consent on a parent's behalf
         })
         .select("id")

@@ -83,6 +83,7 @@ export type MintResult =
 export async function provisionAndMint(
   svc: SupabaseClient,
   dean: { student_id: string; first_name: string; grade: string },
+  schoolId: string,
 ): Promise<MintResult> {
   let uid: string
   let localId: string
@@ -98,7 +99,14 @@ export async function provisionAndMint(
     localId = existing.data.id as string
     await svc
       .from("students")
-      .update({ first_name: dean.first_name, grade: dean.grade, school_covered: true })
+      .update({
+        first_name: dean.first_name,
+        grade: dean.grade,
+        school_covered: true,
+        // The school Dean resolved this PIN against, so staff there can see
+        // the student (migration 0030). Server-written only, like school_covered.
+        school_id: schoolId,
+      })
       .eq("id", localId)
   } else {
     // Fresh identity: NO password, random non-routable email — nothing to sign in
@@ -125,6 +133,7 @@ export async function provisionAndMint(
         level: "on",
         dean_student_id: dean.student_id,
         school_covered: true,
+        school_id: schoolId,
         above_grade_ok: false, // a school does not consent on a parent's behalf
       })
       .select("id")

@@ -139,6 +139,9 @@ export interface Database {
           // client-set (it drives the Stripe bypass).
           dean_student_id: string | null
           school_covered: boolean
+          // The covering school (migration 0030), written server-side beside
+          // school_covered. Null for B2C and for unmapped test accounts.
+          school_id: string | null
           // Seat enforcement (migration 0012): a child counts against the plan's
           // seat cap only while active. Over-cap children are marked inactive by
           // the parent's seat picker (never deleted).
@@ -163,6 +166,7 @@ export interface Database {
           avatar_mode?: string
           dean_student_id?: string | null
           school_covered?: boolean
+          school_id?: string | null
           active?: boolean
           pin_hash?: string | null
         }
@@ -180,6 +184,7 @@ export interface Database {
           avatar_mode?: string
           dean_student_id?: string | null
           school_covered?: boolean
+          school_id?: string | null
           active?: boolean
           pin_hash?: string | null
         }
@@ -331,6 +336,9 @@ export interface Database {
           recheck_passed_at: string | null
           computed_at: string | null
           legacy_self_rating_mastery: number | null
+          // First time the ADVANCE bar was met (migration 0030). Stamped once by
+          // the engine and never cleared.
+          advanced_at: string | null
         }
         Insert: {
           id?: string
@@ -349,6 +357,7 @@ export interface Database {
           recheck_passed_at?: string | null
           computed_at?: string | null
           legacy_self_rating_mastery?: number | null
+          advanced_at?: string | null
         }
         Update: {
           id?: string
@@ -367,6 +376,7 @@ export interface Database {
           recheck_passed_at?: string | null
           computed_at?: string | null
           legacy_self_rating_mastery?: number | null
+          advanced_at?: string | null
         }
         Relationships: []
       }
@@ -775,6 +785,39 @@ export interface Database {
         }
         Relationships: []
       }
+      // School staff with read-only access to their school's progress
+      // (migration 0030). A signed-in user can read only their own rows;
+      // writes are service role only.
+      school_staff: {
+        Row: {
+          id: string
+          school_id: string
+          email: string
+          user_id: string | null
+          role: 'teacher' | 'guidance' | 'admin' | 'academic_dean'
+          active: boolean
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          school_id: string
+          email: string
+          user_id?: string | null
+          role: 'teacher' | 'guidance' | 'admin' | 'academic_dean'
+          active?: boolean
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          school_id?: string
+          email?: string
+          user_id?: string | null
+          role?: 'teacher' | 'guidance' | 'admin' | 'academic_dean'
+          active?: boolean
+          created_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: Record<string, never>
     Functions: {
@@ -842,6 +885,52 @@ export interface Database {
       prep_essay_finalize: {
         Args: { p_attempt_id: string; p_essay_text?: string | null; p_client_expired?: boolean }
         Returns: Json
+      }
+      // Staff progress view (migration 0030). Each returns only safe columns:
+      // never chat content, PINs or billing ids.
+      link_staff_account: {
+        Args: Record<string, never>
+        Returns: number
+      }
+      staff_role_for: {
+        Args: { p_school_id: string }
+        Returns: string | null
+      }
+      can_view_test_scores: {
+        Args: { p_school_id: string }
+        Returns: boolean
+      }
+      staff_search_students: {
+        Args: { p_query: string }
+        Returns: {
+          student_id: string
+          school_id: string
+          first_name: string
+          grade: string
+          email: string | null
+          last_active_at: string | null
+        }[]
+      }
+      staff_student_profile: {
+        Args: { p_student_id: string }
+        Returns: {
+          student_id: string
+          school_id: string
+          first_name: string
+          grade: string
+          email: string | null
+          last_active_at: string | null
+          days_active_this_month: number
+        }[]
+      }
+      staff_student_sessions: {
+        Args: { p_student_id: string }
+        Returns: {
+          subject: string
+          started_at: string
+          ended_at: string | null
+          updated_at: string
+        }[]
       }
     }
     Enums: {

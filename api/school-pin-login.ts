@@ -52,7 +52,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!r.data.covered) return res.status(200).json({ covered: false })
 
     const svc = createClient(supabaseUrl, serviceKey)
-    const minted = await provisionAndMint(svc, r.data)
+    const minted = await provisionAndMint(svc, r.data, body.school_id)
     if ("error" in minted) return res.status(500).json({ error: minted.error })
 
     return res.status(200).json({
