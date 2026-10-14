@@ -88,11 +88,12 @@ begin
     insert into public.student_skill_mastery
       (student_id, skill_id, status, evidence_accuracy, attempts_counted,
        mastery_percentage, accuracy, attempts, last_practiced,
-       first_bar_met_at, recheck_passed_at, computed_at)
+       first_bar_met_at, recheck_passed_at, computed_at, advanced_at)
     values
       (v_student, v_skill, 'mastered', 92, 14,
        92, 92, 14, now() - interval '4 days',
-       now() - interval '20 days', now() - interval '6 days', now() - interval '4 days')
+       now() - interval '20 days', now() - interval '6 days', now() - interval '4 days',
+       now() - interval '20 days')
     on conflict do nothing;
   end loop;
 
@@ -106,11 +107,11 @@ begin
     insert into public.student_skill_mastery
       (student_id, skill_id, status, evidence_accuracy, attempts_counted,
        mastery_percentage, accuracy, attempts, last_practiced,
-       first_bar_met_at, computed_at)
+       first_bar_met_at, computed_at, advanced_at)
     values
       (v_student, v_skill, 'advanced', 84, 11,
        84, 84, 11, now() - interval '2 days',
-       now() - interval '9 days', now() - interval '2 days')
+       now() - interval '9 days', now() - interval '2 days', now() - interval '9 days')
     on conflict do nothing;
   end loop;
 
