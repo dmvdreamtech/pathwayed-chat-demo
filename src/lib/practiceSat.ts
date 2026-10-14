@@ -19,16 +19,16 @@ import type { Student } from '@/lib/students'
 // published items each → 60 available).
 export const SAT_MATH_SKILLS = ['algebra-2', 'advanced-functions', 'hs-geometry'] as const
 
-// Reading & Writing skills (HS, published, SAT-aligned):
-//   reading  — evidence-based-reading (passage-backed): 20 available
-//   writing  — Standard-English-Conventions, 20 each → 80 available
+// Reading & Writing skills (grade 9+, published, SAT-aligned):
+//   reading  — evidence-based-reading (grade 9, passage-backed): 20 available
+//   writing  — advanced-punctuation (grade 9, Standard English Conventions): 20
+//              available. INTERIM: the only grade 9+ conventions skill with
+//              published questions. Possessives (grade 5), modifier placement
+//              (grade 7) and sentence boundaries (grade 6) were dropped as below
+//              SAT level. The official Boundaries and Form, Structure, and Sense
+//              skills replace this once they are published.
 export const SAT_READING_SKILLS = ['evidence-based-reading'] as const
-export const SAT_WRITING_SKILLS = [
-  'advanced-punctuation',
-  'possessives-and-apostrophes',
-  'modifier-placement',
-  'sentence-boundaries',
-] as const
+export const SAT_WRITING_SKILLS = ['advanced-punctuation'] as const
 
 // SAT domain codes (the `sat_alignment` value) that belong to Reading & Writing;
 // anything else (algebra, advanced-math, geometry-trigonometry, …) is Math. Used
@@ -50,7 +50,7 @@ export function sectionOf(q: PracticeQuestion): SatSection {
 /** Target length of the practice Math section (bank supports 60). */
 export const PRACTICE_SAT_MATH_LENGTH = 12
 
-/** Target length of the R&W section: 4 reading + 4 conventions (bank: 20 + 80). */
+/** Target length of the R&W section: 4 reading + 4 conventions (bank: 20 + 20). */
 export const PRACTICE_SAT_RW_LENGTH = 8
 const PRACTICE_SAT_RW_READING = 4
 const PRACTICE_SAT_RW_WRITING = 4

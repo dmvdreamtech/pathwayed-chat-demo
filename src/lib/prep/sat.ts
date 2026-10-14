@@ -47,14 +47,14 @@ export const SAT: PrepModule = {
       name: 'Math, Module 1',
       questionCount: 22,
       timeLimitSec: 2100,
-      questionTypes: ['algebra', 'advanced_math', 'problem_solving_data_analysis', 'geometry_trigonometry'],
+      questionTypes: ['sat_algebra', 'advanced_math', 'problem_solving_data_analysis', 'geometry_trigonometry'],
     },
     {
       id: 'math-2',
       name: 'Math, Module 2',
       questionCount: 22,
       timeLimitSec: 2100,
-      questionTypes: ['algebra', 'advanced_math', 'problem_solving_data_analysis', 'geometry_trigonometry'],
+      questionTypes: ['sat_algebra', 'advanced_math', 'problem_solving_data_analysis', 'geometry_trigonometry'],
     },
   ],
   // Official digital-SAT order. A short break falls AFTER Reading and Writing (both
