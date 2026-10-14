@@ -48,6 +48,10 @@ All imports use `@/` prefix mapped to `src/`:
 bunx --bun shadcn@latest add <component-name>
 ```
 
+### Database Rules
+- Every new database function the browser calls needs an explicit `grant execute ... to authenticated` in its migration, and `revoke` from `public` and `anon`.
+- Edge function redeploys can reset `verify_jwt`; check it after every deploy.
+
 ### Commiting Rules
 **Important:** Do not include any reference to Claude or AI in commit messages. Keep commits clean and professional.
 
