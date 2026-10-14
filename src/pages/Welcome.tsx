@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router'
 import { useAuth, type OAuthProvider } from '@/context/AuthContext'
 import { getConsentStatus } from '@/lib/consent'
 import { ensureSchoolCheck } from '@/lib/schoolCheck'
+import { loadStaffMembership } from '@/lib/staffProgress'
 import logoImg from '@/assets/logo-horizontal.png'
 
 const iconStyle = { width: 20, height: 20, flexShrink: 0 } as const
@@ -179,8 +180,17 @@ export function Welcome() {
     if (loading || !user) return
     const token = session?.access_token
     let active = true
-    ensureSchoolCheck(user.id, token ?? '').then((r) => {
+    ensureSchoolCheck(user.id, token ?? '').then(async (r) => {
       if (!active || r.covered) return
+      // School staff go to the staff progress view, not the parent flow.
+      // loadStaffMembership resolves to [] on any failure, so this can never
+      // block a family sign-in.
+      const staff = await loadStaffMembership(user.id)
+      if (!active) return
+      if (staff.length > 0) {
+        navigate('/staff', { replace: true })
+        return
+      }
       getConsentStatus(user.id).then((hasConsent) => {
         if (active) navigate(hasConsent ? '/students' : '/consent', { replace: true })
       })

@@ -1,0 +1,312 @@
+/* Staff progress view (/staff). Builds on the .shell tokens in app-screens.css. */
+
+.shell.staff-shell {
+  max-width: 980px;
+}
+.staff-who {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13.5px;
+  min-width: 0;
+}
+.staff-who .muted {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.shell .staff-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 14px 0 10px;
+  text-decoration: none;
+}
+
+/* Search */
+.staff-search {
+  position: relative;
+  margin: 18px 0 10px;
+}
+.staff-search .input {
+  padding-left: 42px;
+}
+.staff-search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--faint);
+}
+.staff-count {
+  font-size: 13px;
+  margin: 6px 2px 8px;
+}
+.staff-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.staff-results li + li {
+  border-top: 1px solid var(--line-2);
+}
+.shell .staff-result {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  text-align: left;
+}
+.shell .staff-result:hover,
+.shell .staff-result:focus-visible {
+  background: #faf6ef;
+  outline: none;
+}
+.staff-result-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.staff-result-name {
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 15.5px;
+}
+.staff-result-meta {
+  font-size: 13px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.staff-result-active {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.staff-label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+}
+
+/* Student header */
+.staff-header {
+  margin-top: 4px;
+}
+.shell .staff-name {
+  font-size: 30px;
+  line-height: 1.1;
+}
+.staff-sub {
+  margin: 4px 0 0;
+  font-size: 14.5px;
+  overflow-wrap: anywhere;
+}
+.staff-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 36px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-2);
+}
+.staff-stat {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* Tabs (hidden until the Test scores tab ships) */
+.staff-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 4px 0 14px;
+}
+.shell .staff-tabs button {
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.shell .staff-tabs button[aria-selected='true'] {
+  background: var(--navy);
+  color: #fff;
+}
+
+/* Cards */
+.staff-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+.shell .staff-card {
+  margin-bottom: 0;
+  border-top-width: 4px;
+}
+.staff-card-work {
+  border-top-color: var(--math);
+}
+.staff-card-stuck {
+  border-top-color: var(--orange);
+}
+.staff-card-win {
+  border-top-color: var(--grow);
+}
+.shell .staff-card h3 {
+  margin-bottom: 0;
+}
+.staff-caption {
+  font-size: 12.5px;
+  color: var(--faint);
+  margin: 2px 0 10px;
+}
+.staff-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.staff-card li {
+  padding: 8px 0;
+  border-top: 1px solid var(--line-2);
+}
+.staff-card li:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+.staff-card-skill {
+  display: block;
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 15px;
+}
+.staff-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.staff-tag {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--grow-soft);
+  color: var(--grow);
+}
+.staff-small {
+  font-size: 13px;
+  margin: 8px 0 0;
+}
+
+/* Skills by subject */
+.shell .staff-h2 {
+  font-size: 21px;
+  margin: 26px 0 10px;
+}
+.staff-subjects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+.shell .staff-subject {
+  margin-bottom: 0;
+}
+.staff-skill-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.staff-skill-list li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 10px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line-2);
+}
+.staff-skill-list li:first-child {
+  border-top: none;
+}
+.staff-skill-name {
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.staff-skill-detail {
+  grid-column: 1 / -1;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.staff-level {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+  align-self: start;
+}
+.staff-level-mastered {
+  background: var(--grow-soft);
+  color: var(--grow);
+}
+.staff-level-advanced {
+  background: #e8eefb;
+  color: var(--math);
+}
+.staff-level-practicing {
+  background: #f4eee4;
+  color: #7a5a2e;
+}
+.staff-level-not_started {
+  background: #f1f2f4;
+  color: var(--muted);
+}
+
+/* Recent activity */
+.staff-activity {
+  overflow-x: auto;
+}
+.staff-activity table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.staff-activity th {
+  text-align: left;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+  padding: 0 12px 8px 0;
+  white-space: nowrap;
+}
+.staff-activity td {
+  padding: 9px 12px 9px 0;
+  border-top: 1px solid var(--line-2);
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .shell .staff-name {
+    font-size: 26px;
+  }
+  .staff-who .muted {
+    display: none;
+  }
+  .shell .staff-result {
+    padding: 12px 14px;
+  }
+}

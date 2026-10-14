@@ -29,6 +29,9 @@ export function SchoolLoginGate() {
     let active = true
     void ensureSchoolCheck(uid, token).then((r) => {
       if (!active || !r.covered || !r.student_id) return
+      // A covered account can also be school staff (a test account is both).
+      // Leave it on the staff view rather than pulling it to the student home.
+      if (window.location.pathname.startsWith("/staff")) return
       navigate(`/students/${r.student_id}`, { replace: true })
     })
     return () => {

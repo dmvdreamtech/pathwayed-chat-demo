@@ -27,6 +27,8 @@ import { PrepModuleHome } from '@/pages/prep/PrepModuleHome'
 import { PrepTimedSection } from '@/pages/prep/PrepTimedSection'
 import { PrepReview } from '@/pages/prep/PrepReview'
 import { PrepEssay } from '@/pages/prep/PrepEssay'
+import { StaffSearch } from '@/pages/staff/StaffSearch'
+import { StaffStudent } from '@/pages/staff/StaffStudent'
 
 export function AppRoutes() {
   return (
@@ -44,6 +46,10 @@ export function AppRoutes() {
       <Route path="/children/:id/edit" element={<AddChild />} />
       {/* K-8 staff-supervised station: staff SSO (Dean) then student PIN entry. */}
       <Route path="/school" element={<SchoolStation />} />
+      {/* Read-only staff view of school students' tutoring progress. Each page
+          gates on an active school_staff row and redirects everyone else to /. */}
+      <Route path="/staff" element={<StaffSearch />} />
+      <Route path="/staff/students/:id" element={<StaffStudent />} />
       <Route path="/students" element={<StudentPicker />} />
       {/* Learning surface, gated by the app-managed trial. Once the trial ends
           with no active subscription, SubscriptionGate blocks entry (for all
