@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getStudent, type Student } from '@/lib/students'
-import { getSatPayload, type SatProjectionPayload } from '@/lib/readiness'
+import { getSatPayload, type SatResultsPayload } from '@/lib/readiness'
 import { trajectorySummary, type ModuleTrajectory } from '@/lib/prep/testTrajectory'
 import { showKidSatFraming } from '@/lib/satFraming'
 import { SatReadiness } from '@/components/SatReadiness'
@@ -22,7 +22,7 @@ import {
  *
  * READ ONLY. It selects the child's finalized prep attempts, essays and stored
  * SAT payload, and renders them. No writes, no recompute, no change to the timed
- * engine or to the SAT projection.
+ * engine or to the SAT results.
  *
  * Order is HSPT, then ISEE, then SAT.
  *
@@ -48,7 +48,7 @@ import {
  *   student - showKidSatFraming (consent AND grade >= 9). Below grade 9 the SAT
  *             row is omitted entirely: no placeholder, no locked state, and the
  *             word SAT never reaches the page.
- * SatReadiness keeps its own internal grade banding and empty state on top.
+ * SatReadiness shows measured results only, with its own empty state.
  */
 
 export function TestReadinessCard({
@@ -60,7 +60,7 @@ export function TestReadinessCard({
 }) {
   const [student, setStudent] = useState<Student | null>(null)
   const [data, setData] = useState<TestReadinessData | null>(null)
-  const [sat, setSat] = useState<SatProjectionPayload | null>(null)
+  const [sat, setSat] = useState<SatResultsPayload | null>(null)
 
   useEffect(() => {
     let active = true
@@ -121,7 +121,7 @@ export function TestReadinessCard({
 
       {showSat && (
         <div className="trc-sat">
-          <SatReadiness payload={sat} grade={grade} variant={audience} />
+          <SatReadiness payload={sat} firstName={student.first_name} variant={audience} />
         </div>
       )}
 
@@ -236,7 +236,7 @@ function CompositeLine({ composite }: { composite: CompositeRow }) {
 
 const BAND_CLASS: Record<ReadinessBand, string> = {
   Developing: 'developing',
-  'On Track': 'ontrack',
+  Solid: 'solid',
   Strong: 'strong',
 }
 

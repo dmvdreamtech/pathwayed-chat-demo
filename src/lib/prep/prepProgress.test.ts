@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { computePrepProgress, READINESS_W_MASTERY, READINESS_W_SECTION } from './prepProgress'
+import { computePrepProgress } from './prepProgress'
 import type { PrepModule } from './types'
-import type { PrepAttemptLite } from './prepProgress'
+import type { PracticeEvidence, PrepAttemptLite } from './prepProgress'
+
+/** Practice evidence: % right over `answers` counted answers (10 by default). */
+const ev = (accuracy: number, answers = 10): PracticeEvidence => ({ accuracy, answers })
 
 // A tiny module with two timed sections whose types resolve to real prep slugs.
 const MODULE: PrepModule = {
@@ -23,28 +26,28 @@ const A = (sectionId: string, score: number, startedAt: string, status: 'submitt
 })
 
 describe('computePrepProgress', () => {
-  it('empty state: no attempts, no readiness', () => {
+  it('empty state: no attempts, no practice results', () => {
     const p = computePrepProgress(MODULE, [], new Map())
     expect(p.hasAttempts).toBe(false)
     expect(p.sections).toEqual([])
     expect(p.weakestTypes).toEqual([])
-    expect(p.readiness).toBeNull()
-    expect(p.masteryReadiness).toBeNull()
+    expect(p.practicePctRight).toBeNull()
+    expect(p.practiceAnswers).toBe(0)
     expect(p.coveredSkillCount).toBe(0)
     expect(p.coveredSubjects).toEqual([])
   })
 
-  it('mastery-only readiness + coverage for a not-yet-entitled child (no timed attempts)', () => {
+  it('practice % right + coverage for a not-yet-entitled child (no timed attempts)', () => {
     // No attempts (unentitled child can't take timed sections), only practice mastery.
-    const acc = new Map<string, number | null>([
-      ['prep-synonyms', 40], // reading
-      ['prep-antonyms', 50], // reading
-      ['prep-number-series', 60], // math
+    const acc = new Map<string, PracticeEvidence | null>([
+      ['prep-synonyms', ev(40)], // reading
+      ['prep-antonyms', ev(50)], // reading
+      ['prep-number-series', ev(60)], // math
     ])
     const p = computePrepProgress(MODULE, [], acc)
     expect(p.hasAttempts).toBe(false)
-    expect(p.masteryReadiness).toBe(50) // mean(40,50,60)
-    expect(p.readiness).toBe(50) // blend == mastery term when no sections
+    expect(p.practicePctRight).toBe(50) // 15 of 30 answers right
+    expect(p.practiceAnswers).toBe(30)
     expect(p.coveredSkillCount).toBe(3)
     expect(p.coveredSubjects).toEqual(['math', 'reading']) // stable order, writing->language absent here
   })
@@ -82,10 +85,10 @@ describe('computePrepProgress', () => {
 
   it('weakest types come from practice mastery, lowest first, deduped by skill', () => {
     // synonyms->prep-synonyms, antonyms->prep-antonyms, number_series->prep-number-series
-    const acc = new Map<string, number | null>([
-      ['prep-synonyms', 82],
-      ['prep-antonyms', 40],
-      ['prep-number-series', 65],
+    const acc = new Map<string, PracticeEvidence | null>([
+      ['prep-synonyms', ev(82)],
+      ['prep-antonyms', ev(40)],
+      ['prep-number-series', ev(65)],
     ])
     const p = computePrepProgress(MODULE, [], acc)
     expect(p.weakestTypes.map((t) => t.slug)).toEqual(['prep-antonyms', 'prep-number-series', 'prep-synonyms'])
@@ -96,55 +99,55 @@ describe('computePrepProgress', () => {
   it('does not send a student back to a skill they have cleared', () => {
     // The production shape: the prep tile kept offering a skill the student was
     // already 'advanced' on, because nothing here knew.
-    const acc = new Map<string, number | null>([
-      ['prep-synonyms', 82],
-      ['prep-antonyms', 40],
-      ['prep-number-series', 65],
+    const acc = new Map<string, PracticeEvidence | null>([
+      ['prep-synonyms', ev(82)],
+      ['prep-antonyms', ev(40)],
+      ['prep-number-series', ev(65)],
     ])
     const p = computePrepProgress(MODULE, [], acc, new Set(['prep-antonyms']))
     expect(p.weakestTypes.map((t) => t.slug)).toEqual(['prep-number-series', 'prep-synonyms'])
   })
 
-  it('leaves readiness and coverage untouched when a skill is cleared', () => {
+  it('leaves % right and coverage untouched when a skill is cleared', () => {
     // The guard is presentational: it must not move the prep engine's numbers.
-    const acc = new Map<string, number | null>([
-      ['prep-synonyms', 82],
-      ['prep-antonyms', 40],
-      ['prep-number-series', 65],
+    const acc = new Map<string, PracticeEvidence | null>([
+      ['prep-synonyms', ev(82)],
+      ['prep-antonyms', ev(40)],
+      ['prep-number-series', ev(65)],
     ])
     const plain = computePrepProgress(MODULE, [], acc)
     const guarded = computePrepProgress(MODULE, [], acc, new Set(['prep-antonyms']))
-    expect(guarded.readiness).toBe(plain.readiness)
-    expect(guarded.masteryReadiness).toBe(plain.masteryReadiness)
+    expect(guarded.practicePctRight).toBe(plain.practicePctRight)
+    expect(guarded.practiceAnswers).toBe(plain.practiceAnswers)
     expect(guarded.coveredSkillCount).toBe(plain.coveredSkillCount)
     expect(guarded.coveredSubjects).toEqual(plain.coveredSubjects)
   })
 
   it('offers nothing rather than a cleared skill when everything is cleared', () => {
-    const acc = new Map<string, number | null>([['prep-synonyms', 82], ['prep-antonyms', 40]])
+    const acc = new Map<string, PracticeEvidence | null>([['prep-synonyms', ev(82)], ['prep-antonyms', ev(40)]])
     const p = computePrepProgress(MODULE, [], acc, new Set(['prep-synonyms', 'prep-antonyms']))
     expect(p.weakestTypes).toEqual([])
     expect(p.coveredSkillCount).toBe(2)
   })
 
   it('types without graded evidence are excluded', () => {
-    const acc = new Map<string, number | null>([['prep-synonyms', 70], ['prep-antonyms', null]])
+    const acc = new Map<string, PracticeEvidence | null>([['prep-synonyms', ev(70)], ['prep-antonyms', null]])
     const p = computePrepProgress(MODULE, [], acc)
     expect(p.weakestTypes.map((t) => t.slug)).toEqual(['prep-synonyms'])
   })
 
-  it('readiness blends mastery (0.6) and recent section accuracy (0.4)', () => {
-    const acc = new Map<string, number | null>([['prep-synonyms', 90], ['prep-antonyms', 90], ['prep-number-series', 90]])
-    const attempts = [A('verbal-skills', 0.5, '2026-07-05T10:00:00Z')] // section% = 50
-    const p = computePrepProgress(MODULE, attempts, acc)
-    const expected = Math.round((90 * READINESS_W_MASTERY + 50 * READINESS_W_SECTION) / (READINESS_W_MASTERY + READINESS_W_SECTION))
-    expect(p.readiness).toBe(expected) // 74
+  it('% right pools answers across skills instead of averaging skill percents', () => {
+    // 9 of 10 right on one skill, 1 of 2 on another: 10 of 12 overall, not mean(90, 50).
+    const acc = new Map<string, PracticeEvidence | null>([['prep-synonyms', ev(90, 10)], ['prep-antonyms', ev(50, 2)]])
+    const p = computePrepProgress(MODULE, [], acc)
+    expect(p.practicePctRight).toBe(83)
+    expect(p.practiceAnswers).toBe(12)
   })
 
-  it('readiness is defined from a single signal (weight renormalized)', () => {
-    const masteryOnly = computePrepProgress(MODULE, [], new Map([['prep-synonyms', 80]]))
-    expect(masteryOnly.readiness).toBe(80)
-    const sectionOnly = computePrepProgress(MODULE, [A('verbal-skills', 0.6, '2026-07-05T10:00:00Z')], new Map())
-    expect(sectionOnly.readiness).toBe(60)
+  it('timed sections never blend into the practice % right', () => {
+    const acc = new Map<string, PracticeEvidence | null>([['prep-synonyms', ev(90)]])
+    const p = computePrepProgress(MODULE, [A('verbal-skills', 0.5, '2026-07-05T10:00:00Z')], acc)
+    expect(p.practicePctRight).toBe(90)
+    expect(p.sections[0].latestScore).toBe(50)
   })
 })

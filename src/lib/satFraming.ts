@@ -26,16 +26,3 @@ export function showKidSatFraming({
   // parent "start SAT early" opt-in to turn it on here.
   return false
 }
-
-/**
- * Pacing tone for the SAT-readiness message. "Ready by 11th" is a TARGET, not a
- * gate: readiness comes from mastering the material, so a strong-mastery student
- * is ready early. This picks which honest message to show, from the same mastery-
- * driven readiness estimate the engine already computes (no recompute, no shown
- * numbers): a strong estimate reads as "ahead of pace", otherwise "building".
- */
-export const SAT_AHEAD_PCT = 70
-
-export function satPacingTone(overallPct: number | null): 'ahead' | 'building' {
-  return overallPct != null && overallPct >= SAT_AHEAD_PCT ? 'ahead' : 'building'
-}

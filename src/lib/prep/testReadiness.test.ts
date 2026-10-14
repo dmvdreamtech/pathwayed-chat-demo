@@ -3,7 +3,7 @@ import { HSPT } from './hspt'
 import { ISEE } from './isee'
 import type { PrepAttemptLite } from './prepProgress'
 import {
-  BAND_ON_TRACK_MIN,
+  BAND_SOLID_MIN,
   BAND_STRONG_MIN,
   HISTORY_LIMIT,
   HSPT_COMPOSITES,
@@ -45,9 +45,9 @@ const H = (
 describe('bandFor', () => {
   it('splits at the named thresholds', () => {
     expect(bandFor(BAND_STRONG_MIN)).toBe('Strong')
-    expect(bandFor(BAND_STRONG_MIN - 1)).toBe('On Track')
-    expect(bandFor(BAND_ON_TRACK_MIN)).toBe('On Track')
-    expect(bandFor(BAND_ON_TRACK_MIN - 1)).toBe('Developing')
+    expect(bandFor(BAND_STRONG_MIN - 1)).toBe('Solid')
+    expect(bandFor(BAND_SOLID_MIN)).toBe('Solid')
+    expect(bandFor(BAND_SOLID_MIN - 1)).toBe('Developing')
     expect(bandFor(0)).toBe('Developing')
     expect(bandFor(100)).toBe('Strong')
   })
@@ -95,7 +95,7 @@ describe('buildModuleReadiness', () => {
     const cognitive = m.composites.find((c) => c.id === 'total-cognitive-skills')
     expect(cognitive?.percent).toBe(70)
     expect(cognitive?.partial).toBe(false)
-    expect(cognitive?.band).toBe('On Track')
+    expect(cognitive?.band).toBe('Solid')
   })
 
   it('excludes missing sections from a composite and labels it partial', () => {
@@ -217,12 +217,12 @@ describe('practiceDisclosure', () => {
     }
   })
 
-  it('still disclaims for SAT: an estimate, and the College Board owns the real score', () => {
+  it('still disclaims for SAT: practice results only, and the College Board owns the real score', () => {
     const text = practiceDisclosure(['sat'])
     expect(text).toContain('Practice performance on PathwayEd questions.')
-    expect(text).toContain('College Board')
-    expect(text).toContain('estimate')
-    expect(text).toContain('not a reported score')
+    expect(text).toContain('Official SAT scores come only from the College Board.')
+    expect(text).toContain('never an SAT score')
+    expect(text).not.toMatch(/estimate|range/i)
   })
 
   it('uses singular agreement when only one norm-referenced test applies', () => {

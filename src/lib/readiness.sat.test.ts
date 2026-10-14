@@ -1,173 +1,165 @@
 import { describe, it, expect } from 'vitest'
 import {
-  computeSatProjection,
+  computeSatResults,
   buildReadinessView,
   buildTodaysPlan,
+  isSatLevelSkill,
+  parseSatPayload,
   SAT_DOMAINS,
+  SAT_MIN_GRADE,
+  SAT_SCHEMA_VERSION,
   type SatSkillRow,
 } from './readiness'
 
-// Fixed "now" so recency weighting is deterministic.
-const NOW = 1_700_000_000_000
-const daysAgo = (d: number) => new Date(NOW - d * 86_400_000).toISOString()
+const NOW_ISO = '2026-10-14T12:00:00Z'
 
-function srow(over: Partial<SatSkillRow> & { slug: string; sat_alignment: string }): SatSkillRow {
+function srow(over: Partial<SatSkillRow> & { slug: string; sat_alignment: string | null }): SatSkillRow {
   return {
     name: over.slug,
     subject: 'math',
     mastery_percentage: 50,
-    attempts: 3,
-    last_practiced: daysAgo(0),
+    attempts: 4,
+    last_practiced: NOW_ISO,
+    ccss_grade_num: 9,
     ...over,
   }
 }
 
-// 4 fresh, fully-weighted math skills -> clears the low-data gate (>= 4 attempted).
-function fourMath(over: Partial<SatSkillRow> = {}): SatSkillRow[] {
-  // Spread FIRST so slug and sat_alignment cannot be overridden: they are the
-  // identity of each row, and SatSkillRow types sat_alignment as nullable, so a
-  // trailing spread widened it to string | null.
-  return [
-    srow({ ...over, slug: 'm1', sat_alignment: 'algebra' }),
-    srow({ ...over, slug: 'm2', sat_alignment: 'algebra' }),
-    srow({ ...over, slug: 'm3', sat_alignment: 'advanced-math' }),
-    srow({ ...over, slug: 'm4', sat_alignment: 'advanced-math' }),
-  ]
-}
-
-const domain = (res: ReturnType<typeof computeSatProjection>, token: string) =>
+const domain = (res: ReturnType<typeof computeSatResults>, token: string) =>
   res.payload.sections[SAT_DOMAINS.find((d) => d.token === token)!.section].domains.find((d) => d.token === token)!
 
-describe('computeSatProjection — domain grouping', () => {
-  it('groups mastery by sat_alignment into per-domain %s; empty domains are null', () => {
-    const res = computeSatProjection(
-      [
-        srow({ slug: 'a', sat_alignment: 'algebra', mastery_percentage: 80, attempts: 3 }),
-        srow({ slug: 'b', sat_alignment: 'advanced-math', mastery_percentage: 40, attempts: 3 }),
-      ],
-      NOW,
-    )
-    expect(domain(res, 'algebra').pct).toBe(80)
-    expect(domain(res, 'advanced-math').pct).toBe(40)
-    expect(domain(res, 'problem-solving-data-analysis').pct).toBeNull() // no rows
-    expect(domain(res, 'geometry-trigonometry').pct).toBeNull()
+describe('isSatLevelSkill — only SAT-level skills count', () => {
+  it('drops K-5 skills even though they carry an SAT domain', () => {
+    // The production shape: Counting (K) and Letter Naming (K) map to SAT domains.
+    expect(isSatLevelSkill({ sat_alignment: 'problem-solving-data-analysis', ccss_grade_num: 0, subject: 'math' })).toBe(false)
+    expect(isSatLevelSkill({ sat_alignment: 'information-and-ideas', ccss_grade_num: 0, subject: 'reading' })).toBe(false)
+    expect(isSatLevelSkill({ sat_alignment: 'problem-solving-data-analysis', ccss_grade_num: 5, subject: 'math' })).toBe(false)
+  })
+
+  it(`keeps grade ${SAT_MIN_GRADE} and above`, () => {
+    expect(isSatLevelSkill({ sat_alignment: 'algebra', ccss_grade_num: SAT_MIN_GRADE, subject: 'math' })).toBe(true)
+    expect(isSatLevelSkill({ sat_alignment: 'advanced-math', ccss_grade_num: 12, subject: 'math' })).toBe(true)
+  })
+
+  it('keeps a test-prep skill mapped to an SAT domain, which has no grade', () => {
+    expect(isSatLevelSkill({ sat_alignment: 'craft-and-structure', ccss_grade_num: null, subject: 'prep-verbal' })).toBe(true)
+  })
+
+  it('drops skills without a known SAT domain, and ungraded non-prep skills', () => {
+    expect(isSatLevelSkill({ sat_alignment: null, ccss_grade_num: 10, subject: 'math' })).toBe(false)
+    expect(isSatLevelSkill({ sat_alignment: 'not-a-domain', ccss_grade_num: 10, subject: 'math' })).toBe(false)
+    expect(isSatLevelSkill({ sat_alignment: null, ccss_grade_num: null, subject: 'prep-verbal' })).toBe(false)
+    expect(isSatLevelSkill({ sat_alignment: 'algebra', ccss_grade_num: null, subject: 'math' })).toBe(false)
   })
 })
 
-describe('computeSatProjection — section blend', () => {
-  it('blends domains into a section % (confidence-weighted), empty section -> null', () => {
-    const res = computeSatProjection(
-      [
-        srow({ slug: 'a', sat_alignment: 'algebra', mastery_percentage: 80, attempts: 3 }),
-        srow({ slug: 'b', sat_alignment: 'advanced-math', mastery_percentage: 40, attempts: 3 }),
-      ],
-      NOW,
-    )
-    // Equal weight (same attempts/recency) -> simple mean of 80 and 40.
-    expect(res.payload.sections.math.pct).toBe(60)
-    expect(res.payload.sections['reading-writing'].pct).toBeNull() // no R/W rows
+describe('computeSatResults — gaps and next skill are SAT-level only', () => {
+  it('never lists or suggests a K-5 skill', () => {
+    const res = computeSatResults([
+      srow({ slug: 'counting', name: 'Counting', sat_alignment: 'problem-solving-data-analysis', ccss_grade_num: 0, attempts: 0, mastery_percentage: 0 }),
+      srow({ slug: 'letter-naming', name: 'Letter Naming', subject: 'reading', sat_alignment: 'information-and-ideas', ccss_grade_num: 0, attempts: 0, mastery_percentage: 0 }),
+      srow({ slug: 'add-subtract-fractions-unlike', name: 'Add & Subtract Fractions', sat_alignment: 'problem-solving-data-analysis', ccss_grade_num: 5, attempts: 0, mastery_percentage: 0 }),
+      srow({ slug: 'ratios', name: 'Ratios', sat_alignment: 'problem-solving-data-analysis', ccss_grade_num: 6, attempts: 0, mastery_percentage: 0 }),
+      srow({ slug: 'linear-equations', name: 'Linear Equations', sat_alignment: 'algebra', ccss_grade_num: 9, attempts: 0, mastery_percentage: 0 }),
+    ])
+    const listed = [...res.payload.toPractice, ...res.gaps].map((s) => s.slug)
+    expect(listed).not.toContain('counting')
+    expect(listed).not.toContain('letter-naming')
+    expect(listed).not.toContain('add-subtract-fractions-unlike')
+    expect(res.nextSkillSlug).toBe('ratios') // lowest grade SAT-level skill, not the first alphabetically
+    expect(res.payload.skillsTotal).toBe(2)
+  })
+
+  it('suggests measured weaknesses before skills not started', () => {
+    const res = computeSatResults([
+      srow({ slug: 'untouched', sat_alignment: 'algebra', ccss_grade_num: 6, attempts: 0, mastery_percentage: 0 }),
+      srow({ slug: 'weak', sat_alignment: 'algebra', ccss_grade_num: 11, attempts: 5, mastery_percentage: 40 }),
+      srow({ slug: 'strong', sat_alignment: 'algebra', ccss_grade_num: 9, attempts: 5, mastery_percentage: 90 }),
+    ])
+    expect(res.payload.toPractice.map((s) => s.slug)).toEqual(['weak', 'untouched'])
+    expect(res.nextSkillSlug).toBe('weak')
+    expect(res.strengths.map((s) => s.slug)).toEqual(['strong'])
   })
 })
 
-describe('computeSatProjection — today range', () => {
-  it('emits a sane 400-1600 range (low<high, in-bounds, multiples of 10)', () => {
-    const res = computeSatProjection(fourMath({ mastery_percentage: 70 }), NOW)
-    expect(res.payload.gate).toBe('ok')
-    const t = res.payload.today!
-    expect(t.low).toBeLessThan(t.high)
-    expect(t.low).toBeGreaterThanOrEqual(400)
-    expect(t.high).toBeLessThanOrEqual(1600)
-    expect(t.low % 10).toBe(0)
-    expect(t.high % 10).toBe(0)
-    // Section bands stay inside 200-800.
-    const m = res.payload.sections.math.today!
-    expect(m.low).toBeGreaterThanOrEqual(200)
-    expect(m.high).toBeLessThanOrEqual(800)
+describe('computeSatResults — measured % right, pooled over answers', () => {
+  it('reports answers right out of answers counted, per domain and section', () => {
+    const res = computeSatResults([
+      // 8 of 10 right
+      srow({ slug: 'a1', sat_alignment: 'algebra', attempts: 10, mastery_percentage: 80 }),
+      // 2 of 10 right
+      srow({ slug: 'a2', sat_alignment: 'algebra', attempts: 10, mastery_percentage: 20 }),
+      // not started
+      srow({ slug: 'a3', sat_alignment: 'algebra', attempts: 0, mastery_percentage: 0 }),
+      // 3 of 4 right
+      srow({ slug: 'g1', sat_alignment: 'geometry-trigonometry', attempts: 4, mastery_percentage: 75 }),
+    ])
+    const alg = domain(res, 'algebra')
+    expect(alg.pctRight).toBe(50) // 10 of 20
+    expect(alg.answers).toBe(20)
+    expect(alg.skillsPracticed).toBe(2)
+    expect(alg.skillsTotal).toBe(3)
+    const math = res.payload.sections.math
+    expect(math.pctRight).toBe(54) // 13 of 24
+    expect(math.answers).toBe(24)
+    expect(res.payload.overallPctRight).toBe(54)
+    expect(res.score).toBe(54)
   })
 
-  it('widens the range inversely to data volume (more attempts -> tighter band)', () => {
-    const thin = computeSatProjection(fourMath({ attempts: 1, mastery_percentage: 70 }), NOW)
-    const thick = computeSatProjection(fourMath({ attempts: 6, mastery_percentage: 70 }), NOW)
-    const wThin = thin.payload.sections.math.today!
-    const wThick = thick.payload.sections.math.today!
-    expect(wThick.high - wThick.low).toBeLessThan(wThin.high - wThin.low)
+  it('a domain or section with nothing practiced reads as not started, never zero', () => {
+    const res = computeSatResults([srow({ slug: 'a1', sat_alignment: 'algebra', attempts: 4, mastery_percentage: 75 })])
+    expect(res.payload.sections['reading-writing'].pctRight).toBeNull()
+    expect(res.payload.sections['reading-writing'].answers).toBe(0)
+    expect(domain(res, 'craft-and-structure').skillsTotal).toBe(0)
+    expect(domain(res, 'craft-and-structure').pctRight).toBeNull()
   })
 
-  it('higher mastery -> higher band center', () => {
-    const low = computeSatProjection(fourMath({ mastery_percentage: 30 }), NOW).payload.sections.math.today!
-    const high = computeSatProjection(fourMath({ mastery_percentage: 90 }), NOW).payload.sections.math.today!
-    const center = (b: { low: number; high: number }) => (b.low + b.high) / 2
-    expect(center(high)).toBeGreaterThan(center(low))
-  })
-})
-
-describe('computeSatProjection — trajectory range (ceiling, not a trend)', () => {
-  it('lifts weak skills toward the target so the ceiling sits above today', () => {
-    const res = computeSatProjection(fourMath({ mastery_percentage: 30, attempts: 3 }), NOW)
-    const today = res.payload.today!
-    const traj = res.payload.trajectory!
-    expect(traj.high).toBeGreaterThan(today.high)
-    expect(traj.low).toBeGreaterThan(today.low)
-    expect(traj.low).toBeGreaterThanOrEqual(400)
-    expect(traj.high).toBeLessThanOrEqual(1600)
-  })
-
-  it('a student already at/above target has a ceiling at/above today (never below)', () => {
-    const res = computeSatProjection(fourMath({ mastery_percentage: 95, attempts: 3 }), NOW)
-    expect(res.payload.trajectory!.high).toBeGreaterThanOrEqual(res.payload.today!.high)
+  it('an empty catalog is all zero counts and no % right', () => {
+    const res = computeSatResults([])
+    expect(res.payload.overallPctRight).toBeNull()
+    expect(res.score).toBe(0)
+    expect(res.payload.skillsTotal).toBe(0)
+    expect(res.nextSkillSlug).toBeNull()
   })
 })
 
-describe('computeSatProjection — empty SAT domain handled (no divide-by-zero)', () => {
-  it('R/W blends only domains with evidence; the empty conventions domain is null', () => {
-    // Four R/W skills, all in information-and-ideas; conventions has none.
-    const rows: SatSkillRow[] = [
-      srow({ slug: 'r1', sat_alignment: 'information-and-ideas', subject: 'reading', mastery_percentage: 60, attempts: 3 }),
-      srow({ slug: 'r2', sat_alignment: 'information-and-ideas', subject: 'reading', mastery_percentage: 60, attempts: 3 }),
-      srow({ slug: 'r3', sat_alignment: 'information-and-ideas', subject: 'reading', mastery_percentage: 60, attempts: 3 }),
-      srow({ slug: 'r4', sat_alignment: 'information-and-ideas', subject: 'reading', mastery_percentage: 60, attempts: 3 }),
-    ]
-    const res = computeSatProjection(rows, NOW)
-    expect(res.payload.sections['reading-writing'].pct).toBe(60) // not NaN
-    expect(domain(res, 'standard-english-conventions').pct).toBeNull()
-    const rw = res.payload.sections['reading-writing'].today!
-    expect(Number.isFinite(rw.low)).toBe(true)
-    expect(Number.isFinite(rw.high)).toBe(true)
+describe('computeSatResults — no projection of any kind', () => {
+  it('the stored payload has no range, ceiling, gate or timeline', () => {
+    const res = computeSatResults([
+      srow({ slug: 'a1', sat_alignment: 'algebra', attempts: 10, mastery_percentage: 80 }),
+      srow({ slug: 'r1', subject: 'reading', sat_alignment: 'information-and-ideas', attempts: 10, mastery_percentage: 60 }),
+    ])
+    const json = JSON.stringify(res.payload)
+    for (const key of ['today', 'trajectory', 'gate', 'timeline', 'low', 'high', 'ceiling']) {
+      expect(json).not.toContain(`"${key}"`)
+    }
+    expect(json.toLowerCase()).not.toMatch(/project|estimat|potential/)
+    expect(res.payload.schemaVersion).toBe(SAT_SCHEMA_VERSION)
   })
 })
 
-describe('computeSatProjection — low-data gate', () => {
-  it('fewer than 4 attempted SAT skills -> insufficient, no projected range', () => {
-    const res = computeSatProjection(
-      [
-        srow({ slug: 'a', sat_alignment: 'algebra', attempts: 1 }),
-        srow({ slug: 'b', sat_alignment: 'algebra', attempts: 1 }),
-        srow({ slug: 'c', sat_alignment: 'algebra', attempts: 1 }),
-      ],
-      NOW,
-    )
-    expect(res.payload.gate).toBe('insufficient')
-    expect(res.payload.today).toBeNull()
-    expect(res.payload.trajectory).toBeNull()
-    expect(res.payload.attemptedSatSkills).toBe(3)
+describe('parseSatPayload — old-format rows read as empty', () => {
+  it('rejects a schema version 1 row, which carries projected ranges', () => {
+    const v1 = {
+      schemaVersion: 1,
+      gate: 'ok',
+      today: { low: 1050, high: 1180 },
+      trajectory: { low: 1200, high: 1320 },
+      sections: { math: { pct: 60, today: null, trajectory: null, domains: [] }, 'reading-writing': { pct: 50, today: null, trajectory: null, domains: [] } },
+      timeline: 'Projected ranges are transparent estimates',
+    }
+    expect(parseSatPayload(v1)).toBeNull()
   })
 
-  it('exactly 4 attempted SAT skills -> gate opens', () => {
-    expect(computeSatProjection(fourMath({ attempts: 1 }), NOW).payload.gate).toBe('ok')
+  it('reads back exactly what the engine stores', () => {
+    const res = computeSatResults([srow({ slug: 'a1', sat_alignment: 'algebra', attempts: 4, mastery_percentage: 75 })])
+    const parsed = parseSatPayload(JSON.parse(JSON.stringify(res.payload)))
+    expect(parsed).toEqual(res.payload)
   })
 
-  it('untouched SAT skills (no attempts) are insufficient and listed as missing', () => {
-    const res = computeSatProjection(
-      [
-        srow({ slug: 'u1', sat_alignment: 'algebra', attempts: 0, mastery_percentage: 0, last_practiced: null }),
-        srow({ slug: 'u2', sat_alignment: 'geometry-trigonometry', attempts: 0, mastery_percentage: 0, last_practiced: null }),
-      ],
-      NOW,
-    )
-    expect(res.payload.gate).toBe('insufficient')
-    expect(res.payload.today).toBeNull()
-    expect(res.payload.missingBySection.math.map((s) => s.slug).sort()).toEqual(['u1', 'u2'])
-    expect(res.nextSkillSlug).not.toBeNull()
+  it('rejects a malformed v2 payload rather than guessing', () => {
+    expect(parseSatPayload({ schemaVersion: SAT_SCHEMA_VERSION, sections: {} })).toBeNull()
+    expect(parseSatPayload(null)).toBeNull()
   })
 })
 

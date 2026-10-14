@@ -12,7 +12,7 @@ import {
 import { prepSkillFor, questionTypeLabel } from '@/lib/prep/prepSkills'
 import { listAttempts, type PrepAttempt } from '@/lib/prep/timedSection'
 import { listEssayAttempts, type EssayAttempt } from '@/lib/prep/prepEssay'
-import { computePrepProgress, type PrepProgress } from '@/lib/prep/prepProgress'
+import { computePrepProgress, type PracticeEvidence, type PrepProgress } from '@/lib/prep/prepProgress'
 import { daysUntilDate } from '@/lib/prep/entitlements'
 import { getSkillMastery } from '@/lib/mastery'
 import { resolveSkillIdsBySlug } from '@/lib/skills'
@@ -63,7 +63,7 @@ export function PrepModuleHome() {
   const [entitled, setEntitled] = useState<boolean | null>(null)
   const [testDate, setTestDate] = useState<string | null>(null)
   // Stand-in skill slug -> accuracy (0-100) when there is graded evidence, else null.
-  const [slugAccuracy, setSlugAccuracy] = useState<Map<string, number | null>>(new Map())
+  const [slugAccuracy, setSlugAccuracy] = useState<Map<string, PracticeEvidence | null>>(new Map())
   // Slugs already at 'advanced' or 'mastered'. Keeps "what to work on next" from
   // sending a student back to a skill they have demonstrably cleared.
   const [clearedSlugs, setClearedSlugs] = useState<Set<string>>(new Set())
@@ -112,15 +112,20 @@ export function PrepModuleHome() {
     if (slugs.length === 0) return
     Promise.all([resolveSkillIdsBySlug(slugs), getSkillMastery(student.id)]).then(([idBySlug, mastery]) => {
       if (!active) return
-      const accById = new Map(mastery.map((m) => [m.skill_id, m.attempts_counted > 0 ? m.accuracy : null]))
+      const evById = new Map<string, PracticeEvidence | null>(
+        mastery.map((m) => [
+          m.skill_id,
+          m.attempts_counted > 0 && m.accuracy != null ? { accuracy: m.accuracy, answers: m.attempts_counted } : null,
+        ]),
+      )
       const clearedIds = new Set(
         mastery.filter((m) => m.status === 'advanced' || m.status === 'mastered').map((m) => m.skill_id),
       )
-      const next = new Map<string, number | null>()
+      const next = new Map<string, PracticeEvidence | null>()
       const cleared = new Set<string>()
       for (const slug of slugs) {
         const skillId = idBySlug.get(slug)
-        next.set(slug, skillId ? accById.get(skillId) ?? null : null)
+        next.set(slug, skillId ? evById.get(skillId) ?? null : null)
         if (skillId && clearedIds.has(skillId)) cleared.add(slug)
       }
       setSlugAccuracy(next)
@@ -174,7 +179,7 @@ export function PrepModuleHome() {
           <div style={{ display: 'grid', gap: 6 }}>
             {sec.questionTypes.map((type) => {
               const slug = prepSkillFor(type)?.slug ?? null
-              const acc = slug ? slugAccuracy.get(slug) ?? null : null
+              const acc = slug ? slugAccuracy.get(slug)?.accuracy ?? null : null
               return (
                 <button
                   key={type}
@@ -451,7 +456,7 @@ function PrepProgressTab({
 }: {
   studentId: string
   module: PrepModule
-  slugAccuracy: Map<string, number | null>
+  slugAccuracy: Map<string, PracticeEvidence | null>
   clearedSlugs: Set<string>
   testDate: string | null
   onGoToTest: () => void

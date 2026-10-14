@@ -27,13 +27,13 @@ import { computePrepProgress, type PrepAttemptLite, type SectionProgress } from 
 // PathwayEd practice bands, not concordance with any published scale.
 // ---------------------------------------------------------------------------
 export const BAND_STRONG_MIN = 75
-export const BAND_ON_TRACK_MIN = 50
+export const BAND_SOLID_MIN = 50
 
-export type ReadinessBand = 'Developing' | 'On Track' | 'Strong'
+export type ReadinessBand = 'Developing' | 'Solid' | 'Strong'
 
 export function bandFor(percent: number): ReadinessBand {
   if (percent >= BAND_STRONG_MIN) return 'Strong'
-  if (percent >= BAND_ON_TRACK_MIN) return 'On Track'
+  if (percent >= BAND_SOLID_MIN) return 'Solid'
   return 'Developing'
 }
 
@@ -78,14 +78,10 @@ export function practiceDisclosure(moduleIds: readonly string[]): string {
     )
   }
 
-  // SAT is a different failure mode with the same answer. There is no norming table
-  // we are missing; the gap is that the range on this card is projected from
-  // mastery rather than earned on a test. Either way PathwayEd reports no official
-  // score, and the College Board is who does.
+  // SAT: the card shows measured practice results only, never an SAT score or
+  // range. Only the College Board reports one.
   if (ids.has('sat')) {
-    parts.push(
-      'Official SAT scores are produced by the College Board from the real test. Any SAT range here is an estimate built from practice, not a reported score.',
-    )
+    parts.push('Official SAT scores come only from the College Board. PathwayEd shows practice results, never an SAT score.')
   }
 
   return parts.join(' ')
@@ -102,14 +98,14 @@ export const SCALE_REFERENCE: { id: string; test: string; text: string }[] = [
   {
     id: 'hspt',
     test: 'HSPT',
-    text: 'Reports standard scores from 200 to 800 with 500 as the mean, plus national and local percentiles and a Cognitive Skills Quotient averaging 100.',
+    text: 'Reports standard scores with 500 as the national mean, plus national and local percentiles and a Cognitive Skills Quotient.',
   },
   {
     id: 'isee',
     test: 'ISEE',
-    text: 'Reports scaled scores from 760 to 940 per section, a percentile from 1 to 99, and a stanine from 1 to 9.',
+    text: 'Reports a scaled score for each section, a national percentile, and a stanine.',
   },
-  { id: 'sat', test: 'SAT', text: 'Reports scores from 400 to 1600.' },
+  { id: 'sat', test: 'SAT', text: 'The College Board reports a total score; PathwayEd does not.' },
 ]
 
 /**
@@ -259,8 +255,8 @@ export function buildModuleReadiness(
 ): ModuleReadiness {
   const submitted = attempts.filter((a) => a.status === 'submitted' && a.score != null)
   // Empty slug map: this card uses only the per-section aggregation, never the
-  // practice-mastery blend or the readiness number those inputs would produce.
-  const progress = computePrepProgress(module, submitted, new Map<string, number | null>())
+  // practice % right those inputs would produce.
+  const progress = computePrepProgress(module, submitted, new Map())
   const bySection = new Map<string, SectionProgress>(progress.sections.map((s) => [s.sectionId, s]))
 
   const scored = module.sections.filter((s) => {

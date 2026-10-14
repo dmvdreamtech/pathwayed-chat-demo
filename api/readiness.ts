@@ -50,7 +50,7 @@ export async function recomputeReadiness(svc: SupabaseClient, studentId: string,
   // still store, which is how the browser version behaved.
   const { data: satCatalog, error: satError } = await svc
     .from("skills")
-    .select("id, slug, name, subject, sat_alignment")
+    .select("id, slug, name, subject, sat_alignment, ccss_grade_num")
     .eq("level", "skill")
     .not("sat_alignment", "is", null)
   if (satError) console.error("readiness: SAT catalog read failed", satError.message)

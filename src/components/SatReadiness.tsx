@@ -1,92 +1,63 @@
-import type { SatProjectionPayload } from '@/lib/readiness'
-import { satPacingTone } from '@/lib/satFraming'
+import type { SatDomainResult, SatResultsPayload, SatSectionResult } from '@/lib/readiness'
 
 /**
- * Shared SAT Readiness presentation for BOTH surfaces — the student dashboard
- * card (variant 'student') and the parent dashboard per-child section (variant
+ * Shared SAT results presentation for BOTH surfaces — the student dashboard card
+ * (variant 'student') and the parent dashboard per-child section (variant
  * 'parent'). Read-only: it renders the stored 'sat' payload, no engine logic.
  *
- * Everything is shared except the wrapper element and the intro copy, so the
- * framing — the ESTIMATE badge, the methodology line, and the
- * "potential, not a prediction" disclaimer — CANNOT drift between the two
- * surfaces (a school sees the parent view, so this matters).
+ * MEASURED PERFORMANCE ONLY. Every number here is something that happened: the
+ * share of SAT-level practice answers that were right, per section and per SAT
+ * domain, and how many SAT-level skills have been practiced. There is no
+ * estimated score, no range, and no "potential". PathwayEd never estimates an
+ * SAT score; only the College Board reports one (see practiceDisclosure).
  *
- * Grade- AND gate-dependent:
- *   - gate 'insufficient' (any grade): section %s + "building toward" copy,
- *     never a score or a fabricated range.
- *   - grade <= 8 (incl. K / unknown): foundation framing only, no SAT score.
- *   - grade 9-10, gate ok: dual ranges (today + junior-year) framed as college
- *     readiness.
- *   - grade 11-12, gate ok: full SAT framing + ranges + top missing skills +
- *     timeline.
+ * Shared by both surfaces so the wording cannot drift between them (a school sees
+ * the parent view, so this matters).
  */
 
-// Defined ONCE — the non-negotiable framing strings shared by both surfaces.
-const METHODOLOGY = 'Projected from demonstrated mastery, refined as your child practices.'
-const TRAJECTORY_DISCLAIMER =
-  'Junior-year potential is where they could land if they master weak and untouched skills, a potential, not a prediction.'
-
-// Pacing message: readiness comes from MASTERING the material, not from reaching a
-// grade. "Ready by 11th" is a target, not a gate — a strong-mastery student is
-// ready early. Two honest, encouraging variants (no numbers), chosen by tone.
-const PACING: Record<Variant, Record<'ahead' | 'building', string>> = {
-  student: {
-    ahead:
-      "You're ahead of the usual pace! Readiness comes from mastering the skills, not waiting for a grade, keep it up and you'll be ready early.",
-    building:
-      "Readiness comes from mastering the skills, not reaching a certain grade. Master them and you're ready, as soon as that takes you, not a moment later.",
-  },
-  parent: {
-    ahead:
-      'Ahead of the usual pace, readiness comes from mastered skills, not a grade. A strong-mastery student is ready early, ahead of the typical junior-year timeline.',
-    building:
-      "Readiness comes from mastered skills, not a grade. As your child masters the material they become ready, potentially ahead of the typical junior-year timeline, never held to it.",
-  },
-}
-
-type Band = 'foundation' | 'college' | 'sat'
 type Variant = 'student' | 'parent'
 
-function bandFor(grade: string): Band {
-  const n = parseInt(grade, 10)
-  if (Number.isNaN(n) || n <= 8) return 'foundation' // K and anything <= 8
-  if (n <= 10) return 'college' // 9-10
-  return 'sat' // 11-12
+const SECTIONS: { key: 'math' | 'reading-writing'; label: string; accent: string }[] = [
+  { key: 'math', label: 'Math', accent: 'var(--math)' },
+  { key: 'reading-writing', label: 'Reading & Writing', accent: 'var(--reading)' },
+]
+
+const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`
+
+function intro(variant: Variant, firstName: string): string {
+  return variant === 'student'
+    ? 'Measured on SAT-level practice: how many answers you got right in each section, and how many SAT skills you have practiced.'
+    : `Measured on SAT-level practice: how many answers ${firstName} got right in each section, and how many SAT skills they have practiced.`
 }
 
-// Intro copy varies by surface + state. Student strings are kept verbatim from
-// the original card so the student view renders identically post-refactor.
-const COPY: Record<Variant, Record<'empty' | 'foundation' | 'insufficient' | 'college' | 'sat', string>> = {
-  student: {
-    empty: 'As your child practices SAT-aligned skills, a readiness estimate will appear here.',
-    foundation:
-      "You're building skills that lead toward the SAT. Keep practicing, these are the foundations that get them there.",
-    insufficient: "A little more SAT-skill practice and we'll project a score range. Here's where things stand so far.",
-    college: 'On track toward college-level work. Below is an estimated SAT range from demonstrated mastery.',
-    sat: 'Here is an estimated SAT range from demonstrated mastery.',
-  },
-  parent: {
-    empty: 'As your child practices SAT-aligned skills, a readiness estimate will appear here.',
-    foundation:
-      'Your child is building foundational skills toward college readiness, no SAT estimate yet; that comes as they grow these skills.',
-    insufficient:
-      'A little more SAT-skill practice and an estimated score range will appear. Here is where things stand so far.',
-    college:
-      'On track toward college-level work. Below is an estimated SAT range projected from demonstrated mastery.',
-    sat: 'An estimated SAT range projected from demonstrated mastery.',
-  },
+function emptyCopy(variant: Variant, firstName: string): string {
+  return variant === 'student'
+    ? 'Your SAT practice results will show here once you practice SAT-level skills.'
+    : `${firstName}'s SAT practice results will show here once they practice SAT-level skills.`
+}
+
+/** "48 answers across 5 skills", or "Not started". */
+function sectionDetail(s: SatSectionResult): string {
+  if (s.answers === 0) return 'Not started'
+  return `${plural(s.answers, 'answer', 'answers')} across ${plural(s.skillsPracticed, 'skill', 'skills')}`
+}
+
+/** "Algebra · 80% right · 2 of 12 skills practiced". */
+function domainLine(d: SatDomainResult): string {
+  if (d.skillsTotal === 0) return 'No SAT-level skills yet'
+  const practiced = `${d.skillsPracticed} of ${plural(d.skillsTotal, 'skill', 'skills')} practiced`
+  return d.pctRight == null ? `Not started · ${practiced}` : `${d.pctRight}% right · ${practiced}`
 }
 
 export function SatReadiness({
   payload,
-  grade,
+  firstName,
   variant,
 }: {
-  payload: SatProjectionPayload | null
-  grade: string
+  payload: SatResultsPayload | null
+  firstName: string
   variant: Variant
 }) {
-  const band = bandFor(grade)
   const heading = (text: string) =>
     variant === 'parent' ? <div className="pd-label">{text}</div> : <h3>{text}</h3>
   const wrap = (children: React.ReactNode) =>
@@ -96,101 +67,70 @@ export function SatReadiness({
       <section className="panel">{children}</section>
     )
 
-  // No row yet / unrecognised payload -> gentle empty state. Never a number.
-  if (!payload) {
+  // No row yet, an old-format row, or nothing practiced: a plain empty state.
+  if (!payload || payload.answers === 0) {
     return wrap(
       <>
-        {heading('SAT Readiness')}
-        <p className="muted sat-intro">{COPY[variant].empty}</p>
+        {heading('SAT Practice')}
+        <p className="muted sat-intro">{emptyCopy(variant, firstName)}</p>
+        {payload && payload.skillsTotal > 0 && (
+          <p className="sat-note">{`SAT-level skills practiced: 0 of ${payload.skillsTotal}.`}</p>
+        )}
       </>,
     )
   }
 
-  const sections = (
-    [
-      { key: 'math', label: 'Math', pct: payload.sections?.math?.pct ?? null, accent: 'var(--math)' },
-      {
-        key: 'rw',
-        label: 'Reading & Writing',
-        pct: payload.sections?.['reading-writing']?.pct ?? null,
-        accent: 'var(--reading)',
-      },
-    ] as { key: string; label: string; pct: number | null; accent: string }[]
-  ).filter((s): s is { key: string; label: string; pct: number; accent: string } => typeof s.pct === 'number')
-
-  const gateOk = payload.gate === 'ok'
-  // Foundation grades NEVER show a score/range, even if the gate is somehow ok.
-  const showRanges = gateOk && band !== 'foundation' && !!payload.today && !!payload.trajectory
-  const showSatExtras = showRanges && band === 'sat'
-
-  const headingText = band === 'college' ? 'College Readiness' : 'SAT Readiness'
-  const introKey: 'foundation' | 'insufficient' | 'college' | 'sat' =
-    band === 'foundation' ? 'foundation' : !gateOk ? 'insufficient' : band
-  const intro = COPY[variant][introKey]
-
-  const missing = showSatExtras
-    ? [...(payload.missingBySection?.math ?? []), ...(payload.missingBySection?.['reading-writing'] ?? [])]
-        .filter((s) => s && typeof s.name === 'string')
-        .slice(0, 4)
-    : []
+  const notStarted = payload.skillsTotal - payload.skillsPracticed
 
   return wrap(
     <>
-      {heading(headingText)}
-      <p className="muted sat-intro">{intro}</p>
+      {heading('SAT Practice')}
+      <p className="muted sat-intro">{intro(variant, firstName)}</p>
 
-      {sections.length > 0 && (
-        <div className="sat-sections">
-          {sections.map((s) => (
-            <div key={s.key} className="skill-row">
-              <div className="skill-top">
-                <span className="skill-name">{s.label}</span>
-                <span className="skill-pct">{Math.round(s.pct)}%</span>
+      <div className="sat-sections">
+        {SECTIONS.map(({ key, label, accent }) => {
+          const s = payload.sections[key]
+          return (
+            <div key={key} className="sat-section">
+              <div className="skill-row">
+                <div className="skill-top">
+                  <span className="skill-name">{label}</span>
+                  <span className="skill-pct">{s.pctRight == null ? 'Not started' : `${s.pctRight}% right`}</span>
+                </div>
+                {s.pctRight != null && (
+                  <div className="bar">
+                    <i style={{ width: `${s.pctRight}%`, background: accent }} />
+                  </div>
+                )}
+                <p className="sat-sub">{sectionDetail(s)}</p>
               </div>
-              <div className="bar">
-                <i style={{ width: `${Math.round(s.pct)}%`, background: s.accent }} />
-              </div>
+              <ul className="sat-domains">
+                {s.domains.map((d) => (
+                  <li key={d.token}>
+                    <span className="sat-domain-name">{d.label}</span>
+                    <span className="sat-domain-val">{domainLine(d)}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          ))}
-        </div>
-      )}
+          )
+        })}
+      </div>
 
-      {showRanges && (
-        <div className="sat-ranges">
-          <div className="sat-range">
-            <span className="sat-range-label">
-              Estimated SAT today <span className="sat-badge">Estimate</span>
-            </span>
-            <span className="sat-range-val">
-              {payload.today!.low}&ndash;{payload.today!.high}
-            </span>
-          </div>
-          <div className="sat-range">
-            <span className="sat-range-label">Junior-year potential</span>
-            <span className="sat-range-val">
-              {payload.trajectory!.low}&ndash;{payload.trajectory!.high}
-            </span>
-          </div>
-          <p className={`sat-pacing${satPacingTone(payload.overallPct) === 'ahead' ? ' ahead' : ''}`}>
-            {PACING[variant][satPacingTone(payload.overallPct)]}
-          </p>
-          <p className="sat-note">{TRAJECTORY_DISCLAIMER}</p>
-          <p className="sat-method">{METHODOLOGY}</p>
-        </div>
-      )}
+      <p className="sat-note">
+        {`SAT-level skills practiced: ${payload.skillsPracticed} of ${payload.skillsTotal}. Not started: ${notStarted}.`}
+      </p>
 
-      {showSatExtras && missing.length > 0 && (
+      {payload.toPractice.length > 0 && (
         <div className="sat-missing">
-          <div className="subj-head">Top skills to focus on</div>
+          <div className="subj-head">Skills to practice next</div>
           <ul>
-            {missing.map((s) => (
+            {payload.toPractice.slice(0, 4).map((s) => (
               <li key={s.slug}>{s.name}</li>
             ))}
           </ul>
         </div>
       )}
-
-      {showSatExtras && payload.timeline && <p className="sat-method">{payload.timeline}</p>}
     </>,
   )
 }

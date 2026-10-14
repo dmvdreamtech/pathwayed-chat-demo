@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { showKidSatFraming, satPacingTone } from './satFraming'
+import { showKidSatFraming } from './satFraming'
 
 describe('showKidSatFraming', () => {
   it('is ON for a consented kid at grade 9+', () => {
@@ -18,19 +18,5 @@ describe('showKidSatFraming', () => {
     expect(showKidSatFraming({ grade: '11', above_grade_ok: false })).toBe(false)
     expect(showKidSatFraming({ grade: '9', above_grade_ok: false })).toBe(false)
     expect(showKidSatFraming({ grade: '6', above_grade_ok: false })).toBe(false)
-  })
-})
-
-describe('satPacingTone', () => {
-  it('reads a strong mastery estimate as ahead of pace', () => {
-    expect(satPacingTone(85)).toBe('ahead')
-    expect(satPacingTone(70)).toBe('ahead')
-  })
-
-  it('reads a modest / absent estimate as still building', () => {
-    expect(satPacingTone(69)).toBe('building')
-    expect(satPacingTone(40)).toBe('building')
-    expect(satPacingTone(0)).toBe('building')
-    expect(satPacingTone(null)).toBe('building')
   })
 })

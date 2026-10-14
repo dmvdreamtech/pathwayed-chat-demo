@@ -371,8 +371,8 @@ function ChildPanel({ data, index, now }: { data: ChildData; index: number; now:
               })}
               <p className="gp-note">
                 This counts the skills {student.first_name} has cleared at each grade, which means
-                70% or better over at least 5 questions. It is not a grade-equivalent score and it
-                does not predict how they would do on a grade-level test.
+                70% or better over at least 5 questions. It is not a grade-equivalent score or a
+                grade-level test result.
               </p>
             </div>
           )}

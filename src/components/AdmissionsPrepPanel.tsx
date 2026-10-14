@@ -345,7 +345,7 @@ export function AdmissionsPrepPanel({
 
       {/* Free readiness teasers, the discovery funnel. One per (grade-eligible,
           not-yet-entitled) child × module, on qualifying accounts only. Shows the
-          mastery-only readiness number (or a building state) and an Unlock action
+          measured % right (or a building state) and an Unlock action
           that preselects the child + module in the purchase flow below. */}
       {teasers.length > 0 && (
         <div style={{ marginTop: 14, display: 'grid', gap: 10 }}>
@@ -469,7 +469,7 @@ export function AdmissionsPrepPanel({
 }
 
 /** Readiness band color for the parent headline number. */
-function readinessColor(score: number): string {
+function pctColor(score: number): string {
   if (score >= 75) return '#1F9E6F'
   if (score >= 50) return '#003078'
   if (score >= 25) return '#B87A2E'
@@ -483,13 +483,13 @@ const TREND: Record<'up' | 'down' | 'flat', { s: string; c: string }> = {
 }
 
 /**
- * Parent-facing readiness + progress for one child's prep module. Entirely
- * client-computed (loadPrepProgress) from prep_attempts and mastery the parent can
- * already read under RLS — no new tables, no server work. Shows:
- *   - a 0-100 readiness headline (blend of per-type mastery + recent section scores),
+ * Parent-facing progress for one child's prep module. Entirely client-computed
+ * (loadPrepProgress) from prep_attempts and mastery the parent can already read
+ * under RLS — no new tables, no server work. Shows measured results only:
+ *   - % right on this test's practice, and how many answers that rests on,
  *   - latest timed section scores with a trend arrow vs the prior attempt,
  *   - the weakest areas in plain parent language.
- * Readiness is a coaching signal, stated as such — never a predicted test score.
+ * No blended score and nothing projected onto the test's own scale.
  */
 function PrepChildProgress({
   studentId,
@@ -522,7 +522,7 @@ function PrepChildProgress({
   }
   if (!progress) return null
 
-  const hasReadiness = progress.readiness != null
+  const hasPractice = progress.practicePctRight != null
   const wrap: React.CSSProperties = {
     marginTop: 2,
     padding: '10px 12px',
@@ -535,28 +535,31 @@ function PrepChildProgress({
 
   return (
     <div style={wrap}>
-      {/* Readiness headline. */}
-      {hasReadiness ? (
+      {/* Measured practice headline. */}
+      {hasPractice ? (
         <div>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 7 }}>
-            <span style={{ fontSize: 24, fontWeight: 800, color: readinessColor(progress.readiness as number), lineHeight: 1 }}>
-              {progress.readiness}
+            <span style={{ fontSize: 24, fontWeight: 800, color: pctColor(progress.practicePctRight as number), lineHeight: 1 }}>
+              {progress.practicePctRight}%
             </span>
-            <span style={{ fontSize: 12, fontWeight: 600, color: '#5A6172' }}>/ 100 · {moduleName} readiness</span>
+            <span style={{ fontSize: 12, fontWeight: 600, color: '#5A6172' }}>right on {moduleName} practice</span>
           </div>
           <p className="muted" style={{ fontSize: 12, margin: '4px 0 0' }}>
-            A blend of practice mastery and recent timed-section scores, a coaching signal to guide practice, not a predicted test score.
+            {progress.practiceAnswers === 1
+              ? 'Based on 1 practice answer.'
+              : `Based on ${progress.practiceAnswers} practice answers.`}
           </p>
         </div>
       ) : (
         <p className="muted" style={{ fontSize: 12.5, margin: 0 }}>
-          {moduleName} readiness will appear once {`there's`} a little timed practice to measure.
+          {moduleName} practice results will show here once {`there's`} some practice to measure.
         </p>
       )}
 
       {/* Latest section scores + trend vs prior attempt. */}
       {progress.sections.length > 0 && (
         <div style={{ display: 'grid', gap: 4 }}>
+          <div style={{ fontSize: 11.5, fontWeight: 700, color: '#5A6172' }}>Latest timed sections</div>
           {progress.sections.map((s) => {
             const arrow = s.trend ? TREND[s.trend] : null
             return (
@@ -594,13 +597,13 @@ function humanList(items: string[]): string {
 }
 
 /**
- * Free readiness teaser (discovery funnel) for a grade-eligible child who is NOT yet
- * entitled to this module, on a qualifying account. Shows the MASTERY-ONLY readiness
- * number when there's enough coverage (TEASER_MIN_COVERED_SKILLS distinct skills with
- * graded evidence), otherwise a friendly "building a picture" state — never a number
- * from almost nothing. Both states end in the same Unlock action, which preselects
- * this child + module in the purchase flow. Client-computed from mastery under
- * existing RLS; the child has no timed attempts, so masteryReadiness == readiness.
+ * Free preview (discovery funnel) for a grade-eligible child who is NOT yet
+ * entitled to this module, on a qualifying account. Shows the child's measured %
+ * right on the module's practice skills when there's enough coverage
+ * (TEASER_MIN_COVERED_SKILLS distinct skills with graded evidence), otherwise a
+ * friendly "building a picture" state — never a number from almost nothing. Both
+ * states end in the same Unlock action, which preselects this child + module in
+ * the purchase flow. Client-computed from mastery under existing RLS.
  */
 function PrepTeaserCard({
   student,
@@ -629,7 +632,7 @@ function PrepTeaserCard({
 
   const firstName = student.first_name || 'Your child'
   const showNumber =
-    !!progress && progress.masteryReadiness != null && progress.coveredSkillCount >= TEASER_MIN_COVERED_SKILLS
+    !!progress && progress.practicePctRight != null && progress.coveredSkillCount >= TEASER_MIN_COVERED_SKILLS
   const subjects = progress?.coveredSubjects ?? []
 
   const wrap: React.CSSProperties = {
@@ -654,23 +657,23 @@ function PrepTeaserCard({
       ) : showNumber ? (
         <div>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
-            <span style={{ fontSize: 14.5, fontWeight: 700, color: '#1C2230' }}>{firstName}’s {moduleName} readiness:</span>
-            <span style={{ fontSize: 26, fontWeight: 800, color: readinessColor(progress!.masteryReadiness as number), lineHeight: 1 }}>
-              {progress!.masteryReadiness}
+            <span style={{ fontSize: 14.5, fontWeight: 700, color: '#1C2230' }}>{firstName}’s {moduleName} practice so far:</span>
+            <span style={{ fontSize: 26, fontWeight: 800, color: pctColor(progress!.practicePctRight as number), lineHeight: 1 }}>
+              {progress!.practicePctRight}% right
             </span>
           </div>
           <p className="muted" style={{ fontSize: 12, margin: '5px 0 0' }}>
-            An early read from the practice {firstName} has already done, a coaching signal, not a predicted test score.
+            Measured on {progress!.practiceAnswers} practice answers {firstName} has already given.
             {subjects.length > 0 && <> Based on their work in {humanList(subjects)} so far.</>}
           </p>
         </div>
       ) : (
         <div>
           <p style={{ fontSize: 14, fontWeight: 600, color: '#1C2230', margin: 0 }}>
-            We’re building a picture of {firstName}’s {moduleName} readiness.
+            We’re building a picture of {firstName}’s {moduleName} practice.
           </p>
           <p className="muted" style={{ fontSize: 12, margin: '4px 0 0' }}>
-            As {firstName} keeps practicing, an early readiness read will appear here.
+            As {firstName} keeps practicing, their % right will show here.
           </p>
         </div>
       )}

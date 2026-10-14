@@ -6,10 +6,10 @@ import {
   ENGINE_VERSION,
   SAT_SCHEMA_VERSION,
   SUBJECTS,
-  type SatBand,
-  type SatProjectionPayload,
+  type SatDomainResult,
+  type SatResultsPayload,
   type SatSection,
-  type SatSectionPayload,
+  type SatSectionResult,
   type SkillRef,
 } from '@/lib/readinessEngine'
 
@@ -17,7 +17,7 @@ import {
  * Readiness in the browser: reading it, deciding when it is stale, asking the
  * server to recompute, and the templated coach copy.
  *
- * The engine (computePathwayScore, computeSatProjection and the row builders)
+ * The engine (computePathwayScore, computeSatResults and the row builders)
  * lives in readinessEngine.ts and is re-exported here, so existing imports keep
  * working. Since migration 0031 the browser never writes readiness_scores:
  * refreshReadiness asks api/readiness.ts, which recomputes from the database's
@@ -165,56 +165,77 @@ export async function getReadiness(studentId: string): Promise<ReadinessView> {
   return buildReadinessView(data)
 }
 
-function isBand(v: unknown): v is SatBand {
-  return !!v && typeof v === 'object' && typeof (v as SatBand).low === 'number' && typeof (v as SatBand).high === 'number'
+const isCount = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v) && v >= 0
+const isPct = (v: unknown): v is number | null => v === null || (typeof v === 'number' && v >= 0 && v <= 100)
+
+function isDomain(v: unknown): v is SatDomainResult {
+  if (!v || typeof v !== 'object') return false
+  const d = v as SatDomainResult
+  return (
+    typeof d.token === 'string' &&
+    typeof d.label === 'string' &&
+    isPct(d.pctRight) &&
+    isCount(d.answers) &&
+    isCount(d.skillsPracticed) &&
+    isCount(d.skillsTotal)
+  )
 }
 
-function isSection(v: unknown): v is SatSectionPayload {
+function isSection(v: unknown): v is SatSectionResult {
   if (!v || typeof v !== 'object') return false
-  const s = v as SatSectionPayload
-  return (s.pct === null || typeof s.pct === 'number') && (s.today === null || isBand(s.today))
+  const s = v as SatSectionResult
+  return (
+    isPct(s.pctRight) &&
+    isCount(s.answers) &&
+    isCount(s.skillsPracticed) &&
+    isCount(s.skillsTotal) &&
+    Array.isArray(s.domains) &&
+    s.domains.every(isDomain)
+  )
 }
 
 /**
  * Defensive parse of a stored 'sat' row's `recommendations` into a
- * SatProjectionPayload. Returns null on anything it doesn't fully recognise —
- * unknown/missing schemaVersion, wrong gate, or a malformed shape — so the card
- * degrades to "nothing / foundation" rather than crashing on a stale payload.
+ * SatResultsPayload. Returns null on anything it doesn't fully recognise, so the
+ * card shows its empty state rather than crashing on a stale payload.
+ *
+ * ONLY schema version 2 is read. Version 1 rows carry projected SAT score ranges,
+ * which PathwayEd no longer shows, so an old row reads as empty until the server
+ * recomputes it (engine version 5 marks it stale on the next parent visit, and
+ * scripts/recompute-readiness.ts rewrites every row at once).
  */
-function parseSatPayload(raw: Json | null | undefined): SatProjectionPayload | null {
+export function parseSatPayload(raw: Json | null | undefined): SatResultsPayload | null {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null
   const p = raw as Record<string, unknown>
   if (p.schemaVersion !== SAT_SCHEMA_VERSION) return null // only the version we know
-  if (p.gate !== 'ok' && p.gate !== 'insufficient') return null
   const sections = p.sections as Record<string, unknown> | undefined
   if (!sections || !isSection(sections.math) || !isSection(sections['reading-writing'])) return null
-  if (!(p.today === null || isBand(p.today))) return null
-  if (!(p.trajectory === null || isBand(p.trajectory))) return null
-  const missing = p.missingBySection as Record<string, unknown> | undefined
-  const mathMissing = Array.isArray(missing?.math) ? (missing!.math as SkillRef[]) : []
-  const rwMissing = Array.isArray(missing?.['reading-writing']) ? (missing!['reading-writing'] as SkillRef[]) : []
+  if (!isPct(p.overallPctRight) || !isCount(p.answers) || !isCount(p.skillsPracticed) || !isCount(p.skillsTotal)) {
+    return null
+  }
+  const toPractice = Array.isArray(p.toPractice)
+    ? (p.toPractice as SkillRef[]).filter((s) => s && typeof s.name === 'string' && typeof s.slug === 'string')
+    : []
   return {
     schemaVersion: SAT_SCHEMA_VERSION,
-    gate: p.gate,
-    attemptedSatSkills: typeof p.attemptedSatSkills === 'number' ? p.attemptedSatSkills : 0,
-    overallPct: typeof p.overallPct === 'number' ? p.overallPct : null,
-    sections: sections as unknown as Record<SatSection, SatSectionPayload>,
-    today: (p.today as SatBand | null) ?? null,
-    trajectory: (p.trajectory as SatBand | null) ?? null,
-    missingBySection: { math: mathMissing, 'reading-writing': rwMissing },
+    sections: sections as unknown as Record<SatSection, SatSectionResult>,
+    overallPctRight: p.overallPctRight,
+    answers: p.answers,
+    skillsPracticed: p.skillsPracticed,
+    skillsTotal: p.skillsTotal,
+    toPractice,
     nextSkillSlug: typeof p.nextSkillSlug === 'string' ? p.nextSkillSlug : null,
-    timeline: typeof p.timeline === 'string' ? p.timeline : '',
   }
 }
 
 /**
- * Read-only fetch of the student's SAT projection payload (the 'sat'
+ * Read-only fetch of the student's SAT results payload (the 'sat'
  * readiness_scores row's `recommendations`). Returns null when there is no row
  * or the payload is an unrecognised shape/version. Does NOT touch the pathway/
  * subject view or Today's Plan. Call after ensureFreshReadiness so it reflects
  * any just-written recompute.
  */
-export async function getSatPayload(studentId: string): Promise<SatProjectionPayload | null> {
+export async function getSatPayload(studentId: string): Promise<SatResultsPayload | null> {
   const { data, error } = await supabase
     .from('readiness_scores')
     .select('recommendations')

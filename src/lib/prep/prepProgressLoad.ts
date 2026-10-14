@@ -3,7 +3,12 @@ import { prepSkillFor } from '@/lib/prep/prepSkills'
 import { listAttempts } from '@/lib/prep/timedSection'
 import { getSkillMastery } from '@/lib/mastery'
 import { resolveSkillIdsBySlug } from '@/lib/skills'
-import { computePrepProgress, type PrepProgress, type PrepAttemptLite } from '@/lib/prep/prepProgress'
+import {
+  computePrepProgress,
+  type PracticeEvidence,
+  type PrepProgress,
+  type PrepAttemptLite,
+} from '@/lib/prep/prepProgress'
 
 /**
  * I/O orchestration for computePrepProgress (the pure engine). Reads the child's
@@ -27,15 +32,20 @@ export async function loadPrepProgress(studentId: string, module: PrepModule): P
     getSkillMastery(studentId),
   ])
 
-  const accById = new Map(mastery.map((m) => [m.skill_id, m.attempts_counted > 0 ? m.accuracy : null]))
+  const evById = new Map<string, PracticeEvidence | null>(
+    mastery.map((m) => [
+      m.skill_id,
+      m.attempts_counted > 0 && m.accuracy != null ? { accuracy: m.accuracy, answers: m.attempts_counted } : null,
+    ]),
+  )
   const clearedIds = new Set(
     mastery.filter((m) => m.status === 'advanced' || m.status === 'mastered').map((m) => m.skill_id),
   )
-  const slugAccuracy = new Map<string, number | null>()
+  const slugEvidence = new Map<string, PracticeEvidence | null>()
   const clearedSlugs = new Set<string>()
   for (const slug of slugs) {
     const skillId = idBySlug.get(slug)
-    slugAccuracy.set(slug, skillId ? accById.get(skillId) ?? null : null)
+    slugEvidence.set(slug, skillId ? evById.get(skillId) ?? null : null)
     if (skillId && clearedIds.has(skillId)) clearedSlugs.add(slug)
   }
 
@@ -48,5 +58,5 @@ export async function loadPrepProgress(studentId: string, module: PrepModule): P
       startedAt: a.startedAt,
     }))
 
-  return computePrepProgress(module, lite, slugAccuracy, clearedSlugs)
+  return computePrepProgress(module, lite, slugEvidence, clearedSlugs)
 }

@@ -13,8 +13,11 @@ import { prepSkillFor, questionTypeLabel } from '@/lib/prep/prepSkills'
  *      prep_attempts only), so this is a distinct, practice-driven signal.
  *
  * computePrepProgress is PURE (no I/O, `now` passed in) so both surfaces render the
- * same numbers and it is unit-testable. The kid surface shows scores + encouragement
- * and NEVER a readiness number; the parent surface adds the readiness blend below.
+ * same numbers and it is unit-testable.
+ *
+ * MEASURED ONLY. Every number is something that happened: a timed section's
+ * percent correct, or the share of practice answers that were right. There is no
+ * blended readiness score and nothing projected onto a test's scale.
  */
 
 /** The subset of a PrepAttempt this engine needs (finalized timed attempts only). */
@@ -42,6 +45,14 @@ export interface SectionProgress {
   trend: 'up' | 'down' | 'flat' | null
 }
 
+/** One skill's graded practice evidence: % right and how many answers counted. */
+export interface PracticeEvidence {
+  /** Answers right out of answers counted, 0..100. */
+  accuracy: number
+  /** Graded, counted practice answers behind the accuracy. */
+  answers: number
+}
+
 export interface TypeProgress {
   type: string
   label: string
@@ -56,14 +67,11 @@ export interface PrepProgress {
   sections: SectionProgress[]
   /** Lowest-accuracy types with practice evidence, deduped by skill, up to 3. */
   weakestTypes: TypeProgress[]
-  /** 0..100 module readiness for the PARENT surface; null when data is too thin.
-   *  NEVER shown on a kid surface. */
-  readiness: number | null
-  /** The MASTERY TERM ALONE (0..100), null when no type has graded evidence. This
-   *  is what the free readiness teaser shows for a not-yet-entitled child (they have
-   *  no timed attempts, so the blended readiness would equal this anyway — exposed
-   *  explicitly so the teaser never depends on that coincidence). */
-  masteryReadiness: number | null
+  /** % right on this test's practice: answers right out of answers counted across
+   *  the module's skills (deduped), 0..100. Null when nothing has been practiced. */
+  practicePctRight: number | null
+  /** Graded practice answers behind practicePctRight. */
+  practiceAnswers: number
   /** How many of the module's question types (deduped by skill) have graded practice
    *  evidence. The teaser's coverage gate keys on this. */
   coveredSkillCount: number
@@ -76,43 +84,30 @@ export interface PrepProgress {
 const SUBJECT_DISPLAY: Record<string, string> = { math: 'math', reading: 'reading', writing: 'language' }
 const SUBJECT_ORDER = ['math', 'reading', 'writing']
 
-// Readiness blend weights (parent surface only). Per-type practice mastery is
-// weighted a bit higher than recent section accuracy because it reflects durable
-// per-skill depth across the whole module, while a single timed section is a
-// narrower, noisier snapshot. Both are on a 0..100 scale; when only one signal
-// exists the present weight is renormalized to 1 (so readiness is still defined
-// from either signal alone). Formula:
-//   readiness = round( (mastery% * 0.6 + section% * 0.4) / (0.6 + 0.4) )
-// with a term dropped (and its weight removed from the denominator) when its
-// signal is absent. null when NEITHER signal has evidence.
-export const READINESS_W_MASTERY = 0.6
-export const READINESS_W_SECTION = 0.4
 // How many "work on next" types the surfaces show.
 const WEAKEST_LIMIT = 3
 // Free-teaser coverage gate: a not-yet-entitled child needs graded evidence on at
-// least this many of the module's distinct skills before we show a readiness NUMBER.
+// least this many of the module's distinct skills before we show a % right.
 // Below it, the teaser shows the "building a picture" state instead — never a number
 // derived from almost nothing. Three distinct skills is enough to be directional
 // without being noise from a single lucky (or unlucky) skill.
 export const TEASER_MIN_COVERED_SKILLS = 3
 
 const pct = (fraction: number) => Math.round(fraction * 100)
-const mean = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length
 
 /**
  * Compute a module's progress from finalized timed attempts + per-slug practice
- * accuracy. `slugAccuracy` maps a skill slug to its practice accuracy (0..100) or
- * null when there is no graded evidence yet.
+ * evidence. `slugEvidence` maps a skill slug to its practice % right and answer
+ * count, or null when there is no graded evidence yet.
  */
 export function computePrepProgress(
   module: PrepModule,
   attempts: PrepAttemptLite[],
-  slugAccuracy: Map<string, number | null>,
+  slugEvidence: Map<string, PracticeEvidence | null>,
   /**
    * Slugs the student has already cleared the ADVANCE bar on (status 'advanced' or
    * 'mastered'). Used ONLY to keep them out of "what to work on next" — every other
-   * number here, including the readiness blend and coverage count, is unchanged, so
-   * the prep engine's scoring is untouched.
+   * number here, including % right and coverage, is unchanged.
    */
   clearedSlugs: Set<string> = new Set(),
 ): PrepProgress {
@@ -161,15 +156,19 @@ export function computePrepProgress(
   const seenSlug = new Set<string>()
   const typeRows: TypeProgress[] = []
   const subjectsSeen = new Set<string>()
+  let answers = 0
+  let right = 0
   for (const sec of module.sections) {
     for (const type of sec.questionTypes) {
       const ref = prepSkillFor(type)
       const slug = ref?.slug
       if (!slug || seenSlug.has(slug)) continue
-      const acc = slugAccuracy.get(slug)
-      if (acc == null) continue // only types with graded practice evidence
+      const ev = slugEvidence.get(slug)
+      if (ev == null) continue // only types with graded practice evidence
       seenSlug.add(slug)
-      typeRows.push({ type, label: questionTypeLabel(type), slug, accuracy: Math.round(acc) })
+      typeRows.push({ type, label: questionTypeLabel(type), slug, accuracy: Math.round(ev.accuracy) })
+      answers += ev.answers
+      right += (ev.accuracy / 100) * ev.answers
       if (ref?.sessionSubject) subjectsSeen.add(ref.sessionSubject)
     }
   }
@@ -183,26 +182,12 @@ export function computePrepProgress(
     .slice(0, WEAKEST_LIMIT)
   const coveredSubjects = SUBJECT_ORDER.filter((s) => subjectsSeen.has(s)).map((s) => SUBJECT_DISPLAY[s] ?? s)
 
-  // ---- Parent readiness blend (0..100), null when both signals absent -----
-  const masteryComponent = typeRows.length ? mean(typeRows.map((t) => t.accuracy)) : null
-  const sectionComponent = sections.length ? mean(sections.map((s) => s.latestScore)) : null
-  let readiness: number | null = null
-  {
-    const parts: { v: number; w: number }[] = []
-    if (masteryComponent != null) parts.push({ v: masteryComponent, w: READINESS_W_MASTERY })
-    if (sectionComponent != null) parts.push({ v: sectionComponent, w: READINESS_W_SECTION })
-    if (parts.length) {
-      const wsum = parts.reduce((a, p) => a + p.w, 0)
-      readiness = Math.round(parts.reduce((a, p) => a + p.v * p.w, 0) / wsum)
-    }
-  }
-
   return {
     hasAttempts: sections.length > 0,
     sections,
     weakestTypes,
-    readiness,
-    masteryReadiness: masteryComponent != null ? Math.round(masteryComponent) : null,
+    practicePctRight: answers > 0 ? Math.round((100 * right) / answers) : null,
+    practiceAnswers: answers,
     coveredSkillCount: typeRows.length,
     coveredSubjects,
   }

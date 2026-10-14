@@ -6,8 +6,8 @@ import type { MasteryStatus } from './masteryStatus'
  *
  * `computePathwayScore` is a PURE, documented, NO-ML function: a confidence-
  * weighted average of per-skill mastery, plus per-subject sub-scores, strengths,
- * gaps, and the next skill to practice. `computeSatProjection` is the SAT
- * projection on top of the same evidence. `buildReadinessUpserts` turns a
+ * gaps, and the next skill to practice. `computeSatResults` reports measured SAT
+ * results (% right per section and domain) from the same evidence. `buildReadinessUpserts` turns a
  * student's mastery rows into the readiness_scores rows to store.
  *
  * WHY THIS IS ITS OWN FILE. Readiness is a RESULT, so since migration 0031 only
@@ -28,7 +28,7 @@ const CONFIDENCE_ATTEMPTS = 3 // attempts for full attempts-weight (tunable)
 const RECENCY_HALFLIFE_DAYS = 30 // mastery weight halves every ~month of no practice
 const RECENCY_FLOOR = 0.25 // old practice still counts a little, never zero
 const TOP_N = 3 // strengths / gaps list size
-// Percentage thresholds used ONLY by the SAT projection, which still groups by
+// Percentage thresholds used ONLY by the SAT results, which still group by
 // accuracy band. The Pathway strengths/gaps no longer use them: they classify on
 // the evidence bars (advanced/mastered vs practicing) so a skill can never be
 // called a strength or a gap without graded attempts behind it.
@@ -38,8 +38,9 @@ const GAP_MAX = 60
 // Bumped whenever the scoring/classification logic changes. Stored on each
 // readiness_scores row so a row computed by an older engine is detected as stale
 // and recomputed on next view. (v2 = the threshold-based strengths/gaps fix;
-// v3 = adds the SAT readiness projection — existing rows self-heal on next view.)
-export const ENGINE_VERSION = 4
+// v3 = adds the SAT readiness projection — existing rows self-heal on next view;
+// v5 = SAT results are measured only, SAT-level skills only, no projected range.)
+export const ENGINE_VERSION = 5
 const DAY_MS = 86_400_000
 
 // Subjects we publish a per-subject sub-score for (seeded subjects). The overall
@@ -54,7 +55,7 @@ export const SUBJECTS = ['math', 'reading', 'writing'] as const
  * engine (migration 0010), and `status` comes along so strengths and gaps can be
  * classified by the real bars rather than by a percentage threshold.
  *
- * The field names are kept so computeBreakdown and computeSatProjection did not
+ * The field names are kept so computeBreakdown and computeSatResults did not
  * need rewriting; what changed is what is put in them, at the one place that reads
  * the database (recordReadiness).
  */
@@ -193,62 +194,64 @@ export function computePathwayScore(rows: ReadinessSkillRow[], now: number): Pat
 }
 
 // ===========================================================================
-// SAT readiness engine (pure, NO-ML). Extends the Pathway engine: it reads the
-// same confidence-weighted mastery signal but groups by SAT taxonomy
-// (sat_alignment domain token -> SAT section) and projects a transparent,
-// LABELED-ESTIMATE score range. It is NOT a calibrated SAT predictor.
+// SAT results (pure, NO-ML). MEASURED PERFORMANCE ONLY: how many answers on
+// SAT-level skills were right, per section and per SAT domain, and how many of
+// those skills have been practiced. No projected score, no range, no ceiling.
+// PathwayEd never estimates an SAT score; only the College Board reports one.
 // ===========================================================================
 
 export type SatSection = 'math' | 'reading-writing'
 
-/** A practiced-or-untouched SAT-aligned skill row fed to the SAT engine. */
+/** A practiced-or-untouched skill row fed to the SAT engine. */
 export interface SatSkillRow extends ReadinessSkillRow {
   /** SAT domain token from skills.sat_alignment (e.g. 'algebra'). */
   sat_alignment: string | null
+  /** True Common Core grade (K = 0), null for test-prep skills. */
+  ccss_grade_num: number | null
 }
 
-export interface SatBand {
-  low: number
-  high: number
-}
-
-export interface SatDomainScore {
+/** Measured results for one SAT domain. */
+export interface SatDomainResult {
   token: string
   label: string
   section: SatSection
-  /** Confidence-weighted mastery %, or null when the domain has no evidence. */
-  pct: number | null
-  attemptedSkills: number
+  /** Answers right out of answers counted, 0..100; null when none counted. */
+  pctRight: number | null
+  /** Graded answers counted across the domain's SAT-level skills. */
+  answers: number
+  /** SAT-level skills in this domain with at least one counted answer. */
+  skillsPracticed: number
+  /** SAT-level skills in this domain. 0 means we have none to offer yet. */
+  skillsTotal: number
 }
 
-export interface SatSectionPayload {
-  pct: number | null
-  /** 200-800 band; null when the low-data gate is closed. */
-  today: SatBand | null
-  trajectory: SatBand | null
-  domains: SatDomainScore[]
+/** Measured results for one SAT section. */
+export interface SatSectionResult {
+  pctRight: number | null
+  answers: number
+  skillsPracticed: number
+  skillsTotal: number
+  domains: SatDomainResult[]
 }
 
-export interface SatProjectionPayload {
+/** The stored 'sat' payload (readiness_scores.recommendations). */
+export interface SatResultsPayload {
   schemaVersion: number
-  gate: 'ok' | 'insufficient'
-  attemptedSatSkills: number
-  /** Blended overall SAT-readiness %, or null with no evidence. */
-  overallPct: number | null
-  sections: Record<SatSection, SatSectionPayload>
-  /** Combined 400-1600 range TODAY; null when the gate is closed. */
-  today: SatBand | null
-  /** Combined 400-1600 junior-year CEILING; null when the gate is closed. */
-  trajectory: SatBand | null
-  missingBySection: Record<SatSection, SkillRef[]>
+  sections: Record<SatSection, SatSectionResult>
+  /** Answers right out of answers counted, both sections; null when none. */
+  overallPctRight: number | null
+  answers: number
+  skillsPracticed: number
+  skillsTotal: number
+  /** Measured skills under GAP_MAX first, then not-started skills, lowest grade first. */
+  toPractice: SkillRef[]
   nextSkillSlug: string | null
-  timeline: string
 }
 
 /** What the SAT engine returns: the stored payload plus the row scalars. */
 export interface SatEngineResult {
-  payload: SatProjectionPayload
-  /** 0..100 blended % for the readiness_scores.score column. */
+  payload: SatResultsPayload
+  /** 0..100 overall % right, for the readiness_scores.score column (0 when none). */
   score: number
   strengths: SkillRef[]
   gaps: SkillRef[]
@@ -271,180 +274,121 @@ export const SAT_DOMAINS: { token: string; label: string; section: SatSection }[
 const SECTION_BY_DOMAIN = new Map(SAT_DOMAINS.map((d) => [d.token, d.section] as const))
 const SAT_SECTIONS: SatSection[] = ['math', 'reading-writing']
 
-export const SAT_SCHEMA_VERSION = 1
-// Trajectory target: the mastery we assume weak/untouched SAT skills reach.
-const SAT_TARGET_MASTERY = 85
-// Low-data gate: need at least this many SAT-aligned skills with a real attempt
-// before we emit any projected range. Below it -> gate:'insufficient', no range.
-const SAT_MIN_SKILLS_FOR_PROJECTION = 4
-// Today-range half-width (per section, in SAT points) decays from MAX toward MIN
-// as evidence (summed confidence weight) grows: little data -> wide, lots -> tight.
-const SAT_HALF_WIDTH_MIN = 40
-const SAT_HALF_WIDTH_MAX = 130
-const SAT_EVIDENCE_SCALE = 3
-// Trajectory is hypothetical (a target, no evidence), so it uses a fixed,
-// deliberately rough half-width rather than the data-driven one.
-const SAT_TRAJ_HALF_WIDTH = 60
-const SAT_GAPS_CAP = 6
-const SAT_TIMELINE_NOTE =
-  'Projected ranges are transparent estimates from current mastery, a coaching signal, not a calibrated SAT predictor. The trajectory is a junior-year ceiling: where you could land if you bring weak and untouched SAT-aligned skills to about 85% mastery (not a trend from past scores, there is no score history).'
-
-/** Confidence-weighted mastery % over rows, or null when there's no evidence. */
-function weightedPct(rows: ReadinessSkillRow[], now: number): { pct: number | null; evidence: number } {
-  let weighted = 0
-  let totalWeight = 0
-  for (const r of rows) {
-    const w = attemptsWeight(r.attempts) * recencyWeight(r.last_practiced, now)
-    weighted += r.mastery_percentage * w
-    totalWeight += w
-  }
-  if (totalWeight <= 0) return { pct: null, evidence: 0 }
-  return { pct: clamp(Math.round(weighted / totalWeight), 0, 100), evidence: totalWeight }
-}
+// v2: measured results only. v1 rows (projected ranges) are read as empty.
+export const SAT_SCHEMA_VERSION = 2
 
 /**
- * Ceiling %: the equal-weighted mean of each skill's mastery RAISED to at least
- * the target. Equal-weighted (not confidence-weighted) because this is a
- * hypothetical "fully practiced & mastered" state, not current evidence; an
- * untouched skill (mastery 0) lifts to the target here. Null if no skills.
+ * The lowest Common Core grade that counts as SAT-level. Almost every K-12 skill
+ * carries an sat_alignment (Counting maps to Problem-Solving & Data Analysis),
+ * so the domain alone would put kindergarten skills in a 9th grader's SAT list.
  */
-function ceilingPct(rows: SatSkillRow[]): number | null {
-  if (!rows.length) return null
-  let sum = 0
-  for (const r of rows) sum += Math.max(r.mastery_percentage, SAT_TARGET_MASTERY)
-  return clamp(Math.round(sum / rows.length), 0, 100)
+export const SAT_MIN_GRADE = 6
+const SAT_TO_PRACTICE_CAP = 6
+
+/**
+ * Is this skill SAT-level? It must map to a digital-SAT domain AND be either
+ * grade 6 or above, or a test-prep skill (subject prep-*) that has been mapped to
+ * an SAT domain on purpose (SAT Words in Context, SAT Transitions; migration
+ * 0032). Prep skills carry no grade, so the floor alone would drop them.
+ */
+export function isSatLevelSkill(row: {
+  sat_alignment: string | null
+  ccss_grade_num: number | null
+  subject: string
+}): boolean {
+  if (!row.sat_alignment || !SECTION_BY_DOMAIN.has(row.sat_alignment)) return false
+  if (row.subject.startsWith('prep-')) return true
+  return row.ccss_grade_num != null && row.ccss_grade_num >= SAT_MIN_GRADE
 }
 
-/** Map a section % (0..100, or null=neutral) to a 200-800 band of given half-width. */
-function sectionBand(pct: number | null, halfWidth: number): SatBand {
-  const center = 200 + (clamp(pct ?? 50, 0, 100) / 100) * 600
+/** Pooled % right over rows: answers right / answers counted. Null with none. */
+function measured(rows: SatSkillRow[]): Omit<SatSectionResult, 'domains'> {
+  let answers = 0
+  let right = 0
+  let practiced = 0
+  for (const r of rows) {
+    if (r.attempts <= 0) continue
+    answers += r.attempts
+    right += (r.mastery_percentage / 100) * r.attempts
+    practiced += 1
+  }
   return {
-    low: clamp(Math.round(center - halfWidth), 200, 800),
-    high: clamp(Math.round(center + halfWidth), 200, 800),
+    pctRight: answers > 0 ? clamp(Math.round((100 * right) / answers), 0, 100) : null,
+    answers,
+    skillsPracticed: practiced,
+    skillsTotal: rows.length,
   }
 }
 
-function todayHalfWidth(evidence: number): number {
-  return SAT_HALF_WIDTH_MIN + (SAT_HALF_WIDTH_MAX - SAT_HALF_WIDTH_MIN) * Math.exp(-evidence / SAT_EVIDENCE_SCALE)
-}
-
-const round10 = (n: number) => Math.round(n / 10) * 10
-
-/** Combine two section bands into a 400-1600 range, rounded to 10s. */
-function combineBands(a: SatBand, b: SatBand): SatBand {
-  return {
-    low: clamp(round10(a.low + b.low), 400, 1600),
-    high: clamp(round10(a.high + b.high), 400, 1600),
-  }
-}
-
-// Missing-skill ordering = highest leverage first: practiced weaknesses before
-// untouched skills, then weakest mastery, then most attempts (persistent).
-function missingCompare(a: SatSkillRow, b: SatSkillRow): number {
+// What to practice next: measured weaknesses first (lowest % right first), then
+// skills not started, lowest grade first so the foundations come before the
+// hardest material. Prep skills (no grade) sort with grade 9, where SAT prep
+// begins.
+function toPracticeCompare(a: SatSkillRow, b: SatSkillRow): number {
   const ap = a.attempts > 0 ? 0 : 1
   const bp = b.attempts > 0 ? 0 : 1
   if (ap !== bp) return ap - bp
-  if (a.mastery_percentage !== b.mastery_percentage) return a.mastery_percentage - b.mastery_percentage
-  if (a.attempts !== b.attempts) return b.attempts - a.attempts
+  if (ap === 0 && a.mastery_percentage !== b.mastery_percentage) return a.mastery_percentage - b.mastery_percentage
+  const ag = a.ccss_grade_num ?? 9
+  const bg = b.ccss_grade_num ?? 9
+  if (ag !== bg) return ag - bg
   return a.name.localeCompare(b.name)
 }
 
 /**
- * Pure SAT projection. `rows` should be every SAT-aligned skill the student
- * could practice (the catalog), with mastery/attempts/last_practiced filled —
- * untouched skills present with attempts:0. `now` (epoch ms) makes recency
- * deterministic/testable. Rows whose sat_alignment isn't a known SAT domain are
- * ignored.
- *
- *   today      = each section % -> 200-800 band (widened when data is thin) ->
- *                summed to a 400-1600 RANGE. Heuristic, labeled estimate.
- *   trajectory = the same, but each section lifted to its CEILING (weak/untouched
- *                skills assumed at ~85%). This is a potential ceiling, NOT a trend
- *                extrapolation — we have no score history.
- *   gate       = 'insufficient' (and no ranges) until enough SAT skills have real
- *                attempts; we never fabricate a range from almost no data.
+ * Measured SAT results. `rows` should be the SAT catalog with this student's
+ * evidence filled in (untouched skills present with attempts 0). Rows that are
+ * not SAT-level (isSatLevelSkill) are ignored. `mastery_percentage` and
+ * `attempts` carry evidence_accuracy and attempts_counted, so % right is the
+ * share of graded, counted answers that were right.
  */
-export function computeSatProjection(rows: SatSkillRow[], now: number): SatEngineResult {
-  const satRows = rows.filter((r) => r.sat_alignment && SECTION_BY_DOMAIN.has(r.sat_alignment))
+export function computeSatResults(rows: SatSkillRow[]): SatEngineResult {
+  const satRows = rows.filter(isSatLevelSkill)
 
-  const attemptedSatSkills = satRows.filter((r) => r.attempts >= 1).length
-  const gate: 'ok' | 'insufficient' =
-    attemptedSatSkills >= SAT_MIN_SKILLS_FOR_PROJECTION ? 'ok' : 'insufficient'
+  const domainResults: SatDomainResult[] = SAT_DOMAINS.map((d) => ({
+    token: d.token,
+    label: d.label,
+    section: d.section,
+    ...measured(satRows.filter((r) => r.sat_alignment === d.token)),
+  }))
 
-  // 8 domain %s (today-style, confidence-weighted). Empty domains -> pct null.
-  const domainScores: SatDomainScore[] = SAT_DOMAINS.map((d) => {
-    const drows = satRows.filter((r) => r.sat_alignment === d.token)
-    return {
-      token: d.token,
-      label: d.label,
-      section: d.section,
-      pct: weightedPct(drows, now).pct,
-      attemptedSkills: drows.filter((r) => r.attempts >= 1).length,
-    }
-  })
-
-  // 2 section payloads. R/W blends only its domains that have evidence, so an
-  // empty domain (e.g. standard-english-conventions) never divides by zero.
-  const sections = {} as Record<SatSection, SatSectionPayload>
+  const sections = {} as Record<SatSection, SatSectionResult>
   for (const section of SAT_SECTIONS) {
-    const srows = satRows.filter((r) => SECTION_BY_DOMAIN.get(r.sat_alignment as string) === section)
-    const { pct, evidence } = weightedPct(srows, now)
     sections[section] = {
-      pct,
-      today: gate === 'ok' ? sectionBand(pct, todayHalfWidth(evidence)) : null,
-      trajectory: gate === 'ok' ? sectionBand(ceilingPct(srows), SAT_TRAJ_HALF_WIDTH) : null,
-      domains: domainScores.filter((d) => d.section === section),
+      ...measured(satRows.filter((r) => SECTION_BY_DOMAIN.get(r.sat_alignment as string) === section)),
+      domains: domainResults.filter((d) => d.section === section),
     }
   }
 
-  const overall = weightedPct(satRows, now)
-  const today =
-    gate === 'ok' ? combineBands(sections.math.today as SatBand, sections['reading-writing'].today as SatBand) : null
-  let trajectory =
-    gate === 'ok'
-      ? combineBands(sections.math.trajectory as SatBand, sections['reading-writing'].trajectory as SatBand)
-      : null
-  // A ceiling is never below the current estimate: floor the trajectory at
-  // today's range. (Matters only when a whole section has no evidence and its
-  // wide neutral "today" band would otherwise exceed the narrow neutral ceiling.)
-  if (today && trajectory) {
-    trajectory = { low: Math.max(trajectory.low, today.low), high: Math.max(trajectory.high, today.high) }
-  }
+  const overall = measured(satRows)
+  const toPracticeRows = satRows
+    .filter((r) => r.attempts === 0 || r.mastery_percentage < GAP_MAX)
+    .sort(toPracticeCompare)
+  const toPractice = toPracticeRows.slice(0, SAT_TO_PRACTICE_CAP).map(toRef)
+  const nextSkillSlug = toPracticeRows[0]?.slug ?? null
 
-  // Missing = weak (below GAP_MAX) OR untouched (no attempts), grouped by section.
-  const missing = satRows.filter((r) => r.attempts === 0 || r.mastery_percentage < GAP_MAX).sort(missingCompare)
-  const missingBySection: Record<SatSection, SkillRef[]> = { math: [], 'reading-writing': [] }
-  for (const r of missing) {
-    const sec = SECTION_BY_DOMAIN.get(r.sat_alignment as string) as SatSection
-    missingBySection[sec].push(toRef(r))
-  }
-
-  const strengths = [...satRows]
-    .filter((r) => r.mastery_percentage >= STRENGTH_MIN)
+  const strengths = satRows
+    .filter((r) => r.attempts > 0 && r.mastery_percentage >= STRENGTH_MIN)
     .sort((a, b) => b.mastery_percentage - a.mastery_percentage || a.name.localeCompare(b.name))
     .slice(0, TOP_N)
     .map(toRef)
 
-  const nextSkillSlug = missing[0]?.slug ?? null
-
-  const payload: SatProjectionPayload = {
+  const payload: SatResultsPayload = {
     schemaVersion: SAT_SCHEMA_VERSION,
-    gate,
-    attemptedSatSkills,
-    overallPct: overall.pct,
     sections,
-    today,
-    trajectory,
-    missingBySection,
+    overallPctRight: overall.pctRight,
+    answers: overall.answers,
+    skillsPracticed: overall.skillsPracticed,
+    skillsTotal: overall.skillsTotal,
+    toPractice,
     nextSkillSlug,
-    timeline: SAT_TIMELINE_NOTE,
   }
 
   return {
     payload,
-    score: overall.pct ?? 0,
+    score: overall.pctRight ?? 0,
     strengths,
-    gaps: missing.slice(0, SAT_GAPS_CAP).map(toRef),
+    gaps: toPractice,
     nextSkillSlug,
   }
 }
@@ -470,9 +414,9 @@ export function readinessRow(studentId: string, readinessType: string, b: Readin
 }
 
 /**
- * The single readiness_scores row for readiness_type='sat'. The 400-1600
- * projection and ranges don't fit numeric(5,2), so the full SAT payload lives in
- * `recommendations`; `score` holds the blended SAT-readiness % (0..100).
+ * The single readiness_scores row for readiness_type='sat'. The per-section and
+ * per-domain results don't fit numeric(5,2), so the full SAT payload lives in
+ * `recommendations`; `score` holds the overall % right (0..100).
  */
 export function satReadinessRow(studentId: string, sat: SatEngineResult) {
   return {
@@ -506,13 +450,14 @@ export interface ReadinessSkillInput {
   slug: string | null
 }
 
-/** One row of the SAT-aligned skill catalog (level 'skill', sat_alignment set). */
+/** One row of the SAT catalog (level 'skill', sat_alignment set). */
 export interface SatCatalogInput {
   id: string
   slug: string | null
   name: string
   subject: string
   sat_alignment: string | null
+  ccss_grade_num: number | null
 }
 
 /**
@@ -555,9 +500,9 @@ export function buildReadinessUpserts(
     ...Object.entries(result.bySubject).map(([subject, b]) => readinessRow(studentId, subject, b)),
   ]
 
-  // SAT readiness: project over the FULL SAT-aligned catalog (so untouched
-  // skills count toward the trajectory ceiling and the missing list), left-
-  // joined to this student's mastery (untouched -> attempts:0).
+  // SAT results over the FULL SAT catalog (so untouched SAT-level skills count as
+  // not started and can be suggested next), left-joined to this student's
+  // mastery (untouched -> attempts:0). computeSatResults keeps SAT-level only.
   const masteryById = new Map(masteryRows.map((m) => [m.skill_id, m]))
   const satRows: SatSkillRow[] = []
   for (const c of satCatalog) {
@@ -568,6 +513,7 @@ export function buildReadinessUpserts(
       name: c.name,
       subject: c.subject,
       sat_alignment: c.sat_alignment,
+      ccss_grade_num: c.ccss_grade_num,
       // Evidence, same as the pathway rows above. A skill with a mastery row but
       // no counted attempts reads as untouched here, which is what it is.
       mastery_percentage: m?.evidence_accuracy == null ? 0 : Number(m.evidence_accuracy),
@@ -577,7 +523,7 @@ export function buildReadinessUpserts(
     })
   }
   if (satRows.length) {
-    upserts.push(satReadinessRow(studentId, computeSatProjection(satRows, now)))
+    upserts.push(satReadinessRow(studentId, computeSatResults(satRows)))
   }
   return upserts
 }
