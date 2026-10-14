@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
-import { requireUser } from "./require-auth.js"
+import { requireUser, requireLearningAccess } from "./require-auth.js"
 import { rateLimit, TTS_LIMIT } from "./rate-limit.js"
 
 interface TtsRequest {
@@ -50,6 +50,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // a session is what closes the abuse surface.
   const auth = await requireUser(req, res)
   if (!auth) return
+  // Learning features need an active plan, trial or school coverage (0033).
+  if (!(await requireLearningAccess(res, auth))) return
 
   // Higher ceiling than chat: one tutoring turn can legitimately fire several TTS
   // calls (a streamed reply, a replay, and the prefetch of common phrases).

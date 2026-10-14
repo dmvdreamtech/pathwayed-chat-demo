@@ -1,6 +1,13 @@
 import { describe, it, expect, vi, afterEach } from "vitest"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
-import { bearerToken, ownsStudent, requireCronSecret, requireOwnedStudent } from "./require-auth.js"
+import {
+  bearerToken,
+  ownsStudent,
+  requireCronSecret,
+  requireLearningAccess,
+  requireOwnedStudent,
+  type AuthedCaller,
+} from "./require-auth.js"
 
 const req = (headers: Record<string, string>) => ({ headers }) as unknown as VercelRequest
 
@@ -141,5 +148,35 @@ describe("requireOwnedStudent", () => {
     const svc = fakeSvc({ data: null, error: null })
     expect(await requireOwnedStudent(res, { userId: "u", email: "parent@example.com", svc: svc.client }, 42)).toBe(false)
     expect(sent.status).toBe(400)
+  })
+})
+
+describe("requireLearningAccess", () => {
+  const caller = (result: { data: unknown; error: unknown }) => {
+    const rpc = vi.fn().mockResolvedValue(result)
+    return { auth: { userId: "u1", email: null, svc: { rpc } as never } as AuthedCaller, rpc }
+  }
+
+  it("lets an account with access through, asking the database by user id", async () => {
+    const { auth, rpc } = caller({ data: true, error: null })
+    const { res, sent } = fakeRes()
+    expect(await requireLearningAccess(res, auth)).toBe(true)
+    expect(rpc).toHaveBeenCalledWith("account_has_learning_access", { p_user_id: "u1" })
+    expect(sent.status).toBeUndefined()
+  })
+
+  it("answers 403 when the trial has ended and there is no plan", async () => {
+    const { auth } = caller({ data: false, error: null })
+    const { res, sent } = fakeRes()
+    expect(await requireLearningAccess(res, auth)).toBe(false)
+    expect(sent).toEqual({ status: 403, body: { error: "subscription_required" } })
+  })
+
+  it("FAILS CLOSED when the check itself fails", async () => {
+    vi.spyOn(console, "error").mockImplementation(() => {})
+    const { auth } = caller({ data: null, error: { message: "boom" } })
+    const { res, sent } = fakeRes()
+    expect(await requireLearningAccess(res, auth)).toBe(false)
+    expect(sent.status).toBe(503)
   })
 })

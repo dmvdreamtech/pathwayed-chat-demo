@@ -1,6 +1,8 @@
 import { supabase } from '@/lib/supabase'
 import { authedJsonHeaders } from '@/lib/apiAuth'
 import type { PrepModule } from '@/lib/prep/types'
+import { PREP_MODULES } from '@/lib/prep/registry'
+import { prepSkillFor } from '@/lib/prep/prepSkills'
 
 /** A child's entitlement to a prep module, as read from prep_entitlements. */
 export interface PrepEntitlement {
@@ -24,6 +26,17 @@ export { ACTIVE_PREP_STATUSES, isGradeEligible } from '@/lib/prep/access'
  */
 export function isKidEntitled(status: string): boolean {
   return status === 'active' || status === 'past_due'
+}
+
+/**
+ * The prep modules whose sections use this skill. A child entitled to one of them
+ * may practice the skill (prep Train/Practice) without a learning plan. The server
+ * applies the same rule in can_practice_skill (migration 0033).
+ */
+export function prepModulesUsingSkill(slug: string): string[] {
+  return PREP_MODULES.filter((m) =>
+    m.sections.some((s) => s.questionTypes.some((t) => prepSkillFor(t)?.slug === slug)),
+  ).map((m) => m.id)
 }
 
 /** Short reason shown next to a disabled (ineligible) child, e.g. "Grades 6-8 only". */

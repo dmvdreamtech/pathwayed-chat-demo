@@ -12,10 +12,12 @@ export function checkAnswerSummary({
   isCorrect,
 }: {
   chosenText: string
-  isCorrect: boolean
+  /** Null when the server could not check it: say what was picked, claim nothing. */
+  isCorrect: boolean | null
 }): string {
   const answer = chosenText.trim()
   const said = answer ? `I picked "${answer}".` : 'I picked an answer.'
+  if (isCorrect === null) return said
   return isCorrect
     ? `${said} That one was right.`
     : `${said} That one was not right.`

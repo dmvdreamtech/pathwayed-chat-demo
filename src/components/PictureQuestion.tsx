@@ -8,6 +8,9 @@ interface PictureQuestionProps {
   choices: PracticeChoice[]
   answered: boolean
   selected: number | null
+  /** The right tile, from the server's verdict. Null until it arrives, and always
+   *  null in the silent diagnostic. */
+  correctIndex: number | null
   onPick: (index: number) => void
   /** Practice colors correct/wrong after a tap; the silent diagnostic does not. */
   showState: boolean
@@ -35,7 +38,7 @@ function group(image: string, count: number, variant: 'solo' | 'count' | 'tile')
  * child must read — the prompt is spoken by Nikki (auto-read). Scoring is by the
  * tapped tile index, exactly like the text choices.
  */
-export function PictureQuestion({ prompt, choices, answered, selected, onPick, showState }: PictureQuestionProps) {
+export function PictureQuestion({ prompt, choices, answered, selected, correctIndex, onPick, showState }: PictureQuestionProps) {
   return (
     <div className="picq">
       {/* A single word-picture (phonics) shows large; a counting group shows smaller. */}
@@ -47,13 +50,13 @@ export function PictureQuestion({ prompt, choices, answered, selected, onPick, s
       <div className="picq-tiles" data-count={choices.length}>
         {choices.map((c, i) => {
           const tile = c.tile
-          const state = !showState || !answered ? '' : c.is_correct ? 'correct' : i === selected ? 'chosen-wrong' : 'dim'
+          const state = !showState || !answered ? '' : i === correctIndex ? 'correct' : i === selected ? 'chosen-wrong' : 'dim'
           return (
             <button
               key={i}
               type="button"
               className={`picq-tile ${state}`}
-              disabled={answered}
+              disabled={answered || selected !== null}
               aria-label={c.text}
               onClick={() => onPick(i)}
             >

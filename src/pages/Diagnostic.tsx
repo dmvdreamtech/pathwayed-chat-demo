@@ -5,8 +5,7 @@ import {
   fetchDiagnosticQuestions,
   fetchEarlyGradeDiagnostic,
   listPracticeableSkills,
-  recordQuestionAttempt,
-  scoreChoice,
+  submitAnswer,
   type DiagnosticQuestion,
   type PracticeQuestion,
   type PracticeableSkill,
@@ -37,7 +36,6 @@ import { QuestionAudio } from '@/components/QuestionAudio'
 import { PictureQuestion } from '@/components/PictureQuestion'
 import { useVoiceMuted } from '@/hooks/useVoiceMuted'
 import { useAutoRead } from '@/hooks/useAutoRead'
-import { useAnswerWrites } from '@/hooks/useAnswerWrites'
 import { stopNikkiSpeech } from '@/lib/voice'
 import '@/styles/app-screens.css'
 
@@ -111,9 +109,8 @@ export function Diagnostic() {
   const [started, setStarted] = useState(false)
   const [consent, setConsent] = useState(false) // parent OK to show above-grade / SAT framing
   const shownAtRef = useRef(0)
-  // Seeding waits for these, because the database seeds from the answers it
-  // has recorded and graded, not from this page's tally.
-  const answerWrites = useAnswerWrites()
+  // An answer is being checked by the server; taps are ignored until it returns.
+  const [checking, setChecking] = useState(false)
 
   // Auto-read each question aloud once it's shown (after the parent starts the
   // assessment — a user gesture), respecting the app-wide mute.
@@ -274,7 +271,7 @@ export function Diagnostic() {
     // the scenes). K-2 does NOT seed: a couple of correct answers must not pre-mark
     // counting/phonics "mastered" — placement is routing into Skills building, and
     // the lessons should teach those skills fully from fresh. (Attempts are still
-    // recorded via recordQuestionAttempt for history either way.)
+    // recorded through submitAnswer for history either way.)
     console.info('[diagnostic] settled working grade', settledGrade(allResults, studentGradeNum(stu.grade)))
     // Only seed a real placement when a grades-3-12 run cleared the minimum
     // question floor. A too-short run (a thin grade that settled the ladder after
@@ -283,8 +280,8 @@ export function Diagnostic() {
     // child still lands on the positive done screen and can start learning; an
     // unseeded child is simply offered placement again at their next visit.
     if (!early && placementSeeds(allResults.length)) {
-      // Let this run's answer writes land first: the database seeds from them.
-      await answerWrites.recordedIds()
+      // Every answer was recorded before the ladder moved on, so the database has
+      // them all to seed from.
       await seedDiagnosticMastery(
         stu.id,
         allResults.map((r) => r.skillId),
@@ -327,22 +324,24 @@ export function Diagnostic() {
     await finish(allResults, stu)
   }
 
-  // Silent scoring: score, record the attempt, accumulate the result, advance.
-  const handlePick = (choiceIndex: number) => {
-    if (!student || !questions || busy) return
+  // Silent scoring: the server records and grades the answer and says only
+  // whether it was right (never which choice was), then the ladder advances.
+  const handlePick = async (choiceIndex: number) => {
+    if (!student || !questions || busy || checking) return
     const current = questions[index]
     if (!current) return
-    // Drives the ladder on this page only. The database grades the record.
-    const { isCorrect } = scoreChoice(current.choices, choiceIndex)
-    answerWrites.track(
-      recordQuestionAttempt({
-        studentId: student.id,
-        generatedQuestionId: current.id,
-        chosenChoiceIndex: choiceIndex,
-        shownAtMs: shownAtRef.current,
-        isDiagnostic: true,
-      }),
-    )
+    setChecking(true)
+    const verdict = await submitAnswer({
+      studentId: student.id,
+      generatedQuestionId: current.id,
+      chosenChoiceIndex: choiceIndex,
+      shownAtMs: shownAtRef.current,
+      isDiagnostic: true,
+    })
+    setChecking(false)
+    // An answer that could not be checked counts as not right: the ladder steps
+    // down rather than up, which is the cautious way to place a child.
+    const isCorrect = verdict?.isCorrect ?? false
     const nextResults: DiagnosticResult[] = [
       ...results,
       { skillId: current.skill_id, gradeNum: current.ccss_grade_num ?? currentGrade, isCorrect },
@@ -506,8 +505,9 @@ export function Diagnostic() {
               prompt={current.prompt}
               choices={current.choices}
               answered={false}
+              correctIndex={null}
               selected={null}
-              onPick={handlePick}
+              onPick={(i) => void handlePick(i)}
               showState={false}
             />
           ) : (
@@ -523,7 +523,7 @@ export function Diagnostic() {
               <MathFigure stem={current.stem} />
               <div className="practice-choices">
                 {current.choices.map((c, i) => (
-                  <button key={i} className="practice-choice" onClick={() => handlePick(i)}>
+                  <button key={i} className="practice-choice" disabled={checking} onClick={() => void handlePick(i)}>
                     <MathText content={c.text} />
                   </button>
                 ))}

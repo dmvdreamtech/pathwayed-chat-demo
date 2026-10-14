@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { getStudent, type Student } from '@/lib/students'
-import { scoreChoice, summarizeAttempts, type PracticeQuestion } from '@/lib/questions'
+import { submitAnswer, summarizeAttempts, type AnswerVerdict, type PracticeQuestion } from '@/lib/questions'
+import { refreshReadiness } from '@/lib/readiness'
 import {
   assembleMathSection,
   assembleReadingWritingSection,
@@ -15,15 +16,16 @@ import { MathText } from '@/components/MathText'
 import { TopMenu } from '@/components/TopMenu'
 import '@/styles/app-screens.css'
 
-type Phase = 'loading' | 'intro' | 'test' | 'done'
+type Phase = 'loading' | 'intro' | 'test' | 'scoring' | 'done'
 
 /**
  * Practice SAT — Phase 3 (HS-only, consent-gated): a short Reading & Writing
  * section then Math, SAT-shaped at small scale. Deferred scoring: answer every
- * item with no per-question feedback, then a RAW score per section + overall
- * (no scaled 400–1600) and a review of missed items with the Stage-4 explanation
- * + worked solution. Read-only apart from writing missed skills to the focus
- * mechanism. It's a practice test, not a full SAT.
+ * item with no per-question feedback, then the server records and grades every
+ * answer at once (submit_answer, migration 0033) and returns the verdicts, which
+ * give a raw score per section and a review of missed items with the explanation
+ * and worked solution. The answers count as practice evidence, and missed skills
+ * become focus skills. It's a practice test, not a full SAT.
  */
 export function PracticeSat() {
   const { id } = useParams<{ id: string }>()
@@ -35,6 +37,10 @@ export function PracticeSat() {
   const [index, setIndex] = useState(0)
   const [selected, setSelected] = useState<number | null>(null)
   const [answers, setAnswers] = useState<number[]>([])
+  // Time spent on each question, measured as the child moves on.
+  const [times, setTimes] = useState<number[]>([])
+  const [verdicts, setVerdicts] = useState<(AnswerVerdict | null)[]>([])
+  const shownAtRef = useRef(0)
 
   useEffect(() => {
     if (!id) return
@@ -108,11 +114,17 @@ export function PracticeSat() {
               I’ll show your score for each section and walk through anything you missed.
             </p>
             <p className="muted" style={{ margin: '12px 0 0', fontSize: 13.5 }}>
-              This is a shortened practice test, not a full SAT, and it doesn’t affect your progress. Take your time and
-              give each one your best shot.
+              This is a shortened practice test, not a full SAT. Your answers count as practice, so they show up in your
+              progress. Take your time and give each one your best shot.
             </p>
           </div>
-          <button className="btn btn-navy" onClick={() => setPhase('test')}>
+          <button
+            className="btn btn-navy"
+            onClick={() => {
+              shownAtRef.current = Date.now()
+              setPhase('test')
+            }}
+          >
             Start practice
           </button>
           <button className="btn btn-soft" style={{ marginTop: 10 }} onClick={backToDashboard}>
@@ -123,8 +135,23 @@ export function PracticeSat() {
     )
   }
 
+  if (phase === 'scoring') {
+    return (
+      <div className="kid-screen">
+        <div className="shell">
+          <p className="muted">Checking your answers…</p>
+        </div>
+      </div>
+    )
+  }
+
   if (phase === 'done') {
-    const scored = questions.map((q, i) => ({ q, chosen: answers[i], section: sectionOf(q), ...scoreChoice(q.choices, answers[i]) }))
+    // Only answers the server checked are scored; the key never reached the page.
+    const scored = questions
+      .map((q, i) => ({ q, chosen: answers[i], section: sectionOf(q), verdict: verdicts[i] ?? null }))
+      .filter((r): r is typeof r & { verdict: AnswerVerdict } => r.verdict !== null)
+      .map((r) => ({ ...r, isCorrect: r.verdict.isCorrect }))
+    const unchecked = questions.length - scored.length
     const summary = summarizeAttempts(scored)
     const rwSummary = summarizeAttempts(scored.filter((r) => r.section === 'rw'))
     const mathSummary = summarizeAttempts(scored.filter((r) => r.section === 'math'))
@@ -155,14 +182,21 @@ export function PracticeSat() {
             <p className="muted" style={{ fontSize: 12.5, marginTop: 6 }}>
               Raw practice score per section, not a scaled SAT score.
             </p>
+            {unchecked > 0 && (
+              <p className="muted" style={{ fontSize: 12.5, marginTop: 6 }}>
+                {unchecked === 1
+                  ? 'We couldn’t check 1 answer just now, so it isn’t in the score.'
+                  : `We couldn’t check ${unchecked} answers just now, so they aren’t in the score.`}
+              </p>
+            )}
           </div>
 
           {missed.length > 0 ? (
             <div className="panel">
               <div className="pd-label">Let’s review what you missed</div>
-              {missed.map(({ q, chosen }, k) => {
+              {missed.map(({ q, chosen, verdict }, k) => {
                 const chosenChoice = chosen != null ? q.choices[chosen] : undefined
-                const hint = explainMisconception(chosenChoice?.misconception_token)
+                const hint = explainMisconception(verdict.misconceptionToken)
                 return (
                   <div key={q.id} className="sat-review-item">
                     {q.passage && (
@@ -180,12 +214,12 @@ export function PracticeSat() {
                     </p>
                     <p className="sat-review-line">
                       <span className="muted">Correct answer:</span>{' '}
-                      <strong>{q.correct_answer}</strong>
+                      <strong>{verdict.correctAnswer ?? ''}</strong>
                     </p>
                     {hint && <p className="practice-explain">{hint}</p>}
-                    {q.solution && (
+                    {verdict.solution && (
                       <div className="practice-solution">
-                        <MathText content={q.solution} />
+                        <MathText content={verdict.solution} />
                       </div>
                     )}
                   </div>
@@ -211,23 +245,39 @@ export function PracticeSat() {
   const isLast = index + 1 >= questions.length
   const sectionLabel = sectionOf(current) === 'rw' ? 'Reading & Writing' : 'Math'
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (selected === null) return
     const nextAnswers = [...answers, selected]
+    const nextTimes = [...times, Math.max(0, Date.now() - shownAtRef.current)]
     setAnswers(nextAnswers)
+    setTimes(nextTimes)
     setSelected(null)
-    if (isLast) {
-      // Phase 2: record the missed SKILLS as focus skills so the learning path
-      // serves them next. The only practice-SAT DB write; still no mastery or
-      // question_attempts writes. Best-effort, fire-and-forget.
-      const missedSkillIds = questions
-        .filter((q, i) => !scoreChoice(q.choices, nextAnswers[i]).isCorrect)
-        .map((q) => q.skill_id)
-      void recordSatMisses(student.id, missedSkillIds)
-      setPhase('done')
-    } else {
+    if (!isLast) {
       setIndex(index + 1)
+      shownAtRef.current = Date.now()
+      return
     }
+    // The end: the server records and grades every answer and returns the
+    // verdicts. They count as practice evidence.
+    setPhase('scoring')
+    const results = await Promise.all(
+      questions.map((q, i) =>
+        submitAnswer({
+          studentId: student.id,
+          generatedQuestionId: q.id,
+          chosenChoiceIndex: nextAnswers[i],
+          shownAtMs: null,
+          timeMs: nextTimes[i] ?? null,
+        }),
+      ),
+    )
+    // Missed SKILLS become focus skills so the learning path serves them next.
+    const missedSkillIds = questions.filter((_, i) => results[i] && !results[i]!.isCorrect).map((q) => q.skill_id)
+    void recordSatMisses(student.id, missedSkillIds)
+    // The answers moved the evidence, so the SAT card is recomputed. Best-effort.
+    void refreshReadiness(student.id).catch((err: unknown) => console.error('readiness refresh failed', err))
+    setVerdicts(results)
+    setPhase('done')
   }
 
   return (
@@ -258,7 +308,7 @@ export function PracticeSat() {
               </button>
             ))}
           </div>
-          <button className="btn btn-navy" disabled={selected === null} onClick={handleNext}>
+          <button className="btn btn-navy" disabled={selected === null} onClick={() => void handleNext()}>
             {isLast ? 'Finish & see score' : 'Next question'}
           </button>
         </div>

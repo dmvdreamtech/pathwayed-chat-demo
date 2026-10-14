@@ -1,7 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 import { getCombinedSystemPrompt, type Mode, type StudentContext } from "./prompts.js"
-import { requireUser, requireOwnedStudent } from "./require-auth.js"
+import { requireUser, requireOwnedStudent, requireLearningAccess } from "./require-auth.js"
 import { rateLimit } from "./rate-limit.js"
 
 interface ChatMessage {
@@ -42,6 +42,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // sessions by the time a request is made — see require-auth.ts.
   const auth = await requireUser(req, res)
   if (!auth) return
+  // Learning features need an active plan, trial or school coverage (0033).
+  if (!(await requireLearningAccess(res, auth))) return
 
   // Per-user cap. Cheap, in-memory, per-instance; see rate-limit.ts for what that
   // does and does not buy.

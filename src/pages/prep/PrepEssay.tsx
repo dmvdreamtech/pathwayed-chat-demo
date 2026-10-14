@@ -217,10 +217,10 @@ export function PrepEssay() {
   }
 
   const start = async () => {
-    if (starting || !promptId || !id) return
+    if (starting || !promptId || !id || !moduleId) return
     setStarting(true)
     try {
-      const a = await startOrResumeEssay(id, promptId, timeLimitSec)
+      const a = await startOrResumeEssay(id, moduleId, promptId)
       setAttempt(a)
       setPromptId(a.promptId)
       setText(a.essayText)

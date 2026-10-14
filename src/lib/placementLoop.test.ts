@@ -35,7 +35,8 @@ const state = vi.hoisted(() => ({
  * whatever filters accumulated.
  */
 vi.mock('@/lib/supabase', () => {
-  const choice = (correct: boolean) => ({ text: 't', is_correct: correct })
+  // What the browser can read since migration 0033: the text, never the key.
+  const choice = () => ({ text: 't' })
 
   const makeBuilder = (table: string) => {
     let head = false
@@ -55,9 +56,7 @@ vi.mock('@/lib/supabase', () => {
             skill_id: skillId,
             sat_alignment: null,
             stem: 's',
-            choices: [choice(true), choice(false)],
-            correct_answer: 't',
-            solution: null,
+            choices_public: [choice(), choice()],
             passage_id: null,
             render_mode: 'text',
             prompt: null,

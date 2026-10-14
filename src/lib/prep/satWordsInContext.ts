@@ -27,34 +27,14 @@ import {
   type PrepItem,
   type PrepSkill,
 } from './verbalTemplates'
+import { SAT_WORDS_IN_CONTEXT_MISCONCEPTIONS, WIC_WRONG_CONNOTATION, WIC_TOO_EXTREME, WIC_RELATED_NOT_PRECISE, WIC_WRONG_SENSE, WIC_OFF_CONTEXT } from './satWordsInContextMisconceptions'
+export { SAT_WORDS_IN_CONTEXT_MISCONCEPTIONS }
 
 // Re-export the shared engine bits so callers of this module have them in one place.
 export { buildPrepQuestion, seedForSlot }
 
-// --- Misconception tokens (the wrong-path archetypes) -----------------------
-// Each distractor is a real word that fits the grammar but breaks the passage's
-// context clue in one of these specific ways.
-const WIC_WRONG_CONNOTATION = 'sat-wic-wrong-connotation' // right topic, wrong positive/negative feeling
-const WIC_TOO_EXTREME = 'sat-wic-too-extreme' // meaning too strong for what the context supports
-const WIC_RELATED_NOT_PRECISE = 'sat-wic-related-not-precise' // related to the idea but not the precise word demanded
-const WIC_WRONG_SENSE = 'sat-wic-wrong-sense' // matches a DIFFERENT sense/meaning than the context uses
-const WIC_OFF_CONTEXT = 'sat-wic-off-context' // a real word that simply ignores the context clue
-
-/** Token -> explanation. Kept parallel in tone to the sibling module: short,
- *  encouraging, plain text, aimed at a student. A test asserts every token used
- *  below has an entry here. */
-export const SAT_WORDS_IN_CONTEXT_MISCONCEPTIONS: Record<string, string> = {
-  [WIC_WRONG_CONNOTATION]:
-    'This word is about the right topic, but its feeling, positive or negative, is wrong for what the passage is describing. Match the tone the context sets.',
-  [WIC_TOO_EXTREME]:
-    'This word means something too strong or extreme for what the passage actually supports. The context calls for a milder, more measured word.',
-  [WIC_RELATED_NOT_PRECISE]:
-    'This word is related to the idea, but it is not the precise word the context demands. A more exact word fits the specific clue better.',
-  [WIC_WRONG_SENSE]:
-    'This word matches a DIFFERENT sense or meaning than the one the passage is using. Reread the clue to see which meaning the context needs.',
-  [WIC_OFF_CONTEXT]:
-    'This is a real word, but it ignores the clue in the passage, so it does not actually make sense in the blank. Anchor your choice to the context.',
-}
+// Misconception tokens and their explanations live in ./satWordsInContextMisconceptions.ts, so the
+// browser can explain a wrong answer without importing this bank.
 
 // --- The curated item bank --------------------------------------------------
 type Clue = 'definition' | 'contrast' | 'example'

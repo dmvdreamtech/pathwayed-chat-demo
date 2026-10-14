@@ -556,9 +556,14 @@ export interface Database {
           sat_alignment: string | null
           difficulty: Database['public']['Enums']['question_difficulty']
           stem: string
+          // choices, correct_answer and solution hold the answer key. Since
+          // migration 0033 the browser cannot read them; it reads choices_public
+          // (the choices without is_correct or misconception_token) and gets the
+          // verdict from submit_answer after answering.
           choices: Json
           correct_answer: string
           solution: string | null
+          choices_public: Json
           status: Database['public']['Enums']['question_status']
           // Reading-set link (migration 0007): the passage this question is
           // asked about, or null for math/writing standalone stems.
@@ -854,13 +859,26 @@ export interface Database {
       // start/resume stamps started_at with now(); finalize decides submitted vs
       // expired from the server clock and scores the stored answers. Each returns
       // the attempt as jsonb (Json) including a server-computed remaining_seconds.
+      // Migration 0033: the server picks the questions and the time limit.
       prep_start_section: {
         Args: {
           p_student_id: string
           p_module_id: string
           p_section_id: string
-          p_time_limit_sec: number
-          p_question_ids: Json
+        }
+        Returns: Json
+      }
+      prep_attempt_review: {
+        Args: { p_attempt_id: string }
+        Returns: Json
+      }
+      submit_answer: {
+        Args: {
+          p_student_id: string
+          p_question_id: string
+          p_choice_index: number
+          p_time_ms?: number | null
+          p_is_diagnostic?: boolean
         }
         Returns: Json
       }
@@ -878,7 +896,7 @@ export interface Database {
       // (prep_essay_save_feedback is service-role only — not listed here, as the
       // browser client never calls it.)
       prep_essay_start: {
-        Args: { p_student_id: string; p_prompt_id: string; p_time_limit_sec: number }
+        Args: { p_student_id: string; p_module_id: string; p_prompt_id: string }
         Returns: Json
       }
       prep_essay_remaining_seconds: {

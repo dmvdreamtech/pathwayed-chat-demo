@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Student } from '@/lib/students'
-import { recordQuestionAttempt, scoreChoice, type PracticeQuestion } from '@/lib/questions'
+import { submitAnswer, type PracticeQuestion } from '@/lib/questions'
 import { explainMisconception } from '@/lib/misconceptions'
 import { fetchCheckQuestion, shouldServeCheck, type CheckTrigger } from '@/lib/checkQuestion'
 import { checkAnswerSummary } from '@/lib/checkQuestionCopy'
@@ -10,7 +10,8 @@ import { checkAnswerSummary } from '@/lib/checkQuestionCopy'
  * show, grade, record, hand back to the conversation.
  *
  * WHERE THE WRITE HAPPENS, AND WHY HERE. The attempt is recorded from the BROWSER
- * through the existing recordQuestionAttempt, under the same owns_student RLS
+ * through submitAnswer (the server grades it and returns the verdict, migration
+ * 0033), under the same owns_student check
  * policy, with the same shape Practice writes. No new server credential is
  * introduced. api/chat.ts stays a stateless proxy with no database access at all:
  * it has no authentication today, so attaching the service role to it would let any
@@ -127,34 +128,37 @@ export function useCheckQuestion(opts: UseCheckQuestionOptions): CheckQuestionSt
     (index: number) => {
       if (!question || selectedIndex !== null) return
       setSelectedIndex(index)
-      const { isCorrect, misconceptionToken } = scoreChoice(question.choices, index)
+      const q = question
+      void (async () => {
+        // Identical to the Practice write path, so generated_question_id is populated
+        // and the per-question time median keeps filtering guesses. The verdict
+        // comes back from the server; the key was never in the browser.
+        const verdict = await submitAnswer({
+          studentId: student.id,
+          generatedQuestionId: q.id,
+          chosenChoiceIndex: index,
+          shownAtMs: shownAtRef.current || null,
+        })
 
-      // Identical to the Practice write path, so generated_question_id is populated
-      // and the per-question time median keeps filtering guesses.
-      void recordQuestionAttempt({
-        studentId: student.id,
-        generatedQuestionId: question.id,
-        chosenChoiceIndex: index,
-        shownAtMs: shownAtRef.current || null,
-      })
+        // Drives the struggle backoff. A correct answer clears the streak, so a child
+        // who stumbles once and recovers keeps being checked normally. An answer
+        // that could not be checked leaves the streak alone.
+        if (verdict) setConsecutiveWrong((n) => (verdict.isCorrect ? 0 : n + 1))
 
-      // Drives the struggle backoff. A correct answer clears the streak, so a child
-      // who stumbles once and recovers keeps being checked normally.
-      setConsecutiveWrong((n) => (isCorrect ? 0 : n + 1))
-
-      // The nudge names the SPECIFIC misconception behind the distractor they chose,
-      // so Nikki's next turn teaches into their actual error instead of asking them
-      // to try again. This is what makes a wrong answer a lesson rather than a mark.
-      const nudge = isCorrect ? null : explainMisconception(misconceptionToken)
-      const summary = checkAnswerSummary({
-        chosenText: question.choices[index]?.text ?? '',
-        isCorrect,
-      })
-      // Clear the card so the conversation moves on; the answered state has already
-      // been recorded and Nikki responds to it in her next turn.
-      setQuestion(null)
-      setSelectedIndex(null)
-      onAnsweredRef.current({ nudge, summary })
+        // The nudge names the SPECIFIC misconception behind the distractor they chose,
+        // so Nikki's next turn teaches into their actual error instead of asking them
+        // to try again. This is what makes a wrong answer a lesson rather than a mark.
+        const nudge = verdict && !verdict.isCorrect ? explainMisconception(verdict.misconceptionToken) : null
+        const summary = checkAnswerSummary({
+          chosenText: q.choices[index]?.text ?? '',
+          isCorrect: verdict ? verdict.isCorrect : null,
+        })
+        // Clear the card so the conversation moves on; the answered state has already
+        // been recorded and Nikki responds to it in her next turn.
+        setQuestion(null)
+        setSelectedIndex(null)
+        onAnsweredRef.current({ nudge, summary })
+      })()
     },
     [question, selectedIndex, student.id],
   )

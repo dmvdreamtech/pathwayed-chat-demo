@@ -41,10 +41,13 @@ export interface PicturePrompt {
   count: number
 }
 
+/**
+ * A choice as the browser sees it: the text (and a tile for K-2 picture items),
+ * never whether it is right. Since migration 0033 the answer key stays on the
+ * server; the verdict arrives from submitAnswer after the child answers.
+ */
 export interface PracticeChoice {
   text: string
-  is_correct: boolean
-  misconception_token?: string
   /** Present only on audio-picture (K–2) items; the child taps this tile. */
   tile?: PictureTile
 }
@@ -58,8 +61,6 @@ export interface PracticeQuestion {
   // (math/writing) stems. Rendered above the stem by the practice/diagnostic UI.
   passage: string | null
   choices: PracticeChoice[]
-  correct_answer: string
-  solution: string | null
   // 'text' (default) or 'audio_picture' (K–2 pre-reader: spoken prompt + tiles).
   render_mode: string
   // Visual prompt for audio-picture items (e.g. a group of objects to count).
@@ -70,17 +71,7 @@ export interface PracticeQuestion {
   difficulty: Difficulty | null
 }
 
-// --- Pure scoring / aggregation (unit-tested) --------------------------------
-
-/** Score a tapped choice: is it correct, and (if wrong) which misconception. */
-export function scoreChoice(
-  choices: PracticeChoice[],
-  index: number,
-): { isCorrect: boolean; misconceptionToken: string | null } {
-  const c = choices[index]
-  if (!c) return { isCorrect: false, misconceptionToken: null }
-  return { isCorrect: c.is_correct === true, misconceptionToken: c.misconception_token ?? null }
-}
+// --- Pure aggregation (unit-tested) ------------------------------------------
 
 /** Aggregate a session's answers into total / correct / accuracy (0-100). */
 export function summarizeAttempts(results: { isCorrect: boolean }[]): {
@@ -123,14 +114,9 @@ function parseChoices(raw: Json): PracticeChoice[] {
   for (const c of raw) {
     if (!c || typeof c !== 'object' || Array.isArray(c)) continue
     const obj = c as Record<string, unknown>
-    if (typeof obj.text !== 'string' || typeof obj.is_correct !== 'boolean') continue
+    if (typeof obj.text !== 'string') continue
     const tile = parseTile(obj.tile)
-    out.push({
-      text: obj.text,
-      is_correct: obj.is_correct,
-      ...(typeof obj.misconception_token === 'string' ? { misconception_token: obj.misconception_token } : {}),
-      ...(tile ? { tile } : {}),
-    })
+    out.push({ text: obj.text, ...(tile ? { tile } : {}) })
   }
   return out
 }
@@ -156,7 +142,7 @@ export async function fetchPracticeQuestions(skillSlug: string, limit: number): 
 
   const { data, error } = await supabase
     .from('generated_questions')
-    .select('id, skill_id, sat_alignment, stem, choices, correct_answer, solution, passage_id, render_mode, prompt, difficulty')
+    .select('id, skill_id, sat_alignment, stem, choices_public, passage_id, render_mode, prompt, difficulty')
     .eq('skill_id', skillId)
     .eq('status', 'published')
   if (error) {
@@ -182,7 +168,7 @@ export async function fetchPracticeQuestions(skillSlug: string, limit: number): 
 
   const parsed: PracticeQuestion[] = []
   for (const row of rows) {
-    const choices = parseChoices(row.choices)
+    const choices = parseChoices(row.choices_public)
     if (choices.length < 2) continue // skip anything malformed
     parsed.push({
       id: row.id,
@@ -191,8 +177,6 @@ export async function fetchPracticeQuestions(skillSlug: string, limit: number): 
       stem: row.stem,
       passage: row.passage_id ? passageById.get(row.passage_id) ?? null : null,
       choices,
-      correct_answer: row.correct_answer,
-      solution: row.solution,
       render_mode: typeof row.render_mode === 'string' ? row.render_mode : 'text',
       prompt: parsePrompt(row.prompt),
       difficulty: parseDifficulty(row.difficulty),
@@ -399,7 +383,7 @@ export async function fetchQuestionsByIds(ids: string[]): Promise<PracticeQuesti
   if (ids.length === 0) return []
   const { data, error } = await supabase
     .from('generated_questions')
-    .select('id, skill_id, sat_alignment, stem, choices, correct_answer, solution, passage_id, render_mode, prompt, difficulty')
+    .select('id, skill_id, sat_alignment, stem, choices_public, passage_id, render_mode, prompt, difficulty')
     .in('id', ids)
     .eq('status', 'published')
   if (error) {
@@ -422,7 +406,7 @@ export async function fetchQuestionsByIds(ids: string[]): Promise<PracticeQuesti
 
   const byId = new Map<string, PracticeQuestion>()
   for (const row of rows) {
-    const choices = parseChoices(row.choices)
+    const choices = parseChoices(row.choices_public)
     if (choices.length < 2) continue
     byId.set(row.id, {
       id: row.id,
@@ -431,8 +415,6 @@ export async function fetchQuestionsByIds(ids: string[]): Promise<PracticeQuesti
       stem: row.stem,
       passage: row.passage_id ? passageById.get(row.passage_id) ?? null : null,
       choices,
-      correct_answer: row.correct_answer,
-      solution: row.solution,
       render_mode: typeof row.render_mode === 'string' ? row.render_mode : 'text',
       prompt: parsePrompt(row.prompt),
       difficulty: parseDifficulty(row.difficulty),
@@ -755,52 +737,74 @@ export async function fetchEarlyGradeDiagnostic(
   return out
 }
 
-// --- Write path: append-only question_attempts -------------------------------
+// --- Write path: answer through the server ----------------------------------
 
-export interface QuestionAttemptInput {
+export interface AnswerInput {
   studentId: string
   generatedQuestionId: string
-  chosenChoiceIndex: number | null
+  chosenChoiceIndex: number
   /** Epoch ms when the question was shown; time_ms is computed here (null skips). */
   shownAtMs: number | null
+  /** Time already measured by the caller (a deferred-scoring test), used instead. */
+  timeMs?: number | null
   /** True when recorded by the placement diagnostic (kept out of practice history). */
   isDiagnostic?: boolean
 }
 
-/**
- * Record one answered question (append-only). Best-effort and fire-and-forget:
- * callers `void` this (or hold the promise) so a mid-session quit still persists
- * what was answered, and a failure never blocks the kid's flow. RLS
- * (owns_student) scopes the insert to the signed-in parent's own child.
- *
- * ONLY THE INPUTS ARE SENT. Since migration 0031 the database grades the answer
- * from the stored question and fills is_correct, skill_id, sat_alignment, the
- * misconception token and created_at itself. The screen still shows right or
- * wrong straight away from scoreChoice; that is feedback, not the record.
- *
- * Resolves to the new row's id (null on failure), so a Practice set can ask the
- * server to score exactly the answers it recorded.
- */
-export async function recordQuestionAttempt(a: QuestionAttemptInput): Promise<string | null> {
-  const timeMs = a.shownAtMs == null ? null : Math.max(0, Date.now() - a.shownAtMs)
-  const payload = {
-    student_id: a.studentId,
-    generated_question_id: a.generatedQuestionId,
-    chosen_choice_index: a.chosenChoiceIndex,
-    time_ms: timeMs,
-    is_diagnostic: a.isDiagnostic ?? false,
+/** What the server says about an answer once it is recorded. */
+export interface AnswerVerdict {
+  attemptId: string | null
+  isCorrect: boolean
+  /** The right choice's index. Null for a placement answer, which stays silent. */
+  correctIndex: number | null
+  correctAnswer: string | null
+  misconceptionToken: string | null
+  solution: string | null
+}
+
+/** Pure: read submit_answer's jsonb reply. Null when it is not a verdict. */
+export function parseVerdict(raw: unknown): AnswerVerdict | null {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null
+  const r = raw as Record<string, unknown>
+  if (typeof r.is_correct !== 'boolean') return null
+  return {
+    attemptId: typeof r.attempt_id === 'string' ? r.attempt_id : null,
+    isCorrect: r.is_correct,
+    correctIndex: typeof r.correct_index === 'number' ? r.correct_index : null,
+    correctAnswer: typeof r.correct_answer === 'string' ? r.correct_answer : null,
+    misconceptionToken: typeof r.misconception_token === 'string' ? r.misconception_token : null,
+    solution: typeof r.solution === 'string' ? r.solution : null,
   }
-  // Surface BOTH a returned error (e.g. RLS) and a thrown rejection — the
-  // fire-and-forget caller would otherwise swallow either silently.
+}
+
+/**
+ * Answer one question. The server records it (append-only), grades it from the
+ * stored question, and only then returns the verdict: right or wrong, the correct
+ * choice, the misconception behind a wrong choice, and the worked solution. A
+ * placement answer returns right or wrong only.
+ *
+ * Never throws: null means the answer was not recorded (a network failure, or the
+ * account has no access to practice this skill), and the caller says so rather
+ * than guessing a verdict.
+ */
+export async function submitAnswer(a: AnswerInput): Promise<AnswerVerdict | null> {
+  const timeMs =
+    a.timeMs !== undefined ? a.timeMs : a.shownAtMs == null ? null : Math.max(0, Date.now() - a.shownAtMs)
   try {
-    const { data, error } = await supabase.from('question_attempts').insert(payload).select('id').single()
+    const { data, error } = await supabase.rpc('submit_answer', {
+      p_student_id: a.studentId,
+      p_question_id: a.generatedQuestionId,
+      p_choice_index: a.chosenChoiceIndex,
+      p_time_ms: timeMs,
+      p_is_diagnostic: a.isDiagnostic ?? false,
+    })
     if (error) {
-      console.error('question_attempt insert failed', { error, payload })
+      console.error('submit_answer failed', { error, questionId: a.generatedQuestionId })
       return null
     }
-    return data?.id ?? null
+    return parseVerdict(data)
   } catch (err) {
-    console.error('question_attempt insert threw', { err, payload })
+    console.error('submit_answer threw', { err, questionId: a.generatedQuestionId })
     return null
   }
 }

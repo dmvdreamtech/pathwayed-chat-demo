@@ -3,9 +3,9 @@ import { useNavigate, useParams } from 'react-router'
 import { getStudent, type Student } from '@/lib/students'
 import {
   fetchRampedQuestions,
-  recordQuestionAttempt,
-  scoreChoice,
+  submitAnswer,
   summarizeAttempts,
+  type AnswerVerdict,
   type PracticeQuestion,
 } from '@/lib/questions'
 import { recordPracticeResult } from '@/lib/skills'
@@ -55,6 +55,10 @@ export function Practice() {
   const [index, setIndex] = useState(0)
   const [selected, setSelected] = useState<number | null>(null)
   const [results, setResults] = useState<{ isCorrect: boolean }[]>([])
+  // The server's verdict on the current answer; null until it arrives.
+  const [verdict, setVerdict] = useState<AnswerVerdict | null>(null)
+  // The answer could not be checked (offline, or no access). Never guessed.
+  const [checkFailed, setCheckFailed] = useState(false)
   const [shownAt, setShownAt] = useState(0)
   const [done, setDone] = useState(false)
   const [saving, setSaving] = useState(false)
@@ -122,26 +126,30 @@ export function Practice() {
     )
   }
 
-  const handlePick = (choiceIndex: number) => {
+  const handlePick = async (choiceIndex: number) => {
     const current = questions[index]
     if (selected !== null || !current) return
     setSelected(choiceIndex)
-    // Instant feedback only. The database grades the recorded answer itself.
-    const { isCorrect } = scoreChoice(current.choices, choiceIndex)
-    setResults((r) => [...r, { isCorrect }])
-    // Append-only and never awaited here: a mid-session quit still records this answer.
-    answerWrites.track(
-      recordQuestionAttempt({
-        studentId: student.id,
-        generatedQuestionId: current.id,
-        chosenChoiceIndex: choiceIndex,
-        shownAtMs: shownAt,
-      }),
-    )
+    // The server records the answer, grades it, and only then sends the verdict.
+    // The answer key never reaches the browser before the child answers.
+    const write = submitAnswer({
+      studentId: student.id,
+      generatedQuestionId: current.id,
+      chosenChoiceIndex: choiceIndex,
+      shownAtMs: shownAt,
+    })
+    answerWrites.track(write.then((v) => v?.attemptId ?? null))
+    const v = await write
+    if (!v) {
+      setCheckFailed(true)
+      return
+    }
+    setVerdict(v)
+    setResults((r) => [...r, { isCorrect: v.isCorrect }])
     // Pre-reader items: Nikki SPEAKS the warm "let's count together" feedback,
     // since the child can't read it. Respects the app-wide mute.
-    if (current.render_mode === 'audio_picture' && !muted && current.solution) {
-      void speakWithNikki(current.solution)
+    if (current.render_mode === 'audio_picture' && !muted && v.solution) {
+      void speakWithNikki(v.solution)
     }
   }
 
@@ -149,6 +157,8 @@ export function Practice() {
     if (index + 1 < questions.length) {
       setIndex(index + 1)
       setSelected(null)
+      setVerdict(null)
+      setCheckFailed(false)
       setShownAt(Date.now())
       return
     }
@@ -201,13 +211,10 @@ export function Practice() {
   }
 
   const current = questions[index]
-  const answered = selected !== null
-  const lastResult = results[results.length - 1]
+  const answered = verdict !== null || checkFailed
   // For a wrong answer, a nudge targeted at the specific mistake the student made
-  // (from the chosen choice's misconception token), shown instead of just "the answer is N".
-  const chosenChoice = selected !== null ? current.choices[selected] : undefined
-  const mistakeHint =
-    answered && !lastResult?.isCorrect ? explainMisconception(chosenChoice?.misconception_token) : null
+  // (from the misconception the server names), shown instead of just "the answer is N".
+  const mistakeHint = verdict && !verdict.isCorrect ? explainMisconception(verdict.misconceptionToken) : null
 
   return (
     <div className="kid-screen">
@@ -225,7 +232,8 @@ export function Practice() {
               choices={current.choices}
               answered={answered}
               selected={selected}
-              onPick={handlePick}
+              correctIndex={verdict?.correctIndex ?? null}
+              onPick={(i) => void handlePick(i)}
               showState
             />
           ) : (
@@ -241,13 +249,21 @@ export function Practice() {
               <MathFigure stem={current.stem} />
               <div className="practice-choices">
                 {current.choices.map((c, i) => {
-                  const state = !answered ? '' : c.is_correct ? 'correct' : i === selected ? 'chosen-wrong' : 'dim'
+                  const state = !verdict
+                    ? i === selected
+                      ? 'chosen'
+                      : ''
+                    : i === verdict.correctIndex
+                      ? 'correct'
+                      : i === selected
+                        ? 'chosen-wrong'
+                        : 'dim'
                   return (
                     <button
                       key={i}
                       className={`practice-choice ${state}`}
-                      disabled={answered}
-                      onClick={() => handlePick(i)}
+                      disabled={selected !== null}
+                      onClick={() => void handlePick(i)}
                     >
                       <MathText content={c.text} />
                     </button>
@@ -257,15 +273,25 @@ export function Practice() {
             </>
           )}
 
+          {selected !== null && !answered && <p className="muted">Checking your answer…</p>}
+
           {answered && (
             <div className="practice-feedback">
-              <p className={`practice-verdict ${lastResult?.isCorrect ? 'good' : 'soft'}`}>
-                {lastResult?.isCorrect ? 'Correct! 🎉' : `Good try, the answer is ${current.correct_answer}.`}
-              </p>
+              {verdict ? (
+                <p className={`practice-verdict ${verdict.isCorrect ? 'good' : 'soft'}`}>
+                  {verdict.isCorrect
+                    ? 'Correct! 🎉'
+                    : verdict.correctAnswer
+                      ? `Good try, the answer is ${verdict.correctAnswer}.`
+                      : 'Good try.'}
+                </p>
+              ) : (
+                <p className="practice-verdict soft">We couldn’t check that answer just now. Tap below to keep going.</p>
+              )}
               {mistakeHint && <p className="practice-explain">{mistakeHint}</p>}
-              {current.solution && (
+              {verdict?.solution && (
                 <div className="practice-solution">
-                  <MathText content={current.solution} />
+                  <MathText content={verdict.solution} />
                 </div>
               )}
               <button className="btn btn-navy" onClick={() => void handleNext()}>

@@ -49,16 +49,17 @@ function parseEssay(raw: RawEssay): EssayAttempt {
 
 /** Start the essay, or resume the in-progress one. On resume the server returns the
  *  existing attempt (same started_at, same prompt); the passed promptId is used only
- *  when creating a fresh attempt. */
+ *  when creating a fresh attempt. The time limit comes from the server's section
+ *  settings (migration 0033), never from the browser. */
 export async function startOrResumeEssay(
   studentId: string,
+  moduleId: string,
   promptId: string,
-  timeLimitSec: number,
 ): Promise<EssayAttempt> {
   const { data, error } = await supabase.rpc('prep_essay_start', {
     p_student_id: studentId,
+    p_module_id: moduleId,
     p_prompt_id: promptId,
-    p_time_limit_sec: timeLimitSec,
   })
   if (error || !data) throw new Error('Could not start the essay')
   return parseEssay(data as unknown as RawEssay)

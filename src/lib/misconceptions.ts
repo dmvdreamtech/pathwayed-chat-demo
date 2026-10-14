@@ -10,14 +10,14 @@
  * as-is, no math/markdown). Returns null for an unknown/absent token so the
  * caller falls back to the plain verdict + worked solution.
  */
-import { VERBAL_MISCONCEPTIONS } from '@/lib/prep/verbalTemplates'
-import { ANALOGY_MISCONCEPTIONS } from '@/lib/prep/analogyTemplates'
-import { SENTENCE_COMPLETION_MISCONCEPTIONS } from '@/lib/prep/sentenceCompletionTemplates'
-import { NUMBER_SERIES_MISCONCEPTIONS } from '@/lib/prep/numberSeriesTemplates'
-import { QUANT_COMPARE_MISCONCEPTIONS } from '@/lib/prep/quantCompareTemplates'
-import { LOGIC_MISCONCEPTIONS } from '@/lib/prep/logicTemplates'
-import { SAT_TRANSITIONS_MISCONCEPTIONS } from '@/lib/prep/satTransitions'
-import { SAT_WORDS_IN_CONTEXT_MISCONCEPTIONS } from '@/lib/prep/satWordsInContext'
+import { VERBAL_MISCONCEPTIONS } from '@/lib/prep/verbalMisconceptions'
+import { ANALOGY_MISCONCEPTIONS } from '@/lib/prep/analogyMisconceptions'
+import { SENTENCE_COMPLETION_MISCONCEPTIONS } from '@/lib/prep/sentenceCompletionMisconceptions'
+import { NUMBER_SERIES_MISCONCEPTIONS } from '@/lib/prep/numberSeriesMisconceptions'
+import { QUANT_COMPARE_MISCONCEPTIONS } from '@/lib/prep/quantCompareMisconceptions'
+import { LOGIC_MISCONCEPTIONS } from '@/lib/prep/logicMisconceptions'
+import { SAT_TRANSITIONS_MISCONCEPTIONS } from '@/lib/prep/satTransitionsMisconceptions'
+import { SAT_WORDS_IN_CONTEXT_MISCONCEPTIONS } from '@/lib/prep/satWordsInContextMisconceptions'
 
 const EXPLANATIONS: Record<string, string> = {
   // Prep tokens — defined per template module in src/lib/prep/*Templates.ts.

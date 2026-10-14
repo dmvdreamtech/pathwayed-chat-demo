@@ -29,44 +29,15 @@ import {
   type PrepItem,
   type PrepSkill,
 } from './verbalTemplates'
+import { LOGIC_MISCONCEPTIONS, LOGIC_REVERSED, LOGIC_OVERGEN, LOGIC_ASSUMPTION, LOGIC_ORDER, CLASS_WRONG_ATTR, CLASS_TOO_BROAD, CLASS_ASSOCIATED, CLASS_MEMBER } from './logicMisconceptions'
+export { LOGIC_MISCONCEPTIONS }
 
 // re-export so downstream builders can reach the shared helpers from one module
 export { buildPrepQuestion, seedForSlot }
 export type { Difficulty, PrepChoice, PrepItem, PrepSkill }
 
-// --- Misconception tokens (the wrong-path archetypes) -----------------------
-// Logic distractors:
-const LOGIC_REVERSED = 'logic-reversed-implication' // flipped "all A are B" into "all B are A"
-const LOGIC_OVERGEN = 'logic-overgeneralized' // concluded more than the clues prove
-const LOGIC_ASSUMPTION = 'logic-unstated-assumption' // added a fact the problem never gave
-const LOGIC_ORDER = 'logic-wrong-order' // mixed up the order in a ranking problem
-// Classification distractors:
-const CLASS_WRONG_ATTR = 'class-wrong-attribute' // sorted by color/size/spelling, not category
-const CLASS_TOO_BROAD = 'class-too-broad-category' // reached for a category that is too general
-const CLASS_ASSOCIATED = 'class-associated-not-member' // related to the group but not a member
-const CLASS_MEMBER = 'class-picked-a-member' // in odd-one-out, flagged a word that DOES belong
-
-/** Token -> short, kid-friendly, plain-text explanation. Covers EVERY token used
- *  by both skills below; a test asserts coverage. Self-contained (not merged into
- *  the shared misconceptions.ts) so the logic bank stands on its own. */
-export const LOGIC_MISCONCEPTIONS: Record<string, string> = {
-  [LOGIC_REVERSED]:
-    'You flipped the rule around. "All A are B" does not mean "all B are A", an arrow only points one way.',
-  [LOGIC_OVERGEN]:
-    'That says more than the clues prove. Stick to exactly what you were told; do not stretch it any further.',
-  [LOGIC_ASSUMPTION]:
-    'You added a fact the problem never gave you. Use only the clues that are actually written down.',
-  [LOGIC_ORDER]:
-    'The order got mixed up. Line the clues up carefully (tallest to shortest, first to last) before you choose.',
-  [CLASS_WRONG_ATTR]:
-    'You matched the wrong feature, like color, size, or spelling, instead of the group the word belongs to. Sort by category, not by how it looks.',
-  [CLASS_TOO_BROAD]:
-    'That word names a broader, more general category. It is too loose to be the exact match, and it still shares the group, so it is not the odd one out either.',
-  [CLASS_ASSOCIATED]:
-    'That word is connected to the group, but it is not a member of it. Being related is not the same as belonging.',
-  [CLASS_MEMBER]:
-    'That word actually DOES belong with the others, it shares the same category, so it cannot be the odd one out. Look for the ONE word that breaks the pattern.',
-}
+// Misconception tokens and their explanations live in ./logicMisconceptions.ts, so the
+// browser can explain a wrong answer without importing this bank.
 
 // --- Raw item shape ---------------------------------------------------------
 interface RawDistractor {

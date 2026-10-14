@@ -22,42 +22,14 @@ import {
   type PrepItem,
   type PrepSkill,
 } from './verbalTemplates'
+import { SENTENCE_COMPLETION_MISCONCEPTIONS, SC_IGNORED_CONTRAST, SC_IGNORED_CAUSATION, SC_REVERSED_CAUSATION, SC_IGNORED_RESTATEMENT, SC_WRONG_TONE, SC_OFF_TOPIC, SC_SECOND_BLANK_MISMATCH, SC_FIRST_BLANK_MISMATCH } from './sentenceCompletionMisconceptions'
+export { SENTENCE_COMPLETION_MISCONCEPTIONS }
 
 // Re-export the shared engine bits so callers of this module have them in one place.
 export { buildPrepQuestion, seedForSlot }
 
-// --- Misconception tokens (the wrong-path archetypes) -----------------------
-// Each distractor fits the grammar but breaks the sentence's context clue.
-const SC_IGNORED_CONTRAST = 'sc-ignored-contrast' // contrast clue, but picked a word that MATCHES instead of opposes
-const SC_IGNORED_CAUSATION = 'sc-ignored-causation' // cause/effect clue, but picked a word that breaks the logic
-const SC_REVERSED_CAUSATION = 'sc-reversed-causation' // swapped cause and effect (picked what CAUSES, not what RESULTS)
-const SC_IGNORED_RESTATEMENT = 'sc-ignored-restatement' // restatement clue, but picked a word that does NOT match the clue
-const SC_WRONG_TONE = 'sc-wrong-tone' // right topic, wrong feeling (positive vs. negative)
-const SC_OFF_TOPIC = 'sc-off-topic' // grammatically fine, but ignores the clue entirely
-const SC_SECOND_BLANK_MISMATCH = 'sc-second-blank-mismatch' // two-blank: first word fits, second word breaks the logic
-const SC_FIRST_BLANK_MISMATCH = 'sc-first-blank-mismatch' // two-blank: second word fits, first word breaks the logic
-
-/** Token -> explanation. Kept parallel to VERBAL_MISCONCEPTIONS in tone: short,
- *  encouraging, plain text, aimed at a 6-8 grader. A test asserts every token used
- *  below has an entry here. */
-export const SENTENCE_COMPLETION_MISCONCEPTIONS: Record<string, string> = {
-  [SC_IGNORED_CONTRAST]:
-    'This sentence has a contrast word like "but," "although," or "unlike," so the blank needs the OPPOSITE idea. This choice matches the first idea instead of flipping it.',
-  [SC_IGNORED_CAUSATION]:
-    'This sentence shows a cause and its effect (words like "because," "since," or "so"). This choice breaks that cause-and-effect logic instead of following it.',
-  [SC_REVERSED_CAUSATION]:
-    'You have the cause and the effect switched. Find which part makes the other happen, then pick the word that fits the RESULT.',
-  [SC_IGNORED_RESTATEMENT]:
-    'The sentence restates the clue with a phrase like "that is" or "in other words," so the blank should MATCH the clue\'s meaning. This choice does not mean the same thing.',
-  [SC_WRONG_TONE]:
-    'This word is about the right topic, but its feeling, positive or negative, is wrong for what the sentence is describing.',
-  [SC_OFF_TOPIC]:
-    'This word can fit the grammar, but it ignores the clue in the sentence, so it does not actually make sense in the blank.',
-  [SC_SECOND_BLANK_MISMATCH]:
-    'The first word fits, but the second word breaks the sentence\'s logic. In a two-blank question BOTH words have to work.',
-  [SC_FIRST_BLANK_MISMATCH]:
-    'The second word fits, but the first word breaks the sentence\'s logic. In a two-blank question BOTH words have to work.',
-}
+// Misconception tokens and their explanations live in ./sentenceCompletionMisconceptions.ts, so the
+// browser can explain a wrong answer without importing this bank.
 
 // --- The curated frame bank -------------------------------------------------
 type Clue = 'contrast' | 'causation' | 'restatement'

@@ -22,34 +22,14 @@ import {
   type PrepItem,
   type PrepSkill,
 } from './verbalTemplates'
+import { SAT_TRANSITIONS_MISCONCEPTIONS, TRANS_WRONG_CONTRAST, TRANS_WRONG_CONTINUATION, TRANS_WRONG_CAUSE, TRANS_WRONG_EXAMPLE, TRANS_WRONG_SEQUENCE } from './satTransitionsMisconceptions'
+export { SAT_TRANSITIONS_MISCONCEPTIONS }
 
 // Re-export the shared engine bits so callers of this module have them in one place.
 export { buildPrepQuestion, seedForSlot }
 
-// --- Misconception tokens (the wrong-path archetypes) -----------------------
-// Each distractor is a real transition of its category, chosen because a student
-// misread which logical relationship actually connects the two ideas.
-const TRANS_WRONG_CONTRAST = 'sat-trans-wrong-contrast' // picked a contrast word where the ideas actually agree/continue
-const TRANS_WRONG_CONTINUATION = 'sat-trans-wrong-continuation' // picked an addition word where the ideas actually contrast
-const TRANS_WRONG_CAUSE = 'sat-trans-wrong-cause' // picked a cause/result word where there is no cause and effect
-const TRANS_WRONG_EXAMPLE = 'sat-trans-wrong-example' // picked "For example/instance" where sentence 2 is not an example
-const TRANS_WRONG_SEQUENCE = 'sat-trans-wrong-sequence' // picked a time/sequence word where the link is logical, not chronological
-
-/** Token -> explanation. Kept parallel to SENTENCE_COMPLETION_MISCONCEPTIONS in
- *  tone: short, encouraging, plain text, aimed at a grades 9-12 student. A test
- *  asserts every token used below has an entry here. */
-export const SAT_TRANSITIONS_MISCONCEPTIONS: Record<string, string> = {
-  [TRANS_WRONG_CONTRAST]:
-    'This is a contrast transition (like "However," or "In contrast,"). It tells the reader the second idea pushes AGAINST the first. Here the ideas do not clash, they agree or build on each other, so a contrast word sends the wrong signal.',
-  [TRANS_WRONG_CONTINUATION]:
-    'This is an addition transition (like "In addition," or "Similarly,"). It tells the reader the second idea keeps going in the SAME direction. Here the ideas actually turn or clash, so an addition word hides the shift.',
-  [TRANS_WRONG_CAUSE]:
-    'This is a cause-and-effect transition (like "Therefore," or "As a result,"). It says the first idea MAKES the second one happen. Here there is no cause and effect, so this word invents a link that is not there.',
-  [TRANS_WRONG_EXAMPLE]:
-    'This is an example transition ("For example," / "For instance,"). It promises the second sentence is a specific example of the first. Here the second sentence is not an example, so it leaves the reader waiting for one.',
-  [TRANS_WRONG_SEQUENCE]:
-    'This is a time or sequence transition (like "Meanwhile," or "Afterward,"). It signals WHEN things happen. Here the link between the ideas is logical, not a matter of timing, so a time word misreads the relationship.',
-}
+// Misconception tokens and their explanations live in ./satTransitionsMisconceptions.ts, so the
+// browser can explain a wrong answer without importing this bank.
 
 // --- The curated frame bank -------------------------------------------------
 type Relation = 'contrast' | 'continuation' | 'cause' | 'example' | 'sequence'

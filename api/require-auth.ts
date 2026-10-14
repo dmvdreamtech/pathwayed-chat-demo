@@ -200,3 +200,27 @@ export async function requireOwnedStudent(
   }
   return true
 }
+
+/**
+ * Require that the caller's account may use learning features right now: an
+ * active school-covered child on the account, a paid plan, or a trial that has
+ * not ended. The database decides (account_has_learning_access, migration 0033),
+ * with the same rule as the app's SubscriptionGate, so calling an api/ route
+ * directly cannot get past an ended trial.
+ *
+ * FAILS CLOSED: a failed check answers 503 rather than letting the call through.
+ * On failure this SENDS the response and returns false.
+ */
+export async function requireLearningAccess(res: VercelResponse, auth: AuthedCaller): Promise<boolean> {
+  const { data, error } = await auth.svc.rpc("account_has_learning_access", { p_user_id: auth.userId })
+  if (error) {
+    console.error("learning access check failed", { error: error.message, userId: auth.userId })
+    res.status(503).json({ error: "access_check_failed" })
+    return false
+  }
+  if (data !== true) {
+    res.status(403).json({ error: "subscription_required" })
+    return false
+  }
+  return true
+}

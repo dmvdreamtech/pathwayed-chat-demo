@@ -1,23 +1,40 @@
 import { describe, it, expect } from 'vitest'
-import { scoreChoice, summarizeAttempts, type PracticeChoice } from './questions'
+import { parseVerdict, summarizeAttempts } from './questions'
 
-const choices: PracticeChoice[] = [
-  { text: '56', is_correct: true },
-  { text: '48', is_correct: false, misconception_token: 'skip-count-error' },
-  { text: '63', is_correct: false, misconception_token: 'off-by-one-factor' },
-  { text: '15', is_correct: false, misconception_token: 'added-instead-of-multiplied' },
-]
-
-describe('scoreChoice', () => {
-  it('correct choice -> isCorrect true, no token', () => {
-    expect(scoreChoice(choices, 0)).toEqual({ isCorrect: true, misconceptionToken: null })
+describe('parseVerdict (the server grades; the browser only reads the verdict)', () => {
+  it('reads a practice verdict with the key and the misconception', () => {
+    expect(
+      parseVerdict({
+        attempt_id: 'a1',
+        is_correct: false,
+        correct_index: 0,
+        correct_answer: '56',
+        misconception_token: 'skip-count-error',
+        solution: '7 x 8 = 56',
+      }),
+    ).toEqual({
+      attemptId: 'a1',
+      isCorrect: false,
+      correctIndex: 0,
+      correctAnswer: '56',
+      misconceptionToken: 'skip-count-error',
+      solution: '7 x 8 = 56',
+    })
   })
-  it('wrong choice -> isCorrect false with its misconception token', () => {
-    expect(scoreChoice(choices, 1)).toEqual({ isCorrect: false, misconceptionToken: 'skip-count-error' })
+  it('a placement verdict carries right or wrong only', () => {
+    expect(parseVerdict({ attempt_id: 'a2', is_correct: true })).toEqual({
+      attemptId: 'a2',
+      isCorrect: true,
+      correctIndex: null,
+      correctAnswer: null,
+      misconceptionToken: null,
+      solution: null,
+    })
   })
-  it('out-of-range index -> safe false/null (never throws)', () => {
-    expect(scoreChoice(choices, 9)).toEqual({ isCorrect: false, misconceptionToken: null })
-    expect(scoreChoice(choices, -1)).toEqual({ isCorrect: false, misconceptionToken: null })
+  it('anything that is not a verdict is null, never a guessed result', () => {
+    expect(parseVerdict(null)).toBeNull()
+    expect(parseVerdict({ attempt_id: 'a3' })).toBeNull()
+    expect(parseVerdict([true])).toBeNull()
   })
 })
 

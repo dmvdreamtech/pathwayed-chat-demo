@@ -20,34 +20,16 @@ import {
   type PrepItem,
   type PrepSkill,
 } from './verbalTemplates'
+import { NUMBER_SERIES_MISCONCEPTIONS, OFF_BY_ONE_STEP, WRONG_OPERATION, TEMPTING_MISREAD, MISREAD_INTERLEAVED } from './numberSeriesMisconceptions'
+export { NUMBER_SERIES_MISCONCEPTIONS }
 
 // Re-export so downstream seed/build scripts can pull position + build helpers
 // straight from this module, mirroring the verbal bank's ergonomics.
 export { buildPrepQuestion, seedForSlot }
 export type { Difficulty, PrepChoice, PrepItem, PrepSkill }
 
-// --- Misconception tokens (the wrong-path archetypes) -----------------------
-// Exactly one of these three tokens is attached to each of an item's three
-// distractors. The interleaved-misread token replaces the generic tempting-misread
-// token ONLY on two-interleaved-sequence items (where "treated it as one list" is
-// the specific trap). Every item still uses THREE distinct tokens.
-const OFF_BY_ONE_STEP = 'series-off-by-one-step'
-const WRONG_OPERATION = 'series-wrong-operation'
-const TEMPTING_MISREAD = 'series-tempting-misread'
-const MISREAD_INTERLEAVED = 'series-misread-interleaved'
-
-/** Token -> short, kid-friendly plain-text explanation. Self-contained: a test
- *  asserts every token used in the bank has an entry here. */
-export const NUMBER_SERIES_MISCONCEPTIONS: Record<string, string> = {
-  [OFF_BY_ONE_STEP]:
-    'You applied the rule one time too many or too few. Count the steps carefully and stop exactly at the missing term, do not go one extra step or come up one short.',
-  [WRONG_OPERATION]:
-    'You continued with the wrong operation. Check whether the pattern adds, multiplies, or does something else, then use that SAME rule to find the next term.',
-  [TEMPTING_MISREAD]:
-    'You read the pattern as the wrong kind. Look again at how each term changes, adding, multiplying, or squaring, before you pick the next number.',
-  [MISREAD_INTERLEAVED]:
-    'This is really TWO sequences taking turns. Follow only the terms in the same position (every other number), not all of the numbers as one single list.',
-}
+// Misconception tokens and their explanations live in ./numberSeriesMisconceptions.ts, so the
+// browser can explain a wrong answer without importing this bank.
 
 // --- Pattern specs (the deterministic source of the whole bank) -------------
 type Tier = Difficulty

@@ -1,7 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 import { buildFlashcardsPrompt, type StudentContext } from "./prompts.js"
-import { requireUser } from "./require-auth.js"
+import { requireUser, requireLearningAccess } from "./require-auth.js"
 import { rateLimit, FLASHCARDS_LIMIT } from "./rate-limit.js"
 
 interface ImageInput {
@@ -52,6 +52,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // accepts an image. No child is named in the request, so a session is the check.
   const auth = await requireUser(req, res)
   if (!auth) return
+  // Learning features need an active plan, trial or school coverage (0033).
+  if (!(await requireLearningAccess(res, auth))) return
 
   const limited = rateLimit(`flashcards:${auth.userId}`, FLASHCARDS_LIMIT)
   if (!limited.allowed) {

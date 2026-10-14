@@ -26,32 +26,15 @@ import {
   type PrepItem,
   type PrepSkill,
 } from './verbalTemplates'
+import { ANALOGY_MISCONCEPTIONS, WRONG_REL, SAME_CAT, REVERSED, ASSOCIATED } from './analogyMisconceptions'
+export { ANALOGY_MISCONCEPTIONS }
 
 // Re-export so callers importing analogy pieces get the shared plumbing too.
 export { buildPrepQuestion, seedForSlot }
 export type { Difficulty, PrepChoice, PrepItem, PrepSkill }
 
-// --- Misconception tokens (the wrong-path archetypes for analogies) ----------
-// A distractor is NEVER a random word — it is always a word that has a real,
-// nameable relationship to C, just not the SAME relationship the A:B pair shows.
-const WRONG_REL = 'analogy-wrong-relationship' // applied a real but DIFFERENT relation
-const SAME_CAT = 'analogy-same-category-not-relation' // grabbed a word from a category, not the relation
-const REVERSED = 'analogy-reversed-relation' // matched the relation backwards (B:A, not A:B)
-const ASSOCIATED = 'analogy-associated-not-parallel' // a word merely associated with C
-
-/** Token -> explanation. Merged into misconceptions.ts EXPLANATIONS so
- *  explainMisconception() and the review screen pick these up. Plain text,
- *  grades 6-8 (no markdown/math). */
-export const ANALOGY_MISCONCEPTIONS: Record<string, string> = {
-  [WRONG_REL]:
-    'That pair does have a real connection, but it is a DIFFERENT one than the example shows. First figure out exactly how the first two words are linked, then use that same link for the second pair.',
-  [SAME_CAT]:
-    'That word is in the same general group as one of the words, but just being in the same category is not the connection. Match the SPECIFIC relationship the first pair shows.',
-  [REVERSED]:
-    'You matched the relationship backwards. Watch the order: whatever the first word does to the second, the third word should do to your answer in that SAME direction.',
-  [ASSOCIATED]:
-    'That word just goes along with the third word, but the analogy needs the SAME relationship as the first pair, not a word that is simply related to it.',
-}
+// Misconception tokens and their explanations live in ./analogyMisconceptions.ts, so the
+// browser can explain a wrong answer without importing this bank.
 
 // --- The curated analogy bank -----------------------------------------------
 type Relationship =

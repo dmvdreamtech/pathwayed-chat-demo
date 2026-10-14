@@ -4,7 +4,7 @@ import { getStudent, avatarModeOf, type Student } from '@/lib/students'
 import { getPrepModule } from '@/lib/prep/registry'
 import type { PrepModule } from '@/lib/prep/types'
 import { getPrepEntitlements, isKidEntitled } from '@/lib/prep/entitlements'
-import { getAttempt, type PrepAttempt } from '@/lib/prep/timedSection'
+import { getAttempt, getReviewKeys, type PrepAttempt, type ReviewKey } from '@/lib/prep/timedSection'
 import { fetchQuestionsByIds, type PracticeQuestion } from '@/lib/questions'
 import { explainMisconception } from '@/lib/misconceptions'
 import { NikkiFace } from '@/components/NikkiFace'
@@ -26,6 +26,8 @@ export function PrepReview() {
 
   const [student, setStudent] = useState<Student | null>(null)
   const [attempt, setAttempt] = useState<PrepAttempt | null>(null)
+  // The answer keys, from the server, once the section is finished.
+  const [keys, setKeys] = useState<Map<string, ReviewKey>>(new Map())
   const [questions, setQuestions] = useState<PracticeQuestion[]>([])
   const [loading, setLoading] = useState(true)
   const [open, setOpen] = useState<string | null>(null)
@@ -52,11 +54,12 @@ export function PrepReview() {
         navigate(`/students/${id}/prep/${moduleId}?tab=test`, { replace: true })
         return
       }
-      const qs = await fetchQuestionsByIds(a.questionIds)
+      const [qs, k] = await Promise.all([fetchQuestionsByIds(a.questionIds), getReviewKeys(a.id)])
       if (!active) return
       setStudent(s)
       setAttempt(a)
       setQuestions(qs)
+      setKeys(k ?? new Map())
       setLoading(false)
     })().catch(() => active && setLoading(false))
     return () => {
@@ -64,7 +67,7 @@ export function PrepReview() {
     }
   }, [id, moduleId, attemptId, module, navigate])
 
-  const correctIndexOf = (q: PracticeQuestion) => q.choices.findIndex((c) => c.is_correct)
+  const correctIndexOf = (q: PracticeQuestion) => keys.get(q.id)?.correctIndex ?? -1
 
   const outcomeOf = (q: PracticeQuestion): Outcome => {
     const chosen = attempt?.answers[q.id]
@@ -75,7 +78,7 @@ export function PrepReview() {
   const correctCount = useMemo(
     () => questions.filter((q) => outcomeOf(q) === 'correct').length,
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [questions, attempt],
+    [questions, attempt, keys],
   )
 
   if (loading || !attempt || !module || !student) {
@@ -110,7 +113,7 @@ export function PrepReview() {
             const outcome = outcomeOf(q)
             const chosen = attempt.answers[q.id]
             const correctIdx = correctIndexOf(q)
-            const token = chosen !== undefined && outcome === 'incorrect' ? q.choices[chosen]?.misconception_token ?? null : null
+            const token = chosen !== undefined && outcome === 'incorrect' ? keys.get(q.id)?.tokens[chosen] ?? null : null
             const nudge = token ? explainMisconception(token) : null
             const isOpen = open === q.id
             const badge =

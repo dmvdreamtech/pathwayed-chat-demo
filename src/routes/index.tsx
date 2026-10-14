@@ -60,7 +60,7 @@ export function AppRoutes() {
       <Route path="/students/:id/learn" element={<SubscriptionGate><SkillsBuilding /></SubscriptionGate>} />
       <Route path="/students/:id/homework" element={<SubscriptionGate><HomeworkStart /></SubscriptionGate>} />
       <Route path="/students/:id/session/:subject" element={<SubscriptionGate><Session /></SubscriptionGate>} />
-      <Route path="/students/:id/practice/:skill" element={<SubscriptionGate><Practice /></SubscriptionGate>} />
+      <Route path="/students/:id/practice/:skill" element={<SubscriptionGate allowPrepSkill><Practice /></SubscriptionGate>} />
       {/* Practice SAT, Phase 1: HS-only, consent-gated, Math-only. The page
           re-checks the gate and redirects anyone who fails it. */}
       <Route path="/students/:id/practice-sat" element={<SubscriptionGate><PracticeSat /></SubscriptionGate>} />

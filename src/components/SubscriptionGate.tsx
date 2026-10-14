@@ -1,9 +1,11 @@
 import { useEffect, useState, type ReactNode } from 'react'
+import { useParams } from 'react-router'
 import { useAuth } from '@/context/AuthContext'
 import { isSchoolCovered } from '@/lib/schoolSession'
 import { getSubscription, type Subscription } from '@/lib/profile'
 import { listStudents, type Student } from '@/lib/students'
 import { hasCoveredStudent, hasLearningAccess } from '@/lib/accessGate'
+import { getPrepEntitlements, isKidEntitled, prepModulesUsingSkill } from '@/lib/prep/entitlements'
 import { PlanPicker } from '@/components/PlanPicker'
 import { TopMenu } from '@/components/TopMenu'
 import '@/styles/app-screens.css'
@@ -32,9 +34,25 @@ import '@/styles/app-screens.css'
  * behave exactly as before. The students read it depends on was already being
  * made here for the plan picker, so this adds no request.
  */
-export function SubscriptionGate({ children }: { children: ReactNode }) {
+export function SubscriptionGate({
+  children,
+  allowPrepSkill = false,
+}: {
+  children: ReactNode
+  /**
+   * On a Practice route (/students/:id/practice/:skill): also let through a child
+   * who has an active prep entitlement for a module that uses this skill, so a
+   * prep-only family can use prep Train/Practice. The server checks the same rule
+   * when each answer is submitted (can_practice_skill, migration 0033).
+   */
+  allowPrepSkill?: boolean
+}) {
   const { user } = useAuth()
   const sessionCovered = isSchoolCovered()
+  const { id: routeStudentId, skill: routeSkill } = useParams<{ id?: string; skill?: string }>()
+  const wantsPrep = allowPrepSkill && !!routeStudentId && !!routeSkill
+  // Whether the prep entitlement opens this route. Null until it has been read.
+  const [prepAllowed, setPrepAllowed] = useState<boolean | null>(null)
   const [sub, setSub] = useState<Subscription | null>(null)
   const [students, setStudents] = useState<Student[]>([])
   // Snapshot the clock once at mount — a stable render-time value for the gate.
@@ -56,6 +74,22 @@ export function SubscriptionGate({ children }: { children: ReactNode }) {
     }
   }, [sessionCovered, user])
 
+  useEffect(() => {
+    if (!wantsPrep || sessionCovered || !user || !routeStudentId || !routeSkill) return
+    let active = true
+    const modules = prepModulesUsingSkill(routeSkill)
+    getPrepEntitlements([routeStudentId])
+      .then((ents) => {
+        if (active) setPrepAllowed(ents.some((e) => isKidEntitled(e.status) && modules.includes(e.moduleId)))
+      })
+      .catch(() => {
+        if (active) setPrepAllowed(false)
+      })
+    return () => {
+      active = false
+    }
+  }, [wantsPrep, sessionCovered, user, routeStudentId, routeSkill])
+
   // Covered → straight through. No user → preserve existing (ungated) behavior.
   if (sessionCovered || !user) return <>{children}</>
 
@@ -74,6 +108,18 @@ export function SubscriptionGate({ children }: { children: ReactNode }) {
   // covered student reaches this line (not the early return above) whenever they
   // signed in without a school session.
   if (hasLearningAccess(sub, now, hasCoveredStudent(students))) return <>{children}</>
+
+  // No learning plan, but this may be a prep skill the child is entitled to.
+  if (wantsPrep && prepAllowed === null) {
+    return (
+      <div className="kid-screen">
+        <div className="shell">
+          <p className="muted">Loading…</p>
+        </div>
+      </div>
+    )
+  }
+  if (wantsPrep && prepAllowed) return <>{children}</>
 
   // Locked: parent-facing subscribe prompt with the plan picker.
   return (

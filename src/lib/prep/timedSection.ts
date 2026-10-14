@@ -1,13 +1,14 @@
 import { supabase } from '@/lib/supabase'
-import { fetchPracticeQuestions, fetchQuestionsByIds, type PracticeQuestion } from '@/lib/questions'
+import { fetchQuestionsByIds, type PracticeQuestion } from '@/lib/questions'
 import type { PrepModule, PrepSection } from '@/lib/prep/types'
-import { prepSkillFor } from '@/lib/prep/prepSkills'
 
 /**
  * Client wrapper for the timed-section engine. The DATABASE owns time, transitions
  * and scoring (migration 0016): started_at is server now(), remaining time and
  * expiry are computed server-side, and score is graded from the bank in the
- * finalize RPC. This module only orchestrates and renders — it never decides time.
+ * finalize RPC. Since migration 0033 the database also picks the questions and the
+ * time limit (prep_section_config), and the answer keys reach the browser only in
+ * the review of a finished section. This module only orchestrates and renders.
  */
 
 /** Fewest questions a timed section will run with; below this we show a friendly
@@ -70,60 +71,33 @@ function parseAttempt(raw: RawAttempt): PrepAttempt {
   }
 }
 
-function shuffle<T>(arr: T[]): T[] {
-  const a = arr.slice()
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
-  }
-  return a
-}
-
-/**
- * Build a section's question set from the bank via the stand-in skill mapping,
- * deduped across the section's types and capped at the section's questionCount.
- */
-async function selectQuestions(section: PrepSection): Promise<PracticeQuestion[]> {
-  const slugs = Array.from(
-    new Set(section.questionTypes.map((t) => prepSkillFor(t)?.slug).filter((s): s is string => !!s)),
-  )
-  const perSlug = await Promise.all(
-    slugs.map((slug) => fetchPracticeQuestions(slug, section.questionCount > 0 ? section.questionCount : 20)),
-  )
-  const byId = new Map<string, PracticeQuestion>()
-  for (const list of perSlug) for (const q of list) if (!byId.has(q.id)) byId.set(q.id, q)
-  const combined = shuffle([...byId.values()])
-  const cap = section.questionCount > 0 ? section.questionCount : combined.length
-  return combined.slice(0, cap)
-}
-
 export interface StartResult {
   attempt: PrepAttempt
   questions: PracticeQuestion[]
 }
 
 /**
- * Start a timed section, or resume the in-progress attempt for it. Questions are
- * preselected here and FROZEN by the RPC at creation; on resume the RPC returns the
- * original attempt and we reload its frozen questions (a fresh selection is
- * ignored). Returns { notEnough } when the bank can't supply MIN_QUESTIONS.
+ * Start a timed section, or resume the in-progress attempt for it. The SERVER
+ * picks the questions and the time limit and freezes them at creation; on resume
+ * it returns the original attempt and we reload its frozen questions (without
+ * keys). Returns { notEnough } when the bank can't supply MIN_QUESTIONS.
  */
 export async function startOrResumeSection(
   studentId: string,
   module: PrepModule,
   section: PrepSection,
 ): Promise<StartResult | { notEnough: true; available: number }> {
-  const fresh = await selectQuestions(section)
-  if (fresh.length < MIN_QUESTIONS) return { notEnough: true, available: fresh.length }
-
   const { data, error } = await supabase.rpc('prep_start_section', {
     p_student_id: studentId,
     p_module_id: module.id,
     p_section_id: section.id,
-    p_time_limit_sec: section.timeLimitSec,
-    p_question_ids: fresh.map((q) => q.id),
   })
-  if (error || !data) throw new Error('Could not start the section')
+  if (error) {
+    const short = /prep_not_enough_questions: (\d+)/.exec(error.message ?? '')
+    if (short) return { notEnough: true, available: Number(short[1]) }
+    throw new Error('Could not start the section')
+  }
+  if (!data) throw new Error('Could not start the section')
   const attempt = parseAttempt(data as unknown as RawAttempt)
   const questions = await fetchQuestionsByIds(attempt.questionIds)
   return { attempt, questions }
@@ -178,6 +152,44 @@ export async function findInProgressAttempt(
     .maybeSingle()
   if (error || !data) return null
   return parseAttempt(data as unknown as RawAttempt)
+}
+
+/** One question's key, from the review of a finished section. */
+export interface ReviewKey {
+  correctIndex: number | null
+  correctAnswer: string | null
+  solution: string | null
+  /** Each choice's misconception token, by choice index (null for the right one). */
+  tokens: (string | null)[]
+}
+
+/** Pure: read prep_attempt_review's keys into a map by question id. */
+export function parseReviewKeys(raw: unknown): Map<string, ReviewKey> {
+  const out = new Map<string, ReviewKey>()
+  const keys = raw && typeof raw === 'object' && !Array.isArray(raw) ? (raw as Record<string, unknown>).keys : null
+  if (!Array.isArray(keys)) return out
+  for (const k of keys) {
+    if (!k || typeof k !== 'object' || Array.isArray(k)) continue
+    const r = k as Record<string, unknown>
+    if (typeof r.question_id !== 'string') continue
+    out.set(r.question_id, {
+      correctIndex: typeof r.correct_index === 'number' ? r.correct_index : null,
+      correctAnswer: typeof r.correct_answer === 'string' ? r.correct_answer : null,
+      solution: typeof r.solution === 'string' ? r.solution : null,
+      tokens: Array.isArray(r.tokens) ? r.tokens.map((t) => (typeof t === 'string' ? t : null)) : [],
+    })
+  }
+  return out
+}
+
+/**
+ * The answer keys for a FINISHED section, from the server. The server refuses
+ * while the section is still running, and for anyone but the student's family.
+ */
+export async function getReviewKeys(attemptId: string): Promise<Map<string, ReviewKey> | null> {
+  const { data, error } = await supabase.rpc('prep_attempt_review', { p_attempt_id: attemptId })
+  if (error || !data) return null
+  return parseReviewKeys(data)
 }
 
 /** Read one attempt (for the review screen). */

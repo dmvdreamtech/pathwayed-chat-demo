@@ -19,12 +19,7 @@ const q = (id: string): PracticeQuestion => ({
   sat_alignment: null,
   stem: `stem ${id}`,
   passage: null,
-  choices: [
-    { text: 'a', is_correct: true },
-    { text: 'b', is_correct: false },
-  ],
-  correct_answer: 'a',
-  solution: null,
+  choices: [{ text: 'a' }, { text: 'b' }],
   render_mode: 'text',
   prompt: null,
   difficulty: null,
