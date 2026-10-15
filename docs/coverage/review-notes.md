@@ -48,6 +48,31 @@ cannot judge.
 - `math-g9-rational-exponents-and-radicals` slots 9 and 39 take odd roots of a
   negative base, e.g. $(-32)^{3/5} = -8$, the usual grade 9 convention.
 
+- More fixes from the independent math check, all applied before commit:
+  - `math-g10-constructions` slot 39 described a step that cannot be done.
+  - `math-g11-normal-distributions-and-inference` slot 23 had two defensible
+    answers.
+  - `math-g10-similarity` slots 29 and 31 had misconception tags that named
+    the wrong mistake.
+
+## Top-ups of live skills
+
+Six live writing skills had 20 questions each. A file with
+`extends: '<live slug>'` adds 20 original drafts to that skill; its seed never
+touches the skill row. Each top-up's author read the existing 20 first and
+covered what they left thin:
+
+- `punctuation-basics`
+- `possessives-and-apostrophes`
+- `sentence-structure`
+- `pronoun-agreement`
+- `sentence-boundaries`
+- `modifier-placement`
+
+Note for review: in `write-g7-modifier-placement-more`, slot 15's wrong choice
+("The history quiz felt easy to Dev after studying all weekend") is accepted by
+some readers. It still dangles, because the quiz stays the subject.
+
 ## Publishing passage-based questions
 
 A question with a passage needs its passage published too; both load as draft.
