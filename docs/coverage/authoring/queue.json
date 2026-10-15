@@ -1,0 +1,2187 @@
+[
+ {
+  "slug": "read-g8-story-details-inference",
+  "subject": "reading",
+  "grade": 8,
+  "group": "Literature",
+  "name": "Key details and inference in stories",
+  "standards": [
+   "RL.8.1"
+  ],
+  "file": "content/reading/grade-8/read-g8-story-details-inference.ts"
+ },
+ {
+  "slug": "read-g8-theme-summary",
+  "subject": "reading",
+  "grade": 8,
+  "group": "Literature",
+  "name": "Theme and summary",
+  "standards": [
+   "RL.8.2"
+  ],
+  "file": "content/reading/grade-8/read-g8-theme-summary.ts"
+ },
+ {
+  "slug": "read-g8-character-setting-plot",
+  "subject": "reading",
+  "grade": 8,
+  "group": "Literature",
+  "name": "Characters, setting and plot",
+  "standards": [
+   "RL.8.3"
+  ],
+  "file": "content/reading/grade-8/read-g8-character-setting-plot.ts"
+ },
+ {
+  "slug": "read-g8-literary-structure-pov",
+  "subject": "reading",
+  "grade": 8,
+  "group": "Literature",
+  "name": "Structure and point of view in literature",
+  "standards": [
+   "RL.8.5",
+   "RL.8.6"
+  ],
+  "file": "content/reading/grade-8/read-g8-literary-structure-pov.ts"
+ },
+ {
+  "slug": "read-g8-comparing-texts",
+  "subject": "reading",
+  "grade": 8,
+  "group": "Literature",
+  "name": "Comparing stories and poems",
+  "standards": [
+   "RL.8.9"
+  ],
+  "file": "content/reading/grade-8/read-g8-comparing-texts.ts"
+ },
+ {
+  "slug": "read-g8-evidence-inference",
+  "subject": "reading",
+  "grade": 8,
+  "group": "Informational text",
+  "name": "Key details, evidence and inference",
+  "standards": [
+   "RI.8.1"
+  ],
+  "file": "content/reading/grade-8/read-g8-evidence-inference.ts"
+ },
+ {
+  "slug": "read-g8-main-idea-summary",
+  "subject": "reading",
+  "grade": 8,
+  "group": "Informational text",
+  "name": "Main idea and summary",
+  "standards": [
+   "RI.8.2"
+  ],
+  "file": "content/reading/grade-8/read-g8-main-idea-summary.ts"
+ },
+ {
+  "slug": "read-g8-connections",
+  "subject": "reading",
+  "grade": 8,
+  "group": "Informational text",
+  "name": "Connections between events and ideas",
+  "standards": [
+   "RI.8.3"
+  ],
+  "file": "content/reading/grade-8/read-g8-connections.ts"
+ },
+ {
+  "slug": "read-g8-text-structure",
+  "subject": "reading",
+  "grade": 8,
+  "group": "Informational text",
+  "name": "Text structure and features",
+  "standards": [
+   "RI.8.5"
+  ],
+  "file": "content/reading/grade-8/read-g8-text-structure.ts"
+ },
+ {
+  "slug": "read-g8-authors-purpose",
+  "subject": "reading",
+  "grade": 8,
+  "group": "Informational text",
+  "name": "Author's purpose and point of view",
+  "standards": [
+   "RI.8.6"
+  ],
+  "file": "content/reading/grade-8/read-g8-authors-purpose.ts"
+ },
+ {
+  "slug": "read-g8-argument-evidence",
+  "subject": "reading",
+  "grade": 8,
+  "group": "Informational text",
+  "name": "Reasons, evidence and argument",
+  "standards": [
+   "RI.8.8"
+  ],
+  "file": "content/reading/grade-8/read-g8-argument-evidence.ts"
+ },
+ {
+  "slug": "read-g8-context-clues",
+  "subject": "reading",
+  "grade": 8,
+  "group": "Vocabulary and word study",
+  "name": "Context clues",
+  "standards": [
+   "L.8.4a"
+  ],
+  "file": "content/reading/grade-8/read-g8-context-clues.ts"
+ },
+ {
+  "slug": "read-g8-word-parts",
+  "subject": "reading",
+  "grade": 8,
+  "group": "Vocabulary and word study",
+  "name": "Word parts: roots and affixes",
+  "standards": [
+   "L.8.4b",
+   "L.8.4c"
+  ],
+  "file": "content/reading/grade-8/read-g8-word-parts.ts"
+ },
+ {
+  "slug": "read-g8-figurative-language",
+  "subject": "reading",
+  "grade": 8,
+  "group": "Vocabulary and word study",
+  "name": "Figurative language and word relationships",
+  "standards": [
+   "L.8.5"
+  ],
+  "file": "content/reading/grade-8/read-g8-figurative-language.ts"
+ },
+ {
+  "slug": "write-g8-grammar-usage",
+  "subject": "writing",
+  "grade": 8,
+  "group": "Conventions",
+  "name": "Grammar and usage",
+  "standards": [
+   "L.8.1"
+  ],
+  "file": "content/writing/grade-8/write-g8-grammar-usage.ts"
+ },
+ {
+  "slug": "write-g8-capitalization-punctuation",
+  "subject": "writing",
+  "grade": 8,
+  "group": "Conventions",
+  "name": "Capitalization and punctuation",
+  "standards": [
+   "L.8.2"
+  ],
+  "file": "content/writing/grade-8/write-g8-capitalization-punctuation.ts"
+ },
+ {
+  "slug": "write-g8-sentence-structure",
+  "subject": "writing",
+  "grade": 8,
+  "group": "Sentence and paragraph",
+  "name": "Sentence structure and boundaries",
+  "standards": [
+   "L.8.1"
+  ],
+  "file": "content/writing/grade-8/write-g8-sentence-structure.ts"
+ },
+ {
+  "slug": "write-g8-paragraph-transitions",
+  "subject": "writing",
+  "grade": 8,
+  "group": "Sentence and paragraph",
+  "name": "Paragraph organization and transitions",
+  "standards": [
+   "W.8.2c"
+  ],
+  "file": "content/writing/grade-8/write-g8-paragraph-transitions.ts"
+ },
+ {
+  "slug": "write-g8-precise-language",
+  "subject": "writing",
+  "grade": 8,
+  "group": "Sentence and paragraph",
+  "name": "Precise language and style",
+  "standards": [
+   "L.8.3"
+  ],
+  "file": "content/writing/grade-8/write-g8-precise-language.ts"
+ },
+ {
+  "slug": "write-g8-argument-writing",
+  "subject": "writing",
+  "grade": 8,
+  "group": "Composition",
+  "name": "Argument writing",
+  "standards": [
+   "W.8.1"
+  ],
+  "file": "content/writing/grade-8/write-g8-argument-writing.ts"
+ },
+ {
+  "slug": "write-g8-informative-writing",
+  "subject": "writing",
+  "grade": 8,
+  "group": "Composition",
+  "name": "Informative writing",
+  "standards": [
+   "W.8.2"
+  ],
+  "file": "content/writing/grade-8/write-g8-informative-writing.ts"
+ },
+ {
+  "slug": "write-g8-narrative-writing",
+  "subject": "writing",
+  "grade": 8,
+  "group": "Composition",
+  "name": "Narrative writing",
+  "standards": [
+   "W.8.3"
+  ],
+  "file": "content/writing/grade-8/write-g8-narrative-writing.ts"
+ },
+ {
+  "slug": "write-g8-writing-with-evidence",
+  "subject": "writing",
+  "grade": 8,
+  "group": "Composition",
+  "name": "Writing about texts with evidence",
+  "standards": [
+   "W.8.9"
+  ],
+  "file": "content/writing/grade-8/write-g8-writing-with-evidence.ts"
+ },
+ {
+  "slug": "read-g7-story-details-inference",
+  "subject": "reading",
+  "grade": 7,
+  "group": "Literature",
+  "name": "Key details and inference in stories",
+  "standards": [
+   "RL.7.1"
+  ],
+  "file": "content/reading/grade-7/read-g7-story-details-inference.ts"
+ },
+ {
+  "slug": "read-g7-theme-summary",
+  "subject": "reading",
+  "grade": 7,
+  "group": "Literature",
+  "name": "Theme and summary",
+  "standards": [
+   "RL.7.2"
+  ],
+  "file": "content/reading/grade-7/read-g7-theme-summary.ts"
+ },
+ {
+  "slug": "read-g7-character-setting-plot",
+  "subject": "reading",
+  "grade": 7,
+  "group": "Literature",
+  "name": "Characters, setting and plot",
+  "standards": [
+   "RL.7.3"
+  ],
+  "file": "content/reading/grade-7/read-g7-character-setting-plot.ts"
+ },
+ {
+  "slug": "read-g7-literary-structure-pov",
+  "subject": "reading",
+  "grade": 7,
+  "group": "Literature",
+  "name": "Structure and point of view in literature",
+  "standards": [
+   "RL.7.5",
+   "RL.7.6"
+  ],
+  "file": "content/reading/grade-7/read-g7-literary-structure-pov.ts"
+ },
+ {
+  "slug": "read-g7-comparing-texts",
+  "subject": "reading",
+  "grade": 7,
+  "group": "Literature",
+  "name": "Comparing stories and poems",
+  "standards": [
+   "RL.7.9"
+  ],
+  "file": "content/reading/grade-7/read-g7-comparing-texts.ts"
+ },
+ {
+  "slug": "read-g7-evidence-inference",
+  "subject": "reading",
+  "grade": 7,
+  "group": "Informational text",
+  "name": "Key details, evidence and inference",
+  "standards": [
+   "RI.7.1"
+  ],
+  "file": "content/reading/grade-7/read-g7-evidence-inference.ts"
+ },
+ {
+  "slug": "read-g7-main-idea-summary",
+  "subject": "reading",
+  "grade": 7,
+  "group": "Informational text",
+  "name": "Main idea and summary",
+  "standards": [
+   "RI.7.2"
+  ],
+  "file": "content/reading/grade-7/read-g7-main-idea-summary.ts"
+ },
+ {
+  "slug": "read-g7-connections",
+  "subject": "reading",
+  "grade": 7,
+  "group": "Informational text",
+  "name": "Connections between events and ideas",
+  "standards": [
+   "RI.7.3"
+  ],
+  "file": "content/reading/grade-7/read-g7-connections.ts"
+ },
+ {
+  "slug": "read-g7-text-structure",
+  "subject": "reading",
+  "grade": 7,
+  "group": "Informational text",
+  "name": "Text structure and features",
+  "standards": [
+   "RI.7.5"
+  ],
+  "file": "content/reading/grade-7/read-g7-text-structure.ts"
+ },
+ {
+  "slug": "read-g7-authors-purpose",
+  "subject": "reading",
+  "grade": 7,
+  "group": "Informational text",
+  "name": "Author's purpose and point of view",
+  "standards": [
+   "RI.7.6"
+  ],
+  "file": "content/reading/grade-7/read-g7-authors-purpose.ts"
+ },
+ {
+  "slug": "read-g7-argument-evidence",
+  "subject": "reading",
+  "grade": 7,
+  "group": "Informational text",
+  "name": "Reasons, evidence and argument",
+  "standards": [
+   "RI.7.8"
+  ],
+  "file": "content/reading/grade-7/read-g7-argument-evidence.ts"
+ },
+ {
+  "slug": "read-g7-context-clues",
+  "subject": "reading",
+  "grade": 7,
+  "group": "Vocabulary and word study",
+  "name": "Context clues",
+  "standards": [
+   "L.7.4a"
+  ],
+  "file": "content/reading/grade-7/read-g7-context-clues.ts"
+ },
+ {
+  "slug": "read-g7-word-parts",
+  "subject": "reading",
+  "grade": 7,
+  "group": "Vocabulary and word study",
+  "name": "Word parts: roots and affixes",
+  "standards": [
+   "L.7.4b",
+   "L.7.4c"
+  ],
+  "file": "content/reading/grade-7/read-g7-word-parts.ts"
+ },
+ {
+  "slug": "read-g7-figurative-language",
+  "subject": "reading",
+  "grade": 7,
+  "group": "Vocabulary and word study",
+  "name": "Figurative language and word relationships",
+  "standards": [
+   "L.7.5"
+  ],
+  "file": "content/reading/grade-7/read-g7-figurative-language.ts"
+ },
+ {
+  "slug": "write-g7-capitalization-punctuation",
+  "subject": "writing",
+  "grade": 7,
+  "group": "Conventions",
+  "name": "Capitalization and punctuation",
+  "standards": [
+   "L.7.2"
+  ],
+  "file": "content/writing/grade-7/write-g7-capitalization-punctuation.ts"
+ },
+ {
+  "slug": "write-g7-sentence-structure",
+  "subject": "writing",
+  "grade": 7,
+  "group": "Sentence and paragraph",
+  "name": "Sentence structure and boundaries",
+  "standards": [
+   "L.7.1"
+  ],
+  "file": "content/writing/grade-7/write-g7-sentence-structure.ts"
+ },
+ {
+  "slug": "write-g7-paragraph-transitions",
+  "subject": "writing",
+  "grade": 7,
+  "group": "Sentence and paragraph",
+  "name": "Paragraph organization and transitions",
+  "standards": [
+   "W.7.2c"
+  ],
+  "file": "content/writing/grade-7/write-g7-paragraph-transitions.ts"
+ },
+ {
+  "slug": "write-g7-precise-language",
+  "subject": "writing",
+  "grade": 7,
+  "group": "Sentence and paragraph",
+  "name": "Precise language and style",
+  "standards": [
+   "L.7.3"
+  ],
+  "file": "content/writing/grade-7/write-g7-precise-language.ts"
+ },
+ {
+  "slug": "write-g7-argument-writing",
+  "subject": "writing",
+  "grade": 7,
+  "group": "Composition",
+  "name": "Argument writing",
+  "standards": [
+   "W.7.1"
+  ],
+  "file": "content/writing/grade-7/write-g7-argument-writing.ts"
+ },
+ {
+  "slug": "write-g7-informative-writing",
+  "subject": "writing",
+  "grade": 7,
+  "group": "Composition",
+  "name": "Informative writing",
+  "standards": [
+   "W.7.2"
+  ],
+  "file": "content/writing/grade-7/write-g7-informative-writing.ts"
+ },
+ {
+  "slug": "write-g7-narrative-writing",
+  "subject": "writing",
+  "grade": 7,
+  "group": "Composition",
+  "name": "Narrative writing",
+  "standards": [
+   "W.7.3"
+  ],
+  "file": "content/writing/grade-7/write-g7-narrative-writing.ts"
+ },
+ {
+  "slug": "write-g7-writing-with-evidence",
+  "subject": "writing",
+  "grade": 7,
+  "group": "Composition",
+  "name": "Writing about texts with evidence",
+  "standards": [
+   "W.7.9"
+  ],
+  "file": "content/writing/grade-7/write-g7-writing-with-evidence.ts"
+ },
+ {
+  "slug": "read-g6-story-details-inference",
+  "subject": "reading",
+  "grade": 6,
+  "group": "Literature",
+  "name": "Key details and inference in stories",
+  "standards": [
+   "RL.6.1"
+  ],
+  "file": "content/reading/grade-6/read-g6-story-details-inference.ts"
+ },
+ {
+  "slug": "read-g6-theme-summary",
+  "subject": "reading",
+  "grade": 6,
+  "group": "Literature",
+  "name": "Theme and summary",
+  "standards": [
+   "RL.6.2"
+  ],
+  "file": "content/reading/grade-6/read-g6-theme-summary.ts"
+ },
+ {
+  "slug": "read-g6-character-setting-plot",
+  "subject": "reading",
+  "grade": 6,
+  "group": "Literature",
+  "name": "Characters, setting and plot",
+  "standards": [
+   "RL.6.3"
+  ],
+  "file": "content/reading/grade-6/read-g6-character-setting-plot.ts"
+ },
+ {
+  "slug": "read-g6-literary-structure-pov",
+  "subject": "reading",
+  "grade": 6,
+  "group": "Literature",
+  "name": "Structure and point of view in literature",
+  "standards": [
+   "RL.6.5",
+   "RL.6.6"
+  ],
+  "file": "content/reading/grade-6/read-g6-literary-structure-pov.ts"
+ },
+ {
+  "slug": "read-g6-comparing-texts",
+  "subject": "reading",
+  "grade": 6,
+  "group": "Literature",
+  "name": "Comparing stories and poems",
+  "standards": [
+   "RL.6.9"
+  ],
+  "file": "content/reading/grade-6/read-g6-comparing-texts.ts"
+ },
+ {
+  "slug": "read-g6-evidence-inference",
+  "subject": "reading",
+  "grade": 6,
+  "group": "Informational text",
+  "name": "Key details, evidence and inference",
+  "standards": [
+   "RI.6.1"
+  ],
+  "file": "content/reading/grade-6/read-g6-evidence-inference.ts"
+ },
+ {
+  "slug": "read-g6-main-idea-summary",
+  "subject": "reading",
+  "grade": 6,
+  "group": "Informational text",
+  "name": "Main idea and summary",
+  "standards": [
+   "RI.6.2"
+  ],
+  "file": "content/reading/grade-6/read-g6-main-idea-summary.ts"
+ },
+ {
+  "slug": "read-g6-connections",
+  "subject": "reading",
+  "grade": 6,
+  "group": "Informational text",
+  "name": "Connections between events and ideas",
+  "standards": [
+   "RI.6.3"
+  ],
+  "file": "content/reading/grade-6/read-g6-connections.ts"
+ },
+ {
+  "slug": "read-g6-text-structure",
+  "subject": "reading",
+  "grade": 6,
+  "group": "Informational text",
+  "name": "Text structure and features",
+  "standards": [
+   "RI.6.5"
+  ],
+  "file": "content/reading/grade-6/read-g6-text-structure.ts"
+ },
+ {
+  "slug": "read-g6-authors-purpose",
+  "subject": "reading",
+  "grade": 6,
+  "group": "Informational text",
+  "name": "Author's purpose and point of view",
+  "standards": [
+   "RI.6.6"
+  ],
+  "file": "content/reading/grade-6/read-g6-authors-purpose.ts"
+ },
+ {
+  "slug": "read-g6-argument-evidence",
+  "subject": "reading",
+  "grade": 6,
+  "group": "Informational text",
+  "name": "Reasons, evidence and argument",
+  "standards": [
+   "RI.6.8"
+  ],
+  "file": "content/reading/grade-6/read-g6-argument-evidence.ts"
+ },
+ {
+  "slug": "read-g6-context-clues",
+  "subject": "reading",
+  "grade": 6,
+  "group": "Vocabulary and word study",
+  "name": "Context clues",
+  "standards": [
+   "L.6.4a"
+  ],
+  "file": "content/reading/grade-6/read-g6-context-clues.ts"
+ },
+ {
+  "slug": "read-g6-word-parts",
+  "subject": "reading",
+  "grade": 6,
+  "group": "Vocabulary and word study",
+  "name": "Word parts: roots and affixes",
+  "standards": [
+   "L.6.4b",
+   "L.6.4c"
+  ],
+  "file": "content/reading/grade-6/read-g6-word-parts.ts"
+ },
+ {
+  "slug": "read-g6-figurative-language",
+  "subject": "reading",
+  "grade": 6,
+  "group": "Vocabulary and word study",
+  "name": "Figurative language and word relationships",
+  "standards": [
+   "L.6.5"
+  ],
+  "file": "content/reading/grade-6/read-g6-figurative-language.ts"
+ },
+ {
+  "slug": "write-g6-capitalization-punctuation",
+  "subject": "writing",
+  "grade": 6,
+  "group": "Conventions",
+  "name": "Capitalization and punctuation",
+  "standards": [
+   "L.6.2"
+  ],
+  "file": "content/writing/grade-6/write-g6-capitalization-punctuation.ts"
+ },
+ {
+  "slug": "write-g6-paragraph-transitions",
+  "subject": "writing",
+  "grade": 6,
+  "group": "Sentence and paragraph",
+  "name": "Paragraph organization and transitions",
+  "standards": [
+   "W.6.2c"
+  ],
+  "file": "content/writing/grade-6/write-g6-paragraph-transitions.ts"
+ },
+ {
+  "slug": "write-g6-precise-language",
+  "subject": "writing",
+  "grade": 6,
+  "group": "Sentence and paragraph",
+  "name": "Precise language and style",
+  "standards": [
+   "L.6.3"
+  ],
+  "file": "content/writing/grade-6/write-g6-precise-language.ts"
+ },
+ {
+  "slug": "write-g6-argument-writing",
+  "subject": "writing",
+  "grade": 6,
+  "group": "Composition",
+  "name": "Argument writing",
+  "standards": [
+   "W.6.1"
+  ],
+  "file": "content/writing/grade-6/write-g6-argument-writing.ts"
+ },
+ {
+  "slug": "write-g6-informative-writing",
+  "subject": "writing",
+  "grade": 6,
+  "group": "Composition",
+  "name": "Informative writing",
+  "standards": [
+   "W.6.2"
+  ],
+  "file": "content/writing/grade-6/write-g6-informative-writing.ts"
+ },
+ {
+  "slug": "write-g6-narrative-writing",
+  "subject": "writing",
+  "grade": 6,
+  "group": "Composition",
+  "name": "Narrative writing",
+  "standards": [
+   "W.6.3"
+  ],
+  "file": "content/writing/grade-6/write-g6-narrative-writing.ts"
+ },
+ {
+  "slug": "write-g6-writing-with-evidence",
+  "subject": "writing",
+  "grade": 6,
+  "group": "Composition",
+  "name": "Writing about texts with evidence",
+  "standards": [
+   "W.6.9"
+  ],
+  "file": "content/writing/grade-6/write-g6-writing-with-evidence.ts"
+ },
+ {
+  "slug": "read-g4-story-details-inference",
+  "subject": "reading",
+  "grade": 4,
+  "group": "Literature",
+  "name": "Key details and inference in stories",
+  "standards": [
+   "RL.4.1"
+  ],
+  "file": "content/reading/grade-4/read-g4-story-details-inference.ts"
+ },
+ {
+  "slug": "read-g4-theme-summary",
+  "subject": "reading",
+  "grade": 4,
+  "group": "Literature",
+  "name": "Theme and summary",
+  "standards": [
+   "RL.4.2"
+  ],
+  "file": "content/reading/grade-4/read-g4-theme-summary.ts"
+ },
+ {
+  "slug": "read-g4-character-setting-plot",
+  "subject": "reading",
+  "grade": 4,
+  "group": "Literature",
+  "name": "Characters, setting and plot",
+  "standards": [
+   "RL.4.3"
+  ],
+  "file": "content/reading/grade-4/read-g4-character-setting-plot.ts"
+ },
+ {
+  "slug": "read-g4-literary-structure-pov",
+  "subject": "reading",
+  "grade": 4,
+  "group": "Literature",
+  "name": "Structure and point of view in literature",
+  "standards": [
+   "RL.4.5",
+   "RL.4.6"
+  ],
+  "file": "content/reading/grade-4/read-g4-literary-structure-pov.ts"
+ },
+ {
+  "slug": "read-g4-comparing-texts",
+  "subject": "reading",
+  "grade": 4,
+  "group": "Literature",
+  "name": "Comparing stories and poems",
+  "standards": [
+   "RL.4.9"
+  ],
+  "file": "content/reading/grade-4/read-g4-comparing-texts.ts"
+ },
+ {
+  "slug": "read-g4-evidence-inference",
+  "subject": "reading",
+  "grade": 4,
+  "group": "Informational text",
+  "name": "Key details, evidence and inference",
+  "standards": [
+   "RI.4.1"
+  ],
+  "file": "content/reading/grade-4/read-g4-evidence-inference.ts"
+ },
+ {
+  "slug": "read-g4-main-idea-summary",
+  "subject": "reading",
+  "grade": 4,
+  "group": "Informational text",
+  "name": "Main idea and summary",
+  "standards": [
+   "RI.4.2"
+  ],
+  "file": "content/reading/grade-4/read-g4-main-idea-summary.ts"
+ },
+ {
+  "slug": "read-g4-connections",
+  "subject": "reading",
+  "grade": 4,
+  "group": "Informational text",
+  "name": "Connections between events and ideas",
+  "standards": [
+   "RI.4.3"
+  ],
+  "file": "content/reading/grade-4/read-g4-connections.ts"
+ },
+ {
+  "slug": "read-g4-text-structure",
+  "subject": "reading",
+  "grade": 4,
+  "group": "Informational text",
+  "name": "Text structure and features",
+  "standards": [
+   "RI.4.5"
+  ],
+  "file": "content/reading/grade-4/read-g4-text-structure.ts"
+ },
+ {
+  "slug": "read-g4-authors-purpose",
+  "subject": "reading",
+  "grade": 4,
+  "group": "Informational text",
+  "name": "Author's purpose and point of view",
+  "standards": [
+   "RI.4.6"
+  ],
+  "file": "content/reading/grade-4/read-g4-authors-purpose.ts"
+ },
+ {
+  "slug": "read-g4-argument-evidence",
+  "subject": "reading",
+  "grade": 4,
+  "group": "Informational text",
+  "name": "Reasons, evidence and argument",
+  "standards": [
+   "RI.4.8"
+  ],
+  "file": "content/reading/grade-4/read-g4-argument-evidence.ts"
+ },
+ {
+  "slug": "read-g4-context-clues",
+  "subject": "reading",
+  "grade": 4,
+  "group": "Vocabulary and word study",
+  "name": "Context clues",
+  "standards": [
+   "L.4.4a"
+  ],
+  "file": "content/reading/grade-4/read-g4-context-clues.ts"
+ },
+ {
+  "slug": "read-g4-word-parts",
+  "subject": "reading",
+  "grade": 4,
+  "group": "Vocabulary and word study",
+  "name": "Word parts: roots and affixes",
+  "standards": [
+   "L.4.4b",
+   "L.4.4c"
+  ],
+  "file": "content/reading/grade-4/read-g4-word-parts.ts"
+ },
+ {
+  "slug": "read-g4-figurative-language",
+  "subject": "reading",
+  "grade": 4,
+  "group": "Vocabulary and word study",
+  "name": "Figurative language and word relationships",
+  "standards": [
+   "L.4.5"
+  ],
+  "file": "content/reading/grade-4/read-g4-figurative-language.ts"
+ },
+ {
+  "slug": "write-g4-grammar-usage",
+  "subject": "writing",
+  "grade": 4,
+  "group": "Conventions",
+  "name": "Grammar and usage",
+  "standards": [
+   "L.4.1"
+  ],
+  "file": "content/writing/grade-4/write-g4-grammar-usage.ts"
+ },
+ {
+  "slug": "write-g4-spelling",
+  "subject": "writing",
+  "grade": 4,
+  "group": "Conventions",
+  "name": "Spelling",
+  "standards": [
+   "L.4.2"
+  ],
+  "file": "content/writing/grade-4/write-g4-spelling.ts"
+ },
+ {
+  "slug": "write-g4-sentence-structure",
+  "subject": "writing",
+  "grade": 4,
+  "group": "Sentence and paragraph",
+  "name": "Sentence structure and boundaries",
+  "standards": [
+   "L.4.1"
+  ],
+  "file": "content/writing/grade-4/write-g4-sentence-structure.ts"
+ },
+ {
+  "slug": "write-g4-paragraph-transitions",
+  "subject": "writing",
+  "grade": 4,
+  "group": "Sentence and paragraph",
+  "name": "Paragraph organization and transitions",
+  "standards": [
+   "W.4.2c"
+  ],
+  "file": "content/writing/grade-4/write-g4-paragraph-transitions.ts"
+ },
+ {
+  "slug": "write-g4-precise-language",
+  "subject": "writing",
+  "grade": 4,
+  "group": "Sentence and paragraph",
+  "name": "Precise language and style",
+  "standards": [
+   "L.4.3"
+  ],
+  "file": "content/writing/grade-4/write-g4-precise-language.ts"
+ },
+ {
+  "slug": "write-g4-opinion-writing",
+  "subject": "writing",
+  "grade": 4,
+  "group": "Composition",
+  "name": "Opinion writing",
+  "standards": [
+   "W.4.1"
+  ],
+  "file": "content/writing/grade-4/write-g4-opinion-writing.ts"
+ },
+ {
+  "slug": "write-g4-informative-writing",
+  "subject": "writing",
+  "grade": 4,
+  "group": "Composition",
+  "name": "Informative writing",
+  "standards": [
+   "W.4.2"
+  ],
+  "file": "content/writing/grade-4/write-g4-informative-writing.ts"
+ },
+ {
+  "slug": "read-g5-story-details-inference",
+  "subject": "reading",
+  "grade": 5,
+  "group": "Literature",
+  "name": "Key details and inference in stories",
+  "standards": [
+   "RL.5.1"
+  ],
+  "file": "content/reading/grade-5/read-g5-story-details-inference.ts"
+ },
+ {
+  "slug": "read-g5-theme-summary",
+  "subject": "reading",
+  "grade": 5,
+  "group": "Literature",
+  "name": "Theme and summary",
+  "standards": [
+   "RL.5.2"
+  ],
+  "file": "content/reading/grade-5/read-g5-theme-summary.ts"
+ },
+ {
+  "slug": "read-g5-character-setting-plot",
+  "subject": "reading",
+  "grade": 5,
+  "group": "Literature",
+  "name": "Characters, setting and plot",
+  "standards": [
+   "RL.5.3"
+  ],
+  "file": "content/reading/grade-5/read-g5-character-setting-plot.ts"
+ },
+ {
+  "slug": "read-g5-literary-structure-pov",
+  "subject": "reading",
+  "grade": 5,
+  "group": "Literature",
+  "name": "Structure and point of view in literature",
+  "standards": [
+   "RL.5.5",
+   "RL.5.6"
+  ],
+  "file": "content/reading/grade-5/read-g5-literary-structure-pov.ts"
+ },
+ {
+  "slug": "read-g5-comparing-texts",
+  "subject": "reading",
+  "grade": 5,
+  "group": "Literature",
+  "name": "Comparing stories and poems",
+  "standards": [
+   "RL.5.9"
+  ],
+  "file": "content/reading/grade-5/read-g5-comparing-texts.ts"
+ },
+ {
+  "slug": "read-g5-evidence-inference",
+  "subject": "reading",
+  "grade": 5,
+  "group": "Informational text",
+  "name": "Key details, evidence and inference",
+  "standards": [
+   "RI.5.1"
+  ],
+  "file": "content/reading/grade-5/read-g5-evidence-inference.ts"
+ },
+ {
+  "slug": "read-g5-main-idea-summary",
+  "subject": "reading",
+  "grade": 5,
+  "group": "Informational text",
+  "name": "Main idea and summary",
+  "standards": [
+   "RI.5.2"
+  ],
+  "file": "content/reading/grade-5/read-g5-main-idea-summary.ts"
+ },
+ {
+  "slug": "read-g5-connections",
+  "subject": "reading",
+  "grade": 5,
+  "group": "Informational text",
+  "name": "Connections between events and ideas",
+  "standards": [
+   "RI.5.3"
+  ],
+  "file": "content/reading/grade-5/read-g5-connections.ts"
+ },
+ {
+  "slug": "read-g5-text-structure",
+  "subject": "reading",
+  "grade": 5,
+  "group": "Informational text",
+  "name": "Text structure and features",
+  "standards": [
+   "RI.5.5"
+  ],
+  "file": "content/reading/grade-5/read-g5-text-structure.ts"
+ },
+ {
+  "slug": "read-g5-authors-purpose",
+  "subject": "reading",
+  "grade": 5,
+  "group": "Informational text",
+  "name": "Author's purpose and point of view",
+  "standards": [
+   "RI.5.6"
+  ],
+  "file": "content/reading/grade-5/read-g5-authors-purpose.ts"
+ },
+ {
+  "slug": "read-g5-argument-evidence",
+  "subject": "reading",
+  "grade": 5,
+  "group": "Informational text",
+  "name": "Reasons, evidence and argument",
+  "standards": [
+   "RI.5.8"
+  ],
+  "file": "content/reading/grade-5/read-g5-argument-evidence.ts"
+ },
+ {
+  "slug": "read-g5-context-clues",
+  "subject": "reading",
+  "grade": 5,
+  "group": "Vocabulary and word study",
+  "name": "Context clues",
+  "standards": [
+   "L.5.4a"
+  ],
+  "file": "content/reading/grade-5/read-g5-context-clues.ts"
+ },
+ {
+  "slug": "read-g5-word-parts",
+  "subject": "reading",
+  "grade": 5,
+  "group": "Vocabulary and word study",
+  "name": "Word parts: roots and affixes",
+  "standards": [
+   "L.5.4b",
+   "L.5.4c"
+  ],
+  "file": "content/reading/grade-5/read-g5-word-parts.ts"
+ },
+ {
+  "slug": "read-g5-figurative-language",
+  "subject": "reading",
+  "grade": 5,
+  "group": "Vocabulary and word study",
+  "name": "Figurative language and word relationships",
+  "standards": [
+   "L.5.5"
+  ],
+  "file": "content/reading/grade-5/read-g5-figurative-language.ts"
+ },
+ {
+  "slug": "write-g5-spelling",
+  "subject": "writing",
+  "grade": 5,
+  "group": "Conventions",
+  "name": "Spelling",
+  "standards": [
+   "L.5.2"
+  ],
+  "file": "content/writing/grade-5/write-g5-spelling.ts"
+ },
+ {
+  "slug": "write-g5-paragraph-transitions",
+  "subject": "writing",
+  "grade": 5,
+  "group": "Sentence and paragraph",
+  "name": "Paragraph organization and transitions",
+  "standards": [
+   "W.5.2c"
+  ],
+  "file": "content/writing/grade-5/write-g5-paragraph-transitions.ts"
+ },
+ {
+  "slug": "write-g5-precise-language",
+  "subject": "writing",
+  "grade": 5,
+  "group": "Sentence and paragraph",
+  "name": "Precise language and style",
+  "standards": [
+   "L.5.3"
+  ],
+  "file": "content/writing/grade-5/write-g5-precise-language.ts"
+ },
+ {
+  "slug": "write-g5-opinion-writing",
+  "subject": "writing",
+  "grade": 5,
+  "group": "Composition",
+  "name": "Opinion writing",
+  "standards": [
+   "W.5.1"
+  ],
+  "file": "content/writing/grade-5/write-g5-opinion-writing.ts"
+ },
+ {
+  "slug": "write-g5-informative-writing",
+  "subject": "writing",
+  "grade": 5,
+  "group": "Composition",
+  "name": "Informative writing",
+  "standards": [
+   "W.5.2"
+  ],
+  "file": "content/writing/grade-5/write-g5-informative-writing.ts"
+ },
+ {
+  "slug": "write-g5-narrative-writing",
+  "subject": "writing",
+  "grade": 5,
+  "group": "Composition",
+  "name": "Narrative writing",
+  "standards": [
+   "W.5.3"
+  ],
+  "file": "content/writing/grade-5/write-g5-narrative-writing.ts"
+ },
+ {
+  "slug": "write-g5-writing-with-evidence",
+  "subject": "writing",
+  "grade": 5,
+  "group": "Composition",
+  "name": "Writing about texts with evidence",
+  "standards": [
+   "W.5.9"
+  ],
+  "file": "content/writing/grade-5/write-g5-writing-with-evidence.ts"
+ },
+ {
+  "slug": "read-g11-story-details-inference",
+  "subject": "reading",
+  "grade": 11,
+  "group": "Literature",
+  "name": "Key details and inference in stories",
+  "standards": [
+   "RL.11-12.1"
+  ],
+  "file": "content/reading/grade-11/read-g11-story-details-inference.ts"
+ },
+ {
+  "slug": "read-g11-theme-summary",
+  "subject": "reading",
+  "grade": 11,
+  "group": "Literature",
+  "name": "Theme and summary",
+  "standards": [
+   "RL.11-12.2"
+  ],
+  "file": "content/reading/grade-11/read-g11-theme-summary.ts"
+ },
+ {
+  "slug": "read-g11-character-setting-plot",
+  "subject": "reading",
+  "grade": 11,
+  "group": "Literature",
+  "name": "Characters, setting and plot",
+  "standards": [
+   "RL.11-12.3"
+  ],
+  "file": "content/reading/grade-11/read-g11-character-setting-plot.ts"
+ },
+ {
+  "slug": "read-g11-literary-structure-pov",
+  "subject": "reading",
+  "grade": 11,
+  "group": "Literature",
+  "name": "Structure and point of view in literature",
+  "standards": [
+   "RL.11-12.5",
+   "RL.11-12.6"
+  ],
+  "file": "content/reading/grade-11/read-g11-literary-structure-pov.ts"
+ },
+ {
+  "slug": "read-g11-comparing-texts",
+  "subject": "reading",
+  "grade": 11,
+  "group": "Literature",
+  "name": "Comparing stories and poems",
+  "standards": [
+   "RL.11-12.9"
+  ],
+  "file": "content/reading/grade-11/read-g11-comparing-texts.ts"
+ },
+ {
+  "slug": "read-g11-evidence-inference",
+  "subject": "reading",
+  "grade": 11,
+  "group": "Informational text",
+  "name": "Key details, evidence and inference",
+  "standards": [
+   "RI.11-12.1"
+  ],
+  "file": "content/reading/grade-11/read-g11-evidence-inference.ts"
+ },
+ {
+  "slug": "read-g11-main-idea-summary",
+  "subject": "reading",
+  "grade": 11,
+  "group": "Informational text",
+  "name": "Main idea and summary",
+  "standards": [
+   "RI.11-12.2"
+  ],
+  "file": "content/reading/grade-11/read-g11-main-idea-summary.ts"
+ },
+ {
+  "slug": "read-g11-connections",
+  "subject": "reading",
+  "grade": 11,
+  "group": "Informational text",
+  "name": "Connections between events and ideas",
+  "standards": [
+   "RI.11-12.3"
+  ],
+  "file": "content/reading/grade-11/read-g11-connections.ts"
+ },
+ {
+  "slug": "read-g11-text-structure",
+  "subject": "reading",
+  "grade": 11,
+  "group": "Informational text",
+  "name": "Text structure and features",
+  "standards": [
+   "RI.11-12.5"
+  ],
+  "file": "content/reading/grade-11/read-g11-text-structure.ts"
+ },
+ {
+  "slug": "read-g11-authors-purpose",
+  "subject": "reading",
+  "grade": 11,
+  "group": "Informational text",
+  "name": "Author's purpose and point of view",
+  "standards": [
+   "RI.11-12.6"
+  ],
+  "file": "content/reading/grade-11/read-g11-authors-purpose.ts"
+ },
+ {
+  "slug": "read-g11-argument-evidence",
+  "subject": "reading",
+  "grade": 11,
+  "group": "Informational text",
+  "name": "Reasons, evidence and argument",
+  "standards": [
+   "RI.11-12.8"
+  ],
+  "file": "content/reading/grade-11/read-g11-argument-evidence.ts"
+ },
+ {
+  "slug": "read-g11-context-clues",
+  "subject": "reading",
+  "grade": 11,
+  "group": "Vocabulary and word study",
+  "name": "Context clues",
+  "standards": [
+   "L.11-12.4a"
+  ],
+  "file": "content/reading/grade-11/read-g11-context-clues.ts"
+ },
+ {
+  "slug": "read-g11-word-parts",
+  "subject": "reading",
+  "grade": 11,
+  "group": "Vocabulary and word study",
+  "name": "Word parts: roots and affixes",
+  "standards": [
+   "L.11-12.4b",
+   "L.11-12.4c"
+  ],
+  "file": "content/reading/grade-11/read-g11-word-parts.ts"
+ },
+ {
+  "slug": "read-g11-figurative-language",
+  "subject": "reading",
+  "grade": 11,
+  "group": "Vocabulary and word study",
+  "name": "Figurative language and word relationships",
+  "standards": [
+   "L.11-12.5"
+  ],
+  "file": "content/reading/grade-11/read-g11-figurative-language.ts"
+ },
+ {
+  "slug": "write-g11-grammar-usage",
+  "subject": "writing",
+  "grade": 11,
+  "group": "Conventions",
+  "name": "Grammar and usage",
+  "standards": [
+   "L.11-12.1"
+  ],
+  "file": "content/writing/grade-11/write-g11-grammar-usage.ts"
+ },
+ {
+  "slug": "write-g11-capitalization-punctuation",
+  "subject": "writing",
+  "grade": 11,
+  "group": "Conventions",
+  "name": "Capitalization and punctuation",
+  "standards": [
+   "L.11-12.2"
+  ],
+  "file": "content/writing/grade-11/write-g11-capitalization-punctuation.ts"
+ },
+ {
+  "slug": "write-g11-sentence-structure",
+  "subject": "writing",
+  "grade": 11,
+  "group": "Sentence and paragraph",
+  "name": "Sentence structure and boundaries",
+  "standards": [
+   "L.11-12.1"
+  ],
+  "file": "content/writing/grade-11/write-g11-sentence-structure.ts"
+ },
+ {
+  "slug": "write-g11-paragraph-transitions",
+  "subject": "writing",
+  "grade": 11,
+  "group": "Sentence and paragraph",
+  "name": "Paragraph organization and transitions",
+  "standards": [
+   "W.11-12.2c"
+  ],
+  "file": "content/writing/grade-11/write-g11-paragraph-transitions.ts"
+ },
+ {
+  "slug": "write-g11-precise-language",
+  "subject": "writing",
+  "grade": 11,
+  "group": "Sentence and paragraph",
+  "name": "Precise language and style",
+  "standards": [
+   "L.11-12.3"
+  ],
+  "file": "content/writing/grade-11/write-g11-precise-language.ts"
+ },
+ {
+  "slug": "write-g11-argument-writing",
+  "subject": "writing",
+  "grade": 11,
+  "group": "Composition",
+  "name": "Argument writing",
+  "standards": [
+   "W.11-12.1"
+  ],
+  "file": "content/writing/grade-11/write-g11-argument-writing.ts"
+ },
+ {
+  "slug": "write-g11-informative-writing",
+  "subject": "writing",
+  "grade": 11,
+  "group": "Composition",
+  "name": "Informative writing",
+  "standards": [
+   "W.11-12.2"
+  ],
+  "file": "content/writing/grade-11/write-g11-informative-writing.ts"
+ },
+ {
+  "slug": "write-g11-narrative-writing",
+  "subject": "writing",
+  "grade": 11,
+  "group": "Composition",
+  "name": "Narrative writing",
+  "standards": [
+   "W.11-12.3"
+  ],
+  "file": "content/writing/grade-11/write-g11-narrative-writing.ts"
+ },
+ {
+  "slug": "write-g11-writing-with-evidence",
+  "subject": "writing",
+  "grade": 11,
+  "group": "Composition",
+  "name": "Writing about texts with evidence",
+  "standards": [
+   "W.11-12.9"
+  ],
+  "file": "content/writing/grade-11/write-g11-writing-with-evidence.ts"
+ },
+ {
+  "slug": "read-g10-story-details-inference",
+  "subject": "reading",
+  "grade": 10,
+  "group": "Literature",
+  "name": "Key details and inference in stories",
+  "standards": [
+   "RL.9-10.1"
+  ],
+  "file": "content/reading/grade-10/read-g10-story-details-inference.ts"
+ },
+ {
+  "slug": "read-g10-theme-summary",
+  "subject": "reading",
+  "grade": 10,
+  "group": "Literature",
+  "name": "Theme and summary",
+  "standards": [
+   "RL.9-10.2"
+  ],
+  "file": "content/reading/grade-10/read-g10-theme-summary.ts"
+ },
+ {
+  "slug": "read-g10-character-setting-plot",
+  "subject": "reading",
+  "grade": 10,
+  "group": "Literature",
+  "name": "Characters, setting and plot",
+  "standards": [
+   "RL.9-10.3"
+  ],
+  "file": "content/reading/grade-10/read-g10-character-setting-plot.ts"
+ },
+ {
+  "slug": "read-g10-literary-structure-pov",
+  "subject": "reading",
+  "grade": 10,
+  "group": "Literature",
+  "name": "Structure and point of view in literature",
+  "standards": [
+   "RL.9-10.5",
+   "RL.9-10.6"
+  ],
+  "file": "content/reading/grade-10/read-g10-literary-structure-pov.ts"
+ },
+ {
+  "slug": "read-g10-comparing-texts",
+  "subject": "reading",
+  "grade": 10,
+  "group": "Literature",
+  "name": "Comparing stories and poems",
+  "standards": [
+   "RL.9-10.9"
+  ],
+  "file": "content/reading/grade-10/read-g10-comparing-texts.ts"
+ },
+ {
+  "slug": "read-g10-evidence-inference",
+  "subject": "reading",
+  "grade": 10,
+  "group": "Informational text",
+  "name": "Key details, evidence and inference",
+  "standards": [
+   "RI.9-10.1"
+  ],
+  "file": "content/reading/grade-10/read-g10-evidence-inference.ts"
+ },
+ {
+  "slug": "read-g10-main-idea-summary",
+  "subject": "reading",
+  "grade": 10,
+  "group": "Informational text",
+  "name": "Main idea and summary",
+  "standards": [
+   "RI.9-10.2"
+  ],
+  "file": "content/reading/grade-10/read-g10-main-idea-summary.ts"
+ },
+ {
+  "slug": "read-g10-connections",
+  "subject": "reading",
+  "grade": 10,
+  "group": "Informational text",
+  "name": "Connections between events and ideas",
+  "standards": [
+   "RI.9-10.3"
+  ],
+  "file": "content/reading/grade-10/read-g10-connections.ts"
+ },
+ {
+  "slug": "read-g10-text-structure",
+  "subject": "reading",
+  "grade": 10,
+  "group": "Informational text",
+  "name": "Text structure and features",
+  "standards": [
+   "RI.9-10.5"
+  ],
+  "file": "content/reading/grade-10/read-g10-text-structure.ts"
+ },
+ {
+  "slug": "read-g10-authors-purpose",
+  "subject": "reading",
+  "grade": 10,
+  "group": "Informational text",
+  "name": "Author's purpose and point of view",
+  "standards": [
+   "RI.9-10.6"
+  ],
+  "file": "content/reading/grade-10/read-g10-authors-purpose.ts"
+ },
+ {
+  "slug": "read-g10-argument-evidence",
+  "subject": "reading",
+  "grade": 10,
+  "group": "Informational text",
+  "name": "Reasons, evidence and argument",
+  "standards": [
+   "RI.9-10.8"
+  ],
+  "file": "content/reading/grade-10/read-g10-argument-evidence.ts"
+ },
+ {
+  "slug": "read-g10-context-clues",
+  "subject": "reading",
+  "grade": 10,
+  "group": "Vocabulary and word study",
+  "name": "Context clues",
+  "standards": [
+   "L.9-10.4a"
+  ],
+  "file": "content/reading/grade-10/read-g10-context-clues.ts"
+ },
+ {
+  "slug": "read-g10-word-parts",
+  "subject": "reading",
+  "grade": 10,
+  "group": "Vocabulary and word study",
+  "name": "Word parts: roots and affixes",
+  "standards": [
+   "L.9-10.4b",
+   "L.9-10.4c"
+  ],
+  "file": "content/reading/grade-10/read-g10-word-parts.ts"
+ },
+ {
+  "slug": "read-g10-figurative-language",
+  "subject": "reading",
+  "grade": 10,
+  "group": "Vocabulary and word study",
+  "name": "Figurative language and word relationships",
+  "standards": [
+   "L.9-10.5"
+  ],
+  "file": "content/reading/grade-10/read-g10-figurative-language.ts"
+ },
+ {
+  "slug": "write-g10-grammar-usage",
+  "subject": "writing",
+  "grade": 10,
+  "group": "Conventions",
+  "name": "Grammar and usage",
+  "standards": [
+   "L.9-10.1"
+  ],
+  "file": "content/writing/grade-10/write-g10-grammar-usage.ts"
+ },
+ {
+  "slug": "write-g10-capitalization-punctuation",
+  "subject": "writing",
+  "grade": 10,
+  "group": "Conventions",
+  "name": "Capitalization and punctuation",
+  "standards": [
+   "L.9-10.2"
+  ],
+  "file": "content/writing/grade-10/write-g10-capitalization-punctuation.ts"
+ },
+ {
+  "slug": "write-g10-sentence-structure",
+  "subject": "writing",
+  "grade": 10,
+  "group": "Sentence and paragraph",
+  "name": "Sentence structure and boundaries",
+  "standards": [
+   "L.9-10.1"
+  ],
+  "file": "content/writing/grade-10/write-g10-sentence-structure.ts"
+ },
+ {
+  "slug": "write-g10-paragraph-transitions",
+  "subject": "writing",
+  "grade": 10,
+  "group": "Sentence and paragraph",
+  "name": "Paragraph organization and transitions",
+  "standards": [
+   "W.9-10.2c"
+  ],
+  "file": "content/writing/grade-10/write-g10-paragraph-transitions.ts"
+ },
+ {
+  "slug": "write-g10-precise-language",
+  "subject": "writing",
+  "grade": 10,
+  "group": "Sentence and paragraph",
+  "name": "Precise language and style",
+  "standards": [
+   "L.9-10.3"
+  ],
+  "file": "content/writing/grade-10/write-g10-precise-language.ts"
+ },
+ {
+  "slug": "write-g10-argument-writing",
+  "subject": "writing",
+  "grade": 10,
+  "group": "Composition",
+  "name": "Argument writing",
+  "standards": [
+   "W.9-10.1"
+  ],
+  "file": "content/writing/grade-10/write-g10-argument-writing.ts"
+ },
+ {
+  "slug": "write-g10-informative-writing",
+  "subject": "writing",
+  "grade": 10,
+  "group": "Composition",
+  "name": "Informative writing",
+  "standards": [
+   "W.9-10.2"
+  ],
+  "file": "content/writing/grade-10/write-g10-informative-writing.ts"
+ },
+ {
+  "slug": "write-g10-narrative-writing",
+  "subject": "writing",
+  "grade": 10,
+  "group": "Composition",
+  "name": "Narrative writing",
+  "standards": [
+   "W.9-10.3"
+  ],
+  "file": "content/writing/grade-10/write-g10-narrative-writing.ts"
+ },
+ {
+  "slug": "write-g10-writing-with-evidence",
+  "subject": "writing",
+  "grade": 10,
+  "group": "Composition",
+  "name": "Writing about texts with evidence",
+  "standards": [
+   "W.9-10.9"
+  ],
+  "file": "content/writing/grade-10/write-g10-writing-with-evidence.ts"
+ },
+ {
+  "slug": "read-g12-story-details-inference",
+  "subject": "reading",
+  "grade": 12,
+  "group": "Literature",
+  "name": "Key details and inference in stories",
+  "standards": [
+   "RL.11-12.1"
+  ],
+  "file": "content/reading/grade-12/read-g12-story-details-inference.ts"
+ },
+ {
+  "slug": "read-g12-theme-summary",
+  "subject": "reading",
+  "grade": 12,
+  "group": "Literature",
+  "name": "Theme and summary",
+  "standards": [
+   "RL.11-12.2"
+  ],
+  "file": "content/reading/grade-12/read-g12-theme-summary.ts"
+ },
+ {
+  "slug": "read-g12-character-setting-plot",
+  "subject": "reading",
+  "grade": 12,
+  "group": "Literature",
+  "name": "Characters, setting and plot",
+  "standards": [
+   "RL.11-12.3"
+  ],
+  "file": "content/reading/grade-12/read-g12-character-setting-plot.ts"
+ },
+ {
+  "slug": "read-g12-literary-structure-pov",
+  "subject": "reading",
+  "grade": 12,
+  "group": "Literature",
+  "name": "Structure and point of view in literature",
+  "standards": [
+   "RL.11-12.5",
+   "RL.11-12.6"
+  ],
+  "file": "content/reading/grade-12/read-g12-literary-structure-pov.ts"
+ },
+ {
+  "slug": "read-g12-comparing-texts",
+  "subject": "reading",
+  "grade": 12,
+  "group": "Literature",
+  "name": "Comparing stories and poems",
+  "standards": [
+   "RL.11-12.9"
+  ],
+  "file": "content/reading/grade-12/read-g12-comparing-texts.ts"
+ },
+ {
+  "slug": "read-g12-evidence-inference",
+  "subject": "reading",
+  "grade": 12,
+  "group": "Informational text",
+  "name": "Key details, evidence and inference",
+  "standards": [
+   "RI.11-12.1"
+  ],
+  "file": "content/reading/grade-12/read-g12-evidence-inference.ts"
+ },
+ {
+  "slug": "read-g12-main-idea-summary",
+  "subject": "reading",
+  "grade": 12,
+  "group": "Informational text",
+  "name": "Main idea and summary",
+  "standards": [
+   "RI.11-12.2"
+  ],
+  "file": "content/reading/grade-12/read-g12-main-idea-summary.ts"
+ },
+ {
+  "slug": "read-g12-connections",
+  "subject": "reading",
+  "grade": 12,
+  "group": "Informational text",
+  "name": "Connections between events and ideas",
+  "standards": [
+   "RI.11-12.3"
+  ],
+  "file": "content/reading/grade-12/read-g12-connections.ts"
+ },
+ {
+  "slug": "read-g12-text-structure",
+  "subject": "reading",
+  "grade": 12,
+  "group": "Informational text",
+  "name": "Text structure and features",
+  "standards": [
+   "RI.11-12.5"
+  ],
+  "file": "content/reading/grade-12/read-g12-text-structure.ts"
+ },
+ {
+  "slug": "read-g12-authors-purpose",
+  "subject": "reading",
+  "grade": 12,
+  "group": "Informational text",
+  "name": "Author's purpose and point of view",
+  "standards": [
+   "RI.11-12.6"
+  ],
+  "file": "content/reading/grade-12/read-g12-authors-purpose.ts"
+ },
+ {
+  "slug": "read-g12-argument-evidence",
+  "subject": "reading",
+  "grade": 12,
+  "group": "Informational text",
+  "name": "Reasons, evidence and argument",
+  "standards": [
+   "RI.11-12.8"
+  ],
+  "file": "content/reading/grade-12/read-g12-argument-evidence.ts"
+ },
+ {
+  "slug": "read-g12-context-clues",
+  "subject": "reading",
+  "grade": 12,
+  "group": "Vocabulary and word study",
+  "name": "Context clues",
+  "standards": [
+   "L.11-12.4a"
+  ],
+  "file": "content/reading/grade-12/read-g12-context-clues.ts"
+ },
+ {
+  "slug": "read-g12-word-parts",
+  "subject": "reading",
+  "grade": 12,
+  "group": "Vocabulary and word study",
+  "name": "Word parts: roots and affixes",
+  "standards": [
+   "L.11-12.4b",
+   "L.11-12.4c"
+  ],
+  "file": "content/reading/grade-12/read-g12-word-parts.ts"
+ },
+ {
+  "slug": "read-g12-figurative-language",
+  "subject": "reading",
+  "grade": 12,
+  "group": "Vocabulary and word study",
+  "name": "Figurative language and word relationships",
+  "standards": [
+   "L.11-12.5"
+  ],
+  "file": "content/reading/grade-12/read-g12-figurative-language.ts"
+ },
+ {
+  "slug": "write-g12-grammar-usage",
+  "subject": "writing",
+  "grade": 12,
+  "group": "Conventions",
+  "name": "Grammar and usage",
+  "standards": [
+   "L.11-12.1"
+  ],
+  "file": "content/writing/grade-12/write-g12-grammar-usage.ts"
+ },
+ {
+  "slug": "write-g12-capitalization-punctuation",
+  "subject": "writing",
+  "grade": 12,
+  "group": "Conventions",
+  "name": "Capitalization and punctuation",
+  "standards": [
+   "L.11-12.2"
+  ],
+  "file": "content/writing/grade-12/write-g12-capitalization-punctuation.ts"
+ },
+ {
+  "slug": "write-g12-sentence-structure",
+  "subject": "writing",
+  "grade": 12,
+  "group": "Sentence and paragraph",
+  "name": "Sentence structure and boundaries",
+  "standards": [
+   "L.11-12.1"
+  ],
+  "file": "content/writing/grade-12/write-g12-sentence-structure.ts"
+ },
+ {
+  "slug": "write-g12-paragraph-transitions",
+  "subject": "writing",
+  "grade": 12,
+  "group": "Sentence and paragraph",
+  "name": "Paragraph organization and transitions",
+  "standards": [
+   "W.11-12.2c"
+  ],
+  "file": "content/writing/grade-12/write-g12-paragraph-transitions.ts"
+ },
+ {
+  "slug": "write-g12-precise-language",
+  "subject": "writing",
+  "grade": 12,
+  "group": "Sentence and paragraph",
+  "name": "Precise language and style",
+  "standards": [
+   "L.11-12.3"
+  ],
+  "file": "content/writing/grade-12/write-g12-precise-language.ts"
+ },
+ {
+  "slug": "write-g12-argument-writing",
+  "subject": "writing",
+  "grade": 12,
+  "group": "Composition",
+  "name": "Argument writing",
+  "standards": [
+   "W.11-12.1"
+  ],
+  "file": "content/writing/grade-12/write-g12-argument-writing.ts"
+ },
+ {
+  "slug": "write-g12-informative-writing",
+  "subject": "writing",
+  "grade": 12,
+  "group": "Composition",
+  "name": "Informative writing",
+  "standards": [
+   "W.11-12.2"
+  ],
+  "file": "content/writing/grade-12/write-g12-informative-writing.ts"
+ },
+ {
+  "slug": "write-g12-narrative-writing",
+  "subject": "writing",
+  "grade": 12,
+  "group": "Composition",
+  "name": "Narrative writing",
+  "standards": [
+   "W.11-12.3"
+  ],
+  "file": "content/writing/grade-12/write-g12-narrative-writing.ts"
+ },
+ {
+  "slug": "write-g12-writing-with-evidence",
+  "subject": "writing",
+  "grade": 12,
+  "group": "Composition",
+  "name": "Writing about texts with evidence",
+  "standards": [
+   "W.11-12.9"
+  ],
+  "file": "content/writing/grade-12/write-g12-writing-with-evidence.ts"
+ },
+ {
+  "slug": "read-g9-story-details-inference",
+  "subject": "reading",
+  "grade": 9,
+  "group": "Literature",
+  "name": "Key details and inference in stories",
+  "standards": [
+   "RL.9-10.1"
+  ],
+  "file": "content/reading/grade-9/read-g9-story-details-inference.ts"
+ },
+ {
+  "slug": "read-g9-theme-summary",
+  "subject": "reading",
+  "grade": 9,
+  "group": "Literature",
+  "name": "Theme and summary",
+  "standards": [
+   "RL.9-10.2"
+  ],
+  "file": "content/reading/grade-9/read-g9-theme-summary.ts"
+ },
+ {
+  "slug": "read-g9-character-setting-plot",
+  "subject": "reading",
+  "grade": 9,
+  "group": "Literature",
+  "name": "Characters, setting and plot",
+  "standards": [
+   "RL.9-10.3"
+  ],
+  "file": "content/reading/grade-9/read-g9-character-setting-plot.ts"
+ },
+ {
+  "slug": "read-g9-literary-structure-pov",
+  "subject": "reading",
+  "grade": 9,
+  "group": "Literature",
+  "name": "Structure and point of view in literature",
+  "standards": [
+   "RL.9-10.5",
+   "RL.9-10.6"
+  ],
+  "file": "content/reading/grade-9/read-g9-literary-structure-pov.ts"
+ },
+ {
+  "slug": "read-g9-comparing-texts",
+  "subject": "reading",
+  "grade": 9,
+  "group": "Literature",
+  "name": "Comparing stories and poems",
+  "standards": [
+   "RL.9-10.9"
+  ],
+  "file": "content/reading/grade-9/read-g9-comparing-texts.ts"
+ },
+ {
+  "slug": "read-g9-main-idea-summary",
+  "subject": "reading",
+  "grade": 9,
+  "group": "Informational text",
+  "name": "Main idea and summary",
+  "standards": [
+   "RI.9-10.2"
+  ],
+  "file": "content/reading/grade-9/read-g9-main-idea-summary.ts"
+ },
+ {
+  "slug": "read-g9-connections",
+  "subject": "reading",
+  "grade": 9,
+  "group": "Informational text",
+  "name": "Connections between events and ideas",
+  "standards": [
+   "RI.9-10.3"
+  ],
+  "file": "content/reading/grade-9/read-g9-connections.ts"
+ },
+ {
+  "slug": "read-g9-text-structure",
+  "subject": "reading",
+  "grade": 9,
+  "group": "Informational text",
+  "name": "Text structure and features",
+  "standards": [
+   "RI.9-10.5"
+  ],
+  "file": "content/reading/grade-9/read-g9-text-structure.ts"
+ },
+ {
+  "slug": "read-g9-authors-purpose",
+  "subject": "reading",
+  "grade": 9,
+  "group": "Informational text",
+  "name": "Author's purpose and point of view",
+  "standards": [
+   "RI.9-10.6"
+  ],
+  "file": "content/reading/grade-9/read-g9-authors-purpose.ts"
+ },
+ {
+  "slug": "read-g9-argument-evidence",
+  "subject": "reading",
+  "grade": 9,
+  "group": "Informational text",
+  "name": "Reasons, evidence and argument",
+  "standards": [
+   "RI.9-10.8"
+  ],
+  "file": "content/reading/grade-9/read-g9-argument-evidence.ts"
+ },
+ {
+  "slug": "read-g9-context-clues",
+  "subject": "reading",
+  "grade": 9,
+  "group": "Vocabulary and word study",
+  "name": "Context clues",
+  "standards": [
+   "L.9-10.4a"
+  ],
+  "file": "content/reading/grade-9/read-g9-context-clues.ts"
+ },
+ {
+  "slug": "read-g9-word-parts",
+  "subject": "reading",
+  "grade": 9,
+  "group": "Vocabulary and word study",
+  "name": "Word parts: roots and affixes",
+  "standards": [
+   "L.9-10.4b",
+   "L.9-10.4c"
+  ],
+  "file": "content/reading/grade-9/read-g9-word-parts.ts"
+ },
+ {
+  "slug": "read-g9-figurative-language",
+  "subject": "reading",
+  "grade": 9,
+  "group": "Vocabulary and word study",
+  "name": "Figurative language and word relationships",
+  "standards": [
+   "L.9-10.5"
+  ],
+  "file": "content/reading/grade-9/read-g9-figurative-language.ts"
+ },
+ {
+  "slug": "write-g9-grammar-usage",
+  "subject": "writing",
+  "grade": 9,
+  "group": "Conventions",
+  "name": "Grammar and usage",
+  "standards": [
+   "L.9-10.1"
+  ],
+  "file": "content/writing/grade-9/write-g9-grammar-usage.ts"
+ },
+ {
+  "slug": "write-g9-sentence-structure",
+  "subject": "writing",
+  "grade": 9,
+  "group": "Sentence and paragraph",
+  "name": "Sentence structure and boundaries",
+  "standards": [
+   "L.9-10.1"
+  ],
+  "file": "content/writing/grade-9/write-g9-sentence-structure.ts"
+ },
+ {
+  "slug": "write-g9-precise-language",
+  "subject": "writing",
+  "grade": 9,
+  "group": "Sentence and paragraph",
+  "name": "Precise language and style",
+  "standards": [
+   "L.9-10.3"
+  ],
+  "file": "content/writing/grade-9/write-g9-precise-language.ts"
+ },
+ {
+  "slug": "write-g9-argument-writing",
+  "subject": "writing",
+  "grade": 9,
+  "group": "Composition",
+  "name": "Argument writing",
+  "standards": [
+   "W.9-10.1"
+  ],
+  "file": "content/writing/grade-9/write-g9-argument-writing.ts"
+ },
+ {
+  "slug": "write-g9-informative-writing",
+  "subject": "writing",
+  "grade": 9,
+  "group": "Composition",
+  "name": "Informative writing",
+  "standards": [
+   "W.9-10.2"
+  ],
+  "file": "content/writing/grade-9/write-g9-informative-writing.ts"
+ },
+ {
+  "slug": "write-g9-narrative-writing",
+  "subject": "writing",
+  "grade": 9,
+  "group": "Composition",
+  "name": "Narrative writing",
+  "standards": [
+   "W.9-10.3"
+  ],
+  "file": "content/writing/grade-9/write-g9-narrative-writing.ts"
+ },
+ {
+  "slug": "write-g9-writing-with-evidence",
+  "subject": "writing",
+  "grade": 9,
+  "group": "Composition",
+  "name": "Writing about texts with evidence",
+  "standards": [
+   "W.9-10.9"
+  ],
+  "file": "content/writing/grade-9/write-g9-writing-with-evidence.ts"
+ }
+]
