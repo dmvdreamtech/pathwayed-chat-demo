@@ -21,6 +21,12 @@ cannot judge.
 - `write-g8-argument-writing` slot 3: the answer "In addition," begins a
   sentence that already says "also". Correct, but reads slightly doubled.
 
+- `write-g7-precise-language` slots 12 and 36 (and the grade 8 model it
+  followed): the right answer replaces vague wording with an invented specific
+  ("won the race by half a second", "in record time"). Each wrong choice has a
+  clear flaw, but a reviewer may prefer answers that sharpen wording without
+  adding facts.
+
 ## Publishing passage-based questions
 
 A question with a passage needs its passage published too; both load as draft.
