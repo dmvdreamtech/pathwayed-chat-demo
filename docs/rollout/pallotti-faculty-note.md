@@ -36,4 +36,4 @@ Using it is optional. It is there if it helps you plan or check in with a studen
 If you cannot sign in, or something looks wrong, reply to this email and we will sort it out.
 
 Thank you,
-PathwayEd
+David Tenney, Academic Dean
