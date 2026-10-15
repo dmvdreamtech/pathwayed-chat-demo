@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { join } from 'node:path'
-import { TARGET_ITEMS, itemCount, passageLimits, skillIssues } from './checks'
+import { TARGET_ITEMS, TOPUP_ITEMS, itemCount, passageLimits, requiredItems, skillIssues } from './checks'
 import { loadSkills } from './load'
 import { orderedChoices, skillSeed } from '../scripts/build-coverage-seeds'
 import type { ContentItem, ContentSkill } from './types'
@@ -117,6 +117,25 @@ describe('the seed', () => {
   })
 })
 
+describe('a top-up of a live skill', () => {
+  const topUp: ContentSkill = { ...good, slug: 'write-g4-test-topup', grade: 4, standards: ['L.4.2'], extends: 'punctuation-basics', items: good.items!.slice(0, TOPUP_ITEMS) }
+  const sql = skillSeed(topUp, 'content/writing/grade-4/write-g4-test-topup.ts')
+
+  it('needs 20 items, not 40', () => {
+    expect(skillIssues(topUp)).toEqual([])
+    expect(skillIssues({ ...topUp, items: good.items!.slice(0, TOPUP_ITEMS - 1) }).join()).toContain('a top-up needs at least 20')
+  })
+
+  it('attaches drafts to the live skill and never creates or edits a skill row', () => {
+    expect(sql).not.toMatch(/insert into public\.skills/)
+    expect(sql).toContain("raise exception 'top-up: live skill % is missing', 'punctuation-basics'")
+    expect(sql).toContain("(select id from public.skills where slug = 'punctuation-basics')")
+    expect(sql).not.toContain("where slug = 'write-g4-test-topup'")
+    expect((sql.match(/insert into public\.generated_questions/g) ?? []).length).toBe(TOPUP_ITEMS)
+    expect(sql).not.toMatch(/'published'|'reviewed'/)
+  })
+})
+
 describe('every content file', async () => {
   const loaded = await loadSkills(join(__dirname))
 
@@ -133,7 +152,7 @@ describe('every content file', async () => {
   it('lives in the folder for its subject and grade', () => {
     for (const { file, skill } of loaded) {
       expect(file).toBe(`content/${skill.subject}/grade-${skill.grade === 0 ? 'k' : skill.grade}/${skill.slug}.ts`)
-      expect(itemCount(skill)).toBeGreaterThanOrEqual(TARGET_ITEMS)
+      expect(itemCount(skill)).toBeGreaterThanOrEqual(requiredItems(skill))
     }
   })
 })

@@ -60,4 +60,10 @@ export interface ContentSkill {
   passages?: ContentPassage[]
   /** Standalone items (most writing and vocabulary items). */
   items?: ContentItem[]
+  /**
+   * Slug of an existing LIVE skill this file adds questions to (a top-up),
+   * e.g. 'punctuation-basics'. The seed then attaches its drafts to that skill
+   * and never creates or edits a skill row. A top-up needs TOPUP_ITEMS items.
+   */
+  extends?: string
 }

@@ -10,6 +10,9 @@ import type { ContentItem, ContentSkill } from './types'
  */
 
 export const TARGET_ITEMS = 40
+/** A top-up adds to a live skill that already has 20 questions, bringing it to 40. */
+export const TOPUP_ITEMS = 20
+export const requiredItems = (skill: ContentSkill) => (skill.extends ? TOPUP_ITEMS : TARGET_ITEMS)
 
 /** Passage length (words) and longest allowed average sentence (words), by grade. */
 export function passageLimits(grade: number): { min: number; max: number; avgSentence: number } {
@@ -108,7 +111,10 @@ export function skillIssues(skill: ContentSkill): string[] {
   const standalone = stems.filter((s) => !passageStems.has(s))
   const dupStems = standalone.filter((s, i) => standalone.indexOf(s) !== i)
   if (dupStems.length) out.push(`${where}: the same question appears twice: "${dupStems[0]}"`)
-  if (items.length < TARGET_ITEMS) out.push(`${where}: ${items.length} items, a skill needs at least ${TARGET_ITEMS}`)
+  if (items.length < requiredItems(skill)) {
+    out.push(`${where}: ${items.length} items, a ${skill.extends ? 'top-up' : 'skill'} needs at least ${requiredItems(skill)}`)
+  }
+  if (skill.extends !== undefined && !/^[a-z0-9-]+$/.test(skill.extends)) out.push(`${where}: extends must be a live skill slug`)
   return out
 }
 
