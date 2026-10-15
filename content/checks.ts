@@ -26,6 +26,9 @@ const SLUG = /^(read|write|math)-g(k|[0-9]|1[0-2])-[a-z0-9-]+$/
 // Math skills write expressions as $...$ (rendered by MathText), where a spaced
 // minus sign is normal; the dash rule applies only to the prose around them.
 const MATH_SPAN = /\$[^$]*\$/g
+// '\frac' or '\times' written with one backslash in a TypeScript string becomes
+// a form feed or a tab, and KaTeX then shows garbage.
+const CONTROL = /[\x00-\x08\x0b\x0c\x0e-\x1f\t]/
 const prose = (text: string, math: boolean) => (math ? text.replace(MATH_SPAN, ' ') : text)
 
 export const words = (s: string) => s.trim().split(/\s+/).filter(Boolean).length
@@ -52,6 +55,8 @@ function itemIssues(where: string, item: ContentItem, math = false): string[] {
   if (item.solution.trim().length < 20) out.push(`${at}: solution is missing or too short`)
   for (const [label, text] of [['stem', item.stem], ['solution', item.solution], ...item.choices.map((c) => ['choice', c.text])]) {
     if (DASHES.test(prose(text, math))) out.push(`${at}: ${label} has a dash (em dash, en dash, or spaced hyphen)`)
+    if (math && CONTROL.test(text)) out.push(`${at}: ${label} has a control character (a single backslash, like '\\frac', in the source?)`)
+    if (math && (text.match(/\$/g) ?? []).length % 2) out.push(`${at}: ${label} has an unpaired $ (math goes in $...$; write money as dollars)`)
   }
   if (!['easy', 'medium', 'hard'].includes(item.difficulty)) out.push(`${at}: difficulty must be easy, medium or hard`)
   return out

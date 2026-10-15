@@ -82,6 +82,15 @@ describe('the automated checks', () => {
     expect(skillIssues({ ...good, items: [mathItem, ...good.items!.slice(1)] }).join()).toContain('slot 1: stem has a dash')
   })
 
+  it('catch a lost backslash and an unpaired $ in math', () => {
+    const math: ContentSkill = { ...good, slug: 'math-g9-test-skill', subject: 'math', grade: 9 }
+    const lost = item(1, { stem: 'What is $\frac{1}{2} + \frac{1}{4}$?' }) // one backslash: a form feed
+    const unpaired = item(2, { stem: 'A ticket costs $5. How many can she buy with 20 dollars?' })
+    const issues = skillIssues({ ...math, items: [lost, unpaired, ...good.items!.slice(2)] }).join('\n')
+    expect(issues).toContain('slot 1: stem has a control character')
+    expect(issues).toContain('slot 2: stem has an unpaired $')
+  })
+
   it('require the slug to name the subject and grade', () => {
     expect(skillIssues({ ...good, slug: 'read-g6-test-skill' }).join()).toContain('slug must start with write-g6-')
   })
