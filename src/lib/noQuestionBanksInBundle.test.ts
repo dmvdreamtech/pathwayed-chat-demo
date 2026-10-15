@@ -24,8 +24,8 @@ const ROOT = process.cwd()
 const SRC = join(ROOT, 'src')
 const ENTRY = join(SRC, 'main.tsx')
 
-/** A question bank: items plus their answers. */
-const BANK = /(Templates\.ts|[\\/]prep[\\/]satTransitions\.ts|[\\/]prep[\\/]satWordsInContext\.ts)$/
+/** A question bank: items plus their answers. Everything under content/ is one. */
+const BANK = /(Templates\.ts|[\\/]prep[\\/]satTransitions\.ts|[\\/]prep[\\/]satWordsInContext\.ts)$|[\\/]content[\\/]/
 
 function resolveImport(from: string, spec: string): string | null {
   let base: string
