@@ -19,6 +19,7 @@ import { getSkillNameBySlug, recordSessionMastery } from '@/lib/skills'
 import { resolveFocusForSlug } from '@/lib/focusSkills'
 import { speakWithNikki, stopNikkiSpeech } from '@/lib/voice'
 import { getVoiceMuted, setVoiceMuted } from '@/lib/voicePrefs'
+import { getAvatarLarge, isAvatarCompact, setAvatarLarge } from '@/lib/avatarSizePref'
 import { stripMarkdownForTTS } from '@/lib/stripMarkdownForTTS'
 import { transcribeAudio, NO_SPEECH_MESSAGE } from '@/lib/transcribe'
 import { buildTranscriptionPrompt } from '@/lib/transcriptionPrompt'
@@ -267,6 +268,18 @@ function SessionView({
   )
   const feedRef = useRef<HTMLDivElement>(null)
 
+  // Nikki's avatar: large until the student first replies (her greeting shows
+  // with the large view), then a compact header row so the chat fills the
+  // pane. The child can switch back to large; that choice is kept per device.
+  const [avatarLarge, setAvatarLargeState] = useState(getAvatarLarge)
+  const conversationStarted = messages.some((m) => m.role === 'user')
+  const avatarCompact = isAvatarCompact(conversationStarted, avatarLarge)
+  const toggleAvatarSize = () => {
+    const next = !avatarLarge
+    setAvatarLargeState(next)
+    setAvatarLarge(next)
+  }
+
   // Voice input. Reading uses continuous "conversation mode" (tap once, stays
   // listening); other subjects use tap-to-talk. Both transcribe via Whisper and
   // send the text exactly like a typed message.
@@ -313,7 +326,19 @@ function SessionView({
   useEffect(() => {
     const f = feedRef.current
     if (f) f.scrollTop = f.scrollHeight
-  }, [messages, isLoading])
+  }, [messages, isLoading, check.question])
+
+  // The feed changes height while the avatar grows or shrinks: keep the newest
+  // message in view at the start and once the 0.32s transition has finished.
+  useEffect(() => {
+    const toBottom = () => {
+      const f = feedRef.current
+      if (f) f.scrollTop = f.scrollHeight
+    }
+    toBottom()
+    const t = window.setTimeout(toBottom, 360)
+    return () => window.clearTimeout(t)
+  }, [avatarCompact])
 
   // Auto-speak each new completed Nikki response (unless muted). speakWithNikki
   // stops any prior audio first, so a newer message interrupts an older one.
@@ -537,7 +562,12 @@ function SessionView({
 
       <div className="work" data-pane={pane}>
         <div className="chatpane">
-          <CallStage state={callState} mode={avatarMode} />
+          <CallStage
+            state={callState}
+            mode={avatarMode}
+            compact={avatarCompact}
+            onToggle={conversationStarted ? toggleAvatarSize : undefined}
+          />
           {/* Shown only when the entry greeting could not autoplay: hidden
               while muted (respect the mute switch) and once the conversation
               has moved on (messages beyond the greeting follow a gesture, so
