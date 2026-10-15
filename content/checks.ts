@@ -23,10 +23,15 @@ const DASHES = /[‒–—―−]|\s-\s|--/
 const TOKEN = /^[a-z][a-z0-9-]*$/
 const SLUG = /^(read|write|math)-g(k|[0-9]|1[0-2])-[a-z0-9-]+$/
 
+// Math skills write expressions as $...$ (rendered by MathText), where a spaced
+// minus sign is normal; the dash rule applies only to the prose around them.
+const MATH_SPAN = /\$[^$]*\$/g
+const prose = (text: string, math: boolean) => (math ? text.replace(MATH_SPAN, ' ') : text)
+
 export const words = (s: string) => s.trim().split(/\s+/).filter(Boolean).length
 export const sentences = (s: string) => s.split(/[.!?]+(?:["')\]]*)\s+|[.!?]+["')\]]*$/).map((x) => x.trim()).filter(Boolean)
 
-function itemIssues(where: string, item: ContentItem): string[] {
+function itemIssues(where: string, item: ContentItem, math = false): string[] {
   const out: string[] = []
   const at = `${where} slot ${item.slot}`
   if (!Number.isInteger(item.slot) || item.slot < 1) out.push(`${at}: slot must be a positive whole number`)
@@ -46,7 +51,7 @@ function itemIssues(where: string, item: ContentItem): string[] {
   }
   if (item.solution.trim().length < 20) out.push(`${at}: solution is missing or too short`)
   for (const [label, text] of [['stem', item.stem], ['solution', item.solution], ...item.choices.map((c) => ['choice', c.text])]) {
-    if (DASHES.test(text)) out.push(`${at}: ${label} has a dash (em dash, en dash, or spaced hyphen)`)
+    if (DASHES.test(prose(text, math))) out.push(`${at}: ${label} has a dash (em dash, en dash, or spaced hyphen)`)
   }
   if (!['easy', 'medium', 'hard'].includes(item.difficulty)) out.push(`${at}: difficulty must be easy, medium or hard`)
   return out
@@ -66,7 +71,8 @@ export function skillIssues(skill: ContentSkill): string[] {
   if (!skill.standards.length) out.push(`${where}: list at least one standard`)
 
   const items: ContentItem[] = [...(skill.items ?? []), ...(skill.passages ?? []).flatMap((p) => p.items)]
-  for (const item of skill.items ?? []) out.push(...itemIssues(where, item))
+  const math = skill.subject === 'math'
+  for (const item of skill.items ?? []) out.push(...itemIssues(where, item, math))
 
   const limits = passageLimits(skill.grade)
   const codes = new Set<string>()
@@ -82,9 +88,9 @@ export function skillIssues(skill: ContentSkill): string[] {
     if (avg > limits.avgSentence) {
       out.push(`${pw}: sentences average ${avg.toFixed(1)} words, grade ${skill.grade} limit is ${limits.avgSentence}`)
     }
-    if (DASHES.test(p.body) || (p.title && DASHES.test(p.title))) out.push(`${pw}: has a dash (em dash, en dash, or spaced hyphen)`)
+    if (DASHES.test(prose(p.body, math)) || (p.title && DASHES.test(p.title))) out.push(`${pw}: has a dash (em dash, en dash, or spaced hyphen)`)
     if (!p.items.length) out.push(`${pw}: a passage needs at least one question`)
-    for (const item of p.items) out.push(...itemIssues(pw, item))
+    for (const item of p.items) out.push(...itemIssues(pw, item, math))
   }
 
   const slots = items.map((i) => i.slot)

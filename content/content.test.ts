@@ -73,6 +73,15 @@ describe('the automated checks', () => {
     expect(issues).toMatch(/passage p2: sentences average|passage p2: \d+ words/)
   })
 
+  it('treat a spaced minus inside $...$ as math, not a dash, for math skills only', () => {
+    const mathItem = item(1, { stem: 'What is $x$ if $x - 3 = 4$?', solution: 'Add 3 to both sides: $x = 4 + 3 = 7$.' })
+    const math: ContentSkill = { ...good, slug: 'math-g9-test-skill', subject: 'math', grade: 9, items: [mathItem, ...good.items!.slice(1)] }
+    expect(skillIssues(math)).toEqual([])
+    const prose: ContentSkill = { ...math, items: [item(1, { stem: 'Which value works - and why?' }), ...good.items!.slice(1)] }
+    expect(skillIssues(prose).join()).toContain('slot 1: stem has a dash')
+    expect(skillIssues({ ...good, items: [mathItem, ...good.items!.slice(1)] }).join()).toContain('slot 1: stem has a dash')
+  })
+
   it('require the slug to name the subject and grade', () => {
     expect(skillIssues({ ...good, slug: 'read-g6-test-skill' }).join()).toContain('slug must start with write-g6-')
   })

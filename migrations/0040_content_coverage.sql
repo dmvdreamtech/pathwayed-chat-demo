@@ -539,7 +539,10 @@ as $$
       (select c.v ->> 'text' from c where (c.v ->> 'is_correct') = 'true' order by c.i limit 1) as correct_text,
       -- Exact text: capitalization items legitimately differ only in capital letters.
       (select count(distinct btrim(c.v ->> 'text')) from c) as n_distinct,
-      (select string_agg(coalesce(c.v ->> 'text', ''), ' ') from c) as all_text
+      (select string_agg(coalesce(c.v ->> 'text', ''), ' ') from c) as all_text,
+      -- Math writes expressions as $...$, where a spaced minus is normal; the
+      -- dash rule applies to the prose around them (content/checks.ts does the same).
+      coalesce((select s.subject = 'math' from public.skills s where s.id = q.skill_id), false) as is_math
   )
   select array_remove(array[
     case when f.n <> 4 then 'four_choices' end,
@@ -548,7 +551,10 @@ as $$
     case when f.correct_text is distinct from q.correct_answer then 'answer_matches_choice' end,
     case when coalesce(btrim(q.solution), '') = '' then 'has_solution' end,
     case when f.n_distinct <> f.n then 'distinct_choices' end,
-    case when concat_ws(' ', q.stem, f.all_text, q.solution, q.correct_answer) ~ '[—–]|\s-\s|--' then 'no_dashes' end,
+    case when (case when f.is_math
+                    then regexp_replace(concat_ws(' ', q.stem, f.all_text, q.solution, q.correct_answer), '\$[^$]*\$', ' ', 'g')
+                    else concat_ws(' ', q.stem, f.all_text, q.solution, q.correct_answer) end)
+              ~ '[—–]|\s-\s|--' then 'no_dashes' end,
     case when btrim(coalesce(q.stem, '')) !~ '[?:]$' then 'stem_ends' end
   ], null)
   from facts f;

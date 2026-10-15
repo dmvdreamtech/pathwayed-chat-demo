@@ -19,6 +19,8 @@ declare
   v_u_parent uuid := gen_random_uuid();
   v_skill    uuid := gen_random_uuid();
   v_parent   uuid;
+  v_math     uuid := gen_random_uuid();
+  v_mparent  uuid;
   v_good     jsonb := '[{"text":"right","is_correct":true},{"text":"wrong a","is_correct":false,"misconception_token":"x"},{"text":"wrong b","is_correct":false,"misconception_token":"y"},{"text":"wrong c","is_correct":false,"misconception_token":"z"}]';
   v_t        text;
   v_report   text := '';
@@ -80,6 +82,14 @@ begin
     (v_skill, 'easy', 'Pick the main idea', v_good, 'right', 'Because the text says so.', 'draft', null, null),
     (v_skill, 'easy', 'Old item?', v_good, 'right', 'Because the text says so.', 'retired', null, null);
 
+  -- A math skill: a spaced minus inside $...$ is math, not a dash; outside it is a dash.
+  select id into v_mparent from public.skills where level = 'subject' and subject = 'math' order by created_at limit 1;
+  insert into public.skills (id, level, parent_id, subject, name, slug, grade_band, ccss_grade, ccss_grade_num)
+  values (v_math, 'skill', v_mparent, 'math', 'Verify Quadratics', 'v0040-verify-math', '9-12', '9', 9);
+  insert into public.generated_questions (skill_id, difficulty, stem, choices, correct_answer, solution, status) values
+    (v_math, 'easy', 'What is $x$ if $x - 3 = 4$?', v_good, 'right', 'Add 3: $x = 4 + 3$, so $x = 7$.', 'draft'),
+    (v_math, 'easy', 'Which value works - and why?', v_good, 'right', 'Add 3 to both sides of the equation.', 'draft');
+
   create temp table v0040_results (
     n        serial,
     name     text,
@@ -101,6 +111,12 @@ begin
   ('checks: a dash is caught', 'no_dashes',
      (select array_to_string(public.question_issues(q), ',') from public.generated_questions q
        where q.skill_id = v_skill and q.stem = 'Which idea, if any, is central?')),
+  ('checks: math, a spaced minus inside $...$ is not a dash', '0',
+     (select cardinality(public.question_issues(q))::text from public.generated_questions q
+       where q.skill_id = v_math and q.stem like 'What is%')),
+  ('checks: math, a dash in the prose is still caught', 'no_dashes',
+     (select array_to_string(public.question_issues(q), ',') from public.generated_questions q
+       where q.skill_id = v_math and q.stem like 'Which value%')),
   ('checks: a stem without a question mark or colon is caught', 'stem_ends',
      (select array_to_string(public.question_issues(q), ',') from public.generated_questions q
        where q.skill_id = v_skill and q.stem = 'Pick the main idea')),
