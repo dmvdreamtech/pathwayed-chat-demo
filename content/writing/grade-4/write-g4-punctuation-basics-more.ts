@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'write-g4-punctuation-basics-more',
+  extends: 'punctuation-basics',
+  subject: 'writing',
+  grade: 4,
+  group: 'Conventions',
+  name: 'Capitalization and Punctuation',
+  standards: ['L.4.2'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Which sentence uses capital letters correctly?`,
+      choices: [
+        no(`On tuesday, Priya and Aunt Rosa drove to Phoenix.`, 'lowercase-day-of-week'),
+        ok(`On Tuesday, Priya and Aunt Rosa drove to Phoenix.`),
+        no(`On Tuesday, Priya and aunt Rosa drove to Phoenix.`, 'lowercase-title-before-name'),
+        no(`On Tuesday, Priya and Aunt Rosa drove to phoenix.`, 'lowercase-city-name'),
+      ],
+      solution: `Days of the week, titles used with a name, and city names all begin with capital letters. The first choice forgets that "Tuesday" is a proper noun.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Which sentence is capitalized correctly?`,
+      choices: [
+        no(`In the Winter, Mateo's class read about the Pacific Ocean.`, 'capitalizes-season'),
+        no(`In the winter, Mateo's class read about the pacific ocean.`, 'lowercase-proper-place'),
+        no(`In the winter, mateo's class read about the Pacific Ocean.`, 'lowercase-person-name'),
+        ok(`In the winter, Mateo's class read about the Pacific Ocean.`),
+      ],
+      solution: `Names of people and of places like the Pacific Ocean are capitalized, but seasons are not. "Winter" looks important, yet it is a common noun.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'medium',
+      stem: `Hana borrowed a book from the library. Which choice shows the book's title capitalized correctly?`,
+      choices: [
+        no(`The Secret Of The Silver Canyon`, 'capitalizes-short-words'),
+        ok(`The Secret of the Silver Canyon`),
+        no(`the secret of the silver canyon`, 'no-title-capitals'),
+        no(`The secret of the silver canyon`, 'capitalizes-first-word-only'),
+      ],
+      solution: `In a title, capitalize the first word and the important words, but not short words like "of" and "the" in the middle. Capitalizing every word is a common mistake.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'hard',
+      stem: `Which sentence uses capital letters for family words correctly?`,
+      choices: [
+        no(`After lunch, dad and my uncle fixed the fence.`, 'lowercase-name-used-as-title'),
+        no(`After lunch, Dad and my Uncle fixed the fence.`, 'capitalizes-family-word-after-my'),
+        no(`After Lunch, Dad and my uncle fixed the fence.`, 'capitalizes-common-noun'),
+        ok(`After lunch, Dad and my uncle fixed the fence.`),
+      ],
+      solution: `"Dad" is used as a name here, so it is capitalized, but "uncle" follows "my" and is a common noun. Capitalizing "Uncle" after "my" is the tempting mistake.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which sentence punctuates the speaker's words correctly?`,
+      choices: [
+        ok(`Leilani said, "The bus is late again."`),
+        no(`Leilani said "The bus is late again."`, 'missing-comma-before-quote'),
+        no(`Leilani said, "the bus is late again."`, 'lowercase-quote-start'),
+        no(`Leilani said, The bus is late again."`, 'missing-opening-quote'),
+      ],
+      solution: `A comma comes after "said," the quotation begins with a capital letter, and quotation marks surround all of Leilani's words. The second choice leaves out the comma before the quotation.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'medium',
+      stem: `The speaker's words come first in this sentence. Which version is punctuated correctly?`,
+      choices: [
+        no(`"I found a fossil." Tomas whispered.`, 'period-instead-of-comma-in-quote'),
+        no(`"I found a fossil", Tomas whispered.`, 'comma-outside-quote'),
+        ok(`"I found a fossil," Tomas whispered.`),
+        no(`"I found a fossil" Tomas whispered.`, 'missing-comma-in-quote'),
+      ],
+      solution: `When the quotation comes before the speaker tag, a comma goes inside the closing quotation mark. A period would end the sentence too early, and a comma outside the quotation mark is in the wrong place.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Nadia's words are a question. Which sentence is punctuated correctly?`,
+      choices: [
+        no(`"Where did you put the map," asked Nadia.`, 'comma-replaces-question-mark'),
+        ok(`"Where did you put the map?" asked Nadia.`),
+        no(`"Where did you put the map"? asked Nadia.`, 'question-mark-outside-quote'),
+        no(`"Where did you put the map?", asked Nadia.`, 'extra-comma-after-question-mark'),
+      ],
+      solution: `A quoted question keeps its question mark inside the quotation marks, and no comma is added after it. Using a comma instead of the question mark hides that Nadia is asking something.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'hard',
+      stem: `Coach Okafor's sentence is split by the speaker tag. Which version is punctuated correctly?`,
+      choices: [
+        no(`"If it rains," said Coach Okafor, "We will practice in the gym."`, 'capitalizes-continued-quote'),
+        no(`"If it rains" said Coach Okafor, "we will practice in the gym."`, 'missing-comma-inside-quote'),
+        no(`"If it rains," said Coach Okafor "we will practice in the gym."`, 'missing-comma-after-tag'),
+        ok(`"If it rains," said Coach Okafor, "we will practice in the gym."`),
+      ],
+      solution: `Commas go inside the first quotation and after the speaker tag, and the second part starts with a lowercase letter because it continues the same sentence. Capitalizing "We" treats it as a new sentence, which it is not.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'hard',
+      stem: `This sentence reports what Rafael said without using his exact words. Which version is punctuated correctly?`,
+      choices: [
+        no(`Rafael told us that "the game was canceled."`, 'quotes-around-indirect-speech'),
+        ok(`Rafael told us that the game was canceled.`),
+        no(`Rafael told us that, the game was canceled.`, 'comma-before-that-clause'),
+        no(`Rafael told us, "The game was canceled".`, 'period-outside-quote'),
+      ],
+      solution: `The word "that" shows the sentence reports what Rafael said instead of quoting him, so no quotation marks or commas are needed. Adding quotation marks around reported speech is the tempting error.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Mei is shouting a warning. Which sentence is punctuated correctly?`,
+      choices: [
+        no(`"Watch out for the puddle"! shouted Mei.`, 'exclamation-outside-quote'),
+        no(`"Watch out for the puddle!," shouted Mei.`, 'doubles-end-marks'),
+        no(`Watch out for the puddle! shouted Mei.`, 'missing-quotation-marks'),
+        ok(`"Watch out for the puddle!" shouted Mei.`),
+      ],
+      solution: `The exclamation point belongs to Mei's words, so it goes inside the closing quotation mark, with no comma added. Putting it outside the quotation marks is a common slip.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Read the sentence: Mr. Delgado ____ wants to feed the class fish?" Which choice correctly completes the sentence?`,
+      choices: [
+        ok(`asked, "Who`),
+        no(`asked, "who`, 'lowercase-quote-start'),
+        no(`asked "Who`, 'missing-comma-before-quote'),
+        no(`asked, Who`, 'missing-opening-quote'),
+      ],
+      solution: `A comma follows "asked," an opening quotation mark starts the spoken words, and the first word of the quotation is capitalized. Leaving "who" lowercase forgets that a quotation begins like a new sentence.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'easy',
+      stem: `Read the sentence: Zainab wanted to ____ the pool was closed for repairs. Which choice correctly completes the sentence?`,
+      choices: [
+        no(`swim but`, 'missing-comma-compound-sentence'),
+        ok(`swim, but`),
+        no(`swim; but`, 'semicolon-before-conjunction'),
+        no(`swim, so`, 'wrong-conjunction-meaning'),
+      ],
+      solution: `This compound sentence joins two complete sentences with "but," so a comma goes before the conjunction. "So" has a comma but does not fit the meaning, because the closed pool is not a reason for wanting to swim.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Which sentence correctly joins two complete sentences with "and"?`,
+      choices: [
+        no(`Grace fed the rabbits and her brother cleaned the cage.`, 'missing-comma-compound-sentence'),
+        no(`Grace fed the rabbits, and cleaned the cage.`, 'comma-in-compound-predicate'),
+        ok(`Grace fed the rabbits, and her brother cleaned the cage.`),
+        no(`Grace fed the rabbits and, her brother cleaned the cage.`, 'comma-after-conjunction'),
+      ],
+      solution: `"Grace fed the rabbits" and "her brother cleaned the cage" are both complete, so a comma goes before "and." The second choice has only one subject, so it does not need a comma.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Which sentence uses a comma and the word "or" correctly?`,
+      choices: [
+        no(`We can walk to the library or, Mom can drive us there.`, 'comma-after-conjunction'),
+        no(`We can walk to the library or Mom can drive us there.`, 'missing-comma-compound-sentence'),
+        no(`We can walk to the library, Mom can drive us there.`, 'comma-splice'),
+        ok(`We can walk to the library, or Mom can drive us there.`),
+      ],
+      solution: `Two complete sentences joined by "or" need a comma before the conjunction. A comma with no conjunction at all creates a comma splice.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'hard',
+      stem: `Which sentence is punctuated correctly?`,
+      choices: [
+        ok(`Dmitri painted the birdhouse and hung it on the oak tree.`),
+        no(`Dmitri painted the birdhouse, and hung it on the oak tree.`, 'comma-in-compound-predicate'),
+        no(`Dmitri painted the birdhouse and his sister hung it up.`, 'missing-comma-compound-sentence'),
+        no(`Dmitri painted the birdhouse, his sister hung it up.`, 'comma-splice'),
+      ],
+      solution: `The correct sentence has one subject, Dmitri, doing two actions, so no comma is needed before "and." A sentence with a second subject, like "his sister," would need a comma before "and."`,
+    },
+    {
+      slot: 16,
+      difficulty: 'medium',
+      stem: `Read the sentence: The trail map looked ____ still took a wrong turn. Which choice correctly completes the sentence?`,
+      choices: [
+        no(`simple yet, we`, 'comma-after-conjunction'),
+        ok(`simple, yet we`),
+        no(`simple, yet, we`, 'extra-comma-after-conjunction'),
+        no(`simple yet we`, 'missing-comma-compound-sentence'),
+      ],
+      solution: `"Yet" joins two complete sentences here, so the comma goes before "yet" and not after it. Putting the comma after the conjunction is the tempting mistake.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'easy',
+      stem: `Read the sentence: Kwame was ____ that his kite would fly in the strong wind. Which word is spelled correctly?`,
+      choices: [
+        no(`sertain`, 'c-spelled-as-s'),
+        no(`certin`, 'drops-unstressed-vowel'),
+        ok(`certain`),
+        no(`curtain`, 'confuses-similar-word'),
+      ],
+      solution: `"Certain" means sure, and it starts with a "c" that sounds like "s." "Curtain" is a real word, but it names cloth that hangs by a window.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'medium',
+      stem: `Read the sentence: Lucia's grandmother gave her a ____ necklace for her birthday. Which word is spelled correctly?`,
+      choices: [
+        no(`beutiful`, 'missing-vowel-team-letter'),
+        ok(`beautiful`),
+        no(`beautifull`, 'doubles-l-in-ful'),
+        no(`butiful`, 'spells-by-sound'),
+      ],
+      solution: `"Beautiful" has the vowel team "eau," and the suffix "ful" ends with only one "l." "Beautifull" adds an extra "l" that the suffix never has.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Read the sentence: The library has many ____ about astronauts and space travel. Which word is spelled correctly?`,
+      choices: [
+        no(`storys`, 'adds-s-without-changing-y'),
+        no(`storyes`, 'keeps-y-before-es'),
+        no(`story's`, 'apostrophe-for-plural'),
+        ok(`stories`),
+      ],
+      solution: `When a word ends in a consonant followed by "y," change the "y" to "i" and add "es," so "story" becomes "stories." An apostrophe shows ownership, not more than one.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'easy',
+      stem: `Which sentence has correct capitalization?`,
+      choices: [
+        no(`My friend Ayo and i live on Maple Street.`, 'lowercase-pronoun-i'),
+        no(`My friend Ayo and I live on maple street.`, 'lowercase-street-name'),
+        ok(`My friend Ayo and I live on Maple Street.`),
+        no(`My Friend Ayo and I live on Maple Street.`, 'capitalizes-common-noun'),
+      ],
+      solution: `The word "I" is always capitalized, and so are street names like Maple Street. "Friend" is a common noun, so it stays lowercase.`,
+    },
+  ],
+}
+
+export default skill
