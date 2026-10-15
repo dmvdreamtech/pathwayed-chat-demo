@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'write-g7-modifier-placement-more',
+  extends: 'modifier-placement',
+  subject: 'writing',
+  grade: 7,
+  group: 'Conventions',
+  name: 'Modifier Placement',
+  standards: ['L.7.1'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Which sentence contains a misplaced modifier?`,
+      choices: [
+        no(`Lucia bought a bike with a flat tire from a neighbor.`, 'flags-correct-phrase-order'),
+        ok(`Lucia bought a bike from a neighbor with a flat tire.`),
+        no(`From a neighbor, Lucia bought a bike that needed a chain.`, 'flags-opening-phrase'),
+        no(`Lucia rode her new bike to the park after school.`, 'flags-ordinary-sentence'),
+      ],
+      solution: `In "a neighbor with a flat tire," the phrase sits next to "neighbor," so it sounds like the neighbor has the flat tire. Moving the phrase next to "bike," as in the first sentence, fixes the problem.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Kenji packed one thing for the trip, a sweater, and nothing else. Which sentence says this clearly?`,
+      choices: [
+        no(`Only Kenji packed a sweater for the trip.`, 'only-modifies-subject'),
+        ok(`Kenji packed only a sweater for the trip.`),
+        no(`Kenji packed a sweater for the only trip.`, 'only-modifies-wrong-noun'),
+        no(`Kenji packed a sweater for the trip only.`, 'only-modifies-purpose'),
+      ],
+      solution: `"Only" limits the word right after it, so "only a sweater" says the sweater was the one thing he packed. "Only Kenji" means no one else packed a sweater, which is a different idea.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Read the sentence: "Nadia returned the backpack to the store that had a broken zipper." Which revision is clear?`,
+      choices: [
+        ok(`Nadia returned the backpack that had a broken zipper to the store.`),
+        no(`Nadia returned the backpack to the store, that had a broken zipper.`, 'comma-fix-for-modifier'),
+        no(`That had a broken zipper, Nadia returned the backpack to the store.`, 'clause-moved-to-front'),
+        no(`Nadia, who had a broken zipper, returned the backpack to the store.`, 'clause-attached-to-person'),
+      ],
+      solution: `The clause "that had a broken zipper" describes the backpack, so it belongs right after "backpack." Adding a comma does not help, because the clause still sits next to "store."`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Read the sentence: "Walking into the auditorium, the stage lights blinded Tomas." What is the problem?`,
+      choices: [
+        ok(`The opening phrase seems to say the stage lights were walking.`),
+        no(`The sentence is a fragment because it has no main verb.`, 'misidentifies-as-fragment'),
+        no(`The comma after "auditorium" should be taken out.`, 'blames-punctuation'),
+        no(`Nothing is wrong, because the phrase clearly describes Tomas.`, 'misses-dangling-modifier'),
+      ],
+      solution: `An opening phrase describes the subject that comes right after the comma, and here that subject is "the stage lights," which cannot walk. Tomas is the walker, but he is not the subject, so the phrase dangles.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which revision corrects this sentence: "Reaching for the top shelf, the jar of pickles slipped from Mei's hand."?`,
+      choices: [
+        no(`The jar of pickles, reaching for the top shelf, slipped from Mei's hand.`, 'moves-modifier-keeps-wrong-noun'),
+        ok(`Reaching for the top shelf, Mei let the jar of pickles slip from her hand.`),
+        no(`Reaching for the top shelf, the jar of pickles quickly slipped from Mei's hand.`, 'adds-words-keeps-dangler'),
+        no(`Reaching for the top shelf; the jar of pickles slipped from Mei's hand.`, 'punctuation-fix-for-modifier'),
+      ],
+      solution: `Mei is the one reaching, so "Mei" must be the subject right after the opening phrase. Moving the phrase next to "the jar of pickles" still makes the jar do the reaching.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Farah read most, but not all, of the pages. Which sentence says this clearly?`,
+      choices: [
+        no(`Farah almost read all of the pages.`, 'almost-modifies-verb'),
+        no(`Almost, Farah read all of the pages.`, 'almost-at-start'),
+        ok(`Farah read almost all of the pages.`),
+        no(`Farah read all of the pages almost.`, 'almost-at-end'),
+      ],
+      solution: `"Almost all" puts "almost" right before the amount it limits, so it means most of the pages. "Almost read" suggests she came close to reading but never started.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `In the sentence "Coaches who praise players often build their confidence," the word "often" could describe either verb. Which revision makes clear that the coaches praise often?`,
+      choices: [
+        ok(`Coaches who often praise players build their confidence.`),
+        no(`Coaches who praise players build their confidence often.`, 'moves-to-wrong-verb'),
+        no(`Often, coaches who praise players build their confidence.`, 'moves-to-main-clause'),
+        no(`Coaches who praise often players build their confidence.`, 'breaks-verb-object'),
+      ],
+      solution: `Placing "often" right before "praise" ties it only to praising. Moving it to the start or the end of the sentence ties it to "build" instead.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Which sentence places the phrase "covered in mud" so that it clearly describes the dog?`,
+      choices: [
+        no(`The dog ran through Aiyana's kitchen covered in mud.`, 'phrase-next-to-wrong-noun'),
+        ok(`Covered in mud, the dog ran through Aiyana's kitchen.`),
+        no(`Aiyana, covered in mud, watched the dog run through the kitchen.`, 'phrase-attached-to-person'),
+        no(`Covered in mud, Aiyana watched the dog run through the kitchen.`, 'opening-phrase-wrong-subject'),
+      ],
+      solution: `When "covered in mud" opens the sentence, it describes the subject right after the comma, which is "the dog." At the end of the first sentence, it sits next to "kitchen," so the kitchen sounds muddy.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Which sentence contains a dangling modifier?`,
+      choices: [
+        no(`To win the spelling bee, Jasmine studied for hours.`, 'flags-correct-opening'),
+        ok(`To win the spelling bee, hours of study were needed.`),
+        no(`Jasmine studied for hours to win the spelling bee.`, 'flags-end-position'),
+        no(`Studying for hours, Jasmine hoped to win the spelling bee.`, 'flags-participle-opening'),
+      ],
+      solution: `"To win the spelling bee" needs a person who is trying to win, but the subject is "hours of study," so the phrase has nothing sensible to describe. In the other sentences, Jasmine is the subject and the one doing the action.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Which revision corrects this sentence: "When only six years old, Leon's grandmother taught him to bake bread."?`,
+      choices: [
+        no(`When only six years old, Leon's grandmother taught Leon to bake bread.`, 'possessive-as-subject'),
+        no(`Leon's grandmother, when only six years old, taught him to bake bread.`, 'moves-dangler-to-middle'),
+        ok(`When Leon was only six years old, his grandmother taught him to bake bread.`),
+        no(`When only six years old, bread was taught to Leon by his grandmother.`, 'passive-voice-fix'),
+      ],
+      solution: `The short clause "When only six years old" leaves out its subject, so it attaches to "grandmother" and makes her six. Adding "Leon was" names who was six and removes the confusion.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Read the sentence: "Hiking up the steep trail, Marisol's backpack felt heavier with every step." Which word is the opening phrase actually attached to?`,
+      choices: [
+        no(`Marisol`, 'possessive-as-subject'),
+        ok(`backpack`),
+        no(`trail`, 'object-of-phrase'),
+        no(`step`, 'nearest-noun-at-end'),
+      ],
+      solution: `The subject of the sentence is "backpack"; "Marisol's" only tells whose backpack it is. So the sentence says the backpack was hiking, which is why it needs to be rewritten with Marisol as the subject.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Which sentence says that the bus left the station a moment ago?`,
+      choices: [
+        no(`Just the bus left the station.`, 'just-modifies-subject'),
+        no(`The bus left just the station.`, 'just-modifies-object'),
+        no(`The bus left the station, just.`, 'just-at-end'),
+        ok(`The bus just left the station.`),
+      ],
+      solution: `Placed right before the verb, "just" means a moment ago. "Just the bus" means only the bus, so it answers a different question about which vehicles left.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `The principal made an announcement on Monday that the field trip was canceled. Which sentence says this clearly?`,
+      choices: [
+        ok(`On Monday, the principal announced that the field trip was canceled.`),
+        no(`The principal announced that the field trip was canceled on Monday.`, 'squinting-time-phrase'),
+        no(`The principal announced that on Monday the field trip was canceled.`, 'phrase-moved-into-clause'),
+        no(`The principal announced that the field trip on Monday was canceled.`, 'phrase-attached-to-trip'),
+      ],
+      solution: `Putting "On Monday" at the front ties it to "announced," the action that happened on Monday. When it sits inside or after the "that" clause, it seems to tell when the trip was canceled or when the trip was planned.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `The runner set a new school record. Which sentence says this clearly?`,
+      choices: [
+        no(`Ms. Okafor, who had set a new school record, handed the trophy to the runner.`, 'clause-attached-to-presenter'),
+        ok(`Ms. Okafor handed the trophy to the runner who had set a new school record.`),
+        no(`Ms. Okafor handed the runner the trophy that had set a new school record.`, 'clause-attached-to-object'),
+        no(`Who had set a new school record, Ms. Okafor handed the trophy to the runner.`, 'clause-moved-to-front'),
+      ],
+      solution: `A clause beginning with "who" or "that" describes the noun right before it, so it must follow "runner." Placed after "Ms. Okafor," the clause correctly forms a sentence but says the wrong person set the record.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Which revision corrects this sentence: "The history quiz felt easy after studying all weekend."?`,
+      choices: [
+        no(`After studying all weekend, the history quiz felt easy.`, 'moves-dangler-to-front'),
+        ok(`After studying all weekend, Dev found the history quiz easy.`),
+        no(`The history quiz, after studying all weekend, felt easy.`, 'moves-dangler-to-middle'),
+        no(`The history quiz felt easy to Dev after studying all weekend.`, 'adds-person-not-as-subject'),
+      ],
+      solution: `The phrase "after studying all weekend" needs a person as the subject, and only the correct choice makes Dev the subject. Adding "to Dev" names him, but "the history quiz" is still the subject, so the quiz still seems to have studied.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Which sentence has NO modifier error?`,
+      choices: [
+        no(`Hoping to see the eclipse, the roof was where Yusuf set up his telescope.`, 'misses-dangling-modifier'),
+        no(`Yusuf set up the telescope on the roof that his uncle had lent him.`, 'misses-misplaced-clause'),
+        ok(`Hoping to see the eclipse, Yusuf climbed to the roof with his telescope.`),
+        no(`Yusuf almost waited three hours for the eclipse to begin.`, 'misses-limiting-modifier'),
+      ],
+      solution: `Only the correct choice puts "Yusuf," the one hoping, right after the opening phrase. The "lent him" sentence makes it sound like his uncle lent him the roof, and "almost waited" means he nearly waited but did not.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Chiara found a letter in her grandmother's attic, and the letter was written in Italian. Which sentence says this clearly?`,
+      choices: [
+        ok(`In her grandmother's attic, Chiara found a letter written in Italian.`),
+        no(`Chiara found a letter in her grandmother's attic written in Italian.`, 'phrase-next-to-wrong-noun'),
+        no(`Written in Italian, Chiara found a letter in her grandmother's attic.`, 'opening-phrase-wrong-subject'),
+        no(`Chiara, written in Italian, found a letter in her grandmother's attic.`, 'phrase-attached-to-person'),
+      ],
+      solution: `"Written in Italian" must sit right after "letter," and moving the attic phrase to the front makes room for that. In the second choice, the phrase follows "attic," so the attic seems to be written in Italian.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Which revision corrects this sentence: "Lin saw a moose driving through the national park."?`,
+      choices: [
+        no(`Lin saw a moose while it was driving through the national park.`, 'pronoun-keeps-wrong-doer'),
+        no(`Driving through the national park, a moose was seen by Lin.`, 'passive-creates-dangler'),
+        no(`A moose, driving through the national park, was seen by Lin.`, 'phrase-attached-to-animal'),
+        ok(`While driving through the national park, Lin saw a moose.`),
+      ],
+      solution: `Moving the phrase to the front and keeping "Lin" as the subject shows that Lin was driving. The "while it was driving" choice adds a clause, but "it" refers to the moose, so the moose is still behind the wheel.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Coach Barros wants to say that Tariq was the one player who ran extra laps after practice. Which sentence says this?`,
+      choices: [
+        no(`Tariq ran only extra laps after practice.`, 'only-modifies-object'),
+        no(`Tariq ran extra laps only after practice.`, 'only-modifies-time'),
+        ok(`Only Tariq ran extra laps after practice.`),
+        no(`Tariq ran extra laps after the only practice.`, 'only-modifies-practice'),
+      ],
+      solution: `"Only Tariq" limits the subject, so it means no other player ran extra laps. "Only after practice" instead limits when he ran, which is a different message.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Read the sentence: "The class learned about the bridge collapse from a guest engineer that happened in 1940." Which revision places every part clearly?`,
+      choices: [
+        no(`The class that happened in 1940 learned about the bridge collapse from a guest engineer.`, 'clause-attached-to-class'),
+        ok(`From a guest engineer, the class learned about the bridge collapse that happened in 1940.`),
+        no(`The class learned from a guest engineer that happened in 1940 about the bridge collapse.`, 'clause-split-from-noun'),
+        no(`The class learned about the bridge collapse from a guest engineer, who happened in 1940.`, 'comma-fix-for-modifier'),
+      ],
+      solution: `The clause "that happened in 1940" describes the collapse, so it must come right after "collapse," and moving "From a guest engineer" to the front makes that possible. Changing "that" to "who" with a comma still attaches the clause to the engineer.`,
+    },
+  ],
+}
+
+export default skill
