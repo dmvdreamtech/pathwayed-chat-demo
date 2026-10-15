@@ -31,7 +31,7 @@ const SLUG = /^(read|write|math)-g(k|[0-9]|1[0-2])-[a-z0-9-]+$/
 const MATH_SPAN = /\$[^$]*\$/g
 // '\frac' or '\times' written with one backslash in a TypeScript string becomes
 // a form feed or a tab, and KaTeX then shows garbage.
-const CONTROL = /[\x00-\x08\x0b\x0c\x0e-\x1f\t]/
+const CONTROL = { test: (s: string) => [...s].some((ch) => ch.charCodeAt(0) < 0x20 && ch !== '\n' && ch !== '\r') }
 const prose = (text: string, math: boolean) => (math ? text.replace(MATH_SPAN, ' ') : text)
 
 export const words = (s: string) => s.trim().split(/\s+/).filter(Boolean).length
