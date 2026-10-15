@@ -940,6 +940,40 @@ export interface Database {
         Args: { p_school_id: string }
         Returns: boolean
       }
+      // Migration 0038: platform admins manage school staff; no deletes.
+      admin_staff_schools: {
+        Args: Record<string, never>
+        Returns: { school_id: string; name: string; domains: string[]; staff_active: number; staff_total: number }[]
+      }
+      admin_list_staff: {
+        Args: { p_school: string }
+        Returns: {
+          id: string
+          email: string
+          full_name: string | null
+          role: 'teacher' | 'guidance' | 'admin' | 'academic_dean'
+          active: boolean
+          linked: boolean
+          created_at: string
+        }[]
+      }
+      admin_save_staff: {
+        Args: { p_school: string; p_rows: Json }
+        Returns: Json
+      }
+      admin_set_staff_role: {
+        Args: { p_staff_id: string; p_role: string }
+        Returns: undefined
+      }
+      admin_set_staff_active: {
+        Args: { p_staff_id: string; p_active: boolean }
+        Returns: undefined
+      }
+      // Migration 0038: guidance, admin and academic_dean at the student's school.
+      staff_student_test_scores: {
+        Args: { p_student_id: string }
+        Returns: Json
+      }
       // Migration 0037: why the caller must not be billed, or null.
       my_school_provided: {
         Args: Record<string, never>

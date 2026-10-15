@@ -30,6 +30,7 @@ import { PrepEssay } from '@/pages/prep/PrepEssay'
 import { StaffSearch } from '@/pages/staff/StaffSearch'
 import { StaffStudent } from '@/pages/staff/StaffStudent'
 import { SatCoverage } from '@/pages/admin/SatCoverage'
+import { StaffAdmin } from '@/pages/admin/StaffAdmin'
 
 export function AppRoutes() {
   return (
@@ -53,6 +54,8 @@ export function AppRoutes() {
       <Route path="/staff/students/:id" element={<StaffStudent />} />
       {/* Platform admins only: SAT content coverage, counted live (migration 0034). */}
       <Route path="/admin/sat-coverage" element={<SatCoverage />} />
+      {/* Platform admins only: each school's staff list (migration 0038). */}
+      <Route path="/admin/staff" element={<StaffAdmin />} />
       <Route path="/students" element={<StudentPicker />} />
       {/* Learning surface, gated by the app-managed trial. Once the trial ends
           with no active subscription, SubscriptionGate blocks entry (for all

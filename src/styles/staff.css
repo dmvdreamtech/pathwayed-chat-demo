@@ -343,6 +343,84 @@
   min-width: 180px;
 }
 
+/* /admin/staff */
+.shell .staff-admin-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+.staff-admin-bar select,
+.staff-activity select,
+.staff-add input,
+.staff-add select {
+  font: inherit;
+  font-size: 14px;
+  padding: 7px 10px;
+  border: 1.4px solid var(--line-2);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+}
+.shell .staff-notice {
+  margin-top: 14px;
+  font-weight: 600;
+}
+.staff-notice.ok {
+  color: var(--grow);
+}
+.staff-notice.err,
+.staff-danger {
+  color: #b0432e;
+}
+.staff-add {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px;
+}
+.staff-add label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.staff-row-off td {
+  color: var(--muted);
+}
+.staff-row-bad td {
+  background: #fdf1ee;
+}
+.staff-activity td.staff-wrap {
+  white-space: normal;
+  min-width: 220px;
+}
+.staff-confirm {
+  display: inline-flex;
+  gap: 10px;
+}
+.staff-preview {
+  margin-top: 14px;
+}
+.staff-preview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.staff-activity {
+  overflow-x: auto;
+}
+
 @media (max-width: 560px) {
   .shell .staff-name {
     font-size: 26px;

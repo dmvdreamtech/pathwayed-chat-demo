@@ -3,7 +3,8 @@ import { useNavigate, useParams } from 'react-router'
 import { ArrowLeft } from 'lucide-react'
 import { StaffGate } from '@/components/staff/StaffGate'
 import { StaffShell } from '@/components/staff/StaffShell'
-import { SHOW_TEST_SCORES_TAB, TestScoresTab } from '@/components/staff/TestScoresTab'
+import { TestScoresTab } from '@/components/staff/TestScoresTab'
+import { canViewTestScores } from '@/lib/staffScores'
 import { gradeLabel } from '@/lib/students'
 import {
   RECENT_WINS_DAYS,
@@ -41,6 +42,9 @@ function StaffStudentInner() {
   // shows the previous student's progress while the next one loads.
   const [loaded, setLoaded] = useState<{ id: string; data: StudentProgressData | null } | null>(null)
   const [tab, setTab] = useState<'progress' | 'scores'>('progress')
+  // Guidance, admin and academic_dean only (can_view_test_scores, 0030).
+  // Keyed by school, so it is asked once per school, not per student.
+  const [scoresFor, setScoresFor] = useState<{ school: string; ok: boolean } | null>(null)
   const now = useMemo(() => new Date(), [])
 
   useEffect(() => {
@@ -60,6 +64,19 @@ function StaffStudentInner() {
 
   const current = loaded?.id === id ? loaded : null
   const data = current?.data ?? null
+  const schoolId = data?.profile?.school_id ?? null
+
+  useEffect(() => {
+    if (!schoolId || scoresFor?.school === schoolId) return
+    let active = true
+    canViewTestScores(schoolId).then((ok) => {
+      if (active) setScoresFor({ school: schoolId, ok })
+    })
+    return () => {
+      active = false
+    }
+  }, [schoolId, scoresFor?.school])
+  const showScores = !!schoolId && scoresFor?.school === schoolId && scoresFor.ok
   const failed = current !== null && current.data === null
 
   const back = (
@@ -128,7 +145,7 @@ function StaffStudentInner() {
         </div>
       </div>
 
-      {SHOW_TEST_SCORES_TAB && (
+      {showScores && (
         <div className="staff-tabs" role="tablist">
           <button type="button" role="tab" aria-selected={tab === 'progress'} onClick={() => setTab('progress')}>
             Progress
@@ -139,8 +156,8 @@ function StaffStudentInner() {
         </div>
       )}
 
-      {SHOW_TEST_SCORES_TAB && tab === 'scores' ? (
-        <TestScoresTab />
+      {showScores && tab === 'scores' ? (
+        <TestScoresTab studentId={p.student_id} firstName={p.first_name} />
       ) : !hasActivity ? (
         <div className="panel">
           <p className="muted">
