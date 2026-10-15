@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'write-g5-possessives-and-apostrophes-more',
+  extends: 'possessives-and-apostrophes',
+  subject: 'writing',
+  grade: 5,
+  group: 'Conventions',
+  name: 'Possessives and Apostrophes',
+  standards: ['L.5.2'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Read the sentence: "The ____ red collar has a tiny silver bell on it." The collar belongs to one puppy. Which word correctly completes the sentence?`,
+      choices: [
+        ok(`puppy's`),
+        no(`puppies`, 'possessive-missing-apostrophe'),
+        no(`puppies'`, 'plural-for-singular-possessive'),
+        no(`puppys`, 'possessive-missing-apostrophe'),
+      ],
+      solution: `One puppy owns the collar, so add an apostrophe and s to the singular word: "puppy's." "Puppies'" would mean the collar belongs to several puppies.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Read the sentence: "Amara and Tobias said ____ bringing sliced oranges for the soccer team." Which word correctly completes the sentence?`,
+      choices: [
+        no(`their`, 'possessive-for-contraction'),
+        ok(`they're`),
+        no(`there`, 'wrong-word-homophone'),
+        no(`theyre`, 'contraction-missing-apostrophe'),
+      ],
+      solution: `"They're" is short for "they are," and "they are bringing" makes sense here. "Their" shows ownership, so it cannot stand in for "they are."`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Read the sentence: "The ____ wool is sheared every spring before the weather turns hot." The wool comes from a whole flock of sheep. Which word correctly completes the sentence?`,
+      choices: [
+        no(`sheeps'`, 'regularizes-irregular-plural'),
+        no(`sheeps`, 'regularizes-irregular-plural'),
+        ok(`sheep's`),
+        no(`sheep`, 'possessive-missing-apostrophe'),
+      ],
+      solution: `"Sheep" is already the plural, and a plural that does not end in s takes an apostrophe and s: "sheep's." "Sheeps'" treats the word as if it needed an added s, which it never does.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Read the sentence: "Ms. Okafor said, '____ going to love the new reading corner.'" Which word correctly completes the sentence?`,
+      choices: [
+        no(`Your`, 'possessive-for-contraction'),
+        no(`Youre`, 'contraction-missing-apostrophe'),
+        no(`Yours`, 'wrong-possessive-form'),
+        ok(`You're`),
+      ],
+      solution: `"You're" means "you are," and "you are going to love" makes sense. "Your" shows that something belongs to you, so it does not fit before "going."`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Read the sentence: "Six ____ waited at the corner for the bus to the museum." Which word correctly completes the sentence?`,
+      choices: [
+        no(`student's`, 'apostrophe-in-plural'),
+        ok(`students`),
+        no(`students'`, 'apostrophe-in-plural'),
+        no(`studentes`, 'wrong-plural-spelling'),
+      ],
+      solution: `The sentence only tells how many students there are; nothing belongs to them. A plain plural takes no apostrophe, so "students" is correct.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Which sentence uses "its" or "it's" correctly?`,
+      choices: [
+        no(`The turtle pulled it's head into the shell.`, 'contraction-for-possessive'),
+        ok(`It's too windy to fly the kite today.`),
+        no(`Its going to snow by tonight.`, 'possessive-for-contraction'),
+        no(`The kite lost its' long paper tail.`, 'wrong-possessive-form'),
+      ],
+      solution: `"It's too windy" means "it is too windy," so the apostrophe is correct. In the turtle sentence the head belongs to the turtle, so it needs possessive "its" with no apostrophe.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Read the sentence: "The ____ honking echoed across the pond at sunrise." The honking comes from many geese. Which word correctly completes the sentence?`,
+      choices: [
+        no(`geeses'`, 'regularizes-irregular-plural'),
+        ok(`geese's`),
+        no(`goose's`, 'singular-for-plural-possessive'),
+        no(`geese'`, 'apostrophe-only-on-irregular-plural'),
+      ],
+      solution: `"Geese" is an irregular plural that does not end in s, so its possessive adds an apostrophe and s: "geese's." "Goose's" would mean only one bird was honking.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Which phrase correctly means "the wheels of the two buses"?`,
+      choices: [
+        no(`the bus's wheels`, 'singular-for-plural-possessive'),
+        no(`the buses's wheels`, 'extra-s-after-plural'),
+        no(`the buse's wheels`, 'apostrophe-inside-word'),
+        ok(`the buses' wheels`),
+      ],
+      solution: `First make the plural, "buses," and then add only an apostrophe because it already ends in s: "buses' wheels." "Bus's wheels" points to just one bus.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Read the sentence: "The ____ costumes for the spring play are hanging in the hallway closet." The costumes belong to the actors in the cast. Which word correctly completes the sentence?`,
+      choices: [
+        no(`actor's`, 'singular-for-plural-possessive'),
+        ok(`actors'`),
+        no(`actors`, 'possessive-missing-apostrophe'),
+        no(`actors's`, 'extra-s-after-plural'),
+      ],
+      solution: `The costumes belong to many actors, so the apostrophe goes after the s of the plural: "actors'." "Actor's" would mean the costumes belong to just one actor.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Read the sentence: "Rafael left ____ backpack under the bleachers after the game." Which word correctly completes the sentence?`,
+      choices: [
+        no(`he's`, 'contraction-for-possessive'),
+        no(`his'`, 'apostrophe-in-possessive-pronoun'),
+        ok(`his`),
+        no(`hiss`, 'wrong-word-homophone'),
+      ],
+      solution: `"His" is a possessive pronoun, and possessive pronouns never use apostrophes. "He's" means "he is" or "he has," which does not make sense before "backpack."`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Which sentence uses "their," "there," and "they're" correctly?`,
+      choices: [
+        ok(`They're hanging their jackets over there.`),
+        no(`Their hanging they're jackets over there.`, 'mixes-up-their-theyre'),
+        no(`There hanging their jackets over they're.`, 'mixes-up-there-theyre'),
+        no(`They're hanging there jackets over their.`, 'mixes-up-their-there'),
+      ],
+      solution: `"They're" means "they are," "their" shows the jackets belong to them, and "there" names a place. Each of the other sentences swaps at least two of these words.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Read the sentence: "The ____ bicycles were lined up neatly outside the library." Several men own the bicycles. Which word correctly completes the sentence?`,
+      choices: [
+        no(`mens'`, 'regularizes-irregular-plural'),
+        no(`man's`, 'singular-for-plural-possessive'),
+        no(`mens`, 'possessive-missing-apostrophe'),
+        ok(`men's`),
+      ],
+      solution: `"Men" is an irregular plural without a final s, so the possessive is "men's." "Mens'" adds an s that the word does not have and then puts the apostrophe after it.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Read the sentence: "My cousin ____ finished her book report yet, so she will stay home." Which word correctly completes the sentence?`,
+      choices: [
+        no(`hasnt`, 'contraction-missing-apostrophe'),
+        ok(`hasn't`),
+        no(`has'nt`, 'apostrophe-in-wrong-place'),
+        no(`hasn't'`, 'extra-apostrophe'),
+      ],
+      solution: `In a contraction, the apostrophe takes the place of the missing letter. "Has not" drops the o, so the apostrophe goes between n and t: "hasn't."`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Which sentence has an apostrophe used correctly?`,
+      choices: [
+        no(`The bakery sells fresh bagel's every morning.`, 'apostrophe-in-plural'),
+        no(`We picked apple's and pear's at the orchard.`, 'apostrophe-in-plural'),
+        ok(`Grandpa's garden hose sprang a leak.`),
+        no(`The kitten's are asleep in a basket.`, 'apostrophe-in-plural'),
+      ],
+      solution: `"Grandpa's garden hose" shows the hose belongs to Grandpa, so it needs an apostrophe. The other sentences put apostrophes in simple plurals like "bagels" and "kittens," which only mean more than one.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Read the sentence: "The ____ hats blew off during the windy parade." The hats belong to the drummers in the marching band. Which word correctly completes the sentence?`,
+      choices: [
+        ok(`drummers'`),
+        no(`drummer's`, 'singular-for-plural-possessive'),
+        no(`drummers's`, 'extra-s-after-plural'),
+        no(`drummers`, 'possessive-missing-apostrophe'),
+      ],
+      solution: `Many drummers own the hats, so add only an apostrophe after the plural: "drummers'." "Drummer's" would mean one drummer lost all the hats.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Read the sentence: "The ____ cheese was nibbled away by morning." The cheese was eaten by a group of mice. Which word correctly completes the sentence?`,
+      choices: [
+        no(`mouses'`, 'regularizes-irregular-plural'),
+        no(`mouse's`, 'singular-for-plural-possessive'),
+        ok(`mice's`),
+        no(`mices'`, 'regularizes-irregular-plural'),
+      ],
+      solution: `"Mice" is the plural of "mouse" and does not end in s, so it takes an apostrophe and s: "mice's." "Mouse's" shows only one mouse ate the cheese, which does not match the sentence.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Which sentence is written correctly?`,
+      choices: [
+        no(`The two teachers' brought they're classes to the planetarium.`, 'apostrophe-in-plural'),
+        ok(`The two teachers brought their classes to the planetarium.`),
+        no(`The two teacher's brought their classes to the planetarium.`, 'apostrophe-in-plural'),
+        no(`The two teachers brought there classes to the planetarium.`, 'mixes-up-their-there'),
+      ],
+      solution: `"Teachers" is only a plural here, so it takes no apostrophe, and "their" shows the classes belong to the teachers. "There" names a place, so it cannot show ownership.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Which phrase correctly shows that the nests belong to several wrens?`,
+      choices: [
+        no(`the wren's nests`, 'singular-for-plural-possessive'),
+        no(`the wrens nest's`, 'apostrophe-on-wrong-word'),
+        ok(`the wrens' nests`),
+        no(`the wrens's nests`, 'extra-s-after-plural'),
+      ],
+      solution: `The owners are the wrens, so the apostrophe goes on "wrens," after its final s, and "nests" is a plain plural. "The wrens nest's" puts the apostrophe on the thing owned instead of the owners.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Read the sentence: "The class pet is a hamster, and ____ cage needs cleaning, so ____ your turn to help." Which pair of words correctly completes the sentence?`,
+      choices: [
+        no(`it's ... its`, 'swaps-possessive-and-contraction'),
+        no(`its ... its`, 'possessive-for-contraction'),
+        no(`it's ... it's`, 'contraction-for-possessive'),
+        ok(`its ... it's`),
+      ],
+      solution: `The cage belongs to the hamster, so the first blank needs possessive "its." The second blank means "it is your turn," so it needs the contraction "it's."`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Read the sentence: "Both ____ tablets need charging before ____ allowed to use them." The tablets belong to the two girls, Leila and Sun. Which pair of words correctly completes the sentence?`,
+      choices: [
+        no(`girl's ... their`, 'singular-for-plural-possessive'),
+        ok(`girls' ... they're`),
+        no(`girls ... there`, 'possessive-missing-apostrophe'),
+        no(`girls's ... their`, 'extra-s-after-plural'),
+      ],
+      solution: `The tablets belong to two girls, so the plural possessive is "girls'," and the second blank means "they are allowed," so it needs "they're." "Girl's" would show just one owner.`,
+    },
+  ],
+}
+
+export default skill
