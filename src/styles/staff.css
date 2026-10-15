@@ -199,13 +199,42 @@
   font-size: 13px;
   color: var(--muted);
 }
-.staff-tag {
+/* Status badges: .staff-level-<status> below is the ONE color per status, used by
+   the cards and the subject lists alike. */
+.staff-card-meta .staff-level {
   font-size: 11.5px;
-  font-weight: 700;
   padding: 2px 8px;
+}
+.shell .staff-quiet {
+  margin-bottom: 14px;
+}
+.staff-quiet p {
+  margin: 0;
+  font-weight: 600;
+  color: var(--ink);
+}
+/* Sort toggle on the student list */
+.staff-sort {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 4px;
+}
+.staff-sort button {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 12px;
   border-radius: 999px;
-  background: var(--grow-soft);
-  color: var(--grow);
+  border: 1.4px solid var(--line-2);
+  background: #fff;
+  color: var(--muted);
+  cursor: pointer;
+}
+.staff-sort button[aria-pressed='true'] {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: #fff;
 }
 .staff-small {
   font-size: 13px;
@@ -297,6 +326,21 @@
   padding: 9px 12px 9px 0;
   border-top: 1px solid var(--line-2);
   white-space: nowrap;
+}
+
+/* SAT coverage (/admin/sat-coverage) */
+.shell .staff-headline {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 4px 0 6px;
+}
+.shell .sat-cov-domain {
+  margin-top: 14px;
+}
+.sat-cov-domain td.sat-cov-name {
+  white-space: normal;
+  min-width: 180px;
 }
 
 @media (max-width: 560px) {

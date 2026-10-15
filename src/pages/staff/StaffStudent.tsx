@@ -16,6 +16,7 @@ import {
   formatLastActive,
   formatMinutes,
   loadStudentProgress,
+  quietLine,
   rightOf,
   subjectLabel,
   type CardItem,
@@ -101,7 +102,8 @@ function StaffStudentInner() {
   }
 
   const p = data.profile
-  const hasActivity = data.attempts.length > 0
+  // Check questions, or tutoring sessions without them: either is something to show.
+  const hasActivity = data.attempts.length > 0 || data.sessions.length > 0
 
   return (
     <StaffShell>
@@ -146,34 +148,52 @@ function StaffStudentInner() {
           </p>
         </div>
       ) : (
-        <ProgressTab data={data} now={now} />
+        <ProgressTab data={data} now={now} lastActiveAt={p.last_active_at} />
       )}
     </StaffShell>
   )
 }
 
-function ProgressTab({ data, now }: { data: StudentProgressData; now: Date }) {
+function ProgressTab({
+  data,
+  now,
+  lastActiveAt,
+}: {
+  data: StudentProgressData
+  now: Date
+  lastActiveAt: string | null
+}) {
   const cards = buildCards(data.mastery, data.attempts, data.skills, now)
   const groups = buildSubjectGroups(data.mastery, data.attempts, data.skills)
-  const activity = buildActivity(data.attempts, data.skills)
+  const activity = buildActivity(data.attempts, data.skills, data.sessions)
+  const quiet = cards.workingOn.length === 0 && cards.stuckOn.length === 0
 
   return (
     <>
+      {quiet && (
+        <div className="panel staff-quiet">
+          <p>{quietLine(lastActiveAt, now)}</p>
+        </div>
+      )}
       <div className="staff-cards">
-        <Card
-          title="Working on"
-          caption={`Practiced in the last ${WORKING_ON_DAYS} days`}
-          items={cards.workingOn}
-          empty={`No skills practiced in the last ${WORKING_ON_DAYS} days.`}
-          tone="work"
-        />
-        <Card
-          title="Stuck on"
-          caption={`${STUCK_MIN_ANSWERS} or more questions, under 70% right`}
-          items={cards.stuckOn}
-          empty="Nothing stuck right now."
-          tone="stuck"
-        />
+        {!quiet && (
+          <>
+            <Card
+              title="Working on"
+              caption={`Practiced in the last ${WORKING_ON_DAYS} days`}
+              items={cards.workingOn}
+              empty={`No skills practiced in the last ${WORKING_ON_DAYS} days.`}
+              tone="work"
+            />
+            <Card
+              title="Stuck on"
+              caption={`${STUCK_MIN_ANSWERS} or more questions, under 70% right`}
+              items={cards.stuckOn}
+              empty="Nothing stuck right now."
+              tone="stuck"
+            />
+          </>
+        )}
         <Card
           title="Recent wins"
           caption={`Last ${RECENT_WINS_DAYS} days`}
@@ -226,15 +246,15 @@ function ProgressTab({ data, now }: { data: StudentProgressData; now: Date }) {
               <tr key={`${a.dateKey}-${a.subject}`}>
                 <td>{formatDateKey(a.dateKey)}</td>
                 <td>{a.subject === 'other' ? 'Other' : subjectLabel(a.subject)}</td>
-                <td>{a.timeMs == null ? 'Not timed' : formatMinutes(a.timeMs)}</td>
-                <td>{rightOf(a.right, a.total)}</td>
+                <td>{a.kind === 'session' ? 'Tutoring session' : a.timeMs == null ? 'Not timed' : formatMinutes(a.timeMs)}</td>
+                <td>{a.kind === 'session' ? 'None answered' : rightOf(a.right, a.total)}</td>
               </tr>
             ))}
           </tbody>
         </table>
         <p className="muted staff-small">
-          Days with check questions, by subject. Time counts how long answers took, up to 5 minutes
-          per question.
+          Days with check questions or tutoring sessions, by subject. Time counts how long answers took,
+          up to 5 minutes per question.
         </p>
       </div>
     </>
@@ -269,7 +289,7 @@ function Card({
               <span className="staff-card-skill">{c.skillName}</span>
               <span className="staff-card-meta">
                 {subjectLabel(c.subject)} · {c.detail}
-                {c.tag && <span className="staff-tag">{c.tag}</span>}
+                {c.tag && <span className={`staff-level staff-level-${c.tagStatus ?? 'not_started'}`}>{c.tag}</span>}
               </span>
             </li>
           ))}

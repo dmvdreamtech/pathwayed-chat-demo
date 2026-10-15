@@ -53,6 +53,14 @@ export interface AttemptRow {
   created_at: string
 }
 
+/** A tutoring session row from staff_student_sessions: one per subject, last touch only. */
+export interface SessionRow {
+  subject: string
+  started_at: string
+  ended_at: string | null
+  updated_at: string
+}
+
 /** The school's local time. Pallotti is the only school today. */
 export const SCHOOL_TIME_ZONE = 'America/New_York'
 
@@ -94,14 +102,22 @@ const SUBJECT_LABEL: Record<string, string> = {
   writing: 'Writing',
   'prep-verbal': 'Test prep: verbal',
   'prep-quant': 'Test prep: quantitative',
+  'prep-sat-rw': 'Test prep: SAT Reading and Writing',
+  'prep-sat-math': 'Test prep: SAT Math',
 }
 
 export function subjectLabel(subject: string): string {
   return SUBJECT_LABEL[subject] ?? subject.charAt(0).toUpperCase() + subject.slice(1)
 }
 
-/** The three subjects shown in "Skills by subject", in this order. */
-export const CORE_SUBJECTS = ['reading', 'writing', 'math'] as const
+/** The boxes in "Skills by subject", in this order. Test prep gathers every
+ *  prep-* subject (HSPT, ISEE and SAT prep skills). */
+export const SUBJECT_BOXES: { key: string; label: string; matches: (subject: string) => boolean }[] = [
+  { key: 'reading', label: 'Reading', matches: (s) => s === 'reading' },
+  { key: 'writing', label: 'Writing', matches: (s) => s === 'writing' },
+  { key: 'math', label: 'Math', matches: (s) => s === 'math' },
+  { key: 'test-prep', label: 'Test prep', matches: (s) => s.startsWith('prep-') },
+]
 
 export function rightOf(right: number, total: number): string {
   return `${right} of ${total} right`
@@ -198,6 +214,8 @@ export interface CardItem {
   detail: string
   /** A status tag, e.g. "Ready to move on" or "Mastered". */
   tag: string | null
+  /** The status the tag names, so it wears the same badge color as everywhere else. */
+  tagStatus: MasteryStatus | null
 }
 
 export interface ProgressCards {
@@ -257,7 +275,12 @@ export function buildCards(
   for (const m of named) {
     if (m.status === 'mastered' && within(m.recheck_passed_at, RECENT_WINS_DAYS)) {
       wins.push({
-        item: { ...base(m), detail: formatShortDate(m.recheck_passed_at!), tag: STATUS_LABEL.mastered },
+        item: {
+          ...base(m),
+          detail: formatShortDate(m.recheck_passed_at!),
+          tag: STATUS_LABEL.mastered,
+          tagStatus: 'mastered',
+        },
         at: m.recheck_passed_at!,
       })
     } else if (
@@ -265,7 +288,12 @@ export function buildCards(
       within(m.advanced_at, RECENT_WINS_DAYS)
     ) {
       wins.push({
-        item: { ...base(m), detail: formatShortDate(m.advanced_at!), tag: STATUS_LABEL.advanced },
+        item: {
+          ...base(m),
+          detail: formatShortDate(m.advanced_at!),
+          tag: STATUS_LABEL.advanced,
+          tagStatus: 'advanced',
+        },
         at: m.advanced_at!,
       })
     }
@@ -277,14 +305,30 @@ export function buildCards(
       ...base(m),
       detail: rightOf(t!.right, t!.total),
       tag: m.status === 'advanced' ? STATUS_LABEL.advanced : null,
+      tagStatus: m.status === 'advanced' ? ('advanced' as const) : null,
     })),
     stuckOn: stuck.map(({ m, t }) => ({
       ...base(m),
       detail: rightOf(t!.right, t!.total),
       tag: null,
+      tagStatus: null,
     })),
     recentWins: wins.map((w) => w.item),
   }
+}
+
+/**
+ * The one line that replaces Working on and Stuck on when both are empty.
+ * "Not active in the last 14 days" is only said when it is true: a student who
+ * was in a tutoring session recently but answered no check questions gets the
+ * narrower statement instead.
+ */
+export function quietLine(lastActiveAt: string | null, now: Date): string {
+  if (!lastActiveAt) return 'No tutoring activity yet.'
+  const recent = now.getTime() - Date.parse(lastActiveAt) <= WORKING_ON_DAYS * DAY_MS
+  return recent
+    ? `No check questions in the last ${WORKING_ON_DAYS} days. Last active ${formatShortDate(lastActiveAt)}.`
+    : `Not active in the last ${WORKING_ON_DAYS} days. Last active ${formatShortDate(lastActiveAt)}.`
 }
 
 // ---------------------------------------------------------------------------
@@ -314,8 +358,11 @@ export function buildSubjectGroups(
   skills: Map<string, SkillInfo>,
 ): SubjectGroup[] {
   const tallies = tallyBySkill(attempts)
-  return CORE_SUBJECTS.map((subject) => {
-    const rows = mastery.filter((m) => skills.get(m.skill_id)?.subject === subject)
+  return SUBJECT_BOXES.map((box) => {
+    const rows = mastery.filter((m) => {
+      const subject = skills.get(m.skill_id)?.subject
+      return !!subject && box.matches(subject)
+    })
     const practiced = rows.filter(
       (m) => m.status !== 'not_started' || (tallies.get(m.skill_id)?.total ?? 0) > 0,
     )
@@ -335,8 +382,8 @@ export function buildSubjectGroups(
           STATUS_RANK[a.status] - STATUS_RANK[b.status] || a.skillName.localeCompare(b.skillName),
       )
     return {
-      subject,
-      label: subjectLabel(subject),
+      subject: box.key,
+      label: box.label,
       skills: list,
       notStarted: rows.length - practiced.length,
     }
@@ -351,6 +398,9 @@ export interface ActivityGroup {
   dateKey: string
   subject: string
   subjectLabel: string
+  /** 'checks': graded check questions. 'session': a tutoring session that day
+   *  in this subject with no check questions answered. */
+  kind: 'checks' | 'session'
   right: number
   total: number
   /** Sum of measured answer times (each capped), or null if none were timed. */
@@ -360,12 +410,16 @@ export interface ActivityGroup {
 export const ACTIVITY_LIMIT = 10
 
 /**
- * The last 10 day-and-subject groups of graded check questions. A "day" is a
- * calendar day in the school's time zone.
+ * The last 10 day-and-subject groups of graded check questions, plus tutoring
+ * sessions on a day and subject with no check questions, so a student who only
+ * talked with Nikki still shows what they worked on. A "day" is a calendar day
+ * in the school's time zone. Sessions keep one row per subject, so each adds the
+ * day it was last used.
  */
 export function buildActivity(
   attempts: AttemptRow[],
   skills: Map<string, SkillInfo>,
+  sessions: SessionRow[] = [],
   limit = ACTIVITY_LIMIT,
 ): ActivityGroup[] {
   const groups = new Map<string, ActivityGroup & { lastAt: string }>()
@@ -377,6 +431,7 @@ export function buildActivity(
       dateKey,
       subject,
       subjectLabel: subject === 'other' ? 'Other' : subjectLabel(subject),
+      kind: 'checks' as const,
       right: 0,
       total: 0,
       timeMs: null,
@@ -390,6 +445,21 @@ export function buildActivity(
     if (a.created_at > g.lastAt) g.lastAt = a.created_at
     groups.set(key, g)
   }
+  for (const s of sessions) {
+    const dateKey = localDateKey(s.updated_at)
+    const key = `${dateKey}|${s.subject}`
+    if (groups.has(key)) continue
+    groups.set(key, {
+      dateKey,
+      subject: s.subject,
+      subjectLabel: subjectLabel(s.subject),
+      kind: 'session',
+      right: 0,
+      total: 0,
+      timeMs: null,
+      lastAt: s.updated_at,
+    })
+  }
   return [...groups.values()]
     .sort((a, b) => b.dateKey.localeCompare(a.dateKey) || b.lastAt.localeCompare(a.lastAt))
     .slice(0, limit)
@@ -397,6 +467,7 @@ export function buildActivity(
       dateKey: g.dateKey,
       subject: g.subject,
       subjectLabel: g.subjectLabel,
+      kind: g.kind,
       right: g.right,
       total: g.total,
       timeMs: g.timeMs,
@@ -435,8 +506,11 @@ export function loadStaffMembership(uid: string): Promise<StaffMembership[]> {
   return promise
 }
 
-export async function searchStaffStudents(query: string): Promise<StaffStudentRow[]> {
-  const { data, error } = await supabase.rpc('staff_search_students', { p_query: query })
+/** 'recent': most recently active first (the default). 'name': A to Z. */
+export type StaffSort = 'recent' | 'name'
+
+export async function searchStaffStudents(query: string, order: StaffSort = 'recent'): Promise<StaffStudentRow[]> {
+  const { data, error } = await supabase.rpc('staff_search_students', { p_query: query, p_order: order })
   if (error) throw error
   return (data ?? []) as StaffStudentRow[]
 }
@@ -450,11 +524,14 @@ export interface StudentProgressData {
   profile: StaffStudentProfile | null
   mastery: MasteryRow[]
   attempts: AttemptRow[]
+  sessions: SessionRow[]
   skills: Map<string, SkillInfo>
 }
 
 export async function loadStudentProgress(studentId: string): Promise<StudentProgressData> {
   const profileReq = supabase.rpc('staff_student_profile', { p_student_id: studentId })
+  // Subject and dates only (0030): never the chat itself.
+  const sessionsReq = supabase.rpc('staff_student_sessions', { p_student_id: studentId })
   const masteryReq = supabase
     .from('student_skill_mastery')
     .select('skill_id, status, advanced_at, recheck_passed_at')
@@ -477,9 +554,11 @@ export async function loadStudentProgress(studentId: string): Promise<StudentPro
     if (!data || data.length < PAGE) break
   }
 
-  const [profileRes, masteryRes] = await Promise.all([profileReq, masteryReq])
+  const [profileRes, masteryRes, sessionsRes] = await Promise.all([profileReq, masteryReq, sessionsReq])
   if (profileRes.error) throw profileRes.error
   if (masteryRes.error) throw masteryRes.error
+  if (sessionsRes.error) throw sessionsRes.error
+  const sessions = (sessionsRes.data ?? []) as SessionRow[]
   const profile = ((profileRes.data ?? []) as StaffStudentProfile[])[0] ?? null
   const mastery = (masteryRes.data ?? []) as MasteryRow[]
 
@@ -494,5 +573,5 @@ export async function loadStudentProgress(studentId: string): Promise<StudentPro
     for (const s of (data ?? []) as SkillInfo[]) skills.set(s.id, s)
   }
 
-  return { profile, mastery, attempts, skills }
+  return { profile, mastery, attempts, sessions, skills }
 }

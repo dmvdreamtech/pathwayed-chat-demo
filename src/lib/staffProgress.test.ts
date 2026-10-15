@@ -7,6 +7,7 @@ import {
   formatLastActive,
   formatMinutes,
   localDateKey,
+  quietLine,
   type AttemptRow,
   type MasteryRow,
   type SkillInfo,
@@ -27,6 +28,8 @@ const skills = new Map<string, SkillInfo>([
   ['punc', { id: 'punc', name: 'Punctuation', subject: 'writing' }],
   ['old', { id: 'old', name: 'Old skill', subject: 'math' }],
   ['seed', { id: 'seed', name: 'Placed only', subject: 'reading' }],
+  ['sat-wic', { id: 'sat-wic', name: 'SAT Words in Context', subject: 'prep-sat-rw' }],
+  ['hspt-syn', { id: 'hspt-syn', name: 'Synonyms', subject: 'prep-verbal' }],
 ])
 
 function answers(skill: string, right: number, wrong: number, at: string, timeMs: number | null = 30_000): AttemptRow[] {
@@ -83,6 +86,11 @@ describe('buildCards', () => {
     expect(buildCards(slipped, attempts, skills, NOW).recentWins).toEqual([])
   })
 
+  it('tags carry their status, so each wears the one badge color for that status', () => {
+    expect(cards.workingOn.map((c) => c.tagStatus)).toEqual(['advanced', null])
+    expect(cards.recentWins.map((c) => c.tagStatus)).toEqual(['mastered', 'advanced'])
+  })
+
   it('is empty for a student with no activity', () => {
     expect(buildCards([], [], skills, NOW)).toEqual({ workingOn: [], stuckOn: [], recentWins: [] })
   })
@@ -91,8 +99,17 @@ describe('buildCards', () => {
 describe('buildSubjectGroups', () => {
   const groups = buildSubjectGroups(mastery, attempts, skills)
 
-  it('returns Reading, Writing, Math in that order', () => {
-    expect(groups.map((g) => g.label)).toEqual(['Reading', 'Writing', 'Math'])
+  it('returns Reading, Writing, Math and Test prep in that order', () => {
+    expect(groups.map((g) => g.label)).toEqual(['Reading', 'Writing', 'Math', 'Test prep'])
+  })
+
+  it('Test prep gathers every prep subject, HSPT, ISEE and SAT alike', () => {
+    const prep: MasteryRow[] = [
+      { skill_id: 'sat-wic', status: 'practicing', advanced_at: null, recheck_passed_at: null },
+      { skill_id: 'hspt-syn', status: 'advanced', advanced_at: daysAgo(2), recheck_passed_at: null },
+    ]
+    const box = buildSubjectGroups(prep, [], skills)[3]
+    expect(box.skills.map((s) => s.skillName)).toEqual(['Synonyms', 'SAT Words in Context'])
   })
 
   it('lists practiced skills strongest first and counts placed-only skills', () => {
@@ -129,6 +146,40 @@ describe('buildActivity', () => {
     const reading = out.find((g) => g.subject === 'reading')!
     expect([reading.right, reading.total, reading.timeMs]).toEqual([1, 2, 6 * 60_000])
     expect(out.find((g) => g.subject === 'writing')!.timeMs).toBeNull()
+  })
+})
+
+describe('buildActivity with tutoring sessions', () => {
+  const session = (subject: string, d: number) => ({
+    subject,
+    started_at: daysAgo(d + 30),
+    ended_at: daysAgo(d),
+    updated_at: daysAgo(d),
+  })
+
+  it('shows what a student worked on when they answered no check questions', () => {
+    const out = buildActivity([], skills, [session('math', 1), session('reading', 3)])
+    expect(out.map((g) => [g.dateKey, g.subject, g.kind])).toEqual([
+      ['2026-10-13', 'math', 'session'],
+      ['2026-10-11', 'reading', 'session'],
+    ])
+  })
+
+  it('does not add a session row where check questions already show that day and subject', () => {
+    const out = buildActivity(answers('lin', 2, 1, daysAgo(1)), skills, [session('math', 1)])
+    expect(out.map((g) => [g.subject, g.kind, g.total])).toEqual([['math', 'checks', 3]])
+  })
+})
+
+describe('quietLine', () => {
+  it('says not active only when the last activity is over 14 days old', () => {
+    expect(quietLine(daysAgo(20), NOW)).toBe('Not active in the last 14 days. Last active Sep 24.')
+  })
+  it('says no check questions when the student was in a session recently', () => {
+    expect(quietLine(daysAgo(3), NOW)).toBe('No check questions in the last 14 days. Last active Oct 11.')
+  })
+  it('handles a student who never started', () => {
+    expect(quietLine(null, NOW)).toBe('No tutoring activity yet.')
   })
 })
 

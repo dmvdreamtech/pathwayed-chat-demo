@@ -4,11 +4,21 @@ import { Search } from 'lucide-react'
 import { StaffGate } from '@/components/staff/StaffGate'
 import { StaffShell } from '@/components/staff/StaffShell'
 import { gradeLabel } from '@/lib/students'
-import { formatLastActive, searchStaffStudents, type StaffStudentRow } from '@/lib/staffProgress'
+import { formatLastActive, searchStaffStudents, type StaffSort, type StaffStudentRow } from '@/lib/staffProgress'
 
 /** The server returns at most this many rows (staff_search_students). */
 const RESULT_CAP = 200
 const DEBOUNCE_MS = 250
+const SORT_KEY = 'pathwayed.staff.sort'
+
+/** The remembered sort, if the browser lets us read it. Most recent by default. */
+function savedSort(): StaffSort {
+  try {
+    return localStorage.getItem(SORT_KEY) === 'name' ? 'name' : 'recent'
+  } catch {
+    return 'recent'
+  }
+}
 
 export function StaffSearch() {
   return (
@@ -21,6 +31,7 @@ export function StaffSearch() {
 function StaffSearchInner() {
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
+  const [sort, setSort] = useState<StaffSort>(savedSort)
   const [rows, setRows] = useState<StaffStudentRow[] | null>(null)
   const [failed, setFailed] = useState(false)
   const now = useMemo(() => new Date(), [])
@@ -28,7 +39,7 @@ function StaffSearchInner() {
   useEffect(() => {
     let active = true
     const timer = setTimeout(() => {
-      searchStaffStudents(query.trim())
+      searchStaffStudents(query.trim(), sort)
         .then((r) => {
           if (!active) return
           setRows(r)
@@ -43,7 +54,16 @@ function StaffSearchInner() {
       active = false
       clearTimeout(timer)
     }
-  }, [query])
+  }, [query, sort])
+
+  const chooseSort = (next: StaffSort) => {
+    setSort(next)
+    try {
+      localStorage.setItem(SORT_KEY, next)
+    } catch {
+      // A blocked store just means the choice is not remembered.
+    }
+  }
 
   const searching = query.trim() !== ''
 
@@ -65,6 +85,16 @@ function StaffSearchInner() {
           aria-label="Search students by name, grade, or email"
           autoFocus
         />
+      </div>
+
+      <div className="staff-sort" role="group" aria-label="Sort students">
+        <span className="staff-label">Sort</span>
+        <button type="button" aria-pressed={sort === 'recent'} onClick={() => chooseSort('recent')}>
+          Most recent
+        </button>
+        <button type="button" aria-pressed={sort === 'name'} onClick={() => chooseSort('name')}>
+          A to Z
+        </button>
       </div>
 
       {failed ? (
