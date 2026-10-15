@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'write-g6-pronoun-agreement-more',
+  extends: 'pronoun-agreement',
+  subject: 'writing',
+  grade: 6,
+  group: 'Conventions',
+  name: 'Pronoun Agreement',
+  standards: ['L.6.1'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Read the sentence: "The mayor ______ cut the ribbon at the new skate park." Which pronoun correctly fills the blank?`,
+      choices: [
+        ok(`herself`),
+        no(`her`, 'wrong-pronoun-case'),
+        no(`hers`, 'wrong-pronoun-type'),
+        no(`themselves`, 'pronoun-number-mismatch'),
+      ],
+      solution: `"Herself" is an intensive pronoun that stresses that the mayor did it in person. "Her" is an object pronoun and cannot sit right after the subject like this.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Read the sentence: "The blue kayak is ours, and the green one is ______." Which word correctly fills the blank?`,
+      choices: [
+        no(`their's`, 'apostrophe-in-possessive-pronoun'),
+        ok(`theirs`),
+        no(`there's`, 'contraction-for-possessive'),
+        no(`them`, 'wrong-pronoun-case'),
+      ],
+      solution: `"Theirs" is a possessive pronoun, and possessive pronouns never take an apostrophe. "Their's" looks possessive, but that spelling is not a word.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Read the sentence: "The librarian thanked Tavi and ______ for shelving the atlases." Which pronoun correctly fills the blank?`,
+      choices: [
+        no(`he`, 'subject-case-as-object'),
+        no(`himself`, 'reflexive-misuse'),
+        ok(`him`),
+        no(`his`, 'wrong-pronoun-type'),
+      ],
+      solution: `"Him" is the object of "thanked," so it takes the objective case; try it alone: "thanked him." "He" sounds formal, but it is a subject pronoun.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'medium',
+      stem: `Which sentence uses an intensive pronoun?`,
+      choices: [
+        no(`We reminded ourselves to stay calm on stage.`, 'reflexive-not-intensive'),
+        no(`Ours is the backdrop with the silver stars.`, 'possessive-not-intensive'),
+        ok(`We painted the whole backdrop ourselves.`),
+        no(`The art teacher helped us with the backdrop.`, 'object-not-intensive'),
+      ],
+      solution: `"Ourselves" in "We painted the whole backdrop ourselves" only adds emphasis, so the sentence still works without it. In "reminded ourselves," the pronoun is the needed object, which makes it reflexive.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Read the sentence: "When you ride the city bus, ______ should have your fare ready." Which pronoun fills the blank and keeps the sentence in the same person?`,
+      choices: [
+        no(`one`, 'person-shift-to-third'),
+        no(`we`, 'person-shift-to-first'),
+        no(`they`, 'person-shift-to-third-plural'),
+        ok(`you`),
+      ],
+      solution: `The sentence begins with "you" and ends with "your," so the middle pronoun must also be "you." "One" shifts to third person in the middle of the sentence.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Read the sentence: "A hummingbird can beat ______ wings more than fifty times a second." Which word correctly fills the blank?`,
+      choices: [
+        ok(`its`),
+        no(`their`, 'pronoun-number-mismatch'),
+        no(`it's`, 'contraction-for-possessive'),
+        no(`his`, 'person-pronoun-for-animal'),
+      ],
+      solution: `"A hummingbird" is singular, so the possessive is "its." "Their" is plural and does not match one bird.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Read the sentence: "If students want to join the debate club, you must sign up by Friday." Which revision corrects the shift in pronoun person?`,
+      choices: [
+        no(`If students want to join the debate club, we must sign up by Friday.`, 'person-shift-to-first'),
+        ok(`If students want to join the debate club, they must sign up by Friday.`),
+        no(`If students want to join the debate club, he must sign up by Friday.`, 'pronoun-number-mismatch'),
+        no(`If students want to join the debate club, one must sign up by Friday.`, 'pronoun-number-mismatch'),
+      ],
+      solution: `"Students" is third person plural, so "they" matches it. "We" still shifts person, and "he" and "one" are singular.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Read the sentence: "Grandpa Ruiz told Mateo that his bike tire was flat." Which revision makes it clear whose tire is flat?`,
+      choices: [
+        no(`Grandpa Ruiz told Mateo that the bike tire was flat.`, 'vague-reference-remains'),
+        no(`Grandpa Ruiz told Mateo that their bike tire was flat.`, 'pronoun-number-mismatch'),
+        ok(`Grandpa Ruiz told Mateo, "Your bike tire is flat."`),
+        no(`Grandpa Ruiz told him that his bike tire was flat.`, 'vague-pronoun-reference'),
+      ],
+      solution: `In the original, "his" could mean Grandpa Ruiz or Mateo; the quotation makes it clear the tire belongs to Mateo. "The bike tire" removes the pronoun but still does not say whose tire it is.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'hard',
+      stem: `Read the sentence: "At the museum, they said the dinosaur hall would close early." What is the problem with the pronoun "they"?`,
+      choices: [
+        no(`It should be the object form "them."`, 'wrong-pronoun-case'),
+        no(`It is plural, but "dinosaur hall" is singular.`, 'pronoun-matches-nearby-noun'),
+        no(`It should be "their" to show who owns the hall.`, 'wrong-pronoun-type'),
+        ok(`It does not refer to any person named in the sentence.`),
+      ],
+      solution: `"They" has no antecedent, so the reader cannot tell who made the announcement; a clear fix is "the guide said." "They" does not stand for the dinosaur hall, so its number is not the issue.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Which sentence uses pronouns correctly?`,
+      choices: [
+        no(`Him and Ravi built a birdhouse for the porch.`, 'object-case-as-subject'),
+        ok(`Ravi and he built a birdhouse for the porch.`),
+        no(`Ravi and himself built a birdhouse for the porch.`, 'reflexive-as-subject'),
+        no(`Ravi and him built a birdhouse for the porch.`, 'object-case-in-compound-subject'),
+      ],
+      solution: `The pronoun is part of the subject, so it needs the subjective case "he"; test it alone: "He built a birdhouse." "Him" sounds natural in casual speech, but it is an object pronoun.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Which sentence uses "myself" correctly?`,
+      choices: [
+        no(`Ms. Adeyemi gave Jonah and myself the trail map.`, 'reflexive-misuse'),
+        no(`Myself and Jonah studied the trail map together.`, 'reflexive-as-subject'),
+        ok(`I baked the cornbread for the picnic myself.`),
+        no(`Please call Jonah or myself if you get lost.`, 'reflexive-as-object'),
+      ],
+      solution: `In "I baked the cornbread myself," the word "myself" adds emphasis to "I," which is correct intensive use. In the other sentences, "myself" replaces "me" or "I" without referring back to anyone.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Read the sentence: "The bakery on Elm Street changed its hours, and they now open at six." Which revision fixes the shift in pronoun number?`,
+      choices: [
+        ok(`The bakery on Elm Street changed its hours, and it now opens at six.`),
+        no(`The bakery on Elm Street changed their hours, and they now open at six.`, 'pronoun-number-mismatch'),
+        no(`The bakery on Elm Street changed its hours, and we now open at six.`, 'person-shift-to-first'),
+        no(`The bakery on Elm Street changed it's hours, and it now opens at six.`, 'contraction-for-possessive'),
+      ],
+      solution: `"Bakery" is singular, so both pronouns should be singular: "its" and "it." Changing both to plural makes them consistent with each other but not with "bakery."`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Read the sentence: "The student ______ poem won first prize will read it aloud at the assembly." Which word correctly fills the blank?`,
+      choices: [
+        no(`who's`, 'contraction-for-possessive'),
+        no(`whom`, 'wrong-pronoun-case'),
+        no(`which`, 'which-for-person'),
+        ok(`whose`),
+      ],
+      solution: `The poem belongs to the student, so the possessive "whose" is needed. "Who's" sounds the same, but it means "who is."`,
+    },
+    {
+      slot: 14,
+      difficulty: 'easy',
+      stem: `Read the sentence: "Is this spiral notebook ______ or Kofi's?" Which word correctly fills the blank?`,
+      choices: [
+        no(`your's`, 'apostrophe-in-possessive-pronoun'),
+        ok(`yours`),
+        no(`you're`, 'contraction-for-possessive'),
+        no(`your`, 'possessive-adjective-alone'),
+      ],
+      solution: `"Yours" is a possessive pronoun that stands alone, with no apostrophe. "Your" must come before a noun, as in "your notebook," so it cannot end the phrase.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Read the sentences: "We hiked to the top of the ridge. The view made you feel tiny." Which revision of the second sentence keeps the pronoun person consistent?`,
+      choices: [
+        no(`The view made them feel tiny.`, 'person-shift-to-third'),
+        no(`The view made we feel tiny.`, 'subject-case-as-object'),
+        ok(`The view made us feel tiny.`),
+        no(`The view made one feel tiny.`, 'person-shift-to-third'),
+      ],
+      solution: `The first sentence uses "we," so the second should stay in first person plural with the object form "us." "We" is the right person, but it is the subject form and cannot follow "made."`,
+    },
+    {
+      slot: 16,
+      difficulty: 'medium',
+      stem: `Read the sentences: "The bake sale ran out of muffins early, and the cash box was missing ten dollars. This upset the organizers." Which revision of the second sentence makes the reference clear?`,
+      choices: [
+        no(`It upset the organizers.`, 'vague-pronoun-reference'),
+        no(`They upset the organizers.`, 'pronoun-number-mismatch'),
+        no(`This thing upset the organizers.`, 'vague-noun-substitute'),
+        ok(`The missing money upset the organizers.`),
+      ],
+      solution: `"This" could point to the muffins, the money, or both, so naming "the missing money" makes the meaning clear. "It" just swaps one vague pronoun for another.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Which sentence contains a vague pronoun?`,
+      choices: [
+        no(`Kenji finished practice, and then he called Arturo.`, 'clear-reference-mistaken-as-vague'),
+        ok(`Kenji called Arturo after he finished practice.`),
+        no(`After Arturo finished practice, Kenji called him.`, 'clear-reference-mistaken-as-vague'),
+        no(`Kenji called Arturo after Kenji finished practice.`, 'repeated-noun-mistaken-as-error'),
+      ],
+      solution: `In "Kenji called Arturo after he finished practice," "he" could mean either boy. In the other sentences, each pronoun has only one possible antecedent, and repeating a name is clear even if it sounds plain.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `In which sentence is "themselves" used as an intensive pronoun rather than a reflexive one?`,
+      choices: [
+        no(`The players taught themselves a new passing drill.`, 'reflexive-indirect-object'),
+        no(`The players dried themselves off after the storm.`, 'reflexive-direct-object'),
+        ok(`The players themselves chose the new team name.`),
+        no(`The players bought snacks for themselves after the game.`, 'reflexive-object-of-preposition'),
+      ],
+      solution: `"The players themselves chose the new team name" still makes sense without "themselves," so the word only adds emphasis. In the other sentences, removing "themselves" leaves the verb or preposition missing its object.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Which sentence has no shift in pronoun person or number?`,
+      choices: [
+        no(`If a person visits the aquarium, you should see the jellyfish.`, 'person-shift-to-second'),
+        ok(`When we visit the aquarium, we always stop at the jellyfish tank.`),
+        no(`When visitors enter the aquarium, he picks up a free map.`, 'pronoun-number-mismatch'),
+        no(`When I visit the aquarium, you can see the sharks up close.`, 'person-shift-to-second'),
+      ],
+      solution: `Both pronouns in the correct sentence are "we," so the person and number stay the same. The sentences with "you" start in first or third person and then switch to second person.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Which sentence uses every pronoun correctly?`,
+      choices: [
+        no(`Aunt Folasade and me made the tamales ourselves.`, 'object-case-as-subject'),
+        no(`Aunt Folasade and I made the tamales ourself.`, 'intensive-number-mismatch'),
+        no(`Aunt Folasade and myself made the tamales ourselves.`, 'reflexive-as-subject'),
+        ok(`Aunt Folasade and I made the tamales ourselves.`),
+      ],
+      solution: `"I" is the right case for part of the subject, and the plural intensive "ourselves" matches "Aunt Folasade and I." "Ourself" is the tempting choice, but it is not standard for a plural subject.`,
+    },
+  ],
+}
+
+export default skill
