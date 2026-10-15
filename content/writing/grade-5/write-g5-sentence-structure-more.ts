@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'write-g5-sentence-structure-more',
+  extends: 'sentence-structure',
+  subject: 'writing',
+  grade: 5,
+  group: 'Sentence and paragraph',
+  name: 'Sentence Structure',
+  standards: ['L.5.1'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Read the sentence: "Wow, that kite is flying higher than the flagpole!" Which word is an interjection?`,
+      choices: [
+        ok(`Wow`),
+        no(`higher`, 'comparative-as-interjection'),
+        no(`than`, 'connecting-word-as-interjection'),
+        no(`flying`, 'verb-as-interjection'),
+      ],
+      solution: `An interjection is a word that shows strong feeling, and "Wow" shows surprise at the start of the sentence. "Higher" is tempting because the sentence is exciting, but it only compares how high the kite flies.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Read the sentence: "Darnell left his muddy boots beside the back door." Which word is a preposition?`,
+      choices: [
+        no(`left`, 'verb-as-preposition'),
+        no(`muddy`, 'adjective-as-preposition'),
+        ok(`beside`),
+        no(`his`, 'pronoun-as-preposition'),
+      ],
+      solution: `"Beside" is a preposition because it shows where the boots are in relation to the door. "Left" is the verb that tells what Darnell did, not a word that shows position.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Read the sentence: "Mei wanted to play outside, ____ the rain kept falling all afternoon." Which conjunction best completes the sentence?`,
+      choices: [
+        no(`so`, 'result-for-contrast'),
+        ok(`but`),
+        no(`or`, 'choice-for-contrast'),
+        no(`because`, 'cause-for-contrast'),
+      ],
+      solution: `"But" shows a contrast: Mei wanted to go out, yet the rain stopped her. "So" is wrong because the rain was not a result of Mei wanting to play outside.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Read the sentence: "For the class trip, we can visit either the aquarium ____ the history museum." Which word correctly completes the sentence?`,
+      choices: [
+        ok(`or`),
+        no(`nor`, 'nor-with-either'),
+        no(`and`, 'and-with-either'),
+        no(`but`, 'but-with-either'),
+      ],
+      solution: `"Either" is always paired with "or" to show a choice between two things. "Nor" is tempting, but it belongs with "neither," not "either."`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which group of words is a complete sentence?`,
+      choices: [
+        no(`The puppet show in the gym after lunch.`, 'missing-verb'),
+        no(`Started in the gym right after lunch.`, 'missing-subject'),
+        no(`Because the puppets were made of socks.`, 'dependent-clause-alone'),
+        ok(`The puppet show began right after lunch.`),
+      ],
+      solution: `"The puppet show began right after lunch" has a subject (show) and a verb (began) and expresses a complete thought. "Because the puppets were made of socks" has a subject and verb, but "because" leaves the thought unfinished.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Read the sentence: "Last Saturday, Omar ____ his grandmother bake flatbread." Which verb correctly completes the sentence?`,
+      choices: [
+        no(`helps`, 'present-for-past'),
+        no(`will help`, 'future-for-past'),
+        ok(`helped`),
+        no(`helping`, 'nonfinite-verb'),
+      ],
+      solution: `"Last Saturday" tells us the action already happened, so the past tense "helped" is correct. "Helps" is present tense and does not match a day that is already over.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Read the sentence: "Siobhan ____ wanted cereal ____ wanted toast, so she ate a banana instead." Which pair of words correctly completes the sentence?`,
+      choices: [
+        ok(`neither ... nor`),
+        no(`either ... nor`, 'mismatched-correlative-pair'),
+        no(`both ... and`, 'pair-wrong-meaning'),
+        no(`neither ... or`, 'or-with-neither'),
+      ],
+      solution: `Siobhan ate a banana because she did not want either food, so "neither ... nor" fits the meaning and is a correct pair. "Both ... and" is a correct pair, but it would mean she wanted both foods, which does not make sense with eating a banana instead.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Read the sentences: "Rafael plays the trumpet. Rafael plays the drums." Which sentence correctly combines them using a pair of conjunctions?`,
+      choices: [
+        no(`Rafael plays both the trumpet or the drums.`, 'or-with-both'),
+        ok(`Rafael plays both the trumpet and the drums.`),
+        no(`Rafael plays either the trumpet and the drums.`, 'and-with-either'),
+        no(`Rafael plays neither the trumpet and the drums.`, 'and-with-neither'),
+      ],
+      solution: `Rafael plays two instruments, so "both ... and" joins them correctly. "Both ... or" is tempting, but "both" must be paired with "and," not "or."`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Read the sentence: "Aiyana opened the window, and a cool breeze blows into the room." Which revision corrects the shift in verb tense?`,
+      choices: [
+        no(`Aiyana opens the window, and a cool breeze blew into the room.`, 'moves-tense-shift'),
+        ok(`Aiyana opened the window, and a cool breeze blew into the room.`),
+        no(`Aiyana opened the window, and a cool breeze will blow into the room.`, 'future-for-past'),
+        no(`Aiyana opened the window, and a cool breeze blowing into the room.`, 'nonfinite-verb'),
+      ],
+      solution: `Both actions happened in the past, so both verbs should be past tense: "opened" and "blew." Changing "opened" to "opens" does not fix the problem; it just moves the shift to the other verb.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Read the sentence: "By the time the bus arrived, Tomas ____ his oatmeal." Which verb correctly completes the sentence?`,
+      choices: [
+        no(`has finished`, 'present-perfect-for-past-perfect'),
+        no(`will have finished`, 'future-perfect-for-past'),
+        no(`finishing`, 'nonfinite-verb'),
+        ok(`had finished`),
+      ],
+      solution: `Tomas finished eating before the bus arrived, and both events are in the past, so the past perfect "had finished" shows the earlier action. "Has finished" is present perfect, which does not fit a sentence about a past moment.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Read the sentence: "By the end of the summer, Amara ____ twelve chapter books." Which verb correctly completes the sentence?`,
+      choices: [
+        no(`had read`, 'past-perfect-for-future'),
+        ok(`will have read`),
+        no(`has read`, 'present-perfect-for-future'),
+        no(`was reading`, 'past-progressive-for-future'),
+      ],
+      solution: `The future perfect "will have read" tells about an action that will be complete by a time in the future, the end of the summer. "Had read" is past perfect, which is used for an action finished before another past event.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Read the sentence: "____ the trail was steep, Nikolai kept hiking until he reached the top." Which word best completes the sentence?`,
+      choices: [
+        no(`Because`, 'cause-for-contrast'),
+        no(`Unless`, 'condition-for-contrast'),
+        ok(`Although`),
+        no(`Until`, 'time-for-contrast'),
+      ],
+      solution: `"Although" shows a contrast: the trail was hard, but Nikolai did not stop. "Because" is wrong since a steep trail is not a reason to keep hiking.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Read the sentence: "The tired puppy curled up under the kitchen table and fell asleep." Which group of words is a prepositional phrase?`,
+      choices: [
+        no(`the tired puppy`, 'noun-phrase-as-prepositional'),
+        no(`curled up`, 'verb-phrase-as-prepositional'),
+        no(`and fell asleep`, 'conjunction-phrase-as-prepositional'),
+        ok(`under the kitchen table`),
+      ],
+      solution: `A prepositional phrase starts with a preposition and ends with a noun, so "under the kitchen table" is one; it tells where the puppy curled up. "Curled up" contains "up," but here it is part of the verb, not the start of a phrase that ends in a noun.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Which sentence uses an interjection and punctuates it correctly?`,
+      choices: [
+        ok(`Oops, I dropped my pencil under the desk.`),
+        no(`Oops I dropped my pencil under the desk.`, 'missing-comma-after-interjection'),
+        no(`Oops, I dropped, my pencil under the desk.`, 'extra-comma'),
+        no(`Oops I, dropped my pencil under the desk.`, 'misplaced-comma'),
+      ],
+      solution: `A mild interjection at the start of a sentence is followed by a comma, as in "Oops, I dropped my pencil." Leaving out the comma runs the interjection into the rest of the sentence.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Read the sentence: "The library closed early on Monday we returned our books on Tuesday." Which revision best fixes the run-on sentence?`,
+      choices: [
+        no(`The library closed early on Monday, we returned our books on Tuesday.`, 'comma-splice'),
+        ok(`The library closed early on Monday, so we returned our books on Tuesday.`),
+        no(`The library closed early on Monday so, we returned our books on Tuesday.`, 'comma-after-conjunction'),
+        no(`Because the library closed early on Monday, and we returned our books on Tuesday.`, 'mixed-construction'),
+      ],
+      solution: `Adding a comma and the conjunction "so" joins the two complete thoughts and shows cause and effect. Adding only a comma creates a comma splice, which is still an error.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Which sentence uses a pair of conjunctions correctly?`,
+      choices: [
+        no(`Neither Fatima or Jamal brought the paints.`, 'or-with-neither'),
+        no(`Both Fatima nor Jamal brought the paints.`, 'nor-with-both'),
+        ok(`Either Fatima or Jamal will bring the paints.`),
+        no(`Either Fatima and Jamal will bring the paints.`, 'and-with-either'),
+      ],
+      solution: `"Either" correctly pairs with "or." "Neither Fatima or Jamal" is a common mistake, because "neither" must be paired with "nor."`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Read the paragraph: "(1) Every morning, Haruto feeds the birds in his yard. (2) He fills the feeder with seeds. (3) Then he sat on the porch to watch. (4) The sparrows usually arrive first." Which sentence has an incorrect shift in verb tense?`,
+      choices: [
+        no(`Sentence 1`, 'time-phrase-confused-with-tense'),
+        no(`Sentence 2`, 'misses-tense-shift'),
+        ok(`Sentence 3`),
+        no(`Sentence 4`, 'adverb-confused-with-tense'),
+      ],
+      solution: `The paragraph describes something Haruto does every day, so it uses present tense, and "sat" in sentence 3 shifts to past tense; it should be "sits." Sentence 4 is tempting because of the word "usually," but "arrive" is present tense and matches the rest.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Which sentence correctly shows that one past action happened before another past action?`,
+      choices: [
+        no(`Zainab already packs her lunch when her mom called her to the car.`, 'tense-shift'),
+        no(`Zainab has already packed her lunch when her mom called her to the car.`, 'present-perfect-for-past-perfect'),
+        no(`Zainab will have already packed her lunch when her mom called her to the car.`, 'future-perfect-for-past'),
+        ok(`Zainab had already packed her lunch when her mom called her to the car.`),
+      ],
+      solution: `The past perfect "had packed" shows that packing happened before the past action "called." "Has packed" is present perfect, which does not match the past tense verb "called."`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Read the words: "Because the river had risen after three days of rain." Which revision turns this fragment into a complete sentence?`,
+      choices: [
+        ok(`Because the river had risen after three days of rain, the ranger closed the bridge.`),
+        no(`Because the river had risen after three days of rain and the bridge.`, 'adds-words-not-clause'),
+        no(`Because the river had risen, after three days of rain.`, 'adds-comma-only'),
+        no(`Because the river, which had risen after three days of rain.`, 'adds-another-dependent-part'),
+      ],
+      solution: `A clause that starts with "because" needs a main clause to finish the thought, and "the ranger closed the bridge" provides one. Adding a comma alone does not help, because the words still do not express a complete thought.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Read the sentence: "Before practice, Mateo stretched his legs, and he jogged slowly after the coach blew the whistle." Which word is used as a preposition?`,
+      choices: [
+        no(`after`, 'subordinating-conjunction-as-preposition'),
+        ok(`Before`),
+        no(`and`, 'coordinating-conjunction-as-preposition'),
+        no(`slowly`, 'adverb-as-preposition'),
+      ],
+      solution: `"Before" is a preposition here because it is followed by the noun "practice." "After" can be a preposition, but in this sentence it is followed by a whole clause, "the coach blew the whistle," so it works as a conjunction.`,
+    },
+  ],
+}
+
+export default skill
