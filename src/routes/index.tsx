@@ -28,6 +28,8 @@ import { PrepTimedSection } from '@/pages/prep/PrepTimedSection'
 import { PrepReview } from '@/pages/prep/PrepReview'
 import { PrepEssay } from '@/pages/prep/PrepEssay'
 import { StaffSearch } from '@/pages/staff/StaffSearch'
+import { StaffDashboard } from '@/pages/staff/StaffDashboard'
+import { StaffProgram } from '@/pages/staff/StaffProgram'
 import { StaffStudent } from '@/pages/staff/StaffStudent'
 import { SatCoverage } from '@/pages/admin/SatCoverage'
 import { StaffAdmin } from '@/pages/admin/StaffAdmin'
@@ -50,7 +52,9 @@ export function AppRoutes() {
       <Route path="/school" element={<SchoolStation />} />
       {/* Read-only staff view of school students' tutoring progress. Each page
           gates on an active school_staff row and redirects everyone else to /. */}
-      <Route path="/staff" element={<StaffSearch />} />
+      <Route path="/staff" element={<StaffDashboard />} />
+      <Route path="/staff/students" element={<StaffSearch />} />
+      <Route path="/staff/program" element={<StaffProgram />} />
       <Route path="/staff/students/:id" element={<StaffStudent />} />
       {/* Platform admins only: SAT content coverage, counted live (migration 0034). */}
       <Route path="/admin/sat-coverage" element={<SatCoverage />} />

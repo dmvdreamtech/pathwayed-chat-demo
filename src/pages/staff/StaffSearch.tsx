@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useNavigate } from 'react-router'
-import { Search } from 'lucide-react'
+import { Link, useNavigate } from 'react-router'
+import { ArrowLeft, Search } from 'lucide-react'
 import { StaffGate } from '@/components/staff/StaffGate'
 import { StaffShell } from '@/components/staff/StaffShell'
 import { gradeLabel } from '@/lib/students'
@@ -75,8 +75,11 @@ function StaffSearchInner() {
 
   return (
     <StaffShell>
-      <h1 className="greet" style={{ marginTop: 18 }}>
-        Student progress
+      <Link to="/staff" className="link staff-back">
+        <ArrowLeft size={16} aria-hidden /> Dashboard
+      </Link>
+      <h1 className="greet" style={{ marginTop: 10 }}>
+        All students
       </h1>
       <p className="muted">Tutoring progress for students at your school. Read only.</p>
 

@@ -343,6 +343,113 @@
   min-width: 180px;
 }
 
+/* /staff dashboard */
+.shell .staff-snapshot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 18px;
+  margin-top: 14px;
+}
+.staff-snapshot-line {
+  font-weight: 700;
+  color: var(--ink);
+}
+.staff-dash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+.shell .staff-dash-card {
+  margin: 0;
+}
+.staff-dash-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.shell .staff-dash-item {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  padding: 7px 8px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+.shell .staff-dash-item:hover,
+.shell .staff-dash-item:focus-visible {
+  background: #f7f2ea;
+}
+.staff-dash-main {
+  font-weight: 700;
+  color: var(--ink);
+}
+.staff-dash-sub {
+  font-size: 13px;
+  color: var(--muted);
+  flex: 1 1 auto;
+}
+.staff-dash-item .staff-level {
+  font-size: 11.5px;
+  padding: 2px 8px;
+}
+.staff-quicksearch {
+  margin-top: 10px;
+}
+.shell .staff-quick-results {
+  margin-top: 8px;
+}
+
+/* /staff/program */
+.staff-levels {
+  margin: 8px 0 0;
+}
+.staff-levels div {
+  margin-top: 10px;
+}
+.staff-levels dt {
+  font-weight: 700;
+  color: var(--ink);
+}
+.staff-levels dd {
+  margin: 2px 0 0;
+  color: var(--muted);
+}
+.staff-grade {
+  border-top: 1px solid var(--line-2);
+  padding: 8px 0;
+}
+.staff-grade summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ink);
+}
+.staff-grade ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  columns: 2 220px;
+}
+.shell .staff-h3 {
+  font-size: 16px;
+  margin: 16px 0 4px;
+  color: var(--navy);
+}
+.shell .staff-h4 {
+  font-size: 14px;
+  margin: 12px 0 4px;
+  color: var(--ink);
+}
+
 /* /admin/staff */
 .shell .staff-admin-bar {
   display: flex;

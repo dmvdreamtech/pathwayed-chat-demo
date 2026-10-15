@@ -940,6 +940,11 @@ export interface Database {
         Args: { p_school_id: string }
         Returns: boolean
       }
+      // Migration 0039: the /staff dashboard, the caller's own school only.
+      staff_dashboard: {
+        Args: Record<string, never>
+        Returns: Json
+      }
       // Migration 0038: platform admins manage school staff; no deletes.
       admin_staff_schools: {
         Args: Record<string, never>

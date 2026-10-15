@@ -81,7 +81,7 @@ function StaffStudentInner() {
 
   const back = (
     <button type="button" className="link staff-back" onClick={() => navigate('/staff')}>
-      <ArrowLeft size={16} aria-hidden /> All students
+      <ArrowLeft size={16} aria-hidden /> Dashboard
     </button>
   )
 
