@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'write-g6-sentence-boundaries-more',
+  extends: 'sentence-boundaries',
+  subject: 'writing',
+  grade: 6,
+  group: 'Sentence and paragraph',
+  name: 'Sentence Boundaries',
+  standards: ['L.6.1'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Which group of words is a complete sentence?`,
+      choices: [
+        no(`The ferry that leaves for the island at seven each morning.`, 'relative-clause-fragment'),
+        ok(`The ferry to the island leaves at seven each morning.`),
+        no(`Leaving for the island on the ferry at seven each morning.`, 'ing-verb-not-main-verb'),
+        no(`Because the ferry leaves for the island at seven each morning.`, 'subordinate-clause-fragment'),
+      ],
+      solution: `"The ferry to the island leaves at seven each morning" has a subject (ferry) and a main verb (leaves) and expresses a complete thought. The choice with "that leaves" sounds complete, but "that" turns the verb into part of a description, so the ferry never does anything.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Which of these is a sentence fragment?`,
+      choices: [
+        no(`The storm knocked out the power on Elm Street.`, 'complete-sentence-mistaken-for-fragment'),
+        no(`Light the candles before the storm gets worse.`, 'imperative-mistaken-for-fragment'),
+        ok(`After the storm knocked out the power on Elm Street.`),
+        no(`Neighbors on Elm Street lit candles after the storm.`, 'long-sentence-mistaken-for-fragment'),
+      ],
+      solution: `"After" makes the words that follow depend on another idea, so the group is an unfinished thought. "Light the candles" is a complete command because the subject "you" is understood.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Read the sentence: "Priya practiced her violin for an hour, she was ready for the recital." What is wrong with it?`,
+      choices: [
+        ok(`It is a comma splice: two complete sentences are joined by only a comma.`),
+        no(`It is a fragment: the second part has no subject or verb in it.`, 'fragment-confusion'),
+        no(`Nothing is wrong: a comma is enough to join the two parts.`, 'comma-joins-sentences'),
+        no(`The verb "practiced" should be changed to "practices."`, 'tense-confusion'),
+      ],
+      solution: `"Priya practiced her violin for an hour" and "she was ready for the recital" can each stand alone, and a comma by itself cannot join them. The second part has both a subject (she) and a verb (was), so it is not a fragment.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Which sentence is a run-on?`,
+      choices: [
+        no(`Marcus fed the goats, and Lena collected the eggs.`, 'compound-sentence-mistaken-for-run-on'),
+        no(`Marcus fed the goats while Lena collected the eggs.`, 'complex-sentence-mistaken-for-run-on'),
+        no(`Marcus fed the goats. Lena collected the eggs.`, 'two-sentences-mistaken-for-run-on'),
+        ok(`Marcus fed the goats Lena collected the eggs.`),
+      ],
+      solution: `Two complete sentences run together with no punctuation or joining word make a run-on. The version with ", and" is a correct compound sentence, not a run-on, even though it is just as long.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Read the words: "Our class visited the aquarium. Which has a tank full of jellyfish." Which revision fixes the fragment?`,
+      choices: [
+        no(`Our class visited the aquarium; which has a tank full of jellyfish.`, 'semicolon-before-dependent-clause'),
+        ok(`Our class visited the aquarium, which has a tank full of jellyfish.`),
+        no(`Our class visited the aquarium. Which had a tank full of jellyfish.`, 'fragment-unchanged'),
+        no(`Our class visited the aquarium. Which has a tank, full of jellyfish.`, 'comma-does-not-fix-fragment'),
+      ],
+      solution: `"Which has a tank full of jellyfish" cannot stand alone, so it should be attached to the sentence before it with a comma. A semicolon only joins two complete sentences, so it does not work before "which."`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Read the sentence: "Tomas wanted to join the chess club, ______ the meetings were on the same day as soccer practice." Which word best completes it?`,
+      choices: [
+        no(`so`, 'conjunction-wrong-logic'),
+        ok(`but`),
+        no(`nor`, 'nor-needs-negative'),
+        no(`because of`, 'preposition-not-conjunction'),
+      ],
+      solution: `The second idea is a problem that works against the first, so the contrast word "but" fits after the comma. "So" would mean the meetings happened because Tomas wanted to join, which makes no sense.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Read the sentence: "The bus was late, we missed the first part of the assembly." Which revision fixes the comma splice by using a subordinating word?`,
+      choices: [
+        no(`The bus was late, because of that we missed the first part of the assembly.`, 'comma-splice-remains'),
+        no(`Because the bus was late. We missed the first part of the assembly.`, 'subordinate-clause-fragment'),
+        ok(`Because the bus was late, we missed the first part of the assembly.`),
+        no(`The bus was late, and because we missed the first part of the assembly.`, 'subordinator-creates-fragment'),
+      ],
+      solution: `"Because" turns the first idea into a dependent clause, and the comma attaches it to the complete sentence that follows. Putting a period after "late" leaves "Because the bus was late" as a fragment.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Which sentence is punctuated correctly?`,
+      choices: [
+        no(`Amara rinsed the paintbrushes, then she stacked the paper.`, 'then-is-not-conjunction'),
+        ok(`Amara rinsed the paintbrushes, and then she stacked the paper.`),
+        no(`Amara rinsed the paintbrushes then she stacked the paper.`, 'run-on'),
+        no(`Amara rinsed the paintbrushes; and then she stacked the paper.`, 'semicolon-misused'),
+      ],
+      solution: `"Then" is not a joining word, so it needs "and" with a comma before it to connect two complete sentences. Using "then" with only a comma, which many writers do, creates a comma splice.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Read the paragraph: "(1) Kofi trained for the city race all summer. (2) Running three miles before breakfast. (3) By August, his time had improved. (4) He felt ready." Which sentence is a fragment?`,
+      choices: [
+        no(`Sentence 1`, 'long-sentence-mistaken-for-fragment'),
+        ok(`Sentence 2`),
+        no(`Sentence 3`, 'introductory-phrase-mistaken-for-fragment'),
+        no(`Sentence 4`, 'short-sentence-mistaken-for-fragment'),
+      ],
+      solution: `Sentence 2 has no subject, and "running" is not a main verb, so it is an incomplete thought. Sentence 4 is short, but it has a subject (he) and a verb (felt), so it is complete.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Read the words: "Isabel found an old map in her grandmother's attic. Rolled up inside a dusty wooden box." Which revision is correct?`,
+      choices: [
+        no(`Isabel found an old map in her grandmother's attic, it was rolled up inside a dusty wooden box.`, 'comma-splice'),
+        no(`Isabel found an old map in her grandmother's attic it was rolled up inside a dusty wooden box.`, 'run-on'),
+        ok(`Isabel found an old map rolled up inside a dusty wooden box in her grandmother's attic.`),
+        no(`Isabel found an old map in her grandmother's attic. Rolled up, inside a dusty wooden box.`, 'fragment-unchanged'),
+      ],
+      solution: `Moving the phrase "rolled up inside a dusty wooden box" next to "map" makes one complete sentence. Adding "it was" after a comma fixes the fragment but creates a comma splice.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Read the two sentences: "The trail was steep and rocky. Grandpa Ruiz walked slowly." Which choice correctly combines them?`,
+      choices: [
+        ok(`The trail was steep and rocky, so Grandpa Ruiz walked slowly.`),
+        no(`The trail was steep and rocky, Grandpa Ruiz walked slowly.`, 'comma-splice'),
+        no(`The trail was steep and rocky so, Grandpa Ruiz walked slowly.`, 'comma-after-conjunction'),
+        no(`Because the trail was steep and rocky. Grandpa Ruiz walked slowly.`, 'subordinate-clause-fragment'),
+      ],
+      solution: `A comma followed by the joining word "so" correctly links two complete sentences. The comma belongs before "so," not after it, and a comma alone makes a splice.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Which of these is a complete sentence?`,
+      choices: [
+        no(`Although the parade went on as planned in the rain.`, 'subordinate-clause-fragment'),
+        no(`The parade, which went on as planned in the rain.`, 'relative-clause-fragment'),
+        ok(`Although it rained, the parade went on as planned.`),
+        no(`The parade going on as planned despite the rain.`, 'ing-verb-not-main-verb'),
+      ],
+      solution: `"Although it rained" depends on the main clause "the parade went on as planned," which can stand alone. In the choice with "which," the parade is described but never given a main verb.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Read the words: "Since the gym was being painted." Which revision makes them a complete sentence?`,
+      choices: [
+        no(`Since the gym was being painted and basketball practice moved outside.`, 'compound-dependent-fragment'),
+        ok(`Since the gym was being painted, basketball practice moved outside.`),
+        no(`Since the gym was being painted, and basketball practice moved outside.`, 'conjunction-after-dependent-clause'),
+        no(`Since the gym was being painted for the whole week of practice.`, 'added-detail-not-main-clause'),
+      ],
+      solution: `"Since" makes the first part depend on a main clause, and "basketball practice moved outside" supplies one. Adding "and" puts the new idea inside the "since" clause, so the whole thing is still a fragment.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Which version of the sentence is punctuated correctly?`,
+      choices: [
+        no(`Nadia skipped the elevator, instead, she climbed all six flights of stairs.`, 'comma-splice-transition'),
+        no(`Nadia skipped the elevator; instead she, climbed all six flights of stairs.`, 'misplaced-comma'),
+        no(`Nadia skipped the elevator instead, she climbed all six flights of stairs.`, 'run-on'),
+        ok(`Nadia skipped the elevator; instead, she climbed all six flights of stairs.`),
+      ],
+      solution: `"Instead" is a transition, not a joining word, so a semicolon must come before it when it links two complete sentences. Commas on both sides of "instead" still leave a comma splice.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Which of these sentences is a comma splice?`,
+      choices: [
+        no(`The puppy chewed my sneaker, and it also tore a hole in the rug.`, 'comma-with-conjunction-mistaken'),
+        no(`When the puppy chewed my sneaker, it also tore a hole in the rug.`, 'introductory-clause-comma-mistaken'),
+        ok(`The puppy chewed my sneaker, it also tore a hole in the rug.`),
+        no(`The puppy, a curious beagle, also tore a hole in the rug.`, 'appositive-commas-mistaken'),
+      ],
+      solution: `Both "The puppy chewed my sneaker" and "it also tore a hole in the rug" are complete sentences joined by only a comma. The sentence starting with "When" is correct because its first part is a dependent clause.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Read the run-on: "The library closes early on Fridays Keisha returns her books on Thursdays." Which revision corrects it and shows that the first idea causes the second?`,
+      choices: [
+        no(`The library closes early on Fridays, Keisha returns her books on Thursdays.`, 'comma-splice'),
+        no(`The library closes early on Fridays, but Keisha returns her books on Thursdays.`, 'wrong-conjunction-meaning'),
+        no(`Since the library closes early on Fridays. Keisha returns her books on Thursdays.`, 'subordinate-clause-fragment'),
+        ok(`Since the library closes early on Fridays, Keisha returns her books on Thursdays.`),
+      ],
+      solution: `"Since" shows cause, and the comma joins the dependent clause to the main clause. The "but" version is punctuated correctly, yet it signals a contrast instead of a cause.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Read the paragraph: "(1) When the power went out, Ms. Okafor lit a lantern. (2) The students gathered around it, they took turns telling stories. (3) Some stories were funny, and others were spooky. (4) By the time the lights returned, nobody wanted to stop." Which sentence contains a comma splice?`,
+      choices: [
+        no(`Sentence 1`, 'introductory-clause-comma-mistaken'),
+        ok(`Sentence 2`),
+        no(`Sentence 3`, 'compound-sentence-mistaken-for-splice'),
+        no(`Sentence 4`, 'time-clause-comma-mistaken'),
+      ],
+      solution: `Sentence 2 joins two complete sentences, "The students gathered around it" and "they took turns telling stories," with only a comma. Sentence 3 is correct because "and" follows its comma.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Which of these word groups can stand alone as a complete sentence?`,
+      choices: [
+        ok(`Stay close to the trail markers.`),
+        no(`Staying close to the trail markers.`, 'ing-verb-not-main-verb'),
+        no(`If you stay close to the trail markers.`, 'subordinate-clause-fragment'),
+        no(`Hikers who stay close to the trail markers.`, 'relative-clause-fragment'),
+      ],
+      solution: `"Stay close to the trail markers" is a command, and its subject "you" is understood, so it is complete. The choice beginning "Hikers who" names a subject, but "who stay" only describes the hikers, so there is no main verb.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Read the passage: "Lucia loves to bake bread especially on cold Sunday mornings. When the kitchen is quiet. Her brother Ayo helps knead the dough." Which revision corrects every sentence boundary error?`,
+      choices: [
+        no(`Lucia loves to bake bread, especially on cold Sunday mornings when the kitchen is quiet, her brother Ayo helps knead the dough.`, 'comma-splice'),
+        ok(`Lucia loves to bake bread, especially on cold Sunday mornings. When the kitchen is quiet, her brother Ayo helps knead the dough.`),
+        no(`Lucia loves to bake bread. Especially on cold Sunday mornings. When the kitchen is quiet, her brother Ayo helps knead the dough.`, 'phrase-fragment-created'),
+        no(`Lucia loves to bake bread, especially on cold Sunday mornings. When the kitchen is quiet. Her brother Ayo helps knead the dough.`, 'dependent-clause-fragment-left'),
+      ],
+      solution: `The "when" clause must attach to "her brother Ayo helps knead the dough" to make a complete sentence. Joining everything with commas fixes the fragment but splices two complete sentences together.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Read the sentence: "Ravi studied the map carefully, he still took a wrong turn at the fork." Which revision fixes the comma splice and shows a contrast?`,
+      choices: [
+        no(`Ravi studied the map carefully, so he still took a wrong turn at the fork.`, 'wrong-conjunction-meaning'),
+        no(`Although Ravi studied the map carefully. He still took a wrong turn at the fork.`, 'subordinate-clause-fragment'),
+        no(`Ravi studied the map carefully, however, he still took a wrong turn at the fork.`, 'comma-splice-transition'),
+        ok(`Although Ravi studied the map carefully, he still took a wrong turn at the fork.`),
+      ],
+      solution: `"Although" signals a contrast and turns the first idea into a dependent clause joined by a comma. "However" with commas on both sides is still a comma splice, because "however" is a transition and needs a semicolon before it.`,
+    },
+  ],
+}
+
+export default skill
