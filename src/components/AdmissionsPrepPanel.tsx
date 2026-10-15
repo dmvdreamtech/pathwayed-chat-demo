@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { billingOffer, useSchoolProvided } from '@/lib/schoolProvided'
 import type { Student } from '@/lib/students'
 import { PREP_MODULES, getPrepModule } from '@/lib/prep/registry'
 import type { PrepModule } from '@/lib/prep/types'
@@ -70,6 +71,9 @@ export function AdmissionsPrepPanel({
   const [sub, setSub] = useState<Subscription | null>(null)
 
   const studentIds = useMemo(() => students.map((s) => s.id), [students])
+  // Migration 0037: a school-provided account is never offered prep to buy (the
+  // billing panel above already says why). Hooks above stay unconditional.
+  const offer = billingOffer(useSchoolProvided(userId), students)
 
   useEffect(() => {
     let active = true
@@ -238,6 +242,8 @@ export function AdmissionsPrepPanel({
       setBusy(false)
     }
   }
+
+  if (offer !== 'sell') return null
 
   return (
     <div className="panel" style={{ padding: '16px 18px', marginTop: 16 }}>

@@ -24,6 +24,7 @@ import { AvatarModePicker } from '@/components/AvatarModePicker'
 import { ChildPinControl } from '@/components/pin/ChildPinControl'
 import { Switch } from '@/components/ui/switch'
 import { isSchoolCovered } from '@/lib/schoolSession'
+import { SCHOOL_PROVIDED_BODY, SCHOOL_PROVIDED_TITLE, useSchoolProvided } from '@/lib/schoolProvided'
 import { getSubscription, type Subscription } from '@/lib/profile'
 import { TRIAL_SEAT_CAP, billingPhase, seatCap } from '@/lib/accessGate'
 import {
@@ -149,13 +150,21 @@ export function AddChild() {
   // Seat cap for this account: paid_seats when subscribed, else the trial cap (2).
   // A school-covered student is never billed or capped (their school holds the license).
   const covered = isSchoolCovered()
+  // Migration 0037: staff, platform admins, covered students and school
+  // addresses are never asked to buy a seat or subscribe.
+  const schoolReason = useSchoolProvided(user?.id)
+  const schoolProvided = !!schoolReason
+  // Never show a price before the answer is in.
+  const schoolKnown = schoolReason !== undefined
   const phase = sub ? billingPhase(sub, now) : 'expired'
   const cap = sub ? seatCap(sub) : TRIAL_SEAT_CAP
   const wouldExceedCap = !editing && !covered && childCount + 1 > cap
   // Subscribed: another child beyond the paid seats buys a seat (bill + proration).
-  const willBill = wouldExceedCap && phase === 'active'
+  const willBill = wouldExceedCap && phase === 'active' && schoolKnown && !schoolProvided
   // Free trial / expired: the 2-child cap requires subscribing before adding more.
-  const needsSubscribe = wouldExceedCap && phase !== 'active'
+  const needsSubscribe = wouldExceedCap && phase !== 'active' && schoolKnown && !schoolProvided
+  // A school-provided account at its cap: say so, never offer a purchase.
+  const schoolCapped = wouldExceedCap && schoolProvided
   const period: BillingPeriod = sub?.billingPeriod === 'annual' ? 'annual' : 'monthly'
   const addCost = `${formatMoney(ADDON_PRICE[period])}${intervalSuffix(period)}`
 
@@ -172,6 +181,11 @@ export function AddChild() {
     }
     setErrMsg('')
     setCapBlocked(false)
+
+    if (schoolCapped) {
+      setErrMsg(`${SCHOOL_PROVIDED_TITLE}. ${SCHOOL_PROVIDED_BODY}`)
+      return
+    }
 
     // Free trial (or expired) at the 2-child cap: can't add for free — send the
     // parent to Billing to subscribe. We never create the child here.
@@ -248,7 +262,9 @@ export function AddChild() {
       // clear message with an upgrade path (capBlocked renders the Settings CTA).
       console.error('[add-child] createStudent failed', { error, newId })
       setErrMsg(
-        isSeatCapError(error)
+        schoolProvided
+          ? `We couldn't add ${trimmed}. ${SCHOOL_PROVIDED_TITLE}, so there is no plan to change here.`
+          : isSeatCapError(error)
           ? `Every seat on your plan is in use, so we couldn't add ${trimmed}. Add a seat or change your ` +
               `plan in Settings, then try again.`
           : `We couldn't add ${trimmed}. If you've reached your plan's child limit, add a seat or ` +
@@ -559,7 +575,7 @@ export function AddChild() {
 
             {/* Upgrade path shown when a save was rejected (most often a seat/plan
                 limit): a clear, explicit route to Settings rather than a dead end. */}
-            {capBlocked && (
+            {capBlocked && !schoolProvided && (
               <button
                 type="button"
                 onClick={() => navigate('/settings', { state: { returnTo: '/children/new' } })}
@@ -583,7 +599,7 @@ export function AddChild() {
             <button
               type="button"
               onClick={handleSave}
-              disabled={saving || (!editing && !billingLoaded)}
+              disabled={saving || (!editing && (!billingLoaded || !schoolKnown))}
               style={{
                 display: 'flex',
                 alignItems: 'center',

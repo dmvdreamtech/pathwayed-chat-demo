@@ -4,6 +4,7 @@ import { isPrepModuleId, prepPriceEnv, prepStudentsMetaKey } from "./prep-core.j
 import { planQualifiesForBand } from "./billing-core.js"
 import { getPrepModule } from "../src/lib/prep/registry.js"
 import { requireUser, requireOwnedStudents } from "./require-auth.js"
+import { refuseIfSchoolProvided } from "./billing-guard.js"
 import { rateLimit, BILLING_LIMIT } from "./rate-limit.js"
 
 /**
@@ -47,6 +48,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const auth = await requireUser(req, res)
   if (!auth) return
+  // Never sell to an account a school provides for (migration 0037).
+  if (await refuseIfSchoolProvided(res, auth)) return
 
   const limited = rateLimit(`prep-buy:${auth.userId}`, BILLING_LIMIT)
   if (!limited.allowed) {

@@ -940,6 +940,11 @@ export interface Database {
         Args: { p_school_id: string }
         Returns: boolean
       }
+      // Migration 0037: why the caller must not be billed, or null.
+      my_school_provided: {
+        Args: Record<string, never>
+        Returns: 'platform_admin' | 'school_staff' | 'covered_student' | 'school_domain' | null
+      }
       // Migration 0034: platform admins only; refuses everyone else.
       is_platform_admin: {
         Args: Record<string, never>

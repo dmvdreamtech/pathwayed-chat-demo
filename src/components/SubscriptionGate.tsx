@@ -7,6 +7,7 @@ import { listStudents, type Student } from '@/lib/students'
 import { hasCoveredStudent, hasLearningAccess } from '@/lib/accessGate'
 import { getPrepEntitlements, isKidEntitled, prepModulesUsingSkill } from '@/lib/prep/entitlements'
 import { PlanPicker } from '@/components/PlanPicker'
+import { SCHOOL_PROVIDED_BODY, SCHOOL_PROVIDED_TITLE, billingOffer, useSchoolProvided } from '@/lib/schoolProvided'
 import { TopMenu } from '@/components/TopMenu'
 import '@/styles/app-screens.css'
 
@@ -57,6 +58,9 @@ export function SubscriptionGate({
   const [students, setStudents] = useState<Student[]>([])
   // Snapshot the clock once at mount — a stable render-time value for the gate.
   const [now] = useState(() => Date.now())
+  // Migration 0037: staff, platform admins and school addresses get a note, not
+  // a plan picker, if they ever reach a locked screen.
+  const schoolReason = useSchoolProvided(sessionCovered ? null : user?.id)
 
   useEffect(() => {
     // Covered students never touch billing state; an unauthenticated view (no
@@ -120,6 +124,32 @@ export function SubscriptionGate({
     )
   }
   if (wantsPrep && prepAllowed) return <>{children}</>
+
+  const offer = billingOffer(schoolReason, students)
+  if (offer === 'wait') {
+    return (
+      <div className="kid-screen">
+        <div className="shell">
+          <p className="muted">Loading…</p>
+        </div>
+      </div>
+    )
+  }
+  if (offer === 'school') {
+    return (
+      <div className="kid-screen">
+        <div className="shell">
+          <TopMenu />
+          <h1 className="greet" style={{ marginTop: 18 }}>
+            {SCHOOL_PROVIDED_TITLE}
+          </h1>
+          <p className="muted">
+            {SCHOOL_PROVIDED_BODY} Learning on this account is set up through your school.
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   // Locked: parent-facing subscribe prompt with the plan picker.
   return (

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { isSchoolCovered } from '@/lib/schoolSession'
+import { SCHOOL_PROVIDED_BODY, SCHOOL_PROVIDED_TITLE, billingOffer, useSchoolProvided } from '@/lib/schoolProvided'
 import { activeStudents, type Student } from '@/lib/students'
 import { ACTIVE_PREP_STATUSES, getPrepEntitlements } from '@/lib/prep/entitlements'
 import { getSubscription, type Subscription } from '@/lib/profile'
@@ -47,6 +47,9 @@ export function BillingPanel({ students, userId }: { students: Student[]; userId
   // of these while their learning status is trial/expired, and still needs the
   // portal — see the trial/expired branches below.
   const [hasActivePrep, setHasActivePrep] = useState(false)
+  // Staff, platform admins, covered students and school addresses are never
+  // offered a plan (migration 0037). Read from the database, not this tab.
+  const offer = billingOffer(useSchoolProvided(userId), students)
 
   useEffect(() => {
     let active = true
@@ -100,24 +103,24 @@ export function BillingPanel({ students, userId }: { students: Student[]; userId
     }
   }
 
-  if (loading) {
+  // A school-provided account never sees a plan, a trial countdown or a price.
+  // Checked before any trial or subscription state is considered.
+  if (offer === 'school') {
     return (
       <div className="panel" style={{ padding: '16px 18px' }}>
-        <h3 style={{ margin: 0 }}>Billing</h3>
-        <p className="muted" style={{ fontSize: 13, margin: '8px 0 0' }}>Loading…</p>
+        <h3 style={{ margin: 0 }}>{SCHOOL_PROVIDED_TITLE}</h3>
+        <p className="muted" style={{ fontSize: 13, margin: '8px 0 0' }}>
+          {SCHOOL_PROVIDED_BODY}
+        </p>
       </div>
     )
   }
 
-  // School-covered students never see billing — their school holds the license.
-  // This bypass is checked before any trial/subscription state is considered.
-  if (isSchoolCovered()) {
+  if (loading || offer === 'wait') {
     return (
       <div className="panel" style={{ padding: '16px 18px' }}>
         <h3 style={{ margin: 0 }}>Billing</h3>
-        <p className="muted" style={{ fontSize: 13, margin: '8px 0 0' }}>
-          Covered by your school, no personal subscription needed.
-        </p>
+        <p className="muted" style={{ fontSize: 13, margin: '8px 0 0' }}>Loading…</p>
       </div>
     )
   }
