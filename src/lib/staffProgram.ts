@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/supabase'
 import { PREP_MODULES } from '@/lib/prep/registry'
+import { listPracticeableSkills } from '@/lib/questions'
 import {
   ADVANCE_MIN_ACCURACY,
   ADVANCE_MIN_ATTEMPTS,
@@ -57,10 +58,12 @@ export const TEST_DESCRIPTIONS: Record<string, string> = {
 const satName = (name: string) => name.replace(/^SAT\s+/, '')
 
 /** Pure: group the catalog for the page. */
-export function buildProgramView(rows: CatalogRow[]): ProgramView {
+export function buildProgramView(rows: CatalogRow[], live?: Set<string>): ProgramView {
   const skills = rows.filter((r) => r.level === 'skill')
   const core = CORE.map(({ subject, label }) => {
-    const mine = skills.filter((r) => r.subject === subject && r.ccss_grade_num !== null)
+    // Only skills students can practice now (at least one published question).
+    // A new skill whose questions are still drafts is not shown yet.
+    const mine = skills.filter((r) => r.subject === subject && r.ccss_grade_num !== null && (!live || live.has(r.id)))
     const grades = [...new Set(mine.map((r) => r.ccss_grade_num as number))].sort((a, b) => a - b)
     return {
       subject,
@@ -130,10 +133,16 @@ export const NIKKI_HOW =
   'each step, and checks understanding with short graded questions that move a skill through the levels above.'
 
 export async function loadProgram(): Promise<ProgramView> {
-  const { data, error } = await supabase
-    .from('skills')
-    .select('id, level, parent_id, subject, name, ccss_grade_num, sat_skill_code')
-    .in('subject', ['reading', 'writing', 'math', 'prep-sat-rw', 'prep-sat-math'])
+  const [{ data, error }, practiceable] = await Promise.all([
+    supabase
+      .from('skills')
+      .select('id, level, parent_id, subject, name, ccss_grade_num, sat_skill_code')
+      .in('subject', ['reading', 'writing', 'math', 'prep-sat-rw', 'prep-sat-math']),
+    listPracticeableSkills(),
+  ])
   if (error) throw error
-  return buildProgramView((data ?? []) as CatalogRow[])
+  // If the practiceable read fails it returns []; show the full catalog then
+  // rather than an empty page.
+  const live = practiceable.length ? new Set(practiceable.map((p) => p.skill_id)) : undefined
+  return buildProgramView((data ?? []) as CatalogRow[], live)
 }

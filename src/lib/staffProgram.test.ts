@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 
 const query = vi.hoisted(() => ({ select: '' }))
+vi.mock('@/lib/questions', () => ({ listPracticeableSkills: async () => [] }))
 vi.mock('@/lib/supabase', () => ({
   supabase: {
     from: () => ({
@@ -69,6 +70,15 @@ describe('program guide', () => {
     expect(LEVELS[1].text).toContain('70% right over at least 5')
     expect(LEVELS[2].text).toContain('85% right over at least 8')
     expect(LEVELS[2].text).toContain('at least 3 days later')
+  })
+
+  it('hides Reading, Writing and Math skills with no published questions yet', () => {
+    const live = new Set(['m1', 'r1'])
+    const v2 = buildProgramView(rows, live)
+    expect(v2.core.find((s) => s.subject === 'math')!.grades.map((g) => g.skills)).toEqual([['Fractions']])
+    expect(v2.core.find((s) => s.subject === 'reading')!.total).toBe(1)
+    // SAT still lists every official skill.
+    expect(v2.satSkillCount).toBe(2)
   })
 
   it('Nikki is two sentences', () => {
