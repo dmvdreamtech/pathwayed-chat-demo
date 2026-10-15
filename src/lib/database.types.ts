@@ -940,6 +940,26 @@ export interface Database {
         Args: { p_school_id: string }
         Returns: boolean
       }
+      // Migration 0040: K-12 coverage per target skill. Platform admins only.
+      content_coverage: {
+        Args: Record<string, never>
+        Returns: {
+          subject: string
+          grade: number
+          grp: string
+          name: string
+          standards: string[]
+          skill_slugs: string[]
+          sort: number
+          target: number
+          skill_exists: boolean
+          drafted: number
+          checks_passing: number
+          reviewed: number
+          published: number
+          published_reviewed: number
+        }[]
+      }
       // Migration 0039: the /staff dashboard, the caller's own school only.
       staff_dashboard: {
         Args: Record<string, never>
