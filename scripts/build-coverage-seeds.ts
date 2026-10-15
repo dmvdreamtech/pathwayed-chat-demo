@@ -1,7 +1,8 @@
 /**
  * Seed builder for the K-12 Reading and Writing coverage content (run with Bun):
  *
- *   bun run scripts/build-coverage-seeds.ts
+ *   bun run scripts/build-coverage-seeds.ts                 every skill
+ *   bun run scripts/build-coverage-seeds.ts content/...ts   just these
  *
  * Reads every skill file under content/ and writes one seed per skill to
  * seeds/coverage/<slug>.sql. NOTHING HERE PUBLISHES:
@@ -20,8 +21,8 @@
  */
 import { createHash } from 'node:crypto'
 import { mkdirSync, writeFileSync } from 'node:fs'
-import { dirname, join } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { dirname, join, relative, resolve, sep } from 'node:path'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { itemCount, skillIssues } from '../content/checks'
 import { loadSkills } from '../content/load'
 import type { ContentChoice, ContentItem, ContentSkill } from '../content/types'
@@ -137,7 +138,17 @@ where public.passages.status = 'draft';
 }
 
 if (import.meta.main) {
-  const loaded = await loadSkills(join(ROOT, 'content'))
+  // With file arguments, build just those skills; otherwise every file under content/.
+  const args = process.argv.slice(2)
+  const loaded = args.length
+    ? await Promise.all(
+        args.map(async (a) => {
+          const abs = resolve(ROOT, a)
+          const mod = (await import(pathToFileURL(abs).href)) as { default: ContentSkill }
+          return { file: relative(ROOT, abs).split(sep).join('/'), skill: mod.default }
+        }),
+      )
+    : await loadSkills(join(ROOT, 'content'))
   const problems = loaded.flatMap(({ skill }) => skillIssues(skill))
   const slugs = loaded.map(({ skill }) => skill.slug)
   const dup = slugs.filter((s, i) => slugs.indexOf(s) !== i)
