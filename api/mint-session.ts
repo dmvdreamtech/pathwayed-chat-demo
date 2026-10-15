@@ -1,5 +1,6 @@
 import { createHmac, randomUUID } from "node:crypto"
 import type { SupabaseClient } from "@supabase/supabase-js"
+import { lastNameUpdate } from "./school-bridge.js"
 
 // Minting for the K-8 covered-student identity (school-bridge, Option A).
 //
@@ -82,7 +83,7 @@ export type MintResult =
  */
 export async function provisionAndMint(
   svc: SupabaseClient,
-  dean: { student_id: string; first_name: string; grade: string },
+  dean: { student_id: string; first_name: string; last_name?: string; grade: string },
   schoolId: string,
 ): Promise<MintResult> {
   let uid: string
@@ -101,6 +102,8 @@ export async function provisionAndMint(
       .from("students")
       .update({
         first_name: dean.first_name,
+        // Migration 0035: staff at this school see it. Server-written only.
+        ...lastNameUpdate(dean),
         grade: dean.grade,
         school_covered: true,
         // The school Dean resolved this PIN against, so staff there can see
@@ -129,6 +132,7 @@ export async function provisionAndMint(
       .insert({
         parent_id: uid,
         first_name: dean.first_name,
+        ...lastNameUpdate(dean),
         grade: dean.grade,
         level: "on",
         dean_student_id: dean.student_id,

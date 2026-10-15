@@ -18,6 +18,7 @@ import {
   loadStudentProgress,
   quietLine,
   rightOf,
+  staffDisplayName,
   subjectLabel,
   type CardItem,
   type StudentProgressData,
@@ -110,7 +111,7 @@ function StaffStudentInner() {
       {back}
 
       <div className="panel staff-header">
-        <h1 className="staff-name">{p.first_name}</h1>
+        <h1 className="staff-name">{staffDisplayName(p)}</h1>
         <p className="muted staff-sub">
           {gradeLabel(p.grade)}
           {p.email ? ` · ${p.email}` : ''}

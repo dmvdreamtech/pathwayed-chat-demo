@@ -8,6 +8,7 @@ import {
   formatMinutes,
   localDateKey,
   quietLine,
+  staffDisplayName,
   type AttemptRow,
   type MasteryRow,
   type SkillInfo,
@@ -201,5 +202,13 @@ describe('formatting', () => {
     expect(formatLastActive(daysAgo(1), NOW)).toBe('Yesterday')
     expect(formatLastActive(daysAgo(3), NOW)).toBe('3 days ago')
     expect(formatLastActive(daysAgo(10), NOW)).toBe('Oct 4')
+  })
+})
+
+describe('staffDisplayName', () => {
+  it('shows first and last name, or the first name alone', () => {
+    expect(staffDisplayName({ first_name: 'Ana', last_name: 'Lopez' })).toBe('Ana Lopez')
+    expect(staffDisplayName({ first_name: 'Ana', last_name: null })).toBe('Ana')
+    expect(staffDisplayName({ first_name: 'Ana', last_name: ' ' })).toBe('Ana')
   })
 })

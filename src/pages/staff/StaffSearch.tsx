@@ -4,7 +4,13 @@ import { Search } from 'lucide-react'
 import { StaffGate } from '@/components/staff/StaffGate'
 import { StaffShell } from '@/components/staff/StaffShell'
 import { gradeLabel } from '@/lib/students'
-import { formatLastActive, searchStaffStudents, type StaffSort, type StaffStudentRow } from '@/lib/staffProgress'
+import {
+  formatLastActive,
+  searchStaffStudents,
+  staffDisplayName,
+  type StaffSort,
+  type StaffStudentRow,
+} from '@/lib/staffProgress'
 
 /** The server returns at most this many rows (staff_search_students). */
 const RESULT_CAP = 200
@@ -81,8 +87,8 @@ function StaffSearchInner() {
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search by name, grade, or email"
-          aria-label="Search students by name, grade, or email"
+          placeholder="Search by first or last name, grade, or email"
+          aria-label="Search students by first or last name, grade, or email"
           autoFocus
         />
       </div>
@@ -129,7 +135,7 @@ function StaffSearchInner() {
                   onClick={() => navigate(`/staff/students/${r.student_id}`)}
                 >
                   <span className="staff-result-main">
-                    <span className="staff-result-name">{r.first_name}</span>
+                    <span className="staff-result-name">{staffDisplayName(r)}</span>
                     <span className="staff-result-meta">
                       {gradeLabel(r.grade)}
                       {r.email ? ` · ${r.email}` : ''}

@@ -111,6 +111,8 @@ export interface Database {
           id: string
           parent_id: string
           first_name: string
+          // Migration 0035: covered students only; server-written.
+          last_name: string | null
           grade: string
           level: string
           // Academic OS Phase 1 (migration 0001): forward-compat learning
@@ -967,6 +969,7 @@ export interface Database {
           student_id: string
           school_id: string
           first_name: string
+          last_name: string | null
           grade: string
           email: string | null
           last_active_at: string | null
@@ -978,6 +981,7 @@ export interface Database {
           student_id: string
           school_id: string
           first_name: string
+          last_name: string | null
           grade: string
           email: string | null
           last_active_at: string | null

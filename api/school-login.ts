@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 import { createClient, type SupabaseClient } from "@supabase/supabase-js"
-import { deanPost, type ResolveResponse } from "./school-bridge.js"
+import { deanPost, lastNameUpdate, type ResolveResponse } from "./school-bridge.js"
 import {
   ACTIVE_PREP_STATUS,
   ACTIVE_PREP_STATUSES,
@@ -294,6 +294,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         .update({
           parent_id: uid,
           first_name: dean.first_name,
+          // Migration 0035: staff at this school see it. Server-written only.
+          ...lastNameUpdate(dean),
           grade: dean.grade,
           school_covered: true,
           dean_student_id: dean.student_id,
@@ -327,6 +329,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         .insert({
           parent_id: uid,
           first_name: dean.first_name,
+          ...lastNameUpdate(dean),
           grade: dean.grade,
           level: "on",
           dean_student_id: dean.student_id,

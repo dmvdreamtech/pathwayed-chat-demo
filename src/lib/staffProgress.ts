@@ -24,6 +24,9 @@ export interface StaffStudentRow {
   student_id: string
   school_id: string
   first_name: string
+  /** From the school roster (migration 0035). Null until the student signs in
+   *  again or the backfill runs. */
+  last_name: string | null
   grade: string
   email: string | null
   last_active_at: string | null
@@ -31,6 +34,11 @@ export interface StaffStudentRow {
 
 export interface StaffStudentProfile extends StaffStudentRow {
   days_active_this_month: number
+}
+
+/** "Ana Lopez", or just "Ana" when the roster gave no last name. */
+export function staffDisplayName(s: { first_name: string; last_name?: string | null }): string {
+  return [s.first_name, s.last_name].filter((x) => x && x.trim()).join(' ')
 }
 
 export interface SkillInfo {

@@ -14,10 +14,32 @@ export interface ResolveCovered {
   covered: true
   student_id: string
   first_name: string
+  /** Console 0092 bridge: everything after the first word of the roster name.
+   *  Absent from a console that has not been redeployed yet. */
+  last_name?: string
   grade: string // authoritative content grade — a STRING, e.g. "10"
 }
 export type ResolveResponse = ResolveCovered | { covered: false }
 
+/** student-last-names: last names for students the app already links. */
+export interface LastNamesResponse {
+  students: { student_id: string; last_name: string }[]
+}
+
+/** guardian-contacts: guardian addresses, only for schools that opted in. */
+export interface GuardianContactsResponse {
+  students: { student_id: string; emails: string[] }[]
+}
+
+/**
+ * The fields a resolve writes about the student's last name. Nothing when the
+ * console did not send one (an older console), so a sign-in never blanks a name
+ * it already has.
+ */
+export function lastNameUpdate(dean: { last_name?: unknown }): { last_name?: string | null } {
+  if (typeof dean.last_name !== "string") return {}
+  return { last_name: dean.last_name.trim() || null }
+}
 export type DeanResult<T> =
   | { ok: true; status: number; data: T }
   // status 0 == network/timeout (Dean unreachable); otherwise Dean's HTTP status.
@@ -29,7 +51,7 @@ export type DeanResult<T> =
  * fall back to cache. Never logs the body (which may contain a PIN) or the secret.
  */
 export async function deanPost<T>(
-  fn: "resolve-student",
+  fn: "resolve-student" | "student-last-names" | "guardian-contacts",
   body: unknown,
 ): Promise<DeanResult<T>> {
   const secret = process.env.TUTORING_BRIDGE_SECRET
