@@ -411,8 +411,8 @@ export const PREP_SAT_TRANSITIONS_SKILLS: PrepSkill[] = [
   {
     slug: 'prep-sat-transitions',
     name: 'SAT Transitions',
-    subject: 'prep-verbal',
-    gradeBand: '6-8',
+    subject: 'prep-sat-rw', // migration 0034: an official SAT skill
+    gradeBand: '9-12',
     items: FRAMES.map((f, i) => frameItem(f, i + 1)),
   },
 ]

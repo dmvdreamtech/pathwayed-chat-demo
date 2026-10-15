@@ -419,8 +419,8 @@ export const PREP_SAT_WORDS_IN_CONTEXT_SKILLS: PrepSkill[] = [
   {
     slug: 'prep-sat-words-in-context',
     name: 'SAT Words in Context',
-    subject: 'prep-verbal',
-    gradeBand: '6-8',
+    subject: 'prep-sat-rw', // migration 0034: an official SAT skill
+    gradeBand: '9-12',
     items: FRAMES.map((f, i) => frameItem(f, i + 1)),
   },
 ]

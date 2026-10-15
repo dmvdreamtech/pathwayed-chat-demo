@@ -13,16 +13,19 @@
 begin;
 
 insert into public.skills (id, level, parent_id, subject, name, slug, grade_band, sat_alignment, prerequisite_skills)
-values (md5('pe-aos:subj-prep-verbal')::uuid, 'subject', null, 'prep-verbal', 'Test Prep — Verbal', null, null, null, '{}')
+values (md5('pe-aos:subj-prep-sat-rw')::uuid, 'subject', null, 'prep-sat-rw', 'Test Prep, SAT Reading and Writing', null, null, null, '{}')
 on conflict (id) do update set level=excluded.level, parent_id=excluded.parent_id, subject=excluded.subject, name=excluded.name;
 insert into public.skills (id, level, parent_id, subject, name, slug, grade_band, sat_alignment, prerequisite_skills)
-values (md5('pe-aos:dom-prep-verbal')::uuid, 'domain', md5('pe-aos:subj-prep-verbal')::uuid, 'prep-verbal', 'Verbal Reasoning', null, null, null, '{}')
+values (md5('pe-aos:dom-prep-sat-expression-of-ideas')::uuid, 'domain', md5('pe-aos:subj-prep-sat-rw')::uuid, 'prep-sat-rw', 'Expression of Ideas', null, null, null, '{}')
 on conflict (id) do update set level=excluded.level, parent_id=excluded.parent_id, subject=excluded.subject, name=excluded.name;
 insert into public.skills (id, level, parent_id, subject, name, slug, grade_band, sat_alignment, prerequisite_skills)
-values (md5('pe-aos:skill-prep-sat-transitions')::uuid, 'skill', md5('pe-aos:dom-prep-verbal')::uuid, 'prep-verbal', 'SAT Transitions', 'prep-sat-transitions', '6-8', null, '{}')
+values (md5('pe-aos:dom-prep-sat-craft-and-structure')::uuid, 'domain', md5('pe-aos:subj-prep-sat-rw')::uuid, 'prep-sat-rw', 'Craft and Structure', null, null, null, '{}')
+on conflict (id) do update set level=excluded.level, parent_id=excluded.parent_id, subject=excluded.subject, name=excluded.name;
+insert into public.skills (id, level, parent_id, subject, name, slug, grade_band, sat_alignment, prerequisite_skills)
+values (md5('pe-aos:skill-prep-sat-transitions')::uuid, 'skill', md5('pe-aos:dom-prep-sat-expression-of-ideas')::uuid, 'prep-sat-rw', 'SAT Transitions', 'prep-sat-transitions', '9-12', null, '{}')
 on conflict (id) do update set level=excluded.level, parent_id=excluded.parent_id, subject=excluded.subject, name=excluded.name, slug=excluded.slug, grade_band=excluded.grade_band;
 insert into public.skills (id, level, parent_id, subject, name, slug, grade_band, sat_alignment, prerequisite_skills)
-values (md5('pe-aos:skill-prep-sat-words-in-context')::uuid, 'skill', md5('pe-aos:dom-prep-verbal')::uuid, 'prep-verbal', 'SAT Words in Context', 'prep-sat-words-in-context', '6-8', null, '{}')
+values (md5('pe-aos:skill-prep-sat-words-in-context')::uuid, 'skill', md5('pe-aos:dom-prep-sat-craft-and-structure')::uuid, 'prep-sat-rw', 'SAT Words in Context', 'prep-sat-words-in-context', '9-12', null, '{}')
 on conflict (id) do update set level=excluded.level, parent_id=excluded.parent_id, subject=excluded.subject, name=excluded.name, slug=excluded.slug, grade_band=excluded.grade_band;
 
 -- prep-sat-transitions (SAT Transitions) — 48 items

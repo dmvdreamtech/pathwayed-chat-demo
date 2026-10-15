@@ -11,10 +11,10 @@ const DIFFICULTIES = new Set(['easy', 'medium', 'hard'])
 describe('prep sat transitions templates', () => {
   for (const skill of PREP_SAT_TRANSITIONS_SKILLS) {
     describe(`${skill.slug} (${skill.items.length} items)`, () => {
-      it('has items and a 6-8 grade band', () => {
+      it('has items, the 9-12 band and the SAT subject (migration 0034)', () => {
         expect(skill.items.length).toBeGreaterThan(0)
-        expect(skill.gradeBand).toBe('6-8')
-        expect(skill.subject).toBe('prep-verbal')
+        expect(skill.gradeBand).toBe('9-12')
+        expect(skill.subject).toBe('prep-sat-rw')
       })
 
       it('every item: 4 distinct choices, exactly one correct, 3 distinct mapped tokens, valid difficulty', () => {

@@ -58,11 +58,21 @@ function deterministicId(input: string): string {
 const VERBAL = { subjectKey: PREP_VERBAL_SUBJECT.key, subjectVal: PREP_VERBAL_SUBJECT.subject, subjectName: PREP_VERBAL_SUBJECT.name, domainKey: PREP_VERBAL_DOMAIN.key, domainName: PREP_VERBAL_DOMAIN.name }
 const QUANT = { subjectKey: 'subj-prep-quant', subjectVal: 'prep-quant', subjectName: 'Test Prep — Quantitative', domainKey: 'dom-prep-quant', domainName: 'Quantitative Reasoning' }
 
+// The SAT Reading and Writing subject from migration 0034. Its skills sit under
+// their own SAT domain rows, so the seed writes exactly what 0034 writes.
+const SAT_RW = { subjectKey: 'subj-prep-sat-rw', subjectVal: 'prep-sat-rw', subjectName: 'Test Prep, SAT Reading and Writing', domainKey: '', domainName: '' }
+const SAT_DOMAIN_OF: Record<string, { key: string; name: string }> = {
+  'prep-sat-transitions': { key: 'dom-prep-sat-expression-of-ideas', name: 'Expression of Ideas' },
+  'prep-sat-words-in-context': { key: 'dom-prep-sat-craft-and-structure', name: 'Craft and Structure' },
+}
+
 interface Group {
   file: string
   label: string
   tax: typeof VERBAL
   skills: PrepSkill[]
+  /** Per-skill domain rows, when the group's skills do not share one domain. */
+  domainOf?: Record<string, { key: string; name: string }>
 }
 
 const GROUPS: Group[] = [
@@ -73,7 +83,7 @@ const GROUPS: Group[] = [
   { file: '0020_prep_logic_questions.sql', label: 'logic + verbal classification', tax: VERBAL, skills: PREP_LOGIC_SKILLS },
   // SAT-specific authored R&W skills (transitions, words-in-context). The other SAT
   // domains lean on existing banks (already seeded), so only these two need a seed.
-  { file: '0021_prep_sat_questions.sql', label: 'SAT reading & writing', tax: VERBAL, skills: [...PREP_SAT_TRANSITIONS_SKILLS, ...PREP_SAT_WORDS_IN_CONTEXT_SKILLS] },
+  { file: '0021_prep_sat_questions.sql', label: 'SAT reading & writing', tax: SAT_RW, domainOf: SAT_DOMAIN_OF, skills: [...PREP_SAT_TRANSITIONS_SKILLS, ...PREP_SAT_WORDS_IN_CONTEXT_SKILLS] },
 ]
 
 for (const g of GROUPS) {
@@ -95,13 +105,20 @@ begin;
 insert into public.skills (id, level, parent_id, subject, name, slug, grade_band, sat_alignment, prerequisite_skills)
 values (${md5uuid(t.subjectKey)}, 'subject', null, ${qq(t.subjectVal)}, ${qq(t.subjectName)}, null, null, null, '{}')
 on conflict (id) do update set level=excluded.level, parent_id=excluded.parent_id, subject=excluded.subject, name=excluded.name;
-insert into public.skills (id, level, parent_id, subject, name, slug, grade_band, sat_alignment, prerequisite_skills)
-values (${md5uuid(t.domainKey)}, 'domain', ${md5uuid(t.subjectKey)}, ${qq(t.subjectVal)}, ${qq(t.domainName)}, null, null, null, '{}')
+`
+  const domains = g.domainOf
+    ? [...new Map(Object.values(g.domainOf).map((d) => [d.key, d])).values()]
+    : [{ key: t.domainKey, name: t.domainName }]
+  for (const d of domains) {
+    sql += `insert into public.skills (id, level, parent_id, subject, name, slug, grade_band, sat_alignment, prerequisite_skills)
+values (${md5uuid(d.key)}, 'domain', ${md5uuid(t.subjectKey)}, ${qq(t.subjectVal)}, ${qq(d.name)}, null, null, null, '{}')
 on conflict (id) do update set level=excluded.level, parent_id=excluded.parent_id, subject=excluded.subject, name=excluded.name;
 `
+  }
   for (const skill of g.skills) {
+    const domainKey = g.domainOf?.[skill.slug]?.key ?? t.domainKey
     sql += `insert into public.skills (id, level, parent_id, subject, name, slug, grade_band, sat_alignment, prerequisite_skills)
-values (${md5uuid('skill-' + skill.slug)}, 'skill', ${md5uuid(t.domainKey)}, ${qq(t.subjectVal)}, ${qq(skill.name)}, ${qq(skill.slug)}, ${qq(skill.gradeBand)}, null, '{}')
+values (${md5uuid('skill-' + skill.slug)}, 'skill', ${md5uuid(domainKey)}, ${qq(t.subjectVal)}, ${qq(skill.name)}, ${qq(skill.slug)}, ${qq(skill.gradeBand)}, null, '{}')
 on conflict (id) do update set level=excluded.level, parent_id=excluded.parent_id, subject=excluded.subject, name=excluded.name, slug=excluded.slug, grade_band=excluded.grade_band;\n`
   }
 

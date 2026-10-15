@@ -273,6 +273,9 @@ export interface Database {
           ccss_grade: string | null
           ccss_code: string | null
           ccss_grade_num: number | null
+          // Migration 0034: which of the 30 official College Board SAT skills this
+          // row is (sat_official_skills.code), or null for every other skill.
+          sat_skill_code: string | null
           sat_alignment: string | null
           prerequisite_skills: string[]
           description: string | null
@@ -935,8 +938,31 @@ export interface Database {
         Args: { p_school_id: string }
         Returns: boolean
       }
+      // Migration 0034: platform admins only; refuses everyone else.
+      is_platform_admin: {
+        Args: Record<string, never>
+        Returns: boolean
+      }
+      sat_coverage: {
+        Args: Record<string, never>
+        Returns: {
+          code: string
+          name: string
+          section: string
+          domain: string
+          sort: number
+          target: number
+          skill_id: string | null
+          skill_slug: string | null
+          drafted: number
+          checks_passing: number
+          reviewed: number
+          published: number
+        }[]
+      }
+      // 'recent' (default): most recently active first. 'name': A to Z.
       staff_search_students: {
-        Args: { p_query: string }
+        Args: { p_query: string; p_order?: 'recent' | 'name' }
         Returns: {
           student_id: string
           school_id: string
