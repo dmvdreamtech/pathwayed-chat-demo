@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import katex from 'katex'
 import { join } from 'node:path'
 import { TARGET_ITEMS, TOPUP_ITEMS, itemCount, passageLimits, requiredItems, skillIssues } from './checks'
 import { loadSkills } from './load'
@@ -141,6 +142,30 @@ describe('every content file', async () => {
 
   it('passes the automated checks', () => {
     const problems = loaded.flatMap(({ skill }) => skillIssues(skill))
+    expect(problems).toEqual([])
+  })
+
+  it('renders every math span with KaTeX, read the way MathText reads it', () => {
+    const MATH_RE = /\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$/g
+    const problems: string[] = []
+    for (const { skill } of loaded.filter((l) => l.skill.subject === 'math')) {
+      const items = [...(skill.items ?? []), ...(skill.passages ?? []).flatMap((p) => p.items)]
+      for (const it of items) {
+        for (const text of [it.stem, it.solution, ...it.choices.map((c) => c.text)]) {
+          for (const m of text.matchAll(MATH_RE)) {
+            // $$ means two spans touched: MathText would show one display block.
+            if (m[1] !== undefined) problems.push(`${skill.slug} slot ${it.slot}: two math spans touch: ${m[0]}`)
+            else {
+              try {
+                katex.renderToString(m[2], { throwOnError: true })
+              } catch (e) {
+                problems.push(`${skill.slug} slot ${it.slot}: ${(e as Error).message}`)
+              }
+            }
+          }
+        }
+      }
+    }
     expect(problems).toEqual([])
   })
 
