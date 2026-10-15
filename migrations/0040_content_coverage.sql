@@ -537,7 +537,8 @@ as $$
       (select count(*) from c where (c.v ->> 'is_correct') is distinct from 'true'
                                  and coalesce(btrim(c.v ->> 'misconception_token'), '') = '') as n_wrong_untagged,
       (select c.v ->> 'text' from c where (c.v ->> 'is_correct') = 'true' order by c.i limit 1) as correct_text,
-      (select count(distinct lower(btrim(c.v ->> 'text'))) from c) as n_distinct,
+      -- Exact text: capitalization items legitimately differ only in capital letters.
+      (select count(distinct btrim(c.v ->> 'text')) from c) as n_distinct,
       (select string_agg(coalesce(c.v ->> 'text', ''), ' ') from c) as all_text
   )
   select array_remove(array[

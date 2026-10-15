@@ -34,7 +34,8 @@ function itemIssues(where: string, item: ContentItem): string[] {
   if (item.choices.length !== 4) out.push(`${at}: needs exactly 4 choices, has ${item.choices.length}`)
   const correct = item.choices.filter((c) => c.is_correct)
   if (correct.length !== 1) out.push(`${at}: needs exactly one correct choice, has ${correct.length}`)
-  const texts = item.choices.map((c) => c.text.trim().toLowerCase())
+  // Exact text: capitalization items legitimately differ only in capital letters.
+  const texts = item.choices.map((c) => c.text.trim())
   if (new Set(texts).size !== texts.length) out.push(`${at}: two choices are the same`)
   if (texts.some((t) => !t)) out.push(`${at}: a choice is empty`)
   for (const c of item.choices) {

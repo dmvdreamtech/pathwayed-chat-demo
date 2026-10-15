@@ -41,7 +41,7 @@ describe('the automated checks', () => {
         item(1, { stem: 'No question mark' }),
         item(2, { choices: good.items![0].choices.slice(0, 3) }),
         item(3, { choices: good.items![0].choices.map((c) => ({ ...c, is_correct: true, misconception_token: undefined })) }),
-        item(4, { choices: [...good.items![0].choices.slice(0, 3), { text: 'Right 1', is_correct: false, misconception_token: 'x' }] }),
+        item(4, { choices: [...good.items![0].choices.slice(0, 3), { text: 'right 1', is_correct: false, misconception_token: 'x' }] }),
         item(5, { choices: good.items![0].choices.map((c, i) => (i === 1 ? { ...c, misconception_token: undefined } : c)) }),
         item(6, { solution: 'short' }),
         item(7, { stem: 'Which one — this or that?' }),
