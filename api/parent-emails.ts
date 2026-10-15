@@ -17,8 +17,10 @@
 //   4. email_suppressions for the candidate addresses, by hash.
 //
 // A run is a dry run, counts only, when ?dry=1, when the email provider is not
-// configured, or when UNSUBSCRIBE_SECRET is unset (every email must carry a
-// working unsubscribe link). The response never contains an address or a name.
+// configured, when UNSUBSCRIBE_SECRET is unset (every email must carry a
+// working unsubscribe link), or when the period starts before
+// PARENT_EMAILS_START_DATE (YYYY-MM-DD, New York time; missing or invalid means
+// never). The response never contains an address or a name.
 //
 // Sends come from PARENT_EMAIL_FROM, or PathwayEd <updates@mail.pathwayed.org>.
 import { createClient } from "@supabase/supabase-js"
@@ -26,11 +28,13 @@ import type { VercelRequest, VercelResponse } from "@vercel/node"
 import { requireCronSecret } from "./require-auth.js"
 import { emailProviderConfigured, sendEmail } from "./email-core.js"
 import { deanPost, type GuardianContactsResponse } from "./school-bridge.js"
+import { sessionSkillSlugs } from "../src/lib/sessionSubject.js"
 import {
   emailHash,
   planEmails,
   previousPeriod,
   renderParentEmail,
+  startDateRefusal,
   unsubscribeUrl,
   type ActivityRow,
   type ParentEmailKind,
@@ -53,13 +57,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const svc = createClient(supabaseUrl, serviceKey)
 
   const secret = process.env.UNSUBSCRIBE_SECRET ?? ""
+  const period = previousPeriod(kind as ParentEmailKind, new Date())
   const dryReasons = [
     req.query.dry === "1" && "dry=1",
     !emailProviderConfigured() && "email provider not configured",
     !secret && "UNSUBSCRIBE_SECRET not set",
+    startDateRefusal(period, process.env.PARENT_EMAILS_START_DATE),
   ].filter(Boolean)
   const dry = dryReasons.length > 0
-  const period = previousPeriod(kind as ParentEmailKind, new Date())
 
   // 1. Activity.
   const act = await svc.rpc("parent_email_activity", { p_from: period.from.toISOString(), p_to: period.to.toISOString() })
@@ -135,6 +140,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
   if (dry) return res.status(200).json(summary)
 
+  // Session keys name skills by slug ("math:functions"); look the names up.
+  const skillNames = new Map<string, string>()
+  const slugs = sessionSkillSlugs(plan.flatMap((p) => p.children.flatMap((c) => c.subjects)))
+  if (slugs.length) {
+    const sk = await svc.from("skills").select("slug, name").in("slug", slugs)
+    if (sk.error) console.error("parent-emails skill names read failed:", sk.error.message)
+    for (const k of (sk.data ?? []) as { slug: string; name: string }[]) skillNames.set(k.slug, k.name)
+  }
+
   // Send, then log each student once per recipient type.
   const from = process.env.PARENT_EMAIL_FROM || DEFAULT_FROM
   const template = kind === "weekly" ? "parent_weekly" : "parent_monthly"
@@ -144,7 +158,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   for (const p of plan) {
     const unsub = unsubscribeUrl(p.to, secret)
     try {
-      await sendEmail(p.to, renderParentEmail(period, p, unsub), template, {
+      await sendEmail(p.to, renderParentEmail(period, p, unsub, skillNames), template, {
         from,
         headers: { "List-Unsubscribe": `<${unsub}>`, "List-Unsubscribe-Post": "List-Unsubscribe=One-Click" },
       })

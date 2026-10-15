@@ -30,6 +30,7 @@
 import { createHash, createHmac, timingSafeEqual } from "node:crypto"
 import { showKidSatFraming } from "../src/lib/satFraming.js"
 import { getPrepModule } from "../src/lib/prep/registry.js"
+import { groupSessionKeys, subjectWithSkills } from "../src/lib/sessionSubject.js"
 import { APP_URL, type RenderedEmail } from "./email-core.js"
 
 export type ParentEmailKind = "weekly" | "monthly"
@@ -139,6 +140,34 @@ export function previousPeriod(kind: ParentEmailKind, now: Date): Period {
     end = addDays(`${today.slice(0, 7)}-01`, -1)
   }
   return { kind, start, end, from: localMidnight(start), to: localMidnight(addDays(end, 1)) }
+}
+
+// ---------------------------------------------------------------------------
+// When the emails start
+// ---------------------------------------------------------------------------
+
+/**
+ * PARENT_EMAILS_START_DATE, a New York calendar date written YYYY-MM-DD, e.g.
+ * 2026-10-19. Nothing is sent for a period that begins before it, so there is
+ * no catch-up: the first weekly email covers the first full Monday to Sunday
+ * week starting on or after the date, and the first monthly email the first
+ * full month starting on or after it. Missing or not a real date: nothing is
+ * ever sent.
+ */
+export function parseStartDate(raw: string | undefined): string | null {
+  const v = (raw ?? "").trim()
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(v)) return null
+  const [y, m, d] = v.split("-").map(Number)
+  const t = new Date(Date.UTC(y, m - 1, d))
+  return t.getUTCFullYear() === y && t.getUTCMonth() === m - 1 && t.getUTCDate() === d ? v : null
+}
+
+/** Null when this period may be sent, or why it must not be. */
+export function startDateRefusal(period: Period, raw: string | undefined): string | null {
+  const start = parseStartDate(raw)
+  if (!start) return "PARENT_EMAILS_START_DATE is missing or not a YYYY-MM-DD date"
+  if (period.start < start) return `this ${period.kind} period starts ${period.start}, before PARENT_EMAILS_START_DATE ${start}`
+  return null
 }
 
 const fmtDay = (date: string) =>
@@ -276,9 +305,24 @@ export function joinNames(names: string[]): string {
   return `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`
 }
 
-function subjectList(subjects: string[]): string {
-  const names = [...new Set(subjects.map((s) => SUBJECT_NAME[s] ?? s.charAt(0).toUpperCase() + s.slice(1)))]
-  return joinNames(names)
+const subjectName = (s: string) => SUBJECT_NAME[s] ?? s.charAt(0).toUpperCase() + s.slice(1)
+
+/**
+ * "Math (Expressions, Functions) and Reading". `subjects` are session keys and
+ * check-question subjects ("math", "math:functions"); only the part before the
+ * colon is a subject, and a known skill slug after it is named in parentheses.
+ * Two subjects that share a name (prep-verbal and prep-quant are both "Test
+ * prep") are shown once.
+ */
+export function subjectList(subjects: string[], skillNames: Map<string, string> = new Map()): string {
+  const byName = new Map<string, Set<string>>()
+  for (const g of groupSessionKeys(subjects)) {
+    const name = subjectName(g.subject)
+    const set = byName.get(name) ?? new Set<string>()
+    for (const slug of g.slugs) set.add(slug)
+    byName.set(name, set)
+  }
+  return joinNames([...byName].map(([name, slugs]) => subjectWithSkills(name, slugs, skillNames)))
 }
 
 function testName(moduleId: string, sectionId: string): string {
@@ -290,9 +334,9 @@ function testName(moduleId: string, sectionId: string): string {
 const possessive = (names: string) => `${names}'s`
 
 /** The measured lines for one child's week. */
-export function weeklyLines(k: ActivityRow): string[] {
+export function weeklyLines(k: ActivityRow, skillNames: Map<string, string> = new Map()): string[] {
   const lines: string[] = []
-  if (k.subjects.length) lines.push(`Tutoring: ${subjectList(k.subjects)}`)
+  if (k.subjects.length) lines.push(`Tutoring: ${subjectList(k.subjects, skillNames)}`)
   if (k.mastered.length) lines.push(`Skills mastered: ${k.mastered.length} (${k.mastered.join(", ")})`)
   if (k.checks_answered > 0) lines.push(`Check questions: ${k.checks_right} of ${k.checks_answered} right`)
   for (const t of k.tests) lines.push(`Practice test finished: ${testName(t.module_id, t.section_id)} on ${fmtDay(localDate(new Date(t.at)))}`)
@@ -330,7 +374,13 @@ function shell(bodyHtml: string, cta: { label: string; url: string } | null, foo
 const P = (s: string, top = 10) => `<p style="font-size:15px;line-height:1.55;margin:${top}px 0 0">${s}</p>`
 
 /** Render one planned email. `unsubscribe` is the signed link for its address. */
-export function renderParentEmail(period: Period, plan: PlannedEmail, unsubscribe: string): RenderedEmail {
+export function renderParentEmail(
+  period: Period,
+  plan: PlannedEmail,
+  unsubscribe: string,
+  /** Skill slug to name, for the skills session keys mention. */
+  skillNames: Map<string, string> = new Map(),
+): RenderedEmail {
   const kids = plan.children
   const names = joinNames(kids.map((k) => k.first_name))
   const one = kids.length === 1
@@ -347,7 +397,7 @@ export function renderParentEmail(period: Period, plan: PlannedEmail, unsubscrib
       plan.recipientType === "account"
         ? { label: one ? `See ${possessive(kids[0].first_name)} progress` : "See their progress", url: progressUrl }
         : null
-    const blocks = kids.map((k) => ({ name: k.first_name, lines: weeklyLines(k) }))
+    const blocks = kids.map((k) => ({ name: k.first_name, lines: weeklyLines(k, skillNames) }))
     const text = [
       "Hi,",
       intro,
@@ -372,9 +422,15 @@ export function renderParentEmail(period: Period, plan: PlannedEmail, unsubscrib
   }
 
   const lines = kids.map((k) => monthlyLine(k, period))
+  // A child who never started has nothing saved yet, so they get the plain line.
+  const neverStarted = kids.every((k) => !k.last_active_at)
   const ready = one
-    ? `When ${kids[0].first_name} is ready, everything they have learned so far is saved, and they can pick up where they left off.`
-    : "When they are ready, everything they have learned so far is saved, and they can pick up where they left off."
+    ? neverStarted
+      ? `When ${kids[0].first_name} is ready, they can start any time.`
+      : `When ${kids[0].first_name} is ready, everything they have learned so far is saved, and they can pick up where they left off.`
+    : neverStarted
+      ? "When they are ready, they can start any time."
+      : "When they are ready, everything they have learned so far is saved, and they can pick up where they left off."
   const footer = one
     ? `You get this email only in months when ${kids[0].first_name} has not used PathwayEd.`
     : "You get this email only in months when your children have not used PathwayEd."

@@ -166,7 +166,7 @@ function ProgressTab({
 }) {
   const cards = buildCards(data.mastery, data.attempts, data.skills, now)
   const groups = buildSubjectGroups(data.mastery, data.attempts, data.skills)
-  const activity = buildActivity(data.attempts, data.skills, data.sessions)
+  const activity = buildActivity(data.attempts, data.skills, data.sessions, data.sessionSkillNames)
   const quiet = cards.workingOn.length === 0 && cards.stuckOn.length === 0
 
   return (
@@ -246,7 +246,7 @@ function ProgressTab({
             {activity.map((a) => (
               <tr key={`${a.dateKey}-${a.subject}`}>
                 <td>{formatDateKey(a.dateKey)}</td>
-                <td>{a.subject === 'other' ? 'Other' : subjectLabel(a.subject)}</td>
+                <td>{a.subjectLabel}</td>
                 <td>{a.kind === 'session' ? 'Tutoring session' : a.timeMs == null ? 'Not timed' : formatMinutes(a.timeMs)}</td>
                 <td>{a.kind === 'session' ? 'None answered' : rightOf(a.right, a.total)}</td>
               </tr>

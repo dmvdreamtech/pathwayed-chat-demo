@@ -172,6 +172,37 @@ describe('buildActivity with tutoring sessions', () => {
   })
 })
 
+describe('buildActivity with session keys', () => {
+  const at = (subject: string, d: number) => ({ subject, started_at: daysAgo(d), ended_at: null, updated_at: daysAgo(d) })
+  const skillNames = new Map([
+    ['expressions', 'Expressions'],
+    ['functions', 'Functions'],
+  ])
+
+  it('shows the subject, with the skill in parentheses, never the raw key', () => {
+    const out = buildActivity([], skills, [at('math:expressions', 1), at('reading:vocabulary-in-context', 1)], skillNames)
+    expect(out.map((g) => [g.subject, g.subjectLabel])).toEqual([
+      ['math', 'Math (Expressions)'],
+      ['reading', 'Reading'],
+    ])
+  })
+
+  it('merges same-day sessions in one subject into one row', () => {
+    const out = buildActivity([], skills, [at('math:expressions', 1), at('math:functions', 1), at('math', 1)], skillNames)
+    expect(out.map((g) => [g.dateKey, g.subjectLabel, g.kind])).toEqual([['2026-10-13', 'Math (Expressions, Functions)', 'session']])
+  })
+
+  it('merges a session into the same day check questions for that subject', () => {
+    const out = buildActivity(answers('lin', 2, 1, daysAgo(1)), skills, [at('math:functions', 1)], skillNames)
+    expect(out.map((g) => [g.subjectLabel, g.kind, g.total])).toEqual([['Math (Functions)', 'checks', 3]])
+  })
+
+  it('keeps different days apart', () => {
+    const out = buildActivity([], skills, [at('math:functions', 1), at('math:expressions', 3)], skillNames)
+    expect(out.map((g) => g.subjectLabel)).toEqual(['Math (Functions)', 'Math (Expressions)'])
+  })
+})
+
 describe('quietLine', () => {
   it('says not active only when the last activity is over 14 days old', () => {
     expect(quietLine(daysAgo(20), NOW)).toBe('Not active in the last 14 days. Last active Sep 24.')

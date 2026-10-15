@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase'
+import { sessionSkillSlugs, splitSessionKey, subjectWithSkills } from '@/lib/sessionSubject'
 import type { MasteryStatus } from '@/lib/mastery'
 
 /**
@@ -419,18 +420,24 @@ export const ACTIVITY_LIMIT = 10
 
 /**
  * The last 10 day-and-subject groups of graded check questions, plus tutoring
- * sessions on a day and subject with no check questions, so a student who only
- * talked with Nikki still shows what they worked on. A "day" is a calendar day
- * in the school's time zone. Sessions keep one row per subject, so each adds the
- * day it was last used.
+ * sessions, so a student who only talked with Nikki still shows what they
+ * worked on. A "day" is a calendar day in the school's time zone. Sessions keep
+ * one row per session key ("math", "math:functions"), so each adds the day it
+ * was last used.
+ *
+ * A session key counts under its subject (the part before the colon), so
+ * "math:functions" and check questions in math on the same day are ONE row.
+ * The label names the session skills that day when they are known skills:
+ * "Math (Functions)". `skillNames` maps skill slug to name.
  */
 export function buildActivity(
   attempts: AttemptRow[],
   skills: Map<string, SkillInfo>,
   sessions: SessionRow[] = [],
+  skillNames: Map<string, string> = new Map(),
   limit = ACTIVITY_LIMIT,
 ): ActivityGroup[] {
-  const groups = new Map<string, ActivityGroup & { lastAt: string }>()
+  const groups = new Map<string, ActivityGroup & { lastAt: string; slugs: Set<string> }>()
   for (const a of attempts) {
     const subject = skills.get(a.skill_id)?.subject ?? 'other'
     const dateKey = localDateKey(a.created_at)
@@ -444,6 +451,7 @@ export function buildActivity(
       total: 0,
       timeMs: null,
       lastAt: a.created_at,
+      slugs: new Set<string>(),
     }
     g.total += 1
     if (a.is_correct) g.right += 1
@@ -455,18 +463,25 @@ export function buildActivity(
   }
   for (const s of sessions) {
     const dateKey = localDateKey(s.updated_at)
-    const key = `${dateKey}|${s.subject}`
-    if (groups.has(key)) continue
-    groups.set(key, {
+    const { subject, skillSlug } = splitSessionKey(s.subject)
+    const key = `${dateKey}|${subject}`
+    const g = groups.get(key) ?? {
       dateKey,
-      subject: s.subject,
-      subjectLabel: subjectLabel(s.subject),
-      kind: 'session',
+      subject,
+      subjectLabel: subjectLabel(subject),
+      kind: 'session' as const,
       right: 0,
       total: 0,
       timeMs: null,
       lastAt: s.updated_at,
-    })
+      slugs: new Set<string>(),
+    }
+    if (skillSlug) g.slugs.add(skillSlug)
+    if (s.updated_at > g.lastAt) g.lastAt = s.updated_at
+    groups.set(key, g)
+  }
+  for (const g of groups.values()) {
+    if (g.subject !== 'other') g.subjectLabel = subjectWithSkills(subjectLabel(g.subject), g.slugs, skillNames)
   }
   return [...groups.values()]
     .sort((a, b) => b.dateKey.localeCompare(a.dateKey) || b.lastAt.localeCompare(a.lastAt))
@@ -534,6 +549,8 @@ export interface StudentProgressData {
   attempts: AttemptRow[]
   sessions: SessionRow[]
   skills: Map<string, SkillInfo>
+  /** Skill slug to name, for the skills named in session keys. */
+  sessionSkillNames: Map<string, string>
 }
 
 export async function loadStudentProgress(studentId: string): Promise<StudentProgressData> {
@@ -581,5 +598,14 @@ export async function loadStudentProgress(studentId: string): Promise<StudentPro
     for (const s of (data ?? []) as SkillInfo[]) skills.set(s.id, s)
   }
 
-  return { profile, mastery, attempts, sessions, skills }
+  // Session keys name a skill by slug ("math:functions"); look the names up.
+  const sessionSkillNames = new Map<string, string>()
+  const slugs = sessionSkillSlugs(sessions.map((s) => s.subject))
+  if (slugs.length) {
+    const { data, error } = await supabase.from('skills').select('slug, name').in('slug', slugs)
+    if (error) throw error
+    for (const k of (data ?? []) as { slug: string; name: string }[]) sessionSkillNames.set(k.slug, k.name)
+  }
+
+  return { profile, mastery, attempts, sessions, skills, sessionSkillNames }
 }
