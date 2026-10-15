@@ -39,11 +39,16 @@ export interface RenderedEmail {
  *             so a trial is not a true statement about a school account.
  *   billing - anything that asks the recipient to pay. The admissions-season
  *             upsell is billing: it quotes a price and links to checkout.
+ *   progress - what a child did (or did not do) on PathwayEd, to their family
+ *             or school guardian (api/parent-emails.ts). Not school-suppressed:
+ *             a school guardian is exactly who it is for.
  */
 export const EMAIL_TEMPLATES = {
   trial_reminder: "trial",
   trial_ended: "trial",
   admissions_season: "billing",
+  parent_weekly: "progress",
+  parent_monthly: "progress",
 } as const
 
 export type EmailTemplate = keyof typeof EMAIL_TEMPLATES
@@ -128,7 +133,19 @@ export function emailProviderConfigured(): boolean {
  * EmailRefusedError, so no caller can reach the provider with a trial or billing
  * template addressed to a school, whatever list it built the recipient from.
  */
-export async function sendEmail(to: string, mail: RenderedEmail, template: EmailTemplate): Promise<void> {
+export interface SendOptions {
+  /** A different sender than EMAIL_FROM, e.g. the progress emails' address. */
+  from?: string
+  /** Extra headers, e.g. List-Unsubscribe. */
+  headers?: Record<string, string>
+}
+
+export async function sendEmail(
+  to: string,
+  mail: RenderedEmail,
+  template: EmailTemplate,
+  opts: SendOptions = {},
+): Promise<void> {
   const refusal = schoolDomainRefusal(to, template)
   if (refusal) throw new EmailRefusedError(template, refusal)
 
@@ -138,7 +155,14 @@ export async function sendEmail(to: string, mail: RenderedEmail, template: Email
       Authorization: `Bearer ${EMAIL_PROVIDER_API_KEY}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ from: EMAIL_FROM, to, subject: mail.subject, html: mail.html, text: mail.text }),
+    body: JSON.stringify({
+      from: opts.from ?? EMAIL_FROM,
+      to,
+      subject: mail.subject,
+      html: mail.html,
+      text: mail.text,
+      ...(opts.headers ? { headers: opts.headers } : {}),
+    }),
   })
   if (!res.ok) {
     const detail = await res.text().catch(() => "")

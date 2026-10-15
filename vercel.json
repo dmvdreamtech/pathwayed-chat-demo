@@ -3,6 +3,8 @@
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],
   "crons": [
-    { "path": "/api/trial-emails", "schedule": "0 14 * * *" }
+    { "path": "/api/trial-emails", "schedule": "0 14 * * *" },
+    { "path": "/api/parent-emails?kind=weekly", "schedule": "0 13 * * 1" },
+    { "path": "/api/parent-emails?kind=monthly", "schedule": "0 14 1 * *" }
   ]
 }
