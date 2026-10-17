@@ -154,7 +154,11 @@ describe('the seed batches for the SQL editor', () => {
   it('are up to date with seeds/coverage (run build-coverage-batches.ts)', () => {
     const onDisk = readdirSync(BATCHES).filter((f) => f.endsWith('.sql')).sort()
     expect(onDisk).toEqual(batches.map((b) => b.file))
-    for (const b of batches) expect(readFileSync(join(BATCHES, b.file), 'utf8')).toBe(b.sql)
+    // Git may check files out with CRLF on Windows; compare line content only.
+    const lf = (t: string) => t.replace(/
+/g, '
+')
+    for (const b of batches) expect(lf(readFileSync(join(BATCHES, b.file), 'utf8'))).toBe(lf(b.sql))
   })
 })
 
