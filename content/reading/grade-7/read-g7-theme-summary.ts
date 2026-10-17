@@ -239,7 +239,7 @@ const skill: ContentSkill = {
             wrong(`Jalen drops the baton again at regionals but still wins the race for Riverside.`, 'adds-false-detail'),
             right(`After dropping the baton at districts, Jalen sees he ran well afterward, practices handoffs, and runs cleanly at regionals.`),
           ],
-          solution: `The correct choice covers the mistake, the coach's lesson, the practice and the clean handoff without judgment. Saying Jalen "should have been more careful" is an opinion.`,
+          solution: `The correct choice covers the mistake, the coach's lesson, the practice and the clean handoff without judgment. Saying Jalen "should have been much more careful" is an opinion.`,
         },
         {
           slot: 18,
@@ -397,7 +397,7 @@ const skill: ContentSkill = {
             right(`Family memory now travels through people instead of the machine.`),
             wrong(`The songs matter less now that the towers have gone quiet.`, 'misreads-ending'),
           ],
-          solution: `The radio can no longer reach home, but the songs passed from grandfather to speaker "travel farther than radios go." The word "But" shows the songs matter more, not less.`,
+          solution: `The radio can no longer reach home, but every song the grandfather gives the speaker "travels farther than radios go." The word "But" shows the songs matter more, not less.`,
         },
         {
           slot: 30,
@@ -409,7 +409,7 @@ const skill: ContentSkill = {
             wrong(`"The towers there went quiet long ago."`, 'irrelevant-detail'),
             right(`"I learn the words and hum them too."`),
           ],
-          solution: `This line shows the speaker taking in the songs and repeating them, which carries the memories forward. The humming in the other line is done by the grandfather, not the speaker.`,
+          solution: `This line shows the speaker taking in the songs and repeating them, which carries the memories forward. The line "He hums the parts the static hides" describes the grandfather humming, not the speaker.`,
         },
       ],
     },
@@ -516,7 +516,7 @@ const skill: ContentSkill = {
           choices: [
             wrong(`To show that Eliza did not care much about her work.`, 'misreads-detail'),
             wrong(`To prove that the ferry mostly carried farm animals.`, 'overgeneralization'),
-            right(`To show the everyday work that made up most of Eliza's job.`),
+            right(`To show the plain, everyday work Eliza did on the ferry.`),
             wrong(`To explain why the town later built a bridge over the river.`, 'unsupported-inference'),
           ],
           solution: `The plain entry shows the steady, ordinary work Eliza did for eleven years, which supports the idea that ordinary work matters. One entry with one cow does not show what the ferry mostly carried.`,
