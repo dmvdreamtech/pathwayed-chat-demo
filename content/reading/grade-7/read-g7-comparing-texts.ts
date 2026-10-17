@@ -263,7 +263,7 @@ const skill: ContentSkill = {
             wrong(`Lighthouse keepers were often given a nickname based on their work.`, 'confuses-texts'),
             wrong(`The job of lighthouse keeper slowly disappeared during the 1900s.`, 'confuses-texts'),
           ],
-          solution: `The father says that every boat that passed safely is in the book, and "That is enough for me." The other choices are facts stated in Text 2, so they are not something only Text 1 expresses.`,
+          solution: `The father says that every boat that passed safely is in the book, and "That is enough for me." Lighting lamps at sunset, the "wickies" nickname and the job disappearing are all facts stated in Text 2, so they are not something only Text 1 expresses.`,
         },
         {
           slot: 20,
@@ -349,7 +349,7 @@ const skill: ContentSkill = {
     {
       code: 'rg7-comparing-texts-p06',
       title: 'Number, Please',
-      body: `Text 1: First Shift (a story)\n\nIn 1912, Ada Mensah took her seat at the long switchboard on her first day as a telephone operator. In front of her was a wall of small holes called jacks, and on the desk lay rows of cords with metal plugs. Twenty other young women sat beside her, each wearing a headset.\n\nA tiny light flickered on. Ada's heart jumped. She plugged a cord into the glowing jack and said, as she had practiced, "Number, please."\n\n"Doctor Haddad's office," said a worried voice. "Our calf is sick."\n\nAda found the right jack and pushed in the second plug. She heard the call connect, and she smiled. The supervisor walked behind the row, watching the clock. Ada worked quickly and kept her voice calm and polite, just as the rules required.\n\nBy evening, her fingers ached. But as she walked home, Ada thought about all the voices she had joined together. The town felt smaller somehow, and friendlier.\n\nText 2: Telephone Operators (a factual account)\n\nIn the early 1900s, most telephone calls could not go through without help. A caller lifted the receiver, which lit a small lamp on a switchboard at the telephone office. An operator answered, asked for the number, and connected the call by plugging a cord into the correct jack.\n\nMost operators were young women. Telephone companies set strict rules. Operators were expected to work fast, speak politely and use set phrases. Supervisors often timed how quickly calls were answered.\n\nOver the following decades, telephone companies installed automatic systems that let callers dial numbers themselves. As these systems spread, fewer operators were needed to connect ordinary calls.`,
+      body: `Text 1: First Shift (a story)\n\nIn 1912, Ada Mensah took her seat at the long switchboard on her first day as a telephone operator. In front of her was a wall of small holes called jacks, and on the desk lay rows of cords with metal plugs. Twenty other young women sat beside her, each wearing a headset.\n\nA tiny light flickered on. Ada's heart jumped. She plugged a cord into the glowing jack and said, as she had practiced, "Number, please."\n\n"Doctor Haddad's office," said a worried voice. "Our boy has a high fever."\n\nAda found the right jack and pushed in the second plug. She heard the call connect, and she smiled. The supervisor walked behind the row, watching the clock. Ada worked quickly and kept her voice calm and polite, just as the rules required.\n\nBy evening, her fingers ached. But as she walked home, Ada thought about all the voices she had joined together. The town felt smaller somehow, and friendlier.\n\nText 2: Telephone Operators (a factual account)\n\nIn the early 1900s, most telephone calls could not go through without help. A caller lifted the receiver, which lit a small lamp on a switchboard at the telephone office. An operator answered, asked for the number, and connected the call by plugging a cord into the correct jack.\n\nMost operators were young women. Telephone companies set strict rules. Operators were expected to work fast, speak politely and use set phrases. Supervisors often timed how quickly calls were answered.\n\nOver the following decades, telephone companies installed automatic systems that let callers dial numbers themselves. As these systems spread, fewer operators were needed to connect ordinary calls.`,
       items: [
         {
           slot: 26,
@@ -358,22 +358,22 @@ const skill: ContentSkill = {
           choices: [
             right(`A tiny light flickers on the switchboard before Ada answers.`),
             wrong(`Ada's fingers ache by the time she walks home that evening.`, 'misreads-detail'),
-            wrong(`The caller asks for a doctor because a calf is sick.`, 'unsupported-inference'),
+            wrong(`The caller asks for a doctor because a boy has a fever.`, 'unsupported-inference'),
             wrong(`Ada thinks the town feels smaller and friendlier at night.`, 'confuses-fact-feeling'),
           ],
-          solution: `Text 2 says lifting the receiver lit a small lamp on the switchboard, and in Text 1 "a tiny light flickered on." The sick calf is an invented detail that Text 2 does not mention.`,
+          solution: `Text 2 says lifting the receiver lit a small lamp on the switchboard, and in Text 1 "a tiny light flickered on." The sick boy is an invented detail that Text 2 does not mention.`,
         },
         {
           slot: 27,
           difficulty: 'medium',
           stem: `How does the supervisor in Text 1 reflect a fact from Text 2?`,
           choices: [
-            right(`He watches the clock, matching the fact that supervisors timed how fast calls were answered.`),
-            wrong(`He teaches Ada to plug in cords, matching the fact that operators needed long training.`, 'unsupported-inference'),
-            wrong(`He answers calls himself, matching the fact that most operators were men in the 1900s.`, 'contradicts-text'),
-            wrong(`He installs a dial system, matching the fact that automatic systems spread over time.`, 'confuses-time-period'),
+            right(`The supervisor watches the clock, matching the fact that supervisors timed how fast calls were answered.`),
+            wrong(`The supervisor teaches Ada the cords, matching the fact that operators needed long training.`, 'unsupported-inference'),
+            wrong(`The supervisor answers calls, matching the fact that most operators were men in the 1900s.`, 'contradicts-text'),
+            wrong(`The supervisor installs a dial system, matching the fact that automatic systems spread over time.`, 'confuses-time-period'),
           ],
-          solution: `In Text 1 the supervisor walks behind the row "watching the clock," and Text 2 says supervisors timed how quickly calls were answered. Text 2 says most operators were young women, so the third choice contradicts it.`,
+          solution: `In Text 1 the supervisor walks behind the row "watching the clock," and Text 2 says supervisors timed how quickly calls were answered. Text 2 says most operators were young women, so the choice claiming most operators were men contradicts it.`,
         },
         {
           slot: 28,
@@ -483,19 +483,19 @@ const skill: ContentSkill = {
     {
       code: 'rg7-comparing-texts-p08',
       title: 'The Night of the Landing',
-      body: `Text 1: Staying Up (a story)\n\nOn a warm July night in 1969, nine-year-old Priya Nair was allowed to stay up past midnight for the first time. Her family had borrowed folding chairs from the Okonkwos next door, and now both families crowded around one small television.\n\nThe picture was gray and fuzzy. Priya squinted at a ghostly shape moving down a ladder. Then a boot touched the ground, and the whole room went silent. Grandpa Nair, who rarely showed his feelings, wiped his eyes with his sleeve.\n\nMr. Okonkwo leaned toward Priya. "Remember this," he whispered. "You are watching something no one has ever seen before."\n\nPriya stepped onto the porch afterward and looked up. The Moon looked exactly the same as always. Yet somehow, she thought, it was a different Moon now.\n\nText 2: Watching Apollo 11 (a factual account)\n\nOn July 20, 1969, the Apollo 11 mission landed two astronauts on the Moon. A third astronaut stayed in orbit around the Moon. Hours after landing, the first astronaut climbed down a ladder and stepped onto the surface.\n\nThe moonwalk was broadcast live on television. The images were black and white and often blurry, because they were sent across about 240,000 miles of space. In much of the United States, the moonwalk took place late at night.\n\nAn estimated 600 million people around the world watched the broadcast. In many places, families and neighbors gathered together around a single set. For many viewers, it became one of the most memorable events of their lives.`,
+      body: `Text 1: Staying Up (a story)\n\nOn a warm July night in 1969, nine-year-old Priya Nair was allowed to stay up past midnight for the first time. Her family had borrowed folding chairs from the Okonkwos next door, and now both families crowded around one small television.\n\nThe picture was gray and fuzzy. Priya squinted at a ghostly shape moving down a ladder. Then a boot touched the ground, and the whole room went silent. Grandpa Nair, who rarely showed his feelings, wiped his eyes with his sleeve.\n\nMr. Okonkwo leaned toward Priya. "Remember this," he whispered. "You are watching something no one has ever seen before."\n\nPriya stepped onto the porch afterward and looked up. The Moon looked exactly the same as always. Yet somehow, she thought, it was a different Moon now.\n\nText 2: Watching Apollo 11 (a factual account)\n\nOn July 20, 1969, the Apollo 11 mission landed two astronauts on the Moon. A third astronaut stayed in orbit around the Moon. Hours after landing, the first astronaut climbed down a ladder and stepped onto the surface.\n\nThe moonwalk was broadcast live on television. The camera sent black and white images that were often blurry. Its signal traveled about 240,000 miles of space and had to be converted before home sets could show it. In much of the United States, the moonwalk took place late at night.\n\nAn estimated 600 million people around the world watched the broadcast. In many places, families and neighbors gathered together around a single set. For many viewers, it became one of the most memorable events of their lives.`,
       items: [
         {
           slot: 36,
           difficulty: 'easy',
           stem: `Why is the TV picture "gray and fuzzy" in Text 1, according to Text 2?`,
           choices: [
-            right(`The images were black and white and sent across a huge distance.`),
+            right(`The camera sent blurry black and white images across a huge distance.`),
             wrong(`The two families had borrowed an old television from their neighbors.`, 'unsupported-inference'),
             wrong(`The broadcast was recorded earlier and shown again late at night.`, 'contradicts-text'),
             wrong(`The astronauts turned off their cameras after they had landed.`, 'unsupported-inference'),
           ],
-          solution: `Text 2 says the images were black and white and often blurry because they traveled about 240,000 miles. The families borrowed chairs, not a television, and Text 2 says the broadcast was live.`,
+          solution: `Text 2 says the camera sent black and white images that were often blurry, across about 240,000 miles of space. The families borrowed chairs, not a television, and Text 2 says the broadcast was live.`,
         },
         {
           slot: 37,
@@ -507,7 +507,7 @@ const skill: ContentSkill = {
             wrong(`Grandpa Nair wipes his eyes with the sleeve of his shirt.`, 'misreads-detail'),
             wrong(`Priya squints at a ghostly shape moving down a ladder.`, 'misreads-detail'),
           ],
-          solution: `Two families watching one television is a specific case of families and neighbors gathering around a single set. The other details happen during or after the broadcast but do not show people gathering.`,
+          solution: `Two families watching one television is a specific case of families and neighbors gathering around a single set. The porch, Grandpa's tears and the ghostly shape on the ladder happen during or after the broadcast but do not show people gathering.`,
         },
         {
           slot: 38,
