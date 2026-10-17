@@ -45,12 +45,12 @@ const skill: ContentSkill = {
         no(`The team will meet in the afternoon at 3 p.m. in the gym.`, 'keeps-redundancy'),
         no(`At 3 p.m. in the afternoon, the team will meet in the gym.`, 'keeps-redundancy'),
       ],
-      solution: `"P.m." already means afternoon, so "in the afternoon" repeats information. The first choice cuts the wrong words, dropping the location while keeping the repetition.`,
+      solution: `"P.m." already means afternoon, so "in the afternoon" repeats information. The choice "The team will meet at 3 p.m. in the afternoon" cuts the wrong words, dropping the location while keeping the repetition.`,
     },
     {
       slot: 4,
       difficulty: 'easy',
-      stem: `Read the sentence: "Bring your stuff for the chemistry lab tomorrow." Which revision uses the most precise language?`,
+      stem: `Read the sentence: "Bring your stuff for the chemistry lab tomorrow." The teacher wants students to bring goggles, gloves, and a lab notebook. Which revision uses the most precise language?`,
       choices: [
         no(`Bring all of your things for the chemistry lab tomorrow.`, 'vague-noun'),
         no(`Bring the usual stuff you need for the lab tomorrow.`, 'vague-noun'),
@@ -62,7 +62,7 @@ const skill: ContentSkill = {
     {
       slot: 5,
       difficulty: 'easy',
-      stem: `The writer does not know who left a bike outside the gym and wants to focus on the bike. Which sentence is the best choice?`,
+      stem: `The writer does not know who left a bike unlocked outside the gym overnight and wants to focus on the bike. Which sentence is the best choice?`,
       choices: [
         ok(`A bike was left unlocked outside the gym overnight.`),
         no(`Someone, somebody, left a bike unlocked outside the gym.`, 'keeps-redundancy'),
@@ -98,7 +98,7 @@ const skill: ContentSkill = {
     {
       slot: 8,
       difficulty: 'easy',
-      stem: `Read the sentence: "The dinosaur skeleton in the museum's new exhibit is really big." Which revision is the most precise?`,
+      stem: `Read the sentence: "The dinosaur skeleton in the museum's new exhibit is really big." The skeleton is forty feet long. Which revision is the most precise?`,
       choices: [
         no(`The dinosaur skeleton in the museum's new exhibit is really, really big.`, 'intensifier-not-precision'),
         no(`The dinosaur skeleton in the museum's new exhibit is extremely large in size.`, 'keeps-redundancy'),
@@ -165,7 +165,7 @@ const skill: ContentSkill = {
         no(`Heat the water to 80 degrees Celsius.`, 'wrong-mood-for-purpose'),
         no(`The water got kind of hot after a while.`, 'vague-wording'),
       ],
-      solution: `The passive voice keeps the water and the exact temperature in focus, which suits a lab report's procedure. The first choice names the people, which shifts attention away from the steps.`,
+      solution: `The passive voice keeps the water and the exact temperature in focus, which suits a lab report's procedure. The choice "I heated the water, and then my partner Ji-woo checked it" names the people, which shifts attention away from the steps.`,
     },
     {
       slot: 14,
@@ -175,9 +175,9 @@ const skill: ContentSkill = {
         no(`The field trip is canceled because of storms.`, 'states-fact'),
         no(`Cancel the field trip because of the storms.`, 'wrong-mood-for-purpose'),
         no(`The field trip was canceled by the storms.`, 'states-fact'),
-        ok(`The field trip could be postponed if storms arrive.`),
+        ok(`The field trip could be canceled if storms arrive.`),
       ],
-      solution: `"Could be postponed if" uses the conditional to show the outcome depends on the weather. The other choices state the cancellation as certain or give an order.`,
+      solution: `"Could be canceled if" uses the conditional to show the outcome depends on the weather. The other choices state the cancellation as certain or give an order.`,
     },
     {
       slot: 15,
@@ -198,10 +198,10 @@ const skill: ContentSkill = {
       choices: [
         no(`Mistakes were made in the budget.`, 'passive-hides-actor'),
         no(`The budget ended up with some mistakes in it.`, 'passive-hides-actor'),
-        ok(`I made two mistakes in the budget.`),
+        ok(`I made an error in the budget.`),
         no(`It is possible that mistakes might have been made.`, 'hedging-hides-actor'),
       ],
-      solution: `The active voice with "I" as the subject names who made the error, and "two" is precise. "Mistakes were made" is passive and hides who is responsible.`,
+      solution: `The active voice with "I" as the subject names who made the error. "Mistakes were made" is passive and hides who is responsible.`,
     },
     {
       slot: 17,
@@ -266,7 +266,7 @@ const skill: ContentSkill = {
     {
       slot: 22,
       difficulty: 'medium',
-      stem: `A science report says, "The results of our soil test were super cool." Which revision best fits the formal, precise style of a report?`,
+      stem: `A science report says, "The results of our soil test were super cool." The test found higher nitrogen levels than the class expected. Which revision best fits the formal, precise style of a report?`,
       choices: [
         no(`The results of our soil test were really awesome.`, 'informal-style'),
         ok(`The results of our soil test showed higher nitrogen levels than expected.`),
@@ -278,12 +278,12 @@ const skill: ContentSkill = {
     {
       slot: 23,
       difficulty: 'medium',
-      stem: `The writer wants to give credit to the volunteers who planted trees. Which sentence does this best?`,
+      stem: `The writer wants to give credit to the volunteers who planted forty trees along the river. Which sentence does this best?`,
       choices: [
         no(`Forty trees were planted along the river.`, 'passive-hides-actor'),
         no(`Along the river, forty trees were planted last spring.`, 'passive-hides-actor'),
         no(`Trees were put in the ground near the river.`, 'vague-passive'),
-        ok(`Volunteers from Oak Hill planted forty trees along the river.`),
+        ok(`Volunteers planted forty trees along the river.`),
       ],
       solution: `The active voice makes the volunteers the subject, so they get the credit. "Forty trees were planted" never says who planted them.`,
     },
@@ -297,7 +297,7 @@ const skill: ContentSkill = {
         no(`Sign the town charter at the courthouse.`, 'wrong-mood-for-purpose'),
         no(`Many leaders, merchants, and farmers signed the town charter in 1852.`, 'actor-focus-wrong-purpose'),
       ],
-      solution: `The passive voice makes "the town charter" the subject, keeping the document in focus. The last choice is correct grammar, but it puts the signers first instead of the charter.`,
+      solution: `The passive voice makes "the town charter" the subject, keeping the document in focus. The choice that begins "Many leaders, merchants, and farmers" is correct grammar, but it puts the signers first instead of the charter.`,
     },
     {
       slot: 25,
@@ -326,7 +326,7 @@ const skill: ContentSkill = {
     {
       slot: 27,
       difficulty: 'medium',
-      stem: `Rafael watched his bird feeder for only one week. Which sentence states his finding with appropriate caution?`,
+      stem: `Rafael counted more finches at his new bird feeder than at his old one, but he watched for only one week. Which sentence states his finding with appropriate caution?`,
       choices: [
         no(`The new feeder will definitely attract more finches forever.`, 'overclaims'),
         ok(`The new feeder may attract more finches than the old one.`),
@@ -357,7 +357,7 @@ const skill: ContentSkill = {
         no(`The bus arrives on time, so we see the opening act.`, 'states-fact'),
         no(`Make sure the bus arrives on time for the opening act.`, 'wrong-mood-for-purpose'),
       ],
-      solution: `"If the bus had arrived" paired with "would have seen" describes a past that did not happen. The second choice reports real events, so nothing is imagined.`,
+      solution: `"If the bus had arrived" paired with "would have seen" describes a past that did not happen. The choice "Because the bus arrived on time, we saw the opening act" reports real events, so nothing is imagined.`,
     },
     {
       slot: 30,
@@ -381,7 +381,7 @@ const skill: ContentSkill = {
         no(`Practice will be held in the cafeteria next to the library.`, 'drops-key-meaning'),
         no(`In the event the gym is unavailable, practice is held in the cafeteria room located next to the library.`, 'keeps-wordiness'),
       ],
-      solution: `"If" replaces "in the event that," and "next to the library" replaces a long clause, while every fact stays. The first choice is shorter still, but it drops where the cafeteria is.`,
+      solution: `"If" replaces "in the event that," and "next to the library" replaces a long clause, while every fact stays. The choice "If the gym is unavailable, practice will be in the cafeteria" is shorter still, but it drops where the cafeteria is.`,
     },
     {
       slot: 32,
@@ -405,7 +405,7 @@ const skill: ContentSkill = {
         no(`Spot the comet with a telescope in the early morning.`, 'wrong-mood-for-purpose'),
         ok(`The comet was first spotted in 1931 by a student astronomer.`),
       ],
-      solution: `The passive voice keeps "the comet" as the subject, just like the two sentences before it. The first choice is clear and active, but it shifts the subject to the astronomer and breaks the paragraph's focus.`,
+      solution: `The passive voice keeps "the comet" as the subject, just like the two sentences before it. The choice that begins "A student astronomer named Esi Mensah" is clear and active, but it shifts the subject to the astronomer and breaks the paragraph's focus.`,
     },
     {
       slot: 34,
@@ -453,7 +453,7 @@ const skill: ContentSkill = {
         no(`Inspectors found cracks.`, 'drops-key-meaning'),
         no(`Cracks, which inspectors found, are the reason why the bridge closed.`, 'keeps-wordiness'),
       ],
-      solution: `"The reason why ... is because" says the cause twice, so "because" alone is enough. The first choice removes "why" but still pairs "the reason" with "because."`,
+      solution: `"The reason why ... is because" says the cause twice, so "because" alone is enough. The choice "The reason the bridge closed is because inspectors found cracks" removes "why" but still pairs "the reason" with "because."`,
     },
     {
       slot: 38,
@@ -489,7 +489,7 @@ const skill: ContentSkill = {
         ok(`The robotics team decided to enter the regional competition.`),
         no(`The members of the robotics team reached a decision that they would enter the regional competition.`, 'keeps-wordiness'),
       ],
-      solution: `The team is now the subject, and "decided to enter" replaces the long passive phrase. The second choice is active, but it no longer says what the team decided.`,
+      solution: `The team is now the subject, and "decided to enter" replaces the long passive phrase. The choice "The robotics team made a decision about the regional competition" is active, but it no longer says what the team decided.`,
     },
   ],
 }
