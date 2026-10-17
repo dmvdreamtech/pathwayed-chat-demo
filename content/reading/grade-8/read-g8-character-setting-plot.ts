@@ -69,7 +69,7 @@ const skill: ContentSkill = {
           difficulty: 'hard',
           stem: `How does the final paragraph connect to the incident at the testing table?`,
           choices: [
-            right(`Writing Amara's name first shows the incident taught Tomas to share the work and credit.`),
+            right(`Writing Amara's name beside his own shows the incident taught Tomas to share the work and credit.`),
             wrong(`Writing a new design shows Tomas still believes he deserved all the credit for the bridge.`, 'contradicts-text'),
             wrong(`Writing Amara's name shows Tomas plans to let her build the next bridge by herself.`, 'overgeneralization'),
             wrong(`Starting a new design shows the cracked bridge discouraged Tomas from building again.`, 'contradicts-text'),
