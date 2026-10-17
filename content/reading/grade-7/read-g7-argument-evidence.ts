@@ -105,7 +105,7 @@ const skill: ContentSkill = {
             wrong(`Students might lose their phones if they leave them in their lockers.`, 'unsupported-inference'),
             wrong(`Phones might be needed to look up answers during math lessons.`, 'unsupported-inference'),
           ],
-          solution: `The fifth paragraph says "Some parents worry that they will not be able to reach their children in an emergency." The other concerns might be reasonable, but the author never mentions them.`,
+          solution: `The fifth paragraph says "Some parents worry that they will not be able to reach their children in an emergency." Worries about lost phones or time spent collecting phones might be reasonable, but the author never mentions them.`,
         },
         {
           slot: 8,
