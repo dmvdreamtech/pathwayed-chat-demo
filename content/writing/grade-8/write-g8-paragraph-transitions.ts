@@ -502,14 +502,14 @@ const skill: ContentSkill = {
     {
       slot: 37,
       difficulty: 'hard',
-      stem: `Read the paragraph: "(1) Honeybees share information through movement. (2) For instance, a bee that finds flowers performs a special dance for its hive. (3) The angle of the dance shows the direction of the food. (4) In contrast, the length of the dance shows how far away the food is. (5) As a result, other bees can fly straight to the flowers. (6) In this way, one dance can help feed a whole hive." Which transition is used incorrectly?`,
+      stem: `Read the paragraph: "(1) Honeybees share information through movement. (2) For instance, a bee that finds flowers performs a special dance for its hive. (3) The angle of the dance shows the direction of the food. (4) Instead, the length of the dance shows how far away the food is. (5) As a result, other bees can fly straight to the flowers. (6) In this way, one dance can help feed a whole hive." Which transition is used incorrectly?`,
       choices: [
         no(`"For instance" in sentence 2`, 'flags-correct-transition'),
-        ok(`"In contrast" in sentence 4`),
+        ok(`"Instead" in sentence 4`),
         no(`"As a result" in sentence 5`, 'flags-correct-transition'),
         no(`"In this way" in sentence 6`, 'flags-correct-transition'),
       ],
-      solution: `Sentence 4 adds a second piece of information the dance carries; it does not contrast with sentence 3, so "In addition" would fit better than "In contrast." "As a result" is correct because knowing the direction and distance is what lets the bees fly straight to the food.`,
+      solution: `Sentence 4 adds a second piece of information the dance carries; it does not replace the angle described in sentence 3, so "In addition" would fit better than "Instead." "As a result" is correct because knowing the direction and distance is what lets the bees fly straight to the food.`,
     },
     {
       slot: 38,
