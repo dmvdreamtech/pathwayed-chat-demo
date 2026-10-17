@@ -66,7 +66,7 @@ const skill: ContentSkill = {
             no(`River otters can be found in many rivers and lakes across the whole country.`, 'off-topic-fact'),
             no(`Marsh says that volunteers counted otter tracks along six miles of riverbank.`, 'evidence-without-analysis'),
           ],
-          solution: `A strong conclusion sums up the analysis from both paragraphs, and only the first choice ties clean water and new banks to food and shelter. Repeating the six miles of tracks restates one piece of evidence without explaining it.`,
+          solution: `A strong conclusion sums up the analysis from both paragraphs, and only the choice about the town cleaning the water and rebuilding the banks ties both changes to food and shelter. Repeating the six miles of tracks restates one piece of evidence without explaining it.`,
         },
         {
           slot: 5,
@@ -239,9 +239,9 @@ const skill: ContentSkill = {
             ok(`After`),
             no(`Although`, 'contrast-signal'),
             no(`Unless`, 'condition-signal'),
-            no(`Because`, 'cause-signal'),
+            no(`Before`, 'wrong-sequence'),
           ],
-          solution: `Sentence 4 tells what happened next in time, once the mural was done, so "After" fits. "Because" claims the finished mural caused the market, which the article does not state.`,
+          solution: `Sentence 4 tells what happened next in time, once the mural was done, so "After" fits. "Before" would place the market in the tunnel ahead of the mural, which breaks the order of events.`,
         },
         {
           slot: 17,
@@ -277,7 +277,7 @@ const skill: ContentSkill = {
             no(`Some people in the neighborhood did not like the mural when it was first finished.`, 'unsupported-claim'),
             no(`The painters used brushes, rollers and ladders to reach the top of the walls.`, 'irrelevant-detail'),
           ],
-          solution: `The first choice links back to the tunnel's change in paragraph 1 and introduces the new point about the painters. Nothing in the draft says people disliked the mural, so that sentence adds an unsupported claim.`,
+          solution: `The choice "The project changed more than the tunnel" links back to the tunnel's change in paragraph 1 and introduces the new point about the painters. Nothing in the draft says people disliked the mural, so that sentence adds an unsupported claim.`,
         },
         {
           slot: 20,
@@ -322,7 +322,7 @@ const skill: ContentSkill = {
             no(`This shows that running every day is the only real way for a runner to improve.`, 'contradicts-evidence'),
             no(`The study that Mensah describes lasted for a total of eight weeks.`, 'repeats-detail'),
           ],
-          solution: `Forty seconds compared with twelve is more than three times the improvement, and the first choice ties that comparison to the claim. Saying that daily running is the only way to improve contradicts the results in sentence 5.`,
+          solution: `Forty seconds compared with twelve is more than three times the improvement, and the choice beginning "Since the rested group improved" ties that comparison to the claim. Saying that daily running is the only way to improve contradicts the results in sentence 5.`,
         },
         {
           slot: 23,
@@ -417,7 +417,7 @@ const skill: ContentSkill = {
             no(`Tobias probably wants the school to bring phones back next year.`, 'unsupported-inference'),
             no(`He was one of the students that Abara interviewed for the article.`, 'restates-fact'),
           ],
-          solution: `Tobias missed scores but liked knowing his tablemates, and the first choice explains how that matches the claim of giving something up and gaining connection. Nothing in the draft says what Tobias wants next year, so that choice is a guess.`,
+          solution: `Tobias missed scores but liked knowing his tablemates, and the choice "Like the article, he shows" explains how that matches the claim of giving something up and gaining connection. Nothing in the draft says what Tobias wants next year, so that choice is a guess.`,
         },
         {
           slot: 30,
@@ -429,7 +429,7 @@ const skill: ContentSkill = {
             no(`That is why the students who signed the petition were wrong to complain.`, 'unsupported-judgment'),
             no(`That is why sixty percent of the students made a new friend at lunch.`, 'restates-single-detail'),
           ],
-          solution: `The first choice sums up both parts of the claim, the early dislike and the new connections, without going beyond the article. The article studied only lunch at one school, so banning phones in every class overstates the evidence.`,
+          solution: `The choice about a phone-free lunch giving students more chances to connect sums up both parts of the claim, the early dislike and the new connections, without going beyond the article. The article studied only lunch at one school, so banning phones in every class overstates the evidence.`,
         },
       ],
     },
@@ -464,7 +464,7 @@ const skill: ContentSkill = {
             no(`Park argues that honeybees are the most important insects living on Earth.`, 'contradicts-source'),
             no(`Park's article has seven paragraphs, one photo and a short list of sources.`, 'structure-not-claim'),
           ],
-          solution: `The draft goes on to show that solitary bees rarely sting, pollinate well and can be helped with a bee hotel, so the first claim previews all of it. The draft praises mason bees over honeybees, so a claim about honeybees being most important does not fit.`,
+          solution: `The draft goes on to show that solitary bees rarely sting, pollinate well and can be helped with a bee hotel, so the claim about gentle, hard-working pollinators previews all of it. The draft praises mason bees over honeybees, so a claim about honeybees being most important does not fit.`,
         },
         {
           slot: 33,
@@ -500,7 +500,7 @@ const skill: ContentSkill = {
             no(`Park's facts show that mason bees are better than honeybees in every possible way.`, 'overstates-evidence'),
             no(`Park's facts show that most bees live together in hives and make honey for people.`, 'contradicts-source'),
           ],
-          solution: `The first choice connects evidence from both paragraphs back to the claim. Park compares mason bees and honeybees only on pollination, so saying mason bees are better "in every possible way" goes beyond the evidence.`,
+          solution: `The choice about gentle, efficient bees and the bee hotel connects evidence from both paragraphs back to the claim. Park compares mason bees and honeybees only on pollination, so saying mason bees are better "in every possible way" goes beyond the evidence.`,
         },
       ],
     },
@@ -535,7 +535,7 @@ const skill: ContentSkill = {
             no(`This shows that the bus driver must have arrived late every single time.`, 'unsupported-inference'),
             no(`Ms. Nwosu is a science teacher who works in one of the county schools.`, 'restates-fact'),
           ],
-          solution: `The first choice explains what lining up before sunrise reveals and ties it to the claim in sentence 2. Nothing in the article suggests the driver was late, so that choice is a guess.`,
+          solution: `The choice "Students arriving that early shows how eager they were" explains what lining up before sunrise reveals and ties it to the claim in sentence 2. Nothing in the article suggests the driver was late, so that choice is a guess.`,
         },
         {
           slot: 38,
@@ -559,7 +559,7 @@ const skill: ContentSkill = {
             no(`One student, Lupe Ortega, told Moana she plans to study weather, which is a popular subject.`, 'adds-irrelevant-comment'),
             no(`One student, Lupe Ortega, told Moana she has always wanted to study weather since she was small.`, 'undercuts-claim'),
           ],
-          solution: `Sentence 7 says the lab changed students' plans, and the first choice shows the bus's weather station caused Lupe's new plan. Saying she "always wanted" to study weather means the bus did not change anything, which weakens the claim.`,
+          solution: `Sentence 7 says the lab changed students' plans, and the choice about using the bus's weather station shows it caused Lupe's new plan. Saying she "always wanted" to study weather means the bus did not change anything, which weakens the claim.`,
         },
         {
           slot: 40,
