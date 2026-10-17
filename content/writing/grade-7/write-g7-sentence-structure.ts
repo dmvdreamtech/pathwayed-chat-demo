@@ -141,7 +141,7 @@ const skill: ContentSkill = {
         no(`The fair opened at noon. Crowds filled the midway by one.`, 'two-sentences-as-run-on'),
         ok(`The fair opened at noon crowds filled the midway by one.`),
       ],
-      solution: `"The fair opened at noon" and "crowds filled the midway by one" are two independent clauses with no punctuation or conjunction between them, which is a run-on. The first choice joins the same clauses correctly with a comma and "and."`,
+      solution: `"The fair opened at noon" and "crowds filled the midway by one" are two independent clauses with no punctuation or conjunction between them, which is a run-on. The choice "The fair opened at noon, and crowds filled the midway by one" joins the same clauses correctly with a comma and "and."`,
     },
     {
       slot: 12,
@@ -201,7 +201,7 @@ const skill: ContentSkill = {
         no(`Hoping to see the comet. Ines, stayed up past midnight.`, 'comma-does-not-fix-fragment'),
         no(`Ines was hoping to see the comet, she stayed up past midnight.`, 'comma-splice-created'),
       ],
-      solution: `"Hoping to see the comet" is a participial phrase with no subject or main verb, so it should introduce the sentence with a comma. The last choice turns the phrase into a clause but then joins two independent clauses with only a comma, which is a comma splice.`,
+      solution: `"Hoping to see the comet" is a participial phrase with no subject or main verb, so it should introduce the sentence with a comma. The choice "Ines was hoping to see the comet, she stayed up past midnight" turns the phrase into a clause but then joins two independent clauses with only a comma, which is a comma splice.`,
     },
     {
       slot: 17,
@@ -369,7 +369,7 @@ const skill: ContentSkill = {
         ok(`The scientists collected water samples, and the students recorded the temperatures.`),
         no(`The scientists and the students collected samples and recorded temperatures.`, 'compound-subject-as-compound'),
       ],
-      solution: `"The scientists collected water samples" and "the students recorded the temperatures" each have their own subject and verb, and they are joined by a comma and "and." The first choice has two verbs but only one subject, so it is a single clause.`,
+      solution: `"The scientists collected water samples" and "the students recorded the temperatures" each have their own subject and verb, and they are joined by a comma and "and." The choice "The scientists collected water samples and tested them for pollution" has two verbs but only one subject, so it is a single clause.`,
     },
     {
       slot: 31,
@@ -465,7 +465,7 @@ const skill: ContentSkill = {
         ok(`Although the weather was perfect, the hike was canceled because the guide was sick.`),
         no(`Although the guide was sick, the hike was canceled because the weather was perfect.`, 'swaps-cause-and-contrast'),
       ],
-      solution: `The perfect weather is a surprising contrast to the cancellation, and the guide's illness is the cause, so "Although" goes with the weather and "because" goes with the illness. The last choice swaps these and makes good weather the reason for canceling.`,
+      solution: `The perfect weather is a surprising contrast to the cancellation, and the guide's illness is the cause, so "Although" goes with the weather and "because" goes with the illness. The choice that begins "Although the guide was sick" swaps these and makes good weather the reason for canceling.`,
     },
     {
       slot: 39,
@@ -489,7 +489,7 @@ const skill: ContentSkill = {
         ok(`Our class visited the water treatment plant, where engineers showed us the filters. The tour lasted two hours.`),
         no(`Our class visited the water treatment plant where engineers showed us the filters the tour lasted two hours.`, 'fused-sentence'),
       ],
-      solution: `Attaching "where engineers showed us the filters" to the first sentence fixes the fragment, and the period before "The tour" separates the second independent clause. The first choice fixes the fragment but joins "the tour lasted two hours" with only a comma, creating a comma splice.`,
+      solution: `Attaching "where engineers showed us the filters" to the first sentence fixes the fragment, and the period before "The tour" separates the second independent clause. The version with a comma before "the tour lasted two hours" fixes the fragment but joins that clause with only a comma, creating a comma splice.`,
     },
   ],
 }
