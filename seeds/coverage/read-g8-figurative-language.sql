@@ -456,7 +456,7 @@ values ('89b4504f-6945-5d63-a6e0-b236c3d2ed1f', 'rg8-figurative-language-p06', (
 
 Scientists sometimes describe the migration route as a highway in the sky. Monarchs follow wind patterns and mountain ranges, and they stop at the same kinds of places year after year. Fields of blooming wildflowers serve as rest stops where the butterflies refuel on nectar.
 
-How do they find the way? Researchers believe monarchs use the sun as a compass. They also seem to sense the Earth's magnetic field. No single butterfly makes the full round trip, though. The monarchs that return north in spring are the children and grandchildren of the ones that flew south.
+How do they find the way? Researchers believe monarchs use the sun as a compass. They also seem to sense the Earth's magnetic field. No single butterfly makes the full round trip, though. The monarchs that reach Canada again the next summer are the grandchildren and great-grandchildren of the ones that flew south.
 
 Students across North America help track this journey. In a program run by a university, volunteers place tiny stickers on the wings of monarchs. Each sticker has a code. When someone finds a tagged butterfly in Mexico, the code shows where it started.
 
