@@ -42,7 +42,7 @@ const skill: ContentSkill = {
             no(`"I really like building robots," Kenji said with a cheerful smile.`, 'dialogue-off-mood'),
             no(`Kenji groaned, and a few seconds later he groaned one more time.`, 'repetition-no-new-info'),
           ],
-          solution: `The first choice uses Kenji's own words and the clock to show his worry about the time. The second choice only reports his feeling, so it summarizes instead of using dialogue.`,
+          solution: `The choice where Kenji says "We go on in twenty minutes" uses his own words and the clock to show his worry about the time. The choice "Kenji told me that he was very worried about how much time we had left" only reports his feeling, so it summarizes instead of using dialogue.`,
         },
         {
           slot: 3,
@@ -115,7 +115,7 @@ const skill: ContentSkill = {
             no(`"Nice," someone said, though it was hard to tell who.`, 'unclear-speaker'),
             no(`Mrs. Delgado said the garden was nice, and it really was nice.`, 'adds-no-detail'),
           ],
-          solution: `The correct choice shows Mrs. Delgado's action and her own words, which reveal what the garden means to her. The first choice still reports her opinion without dialogue or detail.`,
+          solution: `The correct choice shows Mrs. Delgado's action and her own words, which reveal what the garden means to her. The choice "Mrs. Delgado said that she thought the garden was really very nice" still reports her opinion without dialogue or detail.`,
         },
         {
           slot: 8,
@@ -285,7 +285,7 @@ const skill: ContentSkill = {
             no(`It makes the reader unsure about the order in which events happened.`, 'misreads-pacing'),
             ok(`It spends the most time on the hardest and most important part of the race.`),
           ],
-          solution: `Writers slow down for the moments that matter most, and the hill is where Daniela struggles and then succeeds. Stories do not need equal space for every part, so the second choice is a false rule.`,
+          solution: `Writers slow down for the moments that matter most, and the hill is where Daniela struggles and then succeeds. Stories do not need equal space for every part, so the choice claiming every part should get equal space states a false rule.`,
         },
         {
           slot: 20,
@@ -334,7 +334,7 @@ const skill: ContentSkill = {
             no(`"Letters," I said to her. "Yes, letters," she said back to me.`, 'dialogue-reveals-nothing'),
             no(`"I am definitely going to get an A on this," I told her proudly.`, 'dialogue-off-focus'),
           ],
-          solution: `The correct choice uses real dialogue and reveals that the letters were shared across generations. The second choice still summarizes the talk instead of letting the characters speak.`,
+          solution: `The correct choice uses real dialogue and reveals that the letters were shared across generations. The choice "I told my mom all about the letters, and she told me she already knew" still summarizes the talk instead of letting the characters speak.`,
         },
         {
           slot: 23,
@@ -478,7 +478,7 @@ const skill: ContentSkill = {
             no(`"Comets are the most amazing thing in the sky," my dad said happily.`, 'dialogue-contradicts-scene'),
             no(`"Okay," said my dad. "Okay," I said back to him.`, 'dialogue-reveals-nothing'),
           ],
-          solution: `The correct choice lets both characters speak and shows the dad ready to quit while the narrator pleads, which raises suspense. The first choice reports the same talk without any actual dialogue.`,
+          solution: `The correct choice lets both characters speak and shows the dad ready to quit while the narrator pleads, which raises suspense. The choice "My dad yawned and said it was late, and I said that I wanted to stay longer" reports the same talk without any actual dialogue.`,
         },
         {
           slot: 33,
@@ -539,7 +539,7 @@ const skill: ContentSkill = {
             ok(`"Don't let go!" he shouted. "Don't you dare let go!"`),
             no(`"Let go whenever you want," he said in a calm voice.`, 'contradicts-character'),
           ],
-          solution: `Kofi's repeated, shouted words let the reader hear his fear directly. The second choice reports what he wanted instead of giving his actual words.`,
+          solution: `Kofi's repeated, shouted words let the reader hear his fear directly. The choice "He told me that he wanted me to keep holding on to the seat" reports what he wanted instead of giving his actual words.`,
         },
         {
           slot: 37,
