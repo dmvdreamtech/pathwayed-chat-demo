@@ -62,14 +62,14 @@ const skill: ContentSkill = {
             wrong(`She is confused about how the volcano is supposed to work at all.`, 'contradicts-text'),
             right(`She has noticed the puddle on the floor, but they have not seen it yet.`),
           ],
-          solution: `The stage direction shows her "glancing at the floor" before she speaks, and only afterward does Deshawn look down. Her calm question about gas pressure earlier shows she understands the project, so she is not confused.`,
+          solution: `The stage direction shows her "glancing at the floor" before she speaks, and only afterward does Deshawn look down. Her calm, knowing comment shows she understands what has happened, so she is not confused.`,
         },
         {
           slot: 5,
           difficulty: 'hard',
           stem: `Why does the drama form, with its stage directions, work especially well for this scene?`,
           choices: [
-            right(`The directions show the audience a leak the characters ignore, which creates the humor.`),
+            right(`The directions show the audience a leak the characters have not noticed, which creates the humor.`),
             wrong(`The directions explain the science of volcanoes more clearly than the dialogue does.`, 'too-narrow'),
             wrong(`The directions let the characters tell the audience their private thoughts aloud.`, 'confuses-drama-terms'),
             wrong(`The directions reveal what happens to the project's score after the fair ends.`, 'contradicts-text'),
@@ -191,7 +191,7 @@ const skill: ContentSkill = {
           difficulty: 'medium',
           stem: `How does the author show the contrast between Mateo's and Grandma Ines's points of view?`,
           choices: [
-            right(`Each character narrates a section, giving two views of the same morning.`),
+            right(`Each character narrates a section, giving two views of the same garden trip.`),
             wrong(`A narrator outside the story explains what both characters secretly think.`, 'misidentifies-narrator'),
             wrong(`The characters argue out loud about the beans in a long conversation.`, 'contradicts-text'),
             wrong(`Mateo writes a letter to his mother describing his grandmother's plan.`, 'misreads-structure'),
@@ -416,15 +416,15 @@ const skill: ContentSkill = {
     {
       code: 'rg7-literary-structure-pov-p07',
       title: 'Behind the Garage Door',
-      body: `Ever since my sister Noor turned sixteen, she has acted like I am invisible. I am not exaggerating. Every day after school, she disappears into the garage and shuts the door. When I knock, she yells, "Busy!" When I ask what she is doing, she says, "Nothing you'd care about."\n\nFine. I can be busy too.\n\nOn Tuesday, I noticed sawdust in her hair at dinner. Mom raised her eyebrows at Noor, and Noor shook her head very slightly. They both glanced at me and then looked away. Clearly they were talking about how annoying I am.\n\nOn Wednesday, Noor asked me, out of nowhere, how many books I own. I told her I had no idea, maybe sixty, and why did she care? She shrugged and wrote something on her hand. Then she asked if my favorite color was still green. I said it was, but that she would know that if she ever talked to me.\n\nOn Thursday, I heard a saw buzzing behind the garage door, and Dad's voice saying, "Measure twice, cut once." Even Dad gets invited in, I thought. Everyone but me.\n\nMy birthday is Saturday. I am not expecting much. Noor will probably give me a card she bought at the last minute, the way she did last year. I have decided I will not even care.\n\nStill, on my way to bed tonight, I smelled fresh green paint coming from the garage.`,
+      body: `Ever since my sister Noor turned sixteen, she has acted like I am invisible. I am not exaggerating. Every day after school, she disappears into the garage and shuts the door. When I knock, she yells, "Busy!" When I ask what she is doing, she says, "Nothing you'd care about."\n\nFine. I can be busy too.\n\nOn Tuesday, I noticed sawdust in her hair at dinner. Mom raised her eyebrows at Noor, and Noor shook her head very slightly. They both glanced at me and then looked away. Clearly they were talking about how annoying I am.\n\nOn Wednesday, Noor asked me, out of nowhere, how many books I own. I told her I had no idea, maybe sixty, and why did she care? She shrugged and wrote something on her hand. Then she asked if my favorite color was still green. I said it was, but that she would know that if she ever talked to me.\n\nOn Thursday, I heard a saw buzzing behind the garage door, and Dad's voice saying, "Measure twice, cut once." Even Dad gets invited in, I thought. Everyone but me, her little sister.\n\nMy birthday is Saturday. I am not expecting much. Noor will probably give me a card she bought at the last minute, the way she did last year. I have decided I will not even care.\n\nStill, on my way to bed tonight, I smelled fresh green paint coming from the garage.`,
       items: [
         {
           slot: 31,
           difficulty: 'easy',
-          stem: `How does the narrator explain why Noor spends so much time in the garage?`,
+          stem: `What does the narrator believe is the reason Noor keeps shutting her out?`,
           choices: [
             wrong(`Noor is fixing Dad's car before the weekend.`, 'unsupported-inference'),
-            right(`Noor is avoiding her because she is annoying.`),
+            right(`Noor finds her annoying and wants to ignore her.`),
             wrong(`Noor is studying for a hard test at school.`, 'unsupported-inference'),
             wrong(`Noor is hiding from Mom after an argument.`, 'contradicts-text'),
           ],
@@ -452,7 +452,7 @@ const skill: ContentSkill = {
             wrong(`The narrator and the reader both believe Mom is angry about the sawdust in Noor's hair.`, 'unsupported-inference'),
             wrong(`The narrator thinks Noor is sick, but the reader suspects she is simply very tired.`, 'contradicts-text'),
           ],
-          solution: `The narrator decides "they were talking about how annoying I am," but the raised eyebrows and tiny head shake look like Mom checking whether the secret is safe. The narrator never suspects a surprise, so the reversed choice is wrong.`,
+          solution: `The narrator decides "they were talking about how annoying I am," but the raised eyebrows and tiny head shake look like Mom checking whether the secret is safe. The narrator never suspects a surprise, so "The narrator thinks they are planning a surprise" has it backward.`,
         },
         {
           slot: 34,
