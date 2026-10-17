@@ -157,7 +157,7 @@ const skill: ContentSkill = {
           wrong(`Scientists had proven that beaver ponds harmed the birds living near streams.`, 'contradicts-text'),
           wrong(`Beavers had started attacking farm animals that grazed near their ponds.`, 'unsupported-inference'),
           wrong(`Beavers had stopped building dams and were no longer useful to anyone.`, 'contradicts-text'),
-        ], `Paragraph 2 names flooding and chewed trees as reasons people saw dams as a nuisance, and paragraph 3 says scientists only "now" see the benefits. The bird study actually found more kinds of birds near ponds, so the second choice contradicts the text.`),
+        ], `Paragraph 2 names flooding and chewed trees as reasons people saw dams as a nuisance, and paragraph 3 says scientists only "now" see the benefits. The bird study actually found more kinds of birds near ponds, so the choice "Scientists had proven that beaver ponds harmed the birds living near streams" contradicts the text.`),
         q(20, 'hard', `The passage ends by saying "What has changed is how people understand the effects of that behavior." Which evidence best supports this statement?`, [
           right(`People once saw dams mostly as a nuisance, but scientists now see benefits like stored water and wildlife homes.`),
           wrong(`A family of beavers can cut down small trees and build a dam that slows the water in a stream.`, 'describes-behavior-not-change'),
