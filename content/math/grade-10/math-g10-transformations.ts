@@ -201,7 +201,7 @@ const skill: ContentSkill = {
         no(`$A'(-1, -2)$, $B'(-4, -2)$, $C'(-1, -6)$`, 'used-180-degree-rule'),
         no(`$A'(2, 1)$, $B'(2, 4)$, $C'(6, 1)$`, 'swapped-without-sign-change'),
       ],
-      solution: `Apply $(x, y) \\to (-y, x)$ to each vertex: $(1, 2) \\to (-2, 1)$, $(4, 2) \\to (-2, 4)$ and $(1, 6) \\to (-6, 1)$. The first choice applies the clockwise rule $(x, y) \\to (y, -x)$.`,
+      solution: `Apply $(x, y) \\to (-y, x)$ to each vertex: $(1, 2) \\to (-2, 1)$, $(4, 2) \\to (-2, 4)$ and $(1, 6) \\to (-6, 1)$. The choice $A'(2, -1)$, $B'(2, -4)$, $C'(6, -1)$ applies the clockwise rule $(x, y) \\to (y, -x)$.`,
     },
     {
       slot: 17,
@@ -261,7 +261,7 @@ const skill: ContentSkill = {
         ok(`It preserves distance and angle measure but reverses the clockwise order of the vertices.`),
         no(`It preserves angle measure but changes side lengths.`, 'confused-reflection-with-dilation'),
       ],
-      solution: `A reflection is a rigid motion, so lengths and angles stay the same, but it flips the figure, so vertices listed clockwise become counterclockwise. The first choice is true of rotations and translations, not reflections.`,
+      solution: `A reflection is a rigid motion, so lengths and angles stay the same, but it flips the figure, so vertices listed clockwise become counterclockwise. The choice that keeps the clockwise order of the vertices is true of rotations and translations, not reflections.`,
     },
     {
       slot: 22,

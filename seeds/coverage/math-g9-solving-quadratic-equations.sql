@@ -437,7 +437,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('f824afc9-ae49-56e5-88e9-a82c8841728b', null, (select id from public.skills where slug = 'math-g9-solving-quadratic-equations'), null, 'hard',
-   $q$For which values of $c$ does $2x^2 - 4x + c = 0$ have two different real solutions?$q$, $q$[{"text":"$c < 4$","is_correct":false,"misconception_token":"forgot-coefficient-a"},{"text":"$c > 2$","is_correct":false,"misconception_token":"flipped-inequality"},{"text":"$c < -\\frac{1}{2}$","is_correct":false,"misconception_token":"used-b-not-b-squared"},{"text":"$c < 2$","is_correct":true}]$q$::jsonb, $q$$c < 2$$q$, $q$Two real solutions need $(-4)^2 - 4(2)(c) > 0$, so $16 - 8c > 0$ and $c < 2$. The choice $c > 2$ gives a negative discriminant, which means no real solutions.$q$, 'draft', null)
+   $q$For which values of $c$ does $2x^2 - 4x + c = 0$ have two different real solutions?$q$, $q$[{"text":"$c < 4$","is_correct":false,"misconception_token":"forgot-coefficient-a"},{"text":"$c > 2$","is_correct":false,"misconception_token":"flipped-inequality"},{"text":"$c < -\\frac{1}{2}$","is_correct":false,"misconception_token":"used-b-not-b-squared"},{"text":"$c < 2$","is_correct":true}]$q$::jsonb, $q$$c < 2$$q$, $q$Two real solutions need $(-4)^2 - 4 \cdot 2 \cdot c > 0$, so $16 - 8c > 0$ and $c < 2$. The choice $c > 2$ gives a negative discriminant, which means no real solutions.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

@@ -321,7 +321,7 @@ const skill: ContentSkill = {
         ok(`The student is in the robotics club but not on the debate team`),
         no(`The student is in neither the robotics club nor the debate team`, 'complemented-both-events'),
       ],
-      solution: `$A \\cap B^c$ means the student is in $A$ and in the complement of $B$: in the robotics club and not on the debate team. The first choice describes $B \\cap A^c$, which swaps the roles of the two events.`,
+      solution: `$A \\cap B^c$ means the student is in $A$ and in the complement of $B$: in the robotics club and not on the debate team. The choice "on the debate team but not in the robotics club" describes $B \\cap A^c$, which swaps the roles of the two events.`,
     },
     {
       slot: 27,
@@ -357,7 +357,7 @@ const skill: ContentSkill = {
         no(`$P(\\text{bread and honey}) = 0.16$, which is not 0, so the events are independent`, 'used-nonzero-overlap-test'),
         no(`$P(\\text{bread}) = 0.46$, which is less than $0.5$, so the events are independent`, 'ignored-the-condition'),
       ],
-      solution: `$P(\\text{bread}) = \\frac{40 + 75}{250} = 0.46$, while $P(\\text{bread} \\mid \\text{honey}) = \\frac{40}{100} = 0.4$; since these differ, buying honey changes the chance of buying bread, so the events are not independent. The second choice compares with $P(\\text{honey})$, but the test must compare $P(\\text{bread} \\mid \\text{honey})$ with $P(\\text{bread})$.`,
+      solution: `$P(\\text{bread}) = \\frac{40 + 75}{250} = 0.46$, while $P(\\text{bread} \\mid \\text{honey}) = \\frac{40}{100} = 0.4$; since these differ, buying honey changes the chance of buying bread, so the events are not independent. The choice that says $P(\\text{honey}) = 0.4$ means independence compares with $P(\\text{honey})$, but the test must compare $P(\\text{bread} \\mid \\text{honey})$ with $P(\\text{bread})$.`,
     },
     {
       slot: 30,

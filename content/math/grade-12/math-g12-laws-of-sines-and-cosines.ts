@@ -33,7 +33,7 @@ const skill: ContentSkill = {
         no(`$a^2 = b^2 - 2b\\cos A$`, 'misremembered-law-of-cosines'),
         no(`$\\frac{a}{\\cos A} = \\frac{b}{\\cos B}$`, 'used-cosine-in-law-of-sines'),
       ],
-      solution: `The law of sines pairs each side with the sine of its opposite angle: $\\frac{a}{\\sin A} = \\frac{b}{\\sin B}$, so $a = \\frac{b \\sin A}{\\sin B}$. The first choice pairs $a$ with $\\sin B$, which is not the angle opposite $a$.`,
+      solution: `The law of sines pairs each side with the sine of its opposite angle: $\\frac{a}{\\sin A} = \\frac{b}{\\sin B}$, so $a = \\frac{b \\sin A}{\\sin B}$. The choice $\\frac{a}{\\sin B} = \\frac{b}{\\sin A}$ pairs $a$ with $\\sin B$, which is not the angle opposite $a$.`,
     },
     {
       slot: 3,

@@ -369,7 +369,7 @@ const skill: ContentSkill = {
         no(`Both change by equal differences over equal intervals`, 'thought-both-are-additive'),
         ok(`A linear function changes by equal differences and an exponential function by equal factors over equal intervals`),
       ],
-      solution: `Linear functions add the same amount over equal intervals, while exponential functions multiply by the same factor. The tempting first choice swaps these two descriptions.`,
+      solution: `Linear functions add the same amount over equal intervals, while exponential functions multiply by the same factor. The tempting choice "A linear function changes by equal factors" swaps these two descriptions.`,
     },
     {
       slot: 31,

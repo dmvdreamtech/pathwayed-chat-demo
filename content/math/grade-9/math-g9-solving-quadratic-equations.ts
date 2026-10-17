@@ -393,7 +393,7 @@ const skill: ContentSkill = {
         ok(`$c < 2$`),
         no(`$c < -\\frac{1}{2}$`, 'used-b-not-b-squared'),
       ],
-      solution: `Two real solutions need $(-4)^2 - 4(2)(c) > 0$, so $16 - 8c > 0$ and $c < 2$. The choice $c > 2$ gives a negative discriminant, which means no real solutions.`,
+      solution: `Two real solutions need $(-4)^2 - 4 \\cdot 2 \\cdot c > 0$, so $16 - 8c > 0$ and $c < 2$. The choice $c > 2$ gives a negative discriminant, which means no real solutions.`,
     },
     {
       slot: 33,
