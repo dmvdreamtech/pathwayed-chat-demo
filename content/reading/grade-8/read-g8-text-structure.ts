@@ -156,11 +156,11 @@ const skill: ContentSkill = {
           stem: `What is the role of the second sentence of paragraph 1, "The change can look like magic, but it follows a clear chain of causes inside each leaf"?`,
           choices: [
             right(`It tells the reader that the passage will explain causes and effects.`),
-            wrong(`It states a belief that the rest of the passage proves is true.`, 'misreads-purpose'),
+            wrong(`It gives the author's opinion that autumn is the most beautiful season.`, 'misreads-purpose'),
             wrong(`It gives a specific detail about how red pigments are made.`, 'confuses-paragraphs'),
             wrong(`It ends the passage by summing up everything already explained.`, 'wrong-position-role'),
           ],
-          solution: `The phrase "a clear chain of causes" previews the structure of the passage, which traces why colors appear. The passage does not prove the change is magic; it shows the opposite.`,
+          solution: `The phrase "a clear chain of causes" previews the structure of the passage, which traces why colors appear. The sentence states no opinion about autumn; it tells the reader how the explanation will be organized.`,
         },
         {
           slot: 12,
