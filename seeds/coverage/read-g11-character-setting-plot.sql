@@ -21,6 +21,14 @@ on conflict (slug) do update set
   name = excluded.name, grade_band = excluded.grade_band, ccss_grade = excluded.ccss_grade,
   ccss_grade_num = excluded.ccss_grade_num, ccss_code = excluded.ccss_code;
 
+-- Standard codes (0041).
+insert into public.skill_standard_codes (skill_id, framework, code)
+select s.id, t.framework, t.code
+  from public.skills s
+ cross join (values ('ccss', $q$RL.11-12.3$q$)) as t (framework, code)
+ where s.slug = 'read-g11-character-setting-plot'
+on conflict do nothing;
+
 -- Passage rg11-character-setting-plot-p01
 insert into public.passages (id, code, skill_id, sat_alignment, grade_band, title, body, status)
 values ('bcd597d4-e261-5b65-9da7-4aad26879c5e', 'rg11-character-setting-plot-p01', (select id from public.skills where slug = 'read-g11-character-setting-plot'), null,

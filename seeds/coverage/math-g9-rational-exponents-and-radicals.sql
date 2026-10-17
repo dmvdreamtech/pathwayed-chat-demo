@@ -21,6 +21,14 @@ on conflict (slug) do update set
   name = excluded.name, grade_band = excluded.grade_band, ccss_grade = excluded.ccss_grade,
   ccss_grade_num = excluded.ccss_grade_num, ccss_code = excluded.ccss_code;
 
+-- Standard codes (0041).
+insert into public.skill_standard_codes (skill_id, framework, code)
+select s.id, t.framework, t.code
+  from public.skills s
+ cross join (values ('ccss', $q$N-RN.A$q$)) as t (framework, code)
+ where s.slug = 'math-g9-rational-exponents-and-radicals'
+on conflict do nothing;
+
 -- Standalone questions
 insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)

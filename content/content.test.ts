@@ -1,9 +1,11 @@
 import { describe, it, expect } from 'vitest'
 import katex from 'katex'
+import { readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { TARGET_ITEMS, TOPUP_ITEMS, itemCount, passageLimits, requiredItems, skillIssues } from './checks'
 import { loadSkills } from './load'
 import { orderedChoices, skillSeed } from '../scripts/build-coverage-seeds'
+import { BATCHES, MAX_BYTES, buildBatches, orderSeeds, readSeeds } from '../scripts/build-coverage-batches'
 import type { ContentItem, ContentSkill } from './types'
 
 const item = (slot: number, over: Partial<ContentItem> = {}): ContentItem => ({
@@ -134,6 +136,25 @@ describe('a top-up of a live skill', () => {
     expect(sql).not.toContain("where slug = 'write-g4-test-topup'")
     expect((sql.match(/insert into public\.generated_questions/g) ?? []).length).toBe(TOPUP_ITEMS)
     expect(sql).not.toMatch(/'published'|'reviewed'/)
+  })
+})
+
+describe('the seed batches for the SQL editor', () => {
+  const seeds = readSeeds()
+  const batches = buildBatches(seeds)
+
+  it('hold every seed exactly once, top-ups after the skills, each under the size cap', () => {
+    const inBatches = batches.flatMap((b) => [...b.sql.matchAll(/^-- Contains: (.*)$/gm)].flatMap((m) => m[1].split(', ')))
+    expect(inBatches.sort()).toEqual(seeds.map((s) => s.name.replace(/\.sql$/, '')).sort())
+    for (const b of batches) expect(Buffer.byteLength(b.sql)).toBeLessThanOrEqual(MAX_BYTES + 20_000)
+    const order = orderSeeds(seeds).map((s) => s.sql.includes('-- TOP-UP:'))
+    expect(order.indexOf(true) === -1 || !order.slice(order.indexOf(true)).includes(false)).toBe(true)
+  })
+
+  it('are up to date with seeds/coverage (run build-coverage-batches.ts)', () => {
+    const onDisk = readdirSync(BATCHES).filter((f) => f.endsWith('.sql')).sort()
+    expect(onDisk).toEqual(batches.map((b) => b.file))
+    for (const b of batches) expect(readFileSync(join(BATCHES, b.file), 'utf8')).toBe(b.sql)
   })
 })
 

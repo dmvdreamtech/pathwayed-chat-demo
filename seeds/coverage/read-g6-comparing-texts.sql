@@ -21,6 +21,14 @@ on conflict (slug) do update set
   name = excluded.name, grade_band = excluded.grade_band, ccss_grade = excluded.ccss_grade,
   ccss_grade_num = excluded.ccss_grade_num, ccss_code = excluded.ccss_code;
 
+-- Standard codes (0041).
+insert into public.skill_standard_codes (skill_id, framework, code)
+select s.id, t.framework, t.code
+  from public.skills s
+ cross join (values ('ccss', $q$RL.6.9$q$)) as t (framework, code)
+ where s.slug = 'read-g6-comparing-texts'
+on conflict do nothing;
+
 -- Passage rg6-comparing-texts-p01
 insert into public.passages (id, code, skill_id, sat_alignment, grade_band, title, body, status)
 values ('324e929e-0e5b-537e-82cc-0f7d3bf9a13b', 'rg6-comparing-texts-p01', (select id from public.skills where slug = 'read-g6-comparing-texts'), null,

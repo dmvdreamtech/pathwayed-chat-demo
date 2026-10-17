@@ -21,6 +21,14 @@ on conflict (slug) do update set
   name = excluded.name, grade_band = excluded.grade_band, ccss_grade = excluded.ccss_grade,
   ccss_grade_num = excluded.ccss_grade_num, ccss_code = excluded.ccss_code;
 
+-- Standard codes (0041).
+insert into public.skill_standard_codes (skill_id, framework, code)
+select s.id, t.framework, t.code
+  from public.skills s
+ cross join (values ('ccss', $q$W.11-12.1$q$)) as t (framework, code)
+ where s.slug = 'write-g12-argument-writing'
+on conflict do nothing;
+
 -- Passage wg12-argument-writing-p01
 insert into public.passages (id, code, skill_id, sat_alignment, grade_band, title, body, status)
 values ('c7f9829b-1780-5ee6-8676-7632991edbf2', 'wg12-argument-writing-p01', (select id from public.skills where slug = 'write-g12-argument-writing'), null,

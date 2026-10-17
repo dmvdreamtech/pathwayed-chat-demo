@@ -21,6 +21,14 @@ on conflict (slug) do update set
   name = excluded.name, grade_band = excluded.grade_band, ccss_grade = excluded.ccss_grade,
   ccss_grade_num = excluded.ccss_grade_num, ccss_code = excluded.ccss_code;
 
+-- Standard codes (0041).
+insert into public.skill_standard_codes (skill_id, framework, code)
+select s.id, t.framework, t.code
+  from public.skills s
+ cross join (values ('ccss', $q$L.11-12.4b$q$), ('ccss', $q$L.11-12.4c$q$)) as t (framework, code)
+ where s.slug = 'read-g11-word-parts'
+on conflict do nothing;
+
 -- Passage rg11-word-parts-p01
 insert into public.passages (id, code, skill_id, sat_alignment, grade_band, title, body, status)
 values ('a20ce9b9-aa4e-5b16-b827-5dbdd987f7a5', 'rg11-word-parts-p01', (select id from public.skills where slug = 'read-g11-word-parts'), null,

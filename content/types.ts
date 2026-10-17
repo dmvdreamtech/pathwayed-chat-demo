@@ -54,8 +54,13 @@ export interface ContentSkill {
   group: ReadingGroup | WritingGroup | string
   /** Skill name shown to students and staff, e.g. 'Theme and Summary'. */
   name: string
-  /** Common Core codes this skill covers, e.g. ['RL.8.2']. The first is stored as ccss_code. */
+  /**
+   * Common Core codes this skill covers, e.g. ['RL.8.2']. The first is stored as
+   * ccss_code; all are tagged in skill_standard_codes under framework 'ccss'.
+   */
   standards: string[]
+  /** Maryland 2025 math codes, e.g. ['1.GR.C.6'], once known. Tagged under 'md-2025'. */
+  md2025?: string[]
   /** Passage-based items (reading, and writing revision sets). */
   passages?: ContentPassage[]
   /** Standalone items (most writing and vocabulary items). */

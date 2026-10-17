@@ -154,6 +154,23 @@ values (${qq(skillId)}, 'skill', ${qq(domainId)}, ${qq(skill.subject)}, ${dq(ski
 on conflict (slug) do update set
   name = excluded.name, grade_band = excluded.grade_band, ccss_grade = excluded.ccss_grade,
   ccss_grade_num = excluded.ccss_grade_num, ccss_code = excluded.ccss_code;
+${standardTags(skill)}`
+}
+
+/** Standard codes by framework (0041): every Common Core code now, Maryland 2025 codes when a file lists them. */
+function standardTags(skill: ContentSkill): string {
+  const tags = [
+    ...skill.standards.map((code) => ['ccss', code] as const),
+    ...(skill.md2025 ?? []).map((code) => ['md-2025', code] as const),
+  ]
+  return `
+-- Standard codes (0041).
+insert into public.skill_standard_codes (skill_id, framework, code)
+select s.id, t.framework, t.code
+  from public.skills s
+ cross join (values ${tags.map(([f, c]) => `(${qq(f)}, ${dq(c)})`).join(', ')}) as t (framework, code)
+ where s.slug = ${qq(skill.slug)}
+on conflict do nothing;
 `
 }
 
