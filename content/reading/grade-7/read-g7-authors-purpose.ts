@@ -117,7 +117,7 @@ const skill: ContentSkill = {
             wrong(`They know that bats have no eyes at all and must depend on their ears.`, 'contradicts-text'),
             wrong(`They have read that bats cannot see ultraviolet light the way people can.`, 'reverses-detail'),
           ],
-          solution: `The author says people see that echolocation is impressive and "assume bats must use it because their eyes do not work." The passage says every bat has eyes and that some bats see ultraviolet light, so the other reasons contradict it.`,
+          solution: `The author says people see that echolocation is impressive and "assume bats must use it because their eyes do not work." The passage says every bat has eyes, so "bats have no eyes at all" contradicts it, and it says some bats see ultraviolet light, so the claim that they cannot is wrong. Nothing mentions bats bumping into trees.`,
         },
         {
           slot: 9,
@@ -263,7 +263,7 @@ const skill: ContentSkill = {
             wrong(`"Our athletic department should adopt a minimum playing time rule."`, 'confuses-claim'),
             wrong(`"Learning to love a sport can last a lifetime."`, 'confuses-author-view'),
           ],
-          solution: `Right after "These points matter," the author agrees that losing is unpleasant and hard work deserves reward, which are the supporters' concerns. The other sentences state the author's own position.`,
+          solution: `Right after "These points matter," the author agrees that losing is unpleasant and hard work deserves reward, which are the supporters' concerns. The sentences about middle school sports helping students grow, adopting a minimum playing time rule, and learning to love a sport all state the author's own position.`,
         },
         {
           slot: 20,
@@ -373,7 +373,7 @@ const skill: ContentSkill = {
             wrong(`The author once used a leaf blower but now uses a rake to save energy.`, 'unsupported-inference'),
             wrong(`The author has always left leaves and has never thought about bagging them.`, 'contradicts-text'),
           ],
-          solution: `The author says, "I used to do the same thing," meaning bagging every leaf, and now "I now leave many of them where they land." Mr. Okafor's point changes how the author handles the lawn, not the author's overall view.`,
+          solution: `The author says, "I used to do the same thing," meaning bagging every leaf, and then says, "I now leave many of them where they land." Mr. Okafor's point changes how the author handles the lawn, not the author's overall view.`,
         },
         {
           slot: 28,
@@ -464,7 +464,7 @@ const skill: ContentSkill = {
             wrong(`"The city's public works director has raised two concerns."`, 'confuses-opposing-view'),
             wrong(`"The city council will vote on the repainting plan in May."`, 'detail-not-claim'),
           ],
-          solution: `This sentence says exactly what the author wants to happen. The others describe the setting, the director's concerns, or the timing of the vote without stating the author's position.`,
+          solution: `The sentence beginning "I propose a different plan" says exactly what the author wants to happen. The sentence about gray, cracked walls describes the setting, the sentence about the director names her concerns, and the sentence about the May vote gives timing, so none of them states the author's position.`,
         },
         {
           slot: 35,
@@ -500,7 +500,7 @@ const skill: ContentSkill = {
         {
           slot: 37,
           difficulty: 'medium',
-          stem: `Why does the author report that volunteers fixed forty-one of fifty items in less than half an hour each?`,
+          stem: `Why does the author report that volunteers fixed forty-one of fifty items and that most repairs took less than half an hour?`,
           choices: [
             right(`To show that repairing items is usually quick, free, and successful.`),
             wrong(`To show that the volunteers need more tables to keep up with demand.`, 'unsupported-inference'),
