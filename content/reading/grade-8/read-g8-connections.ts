@@ -507,7 +507,7 @@ const skill: ContentSkill = {
             wrong(`Both would be open only during the month of June at the school.`, 'unsupported-inference'),
             wrong(`Both can run with no adult volunteers helping out at any time.`, 'contradicts-text'),
           ],
-          solution: `The library shares books "so one copy serves many readers," and the cafe would share tools and skills "in the same way." The author says each station would have an adult volunteer, so the last choice is wrong.`,
+          solution: `The library shares books "so one copy serves many readers," and the cafe would share tools and skills "in the same way." The author says each station would have an adult volunteer, so the choice about running with no adult volunteers is wrong.`,
         },
         {
           slot: 38,

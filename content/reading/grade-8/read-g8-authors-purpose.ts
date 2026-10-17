@@ -184,7 +184,7 @@ const skill: ContentSkill = {
             wrong(`A player who swims will develop weaker joints than a player who runs.`, 'contradicts-text'),
             wrong(`A player who plays three sports will never earn a college scholarship.`, 'unsupported-inference'),
           ],
-          solution: `The author writes "That is true" and admits a twelve-year-old who plays only tennis "will probably beat" one who splits time. The author says early specialists often burn out, which is the opposite of the second choice.`,
+          solution: `The author writes "That is true" and admits a twelve-year-old who plays only tennis "will probably beat" one who splits time. The author says early specialists often burn out, which is the opposite of the choice saying early specialists are less likely to burn out.`,
         },
         {
           slot: 14,

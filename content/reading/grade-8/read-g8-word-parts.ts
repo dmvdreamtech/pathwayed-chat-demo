@@ -62,7 +62,7 @@ const skill: ContentSkill = {
             wrong(`Made the view of the planets much clearer`, 'opposite-meaning'),
             wrong(`Moved slowly between the stars without effect`, 'too-literal'),
           ],
-          solution: `Inter plus rupt means "break between," so the clouds broke into the viewing, and the passage says the pause lasted twenty minutes before the clouds cleared. The viewing did not end for the night, so the second choice goes too far.`,
+          solution: `Inter plus rupt means "break between," so the clouds broke into the viewing, and the passage says the pause lasted twenty minutes before the clouds cleared. The viewing did not end for the night, so the choice "Ended the viewing for the rest of the night" goes too far.`,
         },
         {
           slot: 5,
@@ -129,7 +129,7 @@ const skill: ContentSkill = {
             wrong(`Listen to the clicking sounds more slowly than usual`, 'ignores-root-clues'),
             wrong(`Write the clicking sounds on paper before reading them`, 'contradicts-text'),
         ],
-          solution: `To translate is to carry meaning across from one form to another, here from clicks into words. The passage says they did this "without writing anything down," so the fourth choice contradicts the text.`,
+          solution: `To translate is to carry meaning across from one form to another, here from clicks into words. The passage says they did this "without writing anything down," so the choice about writing the sounds on paper contradicts the text.`,
         },
         {
           slot: 10,
@@ -196,7 +196,7 @@ const skill: ContentSkill = {
             wrong(`Broke apart and went home`, 'too-literal'),
             wrong(`Stood up slowly to stretch`, 'ignores-root-clues'),
           ],
-          solution: `E plus rupt means "burst out," and the cheers were "so loud that Amara could barely hear" the whistle. The crowd did not literally break apart and leave, so the third choice reads the root too literally.`,
+          solution: `E plus rupt means "burst out," and the cheers were "so loud that Amara could barely hear" the whistle. The crowd did not literally break apart and leave, so the choice "Broke apart and went home" reads the root too literally.`,
         },
         {
           slot: 15,

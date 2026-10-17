@@ -28,7 +28,7 @@ const skill: ContentSkill = {
           wrong(`Asphalt roads absorb more of the sunlight that hits them than they reflect back into the sky.`, 'too-narrow'),
           wrong(`People who live in cities should move to the countryside during the hottest summer months.`, 'unsupported-inference'),
           wrong(`Trees are the most important living things in any neighborhood, whether in a city or a town.`, 'overgeneralization'),
-        ], `The passage explains several causes of urban heat islands and ends with ways to reduce them, so the first choice covers the whole text. The asphalt detail is true but describes only one cause in paragraph 2.`),
+        ], `The passage explains several causes of urban heat islands and ends with ways to reduce them, so the choice about surfaces, design and cooling cities covers the whole text. The asphalt detail is true but describes only one cause in paragraph 2.`),
         q(2, 'easy', `Which detail best supports the idea that plants help cool the air?`, [
           right(`Water released through leaves evaporates and carries heat away from the air.`),
           wrong(`Tar roofs warm up during the day and give off their heat at night.`, 'wrong-supporting-detail'),
@@ -46,7 +46,7 @@ const skill: ContentSkill = {
           wrong(`Cities are miserable in summer, and planners have done a poor job of protecting the people who live there. Everyone should demand that their city build more parks.`, 'includes-opinion'),
           wrong(`Air conditioners, cars and machines release heat into city streets. This extra heat is the main reason city neighborhoods stay warm long after the sun sets.`, 'too-narrow'),
           wrong(`Plants pull water from the ground and release it through their leaves. As the water evaporates, it cools the air in the same way that sweat cools a runner.`, 'too-narrow'),
-        ], `The first choice states the causes and the solutions without adding opinions. The second choice adds the author's own judgments, such as "miserable" and "poor job," which do not belong in an objective summary.`),
+        ], `The choice about dark surfaces, removed plants and trapped air states the causes and the solutions without adding opinions. The choice calling cities "miserable" adds judgments, such as "miserable" and "poor job," which do not belong in an objective summary.`),
         q(5, 'hard', `How does the final paragraph relate to the rest of the passage?`, [
           right(`It shows that the causes explained earlier also point to ways of reducing city heat.`),
           wrong(`It introduces a new problem that the earlier paragraphs did not mention.`, 'misreads-structure'),
@@ -83,7 +83,7 @@ const skill: ContentSkill = {
           wrong(`Towns once kept local time based on the sun. The railroads unfairly forced their own system on everyone, and it was a mistake that people still live with today.`, 'includes-opinion'),
           wrong(`Railroad timetables listed departures in many local times. Passengers grew confused, and a traveler could miss a connection by several minutes.`, 'too-narrow'),
           wrong(`Governments decided that every town should follow the sun more closely. Railroads then printed new timetables to match each town's local time.`, 'contradicts-text'),
-        ], `The first choice covers the whole sequence from sun time to official time zones without judging it. The second adds opinions ("unfairly," "a mistake") that the passage never states.`),
+        ], `The choice about railroads creating time zones covers the whole sequence from sun time to official time zones without judging it. The choice saying railroads "unfairly" forced their system adds opinions ("unfairly," "a mistake") that the passage never states.`),
         q(10, 'hard', `Why does the author include the detail that some townspeople felt the railroads "had no right to decide what time it was"?`, [
           right(`To show that the shift to time zones met resistance before it was widely accepted.`),
           wrong(`To prove that time zones were a poor idea that should be reversed.`, 'misreads-purpose'),
@@ -120,7 +120,7 @@ const skill: ContentSkill = {
           wrong(`Tool libraries let members borrow equipment instead of buying it. They are the best idea any neighborhood has ever had, and every city should pay to open one.`, 'includes-opinion'),
           wrong(`A retired carpenter volunteers at a tool library every Saturday. Teenagers ask him for advice, and some help him repair benches at the local park.`, 'too-narrow'),
           wrong(`Tool libraries are hard to run because borrowers damage tools. Most organizers have decided that these problems are too large to manage.`, 'contradicts-text'),
-        ], `The first choice covers how tool libraries work, their benefits and their challenges without adding opinions. The last choice reverses the text, which says organizers think the problems are "small compared with what the community gains."`),
+        ], `The choice about reducing waste, teaching skills and facing storage problems covers how tool libraries work, their benefits and their challenges without adding opinions. The choice saying the problems are too large reverses the text, which says organizers think the problems are "small compared with what the community gains."`),
         q(15, 'hard', `Why does the author include the paragraph about the difficulties of running a tool library?`, [
           right(`To give a balanced view before concluding that the benefits outweigh the problems.`),
           wrong(`To argue that tool libraries are not worth the effort that they require.`, 'contradicts-text'),
@@ -194,7 +194,7 @@ const skill: ContentSkill = {
           wrong(`Sleep helps athletes repair muscles and learn skills. Any athlete who stays up late is lazy and does not deserve a spot on a school team.`, 'includes-opinion'),
           wrong(`A track coach asks her runners to record their sleep with their running times. She tells them rest is a workout they cannot skip.`, 'too-narrow'),
           wrong(`Athletes get hurt mainly because coaches hold practices too late at night. Moving practices earlier would prevent nearly all sports injuries.`, 'unsupported-inference'),
-        ], `The first choice states each supporting idea and the coaches' response without judgment. The coach example is accurate, but it covers only one detail from the last paragraph.`),
+        ], `The choice about repairing muscles, storing skills and coaches' training plans states each supporting idea and the coaches' response without judgment. The coach example is accurate, but it covers only one detail from the last paragraph.`),
         q(25, 'hard', `What is the purpose of the opening paragraph's claim that rest "is part of how the body and brain improve"?`, [
           right(`It introduces the central idea, which later paragraphs support with specific effects of sleep.`),
           wrong(`It sums up a coach's advice that is explained in detail at the end of the passage.`, 'misreads-structure'),
@@ -231,7 +231,7 @@ const skill: ContentSkill = {
           wrong(`A conservator restored a faded mural in Port Alder. It is now the most beautiful mural in the region, and other towns should be jealous of it.`, 'includes-opinion'),
           wrong(`A conservator tested paint samples and compared photographs of a mural. She learned which materials the first artist had used on the wall.`, 'too-narrow'),
           wrong(`A conservator replaced an old, faded mural with a brand new painting of boats. Residents liked the new design better than the old one.`, 'contradicts-text'),
-        ], `The first choice names every stage and the goal of preserving the original, with no opinions. The last choice contradicts the text, which says her job "was not to paint a new picture."`),
+        ], `The choice about studying, cleaning, repairing and sealing the mural names every stage and the goal of preserving the original, with no opinions. The choice about a brand new painting of boats contradicts the text, which says her job "was not to paint a new picture."`),
         q(30, 'hard', `Why does the author note that Kowalczyk "kept a detailed record of every change"?`, [
           right(`It reinforces that restoration respects the original by keeping new work clearly identified.`),
           wrong(`It shows that the team did not trust Kowalczyk to remember her own work.`, 'unsupported-inference'),
@@ -268,7 +268,7 @@ const skill: ContentSkill = {
           wrong(`Satellites send timed signals that phones use to find their position. This clever system is easily the greatest invention of modern times and deserves more praise.`, 'includes-opinion'),
           wrong(`A phone receives a signal from one satellite and uses it to find its exact position. Tall buildings and indoor spaces never interfere with this process.`, 'contradicts-text'),
           wrong(`Phones mostly use cell towers and wireless networks to find their location. Satellites are used only as a backup when those networks are not available.`, 'confuses-main-and-minor'),
-        ], `The first choice covers signal timing, the need for several satellites, precise clocks and backup data without opinion. The last choice reverses the roles, since the passage says phones add tower data "to help," not that satellites are the backup.`),
+        ], `The choice about delays from several satellites covers signal timing, the need for several satellites, precise clocks and backup data without opinion. The choice saying satellites are only a backup reverses the roles, since the passage says phones add tower data "to help," not that satellites are the backup.`),
         q(35, 'hard', `The author says finding a location "is really a problem of measuring time." How does the rest of the passage develop this idea?`, [
           right(`It shows that each step, from signal delays to clock accuracy, depends on measuring time precisely.`),
           wrong(`It shows that the clocks inside phones keep better time than the clocks on satellites.`, 'contradicts-text'),
@@ -305,7 +305,7 @@ const skill: ContentSkill = {
           wrong(`The author argues that schools should teach cooking. Anyone who disagrees with this plan simply does not care about students or about their futures after graduation.`, 'includes-opinion'),
           wrong(`The author explains that doubling a recipe requires fractions and that yeast makes bread rise. The passage shows that cooking is mainly a way to teach math and science.`, 'too-narrow'),
           wrong(`The author argues that schools cannot afford cooking classes right now and should drop the idea until every school has built a new, fully equipped kitchen.`, 'contradicts-text'),
-        ], `An objective summary of an argument reports the claim and reasons without adding new judgments, which the first choice does. The second choice adds a harsh opinion the author never states; the author calls the cost concern "reasonable."`),
+        ], `An objective summary of an argument reports the claim and reasons without adding new judgments, which the choice about health, independence and low-cost answers does. The choice saying anyone who disagrees "does not care about students" adds a harsh opinion the author never states; the author calls the cost concern "reasonable."`),
         q(40, 'hard', `How does the paragraph about time and money contribute to the development of the author's central claim?`, [
           right(`It answers a likely objection, which makes the argument for cooking classes stronger.`),
           wrong(`It shows that the author has changed position and no longer supports cooking classes.`, 'contradicts-text'),

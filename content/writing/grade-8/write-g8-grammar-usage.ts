@@ -189,7 +189,7 @@ const skill: ContentSkill = {
         ok(`Elena mixed the batter, and then she preheated the oven.`),
         no(`Elena mixes the batter, and then the oven was preheated by her.`, 'tense-shift'),
       ],
-      solution: `Both clauses should use the active voice with Elena as the doer, as in "Elena mixed the batter, and then she preheated the oven." The first choice only reverses the problem, moving from passive to active.`,
+      solution: `Both clauses should use the active voice with Elena as the doer, as in "Elena mixed the batter, and then she preheated the oven." The choice "The batter was mixed by Elena" only reverses the problem, moving from passive to active.`,
     },
     {
       slot: 16,
@@ -201,7 +201,7 @@ const skill: ContentSkill = {
         no(`First, read the directions carefully, and then you will label your diagram.`, 'mood-shift'),
         no(`First, read the directions carefully, and then you label your diagram.`, 'mood-shift'),
       ],
-      solution: `The sentence begins with a command, so both parts should stay in the imperative mood: "read" and "label." The first choice still shifts, this time from "you should read" to the command "label."`,
+      solution: `The sentence begins with a command, so both parts should stay in the imperative mood: "read" and "label." The choice starting "First, you should read" still shifts, this time from "you should read" to the command "label."`,
     },
     {
       slot: 17,
@@ -213,7 +213,7 @@ const skill: ContentSkill = {
         no(`The rain soaked Kofi's backpack, running toward the bus stop.`, 'misplaced-participle'),
         ok(`Running toward the bus stop, Kofi felt the rain soak his backpack.`),
       ],
-      solution: `The participial phrase "Running toward the bus stop" must describe the person running, so "Kofi" has to follow it. In the first choice the phrase still describes the backpack, which cannot run.`,
+      solution: `The participial phrase "Running toward the bus stop" must describe the person running, so "Kofi" has to follow it. In the choice "Running toward the bus stop, Kofi's backpack was soaked by the rain," the phrase still describes the backpack, which cannot run.`,
     },
     {
       slot: 18,
@@ -345,7 +345,7 @@ const skill: ContentSkill = {
         no(`Covered in mud, the cabin welcomed the tired hikers.`, 'dangling-participle'),
         no(`Covered in mud, reaching the cabin was a relief for the hikers.`, 'dangling-participle'),
       ],
-      solution: `The phrase should describe the hikers, so "the hikers" must come right after it. In the first choice the phrase sits next to "the cabin," so it seems the cabin is covered in mud.`,
+      solution: `The phrase should describe the hikers, so "the hikers" must come right after it. In the choice "Covered in mud, the cabin was finally reached by the hikers," the phrase sits next to "the cabin," so it seems the cabin is covered in mud.`,
     },
     {
       slot: 29,
@@ -357,7 +357,7 @@ const skill: ContentSkill = {
         ok(`Students should wear goggles in the lab and should wash their hands before leaving.`),
         no(`Students should wear goggles in the lab, and washing your hands before leaving.`, 'incomplete-verb'),
       ],
-      solution: `The sentence starts as a statement about what students should do, so the second verb must stay in that mood: "should wash their hands." The first choice still mixes a command with a statement, just in the opposite order.`,
+      solution: `The sentence starts as a statement about what students should do, so the second verb must stay in that mood: "should wash their hands." The choice starting "Wear goggles in the lab" still mixes a command with a statement, just in the opposite order.`,
     },
     {
       slot: 30,
@@ -381,7 +381,7 @@ const skill: ContentSkill = {
         no(`If the council approved the park plan, construction would begin in May, and workers removed the old fence.`, 'tense-shift'),
         ok(`If the council approved the park plan, construction would begin in May, and workers would remove the old fence.`),
       ],
-      solution: `The sentence describes a possible situation with the conditional "would begin," so the last clause also needs "would" and the active voice: "workers would remove the old fence." The second choice fixes the mood but keeps the passive voice.`,
+      solution: `The sentence describes a possible situation with the conditional "would begin," so the last clause also needs "would" and the active voice: "workers would remove the old fence." The choice "the old fence would be removed by workers" fixes the mood but keeps the passive voice.`,
     },
     {
       slot: 32,
@@ -453,7 +453,7 @@ const skill: ContentSkill = {
         no(`Mistakes were made in the budget report, and the treasurer then corrected the error.`, 'voice-shift'),
         no(`The treasurer makes mistakes in the budget report, and she then corrected the error.`, 'tense-shift'),
       ],
-      solution: `Making the treasurer the subject of both clauses ("made" and "corrected") puts the whole sentence in the active voice with consistent past tense. The first choice changes only the first clause and leaves "the error was then corrected" in the passive.`,
+      solution: `Making the treasurer the subject of both clauses ("made" and "corrected") puts the whole sentence in the active voice with consistent past tense. The choice that keeps "the error was then corrected" changes only the first clause and leaves "the error was then corrected" in the passive.`,
     },
     {
       slot: 38,
@@ -489,7 +489,7 @@ const skill: ContentSkill = {
         no(`When the class visited the observatory, the guide will show them a telescope that was built in 1890.`, 'tense-shift'),
         ok(`When the class visited the observatory, the guide showed them a telescope that had been built in 1890.`),
       ],
-      solution: `The visit happened in the past, so "showed" matches "visited," and "had been built" correctly shows the building came even earlier. The first choice still leaves "shows" in the present tense.`,
+      solution: `The visit happened in the past, so "showed" matches "visited," and "had been built" correctly shows the building came even earlier. The choice with "the guide shows them" and "had been built" still leaves "shows" in the present tense.`,
     },
   ],
 }

@@ -309,7 +309,7 @@ const skill: ContentSkill = {
         no(`On March 3 2025, the robotics team traveled to Dayton Ohio, for a regional contest.`, 'missing-internal-comma'),
         ok(`On March 3, 2025, the robotics team traveled to Dayton, Ohio, for a regional contest.`),
       ],
-      solution: `A comma separates the day from the year and the city from the state, and another comma follows the year and the state when the sentence continues. The first choice leaves out those closing commas after "2025" and "Ohio."`,
+      solution: `A comma separates the day from the year and the city from the state, and another comma follows the year and the state when the sentence continues. The sentence with "2025 the robotics team" leaves out those closing commas after "2025" and "Ohio."`,
     },
     {
       slot: 26,
@@ -465,7 +465,7 @@ const skill: ContentSkill = {
         no(`I want to thank my coaches Ms. Reyes, and Mr. Park for their help.`, 'comma-splits-names'),
         no(`I want to thank, my coaches Ms. Reyes and Mr. Park for their help.`, 'comma-between-verb-object'),
       ],
-      solution: `Setting off "my coaches" with commas right after the two names shows that the phrase renames Ms. Reyes and Mr. Park. The comma after "Ms. Reyes" in the first choice turns the sentence into a list of three, as if the coaches were other people.`,
+      solution: `Setting off "my coaches" with commas right after the two names shows that the phrase renames Ms. Reyes and Mr. Park. The comma after "Ms. Reyes" in "my coaches, Ms. Reyes, and Mr. Park" turns the sentence into a list of three, as if the coaches were other people.`,
     },
     {
       slot: 39,
