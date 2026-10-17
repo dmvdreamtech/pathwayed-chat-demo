@@ -495,7 +495,7 @@ const skill: ContentSkill = {
             wrong(`Leaves carved too deeply into the rim.`, 'unsupported-inference'),
             wrong(`A bright orange glaze that cracked.`, 'confuses-details'),
           ],
-          solution: `Ms. Ferreira says "Air bubble" and points to "a small round hollow inside the break." The orange glaze belongs to a different bowl, not Kofi's.`,
+          solution: `Ms. Ferreira says "Air bubble" and points to "a small round hollow inside the break." She never mentions the glaze, and the story never says which bowl is orange.`,
         },
         {
           slot: 37,
