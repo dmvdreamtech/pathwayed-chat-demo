@@ -28,7 +28,7 @@ const skill: ContentSkill = {
           right(`Tiny living things break down scraps into rich soil when they have the right conditions.`),
           wrong(`Every family should start a compost pile instead of throwing away its food scraps.`, 'unsupported-inference'),
           wrong(`A compost pile becomes warm enough to steam on a cool morning when it is healthy.`, 'too-narrow'),
-        ], `The passage explains who does the work in a compost pile, what conditions they need and what the finished compost is used for, which the second choice covers. The steam detail is true but comes from only one paragraph.`),
+        ], `The passage explains who does the work in a compost pile, what conditions they need and what the finished compost is used for, which the choice about tiny living things and the right conditions covers. The steam detail is true but comes from only one paragraph.`),
         q(2, 'easy', `Which detail best supports the idea that compost piles need air?`, [
           wrong(`Greens such as fruit peels and grass clippings supply nitrogen.`, 'wrong-supporting-detail'),
           wrong(`A pile that feels like a damp sponge has the right amount of water.`, 'wrong-supporting-detail'),
@@ -46,7 +46,7 @@ const skill: ContentSkill = {
           wrong(`Composting is the smartest thing a family can do for the planet. Anyone who throws food in the trash is being wasteful and should start a compost pile right away.`, 'includes-opinion'),
           wrong(`Greens such as fruit peels supply nitrogen, and browns such as dry leaves supply carbon. A gardener needs to add both kinds of material to a compost pile.`, 'too-narrow'),
           wrong(`A compost pile can look like a heap of trash. Earthworms and beetles live in it, and on cool mornings the pile sometimes gives off steam into the air.`, 'lists-minor-details'),
-        ], `The first choice covers the workers, the conditions and the result without adding opinions. The second choice adds judgments such as "smartest" and "wasteful" that the passage never states.`),
+        ], `The summary that begins "Bacteria, fungi and small creatures" covers the workers, the conditions and the result without adding opinions. The summary calling composting "the smartest thing" adds judgments such as "smartest" and "wasteful" that the passage never states.`),
         q(5, 'hard', `Which sentence would NOT belong in an objective summary of the passage?`, [
           wrong(`Microbes give off heat as they work, which speeds up the composting process.`, 'misidentifies-key-idea'),
           wrong(`Finished compost adds nutrients to soil and helps the ground hold water.`, 'misidentifies-key-idea'),
@@ -83,7 +83,7 @@ const skill: ContentSkill = {
           wrong(`Lamplighters carried long poles with a flame or hook at the end. In the morning they cleaned soot off the glass and reported any broken lamps.`, 'too-narrow'),
           right(`In the 1800s, lamplighters lit and cared for gas streetlamps every day, which let city life continue after dark. Electric lights later made the job unnecessary.`),
           wrong(`Gas lamps were installed in the 1800s and replaced in the 1900s. Today, a few towns still keep gas lamps on their historic streets for visitors.`, 'omits-central-idea'),
-        ], `The third choice includes the job, its effect on cities and its end, with no opinions. The first choice adds judgments like "most admirable" and "sad," which an objective summary leaves out.`),
+        ], `The summary that begins "In the 1800s, lamplighters lit and cared for" includes the job, its effect on cities and its end, with no opinions. The summary calling the job "most admirable" adds judgments like "most admirable" and "sad," which an objective summary leaves out.`),
         q(10, 'hard', `Which idea from the first paragraph is developed most fully across the rest of the passage?`, [
           wrong(`Electric streetlights were invented to save cities a great deal of money.`, 'unsupported-inference'),
           wrong(`Gas lamps gave off a softer, warmer light than modern electric lamps.`, 'unsupported-inference'),
@@ -120,7 +120,7 @@ const skill: ContentSkill = {
           wrong(`The Millbrook Tool Library is a wonderful idea that everyone should support. Buying tools is a waste of money when people can simply share them.`, 'includes-opinion'),
           wrong(`Kwame Asante is a retired carpenter who teaches workshops. He shows people how to fix a leaky faucet and build a bookshelf on Saturdays.`, 'too-narrow'),
           right(`Neighbors in Millbrook started a library that lends donated tools. It also offers free repair classes, reduces waste and brings people together, and other towns are studying it.`),
-        ], `The last choice covers how the library began, what it offers and its effects, without opinions. The first choice is accurate but leaves out the classes and the benefits to the town.`),
+        ], `The summary that begins "Neighbors in Millbrook started a library" covers how the library began, what it offers and its effects, without opinions. The summary listing Elm Street, the cider press and the three tool limit is accurate but leaves out the classes and the benefits to the town.`),
         q(15, 'hard', `How do paragraphs 4 and 5 develop the central idea beyond the basic idea of lending tools?`, [
           right(`They show that the program also builds skills, reduces waste and strengthens friendships.`),
           wrong(`They explain the rules members must follow when they bring borrowed tools back.`, 'misreads-structure'),
@@ -151,13 +151,13 @@ const skill: ContentSkill = {
           wrong(`It explains why beavers build their dams in the first place.`, 'misreads-structure'),
           wrong(`It describes the problems beaver dams can cause for people.`, 'misreads-structure'),
           wrong(`It argues that frogs and fish need beavers in order to survive.`, 'overgeneralization'),
-        ], `Paragraph 3 lists frogs, salamanders, ducks, herons, fish and insects that use the pond. It does not say these animals cannot survive without beavers, so the last choice goes too far.`),
+        ], `Paragraph 3 lists frogs, salamanders, ducks, herons, fish and insects that use the pond. It does not say these animals cannot survive without beavers, so the choice saying frogs and fish need beavers to survive goes too far.`),
         q(19, 'medium', `Which is the best objective summary of the passage?`, [
           wrong(`Beavers are slow on land but strong swimmers. They build lodges in the middle of their ponds, and the lodges have underwater entrances that keep predators away.`, 'too-narrow'),
           wrong(`Beavers are amazing animals, and people should never complain about them. Flooded roads are a small price to pay for all the good that beavers do.`, 'includes-opinion'),
           right(`Beavers build dams that turn streams into ponds. These ponds shelter many animals, keep soil moist, reduce flooding and clean water, though dams can sometimes cause problems for people.`),
           wrong(`Beavers cause floods on roads and farm fields and cut down trees people want. Because of this, most communities now remove beavers from their land.`, 'contradicts-text'),
-        ], `The third choice covers the dams, the benefits and the problems without adding opinions. The last choice contradicts paragraph 5, which says some communities install pipes instead of removing beavers.`),
+        ], `The summary that begins "Beavers build dams that turn streams into ponds" covers the dams, the benefits and the problems without adding opinions. The summary saying most communities now remove beavers contradicts paragraph 5, which says some communities install pipes instead of removing beavers.`),
         q(20, 'hard', `How does the final paragraph affect the development of the central idea?`, [
           wrong(`It shifts the passage's focus away from beavers to the work of wetland scientists.`, 'misreads-structure'),
           wrong(`It proves that the benefits described earlier are not as important as they seemed.`, 'contradicts-text'),
@@ -194,7 +194,7 @@ const skill: ContentSkill = {
           right(`Sleep helps athletes improve because it repairs muscles and strengthens new skills, while too little sleep leads to mistakes and injuries. Simple habits can help teens rest.`),
           wrong(`Athletes who stay up late are making a foolish choice. Coaches should bench any player who does not get at least eight hours of sleep each night.`, 'includes-opinion'),
           wrong(`During deep sleep, the body releases growth hormone. This hormone helps rebuild tiny tears in the muscle fibers so that they come back stronger.`, 'too-narrow'),
-        ], `The second choice includes the benefits of sleep, the costs of missing it and the habits that help, without opinions. The first choice is accurate but leaves out why sleep matters at all.`),
+        ], `The summary that begins "Sleep helps athletes improve" includes the benefits of sleep, the costs of missing it and the habits that help, without opinions. The summary about eight to ten hours and busy schedules is accurate but leaves out why sleep matters at all.`),
         q(25, 'hard', `How does the last sentence of the passage relate to the central idea?`, [
           wrong(`It introduces a new idea that hard work matters more than sleep does.`, 'contradicts-text'),
           right(`It restates the central idea by linking rest to turning practice into progress.`),
@@ -231,7 +231,7 @@ const skill: ContentSkill = {
           wrong(`Printmaking is the most exciting kind of art a student can try. Anyone who enjoys drawing will love it far more than painting or sculpture.`, 'includes-opinion'),
           wrong(`Artists roll ink over a block with a brayer, lay paper on top and press it. When the paper is peeled away, the finished image appears on it.`, 'too-narrow'),
           right(`To make a linoleum print, an artist draws a reversed design, carves away the parts meant to stay white, inks the block and presses paper onto it. One block can make many slightly different prints.`),
-        ], `The last choice covers all the main steps and the result without opinions. The third choice is accurate but describes only the printing step and skips drawing and carving.`),
+        ], `The summary that begins "To make a linoleum print" covers all the main steps and the result without opinions. The summary about rolling ink with a brayer and pressing paper is accurate but describes only the printing step and skips drawing and carving.`),
         q(30, 'hard', `Which sentence from the passage best captures how the author wants readers to view printmaking as a whole?`, [
           wrong(`Forgetting this step is one of the most common beginner mistakes.`, 'too-narrow'),
           right(`For many students, this mix of careful planning and happy surprises is what makes printmaking so rewarding.`),
@@ -262,7 +262,7 @@ const skill: ContentSkill = {
           wrong(`Sound is made of waves of pressure that have high and low points. Our ears notice these changes in pressure and send signals to the brain.`, 'too-narrow'),
           wrong(`Noise-canceling headphones block every kind of sound completely. Their microphones and padded ear cups keep out engines, voices and barking dogs.`, 'contradicts-text'),
           right(`Noise-canceling headphones use microphones and a chip to make sound waves opposite to steady noise, so the waves cancel. Padding helps block sudden sounds the electronics miss.`),
-        ], `The last choice explains the cancellation and the role of padding without opinions. The third choice contradicts paragraph 5, which says some sudden noise still gets through.`),
+        ], `The summary about making opposite sound waves and adding padding explains the cancellation and the role of padding without opinions. The summary claiming the headphones block every kind of sound contradicts paragraph 5, which says some sudden noise still gets through.`),
         q(34, 'hard', `How does the final paragraph refine the central idea presented earlier?`, [
           right(`It shows the cancellation works mainly on steady sounds, so padding is also needed.`),
           wrong(`It shows that the cancellation method does not actually work in real situations.`, 'overgeneralization'),
@@ -299,7 +299,7 @@ const skill: ContentSkill = {
           wrong(`Doubling a recipe uses fractions, and watching bread rise teaches chemistry. Reading a recipe is practice in following directions, so cooking connects to school.`, 'too-narrow'),
           wrong(`The author makes an excellent point, and every school in the country should add a cooking class next year. Students will be much happier if they can cook.`, 'includes-opinion'),
           wrong(`The author argues that schools should stop teaching reading and equations so that students have more time to learn how to cook healthy meals at home.`, 'contradicts-text'),
-        ], `The first choice states the claim, the reasons and the response to cost, without the summarizer's own views. The third choice adds the summarizer's opinion, such as "excellent point," which does not belong in an objective summary.`),
+        ], `The summary that begins "The author argues that middle schools should require cooking" states the claim, the reasons and the response to cost, without the summarizer's own views. The summary that says "The author makes an excellent point" adds the summarizer's opinion, such as "excellent point," which does not belong in an objective summary.`),
         q(39, 'hard', `How does the fifth paragraph contribute to the development of the author's central claim?`, [
           wrong(`It adds a fourth reason that cooking makes students healthier.`, 'misreads-structure'),
           wrong(`It shows that the author has changed position on cooking classes.`, 'contradicts-text'),
