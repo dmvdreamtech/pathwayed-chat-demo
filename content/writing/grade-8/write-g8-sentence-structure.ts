@@ -357,7 +357,7 @@ const skill: ContentSkill = {
         no(`The judges praised both the design of Kofi's model and also how clearly he explained it.`, 'added-word-not-fix'),
         ok(`The judges praised both the design of Kofi's model and the clarity of his explanation.`),
       ],
-      solution: `After "both" and "and," the two parts are now matching noun phrases: "the design" and "the clarity." The first choice simply flips the problem, pairing a "how" clause with a noun phrase.`,
+      solution: `After "both" and "and," the two parts are now matching noun phrases: "the design" and "the clarity." The choice "both how Kofi designed his model and the clarity of his explanation" simply flips the problem, pairing a "how" clause with a noun phrase.`,
     },
     {
       slot: 30,
@@ -393,7 +393,7 @@ const skill: ContentSkill = {
         no(`The bridge had stood for nearly a century however engineers who inspected it last spring found cracks in two supports, so the city closed it.`, 'conjunctive-adverb-fused'),
         ok(`Although the bridge had stood for nearly a century, engineers who inspected it last spring found cracks in two supports, so the city closed it.`),
       ],
-      solution: `The sentence opens with a dependent "Although" clause, then joins two independent clauses with ", so," which is correct even though the sentence is long. The second choice is only a long "Although" clause with no main clause, so it is a fragment.`,
+      solution: `The sentence opens with a dependent "Although" clause, then joins two independent clauses with ", so," which is correct even though the sentence is long. The choice that begins "Although the bridge had stood for nearly a century and engineers" is only a long "Although" clause with no main clause, so it is a fragment.`,
     },
     {
       slot: 33,
@@ -429,7 +429,7 @@ const skill: ContentSkill = {
         no(`The guide explained glaciers carving valleys, why some lakes are so deep, and the reason boulders sit alone in open fields.`, 'mixed-phrase-types'),
         no(`The guide explained how glaciers carve valleys, why some lakes are so deep, and boulders sitting alone in open fields.`, 'noun-phrase-in-clause-series'),
       ],
-      solution: `All three items are now noun clauses beginning with "how" or "why." The second choice fixes the last item but turns the middle item into the noun phrase "the depth of some lakes," so the list is still mixed.`,
+      solution: `All three items are now noun clauses beginning with "how" or "why." The choice with "the depth of some lakes" fixes the last item but turns the middle item into a noun phrase, so the list is still mixed.`,
     },
     {
       slot: 36,
@@ -441,7 +441,7 @@ const skill: ContentSkill = {
         ok(`The robotics team tested its robot all week, hoping to fix the jammed arm before the regional contest. The students worked late on Thursday, and they finally found a loose gear.`),
         no(`The robotics team tested its robot all week, hoping to fix the jammed arm before the regional contest, the students worked late on Thursday and finally found a loose gear.`, 'comma-splice-created'),
       ],
-      solution: `The correct choice attaches the "Hoping" fragment to the first sentence and joins the run-on clauses with ", and." The first choice fixes the run-on but leaves "Hoping to fix the jammed arm before the regional contest" standing alone as a fragment.`,
+      solution: `The best revision attaches the "Hoping" fragment to the first sentence and joins the run-on clauses with ", and." The version that keeps the period after "all week" fixes the run-on but leaves "Hoping to fix the jammed arm before the regional contest" standing alone as a fragment.`,
     },
     {
       slot: 37,
@@ -453,7 +453,7 @@ const skill: ContentSkill = {
         no(`Sofia is talented at painting, a careful listener, and writes poetry well.`, 'mixed-phrase-types'),
         ok(`Sofia paints with talent, listens with care, and writes poetry well.`),
       ],
-      solution: `"Paints," "listens," and "writes" are all present tense verbs with the subject Sofia, so the series is parallel. The first choice starts with two noun phrases and then switches to the clause "she writes poetry well."`,
+      solution: `"Paints," "listens," and "writes" are all present tense verbs with the subject Sofia, so the series is parallel. The choice "Sofia is a talented painter, a careful listener, and she writes poetry well" starts with two noun phrases and then switches to the clause "she writes poetry well."`,
     },
     {
       slot: 38,
@@ -477,7 +477,7 @@ const skill: ContentSkill = {
         ok(`When the eclipse began, the crowd, many of whom had traveled for hours to see it, grew quiet.`),
         no(`When the eclipse began, and the crowd grew quiet, many of whom had traveled for hours to see it.`, 'long-dependent-clause-as-sentence'),
       ],
-      solution: `The clause "many of whom had traveled for hours to see it" interrupts the main clause "the crowd grew quiet" and is set off by commas, so the sentence is complete. The first choice joins two independent clauses with only a comma, making a comma splice.`,
+      solution: `The clause "many of whom had traveled for hours to see it" interrupts the main clause "the crowd grew quiet" and is set off by commas, so the sentence is complete. The choice ending "the crowd grew quiet, many people had traveled for hours to see it" joins two independent clauses with only a comma, making a comma splice.`,
     },
     {
       slot: 40,
