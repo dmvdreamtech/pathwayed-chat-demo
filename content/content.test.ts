@@ -155,9 +155,7 @@ describe('the seed batches for the SQL editor', () => {
     const onDisk = readdirSync(BATCHES).filter((f) => f.endsWith('.sql')).sort()
     expect(onDisk).toEqual(batches.map((b) => b.file))
     // Git may check files out with CRLF on Windows; compare line content only.
-    const lf = (t: string) => t.replace(/
-/g, '
-')
+    const lf = (t: string) => t.replace(/\r\n/g, '\n')
     for (const b of batches) expect(lf(readFileSync(join(BATCHES, b.file), 'utf8'))).toBe(lf(b.sql))
   })
 })
