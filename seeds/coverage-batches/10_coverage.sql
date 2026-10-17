@@ -133,7 +133,7 @@ insert into public.passages (id, code, skill_id, sat_alignment, grade_band, titl
 values ('8ee376fd-defe-5022-ac55-4ea657844dfe', 'rg8-word-parts-p02', (select id from public.skills where slug = 'read-g8-word-parts'), null,
         '6-8', $q$Messages Across the Wires$q$, $q$For most of history, a message could travel only as fast as the person carrying it. A letter sent across a large country might take weeks to arrive, and important news often reached distant towns long after it mattered.
 
-In the 1800s, the telegraph changed that. Operators tapped out patterns of short and long signals, and electric current carried those signals along copper wires strung between poles. A message that once needed a horse and rider could now arrive in minutes.
+In the 1800s, the telegraph changed that. Operators tapped out patterns of short and long signals, and electric current carried those signals along metal wires strung between poles. A message that once needed a horse and rider could now arrive in minutes.
 
 Telegraph offices became busy places. A customer would dictate a message to a clerk, who wrote it down word for word before the operator sent it. Because customers paid by the word, people learned to write in a short, clipped style. A long letter about a family visit might shrink to five words.
 
@@ -457,7 +457,7 @@ where public.generated_questions.status = 'draft' and public.generated_questions
 -- Passage rg8-word-parts-p06
 insert into public.passages (id, code, skill_id, sat_alignment, grade_band, title, body, status)
 values ('b719150c-a79f-551e-8685-73bfe4a7b64e', 'rg8-word-parts-p06', (select id from public.skills where slug = 'read-g8-word-parts'), null,
-        '6-8', $q$Listening to the Ground$q$, $q$Most earthquakes are too small for people to feel. Every day, however, instruments around the world record thousands of tiny movements deep underground. Geologists use these records to understand what is happening below the surface.
+        '6-8', $q$Listening to the Ground$q$, $q$Most earthquakes are too small for people to feel. Every day, however, instruments around the world record many tiny movements deep underground. Geologists use these records to understand what is happening below the surface.
 
 An earthquake begins when stress builds up along a fault, a crack where two huge sections of rock meet. When the stress becomes too great, the rock suddenly ruptures, and the two sections slip past each other. Waves of energy spread out from that point in every direction.
 
