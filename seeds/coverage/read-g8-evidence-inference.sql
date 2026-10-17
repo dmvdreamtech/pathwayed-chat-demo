@@ -116,7 +116,7 @@ The work did not stop when the sun came up. Keepers trimmed lamp wicks, carried 
 
 Families often shared the work. A keeper's children might help carry supplies or watch the lamp during a long storm. At remote stations, the family's nearest neighbors could be many miles away by boat. Supply ships brought food and fuel only a few times each year, so families planted gardens and kept chickens when the rocky ground allowed it.
 
-By the middle of the twentieth century, most lighthouses had switched to electric lights that turned on by themselves. Keepers were no longer needed, and many stations were left empty. Today, some old logbooks sit in museums. Historians read them to learn about storms, shipwrecks, and daily life along the coast in earlier times.$q$, 'draft')
+By the end of the twentieth century, most lighthouses had switched to electric lights that turned on by themselves. Keepers were no longer needed, and many stations were left empty. Today, some old logbooks sit in museums. Historians read them to learn about storms, shipwrecks, and daily life along the coast in earlier times.$q$, 'draft')
 on conflict (id) do update set title = excluded.title, body = excluded.body
 where public.passages.status = 'draft';
 insert into public.generated_questions
