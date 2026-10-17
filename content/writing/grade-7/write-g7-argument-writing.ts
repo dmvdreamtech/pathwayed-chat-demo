@@ -208,7 +208,7 @@ const skill: ContentSkill = {
             ok(`Students who dislike these three sports often sit out and miss the exercise gym class is meant to provide.`),
             no(`Many famous athletes started playing soccer when they were very young.`, 'off-topic-evidence'),
           ],
-          solution: `This sentence shows a real problem with offering only three sports, which gives a reason to add a new one. The other choices are facts about the sports or the school that do not point to any problem.`,
+          solution: `This sentence shows a real problem with offering only three sports, which gives a reason to add a new one. The choices about basketball's history, the volleyball nets, and famous soccer players are facts that do not point to any problem.`,
         },
         {
           slot: 15,
@@ -243,7 +243,7 @@ const skill: ContentSkill = {
             no(`The depot is a very old building on Front Street.`, 'fact-not-claim'),
             no(`Some people like the depot, and other people like parking lots.`, 'no-position'),
           ],
-          solution: `The correct revision takes a precise, formal position that the reasons in sentences (3) through (5) support. The first choice keeps the casual, uncertain wording of the original.`,
+          solution: `The correct revision takes a precise, formal position that the reasons in sentences (3) through (5) support. The choice "I kind of think the depot is pretty cool and should maybe stay" keeps the casual, uncertain wording of the original.`,
         },
         {
           slot: 17,
