@@ -14,7 +14,7 @@ const skill: ContentSkill = {
     {
       code: 'rg8-context-clues-p01',
       title: 'The Toughest Animal You Have Never Seen',
-      body: `Under a microscope, a drop of water from a mossy rooftop can reveal a surprising creature. Tardigrades, often called water bears, are minuscule animals, so small that a dozen of them could line up across the head of a pin. They have eight stubby legs and move with a slow, lumbering walk, like a heavy bear that is in no hurry to get anywhere.\n\nWhat makes tardigrades famous is not their size but how resilient they are. When most animals face extreme heat, freezing cold, or a lack of water, they die. Tardigrades, in contrast, bounce back from conditions that would destroy almost any other living thing.\n\nTheir secret is a state called a tun. When the moss around them dries out, a tardigrade pulls in its legs and curls into a tiny, shriveled ball. In this desiccated form, it has lost nearly all of the water in its body. Its body processes slow down so much that scientists with sensitive tools can barely measure them.\n\nA tardigrade can stay dormant in this way for years. It is not dead, but it is not active either. It simply waits. When rain finally soaks the moss again, the tun absorbs water, the legs unfold, and the animal goes back to walking and eating as if nothing had happened.\n\nResearchers study tardigrades because their abilities could have practical uses. If scientists learn how these animals protect their cells while dried out, they might find better ways to preserve medicines that currently spoil without refrigeration.`,
+      body: `Under a microscope, a drop of water from a mossy rooftop can reveal a surprising creature. Tardigrades, often called water bears, are minuscule animals, so small that several of them could fit on the head of a pin. They have eight stubby legs and move with a slow, lumbering walk, like a heavy bear that is in no hurry to get anywhere.\n\nWhat makes tardigrades famous is not their size but how resilient they are. When most animals face extreme heat, freezing cold, or a lack of water, they die. Tardigrades, in contrast, bounce back from conditions that would destroy almost any other living thing.\n\nTheir secret is a state called a tun. When the moss around them dries out, a tardigrade pulls in its legs and curls into a tiny, shriveled ball. In this desiccated form, it has lost nearly all of the water in its body. Its body processes slow down so much that scientists with sensitive tools can barely measure them.\n\nA tardigrade can stay dormant in this way for years. It is not dead, but it is not active either. It simply waits. When rain finally soaks the moss again, the tun absorbs water, the legs unfold, and the animal goes back to walking and eating as if nothing had happened.\n\nResearchers study tardigrades because their abilities could have practical uses. If scientists learn how these animals protect their cells while dried out, they might find better ways to preserve medicines that currently spoil without refrigeration.`,
       items: [
         {
           slot: 1,
@@ -26,7 +26,7 @@ const skill: ContentSkill = {
             wrong(`covered in fur`, 'surface-association'),
             wrong(`found in water`, 'too-narrow'),
           ],
-          solution: `The example that follows, "so small that a dozen of them could line up across the head of a pin," shows that "minuscule" means extremely small. Living in water is true of tardigrades, but the sentence is describing their size.`,
+          solution: `The example that follows, "so small that several of them could fit on the head of a pin," shows that "minuscule" means extremely small. Living in water is true of tardigrades, but the sentence is describing their size.`,
         },
         {
           slot: 2,
@@ -473,7 +473,7 @@ const skill: ContentSkill = {
           choices: [
             right(`to keep something going over time`),
             wrong(`to reach a top speed quickly`, 'ignores-contrast'),
-            wrong(`to recover from an injury`, 'other-meaning-of-word'),
+            wrong(`to suffer an injury`, 'other-meaning-of-word'),
             wrong(`to feel excited at the start`, 'wrong-context-clue'),
           ],
           solution: `The next sentence contrasts a speed a runner "can keep up for the whole race" with a sprint "that cannot be maintained," so sustain means to keep something going. "Sustain" can also mean to suffer an injury, but no injury is mentioned here.`,

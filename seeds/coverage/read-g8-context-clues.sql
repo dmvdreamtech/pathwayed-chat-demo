@@ -32,7 +32,7 @@ on conflict do nothing;
 -- Passage rg8-context-clues-p01
 insert into public.passages (id, code, skill_id, sat_alignment, grade_band, title, body, status)
 values ('96805021-a08d-5e6f-9e4d-0ef18f804aed', 'rg8-context-clues-p01', (select id from public.skills where slug = 'read-g8-context-clues'), null,
-        '6-8', $q$The Toughest Animal You Have Never Seen$q$, $q$Under a microscope, a drop of water from a mossy rooftop can reveal a surprising creature. Tardigrades, often called water bears, are minuscule animals, so small that a dozen of them could line up across the head of a pin. They have eight stubby legs and move with a slow, lumbering walk, like a heavy bear that is in no hurry to get anywhere.
+        '6-8', $q$The Toughest Animal You Have Never Seen$q$, $q$Under a microscope, a drop of water from a mossy rooftop can reveal a surprising creature. Tardigrades, often called water bears, are minuscule animals, so small that several of them could fit on the head of a pin. They have eight stubby legs and move with a slow, lumbering walk, like a heavy bear that is in no hurry to get anywhere.
 
 What makes tardigrades famous is not their size but how resilient they are. When most animals face extreme heat, freezing cold, or a lack of water, they die. Tardigrades, in contrast, bounce back from conditions that would destroy almost any other living thing.
 
@@ -47,7 +47,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('611290aa-c228-5858-8d88-6faca0657680', null, (select id from public.skills where slug = 'read-g8-context-clues'), null, 'easy',
-   $q$In paragraph 1, the word "minuscule" most likely means:$q$, $q$[{"text":"covered in fur","is_correct":false,"misconception_token":"surface-association"},{"text":"found in water","is_correct":false,"misconception_token":"too-narrow"},{"text":"extremely small","is_correct":true},{"text":"very old","is_correct":false,"misconception_token":"unrelated-meaning"}]$q$::jsonb, $q$extremely small$q$, $q$The example that follows, "so small that a dozen of them could line up across the head of a pin," shows that "minuscule" means extremely small. Living in water is true of tardigrades, but the sentence is describing their size.$q$, 'draft', '96805021-a08d-5e6f-9e4d-0ef18f804aed')
+   $q$In paragraph 1, the word "minuscule" most likely means:$q$, $q$[{"text":"covered in fur","is_correct":false,"misconception_token":"surface-association"},{"text":"found in water","is_correct":false,"misconception_token":"too-narrow"},{"text":"extremely small","is_correct":true},{"text":"very old","is_correct":false,"misconception_token":"unrelated-meaning"}]$q$::jsonb, $q$extremely small$q$, $q$The example that follows, "so small that several of them could fit on the head of a pin," shows that "minuscule" means extremely small. Living in water is true of tardigrades, but the sentence is describing their size.$q$, 'draft', '96805021-a08d-5e6f-9e4d-0ef18f804aed')
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -587,7 +587,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('7dbf8633-128d-5818-b7a6-b26c35ad5a14', null, (select id from public.skills where slug = 'read-g8-context-clues'), null, 'hard',
-   $q$In paragraph 3, the body cannot "sustain" a fast early speed. Which meaning of "sustain" is supported by the contrast in the next sentence?$q$, $q$[{"text":"to recover from an injury","is_correct":false,"misconception_token":"other-meaning-of-word"},{"text":"to keep something going over time","is_correct":true},{"text":"to feel excited at the start","is_correct":false,"misconception_token":"wrong-context-clue"},{"text":"to reach a top speed quickly","is_correct":false,"misconception_token":"ignores-contrast"}]$q$::jsonb, $q$to keep something going over time$q$, $q$The next sentence contrasts a speed a runner "can keep up for the whole race" with a sprint "that cannot be maintained," so sustain means to keep something going. "Sustain" can also mean to suffer an injury, but no injury is mentioned here.$q$, 'draft', '3cd9f915-b6b7-578f-bfa5-7dd26668d077')
+   $q$In paragraph 3, the body cannot "sustain" a fast early speed. Which meaning of "sustain" is supported by the contrast in the next sentence?$q$, $q$[{"text":"to suffer an injury","is_correct":false,"misconception_token":"other-meaning-of-word"},{"text":"to keep something going over time","is_correct":true},{"text":"to feel excited at the start","is_correct":false,"misconception_token":"wrong-context-clue"},{"text":"to reach a top speed quickly","is_correct":false,"misconception_token":"ignores-contrast"}]$q$::jsonb, $q$to keep something going over time$q$, $q$The next sentence contrasts a speed a runner "can keep up for the whole race" with a sprint "that cannot be maintained," so sustain means to keep something going. "Sustain" can also mean to suffer an injury, but no injury is mentioned here.$q$, 'draft', '3cd9f915-b6b7-578f-bfa5-7dd26668d077')
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
