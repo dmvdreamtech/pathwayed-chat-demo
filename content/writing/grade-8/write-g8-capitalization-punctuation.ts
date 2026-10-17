@@ -472,12 +472,12 @@ const skill: ContentSkill = {
       difficulty: 'hard',
       stem: `Which sentence is punctuated correctly?`,
       choices: [
-        no(`In the spring of 2024 our town, which had never hosted a marathon, welcomed nearly two thousand runners.`, 'missing-introductory-comma'),
+        no(`In the spring of 2024, our town, which had never hosted a marathon, welcomed, nearly two thousand runners.`, 'comma-between-verb-object'),
         no(`In the spring of 2024, our town, which had never hosted a marathon welcomed nearly two thousand runners.`, 'missing-closing-comma'),
         no(`In the spring of 2024, our town which had never hosted a marathon, welcomed nearly two thousand runners.`, 'missing-opening-comma'),
         ok(`In the spring of 2024, our town, which had never hosted a marathon, welcomed nearly two thousand runners.`),
       ],
-      solution: `One comma follows the introductory phrase, and two more set off the nonessential clause "which had never hosted a marathon." Each wrong choice drops one of those three needed commas.`,
+      solution: `One comma follows the introductory phrase, and two more set off the nonessential clause "which had never hosted a marathon." Two wrong choices drop one of the commas around the clause, and one adds a comma that wrongly separates the verb "welcomed" from its object.`,
     },
     {
       slot: 40,
