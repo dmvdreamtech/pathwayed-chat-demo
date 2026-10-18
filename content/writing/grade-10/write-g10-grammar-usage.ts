@@ -31,7 +31,7 @@ const skill: ContentSkill = {
         no(`swim`, 'base-verb-breaks-parallel'),
         no(`to swim`, 'infinitive-breaks-parallel'),
         ok(`swimming`),
-        no(`she swims`, 'clause-breaks-parallel'),
+        no(`Marisol swims`, 'clause-breaks-parallel'),
       ],
       solution: `"Hiking" is a gerund, so the item it is compared with should also be a gerund: "swimming." "Swim" and "to swim" switch to different verb forms and break the pairing.`,
     },
@@ -81,7 +81,7 @@ const skill: ContentSkill = {
         no(`The trail climbs to a ridge who overlooks three counties.`, 'who-for-thing'),
         ok(`The trail climbs to a ridge that overlooks three counties.`),
       ],
-      solution: `"That overlooks three counties" is a relative clause that describes "ridge," joining the ideas in one correct sentence. The first choice joins two independent clauses with only a comma, which is a comma splice.`,
+      solution: `"That overlooks three counties" is a relative clause that describes "ridge," joining the ideas in one correct sentence. The choice "The trail climbs to a ridge, it overlooks three counties" joins two independent clauses with only a comma, which is a comma splice.`,
     },
     {
       slot: 7,
@@ -158,7 +158,7 @@ const skill: ContentSkill = {
     {
       slot: 13,
       difficulty: 'medium',
-      stem: `Read the sentence: "Her notebook open on the desk, Priya sketched the veins of the maple leaf." What kind of phrase is "Her notebook open on the desk"?`,
+      stem: `Read the sentence: "The notebook open on the desk, Priya sketched the veins of the maple leaf." What kind of phrase is "The notebook open on the desk"?`,
       choices: [
         no(`a participial phrase`, 'confuses-absolute-participial'),
         ok(`an absolute phrase`),
@@ -297,7 +297,7 @@ const skill: ContentSkill = {
         ok(`Having rehearsed for six weeks, the orchestra performed the symphony without a single mistake.`),
         no(`The orchestra having rehearsed for six weeks and performing the symphony without a mistake.`, 'sentence-fragment'),
       ],
-      solution: `"Having rehearsed for six weeks" correctly modifies "the orchestra," which is the subject that did the rehearsing. In the first choice the phrase modifies "the symphony," which could not rehearse, so the modifier dangles.`,
+      solution: `"Having rehearsed for six weeks" correctly modifies "the orchestra," which is the subject that did the rehearsing. In "Having rehearsed for six weeks, the symphony was performed without a single mistake," the phrase modifies "the symphony," which could not rehearse, so the modifier dangles.`,
     },
     {
       slot: 25,
@@ -405,7 +405,7 @@ const skill: ContentSkill = {
         ok(`The race over, the cyclists coasted back to the starting tent.`),
         no(`Over the race, the cyclists coasted back to the starting tent.`, 'prepositional-not-absolute'),
       ],
-      solution: `"The race over" is an absolute phrase: a noun with a modifier and no complete verb, adding a detail to the whole sentence. The first choice has a full clause, "the race was over," joined with only a comma, which is a comma splice.`,
+      solution: `"The race over" is an absolute phrase: a noun with a modifier and no complete verb, adding a detail to the whole sentence. The choice "The cyclists coasted back to the starting tent, the race was over" has a full clause, "the race was over," joined with only a comma, which is a comma splice.`,
     },
     {
       slot: 34,
@@ -465,7 +465,7 @@ const skill: ContentSkill = {
         no(`Amara, who studied the star chart, noticed a pattern in the planets' positions, she reported it to her astronomy club.`, 'comma-splice'),
         ok(`Studying the star chart, Amara noticed a pattern in the planets' positions and reported it to her astronomy club.`),
       ],
-      solution: `"Studying the star chart" correctly modifies Amara, the subject, and the compound verb "noticed ... and reported" keeps the actions parallel. In the first choice, the participial phrase modifies "a pattern," which could not study a chart, so the modifier dangles.`,
+      solution: `"Studying the star chart" correctly modifies Amara, the subject, and the compound verb "noticed ... and reported" keeps the actions parallel. In the choice that begins "Studying the star chart, a pattern," the participial phrase modifies "a pattern," which could not study a chart, so the modifier dangles.`,
     },
     {
       slot: 39,
@@ -489,7 +489,7 @@ const skill: ContentSkill = {
         no(`The internship taught Lucia to build a website, test it, and how to explain its features to clients.`, 'mixed-forms-in-series'),
         no(`The internship taught Lucia building a website, to test it, and explaining its features to clients.`, 'mixed-forms-in-series'),
       ],
-      solution: `Each item in the correct sentence follows the same "how to" plus verb pattern. The third choice starts with plain infinitives but switches to "how to" for the last item, so the series is not parallel.`,
+      solution: `Each item in the correct sentence follows the same "how to" plus verb pattern. The choice "The internship taught Lucia to build a website, test it, and how to explain its features to clients" starts with plain infinitives but switches to "how to" for the last item, so the series is not parallel.`,
     },
   ],
 }
