@@ -117,7 +117,7 @@ const skill: ContentSkill = {
             wrong(`smooth and pleasing`, 'opposite-meaning'),
             wrong(`quick and rushed`, 'wrong-context-clue'),
           ],
-          solution: `The words right after it restate the meaning: "harsh and clashing instead of smooth," and Sami covers his ears. "Smooth" is what the notes are not, so the pleasing choice is the opposite.`,
+          solution: `The words right after it restate the meaning: "harsh and clashing instead of smooth," and Sami covers his ears. "Smooth" is what the notes are not, so "smooth and pleasing" is the opposite.`,
         },
         {
           slot: 9,
@@ -263,7 +263,7 @@ const skill: ContentSkill = {
             wrong(`a feeling of great excitement`, 'opposite-meaning'),
             wrong(`a shoe lost earlier in the mud`, 'unrelated-meaning'),
           ],
-          solution: `Kenji "counted his steps to calm himself," and then "his breathing grew smoother," which shows composure is calmness. He did not get back to the front, so the race position choice does not fit.`,
+          solution: `Kenji "counted his steps to calm himself," and then "his breathing grew smoother," which shows composure is calmness. He did not get back to the front, so "a position near the front of a race" does not fit.`,
         },
         {
           slot: 20,
@@ -457,7 +457,7 @@ const skill: ContentSkill = {
         {
           slot: 34,
           difficulty: 'medium',
-          stem: `Which sentence from paragraph 5 best helps the reader understand the word "resilient"?`,
+          stem: `Which detail best helps the reader understand the word "resilient" in paragraph 5?`,
           choices: [
             right(`It can freeze and thaw several times and still recover each time.`),
             wrong(`Scientists admire the wood frog.`, 'too-general'),
