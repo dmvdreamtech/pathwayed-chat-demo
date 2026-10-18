@@ -66,7 +66,7 @@ const skill: ContentSkill = {
             no(`Haugen writes that otters wrap themselves in kelp so they can sleep.`, 'evidence-without-analysis'),
             no(`Sea urchins are spiny animals that crawl along the sea floor.`, 'off-topic-fact'),
           ],
-          solution: `A strong conclusion pulls together both paragraphs, and only the first choice names how each one helps the other. Repeating the detail about sleeping in kelp gives one piece of evidence but does not sum up the draft.`,
+          solution: `A strong conclusion pulls together both paragraphs, and only the choice saying otters protect the kelp and the kelp gives otters a safe home names how each one helps the other. Repeating the detail about sleeping in kelp gives one piece of evidence but does not sum up the draft.`,
         },
         {
           slot: 5,
@@ -156,9 +156,9 @@ const skill: ContentSkill = {
     {
       code: 'wg5-writing-with-evidence-p03',
       title: 'Draft: The Baton Pass',
-      body: `(1) Nadia Kowalczyk's article "The Ten-Meter Secret" explains why the baton pass matters so much in a relay race. (2) A relay team has four runners, and each one carries a short stick called a baton. (3) ____.
+      body: `(1) Nadia Kowalczyk's article "The Handoff Secret" explains why the baton pass matters so much in a relay race. (2) A relay team has four runners, and they pass a short stick called a baton from one runner to the next. (3) ____.
 
-(4) Kowalczyk explains that the pass must happen inside a zone that is only about ten meters long. (5) If a runner hands off the baton outside that zone, the whole team is disqualified. (6) She also writes that the runner receiving the baton starts moving before it arrives. (7) That way, the second runner is already at top speed during the pass. (8) ____ these details show that a smooth handoff can save time.
+(4) Kowalczyk explains that the pass must happen inside a short zone marked on the track. (5) If a runner hands off the baton outside that zone, the whole team is disqualified. (6) She also writes that the runner receiving the baton starts moving before it arrives. (7) That way, the second runner is already at top speed during the pass. (8) ____ these details show that a smooth handoff can save time.
 
 (9) Kowalczyk describes a school team that practiced handoffs for three weeks. (10) Their time in the race improved by almost two seconds, even though no one ran faster on their own. (11) I like running too, and I play soccer on weekends. (12) This evidence shows that teamwork can matter as much as speed.
 
@@ -217,7 +217,7 @@ const skill: ContentSkill = {
           difficulty: 'hard',
           stem: `Which sentence would best fill blank (13) as the conclusion?`,
           choices: [
-            no(`Kowalczyk writes that the passing zone is about ten meters long.`, 'evidence-without-analysis'),
+            no(`Kowalczyk writes that the pass must happen inside a zone marked on the track.`, 'evidence-without-analysis'),
             no(`Relay races are exciting, and I hope to run in one someday.`, 'opinion-not-analysis'),
             ok(`Kowalczyk's article shows that a relay can be won in the passing zone, because smooth handoffs save time.`),
             no(`Kowalczyk proves that speed does not matter at all in a relay race.`, 'overstates-evidence'),
@@ -281,7 +281,7 @@ const skill: ContentSkill = {
             ok(`A puppet near the screen makes a small, sharp shadow, and a puppet near the lamp makes a large, blurry one.`),
             no(`A puppet near the lamp makes a shadow that is both larger and sharper.`, 'partly-reverses-detail'),
           ],
-          solution: `Sentence 8 says closer to the screen means sharper and smaller, and sentence 9 says closer to the lamp means bigger and blurrier. The first choice swaps the two, so it does not report the evidence accurately.`,
+          solution: `Sentence 8 says closer to the screen means sharper and smaller, and sentence 9 says closer to the lamp means bigger and blurrier. The choice saying a puppet near the screen makes a large, blurry shadow swaps the two, so it does not report the evidence accurately.`,
         },
         {
           slot: 20,
