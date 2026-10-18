@@ -53,11 +53,11 @@ const skill: ContentSkill = {
       stem: `Read the sentence: "The chess club met every Thursday in the library, Priyanka usually arrived early to set up the boards." Which revision corrects the error?`,
       choices: [
         no(`The chess club met every Thursday in the library, and, Priyanka usually arrived early to set up the boards.`, 'comma-after-conjunction'),
-        no(`The chess club met every Thursday; in the library, Priyanka usually arrived early to set up the boards.`, 'semicolon-misplaced'),
+        no(`The chess club met every Thursday in the library, Priyanka; usually arrived early to set up the boards.`, 'semicolon-misplaced'),
         no(`The chess club met every Thursday in the library Priyanka usually arrived early to set up the boards.`, 'run-on-sentence'),
         ok(`The chess club met every Thursday in the library; Priyanka usually arrived early to set up the boards.`),
       ],
-      solution: `The original joins two independent clauses with only a comma, which is a comma splice; a semicolon after "library" fixes it. Moving the semicolon to after "Thursday" changes the meaning and leaves "in the library" attached to the wrong clause.`,
+      solution: `The original joins two independent clauses with only a comma, which is a comma splice; a semicolon after "library" fixes it. A semicolon after "Priyanka" splits the subject from its verb "arrived."`,
     },
     {
       slot: 5,
@@ -127,7 +127,7 @@ const skill: ContentSkill = {
         ok(`:`),
         no(`;`, 'semicolon-before-quotation'),
         no(` that:`, 'colon-after-that'),
-        no(`.`, 'quotation-as-fragment'),
+        no(` and`, 'missing-punctuation'),
       ],
       solution: `A complete clause, "The banner above the gym door repeated Coach Haddad's favorite rule," introduces the quotation, so a colon is correct. A semicolon cannot introduce a quotation, and "that" followed by a colon breaks the sentence's grammar.`,
     },
@@ -141,7 +141,7 @@ const skill: ContentSkill = {
         no(`The clay bowls dried overnight; and the class glazed them in bright colors.`, 'semicolon-with-conjunction'),
         no(`The class glazed the bowls in; bright blue, green, and orange.`, 'semicolon-misplaced'),
       ],
-      solution: `Both "The clay bowls dried overnight" and "the next morning, the class glazed them in bright colors" are independent clauses, so the semicolon is correct. In the first choice, "After the clay bowls dried overnight" is a dependent clause and needs a comma, not a semicolon.`,
+      solution: `Both "The clay bowls dried overnight" and "the next morning, the class glazed them in bright colors" are independent clauses, so the semicolon is correct. In "After the clay bowls dried overnight; the class glazed them," the opening "After the clay bowls dried overnight" is a dependent clause and needs a comma, not a semicolon.`,
     },
     {
       slot: 12,
@@ -225,7 +225,7 @@ const skill: ContentSkill = {
         ok(`"Within a few seconds" is a phrase, not an independent clause.`),
         no(`A semicolon must always be followed by a capital letter.`, 'capital-after-semicolon'),
       ],
-      solution: `A semicolon needs an independent clause on both sides, and "within a few seconds" has no subject or verb, so the semicolon should be removed. Words after a semicolon are not capitalized unless they are proper nouns, so the capital-letter choice states a false rule.`,
+      solution: `A semicolon needs an independent clause on both sides, and "within a few seconds" has no subject or verb, so the semicolon should be removed. Words after a semicolon are not capitalized unless they are proper nouns, so "A semicolon must always be followed by a capital letter" states a false rule.`,
     },
     {
       slot: 19,
@@ -261,7 +261,7 @@ const skill: ContentSkill = {
         no(`privelege`, 'vowel-swap'),
         no(`privilage`, 'vowel-swap'),
       ],
-      solution: `"Privilege" has no d and uses i, i, e in its vowels: p, r, i, v, i, l, e, g, e. "Priviledge" adds a d, likely by analogy with words such as "knowledge."`,
+      solution: `"Privilege" has no d and uses i, i, e, e as its vowels: p, r, i, v, i, l, e, g, e. "Priviledge" adds a d, likely by analogy with words such as "knowledge."`,
     },
     {
       slot: 22,
@@ -283,9 +283,9 @@ const skill: ContentSkill = {
         no(`"every map leaves something out."`, 'lowercase-quoted-sentence'),
         no(`Every map leaves something out.`, 'missing-quotation-marks'),
         ok(`"Every map leaves something out."`),
-        no(`"Every map leaves something out".`, 'period-outside-quotes'),
+        no(`Every map leaves "something out."`, 'quotation-marks-misplaced'),
       ],
-      solution: `When a colon introduces a quoted complete sentence, the quotation begins with a capital letter, and in American usage the period goes inside the closing quotation mark. The lowercase "every" incorrectly treats the quoted sentence as a fragment.`,
+      solution: `When a colon introduces a quoted complete sentence, the quotation marks enclose the whole quoted sentence and it begins with a capital letter. The lowercase "every" incorrectly treats the quoted sentence as a fragment.`,
     },
     {
       slot: 24,
@@ -297,7 +297,7 @@ const skill: ContentSkill = {
         no(`The band sold 300 tickets; for the concert, nevertheless the fundraiser fell short of its goal.`, 'semicolon-misplaced'),
         ok(`The band sold 300 tickets for the concert; nevertheless, the fundraiser fell short of its goal.`),
       ],
-      solution: `"Nevertheless" is a conjunctive adverb linking two independent clauses, so it needs a semicolon before it and a comma after it. The first choice uses only commas, which leaves a comma splice.`,
+      solution: `"Nevertheless" is a conjunctive adverb linking two independent clauses, so it needs a semicolon before it and a comma after it. Putting only commas around "nevertheless" leaves a comma splice.`,
     },
     {
       slot: 25,
@@ -307,9 +307,9 @@ const skill: ContentSkill = {
         ok(`The north trail was closed for repairs; the east trail was flooded; only the river path remained open.`),
         no(`The north trail was closed for repairs, the east trail was flooded, only the river path remained open.`, 'comma-splice'),
         no(`The north trail was closed for repairs; the east trail was flooded, only the river path remained open.`, 'comma-splice'),
-        no(`The north trail was closed; for repairs the east trail was flooded; only the river path remained open.`, 'semicolon-misplaced'),
+        no(`The north trail was closed for repairs the east trail was flooded; only the river path remained open.`, 'run-on-sentence'),
       ],
-      solution: `The sentence contains three closely related independent clauses, and semicolons can link all three. The third choice fixes only the first break and leaves a comma splice between the second and third clauses.`,
+      solution: `The sentence contains three closely related independent clauses, and semicolons can link all three. The version with a semicolon after "repairs" and a comma after "flooded" fixes only the first break and leaves a comma splice between the second and third clauses.`,
     },
     {
       slot: 26,
@@ -326,7 +326,7 @@ const skill: ContentSkill = {
     {
       slot: 27,
       difficulty: 'medium',
-      stem: `Read the sentence: "Mariana planned to take the bus to the science center ___ she rode her bike along the new greenway." Which choice correctly fills the blank?`,
+      stem: `Read the sentence: "The science club planned to take the bus to the museum ___ the members rode their bikes along the new greenway." Which choice correctly fills the blank?`,
       choices: [
         no(`, instead`, 'comma-splice-with-adverb'),
         no(` instead,`, 'run-on-sentence'),
@@ -381,7 +381,7 @@ const skill: ContentSkill = {
         ok(`Each quilt in the exhibit told a family story; one showed a grandmother's journey across three countries.`),
         no(`The guild finished the last quilt in March; because the exhibit opened in April.`, 'semicolon-before-dependent-clause'),
       ],
-      solution: `Only the third choice has an independent clause on each side of the semicolon, and the second clause gives an example of the first. In the other choices, the semicolon comes before a dependent clause ("which took," "because the exhibit") or splits a preposition from its objects.`,
+      solution: `Only the sentence about each quilt telling a family story has an independent clause on each side of the semicolon, and the second clause gives an example of the first. In the other choices, the semicolon comes before a dependent clause ("which took," "because the exhibit") or splits a preposition from its objects.`,
     },
     {
       slot: 32,
@@ -405,7 +405,7 @@ const skill: ContentSkill = {
         no(`According to the placard: "Every trade route carried ideas as well as goods."`, 'colon-after-phrase'),
         ok(`The placard summed up the exhibit in one line: "Every trade route carried ideas as well as goods."`),
       ],
-      solution: `Only the last choice puts a complete independent clause before the colon, which is what a colon introducing a quotation requires. "According to the placard" is just a phrase, and "said that" leads directly into the quoted words, so neither takes a colon.`,
+      solution: `Only "The placard summed up the exhibit in one line" puts a complete independent clause before the colon, which is what a colon introducing a quotation requires. "According to the placard" is just a phrase, and "said that" leads directly into the quoted words, so neither takes a colon.`,
     },
     {
       slot: 34,
@@ -453,7 +453,7 @@ const skill: ContentSkill = {
         no(`The budget: covers costumes, props, and lighting gels.`, 'colon-splits-subject-verb'),
         no(`The budget covers; costumes, props: and lighting gels.`, 'semicolon-for-colon'),
       ],
-      solution: `Adding the object "three kinds of supplies" completes the clause before the colon, so the colon can now introduce the list. The first choice still places the colon directly after the verb "covers."`,
+      solution: `Adding the object "three kinds of supplies" completes the clause before the colon, so the colon can now introduce the list. "The budget covers: the following, costumes, props, and lighting gels" still places the colon directly after the verb "covers."`,
     },
     {
       slot: 38,
@@ -463,7 +463,7 @@ const skill: ContentSkill = {
         no(`, for example,`, 'comma-splice-with-adverb'),
         no(` for example;`, 'semicolon-after-adverb'),
         ok(`; for example,`),
-        no(`; for example`, 'missing-comma-after-transition'),
+        no(` for example,`, 'run-on-sentence'),
       ],
       solution: `"For example" is a transitional phrase linking two independent clauses, so it takes a semicolon before it and a comma after it. Using commas on both sides leaves a comma splice between the clauses.`,
     },
@@ -489,7 +489,7 @@ const skill: ContentSkill = {
         ok(`The student radio station broadcasts three shows: a morning news program, a jazz hour, and a call-in quiz. The quiz, however, is the most popular.`),
         no(`The student radio station broadcasts three shows; a morning news program, a jazz hour, and a call-in quiz. The quiz, however, is the most popular.`, 'semicolon-for-colon'),
       ],
-      solution: `The third choice uses a colon after a complete clause to introduce the list and sets off "however" with commas inside its own sentence. The first choice joins a new independent clause to the list with only commas around "however," which is a comma splice.`,
+      solution: `The correct sentence uses a colon after the complete clause "The student radio station broadcasts three shows" and sets off "however" with commas inside its own sentence. Ending the list with ", however, the quiz is the most popular" joins a new independent clause to the list with only commas around "however," which is a comma splice.`,
     },
   ],
 }
