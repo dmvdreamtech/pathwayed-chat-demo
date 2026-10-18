@@ -184,7 +184,7 @@ const skill: ContentSkill = {
             wrong(`He was afraid to walk all the way to the rocks.`, 'unsupported-inference'),
             wrong(`He wanted to give the gray shell to Grun instead.`, 'unsupported-inference'),
           ],
-          solution: `Pell says, "Plain and gray? Nobody would look at me twice," so looks mattered most to him. Later he walks to the rocks easily, so fear of the walk was not the reason.`,
+          solution: `Pell says, "Plain and gray? Nobody would look at me twice," so looks mattered most to him. Later he walks to the rocks on his own, so fear of the walk was not the reason.`,
         },
         {
           slot: 14,
