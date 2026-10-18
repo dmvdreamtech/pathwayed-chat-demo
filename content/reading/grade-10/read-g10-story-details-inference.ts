@@ -287,7 +287,7 @@ const skill: ContentSkill = {
         {
           slot: 21,
           difficulty: 'easy',
-          stem: `What does the kite claim about itself when it first speaks to the weathervane?`,
+          stem: `After the weathervane says "and so do you," what does the kite claim about itself?`,
           choices: [
             wrong(`It has flown over the farm for forty years.`, 'misreads-detail'),
             wrong(`It can warn the farmer when a storm is near.`, 'confuses-characters'),
@@ -373,7 +373,7 @@ const skill: ContentSkill = {
             wrong(`The shop is about to close because business has dried up.`, 'overstated-inference'),
             wrong(`The shop also sells tea and baked goods to its customers.`, 'literal-reading'),
           ],
-          solution: `Gold letters that faded to a tea color "before I was born" show age and wear over many years. Faded paint alone does not show the shop is about to close; the grandfather still opens each morning.`,
+          solution: `Letters that were gold "before I was born" and have since faded to the color of tea show age and wear over many years. Faded paint alone does not show the shop is about to close; the grandfather still opens each morning.`,
         },
         {
           slot: 28,
