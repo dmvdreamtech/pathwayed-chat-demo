@@ -318,7 +318,7 @@ const skill: ContentSkill = {
             wrong(`It suggests that the volunteer group does not care about the children it serves.`, 'unsupported-inference'),
             wrong(`It reveals that Amara's family asked specifically for a gray hand.`, 'adds-false-detail'),
           ],
-          solution: `Ji-ho tests until "the numbers held steady" and arrives "certain of its quality," a belief the story then questions. He clearly has design experience, so the second choice contradicts the text.`,
+          solution: `Ji-ho tests until "the numbers held steady" and arrives "certain of its quality," a belief the story then questions. He clearly has design and testing experience, so the choice saying he has none contradicts the text.`,
         },
         {
           slot: 24,
@@ -369,7 +369,7 @@ const skill: ContentSkill = {
           stem: `Which choice is the best objective summary of the poem?`,
           choices: [
             wrong(`A grandmother begs the speaker not to leave for school and cries at the river.`, 'contradicts-text'),
-            right(`Before leaving for college, the speaker drives a grandmother to watch migrating cranes and comes to see belonging as something carried along a route.`),
+            right(`Before leaving for a distant school, the speaker drives a grandmother to watch migrating cranes and comes to see belonging as something carried along a route.`),
             wrong(`The speaker describes cranes landing on sandbars as if the sky were emptying its pockets.`, 'too-narrow'),
             wrong(`A touching and beautiful poem shows how lucky the speaker is to have such a wise grandmother.`, 'includes-opinion'),
           ],
