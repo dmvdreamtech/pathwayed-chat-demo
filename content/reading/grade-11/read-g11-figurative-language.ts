@@ -342,7 +342,7 @@ const skill: ContentSkill = {
             wrong(`Counting mistakes made the shop's totals higher than before.`, 'unsupported-inference'),
             wrong(`The shop will earn more money after the inventory is done.`, 'unsupported-inference'),
           ],
-          solution: `The narrator says Luis "realized she did not only mean the bulbs" and that "he knew the shop now," so the extra she gained includes his understanding. The bulbs are part of the meaning, but stopping there is too narrow.`,
+          solution: `The narrator says Luis "realized she did not only mean the bulbs" and that "he knew the shop now," so the "more" she means includes his understanding of the shop. The bulbs are part of the meaning, but stopping there is too narrow.`,
         },
       ],
     },
