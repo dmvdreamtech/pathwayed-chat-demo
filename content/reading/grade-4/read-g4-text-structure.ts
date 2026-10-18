@@ -373,7 +373,7 @@ const skill: ContentSkill = {
             wrong(`Each paragraph tells one step that players follow during a game from start to finish.`, 'wrong-structure'),
             wrong(`Each paragraph tells the history of one sport, from when it began until today.`, 'unsupported-inference'),
           ],
-          solution: `Paragraph 2 uses "Both" to show likenesses, and paragraphs 3, 4 and 5 each describe a difference. The second choice has the order backward.`,
+          solution: `Paragraph 2 uses "Both" to show likenesses, and paragraphs 3, 4 and 5 each describe a difference. The choice that says paragraph 2 tells how the sports differ has the order backward.`,
         },
         {
           slot: 28,
