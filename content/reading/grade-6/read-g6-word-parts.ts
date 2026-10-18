@@ -299,7 +299,7 @@ const skill: ContentSkill = {
         {
           slot: 22,
           difficulty: 'medium',
-          stem: `The prefix inter- means "between," and the Latin root rupt means "break." What did the worker do when he had to "interrupt the interview"?`,
+          stem: `The prefix inter- means "between," and the Latin root rupt means "break." What did the worker do when the worker had to "interrupt the interview"?`,
           choices: [
             right(`The worker broke into the conversation for a moment`),
             wrong(`The worker ended the interview so it could not go on`, 'overgeneralization'),
