@@ -14,7 +14,7 @@ const skill: ContentSkill = {
     {
       slot: 1,
       difficulty: 'easy',
-      stem: `Read the sentence: "The puppy ate its dinner quickly." Which verb would replace "ate quickly" most precisely?`,
+      stem: `Read the sentence: "The puppy ate its dinner quickly." Which verb could replace both "ate" and "quickly" most precisely?`,
       choices: [
         no(`had`, 'vague-verb'),
         ok(`gobbled`),
@@ -225,7 +225,7 @@ const skill: ContentSkill = {
         ok(`When the goalie blocked the final kick, the crowd cheered.`),
         no(`The crowd cheered. When the goalie blocked the final kick.`, 'creates-fragment'),
       ],
-      solution: `Moving "When the goalie blocked the final kick" to the front, followed by a comma, changes the pattern but keeps the meaning. The first choice flips which event caused the other.`,
+      solution: `Moving "When the goalie blocked the final kick" to the front, followed by a comma, changes the pattern but keeps the meaning. "The goalie blocked the final kick when the crowd cheered" changes the meaning, because now the kick happens during the cheering.`,
     },
     {
       slot: 19,
@@ -285,7 +285,7 @@ const skill: ContentSkill = {
         ok(`A longer lunch period would give students time to eat without rushing.`),
         no(`Make lunch longer right away or we will all complain.`, 'demanding-tone'),
       ],
-      solution: `This sentence gives a clear reason in calm, polite words. The second choice avoids slang, but it blames the principal, which is disrespectful.`,
+      solution: `This sentence gives a clear reason in calm, polite words. "You obviously do not care how hungry all of us get" avoids slang, but it blames the principal, which is disrespectful.`,
     },
     {
       slot: 24,
@@ -381,7 +381,7 @@ const skill: ContentSkill = {
         no(`The markets were places.`, 'flat-wording'),
         no(`The markets were, without a doubt, the most amazing places in all of history.`, 'exaggerated-tone'),
       ],
-      solution: `"Liveliest gathering places" keeps the idea that the markets were popular, but in the same serious style as the rest of the report. The last choice avoids slang, but its huge claim does not fit a factual report.`,
+      solution: `"Liveliest gathering places" keeps the idea that the markets were popular, but in the same serious style as the rest of the report. "The most amazing places in all of history" avoids slang, but its huge claim does not fit a factual report.`,
     },
     {
       slot: 32,
@@ -393,7 +393,7 @@ const skill: ContentSkill = {
         ok(`Picking up bottles and wrappers, the volunteers cleaned the beach and filled twelve bags.`),
         no(`The volunteers cleaned the beach, and they picked up bottles and wrappers, and they filled twelve bags.`, 'and-chain'),
       ],
-      solution: `The opening phrase describes the volunteers, and "the volunteers" comes right after it, so the sentence is clear. In the first choice, the phrase lands next to "twelve bags," which makes it sound like the bags picked up the trash.`,
+      solution: `The opening phrase describes the volunteers, and "the volunteers" comes right after it, so the sentence is clear. In "Picking up bottles and wrappers, twelve bags were filled," the phrase lands next to "twelve bags," which makes it sound like the bags picked up the trash.`,
     },
     {
       slot: 33,
@@ -405,7 +405,7 @@ const skill: ContentSkill = {
         no(`The magnet violently yanks every metal object in the world.`, 'inaccurate-exaggeration'),
         ok(`The magnet attracts objects made of iron.`),
       ],
-      solution: `"Attracts" is the exact science word for a magnet pulling, and "objects" replaces "stuff." The first choice uses "attracts" but keeps "kind of" and "stuff," so it still sounds vague and casual.`,
+      solution: `"Attracts" is the exact science word for a magnet pulling, and "objects" replaces "stuff." "The magnet kind of attracts iron stuff" uses "attracts" but keeps "kind of" and "stuff," so it still sounds vague and casual.`,
     },
     {
       slot: 34,
@@ -417,7 +417,7 @@ const skill: ContentSkill = {
         no(`I am writing to ask a question about something at camp.`, 'vague-purpose'),
         no(`Tell me right now when the swimming lessons start.`, 'demanding-tone'),
       ],
-      solution: `This sentence is polite and names exactly what the student wants to know. The third choice is formal, but "something at camp" does not tell the director what the question is.`,
+      solution: `This sentence is polite and names exactly what the student wants to know. "I am writing to ask a question about something at camp" is formal, but "something at camp" does not tell the director what the question is.`,
     },
     {
       slot: 35,
@@ -429,7 +429,7 @@ const skill: ContentSkill = {
         no(`In March, the comet appeared. In March, it was visible without a telescope. In April, it faded. People gathered on hills.`, 'repeats-opening-pattern'),
         no(`Appearing in March and visible without a telescope and watched from hills, the comet faded by April.`, 'overloaded-sentence'),
       ],
-      solution: `This revision opens one sentence with a describing phrase and joins two ideas with "but," keeping every fact in order. The third choice repeats the "In March" opening and moves the hill watching to the end, which confuses the order.`,
+      solution: `This revision opens one sentence with a describing phrase and joins two ideas with "but," keeping every fact from the original. The version that starts three sentences with "In March" or "In April" repeats the same opening pattern and moves the hill watching to the end, which confuses the order.`,
     },
     {
       slot: 36,
@@ -453,7 +453,7 @@ const skill: ContentSkill = {
         ok(`Because it was raining, the field trip to the planetarium was postponed.`),
         no(`Rain. Planetarium trip postponed.`, 'creates-fragment'),
       ],
-      solution: `"Because" replaces "Due to the fact that," and "postponed" already means moved to a later date, so that phrase can go. The second choice keeps both wordy parts.`,
+      solution: `"Because" replaces "Due to the fact that," and "postponed" already means moved to a later date, so that phrase can go. "Due to the fact that it rained, the trip was postponed until a later date" keeps both wordy parts.`,
     },
     {
       slot: 38,
@@ -477,7 +477,7 @@ const skill: ContentSkill = {
         no(`Fold the paper in some way.`, 'vague-wording'),
         no(`Fold the paper in half so the short edges meet.`, 'misreads-context'),
       ],
-      solution: `This direction tells exactly how to fold, matching the rule that the long edges meet. The last choice is just as precise in wording, but it names the wrong edges.`,
+      solution: `This direction tells exactly how to fold, matching the rule that the long edges meet. "So the short edges meet" is just as precise in wording, but it names the wrong edges.`,
     },
     {
       slot: 40,
@@ -486,7 +486,7 @@ const skill: ContentSkill = {
       choices: [
         no(`It is really pretty and took a super long time.`, 'informal-word'),
         no(`It is the most beautiful quilt ever made in the whole world.`, 'inaccurate-exaggeration'),
-        ok(`Its careful stitching shows how many hours the work required.`),
+        ok(`It is beautiful, and it took many hours to make.`),
         no(`It is pretty and took forever.`, 'vague-wording'),
       ],
       solution: `This sentence keeps the ideas of beauty and long effort but says them in the calm, factual style of the first two sentences. "It is pretty and took forever" drops the slang words, but "forever" is still a casual exaggeration.`,
