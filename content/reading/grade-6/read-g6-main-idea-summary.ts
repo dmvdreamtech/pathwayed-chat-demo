@@ -28,7 +28,7 @@ const skill: ContentSkill = {
           right(`Many bats use echoes from their own calls to find their way and catch food in the dark.`),
           wrong(`Bats would be much better hunters if they had sharper eyesight for the night.`, 'unsupported-inference'),
           wrong(`Many animals have special senses that help them survive in the natural world.`, 'too-broad'),
-        ], `The whole passage explains how bats send out calls, read the echoes and use them to fly and hunt, which the second choice states. The faster calls are only one detail from paragraph 4.`),
+        ], `The whole passage explains how bats send out calls, read the echoes and use them to fly and hunt, which the choice about using echoes from their own calls states. The faster calls are only one detail from paragraph 4.`),
         q(2, 'easy', `Which detail best supports the idea that a bat can tell how far away an object is?`, [
           wrong(`Most of these sounds are too high for human ears to hear.`, 'wrong-supporting-detail'),
           wrong(`They can catch hundreds of small insects in one night.`, 'wrong-supporting-detail'),
@@ -46,13 +46,13 @@ const skill: ContentSkill = {
           wrong(`Scientists record bat calls at night. Just before a bat catches a moth, its calls speed up into a rapid buzz that people can hear on the recordings.`, 'too-narrow'),
           right(`Bats send out high calls and listen for the echoes. The echoes tell them where objects are, so they can fly safely and catch insects in the dark.`),
           wrong(`Bats cannot see at all, so they must make loud calls that people hear at night. The calls scare insects out of trees so the bats can catch them.`, 'contradicts-text'),
-        ], `The third choice covers how echolocation works and what it lets bats do, without adding opinions. The first choice adds the summarizer's own judgments, such as "most amazing," which do not belong in an objective summary.`),
+        ], `The choice beginning "Bats send out high calls" covers how echolocation works and what it lets bats do, without adding opinions. The choice calling bats "the most amazing animals on Earth" adds the summarizer's own judgments, such as "most amazing," which do not belong in an objective summary.`),
         q(5, 'hard', `Which sentence would NOT belong in an objective summary of the passage?`, [
           wrong(`A bat's brain uses echoes to judge the size, distance and movement of objects.`, 'misidentifies-key-idea'),
           wrong(`Bats speed up their calls as they close in on an insect so they can follow it.`, 'misidentifies-key-idea'),
           wrong(`Echolocation lets bats fly through dark places and catch many insects each night.`, 'misidentifies-key-idea'),
           right(`Echolocation is far more impressive than any tool that humans have ever built.`),
-        ], `An objective summary leaves out the summarizer's opinions, and the last choice is a personal judgment the passage never makes. The other three sentences restate key ideas from paragraphs 3, 4 and 5.`),
+        ], `An objective summary leaves out the summarizer's opinions, and "Echolocation is far more impressive than any tool that humans have ever built" is a personal judgment the passage never makes. The sentences about judging distance, speeding up calls and flying through dark places restate key ideas from paragraphs 3, 4 and 5.`),
       ],
     },
     {
@@ -89,7 +89,7 @@ const skill: ContentSkill = {
           wrong(`Crews cleared snow from frozen lakes and marked the ice into a grid. Then workers cut blocks with saws and floated them through channels to shore.`, 'too-narrow'),
           right(`In the 1800s, workers cut ice from frozen lakes, stored it in insulated icehouses and delivered it in summer to keep food cold. Machines and refrigerators later ended the business.`),
           wrong(`Families made ice in their own iceboxes during winter and saved it for summer. Later, factories began selling refrigerators, so the iceboxes were thrown away.`, 'contradicts-text'),
-        ], `The third choice covers cutting, storing, delivering and the end of the business in neutral words. The fourth choice sounds complete but is wrong, because workers cut ice from lakes, not inside family iceboxes.`),
+        ], `The choice beginning "In the 1800s, workers cut ice" covers cutting, storing, delivering and the end of the business in neutral words. The choice saying families made ice in their own iceboxes sounds complete but is wrong, because workers cut ice from lakes, not inside family iceboxes.`),
       ],
     },
     {
@@ -102,7 +102,7 @@ const skill: ContentSkill = {
           wrong(`Recycling helps the planet in many ways, from saving metal to reducing plastic.`, 'too-broad'),
           wrong(`Recycled paper is always stronger and smoother than paper made from new wood.`, 'contradicts-text'),
           right(`Used paper goes through a series of steps that clean its fibers and form new paper.`),
-        ], `The passage walks through sorting, pulping, removing ink and pressing new sheets, which the last choice sums up. The ink detail is true but covers only paragraph 4.`),
+        ], `The passage walks through sorting, pulping, removing ink and pressing new sheets, which the choice about a series of steps that clean fibers and form new paper sums up. The ink detail is true but covers only paragraph 4.`),
         q(12, 'easy', `Which detail best supports the idea that paper cannot be recycled forever?`, [
           wrong(`Newspapers, cardboard and office paper are kept apart during sorting.`, 'wrong-supporting-detail'),
           right(`Each trip through the process makes the fibers shorter and weaker.`),
@@ -120,13 +120,13 @@ const skill: ContentSkill = {
           wrong(`"Paper is made of tiny plant fibers, mostly from wood."`, 'supporting-detail-not-main'),
           wrong(`"Screens then remove staples, tape and bits of plastic."`, 'too-narrow'),
           wrong(`"After about five to seven rounds, they are too short to hold together."`, 'too-narrow'),
-        ], `The first choice names the whole process the passage explains step by step. The other sentences are supporting details about one step or one fact.`),
+        ], `The sentence about "several steps that turn it back into material for new products" names the whole process the passage explains step by step. The other sentences are supporting details about one step or one fact.`),
         q(15, 'hard', `Which is the best objective summary of the passage?`, [
           wrong(`Recycling paper is the most important chore a family can do. People who throw paper in the trash are not doing their part to save the forests.`, 'includes-opinion'),
           wrong(`Paper is sorted by type and then mixed with water in a big tank called a pulper. Screens take out staples and tape from the pulp.`, 'too-narrow'),
           wrong(`Paper is sorted, turned into pulp, cleaned and pressed into new sheets. Because the fibers never wear out, the same paper can be recycled again and again.`, 'contradicts-text'),
           right(`Recycled paper is sorted, made into pulp, cleaned of trash and ink, then pressed into new sheets. Its fibers weaken each time, so it can be recycled only several times.`),
-        ], `The last choice covers every major step and the limit on recycling in neutral words. The third choice looks complete but says fibers never wear out, which paragraph 6 contradicts.`),
+        ], `The choice ending "it can be recycled only several times" covers every major step and the limit on recycling in neutral words. The choice saying the same paper can be recycled again and again looks complete but says fibers never wear out, which paragraph 6 contradicts.`),
       ],
     },
     {
@@ -139,7 +139,7 @@ const skill: ContentSkill = {
           wrong(`Students learn to type well on their own by using computers and phones at home.`, 'confuses-counterclaim'),
           right(`Middle schools should teach typing because it helps students in school and later in life.`),
           wrong(`Computers have changed the way students learn and work in every school subject.`, 'too-broad'),
-        ], `The author states the claim in paragraph 1 and supports it with reasons about speed, writing quality and jobs. The second choice is the opposing view the author argues against in paragraph 4.`),
+        ], `The author states the claim in paragraph 1 and supports it with reasons about speed, writing quality and jobs. The choice saying students learn to type well on their own is the opposing view the author argues against in paragraph 4.`),
         q(17, 'medium', `How does paragraph 4 develop the author's central idea?`, [
           right(`It answers an opposing view by explaining why self-taught typing habits cause problems.`),
           wrong(`It gives a reason about how typing skills will help students in their future jobs.`, 'misreads-structure'),
@@ -157,13 +157,13 @@ const skill: ContentSkill = {
           right(`The author argues that middle schools should teach typing because it makes students faster, improves their writing and prepares them for jobs. The author also claims self-taught habits are hard to fix.`),
           wrong(`Typing classes make students write faster and earn better grades in every subject. Students who take these classes also get better jobs as nurses and engineers.`, 'adds-unsupported-detail'),
           wrong(`Many students type with two fingers. Some people believe students learn to type at home, and many jobs today require people to write on a keyboard.`, 'misses-central-claim'),
-        ], `The second choice states the author's claim and main reasons and labels them as the author's views. The fourth choice lists details but never says what the author is arguing.`),
+        ], `The choice beginning "The author argues that middle schools should teach typing" states the author's claim and main reasons and labels them as the author's views. The choice beginning "Many students type with two fingers" lists details but never says what the author is arguing.`),
         q(20, 'hard', `Which sentence would NOT belong in an objective summary of the passage?`, [
           wrong(`The author claims that quick typing lets students focus on their ideas.`, 'misidentifies-key-idea'),
           wrong(`The author says typing is a skill people will use in many future jobs.`, 'misidentifies-key-idea'),
           right(`The author's plan is clearly the smartest way to improve every school.`),
           wrong(`The author argues that lessons build habits that self-teaching may not.`, 'misidentifies-key-idea'),
-        ], `The third choice gives the summarizer's own judgment ("clearly the smartest"), which an objective summary leaves out. The others fairly report the author's reasons from paragraphs 2, 4 and 5.`),
+        ], `The sentence calling the plan "clearly the smartest" gives the summarizer's own judgment, which an objective summary leaves out. The sentences about quick typing, future jobs and lessons building habits fairly report the author's reasons from paragraphs 2, 4 and 5.`),
       ],
     },
     {
@@ -188,7 +188,7 @@ const skill: ContentSkill = {
           wrong(`Workers spray thin layers of water onto a chilled concrete slab.`, 'misreads-structure'),
           right(`A machine shaves, washes and floods the ice to form a smooth new layer.`),
           wrong(`A machine uses cold water so the new layer stays apart from the old ice.`, 'contradicts-text'),
-        ], `Paragraph 4 describes each job of the resurfacing machine: shaving, washing and spreading warm water. The last choice is wrong because the passage says warm water helps the new layer bond to the old ice.`),
+        ], `Paragraph 4 describes each job of the resurfacing machine: shaving, washing and spreading warm water. The choice saying the machine uses cold water is wrong because the passage says warm water helps the new layer bond to the old ice.`),
         q(24, 'medium', `How does paragraph 3 connect to the paragraph that follows it?`, [
           right(`It describes the problem of worn ice that the resurfacing machine then solves.`),
           wrong(`It explains how ice is first frozen onto the concrete floor of the rink.`, 'misreads-structure'),
@@ -200,13 +200,13 @@ const skill: ContentSkill = {
           wrong(`Pipes under a concrete slab chill the floor of a rink. Workers spray thin layers of water and paint lines and logos onto an early layer of the ice.`, 'too-narrow'),
           right(`Rink ice is built in thin frozen layers over chilled concrete. Because skating roughs it up, a machine regularly shaves, washes and floods it so a smooth layer forms.`),
           wrong(`Rink ice is a thick block frozen outdoors and moved inside. Each night, workers smooth it by hand with warm towels so it is ready the next day.`, 'contradicts-text'),
-        ], `The third choice covers both how the ice is built and how it is kept smooth, without opinions. The second choice is accurate but describes only paragraph 2 and leaves out resurfacing.`),
+        ], `The choice beginning "Rink ice is built in thin frozen layers" covers both how the ice is built and how it is kept smooth, without opinions. The choice about pipes, water layers and painted logos is accurate but describes only paragraph 2 and leaves out resurfacing.`),
       ],
     },
     {
       code: 'rg6-main-idea-summary-p06',
       title: 'From Lump to Bowl',
-      body: `A handmade clay bowl may look simple, but it goes through a long journey before it reaches a table. Potters shape, dry and fire their work in careful stages. Skipping or rushing any stage can ruin the piece.\n\nThe process begins with wedging. A potter kneads a lump of wet clay on a table, pressing and folding it many times. Wedging pushes out trapped air bubbles. If air stays inside, it can expand in the heat later and crack the bowl.\n\nNext comes throwing on the potter's wheel. The potter presses the spinning clay into the center of the wheel, a step called centering. Then the potter pushes a thumb into the middle and slowly pulls the walls upward and outward. Wet hands keep the clay from sticking or tearing.\n\nAfter shaping, the bowl must dry slowly for several days. When it is firm but not yet hard, the potter trims extra clay from the bottom to form a neat base. Then the bowl dries completely until it turns pale and light.\n\nThe first trip into the kiln, a very hot oven, is called the bisque firing. It turns soft clay into hard ceramic. The potter then dips the bowl in glaze, a liquid coating made of minerals. In a second, even hotter firing, the glaze melts into a glassy layer that makes the bowl shiny and waterproof.\n\nFrom start to finish, a single bowl can take two weeks or more. Each step depends on the one before it, so a potter must be patient at every stage.`,
+      body: `A handmade clay bowl may look simple, but it goes through a long journey before it reaches a table. Potters shape, dry and fire their work in careful stages. Skipping or rushing any stage can ruin the piece.\n\nThe process begins with wedging. A potter kneads a lump of wet clay on a table, pressing and folding it many times. Wedging pushes out trapped air bubbles. If air stays inside, it can expand in the heat later and crack the bowl.\n\nNext comes throwing on the potter's wheel. The potter presses the spinning clay into the center of the wheel, a step called centering. Then the potter pushes a thumb into the middle and slowly pulls the walls upward and outward. Wet hands keep the clay from sticking or tearing.\n\nAfter shaping, the bowl must dry slowly for several days. When it is firm but not yet hard, the potter trims extra clay from the bottom to form a neat base. Then the bowl dries completely until it turns pale and light.\n\nThe first trip into the kiln, a very hot oven, is called the bisque firing. It turns soft clay into hard ceramic. The potter then dips the bowl in glaze, a liquid coating made of minerals. In a second firing, which is usually hotter, the glaze melts into a glassy layer that makes the bowl shiny and waterproof.\n\nFrom start to finish, a single bowl can take two weeks or more. Each step depends on the one before it, so a potter must be patient at every stage.`,
       items: [
         q(26, 'easy', `Which statement best expresses the central idea of the passage?`, [
           right(`A clay bowl is made in careful steps of shaping, drying and firing.`),
@@ -219,7 +219,7 @@ const skill: ContentSkill = {
           right(`If air stays inside, it can expand in the heat later and crack the bowl.`),
           wrong(`Glaze is a liquid coating made of minerals that the bowl is dipped in.`, 'wrong-supporting-detail'),
           wrong(`From start to finish, a single bowl can take two weeks or more.`, 'wrong-supporting-detail'),
-        ], `The second choice shows what happens if wedging is skipped: trapped air can crack the bowl. The two weeks detail shows the process is long, not that skipping a step causes damage.`),
+        ], `The detail about trapped air expanding in the heat shows what happens if wedging is skipped: trapped air can crack the bowl. The two weeks detail shows the process is long, not that skipping a step causes damage.`),
         q(28, 'medium', `What is the main idea of paragraph 5?`, [
           wrong(`Glaze is a liquid coating that is made from minerals.`, 'too-narrow'),
           wrong(`A bowl dries slowly for several days before it is trimmed.`, 'misreads-structure'),
@@ -237,7 +237,7 @@ const skill: ContentSkill = {
           wrong(`A potter glazes the wet clay, fires it once to harden it and then shapes and trims it on the wheel. The bowl is finished in a single day.`, 'wrong-sequence'),
           right(`A potter wedges clay to remove air, shapes it on a wheel, dries and trims it, then fires it twice, adding glaze before the second firing. Each step depends on the last.`),
           wrong(`Making pottery is the most relaxing hobby there is. Anyone who has the patience to wait two weeks will love making beautiful bowls at home.`, 'includes-opinion'),
-        ], `The third choice includes every stage in the correct order and the idea that steps depend on each other. The second choice puts the steps in the wrong order and contradicts the two weeks the passage gives.`),
+        ], `The choice beginning "A potter wedges clay to remove air" includes every stage in the correct order and the idea that steps depend on each other. The choice saying the bowl is finished in a single day puts the steps in the wrong order and contradicts the two weeks the passage gives.`),
       ],
     },
     {
@@ -274,7 +274,7 @@ const skill: ContentSkill = {
           wrong(`Wire loops under the pavement sense the metal in cars. Cameras and radar on poles can also tell when a car is waiting on a side street.`, 'too-narrow'),
           wrong(`All traffic signals now use cameras, so timers and buried loops are no longer used. The cameras also decide when walkers may cross the street.`, 'contradicts-text'),
           right(`Some traffic signals run on timers, while others use sensors to detect waiting cars. Signals can be linked into green waves and give walkers a head start, all to reduce waiting and crashes.`),
-        ], `The last choice covers timers, sensors, linked signals, walkers and the shared goal. The second choice is accurate but covers only paragraph 3, so it leaves out most of the central idea.`),
+        ], `The choice beginning "Some traffic signals run on timers" covers timers, sensors, linked signals, walkers and the shared goal. The choice about wire loops, cameras and radar is accurate but covers only paragraph 3, so it leaves out most of the central idea.`),
       ],
     },
     {
@@ -305,7 +305,7 @@ const skill: ContentSkill = {
           right(`After learning that snowy sidewalks trapped some neighbors at home, a sixth-grade class formed the Snow Shovel Squad. Using a library sign-up list and safety rules, it has grown to help over ninety homes.`),
           wrong(`Students in the squad work only in daylight and always with an adult. They take a break every thirty minutes and bend their knees when lifting snow.`, 'too-narrow'),
           wrong(`Librarians lead teams of students who shovel at night after each storm. The library pays them for each home, and the program has stayed the same size.`, 'contradicts-text'),
-        ], `The second choice covers why the squad started, how it works and how it has grown, without opinions. The third choice is accurate but sums up only the safety paragraph.`),
+        ], `The choice beginning "After learning that snowy sidewalks trapped some neighbors" covers why the squad started, how it works and how it has grown, without opinions. The choice about daylight, breaks and bending knees is accurate but sums up only the safety paragraph.`),
         q(40, 'hard', `How does the last paragraph develop the central idea?`, [
           wrong(`It explains how volunteers are assigned to houses after a storm.`, 'misreads-structure'),
           wrong(`It gives numbers that prove the squad helps more homes each year.`, 'misreads-structure'),
