@@ -112,7 +112,7 @@ where public.generated_questions.status = 'draft' and public.generated_questions
 -- Passage rg12-context-clues-p02
 insert into public.passages (id, code, skill_id, sat_alignment, grade_band, title, body, status)
 values ('aecd3af9-8e2c-5bb5-9588-8dfbb806fb29', 'rg12-context-clues-p02', (select id from public.skills where slug = 'read-g12-context-clues'), null,
-        '9-12', $q$The Audition Piece$q$, $q$Adaeze had played the opening bars of the sonata so many times that her left hand moved through them on its own. The audition was in four days, and her teacher, Mr. Lindqvist, had begun treating every lesson like a rehearsal for disaster.
+        '9-12', $q$The Audition Piece$q$, $q$Adaeze, a girl of sixteen, had played the opening bars of the sonata so many times that her left hand moved through them on its own. The audition was in four days, and her teacher, Mr. Lindqvist, had begun treating every lesson like a rehearsal for disaster.
 
 "Lovely," he said after she finished the first page. "If the panel happens to enjoy hearing a cello apologize for itself." His tone was sardonic, the dry, mocking humor of someone who had judged too many auditions to be impressed by anything, and Adaeze felt her face grow warm.
 
@@ -276,7 +276,7 @@ where public.generated_questions.status = 'draft' and public.generated_questions
 -- Passage rg12-context-clues-p04
 insert into public.passages (id, code, skill_id, sat_alignment, grade_band, title, body, status)
 values ('d3f73304-a08e-58b6-95d5-044d1fa76b4a', 'rg12-context-clues-p04', (select id from public.skills where slug = 'read-g12-context-clues'), null,
-        '9-12', $q$Round Five$q$, $q$By the fifth round of the regional chess tournament, Priya had learned to read her opponents before she read the board. Some drummed their fingers when worried; others sighed theatrically after every move. Her opponent this afternoon, a tall boy named Teodor, gave away nothing. His face was inscrutable, as blank and unreadable as a closed door, and after twenty minutes she had no idea whether he thought he was winning.
+        '9-12', $q$Round Five$q$, $q$By the fifth round of the regional chess tournament, a girl named Priya had learned to read her opponents before she read the board. Some drummed their fingers when worried; others sighed theatrically after every move. Her opponent this afternoon, a tall boy named Teodor, gave away nothing. His face was inscrutable, as blank and unreadable as a closed door, and after twenty minutes she had no idea whether he thought he was winning.
 
 Priya had won her first four games, and she could feel herself growing complacent. She had begun to assume that victory was simply what happened to her now, and that assumption made her careless. Twice she nearly left her bishop unprotected before catching the mistake at the last second.
 
@@ -438,7 +438,7 @@ where public.generated_questions.status = 'draft' and public.generated_questions
 -- Passage rg12-context-clues-p06
 insert into public.passages (id, code, skill_id, sat_alignment, grade_band, title, body, status)
 values ('e28bc327-233d-5fe1-870a-4a6892115417', 'rg12-context-clues-p06', (select id from public.skills where slug = 'read-g12-context-clues'), null,
-        '9-12', $q$Tuesdays at the Corner Table$q$, $q$Every Tuesday afternoon, Hana Kobayashi met her reading buddy at a corner table in the public library. Mateo was eight years old and, by his own cheerful admission, did not like books. During their first session he was recalcitrant, refusing to open the picture book she had chosen, sliding it to the edge of the table, and announcing that reading was for babies.
+        '9-12', $q$Tuesdays at the Corner Table$q$, $q$Every Tuesday afternoon, Hana Kobayashi, a girl in her last year of high school, met her reading buddy at a corner table in the public library. Mateo was an eight-year-old boy and, by his own cheerful admission, did not like books. During their first session he was recalcitrant, refusing to open the picture book she had chosen, sliding it to the edge of the table, and announcing that reading was for babies.
 
 Hana tried to cajole him. She offered to read the first page herself, promised they could stop after ten minutes, and pointed out a funny drawing of a goat wearing boots. Mateo only crossed his arms tighter. Nothing she said could coax him into turning a single page.
 
@@ -604,7 +604,7 @@ where public.generated_questions.status = 'draft' and public.generated_questions
 -- Passage rg12-context-clues-p08
 insert into public.passages (id, code, skill_id, sat_alignment, grade_band, title, body, status)
 values ('7fac36c0-b3d3-52d4-b71e-991324418f5e', 'rg12-context-clues-p08', (select id from public.skills where slug = 'read-g12-context-clues'), null,
-        '9-12', $q$Four Hundred Dollars and a Station$q$, $q$The community theater had exactly four hundred dollars to build the set for its spring play, and Oluwaseun Adeyemi, who had volunteered to lead the stage crew, spent the first meeting staring at that number on the whiteboard.
+        '9-12', $q$Four Hundred Dollars and a Station$q$, $q$The community theater had exactly four hundred dollars to build the set for its spring play, and Oluwaseun Adeyemi, a young man who had volunteered to lead the stage crew, spent the first meeting staring at that number on the whiteboard.
 
 The director, a retired schoolteacher named Ms. Castellanos, wanted the stage to resemble the waiting room of an old mountain railway station. The script described the room as austere: bare plank walls, a single wooden bench, one clock, and nothing on the floor but a worn rug. Oluwaseun was relieved. A plain, undecorated room would cost far less than a palace or a crowded city street.
 
@@ -614,7 +614,7 @@ Not everything went as planned. Two days before opening night, the bench collaps
 
 What worried Oluwaseun most was verisimilitude. Ms. Castellanos had warned that if the room looked fake, the audience would stop believing in the story. So the crew sanded the walls to look weathered, stained the clock face with cold tea, and scuffed the rug until it seemed decades old. From the back row, the set looked like a real station that had stood for a century.
 
-On opening night, a visiting designer who had built sets for professional theaters for thirty years walked the stage during intermission. She ran her hand along the sanded planks and told Oluwaseun that his crew had done the work of consummate professionals.$q$, 'draft')
+On opening night, a visiting designer, a woman who had built sets for professional theaters for thirty years, walked the stage during intermission. She ran her hand along the sanded planks and told Oluwaseun that his crew had done the work of consummate professionals.$q$, 'draft')
 on conflict (id) do update set title = excluded.title, body = excluded.body
 where public.passages.status = 'draft';
 insert into public.generated_questions
