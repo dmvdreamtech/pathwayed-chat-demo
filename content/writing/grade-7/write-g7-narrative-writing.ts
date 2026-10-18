@@ -42,7 +42,7 @@ const skill: ContentSkill = {
             no(`"This is the best science project ever," Tomas said with a grin.`, 'dialogue-off-mood'),
             no(`"Your chocolate looks great," Tomas called to another group happily.`, 'dialogue-off-focus'),
           ],
-          solution: `The first choice uses Tomas's own words to compare their oven with the others, which shows his frustration. The second choice only reports his feeling, so it is a summary rather than dialogue.`,
+          solution: `The correct choice uses Tomas's own words to compare their oven with the others, which shows his frustration. The choice "Tomas told me that he was frustrated" only reports his feeling, so it is a summary rather than dialogue.`,
         },
         {
           slot: 3,
@@ -184,7 +184,7 @@ const skill: ContentSkill = {
             no(`"Use your judgment," I said to the small boy in the green raincoat.`, 'wrong-speaker'),
             no(`Mr. Haddad frowned and said, "No books leave this room for less than a dollar."`, 'dialogue-contradicts-events'),
           ],
-          solution: `The correct choice puts Mr. Haddad's exact words in quotation marks and matches what happens next. The first choice reports his words indirectly, so it is not dialogue.`,
+          solution: `The correct choice puts Mr. Haddad's exact words in quotation marks and matches what happens next. The choice "Mr. Haddad said that I should use my own judgment" reports his words indirectly, so it is not dialogue.`,
         },
         {
           slot: 13,
@@ -208,7 +208,7 @@ const skill: ContentSkill = {
             ok(`After a deep breath,`),
             no(`In summary,`, 'conclusion-not-time'),
           ],
-          solution: `"After a deep breath" shows that a moment has passed and that the narrator has made up her mind. "On the contrary" signals an opposite idea, but walking back to the table does not contradict asking Mr. Haddad.`,
+          solution: `"After a deep breath" shows that a moment has passed and that the narrator has made a decision. "On the contrary" signals an opposite idea, but walking back to the table does not contradict asking Mr. Haddad.`,
         },
         {
           slot: 15,
@@ -291,7 +291,7 @@ const skill: ContentSkill = {
             ok(`On the walk back, I counted a flock of geese overhead in fives without even thinking.`),
             no(`We drove home after the count, and I took a long nap on the couch.`, 'flat-ending-no-reflection'),
           ],
-          solution: `The correct choice shows the narrator using the new trick on her own, which proves she has changed since sentence 7. The fact about scientists is tempting, but it ends the story with information instead of the narrator's experience.`,
+          solution: `The correct choice shows the narrator using the new trick on her own, which proves the narrator has changed since sentence 7. The fact about scientists is tempting, but it ends the story with information instead of the narrator's experience.`,
         },
       ],
     },
@@ -326,7 +326,7 @@ const skill: ContentSkill = {
             no(`I passed two runners, which is something that happens in almost every race.`, 'generic-aside'),
             no(`Quickly, I passed a couple of runners and kept going toward the finish.`, 'speeds-up-pacing'),
           ],
-          solution: `The correct choice adds a sound and a specific runner, which slows the reader down during the climb. The first choice is longer, but it repeats words without adding any detail.`,
+          solution: `The correct choice adds a sound and a specific runner, which slows the reader down during the climb. The choice "I passed one runner, then another runner" is longer, but it repeats words without adding any detail.`,
         },
         {
           slot: 23,
@@ -397,7 +397,7 @@ const skill: ContentSkill = {
             ok(`"Lock your elbows on your knees," Mr. Nakamura said. "Let the wheel work."`),
             no(`"Let the wheel do the work," I told Mr. Nakamura with a nod.`, 'wrong-speaker'),
           ],
-          solution: `The correct choice gives Mr. Nakamura's own words, and the next sentences show the narrator following them. The choice telling her to push harder contradicts the story, since pushing harder is what failed in sentence 6.`,
+          solution: `The correct choice gives Mr. Nakamura's own words, and the next sentences show the narrator following them. The choice telling the narrator to push harder contradicts the story, since pushing harder is what failed in sentence 6.`,
         },
         {
           slot: 28,
@@ -480,7 +480,7 @@ const skill: ContentSkill = {
             no(`"Your game looks perfect already!" Mom called up the stairs.`, 'dialogue-contradicts-events'),
             ok(`"Lights out in five minutes!" Mom called up the stairs.`),
           ],
-          solution: `The correct choice gives Mom's exact words and a deadline, which makes the narrator's search more urgent. The first choice reports what Mom said instead of quoting her, so it is not dialogue.`,
+          solution: `The correct choice gives Mom's exact words and a deadline, which makes the narrator's search more urgent. The choice "Mom told me that it was getting late" reports what Mom said instead of quoting her, so it is not dialogue.`,
         },
         {
           slot: 34,
