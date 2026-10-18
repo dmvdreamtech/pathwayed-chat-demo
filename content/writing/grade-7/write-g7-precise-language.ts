@@ -86,7 +86,7 @@ const skill: ContentSkill = {
     {
       slot: 7,
       difficulty: 'easy',
-      stem: `Read the sentence: "Our class saw a lot of birds at the marsh." Which revision uses the most precise language?`,
+      stem: `Read the sentence: "Our class saw a lot of birds at the marsh." The class actually counted forty-two herons. Which revision uses the most precise language?`,
       choices: [
         no(`Our class saw a whole lot of birds at the marsh.`, 'vague-noun'),
         no(`Our class saw tons and tons of birds at the marsh.`, 'vague-noun'),
@@ -117,12 +117,12 @@ const skill: ContentSkill = {
         no(`The marching band members all gathered together on the field.`, 'keeps-redundancy'),
         no(`The marching band gathered together.`, 'cuts-needed-word'),
       ],
-      solution: `"Gathered" already means came together, so "together" is extra. The second choice removes "marching" instead, which is a useful detail, and keeps the redundancy.`,
+      solution: `"Gathered" already means came together, so "together" is extra. The choice "The band members gathered together on the field" removes "marching" instead, which is a useful detail, and keeps the redundancy.`,
     },
     {
       slot: 10,
       difficulty: 'easy',
-      stem: `Read the sentence: "Hana made a thing out of paper in the origami workshop." Which revision is the most precise?`,
+      stem: `Read the sentence: "Hana made a thing out of paper in the origami workshop." Hana's project was a paper crane. Which revision is the most precise?`,
       choices: [
         no(`Hana made something out of paper in the origami workshop.`, 'vague-noun'),
         ok(`Hana folded a paper crane in the origami workshop.`),
@@ -146,7 +146,7 @@ const skill: ContentSkill = {
     {
       slot: 12,
       difficulty: 'easy',
-      stem: `Read the sentence: "The swimmer did good in the race." Which revision uses the most precise language?`,
+      stem: `Read the sentence: "The swimmer did good in the race." The swimmer actually won by half a second. Which revision uses the most precise language?`,
       choices: [
         no(`The swimmer did really good in the race.`, 'vague-intensifier'),
         no(`The swimmer did pretty well in the race.`, 'vague-adjective'),
@@ -165,7 +165,7 @@ const skill: ContentSkill = {
         no(`If it snows tomorrow, the trip to the aquarium will be postponed until a later date.`, 'keeps-redundancy'),
         no(`The field trip will be postponed.`, 'drops-key-meaning'),
       ],
-      solution: `"If" replaces "In the event that," and "postponed" already means moved to a later date. The third choice fixes the opening but still repeats the idea of a later date.`,
+      solution: `"If" replaces "In the event that," and "postponed" already means moved to a later date. The choice "If it snows tomorrow, the trip to the aquarium will be postponed until a later date" fixes the opening but still repeats the idea of a later date.`,
     },
     {
       slot: 14,
@@ -213,7 +213,7 @@ const skill: ContentSkill = {
         no(`The bridge closed for a reason.`, 'drops-key-meaning'),
         ok(`The bridge closed because engineers found a crack in one support.`),
       ],
-      solution: `"The reason why" and "because" both signal a cause, so only "because" is needed. The first choice drops "why" but still pairs "the reason" with "because."`,
+      solution: `"The reason why" and "because" both signal a cause, so only "because" is needed. The choice "The reason the bridge closed is because engineers found a crack in one support" drops "why" but still pairs "the reason" with "because."`,
     },
     {
       slot: 18,
@@ -225,7 +225,7 @@ const skill: ContentSkill = {
         no(`Students who are many volunteer at the shelter on Saturdays.`, 'awkward-construction'),
         no(`Many students volunteer on Saturdays.`, 'drops-key-meaning'),
       ],
-      solution: `Starting with the real subject, "Many students," removes the empty opener "There are" and the extra "who." The first choice still begins with "There are."`,
+      solution: `Starting with the real subject, "Many students," removes the empty opener "There are" and the extra "who." The choice "There are many students volunteering at the animal shelter on Saturdays" still begins with "There are."`,
     },
     {
       slot: 19,
@@ -242,7 +242,7 @@ const skill: ContentSkill = {
     {
       slot: 20,
       difficulty: 'medium',
-      stem: `A student is writing a lab report about a weather balloon. Which sentence uses the most precise language?`,
+      stem: `A student is writing a lab report about a weather balloon. Her data show the balloon burst at 30,000 meters. Which sentence uses the most precise language?`,
       choices: [
         no(`The balloon went really high up before it popped.`, 'vague-modifier'),
         no(`The balloon got up to a big height and then broke.`, 'vague-noun'),
@@ -261,12 +261,12 @@ const skill: ContentSkill = {
         no(`Each member and every member of the staff must submit photos by Friday.`, 'keeps-redundancy'),
         no(`Members must submit by Friday.`, 'drops-key-meaning'),
       ],
-      solution: `"Each and every" says the same thing twice, so "Every" alone is enough. The second choice rearranges the words but keeps the doubled phrase.`,
+      solution: `"Each and every" says the same thing twice, so "Every" alone is enough. The choice "Each and every yearbook staff member must submit photos by Friday" rearranges the words but keeps the doubled phrase.`,
     },
     {
       slot: 22,
       difficulty: 'medium',
-      stem: `Read the sentence: "The train was fast." Which revision replaces the vague wording with the most precise detail?`,
+      stem: `Read the sentence: "The train was fast." The train's top speed was 180 miles per hour. Which revision replaces the vague wording with the most precise detail?`,
       choices: [
         no(`The train was very, very fast.`, 'vague-intensifier'),
         no(`The train was fast and quick.`, 'keeps-redundancy'),
@@ -285,7 +285,7 @@ const skill: ContentSkill = {
         no(`Monarch butterflies migrate in the fall, traveling to warmer places with warm temperatures.`, 'keeps-redundancy'),
         no(`Monarch butterflies migrate somewhere in the fall.`, 'vague-noun'),
       ],
-      solution: `"Warmer places" already means the temperatures are warmer, so the clause at the end repeats it. The third choice still pairs "warmer places" with "warm temperatures."`,
+      solution: `"Warmer places" already means the temperatures are warmer, so the clause at the end repeats it. The choice "Monarch butterflies migrate in the fall, traveling to warmer places with warm temperatures" still pairs "warmer places" with "warm temperatures."`,
     },
     {
       slot: 24,
@@ -294,22 +294,22 @@ const skill: ContentSkill = {
       choices: [
         no(`The soccer coach yelled at the players and told them to run faster.`, 'keeps-wordiness'),
         no(`The soccer coach said something loudly to the players about running.`, 'vague-verb'),
-        ok(`The soccer coach urged the players to run faster.`),
+        ok(`The soccer coach yelled at the players to run faster.`),
         no(`The soccer coach talked to the players.`, 'drops-key-meaning'),
       ],
-      solution: `"Urged" means pushed someone to act, so it replaces "yelled at the players to tell them." The first choice still uses two verbs for one action.`,
+      solution: `"Yelled at the players to run faster" keeps the precise verb "yelled" and drops the extra "to tell them." The choice "The soccer coach yelled at the players and told them to run faster" still uses two verbs for one action.`,
     },
     {
       slot: 25,
       difficulty: 'medium',
-      stem: `Read the sentence: "The coral reef is home to many fish, and it is a place where lots of fish live." Which revision is best?`,
+      stem: `Read the sentence: "The coral reef is home to many fish, and it is a place where lots of fish live." Which revision removes the repetition?`,
       choices: [
         no(`The coral reef is home to many fish, and lots of fish live there.`, 'keeps-redundancy'),
         no(`The coral reef is a place that is home to many fish that live there.`, 'keeps-redundancy'),
         no(`The coral reef has things living in it.`, 'vague-noun'),
-        ok(`The coral reef is home to hundreds of kinds of fish.`),
+        ok(`The coral reef is home to many fish.`),
       ],
-      solution: `The original says the same idea twice, and the best revision says it once with a more precise amount. The first choice shortens the second clause but still repeats it.`,
+      solution: `The original says the same idea twice, and the best revision says it once. The choice "The coral reef is home to many fish, and lots of fish live there" shortens the second clause but still repeats it.`,
     },
     {
       slot: 26,
@@ -326,7 +326,7 @@ const skill: ContentSkill = {
     {
       slot: 27,
       difficulty: 'medium',
-      stem: `Read the sentence: "The bakery smelled good." A student wants to help the reader imagine the smell. Which revision is the most precise?`,
+      stem: `Read the sentence: "The bakery smelled good." A student wants to help the reader imagine the smell, which came from warm cinnamon bread. Which revision is the most precise?`,
       choices: [
         no(`The bakery smelled really good.`, 'vague-intensifier'),
         no(`The bakery smelled nice and good.`, 'keeps-redundancy'),
@@ -345,7 +345,7 @@ const skill: ContentSkill = {
         no(`The desert cactus stores water in its stem so that it is able to survive and live.`, 'keeps-redundancy'),
         ok(`The desert cactus stores water in its thick stem to survive long dry spells.`),
       ],
-      solution: `"Survive" and "live through" mean the same thing, and "in" works as well as "inside of." The first choice trims "of" but keeps "survive and live through."`,
+      solution: `"Survive" and "live through" mean the same thing, and "in" works as well as "inside of." The choice "The desert cactus stores water inside its thick stem so it can survive and live through long dry spells" trims "of" but keeps "survive and live through."`,
     },
     {
       slot: 29,
@@ -381,7 +381,7 @@ const skill: ContentSkill = {
         no(`Before it existed, books were copied by hand, which was slow.`, 'deletes-new-information'),
         ok(`Copying by hand took a long time.`),
       ],
-      solution: `The third sentence already says hand copying was slow, so the last sentence adds nothing new. The second sentence repeats "changed history," but it also gives the reason, which is new information.`,
+      solution: `"Before it existed, books were copied by hand, which was slow" already says hand copying was slow, so "Copying by hand took a long time" adds nothing new. "It changed history because books could be made faster" repeats "changed history," but it also gives the reason, which is new information.`,
     },
     {
       slot: 32,
@@ -390,10 +390,10 @@ const skill: ContentSkill = {
       choices: [
         no(`I believe it would be a good idea for the school to consider adding a bike rack.`, 'keeps-wordiness'),
         no(`The school is adding a bike rack.`, 'changes-meaning'),
-        ok(`I think the school should add a bike rack.`),
+        ok(`I think the school should consider adding a bike rack.`),
         no(`It is my belief that the school should consider the possibility of a bike rack.`, 'keeps-wordiness'),
       ],
-      solution: `"I think the school should add a bike rack" keeps the writer's opinion and the request in nine words. "The school is adding a bike rack" is short but turns a suggestion into a statement of fact.`,
+      solution: `"I think the school should consider adding a bike rack" keeps the writer's opinion and the suggestion in ten words. "The school is adding a bike rack" is short but turns a suggestion into a statement of fact.`,
     },
     {
       slot: 33,
@@ -410,14 +410,14 @@ const skill: ContentSkill = {
     {
       slot: 34,
       difficulty: 'hard',
-      stem: `A student writes a speech for the student council: "Our school's recycling bins are, like, kind of always full and stuff." Which revision best fits a formal speech and is the most precise?`,
+      stem: `A student writes a speech for the student council: "Our school's recycling bins are, like, kind of always full and stuff." The student knows the bins overflow by every Wednesday. Which revision best fits a formal speech and is the most precise?`,
       choices: [
         no(`Our recycling bins are, like, always really full.`, 'informal-filler'),
         no(`Our school's recycling bins are kind of full a lot of the time.`, 'vague-modifier'),
         no(`Our recycling bins are always full and stuff, which is bad.`, 'informal-filler'),
         ok(`Our school's recycling bins overflow by every Wednesday.`),
       ],
-      solution: `"Overflow by every Wednesday" is formal and tells exactly how full the bins get and when. The second choice drops the slang but keeps vague words like "kind of" and "a lot of the time."`,
+      solution: `"Overflow by every Wednesday" is formal and tells exactly how full the bins get and when. The choice "Our school's recycling bins are kind of full a lot of the time" drops the slang but keeps vague words like "kind of" and "a lot of the time."`,
     },
     {
       slot: 35,
@@ -429,7 +429,7 @@ const skill: ContentSkill = {
         ok(`Finished in 1825, the canal let boats carry goods west more cheaply.`),
         no(`The canal let boats carry goods.`, 'drops-key-meaning'),
       ],
-      solution: `The original says the canal was done in 1825 twice, once as "finished" and once as "its completion in that year." The first choice still uses both "completed" and "finished."`,
+      solution: `The original says the canal was done in 1825 twice, once as "finished" and once as "its completion in that year." The choice "The canal was completed and finished in 1825, letting boats carry goods west more cheaply" still uses both "completed" and "finished."`,
     },
     {
       slot: 36,
@@ -437,23 +437,23 @@ const skill: ContentSkill = {
       stem: `Read the sentence: "The track star ran the race in a fast and speedy way that was quick." Which revision fixes the wordiness and redundancy best?`,
       choices: [
         no(`The track star ran the race in a quick and speedy way.`, 'keeps-redundancy'),
-        ok(`The track star ran the race in record time.`),
+        ok(`The track star ran the race quickly.`),
         no(`The track star ran the race fast and quickly.`, 'keeps-redundancy'),
         no(`The track star did the race in a fast way.`, 'keeps-wordiness'),
       ],
-      solution: `"Fast," "speedy," and "quick" all mean the same thing, and "in record time" replaces them with one exact detail. "Fast and quickly" is shorter but still says the same idea twice.`,
+      solution: `"Fast," "speedy," and "quick" all mean the same thing, and "quickly" says the idea once. "Fast and quickly" is shorter but still says the same idea twice.`,
     },
     {
       slot: 37,
       difficulty: 'hard',
-      stem: `Read the paragraph: "The Silk Road was a network of trade routes. Merchants used these routes to trade goods. Silk, spices, and paper traveled along them. The routes were used by merchants for trading." Which sentence should be deleted to remove the redundancy?`,
+      stem: `Read the paragraph: "The Silk Road was a network of trade routes. Merchants used these routes to trade goods between China and Europe. Silk, spices, and paper traveled along them. The routes were used by merchants for trading." Which sentence should be deleted to remove the redundancy?`,
       choices: [
         no(`The Silk Road was a network of trade routes.`, 'deletes-main-idea'),
-        no(`Merchants used these routes to trade goods.`, 'deletes-earlier-version'),
+        no(`Merchants used these routes to trade goods between China and Europe.`, 'deletes-new-information'),
         no(`Silk, spices, and paper traveled along them.`, 'deletes-new-information'),
         ok(`The routes were used by merchants for trading.`),
       ],
-      solution: `The last sentence repeats the second sentence in the passive voice, so it adds nothing new. Deleting the second sentence instead would leave the weaker, wordier version at the end of the paragraph.`,
+      solution: `"The routes were used by merchants for trading" repeats the idea that merchants traded on the routes, so it adds nothing new. "Merchants used these routes to trade goods between China and Europe" also tells where the goods went, so deleting it would lose information.`,
     },
     {
       slot: 38,
@@ -465,7 +465,7 @@ const skill: ContentSkill = {
         no(`When the storm hit, the city did things to make roads safe.`, 'vague-verb'),
         ok(`When the snowstorm hit, the city sent out snowplows to clear the roads.`),
       ],
-      solution: `"Snowplows" is the exact name for trucks that clear snow, which removes a whole clause. The first choice trims a few words but still describes the trucks instead of naming them.`,
+      solution: `"Snowplows" is the exact name for trucks that clear snow, which removes a whole clause. The choice "When the snowstorm hit, the city sent out trucks that clear snow to make the roads safe for drivers" trims a few words but still describes the trucks instead of naming them.`,
     },
     {
       slot: 39,
@@ -477,12 +477,12 @@ const skill: ContentSkill = {
         no(`The club records every month.`, 'drops-key-meaning'),
         no(`The podcast club, which makes podcasts, records podcast episodes monthly.`, 'keeps-redundancy'),
       ],
-      solution: `The name "podcast club" already tells the reader that its members make podcasts, so the "which" clause repeats it. The first choice shortens the clause but keeps the repeated idea.`,
+      solution: `The name "podcast club" already tells the reader that its members make podcasts, so the "which" clause repeats it. The choice "The podcast club, a club for students making podcasts, records episodes every month" shortens the clause but keeps the repeated idea.`,
     },
     {
       slot: 40,
       difficulty: 'hard',
-      stem: `A student is describing a river in a science report: "The river is pretty dirty and has a bunch of bad stuff in it." Which revision uses the most precise and concise language for a science report?`,
+      stem: `A student is describing a river in a science report: "The river is pretty dirty and has a bunch of bad stuff in it." The student's water tests found high levels of fertilizer runoff. Which revision uses the most precise and concise language for a science report?`,
       choices: [
         no(`The river is really very dirty and has a lot of bad things in it.`, 'vague-intensifier'),
         no(`The river is kind of polluted with a bunch of stuff in it.`, 'informal-filler'),
