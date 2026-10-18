@@ -224,7 +224,7 @@ const skill: ContentSkill = {
           choices: [
             right(`It gives early evidence that seems to confirm the old rule about stroke rate.`),
             wrong(`It explains why rowers grow tired over the full race distance.`, 'confuses-paragraphs'),
-            wrong(`It states the revised rule that Okafor now teaches his crews.`, 'wrong-position-role'),
+            wrong(`It states the revised rule that Okafor now teaches the club's crews.`, 'wrong-position-role'),
             wrong(`It describes the drills rowers use to cover more water per stroke.`, 'confuses-paragraphs'),
           ],
           solution: `"At first it did" and the sprint data show the rule appearing to hold. Fatigue and the revised rule come in paragraphs 3 and 4.`,
