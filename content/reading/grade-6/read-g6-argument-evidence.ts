@@ -124,7 +124,7 @@ const skill: ContentSkill = {
           difficulty: 'medium',
           stem: `Why is the parents' report weaker evidence than Coach Lindqvist's count?`,
           choices: [
-            right(`It is based on how parents felt, not on anything measured or counted.`),
+            right(`It is based on what parents noticed, not on anything measured or counted.`),
             wrong(`It comes from parents, and parents never know anything about soccer.`, 'overgeneralizes'),
             wrong(`It talks about a different sport than the rest of the passage does.`, 'misreads-detail'),
             wrong(`It disagrees with the coach's numbers about touches on the ball.`, 'contradicts-text'),
@@ -249,7 +249,7 @@ const skill: ContentSkill = {
             right(`"Pets are the most relaxing thing in the whole world."`),
             wrong(`"A chart on the wall shows whose job it is each day."`, 'misjudges-support'),
             wrong(`"Students in Ms. Ferreira's class weigh Pepper every Friday."`, 'misjudges-support'),
-            wrong(`"Teachers could also check with families before a pet arrives."`, 'misjudges-support'),
+            wrong(`"First, caring for a pet teaches responsibility."`, 'misjudges-support'),
           ],
           solution: `Nothing in the passage compares pets to every other relaxing thing, so this is an unsupported exaggeration. The job chart is a fact the author observed, not an unsupported claim.`,
         },
