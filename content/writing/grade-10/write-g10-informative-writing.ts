@@ -226,7 +226,7 @@ const skill: ContentSkill = {
             no(`Coach Daniel Reyes said, "Our gym floor was refinished last summer."`, 'irrelevant-quotation'),
             ok(`League director Amara Okonkwo explained, "We started with two teams, and now we have eight and a waiting list."`),
           ],
-          solution: `The director is a credible source, and her quotation gives specific information about growth that connects to sentence 3. The online post is related to popularity, but it is vague and comes from an unidentified source.`,
+          solution: `The director is a credible source, and the quotation gives specific information about growth that connects to sentence 3. The online post is related to popularity, but it is vague and comes from an unidentified source.`,
         },
       ],
     },
@@ -378,7 +378,7 @@ const skill: ContentSkill = {
       code: 'wg10-informative-writing-p06',
       title: 'Why Roundabouts Reduce Serious Crashes',
       body: body(
-        `(1) A roundabout is a circular intersection in which traffic flows counterclockwise around a central island and entering drivers yield to vehicles already in the circle. (2) Modern roundabouts differ from older traffic circles, which were often much larger and allowed cars to enter at high speeds. (3) In 2018, the town of Pell Harbor replaced its busiest four-way intersection with a roundabout.`,
+        `(1) A roundabout is a circular intersection in which traffic, in countries that drive on the right, flows counterclockwise around a central island and entering drivers yield to vehicles already in the circle. (2) Modern roundabouts differ from older traffic circles, which were often much larger and allowed cars to enter at high speeds. (3) In 2018, the town of Pell Harbor replaced its busiest four-way intersection with a roundabout.`,
         `(4) Roundabouts are safer. (5) At a traditional intersection, a driver who runs a red light can strike another car from the side at full speed. (6) In a roundabout, the curved entry forces drivers to slow to about 25 kilometers per hour, and all vehicles travel in the same direction. (7) Crashes still happen, but they tend to be glancing sideswipes rather than direct collisions. (8) City data shows that injury crashes at the Pell Harbor intersection dropped from 14 in the three years before construction to 3 in the three years after.`,
         `(9) The new roundabout has bright flowers planted on its central island.`,
         `(10) Roundabouts can confuse drivers who are unfamiliar with them. (11) They also require more land than a standard intersection, so they cannot fit on every corner.`,
