@@ -28,15 +28,15 @@ const skill: ContentSkill = {
           wrong(`Lichens are partnerships between a fungus and an alga that can grow on rock, rooftops and fence posts.`, 'too-narrow'),
           wrong(`Cities should replace their expensive air monitoring stations with volunteer surveys of tree lichens.`, 'contradicts-text'),
           wrong(`Leafy and bushy lichens are healthier and more valuable to scientists than flat, crusty lichens.`, 'unsupported-inference'),
-        ], `The passage moves from how lichens live to why that makes them sensitive and useful as air records, so the first choice covers the whole text. The third choice contradicts paragraph 4, which says lichen surveys "do not replace air monitors."`),
+        ], `The passage moves from how lichens live to why that makes them sensitive and useful as air records, so the choice about lichens as a low-cost, long-term record covers the whole text. The choice saying cities should replace their monitoring stations contradicts paragraph 4, which says lichen surveys "do not replace air monitors."`),
         q(2, 'easy', `Which two central ideas does the passage develop?`, [
-          right(`Lichens absorb everything directly from the air, and scientists use this sensitivity to judge air quality over time.`),
+          right(`Lichens take in water and minerals directly from rain, fog and dust, and scientists use this sensitivity to judge air quality over time.`),
           wrong(`Lichens grow very slowly, and most people walk past them every day without ever noticing them.`, 'too-narrow'),
           wrong(`Pollution from highways harms trees, and volunteers in Dunmore are working to plant new ones.`, 'unsupported-inference'),
           wrong(`Fungi and algae compete for sunlight, and the winner decides what color a lichen becomes.`, 'misreads-detail'),
         ], `Paragraphs 1 and 2 explain how lichens take in water and minerals from the air, and paragraphs 3 and 4 explain how scientists use that trait. The slow growth detail appears only in the first sentence and is not developed.`),
         q(3, 'medium', `How does the second paragraph build on the first?`, [
-          right(`It shows that the trait letting lichens live without soil, taking everything from the air, also makes them sensitive to pollution.`),
+          right(`It shows that the trait letting lichens live without soil, taking water and minerals from the air, also makes them sensitive to pollution.`),
           wrong(`It introduces a new topic, the history of air pollution laws, that the rest of the passage then explains.`, 'misreads-structure'),
           wrong(`It repeats the description of where lichens grow, adding more examples of surfaces such as rock and bark.`, 'misreads-structure'),
           wrong(`It argues that lichens are harmed less by pollution than other plants because they have no roots.`, 'contradicts-text'),
@@ -46,7 +46,7 @@ const skill: ContentSkill = {
           wrong(`Lichens are fascinating and overlooked organisms that deserve far more attention. Every city should train its residents to read them, since they are clearly better than any machine at tracking pollution.`, 'includes-opinion'),
           wrong(`In Dunmore, volunteers mapped lichens on two hundred trees. They found leafy and bushy lichens in parks far from the highway, while only flat, crusty lichens grew along the busiest roads.`, 'too-narrow'),
           wrong(`Lichens grow on stone walls and tree bark in nearly every town. They come in gray, green and orange, and they grow so slowly that most people never notice them as they walk by.`, 'too-narrow'),
-        ], `The first choice states how lichens absorb pollution, how scientists use them and the limits, with no added judgments. The Dunmore choice is accurate but covers only one example from paragraph 3.`),
+        ], `The choice beginning "Lichens take water and minerals straight from the air" states how lichens absorb pollution, how scientists use them and the limits, with no added judgments. The Dunmore choice is accurate but covers only one example from paragraph 3.`),
         q(5, 'hard', `How does the final paragraph refine the central idea of the passage?`, [
           right(`It admits that lichen surveys cannot give exact measurements but argues that their low cost and long record keep them valuable.`),
           wrong(`It reverses the earlier claims by concluding that lichens are too easily affected by weather to be useful at all.`, 'misreads-structure'),
@@ -83,13 +83,13 @@ const skill: ContentSkill = {
           wrong(`Harrowgate's residents foolishly resisted railway time for years, clinging to the sun even though anyone could see that the railway's system was better. The council finally did the sensible thing.`, 'includes-opinion'),
           wrong(`Harrowgate's railway station kept a clock that was eleven minutes ahead of the church clock. Shops hung a second clock face, and a few farmers ignored station time for decades.`, 'too-narrow'),
           wrong(`The railway company forced Harrowgate to change its clocks overnight by passing a national law. Residents had no choice in the matter, and the council vote was simply a formality.`, 'contradicts-text'),
-        ], `The first choice traces the whole sequence without adding judgments. The second uses loaded words such as "foolishly" and "sensible," which make it a biased summary rather than an objective one.`),
+        ], `The choice beginning "Harrowgate once set its clocks by the sun" traces the whole sequence without adding judgments. The choice saying residents "foolishly resisted" uses loaded words such as "foolishly" and "sensible," which make it a biased summary rather than an objective one.`),
         q(10, 'hard', `How does the description of the council vote in the final paragraph contribute to the central idea?`, [
           right(`By saying the vote only recognized what daily life had decided, it shows that the shared time grew from use rather than from a law.`),
           wrong(`By showing that the council led the change, it suggests that government action is what made standard time possible.`, 'reverses-relationship'),
           wrong(`By ending with a vote, it suggests that most residents never accepted railway time and were simply outvoted.`, 'unsupported-inference'),
           wrong(`By placing the vote last, it shows that the council was the first group in town to adopt railway time.`, 'misreads-sequence'),
-        ], `The text says the vote "merely recognized what daily life had already decided," so the law followed the change and supports the idea of a gradual agreement. The second choice reverses that order, since newspapers, schools and the post office had already adopted railway time.`),
+        ], `The text says the vote "merely recognized what daily life had already decided," so the law followed the change and supports the idea of a gradual agreement. The choice saying the council was the first group to adopt railway time reverses that order, since newspapers, schools and the post office had already adopted railway time.`),
       ],
     },
     {
@@ -120,7 +120,7 @@ const skill: ContentSkill = {
           wrong(`Planners at Calder Bay made a brilliant decision that every other coast should copy. Neighbors who complained about losing their pastures and footpath were being short-sighted about the future.`, 'includes-opinion'),
           wrong(`Wading birds returned to Calder Bay after decades away, and young fish used the new pools as nurseries. Fishing crews soon reported larger catches of several kinds of fish in the bay.`, 'too-narrow'),
           wrong(`Calder Bay was farmland for a century until the parks office bought it. The parks office then rebuilt the old wall with concrete so that the fields would stay dry for good.`, 'contradicts-text'),
-        ], `The first choice covers the decision, both benefits, the costs and the conclusion without judgment. The wildlife choice is accurate but leaves out the shoreline protection and the decision itself.`),
+        ], `The choice beginning "Instead of repairing a failing wall" covers the decision, both benefits, the costs and the conclusion without judgment. The wildlife choice is accurate but leaves out the shoreline protection and the decision itself.`),
         q(15, 'hard', `What is the effect of the final paragraph's discussion of the project's costs?`, [
           right(`It acknowledges real drawbacks, which makes the closing claim measured: restoration works well "in the right places," not everywhere.`),
           wrong(`It undercuts the rest of the passage by suggesting that the project's costs were greater than its benefits.`, 'misreads-structure'),
@@ -132,14 +132,14 @@ const skill: ContentSkill = {
     {
       code: 'rg11-main-idea-summary-p04',
       title: 'Under the Yellow Varnish',
-      body: `Visitors to a museum often assume that an old painting looks the way it did the day the artist finished it. In many cases, it does not. Over decades, the protective coat of varnish that painters brushed over their work can yellow and darken, turning a clear blue sky into a muddy green and dulling bright skin tones to brown. What looks like the artist's style may actually be the effect of time.\n\nRemoving that old varnish is one of the most delicate jobs a conservator does. Varnish and paint can both dissolve in the same kinds of solvents, so the conservator must find a mixture strong enough to soften the varnish but too weak to disturb the paint below. Working under magnification, often with small cotton swabs, a conservator may spend months cleaning a single canvas a few square inches at a time.\n\nModern conservators also follow a principle that earlier restorers did not always respect: anything added to a painting should be removable. When a conservator fills a small loss in the paint, the new material is chosen so that a future expert could take it out without harm. New varnish is selected for the same reason and for its resistance to yellowing.\n\nThis careful approach grew out of hard lessons. At the fictional Ostrava Art Hall, records show that a restorer in the 1920s cleaned a landscape so aggressively that he removed thin glazes of color the artist had applied on purpose. The painting has looked flat ever since, and nothing can bring those glazes back.\n\nCleaning also raises a question with no simple answer: how far back should a painting be returned? Some conservators argue that a slight warm tone is part of a work's history and should stay. Others aim for the brightest original colors that can be safely recovered. In practice, most decisions are made one painting at a time, after study and discussion.`,
+      body: `Visitors to a museum often assume that an old painting looks the way it did the day the artist finished it. In many cases, it does not. Over decades, the protective coat of varnish that painters brushed over their work can yellow and darken, turning a clear blue sky into a muddy green and dulling bright skin tones to brown. What looks like the artist's style may actually be the effect of time.\n\nRemoving that old varnish is one of the most delicate jobs a conservator does. Varnish and paint can both dissolve in the same kinds of solvents, so the conservator must find a mixture strong enough to soften the varnish but too weak to disturb the paint below. Working under magnification, often with small cotton swabs, a conservator may spend months cleaning a single canvas a few square inches at a time.\n\nModern conservators also follow a principle that earlier restorers did not always respect: anything added to a painting should be removable. When a conservator fills a small loss in the paint, the new material is chosen so that a future expert could take it out without harm. New varnish is selected for the same reason and for its resistance to yellowing.\n\nThis careful approach grew out of hard lessons. At the fictional Ostrava Art Hall, records show that a restorer in the 1920s cleaned a landscape so aggressively that the cleaning removed thin glazes of color the artist had applied on purpose. The painting has looked flat ever since, and nothing can bring those glazes back.\n\nCleaning also raises a question with no simple answer: how far back should a painting be returned? Some conservators argue that a slight warm tone is part of a work's history and should stay. Others aim for the brightest original colors that can be safely recovered. In practice, most decisions are made one painting at a time, after study and discussion.`,
       items: [
         q(16, 'easy', `Which statement best expresses the central idea of the passage?`, [
           right(`Restoring old paintings by removing yellowed varnish requires careful, reversible methods and difficult judgment about how far to go.`),
           wrong(`Conservators often use small cotton swabs and magnifying tools when they clean the surface of an old canvas.`, 'too-narrow'),
           wrong(`Museums should remove all old varnish from their paintings so that visitors can see the true original colors.`, 'contradicts-text'),
           wrong(`Painters in the past used poor-quality varnish that was designed to change the colors of their work over time.`, 'unsupported-inference'),
-        ], `The passage covers why varnish changes paintings, how delicately it is removed, the rule of removability and the open question of how far to clean. The third choice ignores paragraph 5, where some conservators argue a warm tone should stay.`),
+        ], `The passage covers why varnish changes paintings, how delicately it is removed, the rule of removability and the open question of how far to clean. The choice saying museums should remove all old varnish ignores paragraph 5, where some conservators argue a warm tone should stay.`),
         q(17, 'easy', `Which detail best supports the idea that aged varnish changes how a painting looks?`, [
           right(`A clear blue sky can turn a muddy green as the varnish yellows and darkens.`),
           wrong(`A conservator may spend months cleaning one canvas a few inches at a time.`, 'wrong-supporting-detail'),
@@ -155,15 +155,15 @@ const skill: ContentSkill = {
         q(19, 'medium', `Which is the best objective summary of the passage?`, [
           right(`Old varnish can yellow and hide a painting's colors. Conservators remove it slowly with carefully chosen solvents, make their own additions removable after past damage, and decide case by case how far to clean.`),
           wrong(`Early restorers were reckless and destroyed many great works of art. Today's conservators are far wiser, and museums should trust them completely to decide how every painting ought to look.`, 'includes-opinion'),
-          wrong(`At the Ostrava Art Hall, a restorer in the 1920s cleaned a landscape too aggressively. He removed thin glazes of color, and the painting has looked flat ever since.`, 'too-narrow'),
+          wrong(`At the Ostrava Art Hall, a restorer in the 1920s cleaned a landscape too aggressively. The cleaning removed thin glazes of color, and the painting has looked flat ever since.`, 'too-narrow'),
           wrong(`Varnish protects paintings from damage, so conservators add a fresh coat every few years. They choose bright varnish that makes old colors look newer than they were.`, 'contradicts-text'),
-        ], `The first choice covers the problem, the method, the principle and the open question without judgment. The Ostrava choice is accurate but summarizes only one example from paragraph 4.`),
+        ], `The choice beginning "Old varnish can yellow" covers the problem, the method, the principle and the open question without judgment. The Ostrava choice is accurate but summarizes only one example from paragraph 4.`),
         q(20, 'hard', `How do the passage's two central ideas, technical skill and judgment, interact over the course of the text?`, [
           right(`The passage first shows cleaning as a careful technical process, then reveals that even perfect technique cannot settle how far a painting should be returned.`),
           wrong(`The passage argues that technical skill matters more than judgment, since a skilled conservator never needs to discuss decisions.`, 'contradicts-text'),
           wrong(`The passage treats judgment as the cause of all past damage and technical skill as the cure that has solved every problem.`, 'oversimplifies'),
           wrong(`The passage keeps the two ideas separate, discussing judgment only in the opening and technique only at the end.`, 'misreads-structure'),
-        ], `Paragraphs 2 through 4 focus on methods and the lessons behind them, and paragraph 5 adds a question "with no simple answer" that requires study and discussion. The final paragraph says decisions follow discussion, so the second choice contradicts the text.`),
+        ], `Paragraphs 2 through 4 focus on methods and the lessons behind them, and paragraph 5 adds a question "with no simple answer" that requires study and discussion. The final paragraph says decisions follow discussion, so the choice saying a skilled conservator never needs to discuss decisions contradicts the text.`),
       ],
     },
     {
@@ -176,7 +176,7 @@ const skill: ContentSkill = {
           wrong(`Westmere should turn off its streetlights at night so that residents can see the stars from every street.`, 'contradicts-text'),
           wrong(`Older residents of Westmere remember seeing the pale band of the galaxy from the field behind the school.`, 'too-narrow'),
           wrong(`Night-flying insects gather around lights by the thousands, and many of them never manage to leave.`, 'too-narrow'),
-        ], `Paragraph 2 states the claim, and paragraphs 3 through 5 give the reasons and answer the safety concern. The writer says the standard "would not mean turning off streetlights," so the second choice contradicts the text.`),
+        ], `Paragraph 2 states the claim, and paragraphs 3 through 5 give the reasons and answer the safety concern. The writer says the standard "would not mean turning off streetlights," so the choice about turning off streetlights contradicts the text.`),
         q(22, 'easy', `Which two reasons does the writer develop to support the central claim?`, [
           right(`Upward light wastes money, and unshielded light harms insects, birds and people's sleep.`),
           wrong(`Bright lights cause traffic accidents, and dim lights help the town attract tourists.`, 'unsupported-inference'),
@@ -194,13 +194,13 @@ const skill: ContentSkill = {
           wrong(`Westmere has wasted a third of its lighting budget for years and ruined the night sky. The town must act now, and anyone who opposes the standard simply does not care about wildlife or the stars.`, 'includes-opinion'),
           wrong(`Older people in Westmere remember a sky full of stars, but children today can see only a few dozen. The writer misses the way the town used to look at night.`, 'too-narrow'),
           wrong(`The writer argues that Westmere should remove all outdoor lighting because studies prove that lighting does not improve safety and only harms insects and birds.`, 'distorts-claim'),
-        ], `An objective summary of an argument reports what the writer claims without taking sides, as the first choice does. The second choice adopts the writer's position and adds its own attack on opponents.`),
+        ], `An objective summary of an argument reports what the writer claims without taking sides, as the choice beginning "The writer argues that Westmere should require downward" does. The choice saying anyone who opposes the standard "simply does not care" adopts the writer's position and adds its own attack on opponents.`),
         q(25, 'hard', `How do the opening paragraph and the final sentence work together to shape the argument?`, [
           right(`The opening describes a lost sky, and the ending presents the standard as a way to recover it, framing the practical reasons with a shared sense of loss.`),
           wrong(`The opening states that the sky itself has changed, and the ending admits that lighting cannot restore what has been lost.`, 'contradicts-text'),
           wrong(`The opening and ending focus on cost, which shows that saving money is the writer's only real concern.`, 'misreads-emphasis'),
           wrong(`The opening introduces the safety objection, and the ending proves that the objection was correct all along.`, 'misreads-structure'),
-        ], `The first paragraph ends "The sky has not changed. Our lighting has," and the last sentence promises "a sky our grandparents would recognize," so the two frame the money and wildlife reasons. The second choice contradicts the opening's statement that the sky has not changed.`),
+        ], `The first paragraph ends "The sky has not changed. Our lighting has," and the last sentence promises "a sky our grandparents would recognize," so the two frame the money and wildlife reasons. The choice saying the opening states that the sky itself has changed contradicts the opening's statement that the sky has not changed.`),
       ],
     },
     {
@@ -231,13 +231,13 @@ const skill: ContentSkill = {
           wrong(`Rowing coaches have wrongly focused on strength for too long. Every coach should follow Linwood's excellent example and stop choosing athletes by how strong they are.`, 'includes-opinion'),
           wrong(`Many racing boats carry a device that records speed many times per second. Coaches look at the graphs for dips, and the stroke sets the rhythm for everyone else.`, 'too-narrow'),
           wrong(`Strong rowers often tip the boat, so coaches at Linwood removed their strongest athletes. The crew with no strong rowers then won every race of the season.`, 'distorts-detail'),
-        ], `The first choice covers the cause, the training, the Linwood test and the broader lesson without judgment. The last choice distorts paragraph 4, which says only two rowers had below-average scores and the crew had the club's fastest times, not that it won every race.`),
+        ], `The choice beginning "A racing shell loses speed" covers the cause, the training, the Linwood test and the broader lesson without judgment. The choice saying the crew "won every race" distorts paragraph 4, which says only two rowers had below-average scores and the crew had the club's fastest times, not that it won every race.`),
         q(30, 'hard', `How does the final paragraph extend the central idea developed in the rest of the passage?`, [
           right(`It turns a point about rowing into a general principle that a group's result depends on how members' efforts fit together.`),
           wrong(`It introduces a contrasting idea, that in orchestras and relay teams individual skill matters more than teamwork.`, 'contradicts-text'),
           wrong(`It narrows the focus to the stroke, showing that one leader decides the success of any group.`, 'misreads-emphasis'),
           wrong(`It repeats the Linwood results in more detail to prove that the experiment was carried out fairly.`, 'misreads-structure'),
-        ], `The final paragraph says "The lesson reaches beyond rowing" and applies it to orchestras and relay teams, broadening the idea. It says results depend on how efforts "fit together," which is the opposite of the second choice.`),
+        ], `The final paragraph says "The lesson reaches beyond rowing" and applies it to orchestras and relay teams, broadening the idea. It says results depend on how efforts "fit together," which is the opposite of the choice claiming individual skill matters more than teamwork.`),
       ],
     },
     {
@@ -250,7 +250,7 @@ const skill: ContentSkill = {
           wrong(`Drivers can feel a soft thump every few hundred feet as their tires roll over metal strips on long bridges.`, 'too-narrow'),
           wrong(`Expansion joints are a poor design choice, and engineers have stopped using them on every kind of bridge.`, 'overgeneralization'),
           wrong(`Road salt is the greatest danger to bridges, because it causes steel to rust and concrete to weaken.`, 'misreads-emphasis'),
-        ], `The final paragraph states the idea that ties the passage together: a bridge must accept "the fact that its materials move." Paragraph 4 says only shorter bridges increasingly avoid joints, so the third choice overstates it.`),
+        ], `The final paragraph states the idea that ties the passage together: a bridge must accept "the fact that its materials move." Paragraph 4 says only shorter bridges increasingly avoid joints, so the choice saying engineers have stopped using joints on every kind of bridge overstates it.`),
         q(32, 'medium', `How do the ideas in the third and fourth paragraphs interact?`, [
           right(`Paragraph 3 presents joints as the answer to thermal movement, and paragraph 4 shows that this answer brings new problems, leading some engineers toward jointless designs.`),
           wrong(`Paragraph 3 argues that joints are unnecessary, and paragraph 4 provides evidence that bridges without joints never need any repairs.`, 'contradicts-text'),
@@ -268,7 +268,7 @@ const skill: ContentSkill = {
           wrong(`Bridges change length as temperatures rise and fall, which is why every bridge is now built as one flexible unit. Old joints let in water and wear out, so engineers are removing them everywhere.`, 'overgeneralization'),
           wrong(`Bridges change length as temperatures rise and fall, and this movement is a serious danger to drivers. Anyone crossing a long bridge in winter should worry about cracks and buckling decks.`, 'includes-opinion'),
           wrong(`Bridge joints use interlocking steel teeth that slide past each other like fingers. Larger bridges use rubber seals and steel beams, and bearings let the deck slide on its supports.`, 'too-narrow'),
-        ], `The first choice covers the cause, the solution, its drawbacks and the newer approach accurately. The second choice sounds similar but claims "every bridge" is now jointless, while paragraph 4 says only shorter bridges increasingly avoid joints.`),
+        ], `The choice ending "some shorter bridges are built as flexible units without them" covers the cause, the solution, its drawbacks and the newer approach accurately. The choice ending "engineers are removing them everywhere" sounds similar but claims "every bridge" is now jointless, while paragraph 4 says only shorter bridges increasingly avoid joints.`),
         q(35, 'hard', `Which statement best describes how the central idea is developed across the whole passage?`, [
           right(`The passage moves from a familiar experience, to its cause, to a solution and its tradeoffs, and ends with a principle that connects them.`),
           wrong(`The passage begins with a general principle, then gives a single extended example that proves the principle beyond doubt.`, 'misreads-structure'),
@@ -287,7 +287,7 @@ const skill: ContentSkill = {
           wrong(`The Brackenridge library held deeds, council minutes, newspaper clippings and the payroll books of the old mill.`, 'too-narrow'),
           wrong(`Written records are unreliable, so towns should base their histories only on the memories of older residents.`, 'contradicts-text'),
           wrong(`Former mill workers in Brackenridge used hand signals because the machines were too loud for them to hear.`, 'too-narrow'),
-        ], `The final paragraph states both parts of the idea: history lives "in its people," and gathering it "responsibly takes patience, preparation and a habit of checking." The students checked interviews against written records, so the third choice contradicts the text.`),
+        ], `The final paragraph states both parts of the idea: history lives "in its people," and gathering it "responsibly takes patience, preparation and a habit of checking." The students checked interviews against written records, so the choice saying written records are unreliable contradicts the text.`),
         q(37, 'medium', `Which two central ideas does the passage develop?`, [
           right(`Oral histories capture details missing from official records, and they must be collected and compared carefully because memory changes.`),
           wrong(`Textile mills were loud and difficult places to work, and their payroll books show that wages were very low.`, 'unsupported-inference'),
@@ -305,13 +305,13 @@ const skill: ContentSkill = {
           wrong(`The fourth paragraph cancels the third by showing that the interviews were too unreliable to be kept in the library.`, 'misreads-structure'),
           wrong(`The fourth paragraph proves that the written records were wrong whenever they disagreed with what residents remembered.`, 'contradicts-text'),
           wrong(`The fourth paragraph repeats the examples from the third, adding more details about lunch hours on the riverbank.`, 'misreads-structure'),
-        ], `Paragraph 4 says memories "fade and sometimes shift," and the students noted agreements and differences "rather than choosing one version as the truth," which qualifies the value shown in paragraph 3. The collection was kept and is heavily used, so the second choice is wrong.`),
+        ], `Paragraph 4 says memories "fade and sometimes shift," and the students noted agreements and differences "rather than choosing one version as the truth," which qualifies the value shown in paragraph 3. The collection was kept and is heavily used, so the choice saying the interviews were too unreliable to keep is wrong.`),
         q(40, 'hard', `Which is the best objective summary of the passage?`, [
           right(`Brackenridge's library had many documents but few personal voices, so students recorded forty residents. The interviews added details missing from records, and the students compared accounts because memories can change.`),
           wrong(`Brackenridge's library had many documents but few personal voices, so students recorded forty residents. Their interviews finally revealed the true story of the town that the official records had hidden.`, 'distorts-claim'),
           wrong(`Brackenridge's students did remarkable and inspiring work that every town should copy. Their recordings are far more meaningful than the dull deeds and council minutes in the library.`, 'includes-opinion'),
           wrong(`Former mill workers described the roar of the machines, their hand signals and lunch hours by the river. One woman told how families pooled money to help a flooded neighbor.`, 'too-narrow'),
-        ], `The first choice covers the gap, the project, what it added and the careful checking without judgment. The second choice begins the same way but claims the interviews revealed "the true story," which ignores paragraph 4, where students declined to choose one version as the truth.`),
+        ], `The choice ending "the students compared accounts because memories can change" covers the gap, the project, what it added and the careful checking without judgment. The choice ending "the true story of the town" begins the same way but claims the interviews revealed "the true story," which ignores paragraph 4, where students declined to choose one version as the truth.`),
       ],
     },
   ],
