@@ -117,7 +117,7 @@ const skill: ContentSkill = {
             wrong(`Older boys in Brenford were less interested in school than younger students were.`, 'overgeneralization'),
             wrong(`The ice companies required families to send their sons to work each winter.`, 'unsupported-inference'),
           ],
-          solution: `The drop happens in January, when the passage says harvesting took place, and it follows a paragraph about local people joining the crews, so work on the ice is the best explanation. Nothing in the text mentions school closings or a company requirement.`,
+          solution: `The drop happens in January, when the passage says harvesting took place, and it comes right after the sentence about farmers joining the crews, so work on the ice is the best explanation. Nothing in the text mentions school closings or a company requirement.`,
         },
         {
           slot: 9,
