@@ -50,7 +50,7 @@ const skill: ContentSkill = {
             wrong(`It belonged to the students and no one else`, 'misreads-self-as-ownership'),
             wrong(`It was made of parts that came from a car`, 'confuses-automobile'),
           ],
-          solution: `Auto means "self," and the passage says the station sent its readings "all by itself." It also says nobody had to climb onto the roof, which is the opposite of the second choice.`,
+          solution: `Auto means "self," and the passage says the station sent its readings "all by itself." It also says nobody had to climb onto the roof, so the choice "It needed students to climb up and read it" is the opposite.`,
         },
         {
           slot: 4,
@@ -117,7 +117,7 @@ const skill: ContentSkill = {
             wrong(`He read the same chapter a second time`, 'confuses-prefix-re'),
             wrong(`He read a chapter from a different book`, 'unsupported-inference'),
           ],
-          solution: `Interrupt means to break into the middle of something, and he "waited, then picked up right where he had stopped." He did not end the reading for good, so the second choice goes too far.`,
+          solution: `Interrupt means to break into the middle of something, and he "waited, then picked up right where he had stopped." He did not end the reading for good, so "He ended the reading and left the library" goes too far.`,
         },
         {
           slot: 9,
@@ -141,7 +141,7 @@ const skill: ContentSkill = {
             wrong(`He did not let the boy finish speaking`, 'confuses-interrupt'),
             wrong(`He did not write the boy's idea down`, 'confuses-graph-root'),
           ],
-          solution: `To contradict is to say something against another person's idea, and instead of arguing, Mr. Delgado agreed it was a good point. He clearly heard the boy, since he answered him, so the second choice does not fit.`,
+          solution: `To contradict is to say something against another person's idea, and instead of arguing, Mr. Delgado agreed it was a good point. He clearly heard the boy, since he answered him, so "He did not hear what the boy had said" does not fit.`,
         },
       ],
     },
@@ -172,7 +172,7 @@ const skill: ContentSkill = {
             wrong(`They hide under rocks in the pond`, 'unsupported-inference'),
             wrong(`They are not able to see people`, 'reverses-subject'),
           ],
-          solution: `Invisible means "not able to be seen," which is why scientists need a microscope. The last choice flips the meaning: the creatures cannot be seen, not the other way around.`,
+          solution: `Invisible means "not able to be seen," which is why scientists need a microscope. The choice "They are not able to see people" flips the meaning: the creatures cannot be seen, not the other way around.`,
         },
         {
           slot: 13,
@@ -318,7 +318,7 @@ const skill: ContentSkill = {
             wrong(`The street was cut off and came to a dead end there`, 'too-literal-cut'),
             wrong(`The tunnel stopped and trains turned around there`, 'unsupported-inference'),
           ],
-          solution: `An intersection is the place between streets where they cut across each other, and the passage says "two streets crossed right above them." A dead end does not cross another street, so that choice misreads the root.`,
+          solution: `An intersection is the place between streets where they cut across each other, and the passage says "two streets crossed right above them." A dead end does not cross another street, so "The street was cut off and came to a dead end there" misreads the root.`,
         },
         {
           slot: 24,
