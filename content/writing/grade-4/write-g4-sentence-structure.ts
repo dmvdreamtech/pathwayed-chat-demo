@@ -57,7 +57,7 @@ const skill: ContentSkill = {
         no(`or`, 'wrong-conjunction-choice'),
         no(`because`, 'wrong-conjunction-cause'),
       ],
-      solution: `Jamal wanted to swim, yet he could not, so the two ideas contrast and "but" fits. "So" would mean the pool closed because he wanted to swim, which makes no sense.`,
+      solution: `Jamal wanted to swim, but the closed pool stopped that, so the two ideas contrast and "but" fits. "So" would mean the pool closed because he wanted to swim, which makes no sense.`,
     },
     {
       slot: 5,
@@ -314,14 +314,14 @@ const skill: ContentSkill = {
     {
       slot: 26,
       difficulty: 'medium',
-      stem: `Read: "The library was quiet. Everyone was reading." Which choice combines the sentences using "because" and keeps their meaning?`,
+      stem: `Read: "Everyone was reading. That is why the library was quiet." Which choice uses "because" to combine these ideas and keeps their meaning?`,
       choices: [
-        no(`Because the library was quiet everyone was reading.`, 'reverses-cause-effect'),
+        no(`Because the library was quiet, everyone was reading.`, 'reverses-cause-effect'),
         ok(`The library was quiet because everyone was reading.`),
         no(`The library was quiet. Because everyone was reading.`, 'creates-fragment'),
         no(`The library was quiet, everyone was reading because.`, 'misplaced-conjunction'),
       ],
-      solution: `The library was quiet as a result of everyone reading, so "because" goes before "everyone was reading." Putting "Because" first says the quiet caused the reading, which flips the meaning.`,
+      solution: `The reading caused the quiet, so "because" goes before "everyone was reading." The choice "Because the library was quiet, everyone was reading." says the quiet caused the reading, which flips the meaning.`,
     },
     {
       slot: 27,
@@ -393,7 +393,7 @@ const skill: ContentSkill = {
         no(`The moon has no air, so there is no wind to blow away footprints.`, 'compound-sentence-as-run-on'),
         no(`Look at the moon tonight.`, 'command-as-error'),
       ],
-      solution: `"The moon has no air there is no wind..." runs two complete thoughts together with nothing between them. The longest choice is not a run-on, because a sentence can be long and still be correct.`,
+      solution: `"The moon has no air there is no wind..." runs two complete thoughts together with nothing between them. The sentence that begins "Because the moon has no air or wind" is long but not a run-on, because a sentence can be long and still be correct.`,
     },
     {
       slot: 33,
