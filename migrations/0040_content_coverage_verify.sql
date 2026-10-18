@@ -88,7 +88,14 @@ begin
   values (v_math, 'skill', v_mparent, 'math', 'Verify Quadratics', 'v0040-verify-math', '9-12', '9', 9);
   insert into public.generated_questions (skill_id, difficulty, stem, choices, correct_answer, solution, status) values
     (v_math, 'easy', 'What is $x$ if $x - 3 = 4$?', v_good, 'right', 'Add 3: $x = 4 + 3$, so $x = 7$.', 'draft'),
-    (v_math, 'easy', 'Which value works - and why?', v_good, 'right', 'Add 3 to both sides of the equation.', 'draft');
+    (v_math, 'easy', 'Which value works - and why?', v_good, 'right', 'Add 3 to both sides of the equation.', 'draft'),
+    (v_math, 'easy', 'Solve for $x$: $2x = 8$.', v_good, 'right', 'Divide by 2: 8 - 4 = 4 is not the step; 8 / 2 = 4.', 'draft'),
+    (v_math, 'easy', 'As used here, the word most nearly means', v_good, 'right', 'Because the text says so.', 'draft');
+  -- A K-2 audio-picture item: three tile choices and a spoken instruction.
+  insert into public.generated_questions (skill_id, difficulty, stem, choices, correct_answer, solution, status, render_mode) values
+    (v_math, 'easy', 'Tap the group with more.',
+     '[{"text":"5","is_correct":true},{"text":"2","is_correct":false,"misconception_token":"x"},{"text":"3","is_correct":false,"misconception_token":"y"}]',
+     '5', 'Five is more than two or three.', 'draft', 'audio_picture');
 
   create temp table v0040_results (
     n        serial,
@@ -117,6 +124,15 @@ begin
   ('checks: math, a dash in the prose is still caught', 'no_dashes',
      (select array_to_string(public.question_issues(q), ',') from public.generated_questions q
        where q.skill_id = v_math and q.stem like 'Which value%')),
+  ('checks: math, an instruction ending in a period with a minus between numbers passes', '0',
+     (select cardinality(public.question_issues(q))::text from public.generated_questions q
+       where q.skill_id = v_math and q.stem like 'Solve for%')),
+  ('checks: a lead-in with no closing punctuation is caught', 'stem_ends',
+     (select array_to_string(public.question_issues(q), ',') from public.generated_questions q
+       where q.skill_id = v_math and q.stem like 'As used here%')),
+  ('checks: an audio-picture item with three tiles passes', '0',
+     (select cardinality(public.question_issues(q))::text from public.generated_questions q
+       where q.skill_id = v_math and q.stem like 'Tap the group%')),
   ('checks: a stem without a question mark or colon is caught', 'stem_ends',
      (select array_to_string(public.question_issues(q), ',') from public.generated_questions q
        where q.skill_id = v_skill and q.stem = 'Pick the main idea')),

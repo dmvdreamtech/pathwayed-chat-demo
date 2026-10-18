@@ -544,18 +544,33 @@ as $$
       -- dash rule applies to the prose around them (content/checks.ts does the same).
       coalesce((select s.subject = 'math' from public.skills s where s.id = q.skill_id), false) as is_math
   )
+  -- These checks flag defects, and accept the formats live questions use on
+  -- purpose: K-2 audio-picture items with 2 to 4 tile choices and a spoken
+  -- instruction ("Tap the..."), fill-in-the-blank stems that end at the blank,
+  -- instructions that end with a period ("Solve for $x$: ..."), and in math a
+  -- minus sign written between numbers or letters. The authoring checker
+  -- (content/checks.ts) is stricter for new drafts.
   select array_remove(array[
-    case when f.n <> 4 then 'four_choices' end,
+    case when (case when coalesce(q.render_mode, 'text') = 'audio_picture' then f.n not between 2 and 4 else f.n <> 4 end)
+         then 'four_choices' end,
     case when f.n_correct <> 1 then 'one_correct' end,
     case when f.n_wrong_untagged > 0 then 'distractor_misconceptions' end,
     case when f.correct_text is distinct from q.correct_answer then 'answer_matches_choice' end,
     case when coalesce(btrim(q.solution), '') = '' then 'has_solution' end,
     case when f.n_distinct <> f.n then 'distinct_choices' end,
     case when (case when f.is_math
-                    then regexp_replace(concat_ws(' ', q.stem, f.all_text, q.solution, q.correct_answer), '\$[^$]*\$', ' ', 'g')
+                    then regexp_replace(
+                           regexp_replace(concat_ws(' ', q.stem, f.all_text, q.solution, q.correct_answer), '\$[^$]*\$', ' ', 'g'),
+                           '(?<=[0-9)])\s-\s(?=[0-9A-Za-z(])|(?<=[0-9A-Za-z)])\s-\s(?=[0-9(])', ' ', 'g')
                     else concat_ws(' ', q.stem, f.all_text, q.solution, q.correct_answer) end)
               ~ '[—–]|\s-\s|--' then 'no_dashes' end,
-    case when btrim(coalesce(q.stem, '')) !~ '[?:]$' then 'stem_ends' end
+    case when not (
+           btrim(coalesce(q.stem, '')) ~ '[?:]$'
+           or coalesce(q.render_mode, 'text') = 'audio_picture'
+           or q.stem ~ '_{3,}'
+           or (btrim(q.stem) ~ '[.$]$'
+               and q.stem ~* '^\s*(solve|simplify|find|write|evaluate|factor|expand|compute|calculate|estimate|round|convert|graph|choose|select|complete|identify|name|order|compare|use|show|tap|pick|count|add|subtract|multiply|divide|rewrite|express|determine|list)\M')
+         ) then 'stem_ends' end
   ], null)
   from facts f;
 $$;
