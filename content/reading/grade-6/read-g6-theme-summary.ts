@@ -196,7 +196,7 @@ const skill: ContentSkill = {
             right(`It shows that one small action can inspire others to help, too.`),
             wrong(`It explains why the beetle got lost in the tall grass to begin with.`, 'irrelevant-detail'),
           ],
-          solution: `The other fireflies come only after they notice Pip "blinking low in the grass," so her action leads theirs. They had not acted before her, which is why the first choice misreads the order of events.`,
+          solution: `The other fireflies come only after they notice Pip "blinking low in the grass," so her action leads theirs. They had not acted before her, which is why the choice saying Pip "was not needed" misreads the order of events.`,
         },
         {
           slot: 15,
@@ -227,7 +227,7 @@ const skill: ContentSkill = {
             wrong(`Winning a record is the only way to make a coach proud.`, 'contradicts-text'),
             right(`Being honest matters more than winning, even when no one would know.`),
           ],
-          solution: `Rafael reports the handprint that nobody else saw and gives up the record, yet he ends up smiling. His coach is proud of his honesty, not a record, so the third choice contradicts the ending.`,
+          solution: `Rafael reports the handprint that nobody else saw and gives up the record, yet he ends up smiling. His coach is proud of his honesty, not a record, so the choice saying a record is "the only way to make a coach proud" contradicts the ending.`,
         },
         {
           slot: 17,
@@ -251,7 +251,7 @@ const skill: ContentSkill = {
             wrong(`They show that Rafael has never jumped farther than three meters before.`, 'contradicts-text'),
             wrong(`They suggest that Rafael does not care very much about long jumping.`, 'contradicts-text'),
           ],
-          solution: `Rafael "wanted that record more than anything," so giving it up shows how much honesty means to him. The text says his best mark was four meters, so the third choice gets the facts wrong.`,
+          solution: `Rafael "wanted that record more than anything," so giving it up shows how much honesty means to him. The text says his best mark was four meters, so the choice saying he "has never jumped farther than three meters" gets the facts wrong.`,
         },
         {
           slot: 19,
@@ -294,7 +294,7 @@ const skill: ContentSkill = {
             wrong(`Solar ovens work best when they are tested on a sunny blacktop.`, 'topic-not-theme'),
             wrong(`Teams should always let the loudest member make every decision.`, 'contradicts-text'),
           ],
-          solution: `The oven works only after Amara listens to Joon's idea, and she ends by asking about his notebook. The story shows that more foil did not help, so the second choice is the opposite of what happens.`,
+          solution: `The oven works only after Amara listens to Joon's idea, and she ends by asking about his notebook. The story shows that more foil did not help, so the choice saying more materials "always" make a project more successful is the opposite of what happens.`,
         },
         {
           slot: 22,
@@ -306,7 +306,7 @@ const skill: ContentSkill = {
             right(`Amara ignores Joon's idea for a solar oven, the oven fails, and when she finally tries his idea, the chocolate melts and she wants to hear more from him.`),
             wrong(`Amara and Joon build a solar oven together and win first place in the class contest.`, 'adds-false-detail'),
           ],
-          solution: `The correct summary covers the ignored idea, the failure, the second try and Amara's change. The story clearly says "They did not win," so the last choice adds a false result.`,
+          solution: `The correct summary covers the ignored idea, the failure, the second try and Amara's change. The story clearly says "They did not win," so the choice saying they "win first place" adds a false result.`,
         },
         {
           slot: 23,
@@ -428,7 +428,7 @@ const skill: ContentSkill = {
             right(`Every part of a group effort matters, even when it gets no attention.`),
             wrong(`Learning to play the violin takes many years of practice.`, 'topic-not-theme'),
           ],
-          solution: `Mr. Adeyemi shows that the melody sounds thin without the harmony, and Lucia learns her quiet part makes the music full. The story says the opposite of the first choice, since the whole piece "sinks" without the harmony.`,
+          solution: `Mr. Adeyemi shows that the melody sounds thin without the harmony, and Lucia learns her quiet part makes the music full. The story says the opposite of the choice calling the melody "the only important job," since the whole piece "sinks" without the harmony.`,
         },
         {
           slot: 32,
@@ -440,7 +440,7 @@ const skill: ContentSkill = {
             wrong(`Lucia should have been placed in first violin, and Mr. Adeyemi made an unfair choice.`, 'includes-opinion'),
             wrong(`Lucia moves up to the first violin section and plays the melody at the spring concert.`, 'adds-false-detail'),
           ],
-          solution: `The correct summary includes her disappointment, the lesson at rehearsal and her change. Her disappointment over the list is only the beginning, so the first choice leaves out how the story develops.`,
+          solution: `The correct summary includes her disappointment, the lesson at rehearsal and her change. Her disappointment over the list is only the beginning, so the choice that stops at her disappointment leaves out how the story develops.`,
         },
         {
           slot: 33,
@@ -464,7 +464,7 @@ const skill: ContentSkill = {
             wrong(`She goes from playing quietly to playing as loudly as she can, showing she wants attention.`, 'misreads-detail'),
             wrong(`She goes from playing alone to playing only with Hana, showing friendship matters most.`, 'unsupported-inference'),
           ],
-          solution: `At first she "played it without really listening," but later she listens to the cellos and flutes and fits her sound into theirs. She learns when to "swell" and "fade," not to play as loudly as possible, so the third choice misreads the details.`,
+          solution: `At first she "played it without really listening," but later she listens to the cellos and flutes and fits her sound into theirs. She learns when to "swell" and "fade," not to play as loudly as possible, so the choice about playing "as loudly as she can" misreads the details.`,
         },
         {
           slot: 35,
@@ -495,7 +495,7 @@ const skill: ContentSkill = {
             wrong(`Families should visit their grandparents every Sunday afternoon.`, 'too-narrow'),
             right(`People of different ages each have something valuable to teach one another.`),
           ],
-          solution: `Kofi teaches his grandfather the tablet, and his grandfather teaches him to read the clouds. Grandpa Kwame does learn to make a call, so the first choice is contradicted by the ending.`,
+          solution: `Kofi teaches his grandfather the tablet, and his grandfather teaches him to read the clouds. Grandpa Kwame does learn to make a call, so the choice saying older people cannot learn new technology is contradicted by the ending.`,
         },
         {
           slot: 37,
@@ -528,7 +528,7 @@ const skill: ContentSkill = {
           choices: [
             wrong(`To show that Kofi was feeling sick and needed to rest on the porch.`, 'literal-reading'),
             wrong(`To suggest that Kofi plans to stop teaching his grandfather after today.`, 'contradicts-text'),
-            right(`To show Kofi realizing he could be as patient a teacher as his grandfather was.`),
+            right(`To show Kofi realizing he had been less patient with his grandfather than his grandfather was with him.`),
             wrong(`To explain that Kofi's mother had asked him to keep his feelings to himself.`, 'unsupported-inference'),
           ],
           solution: `Right before this, the text calls his grandfather "a patient teacher," so Kofi compares himself and sees his own impatience. Nothing suggests he will stop teaching, and the ending shows the lessons worked.`,
