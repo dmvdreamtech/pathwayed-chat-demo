@@ -42,7 +42,7 @@ const skill: ContentSkill = {
       choices: [
         ok(`Kenji glazed the bowl twice, hoping the blue color would turn out darker.`),
         no(`Kenji glazed the bowl twice; hoping the blue color would turn out darker.`, 'semicolon-before-phrase'),
-        no(`Kenji glazed the bowl twice, he hoped the blue color would turn out darker.`, 'comma-splice-created'),
+        no(`Kenji glazed the bowl twice, Kenji hoped the blue color would turn out darker.`, 'comma-splice-created'),
         no(`Kenji glazed the bowl twice. Because hoping the blue color would turn out darker.`, 'fragment-unfixed'),
       ],
       solution: `Attaching the phrase "hoping the blue color would turn out darker" to the main clause with a comma creates one complete sentence. A semicolon must be followed by an independent clause, and the "hoping" phrase is not one.`,
@@ -110,12 +110,12 @@ const skill: ContentSkill = {
     {
       slot: 9,
       difficulty: 'easy',
-      stem: `Read the sentence: "Amara tuned her violin before the recital she was still nervous when the lights dimmed." Which revision fixes the run-on?`,
+      stem: `Read the sentence: "Amara tuned the violin before the recital the whole string section was still nervous when the lights dimmed." Which revision fixes the run-on?`,
       choices: [
-        no(`Amara tuned her violin before the recital, she was still nervous when the lights dimmed.`, 'comma-splice-created'),
-        ok(`Amara tuned her violin before the recital. She was still nervous when the lights dimmed.`),
-        no(`Amara tuned her violin before the recital, and, she was still nervous when the lights dimmed.`, 'misplaced-comma-with-conjunction'),
-        no(`Amara tuned her violin before the recital she was, still nervous when the lights dimmed.`, 'fused-sentence'),
+        no(`Amara tuned the violin before the recital, the whole string section was still nervous when the lights dimmed.`, 'comma-splice-created'),
+        ok(`Amara tuned the violin before the recital. The whole string section was still nervous when the lights dimmed.`),
+        no(`Amara tuned the violin before the recital, and, the whole string section was still nervous when the lights dimmed.`, 'misplaced-comma-with-conjunction'),
+        no(`Amara tuned the violin before the recital the whole string section was, still nervous when the lights dimmed.`, 'fused-sentence'),
       ],
       solution: `Splitting the two independent clauses into separate sentences fixes the run-on. Adding only a comma turns the fused sentence into a comma splice, which is still an error.`,
     },
@@ -158,10 +158,10 @@ const skill: ContentSkill = {
     {
       slot: 13,
       difficulty: 'medium',
-      stem: `Read the sentences: "The cartographer measured the coastline. She used a satellite image. The image was taken in 2019." Which choice combines them most clearly and correctly?`,
+      stem: `Read the sentences: "The cartographer measured the coastline. The cartographer used a satellite image. The image was taken in 2019." Which choice combines them most clearly and correctly?`,
       choices: [
         ok(`Using a satellite image taken in 2019, the cartographer measured the coastline.`),
-        no(`The cartographer measured the coastline, she used a satellite image taken in 2019.`, 'comma-splice-created'),
+        no(`The cartographer measured the coastline, the measurement used a satellite image taken in 2019.`, 'comma-splice-created'),
         no(`Taken in 2019, the cartographer measured the coastline using a satellite image.`, 'dangling-modifier'),
         no(`The cartographer measured the coastline using a satellite image, it was taken in 2019.`, 'comma-splice-created'),
       ],
@@ -177,7 +177,7 @@ const skill: ContentSkill = {
         no(`Almost Rafael photographed every bird at the wetland.`, 'misplaced-limiting-modifier'),
         no(`Rafael photographed every bird almost at the wetland.`, 'misplaced-limiting-modifier'),
       ],
-      solution: `"Almost" should sit right before "every bird," the words it limits. "Rafael almost photographed every bird" means he nearly took the pictures but did not actually take any.`,
+      solution: `"Almost" should sit right before "every bird," the words it limits. "Rafael almost photographed every bird" means Rafael nearly took the pictures but did not actually take any.`,
     },
     {
       slot: 15,
@@ -230,14 +230,14 @@ const skill: ContentSkill = {
     {
       slot: 19,
       difficulty: 'medium',
-      stem: `Read the sentences: "Tomasz restored the grandfather clock. The clock had belonged to his great-aunt." Which choice combines them correctly?`,
+      stem: `Read the sentences: "Tomasz restored the grandfather clock. The clock had belonged to the town's first mayor." Which choice combines them correctly?`,
       choices: [
-        no(`Tomasz restored the grandfather clock, it had belonged to his great-aunt.`, 'comma-splice-created'),
-        no(`Tomasz restored the grandfather clock, which, had belonged to his great-aunt.`, 'comma-splits-clause'),
-        ok(`Tomasz restored the grandfather clock that had belonged to his great-aunt.`),
-        no(`Tomasz restored the grandfather clock, and the clock which had belonged to his great-aunt.`, 'incomplete-second-clause'),
+        no(`Tomasz restored the grandfather clock, it had belonged to the town's first mayor.`, 'comma-splice-created'),
+        no(`Tomasz restored the grandfather clock, which, had belonged to the town's first mayor.`, 'comma-splits-clause'),
+        ok(`Tomasz restored the grandfather clock that had belonged to the town's first mayor.`),
+        no(`Tomasz restored the grandfather clock, and the clock which had belonged to the town's first mayor.`, 'incomplete-second-clause'),
       ],
-      solution: `The relative clause "that had belonged to his great-aunt" identifies the clock and joins the ideas in one complete sentence. Using "it" after the comma creates two independent clauses joined only by a comma.`,
+      solution: `The relative clause "that had belonged to the town's first mayor" identifies the clock and joins the ideas in one complete sentence. Using "it" after the comma creates two independent clauses joined only by a comma.`,
     },
     {
       slot: 20,
@@ -270,7 +270,7 @@ const skill: ContentSkill = {
       choices: [
         no(`The vendor sold peaches to the tourists in paper bags.`, 'misplaced-modifier'),
         ok(`The vendor sold peaches in paper bags to the tourists.`),
-        no(`In paper bags, the vendor sold peaches to the tourists.`, 'misplaced-modifier'),
+        no(`The tourists in paper bags bought peaches from the vendor.`, 'misplaced-modifier'),
         no(`The vendor in paper bags sold peaches to the tourists.`, 'misplaced-modifier'),
       ],
       solution: `"In paper bags" describes the peaches, so it belongs right after "peaches." Placing it after "tourists" makes it sound as if the tourists were in paper bags.`,
@@ -350,14 +350,14 @@ const skill: ContentSkill = {
     {
       slot: 29,
       difficulty: 'medium',
-      stem: `Read the sentences: "The violinist bowed to the audience. She smiled at her teacher in the front row." Which choice combines them correctly?`,
+      stem: `Read the sentences: "The violinist bowed to the audience. The violinist smiled at the teacher in the front row." Which choice combines them correctly?`,
       choices: [
-        ok(`Bowing to the audience, the violinist smiled at her teacher in the front row.`),
-        no(`Bowing to the audience, her teacher in the front row smiled at the violinist.`, 'dangling-modifier'),
-        no(`The violinist bowed to the audience, she smiled at her teacher in the front row.`, 'comma-splice-created'),
-        no(`The violinist bowed to the audience and smiling at her teacher in the front row.`, 'faulty-parallelism'),
+        ok(`Bowing to the audience, the violinist smiled at the teacher in the front row.`),
+        no(`Bowing to the audience, the teacher in the front row smiled at the violinist.`, 'dangling-modifier'),
+        no(`The violinist bowed to the audience, the violinist smiled at the teacher in the front row.`, 'comma-splice-created'),
+        no(`The violinist bowed to the audience and smiling at the teacher in the front row.`, 'faulty-parallelism'),
       ],
-      solution: `The phrase "Bowing to the audience" is followed by "the violinist," who is the one bowing, so the sentence is clear and complete. The version with "her teacher" as the subject makes the teacher seem to be the one bowing.`,
+      solution: `The phrase "Bowing to the audience" is followed by "the violinist," who is the one bowing, so the sentence is clear and complete. The version with "the teacher" as the subject makes the teacher seem to be the one bowing.`,
     },
     {
       slot: 30,
