@@ -172,7 +172,7 @@ const skill: ContentSkill = {
             wrong(`Text 1 is eager and celebratory throughout, while Text 2 is humorous and doubtful at first.`, 'confuses-texts'),
             wrong(`Both texts share the same serious, formal tone of a report written for town officials.`, 'misreads-tone'),
           ],
-          solution: `The columnist jokes about nearly being "delivered to the next county" and calls himself a skeptic, yet admits "I understood." The poem's speaker never doubts the bicycle, so it is not the text that starts out doubtful.`,
+          solution: `The columnist jokes about nearly being "delivered to the next county" and claims to remain a skeptic, yet admits "I understood." The poem's speaker never doubts the bicycle, so it is not the text that starts out doubtful.`,
         },
         {
           slot: 13,
@@ -184,14 +184,14 @@ const skill: ContentSkill = {
             wrong(`Text 1 ignores the doubters, while Text 2 lets them have the final word.`, 'contradicts-text'),
             wrong(`Both show the doubters changing their minds after trying a bicycle.`, 'unsupported-inference'),
           ],
-          solution: `The shopkeepers, the stable owner, the mother and the uncle all object, but the columnist's ride and the speaker's daily trips win out. Only the columnist himself is shown trying a bicycle; the mother and uncle never do.`,
+          solution: `The shopkeepers, the stable owner, the mother and the uncle all object, but the columnist's ride and the speaker's daily trips win out. Only the columnist is shown trying a bicycle; the mother and uncle never do.`,
         },
         {
           slot: 14,
           difficulty: 'medium',
           stem: `Which moment in Text 1 comes closest to the feeling expressed throughout Text 2?`,
           choices: [
-            right(`The writer's ride on the river road with the wind in his face.`),
+            right(`The writer's ride on the river road with the wind blowing past.`),
             wrong(`The writer stepping off the curb to buy a newspaper downtown.`, 'misreads-detail'),
             wrong(`The stable owner complaining that nobody rents his horses.`, 'reverses-meaning'),
             wrong(`The writer tipping gently into Mrs. Ferreira's front hedge.`, 'misreads-tone'),
@@ -461,7 +461,7 @@ const skill: ContentSkill = {
           choices: [
             right(`Tomasz looks outward, amazed that someone is up there, while the speaker turns back to imagine Earth and home as seen from the moon.`),
             wrong(`Tomasz worries the astronauts will not return, while the speaker feels certain the landing was only a story on the radio.`, 'unsupported-inference'),
-            wrong(`Tomasz turns back to imagine his town as seen from space, while the speaker searches the sky for a speck he cannot see.`, 'confuses-texts'),
+            wrong(`Tomasz turns back to imagine his town as seen from space, while the speaker searches the sky for a speck that cannot be seen.`, 'confuses-texts'),
             wrong(`Both characters lose interest in the moon at once, since it looks exactly as it always has to each of them.`, 'literal-reading'),
           ],
           solution: `Tomasz tries "to spot a speck that he knew he could never see," while the speaker says "what struck me most was not the moon" but the thought of "this small blue place" seen from above. Both note the moon looks ordinary, but neither loses interest.`,
