@@ -35,10 +35,10 @@ const skill: ContentSkill = {
           choices: [
             right(`She paid close attention so she would not bump it`),
             wrong(`She did not care at all if she bumped it or not`, 'opposite-meaning'),
-            wrong(`She was worried that the moon would disappear`, 'unsupported-inference'),
+            wrong(`She pushed the telescope hard to move the moon`, 'misreads-context'),
             wrong(`She was in a hurry to finish her turn quickly`, 'context-only-guess'),
           ],
-          solution: `Careful means "full of care," so Priya paid close attention as she looked. Not caring at all would be careless, the opposite of careful.`,
+          solution: `Careful means "full of care," so Priya paid close attention during her turn. Not caring at all would be careless, the opposite of careful.`,
         },
         {
           slot: 3,
@@ -290,7 +290,7 @@ const skill: ContentSkill = {
           stem: `The suffix -ful means "full of." How did Hana feel when she was "thankful" for the park worker's help?`,
           choices: [
             right(`She was full of thanks for the help`),
-            wrong(`She was upset that he kept her book`, 'opposite-meaning'),
+            wrong(`She was upset that the worker kept her book`, 'opposite-meaning'),
             wrong(`She was tired from walking to the park`, 'context-only-guess'),
             wrong(`She was worried about the due date`, 'confuses-details'),
           ],
@@ -330,7 +330,7 @@ const skill: ContentSkill = {
             wrong(`She took a brand new way home from school`, 'ignores-prefix'),
             wrong(`She counted how many steps it was to the park`, 'context-only-guess'),
           ],
-          solution: `Retraced means "followed the path again," and Hana thought back over Friday and returned to the park bench. Taking a new way home leaves out the "back" or "again" meaning of re-.`,
+          solution: `Retraced means "followed the path again," and Hana thought back over Friday and went back to the park. Taking a new way home leaves out the "back" or "again" meaning of re-.`,
         },
         {
           slot: 25,
