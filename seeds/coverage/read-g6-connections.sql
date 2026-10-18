@@ -434,7 +434,7 @@ where public.generated_questions.status = 'draft' and public.generated_questions
 -- Passage rg6-connections-p06
 insert into public.passages (id, code, skill_id, sat_alignment, grade_band, title, body, status)
 values ('82913189-f6e1-542d-8308-b0bae4371df0', 'rg6-connections-p06', (select id from public.skills where slug = 'read-g6-connections'), null,
-        '6-8', $q$The Brake That Built the Skyline$q$, $q$For most of history, buildings stayed short. A building with five or six floors was considered tall. The problem was not building materials. It was stairs. Few people wanted to climb ten flights to reach an office or an apartment, so builders saw no reason to go higher.
+        '6-8', $q$The Brake That Built the Skyline$q$, $q$For most of history, buildings stayed short. A building with five or six floors was considered tall. Walls could be built somewhat higher, but the bigger problem was stairs. Few people wanted to climb ten flights to reach an office or an apartment, so builders saw no reason to go higher.
 
 Lifting machines already existed. Factories and mines used platforms pulled up by ropes to move heavy loads. But people refused to ride them. If a rope snapped, the platform would crash to the bottom of the shaft.
 
@@ -449,7 +449,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('a8f0f856-3037-50e6-90b3-ab977ef40bb3', null, (select id from public.skills where slug = 'read-g6-connections'), null, 'easy',
-   $q$According to paragraph 1, why did buildings stay short for most of history?$q$, $q$[{"text":"Tall buildings blocked the views of nearby neighbors.","is_correct":false,"misconception_token":"unsupported-inference"},{"text":"People did not want to climb many flights of stairs.","is_correct":true},{"text":"Builders did not have materials strong enough to go higher.","is_correct":false,"misconception_token":"contradicts-text"},{"text":"Cities had rules that kept buildings under six floors.","is_correct":false,"misconception_token":"unsupported-inference"}]$q$::jsonb, $q$People did not want to climb many flights of stairs.$q$, $q$Paragraph 1 says, "The problem was not building materials. It was stairs." So the choice about materials directly contradicts the text.$q$, 'draft', '82913189-f6e1-542d-8308-b0bae4371df0')
+   $q$According to paragraph 1, why did buildings stay short for most of history?$q$, $q$[{"text":"Tall buildings blocked the views of nearby neighbors.","is_correct":false,"misconception_token":"unsupported-inference"},{"text":"People did not want to climb many flights of stairs.","is_correct":true},{"text":"Cities had too few workers to build taller buildings.","is_correct":false,"misconception_token":"unsupported-inference"},{"text":"Cities had rules that kept buildings under six floors.","is_correct":false,"misconception_token":"unsupported-inference"}]$q$::jsonb, $q$People did not want to climb many flights of stairs.$q$, $q$Paragraph 1 says "the bigger problem was stairs" and that few people wanted to climb ten flights. The passage never mentions a shortage of workers or rules about height.$q$, 'draft', '82913189-f6e1-542d-8308-b0bae4371df0')
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

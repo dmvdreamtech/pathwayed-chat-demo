@@ -349,7 +349,7 @@ const skill: ContentSkill = {
     {
       code: 'rg6-connections-p06',
       title: 'The Brake That Built the Skyline',
-      body: `For most of history, buildings stayed short. A building with five or six floors was considered tall. The problem was not building materials. It was stairs. Few people wanted to climb ten flights to reach an office or an apartment, so builders saw no reason to go higher.\n\nLifting machines already existed. Factories and mines used platforms pulled up by ropes to move heavy loads. But people refused to ride them. If a rope snapped, the platform would crash to the bottom of the shaft.\n\nIn the 1850s, a mechanic found a solution. He attached a strong spring to the top of the platform and placed rows of metal teeth along the walls of the shaft. As long as the rope was tight, the spring stayed pulled in. If the rope broke, the spring snapped outward and pushed metal arms into the teeth, locking the platform in place.\n\nTo convince the public, the mechanic gave a bold demonstration at a crowded fair. He rode a platform high above the audience and ordered the rope to be cut. The platform dropped only a few inches before the brake caught it.\n\nWithin a few years, safe passenger elevators began appearing in stores and hotels. Builders soon realized that the top floors, once the least wanted, could now be the most valuable. They had the best views and the least street noise. Together with strong steel frames, the safety brake helped make the first skyscrapers possible. A small spring had changed the shape of cities.`,
+      body: `For most of history, buildings stayed short. A building with five or six floors was considered tall. Walls could be built somewhat higher, but the bigger problem was stairs. Few people wanted to climb ten flights to reach an office or an apartment, so builders saw no reason to go higher.\n\nLifting machines already existed. Factories and mines used platforms pulled up by ropes to move heavy loads. But people refused to ride them. If a rope snapped, the platform would crash to the bottom of the shaft.\n\nIn the 1850s, a mechanic found a solution. He attached a strong spring to the top of the platform and placed rows of metal teeth along the walls of the shaft. As long as the rope was tight, the spring stayed pulled in. If the rope broke, the spring snapped outward and pushed metal arms into the teeth, locking the platform in place.\n\nTo convince the public, the mechanic gave a bold demonstration at a crowded fair. He rode a platform high above the audience and ordered the rope to be cut. The platform dropped only a few inches before the brake caught it.\n\nWithin a few years, safe passenger elevators began appearing in stores and hotels. Builders soon realized that the top floors, once the least wanted, could now be the most valuable. They had the best views and the least street noise. Together with strong steel frames, the safety brake helped make the first skyscrapers possible. A small spring had changed the shape of cities.`,
       items: [
         {
           slot: 26,
@@ -357,11 +357,11 @@ const skill: ContentSkill = {
           stem: `According to paragraph 1, why did buildings stay short for most of history?`,
           choices: [
             right(`People did not want to climb many flights of stairs.`),
-            wrong(`Builders did not have materials strong enough to go higher.`, 'contradicts-text'),
+            wrong(`Cities had too few workers to build taller buildings.`, 'unsupported-inference'),
             wrong(`Cities had rules that kept buildings under six floors.`, 'unsupported-inference'),
             wrong(`Tall buildings blocked the views of nearby neighbors.`, 'unsupported-inference'),
           ],
-          solution: `Paragraph 1 says, "The problem was not building materials. It was stairs." So the choice about materials directly contradicts the text.`,
+          solution: `Paragraph 1 says "the bigger problem was stairs" and that few people wanted to climb ten flights. The passage never mentions a shortage of workers or rules about height.`,
         },
         {
           slot: 27,
