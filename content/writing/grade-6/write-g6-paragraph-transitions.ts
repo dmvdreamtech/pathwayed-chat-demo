@@ -85,7 +85,7 @@ const skill: ContentSkill = {
       title: 'Telling Time Before Clocks',
       body: `(1) Long before anyone wore a watch, people still needed to know the time. (2) Early farmers watched the sun rise and set to plan their work in the fields. (3) Later, people invented the sundial, a flat plate with a pointer that casts a shadow. (4) As the sun moved across the sky, the shadow moved around the plate and pointed to the hour. (5) ____, a sundial was useless on cloudy days and at night.
 
-(6) To solve this problem, some people built water clocks. (7) A water clock was a container with a tiny hole near the bottom. (8) Water dripped out slowly and steadily, so the level inside dropped at an even rate. (9) Marks on the inside of the container showed how many hours had passed. (10) Many kitchens today have a small clock on the oven. (11) Each of these tools helped people measure their days a little more exactly.`,
+(6) To solve this problem, some people built water clocks. (7) A water clock was a container with a tiny hole near the bottom. (8) Water dripped out slowly and steadily, so the level inside dropped little by little. (9) Marks on the inside of the container showed how many hours had passed. (10) Many kitchens today have a small clock on the oven. (11) Each of these tools helped people measure their days a little more exactly.`,
       items: [
         {
           slot: 6,
@@ -197,7 +197,7 @@ const skill: ContentSkill = {
     {
       code: 'wg6-paragraph-transitions-p04',
       title: 'Playing Fair Without a Referee',
-      body: `(1) Ultimate is a team sport played with a flying disc, and it has one unusual rule. (2) In most games, there is no referee on the field. (3) ____, the players call their own fouls and settle their own disagreements. (4) If a player believes she was pushed, she calls out "Foul!" and play stops. (5) The two players then talk about what happened and decide together how to continue.
+      body: `(1) Ultimate is a team sport played with a flying disc, and it has one unusual rule. (2) In most games, there is no referee on the field. (3) ____, the players call their own fouls and settle their own disagreements. (4) If a player believes someone pushed them, that player calls out "Foul!" and play stops. (5) The two players then talk about what happened and decide together how to continue.
 
 (6) Some people worry that this system would lead to cheating. (7) In practice, players learn that honesty keeps the game fun for everyone. (8) Many teams even give an award to the opponent who showed the most fairness. (9) The disc is usually made of light, smooth plastic. (10) Teams also gather in a short circle after each game, where both sides share what went well. (11) ____, ultimate teaches players that being trusted matters as much as winning.`,
       items: [
@@ -256,10 +256,10 @@ const skill: ContentSkill = {
           choices: [
             ok(`Calling their own fouls actually helps players build habits of honesty and respect.`),
             no(`Ultimate was first played many years ago by a group of students.`, 'off-topic-topic-sentence'),
-            no(`A player who believes she was pushed can call out a foul.`, 'restates-one-detail'),
+            no(`A player who believes someone pushed them can call out a foul.`, 'restates-one-detail'),
             no(`Some games use helpers on the sideline to watch for hard calls.`, 'off-topic-topic-sentence'),
           ],
-          solution: `The details in sentences 7 to 11 all show honesty and respect, so this sentence states the idea they support. The sentence about calling a foul only repeats a detail from the first paragraph.`,
+          solution: `The details in sentences 7, 8, 10, and 11 all show honesty and respect, so this sentence states the idea they support. The sentence about calling a foul only repeats a detail from the first paragraph.`,
         },
       ],
     },
@@ -335,7 +335,7 @@ const skill: ContentSkill = {
     {
       code: 'wg6-paragraph-transitions-p06',
       title: 'Why Leaves Change Color',
-      body: `(1) Every autumn, the leaves on many trees turn from green to yellow, orange, and red. (2) This change actually begins inside each leaf. (3) During spring and summer, leaves are full of a green substance called chlorophyll. (4) Chlorophyll helps the tree use sunlight to make its food. (5) ____, it covers up other colors that are in the leaf all along.
+      body: `(1) Every autumn, the leaves on many trees turn from green to yellow, orange, and red. (2) This change actually begins inside each leaf. (3) During spring and summer, leaves are full of a green substance called chlorophyll. (4) Chlorophyll helps the tree use sunlight to make its food. (5) ____, it covers up other colors that are already in the leaf.
 
 (6) As the days grow shorter and cooler, the tree stops making new chlorophyll. (7) The green color slowly fades away. (8) Once the green is gone, the yellow and orange colors that were hidden can finally be seen. (9) Some trees also make new red colors in their leaves during the fall. (10) Pine trees keep their green needles all year long. (11) Soon after the colors appear, the leaves dry out and drop to the ground.`,
       items: [
