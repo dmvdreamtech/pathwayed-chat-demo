@@ -38,14 +38,14 @@ const skill: ContentSkill = {
     {
       slot: 3,
       difficulty: 'easy',
-      stem: `Read the sentence: "Ana ___ swim across the whole pool, because she took lessons all summer." Which word shows that Ana is able to do it?`,
+      stem: `Read the sentence: "Ana ___ swim across the whole pool after taking lessons all summer." Which word shows that Ana is able to do it?`,
       choices: [
         no(`must`, 'obligation-for-ability'),
         no(`may`, 'permission-for-ability'),
         no(`should`, 'advice-for-ability'),
         ok(`can`),
       ],
-      solution: `"Can" is the modal that shows ability, and the lessons explain why Ana is able to swim. "Must" would mean she is required to swim, which is not the point of the sentence.`,
+      solution: `"Can" is the modal that shows ability, and the lessons explain why Ana is able to swim. "Must" would mean Ana is required to swim, which is not the point of the sentence.`,
     },
     {
       slot: 4,
@@ -294,10 +294,10 @@ const skill: ContentSkill = {
       choices: [
         no(`Hiro is required to visit on Friday.`, 'may-read-as-must'),
         no(`Hiro already visited last Friday.`, 'modal-read-as-past'),
-        no(`Hiro is able to visit any day he likes.`, 'may-read-as-ability'),
+        no(`Hiro is able to visit on any day of the week.`, 'may-read-as-ability'),
         ok(`Hiro might visit, but it is not certain.`),
       ],
-      solution: `Here "may" shows possibility: the visit could happen but is not sure. It does not mean he must go, which would need the word "must."`,
+      solution: `Here "may" shows possibility: the visit could happen but is not sure. It does not mean Hiro must go, which would need the word "must."`,
     },
     {
       slot: 25,
@@ -415,7 +415,7 @@ const skill: ContentSkill = {
         no(`Zara must practice before dinner.`, 'obligation-as-ability'),
         no(`Zara may join the orchestra next year.`, 'possibility-as-ability'),
         ok(`Zara can play three songs on the violin.`),
-        no(`Zara should rest her fingers after practice.`, 'advice-as-ability'),
+        no(`Zara should rest after practice.`, 'advice-as-ability'),
       ],
       solution: `"Can" shows what someone is able to do, so "can play three songs" shows ability. "May join" only says that joining is possible, not that Zara has a skill.`,
     },
@@ -429,7 +429,7 @@ const skill: ContentSkill = {
         no(`There are two kittens sleeping on there porch.`, 'place-word-for-possessive'),
         ok(`There are two kittens sleeping on their porch.`),
       ],
-      solution: `"There are" introduces the kittens, "two" is the number, and "their porch" shows the porch belongs to someone. The third choice gets the first two words right but uses "there" where it needs "their."`,
+      solution: `"There are" introduces the kittens, "two" is the number, and "their porch" shows the porch belongs to someone. The choice "There are two kittens sleeping on there porch." gets the first two words right but uses "there" where it needs "their."`,
     },
     {
       slot: 36,
@@ -489,7 +489,7 @@ const skill: ContentSkill = {
         no(`The two friends went too the zoo, and I went to.`, 'swaps-preposition-and-also'),
         no(`The to friends went two the zoo, and I went too.`, 'swaps-number-and-preposition'),
       ],
-      solution: `"Two" is the number of friends, "to" shows where they went, and "too" means "also." The third choice gets "two" right but mixes up "to" and "too."`,
+      solution: `"Two" is the number of friends, "to" shows where they went, and "too" means "also." The choice "The two friends went too the zoo, and I went to." gets "two" right but mixes up "to" and "too."`,
     },
   ],
 }
