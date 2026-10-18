@@ -379,7 +379,7 @@ const skill: ContentSkill = {
       body: body(
         `(1) Each year, a tree in a temperate climate adds a new layer of wood beneath its bark. (2) In spring the tree grows quickly and forms pale, wide cells, while in late summer growth slows and the cells become dark and dense. (3) Together these bands form one annual ring, and counting the rings in a cross section reveals the tree's age.`,
         `(4) Dendrochronology, the science of dating events through tree rings, goes much further than simple counting. (5) Ring width varies with climate: a wet year usually yields a wide ring, and a drought year yields a narrow one. (6) Because trees in the same region experience the same weather, they share a recognizable pattern of wide and narrow rings. (7) Researchers match these patterns across living trees, old timber and buried logs, building a continuous timeline that can extend back thousands of years.`,
-        `(8) This method has solved practical puzzles. (9) In the village of Elksford, historians long debated when a wooden meeting hall had been built. (10) Researcher Tomasz Wierzbicki and his team compared beams from the hall's roof with the regional ring timeline and found that the outermost ring on the beams formed in 1712, meaning the trees were cut that winter.`,
+        `(8) This method has solved practical puzzles. (9) In the village of Elksford, historians long debated when a wooden meeting hall had been built. (10) Researcher Tomasz Wierzbicki and a research team compared beams from the hall's roof with the regional ring timeline and found that the outermost ring on the beams formed in 1712, meaning the trees were cut that winter.`,
         `(11) Tree rings also hold climate information. (12) A long stretch of narrow rings, for instance, can reveal a drought that no written record describes.`,
       ),
       items: [
@@ -523,7 +523,7 @@ const skill: ContentSkill = {
       body: body(
         `(1) A sourdough starter looks like a simple jar of flour paste, but it is actually a thriving community of microorganisms. (2) Two groups dominate this community: wild yeasts and lactic acid bacteria. (3) Bakers keep a starter alive by feeding it fresh flour and water every day or two.`,
         `(4) Each group plays a distinct role. (5) The yeasts consume sugars in the flour and release carbon dioxide gas, which becomes trapped in the dough and makes the bread rise. (6) Meanwhile, the bacteria convert sugars into lactic and acetic acids, which give sourdough its tangy flavor. (7) These acids also lower the dough's pH, creating conditions in which many unwanted microbes cannot survive.`,
-        `(8) Starters also differ. (9) In a 2022 study, microbiologist Rana Haddad and her students collected starters from 60 home bakers in the town of Westerby and identified the microbes in each. (10) They found more than 20 species of bacteria across the samples, although most starters were dominated by just one or two. (11) Starters fed with whole grain flour tended to host a wider variety of species than those fed with white flour. (12) Haddad's favorite bread is cinnamon raisin.`,
+        `(8) Starters also differ. (9) In a 2022 study, microbiologist Rana Haddad and a group of students collected starters from 60 home bakers in the town of Westerby and identified the microbes in each. (10) They found more than 20 species of bacteria across the samples, although most starters were dominated by just one or two. (11) Starters fed with whole grain flour tended to host a wider variety of species than those fed with white flour. (12) Haddad's favorite bread is cinnamon raisin.`,
         `(13) Some people think sourdough is just bread.`,
       ),
       items: [
@@ -573,7 +573,7 @@ const skill: ContentSkill = {
             ok(`By showing how invisible organisms shape a bread's flavor, texture and safety, sourdough reveals how much of everyday food depends on processes that microbiology can explain.`),
             no(`Some bakeries claim their starters have been kept alive for over a century.`, 'introduces-new-detail'),
           ],
-          solution: `The correct sentence connects the roles described in paragraph 2 to a broader implication about food and science. The first choice is tempting because it summarizes accurately, but it only restates paragraph 2 without stating why the topic matters.`,
+          solution: `The correct sentence connects the roles described in paragraph 2 to a broader implication about food and science. The choice "Sourdough starters contain yeasts and bacteria that make bread rise and taste sour" is tempting because it summarizes accurately, but it only restates paragraph 2 without stating why the topic matters.`,
         },
         {
           slot: 40,
