@@ -46,11 +46,11 @@ const skill: ContentSkill = {
           stem: `Which detail from the fable best supports the theme?`,
           choices: [
             right(`By the time the first stars came out, his light was weak.`),
-            wrong(`He waited until the sky was dark and the frogs began to sing.`, 'irrelevant-detail'),
+            wrong(`Their glow was soft and steady, like tiny lanterns.`, 'irrelevant-detail'),
             wrong(`At the edge of a pond lived a young firefly named Pip.`, 'setting-not-theme'),
             wrong(`A turtle on a log blinked at him.`, 'irrelevant-detail'),
           ],
-          solution: `Pip's weak light at nightfall shows what happens when he rushes at the wrong time. The frogs singing only tells when night came, and the first sentence only sets the scene.`,
+          solution: `Pip's weak light at nightfall shows what happens when he rushes at the wrong time. The line about the older fireflies' steady glow only describes them, and the line about where Pip lived only sets the scene.`,
         },
         {
           slot: 4,
@@ -239,7 +239,7 @@ const skill: ContentSkill = {
             right(`Rafael, who always shoots, learns about passing at practice and then makes the pass that wins the game.`),
             wrong(`The Comets are a much better team than the Hornets because they practice more.`, 'includes-opinion'),
           ],
-          solution: `This choice tells how Rafael starts, what he learns and how the game ends. Mei's basket is only one moment, and Rafael passes instead of shooting, so the second choice is wrong.`,
+          solution: `This choice tells how Rafael starts, what he learns and how the game ends. Mei's basket is only one moment, and Rafael passes instead of shooting, so the choice that says Rafael scores the winning shot is wrong.`,
         },
         {
           slot: 18,
@@ -294,7 +294,7 @@ const skill: ContentSkill = {
             wrong(`Science class should always take place inside a gym.`, 'unsupported-inference'),
             right(`Mistakes can teach you a lot if you pay attention to them.`),
           ],
-          solution: `Nadia says, "Our crashes taught us that," and each crash helps them fix one problem. Their pointed-wing plane crashed, so the first choice goes against the text.`,
+          solution: `Nadia says, "Our crashes taught us that," and each crash helps them fix one problem. Their pointed-wing plane crashed, so the choice about long, pointed wings flying farthest goes against the text.`,
         },
         {
           slot: 22,
@@ -330,7 +330,7 @@ const skill: ContentSkill = {
             wrong(`To show that Ms. Haddad judged the contest unfairly.`, 'unsupported-inference'),
             wrong(`To show that the other pair must have broken the rules.`, 'unsupported-inference'),
           ],
-          solution: `Even without winning, Nadia is proud that they "know exactly why our plane flies," and the teacher asks them to share their notes. That shows the notes were valuable, so the second choice is wrong.`,
+          solution: `Even without winning, Nadia is proud that they "know exactly why our plane flies," and the teacher asks them to share their notes. That shows the notes were valuable, so the choice that says the notes were not useful is wrong.`,
         },
         {
           slot: 25,
@@ -342,7 +342,7 @@ const skill: ContentSkill = {
             wrong(`Nadia blames Jun for the crashes, while Jun blames the paper.`, 'unsupported-inference'),
             right(`Jun sees the crashes as failures, while Nadia sees them as clues.`),
           ],
-          solution: `Jun calls the first crash "terrible" and crumples the plane, but Nadia says, "Maybe it can tell us something." No one blames anyone in the story, so the third choice is not supported.`,
+          solution: `Jun calls the first crash "terrible" and crumples the plane, but Nadia says, "Maybe it can tell us something." No one blames anyone in the story, so the choice about Nadia blaming Jun is not supported.`,
         },
       ],
     },
@@ -428,7 +428,7 @@ const skill: ContentSkill = {
             wrong(`Cookies are the very best way to say thank you.`, 'too-narrow'),
             wrong(`Children should help only when an adult asks them to.`, 'contradicts-text'),
           ],
-          solution: `One child shovels one walk, and by the end the whole block helps and "every neighbor is a friend." The speaker helps without being asked, so the last choice goes against the poem.`,
+          solution: `One child shovels one walk, and by the end the whole block helps and "every neighbor is a friend." The speaker helps without being asked, so the choice about helping only when an adult asks goes against the poem.`,
         },
         {
           slot: 32,
@@ -495,7 +495,7 @@ const skill: ContentSkill = {
             right(`With patience, anyone can be both a teacher and a learner.`),
             wrong(`Young people should do hard tasks for adults to save time.`, 'opposite-of-theme'),
           ],
-          solution: `Theo patiently teaches Pop Eli, and then Pop Eli patiently teaches Theo. Pop Eli does learn to make the call, so the first choice goes against the story.`,
+          solution: `Theo patiently teaches Pop Eli, and then Pop Eli patiently teaches Theo. Pop Eli does learn to make the call, so the choice that says tablets are too hard for older people goes against the story.`,
         },
         {
           slot: 37,
