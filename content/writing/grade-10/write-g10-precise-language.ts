@@ -117,7 +117,7 @@ const skill: ContentSkill = {
         no(`Due to the reason that the river flooded, the town postponed its summer festival.`, 'wordy-phrase'),
         no(`The river flooded, the town postponed its summer festival.`, 'comma-splice'),
       ],
-      solution: `"Because" does the work of "due to the fact that" in one word. The last choice is short but joins two sentences with only a comma and drops the cause relationship.`,
+      solution: `"Because" does the work of "due to the fact that" in one word. The choice "The river flooded, the town postponed its summer festival" is short but joins two sentences with only a comma and drops the cause relationship.`,
     },
     {
       slot: 10,
@@ -223,9 +223,9 @@ const skill: ContentSkill = {
         no(`Then we let it chill for a bit.`, 'informal-word'),
         no(`Then we sort of allowed it to cool for a while.`, 'informal-hedge'),
         no(`It was then cooled quickly with ice.`, 'changes-meaning'),
-        ok(`It was then allowed to cool gradually.`),
+        ok(`It was then allowed to cool for some time.`),
       ],
-      solution: `The correct choice removes "kinda" and matches the impersonal style of the first sentence, and "gradually" keeps the idea of cooling over a while. "Cooled quickly with ice" adds a step that never happened.`,
+      solution: `The correct choice removes "kinda" and matches the impersonal style of the first sentence, and "for some time" keeps the idea of cooling over a while. "Cooled quickly with ice" adds a step that never happened.`,
     },
     {
       slot: 19,
@@ -281,7 +281,7 @@ const skill: ContentSkill = {
       stem: `Read the sentence from an informational article: "Glassblowers obviously need years of practice, as everyone knows." Which revision best keeps an objective tone?`,
       choices: [
         no(`Glassblowers clearly need years of practice, as anyone can see.`, 'assumes-agreement'),
-        ok(`Glassblowers typically need years of practice to master the craft.`),
+        ok(`Glassblowers need years of practice.`),
         no(`Glassblowers need years of practice, which is pretty obvious.`, 'informal-phrase'),
         no(`Glassblowers can master the craft in a few weeks of practice.`, 'changes-meaning'),
       ],
@@ -329,7 +329,7 @@ const skill: ContentSkill = {
       stem: `Read the sentence: "The telescope let the students see a lot of details on the moon's surface." The class notes say the students observed craters and ridges. Which revision is most precise?`,
       choices: [
         no(`The telescope let the students see lots of stuff on the moon's surface.`, 'vague-word'),
-        ok(`The telescope revealed craters and ridges on the moon's surface.`),
+        ok(`The telescope let the students see craters and ridges on the moon's surface.`),
         no(`The telescope let the students see a bunch of the moon's surface.`, 'informal-word'),
         no(`The telescope showed the students some things about the moon.`, 'vague-word'),
       ],
@@ -381,7 +381,7 @@ const skill: ContentSkill = {
         ok(`Many species of frogs can change color.`),
         no(`Frogs change color.`, 'overgeneralization'),
       ],
-      solution: `Removing "it is important to note that," "there are," and "that are able to" leaves the full claim in six words. "Frogs change color" is shorter but wrongly claims that all frogs do so.`,
+      solution: `Removing "it is important to note that," "there are," and "that are able to" leaves the full claim in seven words. "Frogs change color" is shorter but wrongly claims that all frogs do so.`,
     },
     {
       slot: 32,
