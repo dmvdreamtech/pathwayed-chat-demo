@@ -66,7 +66,7 @@ const skill: ContentSkill = {
             no(`Rahman writes that monarchs use the position of the sun to steer in the right direction.`, 'evidence-without-analysis'),
             no(`Some other butterflies, such as painted ladies, also travel long distances each year.`, 'off-topic-fact'),
           ],
-          solution: `A strong conclusion sums up the analysis from both paragraphs, and only the first choice joins direction and flowers. Restating the detail about the sun repeats one piece of evidence without pulling the draft together.`,
+          solution: `A strong conclusion sums up the analysis from both paragraphs, and only the choice about direction being matched by flowers joins both ideas. Restating the detail about the sun repeats one piece of evidence without pulling the draft together.`,
         },
         {
           slot: 5,
@@ -263,7 +263,7 @@ const skill: ContentSkill = {
             no(`Kowalczyk writes that the sensor box sends its readings by radio every second or two.`, 'evidence-without-analysis'),
             no(`Everyone should learn how to read weather maps so they can make their own forecasts.`, 'unsupported-inference'),
           ],
-          solution: `The first choice connects both paragraphs, reaching high air and sending readings fast, back to the claim in sentence 2. The choice about the radio readings only repeats sentence 7 without explaining the whole draft.`,
+          solution: `The choice about reaching high air and sending readings fast connects both paragraphs, reaching high air and sending readings fast, back to the claim in sentence 2. The choice about the radio readings only repeats sentence 7 without explaining the whole draft.`,
         },
         {
           slot: 19,
@@ -346,7 +346,7 @@ const skill: ContentSkill = {
             no(`Delgado reports that the waste dropped from forty pounds to about fifteen pounds.`, 'evidence-without-analysis'),
             no(`Many schools around the world serve very different kinds of lunches to students.`, 'off-topic-fact'),
           ],
-          solution: `The conclusion should bring together both points, less waste and new skills, and only the first choice does that. Restating the drop in pounds repeats evidence from paragraph 1 instead of closing the whole analysis.`,
+          solution: `The conclusion should bring together both points, less waste and new skills, and only the choice saying students waste less and learn to make careful choices does that. Restating the drop in pounds repeats evidence from paragraph 1 instead of closing the whole analysis.`,
         },
         {
           slot: 25,
@@ -415,7 +415,7 @@ const skill: ContentSkill = {
             no(`Watanabe explains that the color sacs can open or close in less than a second.`, 'evidence-without-analysis'),
             no(`This proves that octopuses change color whenever they feel happy or sad.`, 'unsupported-inference'),
           ],
-          solution: `The first choice returns to both reasons named in the claim, hiding and messages. The detail about the color sacs is from the draft, but repeating it does not sum up the analysis.`,
+          solution: `The choice saying the octopus uses its skin both to stay hidden and to send clear messages returns to both reasons named in the claim, hiding and messages. The detail about the color sacs is from the draft, but repeating it does not sum up the analysis.`,
         },
         {
           slot: 30,
@@ -427,7 +427,7 @@ const skill: ContentSkill = {
             no(`It includes a direct quotation from Watanabe's article about the octopus.`, 'misreads-sentence'),
             no(`It covers only the first paragraph, which keeps the draft narrowly focused.`, 'too-narrow'),
           ],
-          solution: `Sentence 2 names two reasons, hiding and messages, and each paragraph gives evidence for one of them; the classmate's sentence only names a topic. Sentence 2 covers both paragraphs, not just the first, so the last choice misreads it.`,
+          solution: `Sentence 2 names two reasons, hiding and messages, and each paragraph gives evidence for one of them; the classmate's sentence only names a topic. Sentence 2 covers both paragraphs, not just the first, so the choice saying it covers only the first paragraph misreads it.`,
         },
       ],
     },
@@ -472,7 +472,7 @@ const skill: ContentSkill = {
             no(`These details suggest that sixty students joined the walking program in one year.`, 'supports-different-point'),
             no(`These details suggest that most teachers prefer to teach during first period.`, 'misreads-evidence'),
           ],
-          solution: `Sentences 7 and 8 connect morning exercise with being alert in class, so the first choice explains that link. The number of students who joined is from paragraph 1 and does not explain why walkers were more alert.`,
+          solution: `Sentences 7 and 8 connect morning exercise with being alert in class, so the choice about exercise helping students focus explains that link. The number of students who joined is from paragraph 1 and does not explain why walkers were more alert.`,
         },
         {
           slot: 34,
@@ -555,7 +555,7 @@ const skill: ContentSkill = {
             no(`Brennan explains that students who sketched insects could describe them better a month later.`, 'evidence-without-analysis'),
             no(`Brennan proves that photographs are useless and that scientists should never take pictures.`, 'overgeneralization'),
           ],
-          solution: `The first choice ties both paragraphs back to the claim about noticing and remembering. The choice about photographs being useless goes too far, because Brennan only shows that drawing adds something photos can miss.`,
+          solution: `The choice about slow looking leading to sharper noticing and stronger memory ties both paragraphs back to the claim about noticing and remembering. The choice about photographs being useless goes too far, because Brennan only shows that drawing adds something photos can miss.`,
         },
         {
           slot: 40,
