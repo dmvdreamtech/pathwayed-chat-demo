@@ -39,15 +39,27 @@ relying on any specific grade move.
   and Statistics. They target the standards in `coverage_targets`. The content
   itself, such as quadratics, circles, trig and probability, carries over to the
   integrated courses. Only the grade and course labels would shift.
-- **Waiting on a decision:** I have **not** started the K to 8 Math gaps. They
-  should be planned against the 2025 Maryland standards, since those are what
-  K to 8 classrooms teach this year, not the 2010 ones that 0040's targets use.
-  Two ways to do it:
-  1. Get the MSDE crosswalks (download them by hand, or share the files). Then
-     rebuild the K to 8 math targets from the new codes and write the missing
-     skills against them. This is the recommended option.
-  2. Build K to 8 against the 2010 targets now, and accept that some skills
-     will sit a grade off for Maryland students.
+- **Decided (2026-10-17):** K to 8 Math is built now on the 2010 Common Core
+  standards. Each skill is tagged with its standard codes in
+  `skill_standard_codes` (migration 0041), framework `ccss`. The Maryland 2025
+  codes go in the same table under framework `md-2025` once the MSDE crosswalks
+  are in hand, so nothing has to be rebuilt.
+
+### Skills Maryland moved (unconfirmed)
+
+These come from MSDE summaries and district notes, not from the crosswalk
+files, so treat them as leads to check, not facts. The skill is built at its
+Common Core grade either way.
+
+| Skill in this build | Common Core | What Maryland 2025 appears to do |
+|---|---|---|
+| Money (coins, dollars and cents) | 2.MD.C.8, grade 2 | Moves into grade 1 (1.GR.C.6). |
+| Telling time | 2.MD.C.7, nearest 5 minutes | Grade 2 goes to the nearest minute and adds elapsed time. |
+| Ratios and rates (grade 6) | 6.RP, its own domain | Sits under an "Algebraic Thinking" domain. Same content, new code. |
+
+When the crosswalk arrives, add each skill's `md-2025` rows and, for any skill
+that moved grades, decide whether students see it at the Maryland grade.
+
 - **Reading and Writing** are unaffected. Maryland's ELA standards still match
   Common Core one for one.
 
