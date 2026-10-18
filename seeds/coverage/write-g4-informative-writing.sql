@@ -110,7 +110,7 @@ insert into public.passages (id, code, skill_id, sat_alignment, grade_band, titl
 values ('add2816f-c2d5-5178-9aa5-751da61ff4f2', 'wg4-informative-writing-p02', (select id from public.skills where slug = 'write-g4-informative-writing'), null,
         '3-5', $q$The Pony Express$q$, $q$(1) In 1860, sending a letter across the country could take weeks. (2) The Pony Express was a mail service that carried letters on horseback. (3) It ran between Missouri and California.
 
-(4) Riders on the Pony Express did not ride the whole way. (5) They rode fast for many miles. (6) They stopped at small buildings called stations. (7) At each station, a rider jumped onto a fresh horse. (8) After riding a long stretch, he handed the mail bag to a new rider. (9) In this way, the mail kept moving day and night.
+(4) Riders on the Pony Express did not ride the whole way. (5) They rode fast for many miles. (6) They stopped at small buildings called stations. (7) At each station, a rider jumped onto a fresh horse. (8) After riding a long stretch, the rider handed the mail bag to a new rider. (9) In this way, the mail kept moving day and night.
 
 (10) The Pony Express could carry a letter about two thousand miles in roughly ten days. (11) That was much faster than mail sent by wagon. (12) The service ended in 1861. (13) A new telegraph line could send messages across the country in minutes.$q$, 'draft')
 on conflict (id) do update set title = excluded.title, body = excluded.body
@@ -132,7 +132,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('0b280bb7-9d4b-5b9b-a7bf-7273d7c72df5', null, (select id from public.skills where slug = 'write-g4-informative-writing'), null, 'easy',
-   $q$Which is the best way to join sentences 5 and 6?$q$, $q$[{"text":"They rode fast for many miles but stopped at small buildings called stations.","is_correct":false,"misconception_token":"false-contrast"},{"text":"They rode fast for many miles because they stopped at small buildings called stations.","is_correct":false,"misconception_token":"confuses-cause-effect"},{"text":"They rode fast for many miles and then stopped at small buildings called stations.","is_correct":true},{"text":"They rode fast for many miles, they stopped at small buildings called stations.","is_correct":false,"misconception_token":"comma-splice"}]$q$::jsonb, $q$They rode fast for many miles and then stopped at small buildings called stations.$q$, $q$"And then" shows the order of events, riding first and stopping next. "Because" is wrong since stopping was not the reason the riders rode fast.$q$, 'draft', 'add2816f-c2d5-5178-9aa5-751da61ff4f2')
+   $q$Which is the best way to join sentences 5 and 6?$q$, $q$[{"text":"They rode fast for many miles. And stopped at small buildings called stations.","is_correct":false,"misconception_token":"sentence-fragment"},{"text":"They rode fast for many miles because they stopped at small buildings called stations.","is_correct":false,"misconception_token":"confuses-cause-effect"},{"text":"They rode fast for many miles and then stopped at small buildings called stations.","is_correct":true},{"text":"They rode fast for many miles, they stopped at small buildings called stations.","is_correct":false,"misconception_token":"comma-splice"}]$q$::jsonb, $q$They rode fast for many miles and then stopped at small buildings called stations.$q$, $q$"And then" shows the order of events, riding first and stopping next. "Because" is wrong since stopping was not the reason the riders rode fast.$q$, 'draft', 'add2816f-c2d5-5178-9aa5-751da61ff4f2')
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -494,7 +494,7 @@ insert into public.passages (id, code, skill_id, sat_alignment, grade_band, titl
 values ('cbf81b78-242c-5149-8a3d-f17c69b09e2f', 'wg4-informative-writing-p07', (select id from public.skills where slug = 'write-g4-informative-writing'), null,
         '3-5', $q$The Goalkeeper$q$, $q$(1) Every soccer team has one special player called the goalkeeper. (2) The goalkeeper's main job is to stop the other team from scoring.
 
-(3) The goalkeeper has a rule that no other player has. (4) Inside a large box in front of the goal, the goalkeeper may touch the ball with hands. (5) This box is called the penalty area. (6) Other players must use their feet, heads or chests.
+(3) The goalkeeper has a rule that no other player has. (4) Inside a large box in front of the goal, the goalkeeper may touch the ball with their hands. (5) This box is called the penalty area. (6) Other players may not touch the ball with their hands or arms.
 
 (7) Goalkeepers wear a shirt with a different color than their teammates. (8) This helps the referee spot them quickly. (9) They also wear padded gloves. (10) The gloves help them grip the ball. (11) Soccer is played in many countries around the world.
 
@@ -544,7 +544,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('50bc0255-d488-5b74-8f16-52c0725089d7', null, (select id from public.skills where slug = 'write-g4-informative-writing'), null, 'medium',
-   $q$Which example would best support sentence 12 if it were added after sentence 14?$q$, $q$[{"text":"A soccer game usually lasts about ninety minutes.","is_correct":false,"misconception_token":"off-focus-detail"},{"text":"Fans often cheer loudly when their team scores.","is_correct":false,"misconception_token":"off-focus-detail"},{"text":"Some goalkeepers leap across the whole goal in less than a second.","is_correct":true},{"text":"Some goalkeepers wear long pants instead of shorts.","is_correct":false,"misconception_token":"supports-wrong-idea"}]$q$::jsonb, $q$Some goalkeepers leap across the whole goal in less than a second.$q$, $q$Leaping across the goal in under a second shows how quick and brave a goalkeeper must be. Long pants are about clothing, which connects to paragraph 3, not to sentence 12.$q$, 'draft', 'cbf81b78-242c-5149-8a3d-f17c69b09e2f')
+   $q$Which example would best support sentence 12 if it were added after sentence 14?$q$, $q$[{"text":"A soccer game usually lasts about ninety minutes.","is_correct":false,"misconception_token":"off-focus-detail"},{"text":"Fans often cheer loudly when their team scores.","is_correct":false,"misconception_token":"off-focus-detail"},{"text":"A goalkeeper may have less than one second to react to a hard kick.","is_correct":true},{"text":"Some goalkeepers wear long pants instead of shorts.","is_correct":false,"misconception_token":"supports-wrong-idea"}]$q$::jsonb, $q$A goalkeeper may have less than one second to react to a hard kick.$q$, $q$Having less than one second to react shows how quick a goalkeeper must be. Long pants are about clothing, which connects to paragraph 3, not to sentence 12.$q$, 'draft', 'cbf81b78-242c-5149-8a3d-f17c69b09e2f')
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

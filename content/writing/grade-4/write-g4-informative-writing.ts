@@ -88,7 +88,7 @@ const skill: ContentSkill = {
       title: 'The Pony Express',
       body: body(
         `(1) In 1860, sending a letter across the country could take weeks. (2) The Pony Express was a mail service that carried letters on horseback. (3) It ran between Missouri and California.`,
-        `(4) Riders on the Pony Express did not ride the whole way. (5) They rode fast for many miles. (6) They stopped at small buildings called stations. (7) At each station, a rider jumped onto a fresh horse. (8) After riding a long stretch, he handed the mail bag to a new rider. (9) In this way, the mail kept moving day and night.`,
+        `(4) Riders on the Pony Express did not ride the whole way. (5) They rode fast for many miles. (6) They stopped at small buildings called stations. (7) At each station, a rider jumped onto a fresh horse. (8) After riding a long stretch, the rider handed the mail bag to a new rider. (9) In this way, the mail kept moving day and night.`,
         `(10) The Pony Express could carry a letter about two thousand miles in roughly ten days. (11) That was much faster than mail sent by wagon. (12) The service ended in 1861. (13) A new telegraph line could send messages across the country in minutes.`,
       ),
       items: [
@@ -112,7 +112,7 @@ const skill: ContentSkill = {
             ok(`They rode fast for many miles and then stopped at small buildings called stations.`),
             no(`They rode fast for many miles, they stopped at small buildings called stations.`, 'comma-splice'),
             no(`They rode fast for many miles because they stopped at small buildings called stations.`, 'confuses-cause-effect'),
-            no(`They rode fast for many miles but stopped at small buildings called stations.`, 'false-contrast'),
+            no(`They rode fast for many miles. And stopped at small buildings called stations.`, 'sentence-fragment'),
           ],
           solution: `"And then" shows the order of events, riding first and stopping next. "Because" is wrong since stopping was not the reason the riders rode fast.`,
         },
@@ -445,7 +445,7 @@ const skill: ContentSkill = {
       title: 'The Goalkeeper',
       body: body(
         `(1) Every soccer team has one special player called the goalkeeper. (2) The goalkeeper's main job is to stop the other team from scoring.`,
-        `(3) The goalkeeper has a rule that no other player has. (4) Inside a large box in front of the goal, the goalkeeper may touch the ball with hands. (5) This box is called the penalty area. (6) Other players must use their feet, heads or chests.`,
+        `(3) The goalkeeper has a rule that no other player has. (4) Inside a large box in front of the goal, the goalkeeper may touch the ball with their hands. (5) This box is called the penalty area. (6) Other players may not touch the ball with their hands or arms.`,
         `(7) Goalkeepers wear a shirt with a different color than their teammates. (8) This helps the referee spot them quickly. (9) They also wear padded gloves. (10) The gloves help them grip the ball. (11) Soccer is played in many countries around the world.`,
         `(12) A good goalkeeper must be brave and quick. (13) They dive to block shots. (14) They also shout directions to teammates on defense.`,
       ),
@@ -491,12 +491,12 @@ const skill: ContentSkill = {
           difficulty: 'medium',
           stem: `Which example would best support sentence 12 if it were added after sentence 14?`,
           choices: [
-            ok(`Some goalkeepers leap across the whole goal in less than a second.`),
+            ok(`A goalkeeper may have less than one second to react to a hard kick.`),
             no(`Some goalkeepers wear long pants instead of shorts.`, 'supports-wrong-idea'),
             no(`A soccer game usually lasts about ninety minutes.`, 'off-focus-detail'),
             no(`Fans often cheer loudly when their team scores.`, 'off-focus-detail'),
           ],
-          solution: `Leaping across the goal in under a second shows how quick and brave a goalkeeper must be. Long pants are about clothing, which connects to paragraph 3, not to sentence 12.`,
+          solution: `Having less than one second to react shows how quick a goalkeeper must be. Long pants are about clothing, which connects to paragraph 3, not to sentence 12.`,
         },
         {
           slot: 35,
