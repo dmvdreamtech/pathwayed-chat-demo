@@ -338,7 +338,7 @@ const skill: ContentSkill = {
     {
       slot: 28,
       difficulty: 'medium',
-      stem: `Lucas built a number with 5 ten thousands, 2 thousands, 6 tens and 1 one. What number did he build?`,
+      stem: `Lucas built a number with 5 ten thousands, 2 thousands, 6 tens and 1 one. What number did Lucas build?`,
       choices: [
         no(`52,610`, 'shifted-tens-and-ones-left'),
         no(`5,261`, 'skipped-the-zero-place'),
@@ -410,7 +410,7 @@ const skill: ContentSkill = {
     {
       slot: 34,
       difficulty: 'hard',
-      stem: `Elan rounded a number to the nearest hundred and got 8,300. Which could have been his number?`,
+      stem: `Elan rounded a number to the nearest hundred and got 8,300. Which could have been Elan's number?`,
       choices: [
         no(`8,351`, 'rounded-down-past-five'),
         no(`8,239`, 'rounded-up-from-three'),

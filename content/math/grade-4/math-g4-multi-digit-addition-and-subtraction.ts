@@ -242,7 +242,7 @@ const skill: ContentSkill = {
     {
       slot: 20,
       difficulty: 'medium',
-      stem: `A hiking trail is 8,204 feet long. Rosa has walked 3,617 feet. How many feet does she have left to walk?`,
+      stem: `A hiking trail is 8,204 feet long. Rosa has walked 3,617 feet. How many feet does Rosa have left to walk?`,
       choices: [
         no(`5,413`, 'subtracted-smaller-from-larger-digit'),
         no(`11,821`, 'added-instead-of-subtracted'),
@@ -266,7 +266,7 @@ const skill: ContentSkill = {
     {
       slot: 22,
       difficulty: 'medium',
-      stem: `Mateo found that $7{,}231 - 3{,}586 = 3{,}645$. Which addition can he use to check his answer?`,
+      stem: `Mateo found that $7{,}231 - 3{,}586 = 3{,}645$. Which addition can Mateo use to check the answer?`,
       choices: [
         ok(`$3{,}645 + 3{,}586 = 7{,}231$`),
         no(`$7{,}231 + 3{,}586 = 10{,}817$`, 'added-the-wrong-numbers'),
@@ -290,7 +290,7 @@ const skill: ContentSkill = {
     {
       slot: 24,
       difficulty: 'medium',
-      stem: `Priya wrote $5{,}002 - 1{,}347 = 4{,}345$. Her answer is wrong. What is the correct difference?`,
+      stem: `Priya wrote $5{,}002 - 1{,}347 = 4{,}345$. Priya's answer is wrong. What is the correct difference?`,
       choices: [
         no(`4,345`, 'subtracted-smaller-from-larger-digit'),
         no(`3,765`, 'regrouped-zero-as-ten'),
@@ -434,7 +434,7 @@ const skill: ContentSkill = {
     {
       slot: 36,
       difficulty: 'hard',
-      stem: `Theo wrote $70{,}000 - 28{,}436 = 42{,}674$. He changed each zero to 10 when he regrouped. What is the correct difference?`,
+      stem: `Theo wrote $70{,}000 - 28{,}436 = 42{,}674$. Theo changed each zero to 10 when regrouping. What is the correct difference?`,
       choices: [
         no(`42,674`, 'regrouped-zero-as-ten'),
         no(`58,436`, 'subtracted-smaller-from-larger-digit'),

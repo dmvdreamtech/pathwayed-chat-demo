@@ -98,7 +98,7 @@ const skill: ContentSkill = {
     {
       slot: 8,
       difficulty: 'easy',
-      stem: `Rosa cuts 2 pies so that each piece is $\\frac{1}{3}$ of a pie. How many pieces does she have?`,
+      stem: `Rosa cuts 2 pies so that each piece is $\\frac{1}{3}$ of a pie. How many pieces does Rosa have?`,
       choices: [
         ok(`$6$`),
         no(`$\\frac{2}{3}$`, 'multiplied-by-unit-fraction'),
@@ -158,7 +158,7 @@ const skill: ContentSkill = {
     {
       slot: 13,
       difficulty: 'medium',
-      stem: `Ana has $\\frac{1}{2}$ pound of trail mix. She shares it equally among 4 friends. How many pounds does each friend get?`,
+      stem: `Ana has $\\frac{1}{2}$ pound of trail mix. Ana shares it equally among 4 friends. How many pounds does each friend get?`,
       choices: [
         ok(`$\\frac{1}{8}$ pound`),
         no(`$2$ pounds`, 'multiplied-instead-of-divided'),
@@ -170,7 +170,7 @@ const skill: ContentSkill = {
     {
       slot: 14,
       difficulty: 'medium',
-      stem: `Kwame has 3 yards of ribbon. He cuts it into pieces that are each $\\frac{1}{6}$ yard long. How many pieces does he get?`,
+      stem: `Kwame has 3 yards of ribbon. Kwame cuts it into pieces that are each $\\frac{1}{6}$ yard long. How many pieces does Kwame get?`,
       choices: [
         no(`$\\frac{1}{2}$`, 'multiplied-by-unit-fraction'),
         no(`$9$`, 'added-instead-of-multiplied'),
@@ -184,10 +184,10 @@ const skill: ContentSkill = {
       difficulty: 'medium',
       stem: `Which story can be solved with $\\frac{1}{3} \\div 2$?`,
       choices: [
-        no(`Omar cuts 2 pans of cornbread into thirds. How many pieces does he have?`, 'reversed-the-division'),
+        no(`Omar cuts 2 pans of cornbread into thirds. How many pieces does Omar have?`, 'reversed-the-division'),
         ok(`Omar and Lena share $\\frac{1}{3}$ of a pan of cornbread equally. How much does each get?`),
-        no(`Omar eats $\\frac{1}{3}$ of a pan of cornbread on each of 2 days. How much does he eat in all?`, 'multiplied-instead-of-divided'),
-        no(`Omar has $\\frac{1}{3}$ of a pan of cornbread and bakes 2 more pans. How much does he have now?`, 'added-instead-of-divided'),
+        no(`Omar eats $\\frac{1}{3}$ of a pan of cornbread on each of 2 days. How much does Omar eat in all?`, 'multiplied-instead-of-divided'),
+        no(`Omar has $\\frac{1}{3}$ of a pan of cornbread and bakes 2 more pans. How much does Omar have now?`, 'added-instead-of-divided'),
       ],
       solution: `Splitting $\\frac{1}{3}$ of a pan between 2 people is $\\frac{1}{3} \\div 2$. The story about cutting 2 pans into thirds is $2 \\div \\frac{1}{3}$, with the numbers in the other order.`,
     },
@@ -196,10 +196,10 @@ const skill: ContentSkill = {
       difficulty: 'medium',
       stem: `Which story can be solved with $5 \\div \\frac{1}{2}$?`,
       choices: [
-        no(`Grace has 5 cups of milk and drinks half of it. How much milk does she drink?`, 'multiplied-by-unit-fraction'),
+        no(`Grace has 5 cups of milk and drinks half of it. How much milk does Grace drink?`, 'multiplied-by-unit-fraction'),
         no(`Grace has $\\frac{1}{2}$ cup of milk and shares it among 5 friends. How much does each friend get?`, 'reversed-the-division'),
-        ok(`Grace has 5 cups of milk and pours it into glasses that each hold $\\frac{1}{2}$ cup. How many glasses can she fill?`),
-        no(`Grace has 5 cups of milk and buys $\\frac{1}{2}$ cup more. How much milk does she have?`, 'added-instead-of-divided'),
+        ok(`Grace has 5 cups of milk and pours it into glasses that each hold $\\frac{1}{2}$ cup. How many glasses can Grace fill?`),
+        no(`Grace has 5 cups of milk and buys $\\frac{1}{2}$ cup more. How much milk does Grace have?`, 'added-instead-of-divided'),
       ],
       solution: `Finding how many $\\frac{1}{2}$ cup glasses fit in 5 cups is $5 \\div \\frac{1}{2} = 10$. Drinking half of 5 cups is $5 \\times \\frac{1}{2}$, which is a different operation.`,
     },
@@ -230,7 +230,7 @@ const skill: ContentSkill = {
     {
       slot: 19,
       difficulty: 'medium',
-      stem: `Lucia says $\\frac{1}{5} \\div 4 = \\frac{1}{20}$. Which multiplication can she use to check her answer?`,
+      stem: `Lucia says $\\frac{1}{5} \\div 4 = \\frac{1}{20}$. Which multiplication can Lucia use to check the answer?`,
       choices: [
         ok(`$\\frac{1}{20} \\times 4 = \\frac{1}{5}$`),
         no(`$\\frac{1}{5} \\times 4 = \\frac{1}{20}$`, 'multiplied-the-wrong-numbers'),
@@ -302,7 +302,7 @@ const skill: ContentSkill = {
     {
       slot: 25,
       difficulty: 'medium',
-      stem: `One lap around the park path is $\\frac{1}{4}$ mile. Tomasz runs 3 miles. How many laps does he run?`,
+      stem: `One lap around the park path is $\\frac{1}{4}$ mile. Tomasz runs 3 miles. How many laps does Tomasz run?`,
       choices: [
         no(`$\\frac{3}{4}$`, 'multiplied-by-unit-fraction'),
         no(`$7$`, 'added-instead-of-multiplied'),
@@ -374,7 +374,7 @@ const skill: ContentSkill = {
     {
       slot: 31,
       difficulty: 'hard',
-      stem: `Mei has 3 pounds of clay. Each pot she makes uses $\\frac{1}{4}$ pound. She makes as many pots as she can and gives 5 of them away. How many pots does she keep?`,
+      stem: `Mei has 3 pounds of clay. Each pot Mei makes uses $\\frac{1}{4}$ pound. Mei makes as many pots as possible and gives 5 of them away. How many pots does Mei keep?`,
       choices: [
         no(`$12$`, 'forgot-second-step'),
         ok(`$7$`),
@@ -410,7 +410,7 @@ const skill: ContentSkill = {
     {
       slot: 34,
       difficulty: 'hard',
-      stem: `Diego has 2 cups of oil. Each batch of muffins uses $\\frac{1}{4}$ cup. He has already made 3 batches from these 2 cups. How many more batches can he make?`,
+      stem: `Diego has 2 cups of oil. Each batch of muffins uses $\\frac{1}{4}$ cup. Diego has already made 3 batches from these 2 cups. How many more batches can Diego make?`,
       choices: [
         no(`$8$`, 'forgot-second-step'),
         no(`$11$`, 'added-instead-of-subtracted'),
@@ -434,12 +434,12 @@ const skill: ContentSkill = {
     {
       slot: 36,
       difficulty: 'hard',
-      stem: `Jamal wrote $\\frac{1}{4} \\div 5 = \\frac{5}{4}$. Which sentence explains his mistake?`,
+      stem: `Jamal wrote $\\frac{1}{4} \\div 5 = \\frac{5}{4}$. Which sentence explains Jamal's mistake?`,
       choices: [
-        ok(`He multiplied by 5 instead of dividing; the answer is $\\frac{1}{20}$.`),
-        no(`He should have added 5 to 4; the answer is $\\frac{1}{9}$.`, 'added-to-denominator'),
-        no(`He should have divided 4 by 5; the answer is $\\frac{4}{5}$.`, 'divided-the-wrong-way'),
-        no(`He made no mistake; dividing by 5 gives $\\frac{5}{4}$.`, 'multiplied-instead-of-divided'),
+        ok(`Jamal multiplied by 5 instead of dividing; the answer is $\\frac{1}{20}$.`),
+        no(`Jamal should have added 5 to 4; the answer is $\\frac{1}{9}$.`, 'added-to-denominator'),
+        no(`Jamal should have divided 4 by 5; the answer is $\\frac{4}{5}$.`, 'divided-the-wrong-way'),
+        no(`Jamal made no mistake; dividing by 5 gives $\\frac{5}{4}$.`, 'multiplied-instead-of-divided'),
       ],
       solution: `$\\frac{5}{4}$ is $\\frac{1}{4} \\times 5$, but splitting one fourth into 5 parts gives $\\frac{1}{20}$. Adding 5 to the denominator to get $\\frac{1}{9}$ is also wrong, because $\\frac{1}{9} \\times 5$ is not $\\frac{1}{4}$.`,
     },
@@ -461,7 +461,7 @@ const skill: ContentSkill = {
       stem: `Kenji finds $4 \\div \\frac{1}{2}$, then $4 \\div \\frac{1}{3}$, then $4 \\div \\frac{1}{4}$. What happens to the answers?`,
       choices: [
         no(`They get smaller, because the denominators get larger.`, 'misjudged-fraction-size'),
-        no(`They stay the same, because he always starts with 4.`, 'ignored-the-divisor'),
+        no(`They stay the same, because Kenji always starts with 4.`, 'ignored-the-divisor'),
         no(`They get smaller, because the answers are 2, then $\\frac{4}{3}$, then 1.`, 'divided-by-denominator'),
         ok(`They get larger, because the answers are 8, then 12, then 16.`),
       ],
@@ -470,7 +470,7 @@ const skill: ContentSkill = {
     {
       slot: 39,
       difficulty: 'hard',
-      stem: `Priya has 5 meters of rope. She cuts it into pieces that are each $\\frac{1}{4}$ meter long. Then she shares the pieces equally among 4 friends. How many pieces does each friend get?`,
+      stem: `Priya has 5 meters of rope. Priya cuts it into pieces that are each $\\frac{1}{4}$ meter long. Then Priya shares the pieces equally among 4 friends. How many pieces does each friend get?`,
       choices: [
         no(`$20$`, 'forgot-second-step'),
         ok(`$5$`),
@@ -484,9 +484,9 @@ const skill: ContentSkill = {
       difficulty: 'hard',
       stem: `Which word problem has an answer of $\\frac{1}{15}$?`,
       choices: [
-        no(`Liam cuts 3 sheets of felt into fifths. How many pieces does he have?`, 'reversed-the-division'),
+        no(`Liam cuts 3 sheets of felt into fifths. How many pieces does Liam have?`, 'reversed-the-division'),
         ok(`Liam shares $\\frac{1}{3}$ liter of water equally among 5 plants. How much does each plant get?`),
-        no(`Liam fills 5 jars with $\\frac{1}{3}$ cup of beads each. How many cups does he use?`, 'multiplied-instead-of-divided'),
+        no(`Liam fills 5 jars with $\\frac{1}{3}$ cup of beads each. How many cups does Liam use?`, 'multiplied-instead-of-divided'),
         no(`Liam has $\\frac{1}{3}$ yard of string and adds 5 yards. How long is it now?`, 'added-instead-of-divided'),
       ],
       solution: `Sharing $\\frac{1}{3}$ liter among 5 plants is $\\frac{1}{3} \\div 5 = \\frac{1}{15}$ liter. Cutting 3 sheets into fifths is $3 \\div \\frac{1}{5} = 15$ pieces, which is 15, not $\\frac{1}{15}$.`,

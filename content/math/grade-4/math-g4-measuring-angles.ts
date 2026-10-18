@@ -50,14 +50,14 @@ const skill: ContentSkill = {
     {
       slot: 4,
       difficulty: 'easy',
-      stem: `Mateo stands facing the door and turns halfway around so he faces the back wall. How many degrees did he turn?`,
+      stem: `Mateo stands facing the door and turns halfway around to face the back wall. How many degrees did Mateo turn?`,
       choices: [
         ok(`$180^\\circ$`),
         no(`$90^\\circ$`, 'confused-half-and-quarter-turn'),
         no(`$360^\\circ$`, 'confused-half-and-full-turn'),
         no(`$50^\\circ$`, 'thinks-circle-is-100-degrees'),
       ],
-      solution: `A half turn is half of $360^\\circ$, which is $180^\\circ$. The answer $90^\\circ$ is a quarter turn, which would leave him facing a side wall.`,
+      solution: `A half turn is half of $360^\\circ$, which is $180^\\circ$. The answer $90^\\circ$ is a quarter turn, which would leave Mateo facing a side wall.`,
     },
     {
       slot: 5,
@@ -117,7 +117,7 @@ const skill: ContentSkill = {
         no(`$180^\\circ$`, 'added-both-scales'),
         no(`$80^\\circ$`, 'subtracted-the-scales'),
       ],
-      solution: `The first ray is on 0 of the inner scale, so he must read the inner scale, which says $50^\\circ$. The answer $130^\\circ$ comes from reading the outer scale, which starts at 0 on the other side.`,
+      solution: `The first ray is on 0 of the inner scale, so Kenji must read the inner scale, which says $50^\\circ$. The answer $130^\\circ$ comes from reading the outer scale, which starts at 0 on the other side.`,
     },
     {
       slot: 10,
@@ -182,7 +182,7 @@ const skill: ContentSkill = {
     {
       slot: 15,
       difficulty: 'medium',
-      stem: `Priya opens a cabinet door $35^\\circ$. Then she opens it $40^\\circ$ more. How far open is the door now?`,
+      stem: `Priya opens a cabinet door $35^\\circ$. Then Priya opens it $40^\\circ$ more. How far open is the door now?`,
       choices: [
         no(`$5^\\circ$`, 'subtracted-instead-of-added'),
         no(`$70^\\circ$`, 'added-tens-only'),
@@ -206,14 +206,14 @@ const skill: ContentSkill = {
     {
       slot: 17,
       difficulty: 'medium',
-      stem: `Lena wants to draw a $70^\\circ$ angle. She puts the protractor's center on the vertex and lines up her first ray with 0 on the outer scale. Where should she make her mark for the second ray?`,
+      stem: `Lena wants to draw a $70^\\circ$ angle. Lena puts the protractor's center on the vertex and lines up the first ray with 0 on the outer scale. Where should Lena make the mark for the second ray?`,
       choices: [
         no(`At 70 on the inner scale`, 'read-the-wrong-scale'),
         ok(`At 70 on the outer scale`),
         no(`At 110 on the outer scale`, 'subtracted-from-straight-angle'),
         no(`At 20 on the outer scale`, 'subtracted-from-right-angle'),
       ],
-      solution: `She started at 0 on the outer scale, so she must count up on that same scale to 70. A mark at 70 on the inner scale sits at 110 on the outer scale, which would make a $110^\\circ$ angle.`,
+      solution: `Lena started at 0 on the outer scale, so Lena must count up on that same scale to 70. A mark at 70 on the inner scale sits at 110 on the outer scale, which would make a $110^\\circ$ angle.`,
     },
     {
       slot: 18,
@@ -266,7 +266,7 @@ const skill: ContentSkill = {
     {
       slot: 22,
       difficulty: 'easy',
-      stem: `Sofia turns a dial by $1^\\circ$ at a time. She does this 10 times. How many degrees has the dial turned in all?`,
+      stem: `Sofia turns a dial by $1^\\circ$ at a time. Sofia does this 10 times. How many degrees has the dial turned in all?`,
       choices: [
         ok(`$10^\\circ$`),
         no(`$1^\\circ$`, 'counted-one-turn-only'),
@@ -326,7 +326,7 @@ const skill: ContentSkill = {
     {
       slot: 27,
       difficulty: 'medium',
-      stem: `Diego is skating. He makes three quarter turns in a row, all in the same direction. How many degrees does he turn in all?`,
+      stem: `Diego is skating. Diego makes three quarter turns in a row, all in the same direction. How many degrees does Diego turn in all?`,
       choices: [
         no(`$180^\\circ$`, 'counted-two-turns'),
         ok(`$270^\\circ$`),

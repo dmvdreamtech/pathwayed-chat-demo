@@ -164,7 +164,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('fdf92159-798a-57ee-8a05-d3350f0d1df6', null, (select id from public.skills where slug = 'math-g4-multiplicative-comparison-and-multi-step-problems'), null, 'medium',
-   $q$Rosa saved 8 dollars. Her brother saved 3 times as much as Rosa. How many dollars did they save together?$q$, $q$[{"text":"16 dollars","is_correct":false,"misconception_token":"subtracted-in-second-step"},{"text":"11 dollars","is_correct":false,"misconception_token":"added-instead-of-multiplied"},{"text":"24 dollars","is_correct":false,"misconception_token":"stopped-after-first-step"},{"text":"32 dollars","is_correct":true}]$q$::jsonb, $q$32 dollars$q$, $q$Her brother saved $3 \times 8 = 24$ dollars, and together they saved $24 + 8 = 32$ dollars. The answer 24 dollars is only the brother's savings.$q$, 'draft', null)
+   $q$Rosa saved 8 dollars. Rosa's brother saved 3 times as much as Rosa. How many dollars did they save together?$q$, $q$[{"text":"16 dollars","is_correct":false,"misconception_token":"subtracted-in-second-step"},{"text":"11 dollars","is_correct":false,"misconception_token":"added-instead-of-multiplied"},{"text":"24 dollars","is_correct":false,"misconception_token":"stopped-after-first-step"},{"text":"32 dollars","is_correct":true}]$q$::jsonb, $q$32 dollars$q$, $q$Rosa's brother saved $3 \times 8 = 24$ dollars, and together they saved $24 + 8 = 32$ dollars. The answer 24 dollars is only the brother's savings.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -190,7 +190,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('571276bf-61a8-5e58-87e4-0d45b47bd29e', null, (select id from public.skills where slug = 'math-g4-multiplicative-comparison-and-multi-step-problems'), null, 'medium',
-   $q$A baker has 50 muffins. She fills as many boxes as she can with 6 muffins in each box. How many muffins are left over?$q$, $q$[{"text":"8","is_correct":false,"misconception_token":"gave-quotient-not-remainder"},{"text":"9","is_correct":false,"misconception_token":"rounded-quotient-up"},{"text":"44","is_correct":false,"misconception_token":"subtracted-one-group"},{"text":"2","is_correct":true}]$q$::jsonb, $q$2$q$, $q$$50 \div 6 = 8$ R $2$, so she fills 8 boxes and 2 muffins are left over. The answer 8 is the number of full boxes, but the question asks for the muffins left over.$q$, 'draft', null)
+   $q$A baker has 50 muffins. The baker fills as many boxes as possible with 6 muffins in each box. How many muffins are left over?$q$, $q$[{"text":"8","is_correct":false,"misconception_token":"gave-quotient-not-remainder"},{"text":"9","is_correct":false,"misconception_token":"rounded-quotient-up"},{"text":"44","is_correct":false,"misconception_token":"subtracted-one-group"},{"text":"2","is_correct":true}]$q$::jsonb, $q$2$q$, $q$$50 \div 6 = 8$ R $2$, so the baker fills 8 boxes and 2 muffins are left over. The answer 8 is the number of full boxes, but the question asks for the muffins left over.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -203,7 +203,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('a32daa87-8c66-5dcd-a357-1f6309935d0b', null, (select id from public.skills where slug = 'math-g4-multiplicative-comparison-and-multi-step-problems'), null, 'medium',
-   $q$Aiyana has a ribbon 39 inches long. She cuts it into pieces that are each 5 inches long. How many full 5-inch pieces can she cut?$q$, $q$[{"text":"34","is_correct":false,"misconception_token":"subtracted-one-group"},{"text":"8","is_correct":false,"misconception_token":"rounded-quotient-up"},{"text":"7","is_correct":true},{"text":"4","is_correct":false,"misconception_token":"answered-with-remainder"}]$q$::jsonb, $q$7$q$, $q$$39 \div 5 = 7$ R $4$, so she gets 7 full pieces and 4 inches are left. The answer 8 is wrong because the 4 inches left over is not enough for another 5-inch piece.$q$, 'draft', null)
+   $q$Aiyana has a ribbon 39 inches long. Aiyana cuts it into pieces that are each 5 inches long. How many full 5-inch pieces can Aiyana cut?$q$, $q$[{"text":"34","is_correct":false,"misconception_token":"subtracted-one-group"},{"text":"8","is_correct":false,"misconception_token":"rounded-quotient-up"},{"text":"7","is_correct":true},{"text":"4","is_correct":false,"misconception_token":"answered-with-remainder"}]$q$::jsonb, $q$7$q$, $q$$39 \div 5 = 7$ R $4$, so Aiyana gets 7 full pieces and 4 inches are left. The answer 8 is wrong because the 4 inches left over is not enough for another 5-inch piece.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -320,7 +320,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('64833bbb-fd30-55ec-8a6d-def8a563d794', null, (select id from public.skills where slug = 'math-g4-multiplicative-comparison-and-multi-step-problems'), null, 'medium',
-   $q$Hana has 45 crayons. She puts the same number of crayons in each of 7 cups, as many as she can. How many crayons go in each cup?$q$, $q$[{"text":"38","is_correct":false,"misconception_token":"subtracted-one-group"},{"text":"6","is_correct":true},{"text":"7","is_correct":false,"misconception_token":"rounded-quotient-up"},{"text":"3","is_correct":false,"misconception_token":"answered-with-remainder"}]$q$::jsonb, $q$6$q$, $q$$45 \div 7 = 6$ R $3$, so each cup gets 6 crayons and 3 are left over. The answer 7 is wrong because 7 cups of 7 would need 49 crayons.$q$, 'draft', null)
+   $q$Hana has 45 crayons. Hana puts the same number of crayons in each of 7 cups, as many as possible. How many crayons go in each cup?$q$, $q$[{"text":"38","is_correct":false,"misconception_token":"subtracted-one-group"},{"text":"6","is_correct":true},{"text":"7","is_correct":false,"misconception_token":"rounded-quotient-up"},{"text":"3","is_correct":false,"misconception_token":"answered-with-remainder"}]$q$::jsonb, $q$6$q$, $q$$45 \div 7 = 6$ R $3$, so each cup gets 6 crayons and 3 are left over. The answer 7 is wrong because 7 cups of 7 would need 49 crayons.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -333,7 +333,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('c44c85d4-439e-5a76-8543-2872ab905059', null, (select id from public.skills where slug = 'math-g4-multiplicative-comparison-and-multi-step-problems'), null, 'medium',
-   $q$A board game costs 7 dollars. A scooter costs 9 times as much as the board game. Shira has 40 dollars. How many more dollars does she need to buy the scooter?$q$, $q$[{"text":"63 dollars","is_correct":false,"misconception_token":"stopped-after-first-step"},{"text":"23 dollars","is_correct":true},{"text":"33 dollars","is_correct":false,"misconception_token":"used-wrong-price"},{"text":"103 dollars","is_correct":false,"misconception_token":"added-instead-of-subtracted"}]$q$::jsonb, $q$23 dollars$q$, $q$The scooter costs $9 \times 7 = 63$ dollars, and $63 - 40 = 23$, so she needs 23 more dollars. The answer 63 dollars is the scooter's price, not what she still needs.$q$, 'draft', null)
+   $q$A board game costs 7 dollars. A scooter costs 9 times as much as the board game. Shira has 40 dollars. How many more dollars does Shira need to buy the scooter?$q$, $q$[{"text":"63 dollars","is_correct":false,"misconception_token":"stopped-after-first-step"},{"text":"23 dollars","is_correct":true},{"text":"33 dollars","is_correct":false,"misconception_token":"used-wrong-price"},{"text":"103 dollars","is_correct":false,"misconception_token":"added-instead-of-subtracted"}]$q$::jsonb, $q$23 dollars$q$, $q$The scooter costs $9 \times 7 = 63$ dollars, and $63 - 40 = 23$, so Shira needs 23 more dollars. The answer 63 dollars is the scooter's price, not what Shira still needs.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -346,7 +346,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('0f03501b-3b5c-5338-9b63-1c9178d02ecd', null, (select id from public.skills where slug = 'math-g4-multiplicative-comparison-and-multi-step-problems'), null, 'hard',
-   $q$Diego earns 6 dollars each week for walking a neighbor's dog. Mila earns 4 times as much each week. After 3 weeks, how many more dollars has Mila earned than Diego?$q$, $q$[{"text":"72 dollars","is_correct":false,"misconception_token":"stopped-after-first-step"},{"text":"54 dollars","is_correct":true},{"text":"90 dollars","is_correct":false,"misconception_token":"added-instead-of-subtracted"},{"text":"18 dollars","is_correct":false,"misconception_token":"found-one-week-only"}]$q$::jsonb, $q$54 dollars$q$, $q$Mila earns $4 \times 6 = 24$ dollars a week, so after 3 weeks she has 72 dollars and Diego has 18 dollars, and $72 - 18 = 54$. The answer 72 dollars is Mila's total, not how much more she earned.$q$, 'draft', null)
+   $q$Diego earns 6 dollars each week for walking a neighbor's dog. Mila earns 4 times as much each week. After 3 weeks, how many more dollars has Mila earned than Diego?$q$, $q$[{"text":"72 dollars","is_correct":false,"misconception_token":"stopped-after-first-step"},{"text":"54 dollars","is_correct":true},{"text":"90 dollars","is_correct":false,"misconception_token":"added-instead-of-subtracted"},{"text":"18 dollars","is_correct":false,"misconception_token":"found-one-week-only"}]$q$::jsonb, $q$54 dollars$q$, $q$Mila earns $4 \times 6 = 24$ dollars a week, so after 3 weeks Mila has 72 dollars and Diego has 18 dollars, and $72 - 18 = 54$. The answer 72 dollars is Mila's total, not how much more Mila earned.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -372,7 +372,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('e2c053e4-f77b-5a12-8e1a-73130009c263', null, (select id from public.skills where slug = 'math-g4-multiplicative-comparison-and-multi-step-problems'), null, 'easy',
-   $q$Lena has 17 apples. She puts 5 apples in each bag. How many full bags can she make?$q$, $q$[{"text":"3","is_correct":true},{"text":"12","is_correct":false,"misconception_token":"subtracted-one-group"},{"text":"2","is_correct":false,"misconception_token":"answered-with-remainder"},{"text":"4","is_correct":false,"misconception_token":"rounded-quotient-up"}]$q$::jsonb, $q$3$q$, $q$$17 \div 5 = 3$ R $2$, so she fills 3 bags and has 2 apples left. The answer 4 is wrong because 2 apples are not enough to fill a fourth bag.$q$, 'draft', null)
+   $q$Lena has 17 apples. Lena puts 5 apples in each bag. How many full bags can Lena make?$q$, $q$[{"text":"3","is_correct":true},{"text":"12","is_correct":false,"misconception_token":"subtracted-one-group"},{"text":"2","is_correct":false,"misconception_token":"answered-with-remainder"},{"text":"4","is_correct":false,"misconception_token":"rounded-quotient-up"}]$q$::jsonb, $q$3$q$, $q$$17 \div 5 = 3$ R $2$, so Lena fills 3 bags and has 2 apples left. The answer 4 is wrong because 2 apples are not enough to fill a fourth bag.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -424,7 +424,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('eb966da3-749a-54ee-a784-4f4d2ecac18b', null, (select id from public.skills where slug = 'math-g4-multiplicative-comparison-and-multi-step-problems'), null, 'medium',
-   $q$Ravi needs 34 cookies for his class party. Cookies come in packs of 6. How many packs must he buy to have enough cookies?$q$, $q$[{"text":"4 packs","is_correct":false,"misconception_token":"answered-with-remainder"},{"text":"5 packs","is_correct":false,"misconception_token":"ignored-remainder"},{"text":"204 packs","is_correct":false,"misconception_token":"multiplied-instead-of-divided"},{"text":"6 packs","is_correct":true}]$q$::jsonb, $q$6 packs$q$, $q$$34 \div 6 = 5$ R $4$, so 5 packs give only 30 cookies and he needs one more pack for the last 4, making 6 packs. The answer 5 packs leaves him 4 cookies short.$q$, 'draft', null)
+   $q$Ravi needs 34 cookies for a class party. Cookies come in packs of 6. How many packs must Ravi buy to have enough cookies?$q$, $q$[{"text":"4 packs","is_correct":false,"misconception_token":"answered-with-remainder"},{"text":"5 packs","is_correct":false,"misconception_token":"ignored-remainder"},{"text":"204 packs","is_correct":false,"misconception_token":"multiplied-instead-of-divided"},{"text":"6 packs","is_correct":true}]$q$::jsonb, $q$6 packs$q$, $q$$34 \div 6 = 5$ R $4$, so 5 packs give only 30 cookies and Ravi needs one more pack for the last 4, making 6 packs. The answer 5 packs leaves Ravi 4 cookies short.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -476,7 +476,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('dfa7980e-0d43-590e-9da5-a78ecc45f393', null, (select id from public.skills where slug = 'math-g4-multiplicative-comparison-and-multi-step-problems'), null, 'hard',
-   $q$Tariq has 412 cards. He gives 98 cards to his cousin. Then he buys 3 packs with 12 cards in each pack. Which is the best estimate of how many cards he has now?$q$, $q$[{"text":"about 340","is_correct":true},{"text":"about 260","is_correct":false,"misconception_token":"subtracted-instead-of-added"},{"text":"about 540","is_correct":false,"misconception_token":"added-instead-of-subtracted"},{"text":"about 300","is_correct":false,"misconception_token":"ignored-last-step"}]$q$::jsonb, $q$about 340$q$, $q$He buys $3 \times 12 = 36$ cards, so round to $400 - 100 + 40 = 340$; the exact answer $412 - 98 + 36 = 350$ is closest to about 340. The estimate about 300 forgets the 3 packs he bought.$q$, 'draft', null)
+   $q$Tariq has 412 cards. Tariq gives 98 cards to a cousin. Then Tariq buys 3 packs with 12 cards in each pack. Which is the best estimate of how many cards Tariq has now?$q$, $q$[{"text":"about 340","is_correct":true},{"text":"about 260","is_correct":false,"misconception_token":"subtracted-instead-of-added"},{"text":"about 540","is_correct":false,"misconception_token":"added-instead-of-subtracted"},{"text":"about 300","is_correct":false,"misconception_token":"ignored-last-step"}]$q$::jsonb, $q$about 340$q$, $q$Tariq buys $3 \times 12 = 36$ cards, so round to $400 - 100 + 40 = 340$; the exact answer $412 - 98 + 36 = 350$ is closest to about 340. The estimate about 300 forgets the 3 packs Tariq bought.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

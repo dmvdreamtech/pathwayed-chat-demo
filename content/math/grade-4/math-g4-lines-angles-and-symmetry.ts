@@ -410,7 +410,7 @@ const skill: ContentSkill = {
     {
       slot: 34,
       difficulty: 'hard',
-      stem: `Samir draws a four-sided shape with all sides the same length and no right angles. Which name fits his shape?`,
+      stem: `Samir draws a four-sided shape with all sides the same length and no right angles. Which name fits Samir's shape?`,
       choices: [
         no(`A square`, 'ignores-no-right-angles'),
         no(`A rectangle`, 'ignores-no-right-angles'),
@@ -482,7 +482,7 @@ const skill: ContentSkill = {
     {
       slot: 40,
       difficulty: 'hard',
-      stem: `Oluwaseun draws a four-sided shape with exactly two right angles, and only one pair of its sides is parallel. Which shape did he draw?`,
+      stem: `Oluwaseun draws a four-sided shape with exactly two right angles, and only one pair of its sides is parallel. Which shape did Oluwaseun draw?`,
       choices: [
         no(`A square`, 'forgets-square-has-four-right-angles'),
         no(`A rectangle`, 'forgets-rectangle-has-four-right-angles'),

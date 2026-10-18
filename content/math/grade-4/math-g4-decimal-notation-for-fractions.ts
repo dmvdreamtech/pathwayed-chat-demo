@@ -110,7 +110,7 @@ const skill: ContentSkill = {
     {
       slot: 9,
       difficulty: 'easy',
-      stem: `Mia walked $\\frac{8}{10}$ of a mile to the library. Which decimal shows how far she walked?`,
+      stem: `Mia walked $\\frac{8}{10}$ of a mile to the library. Which decimal shows how far Mia walked?`,
       choices: [
         ok(`$0.8$ mile`),
         no(`$0.08$ mile`, 'placed-in-hundredths'),
@@ -302,7 +302,7 @@ const skill: ContentSkill = {
     {
       slot: 25,
       difficulty: 'medium',
-      stem: `A dime is $\\frac{1}{10}$ of a dollar and a penny is $\\frac{1}{100}$ of a dollar. Jamal has 3 dimes and 4 pennies. What decimal part of a dollar does he have?`,
+      stem: `A dime is $\\frac{1}{10}$ of a dollar and a penny is $\\frac{1}{100}$ of a dollar. Jamal has 3 dimes and 4 pennies. What decimal part of a dollar does Jamal have?`,
       choices: [
         no(`$0.7$`, 'added-coin-counts'),
         no(`$0.43$`, 'swapped-tenths-and-hundredths'),
@@ -362,7 +362,7 @@ const skill: ContentSkill = {
     {
       slot: 30,
       difficulty: 'medium',
-      stem: `Rosa has read $0.65$ of her chapter book. Which fraction shows how much she has read?`,
+      stem: `Rosa has read $0.65$ of a chapter book. Which fraction shows how much Rosa has read?`,
       choices: [
         no(`$\\frac{65}{10}$`, 'wrong-denominator'),
         no(`$\\frac{6}{5}$`, 'read-digits-as-fraction'),
@@ -386,7 +386,7 @@ const skill: ContentSkill = {
     {
       slot: 32,
       difficulty: 'hard',
-      stem: `Tomasz poured $1\\frac{6}{10}$ liters of water into a fish tank, then added $\\frac{25}{100}$ liter more. How much water did he pour in all, as a decimal?`,
+      stem: `Tomasz poured $1\\frac{6}{10}$ liters of water into a fish tank, then added $\\frac{25}{100}$ liter more. How much water did Tomasz pour in all, as a decimal?`,
       choices: [
         no(`$1.31$ liters`, 'added-without-converting'),
         no(`$0.85$ liter`, 'dropped-whole-number'),
@@ -425,7 +425,7 @@ const skill: ContentSkill = {
       stem: `Liam drank $0.5$ of a small bottle of juice. Priya drank $0.4$ of a large bottle of juice. Which statement is correct?`,
       choices: [
         no(`Liam drank more, because $0.5 > 0.4$.`, 'ignored-different-wholes'),
-        no(`Priya drank more, because her bottle was larger.`, 'assumed-larger-whole-wins'),
+        no(`Priya drank more, because Priya's bottle was larger.`, 'assumed-larger-whole-wins'),
         ok(`We cannot tell who drank more, because the bottles are different sizes.`),
         no(`They drank the same, because both drank about half.`, 'estimated-instead-of-comparing'),
       ],

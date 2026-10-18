@@ -98,14 +98,14 @@ const skill: ContentSkill = {
     {
       slot: 8,
       difficulty: 'easy',
-      stem: `Mia walks $\\frac{2}{3}$ of a mile each day. How far does she walk in 4 days?`,
+      stem: `Mia walks $\\frac{2}{3}$ of a mile each day. How far does Mia walk in 4 days?`,
       choices: [
         ok(`$\\frac{8}{3}$ miles`),
         no(`$\\frac{8}{12}$ miles`, 'multiplied-both-parts'),
         no(`$\\frac{6}{3}$ miles`, 'added-whole-to-numerator'),
         no(`$\\frac{2}{12}$ miles`, 'multiplied-denominator-only'),
       ],
-      solution: `Find $4 \\times \\frac{2}{3}$: multiply $4 \\times 2 = 8$ and keep thirds, so she walks $\\frac{8}{3}$ miles. The choice $\\frac{8}{12}$ is less than one mile, which is too short for 4 days of walking.`,
+      solution: `Find $4 \\times \\frac{2}{3}$: multiply $4 \\times 2 = 8$ and keep thirds, so Mia walks $\\frac{8}{3}$ miles. The choice $\\frac{8}{12}$ is less than one mile, which is too short for 4 days of walking.`,
     },
     {
       slot: 9,
@@ -122,14 +122,14 @@ const skill: ContentSkill = {
     {
       slot: 10,
       difficulty: 'easy',
-      stem: `Each batch of pancakes uses $\\frac{3}{4}$ cup of milk. Arjun makes 2 batches. How much milk does he use?`,
+      stem: `Each batch of pancakes uses $\\frac{3}{4}$ cup of milk. Arjun makes 2 batches. How much milk does Arjun use?`,
       choices: [
         no(`$\\frac{6}{8}$ cup`, 'multiplied-both-parts'),
         no(`$\\frac{5}{4}$ cups`, 'added-whole-to-numerator'),
         no(`$\\frac{3}{8}$ cup`, 'multiplied-denominator-only'),
         ok(`$\\frac{6}{4}$ cups`),
       ],
-      solution: `Find $2 \\times \\frac{3}{4}$: $2 \\times 3 = 6$ fourths, so he uses $\\frac{6}{4}$ cups. The choice $\\frac{6}{8}$ equals one batch's amount, so it cannot be right for 2 batches.`,
+      solution: `Find $2 \\times \\frac{3}{4}$: $2 \\times 3 = 6$ fourths, so Arjun uses $\\frac{6}{4}$ cups. The choice $\\frac{6}{8}$ equals one batch's amount, so it cannot be right for 2 batches.`,
     },
     {
       slot: 11,
@@ -230,14 +230,14 @@ const skill: ContentSkill = {
     {
       slot: 19,
       difficulty: 'medium',
-      stem: `A loaf of bread uses $\\frac{2}{3}$ cup of flour. Tomas bakes 6 loaves. How many cups of flour does he use?`,
+      stem: `A loaf of bread uses $\\frac{2}{3}$ cup of flour. Tomas bakes 6 loaves. How many cups of flour does Tomas use?`,
       choices: [
         no(`$\\frac{8}{3}$ cups`, 'added-whole-to-numerator'),
         no(`$12$ cups`, 'ignored-the-denominator'),
         ok(`$4$ cups`),
         no(`$\\frac{12}{18}$ cup`, 'multiplied-both-parts'),
       ],
-      solution: `$6 \\times \\frac{2}{3} = \\frac{12}{3}$, and 12 thirds make 4 wholes, so he uses 4 cups. The choice 12 cups forgets that the 12 pieces are thirds of a cup.`,
+      solution: `$6 \\times \\frac{2}{3} = \\frac{12}{3}$, and 12 thirds make 4 wholes, so Tomas uses 4 cups. The choice 12 cups forgets that the 12 pieces are thirds of a cup.`,
     },
     {
       slot: 20,
@@ -266,7 +266,7 @@ const skill: ContentSkill = {
     {
       slot: 22,
       difficulty: 'medium',
-      stem: `One lap around the school track is $\\frac{1}{4}$ of a mile. Kofi runs 9 laps. How far does he run?`,
+      stem: `One lap around the school track is $\\frac{1}{4}$ of a mile. Kofi runs 9 laps. How far does Kofi run?`,
       choices: [
         no(`$\\frac{9}{36}$ mile`, 'multiplied-both-parts'),
         no(`$\\frac{4}{9}$ mile`, 'swapped-numerator-and-denominator'),
@@ -381,19 +381,19 @@ const skill: ContentSkill = {
         no(`Amara, by $3$ hours`, 'ignored-the-denominator'),
         no(`Amara, by $\\frac{1}{4}$ hour`, 'subtracted-numerators-only'),
       ],
-      solution: `Amara reads $7 \\times \\frac{3}{4} = \\frac{21}{4}$ hours and Ben reads $9 \\times \\frac{2}{4} = \\frac{18}{4}$ hours, so Amara reads $\\frac{3}{4}$ hour longer. Choosing Ben looks only at his greater number of days.`,
+      solution: `Amara reads $7 \\times \\frac{3}{4} = \\frac{21}{4}$ hours and Ben reads $9 \\times \\frac{2}{4} = \\frac{18}{4}$ hours, so Amara reads $\\frac{3}{4}$ hour longer. Choosing Ben looks only at Ben's greater number of days.`,
     },
     {
       slot: 32,
       difficulty: 'hard',
-      stem: `Nadia needs 7 pieces of ribbon, and each piece is $\\frac{3}{5}$ of a yard long. The store sells ribbon only in whole yards. What is the fewest whole yards she can buy?`,
+      stem: `Nadia needs 7 pieces of ribbon, and each piece is $\\frac{3}{5}$ of a yard long. The store sells ribbon only in whole yards. What is the fewest whole yards Nadia can buy?`,
       choices: [
         no(`$4$ yards`, 'rounded-down-the-remainder'),
         no(`$21$ yards`, 'ignored-the-denominator'),
         no(`$1$ yard`, 'multiplied-both-parts'),
         ok(`$5$ yards`),
       ],
-      solution: `She needs $7 \\times \\frac{3}{5} = \\frac{21}{5} = 4\\frac{1}{5}$ yards, which is more than 4, so she must buy 5 yards. The choice 4 yards is a little too short because it leaves out the extra $\\frac{1}{5}$ yard.`,
+      solution: `Nadia needs $7 \\times \\frac{3}{5} = \\frac{21}{5} = 4\\frac{1}{5}$ yards, which is more than 4, so Nadia must buy 5 yards. The choice 4 yards is a little too short because it leaves out the extra $\\frac{1}{5}$ yard.`,
     },
     {
       slot: 33,

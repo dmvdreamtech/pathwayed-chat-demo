@@ -230,7 +230,7 @@ const skill: ContentSkill = {
     {
       slot: 19,
       difficulty: 'medium',
-      stem: `Aisha ran 2 kilometers in the morning and 750 meters in the afternoon. How many meters did she run in all?`,
+      stem: `Aisha ran 2 kilometers in the morning and 750 meters in the afternoon. How many meters did Aisha run in all?`,
       choices: [
         no(`752 meters`, 'added-without-converting'),
         no(`1,250 meters`, 'subtracted-instead-of-added'),
@@ -242,14 +242,14 @@ const skill: ContentSkill = {
     {
       slot: 20,
       difficulty: 'medium',
-      stem: `Mateo's water bottle holds 1 liter. He drank 350 milliliters. How many milliliters are left in the bottle?`,
+      stem: `Mateo's water bottle holds 1 liter. Mateo drank 350 milliliters. How many milliliters are left in the bottle?`,
       choices: [
         ok(`650 milliliters`),
         no(`1,350 milliliters`, 'added-instead-of-subtracted'),
         no(`750 milliliters`, 'regrouping-error'),
         no(`350 milliliters`, 'gave-amount-used'),
       ],
-      solution: `One liter is 1,000 milliliters, and $1{,}000 - 350 = 650$ milliliters. The answer 1,350 milliliters adds the amount he drank instead of taking it away.`,
+      solution: `One liter is 1,000 milliliters, and $1{,}000 - 350 = 650$ milliliters. The answer 1,350 milliliters adds the amount Mateo drank instead of taking it away.`,
     },
     {
       slot: 21,
@@ -266,7 +266,7 @@ const skill: ContentSkill = {
     {
       slot: 22,
       difficulty: 'medium',
-      stem: `Priya has 3 dollars in her pocket. How many cents is that?`,
+      stem: `Priya has 3 dollars. How many cents is that?`,
       choices: [
         no(`30 cents`, 'used-10-instead-of-100'),
         no(`3,000 cents`, 'used-1000-instead-of-100'),
@@ -278,14 +278,14 @@ const skill: ContentSkill = {
     {
       slot: 23,
       difficulty: 'medium',
-      stem: `Jamal buys a pencil for 45 cents and an eraser for 35 cents. He pays with 1 dollar. How much change does he get?`,
+      stem: `Jamal buys a pencil for 45 cents and an eraser for 35 cents. Jamal pays with 1 dollar. How much change does Jamal get?`,
       choices: [
         no(`80 cents`, 'gave-total-cost'),
         no(`55 cents`, 'subtracted-one-item-only'),
         no(`1 dollar 80 cents`, 'added-instead-of-subtracted'),
         ok(`20 cents`),
       ],
-      solution: `The two items cost $45 + 35 = 80$ cents, and 1 dollar is 100 cents, so the change is $100 - 80 = 20$ cents. The answer 80 cents is what he spent, not the change.`,
+      solution: `The two items cost $45 + 35 = 80$ cents, and 1 dollar is 100 cents, so the change is $100 - 80 = 20$ cents. The answer 80 cents is what Jamal spent, not the change.`,
     },
     {
       slot: 24,
@@ -326,7 +326,7 @@ const skill: ContentSkill = {
     {
       slot: 27,
       difficulty: 'medium',
-      stem: `Elena's garden path is 6 meters long. Each stepping stone covers 50 centimeters of the path. How many stones does she need to cover the whole path?`,
+      stem: `Elena's garden path is 6 meters long. Each stepping stone covers 50 centimeters of the path. How many stones does Elena need to cover the whole path?`,
       choices: [
         ok(`12 stones`),
         no(`120 stones`, 'used-1000-instead-of-100'),
@@ -362,7 +362,7 @@ const skill: ContentSkill = {
     {
       slot: 30,
       difficulty: 'medium',
-      stem: `Kwame filled a fish tank with 4 liters of water. Then he added 500 milliliters more. How many milliliters of water are in the tank?`,
+      stem: `Kwame filled a fish tank with 4 liters of water. Then Kwame added 500 milliliters more. How many milliliters of water are in the tank?`,
       choices: [
         no(`504 milliliters`, 'added-without-converting'),
         no(`3,500 milliliters`, 'subtracted-instead-of-added'),
@@ -374,7 +374,7 @@ const skill: ContentSkill = {
     {
       slot: 31,
       difficulty: 'hard',
-      stem: `Ravi has a rope that is 2 meters long. He cuts off 3 pieces that are each 45 centimeters long. How many centimeters of rope are left?`,
+      stem: `Ravi has a rope that is 2 meters long. Ravi cuts off 3 pieces that are each 45 centimeters long. How many centimeters of rope are left?`,
       choices: [
         no(`155 centimeters`, 'subtracted-only-one-piece'),
         ok(`65 centimeters`),
@@ -386,19 +386,19 @@ const skill: ContentSkill = {
     {
       slot: 32,
       difficulty: 'hard',
-      stem: `Sofia's bread recipe uses 750 grams of flour for each loaf. She has a 3 kilogram bag of flour. How many loaves can she make if she uses all the flour?`,
+      stem: `Sofia's bread recipe uses 750 grams of flour for each loaf. Sofia has a 3 kilogram bag of flour. How many loaves can Sofia make using all the flour?`,
       choices: [
         no(`2,250 loaves`, 'multiplied-instead-of-divided'),
         no(`5 loaves`, 'counted-one-too-many'),
         ok(`4 loaves`),
         no(`3 loaves`, 'counted-one-too-few'),
       ],
-      solution: `Three kilograms is 3,000 grams, and $750 \\times 4 = 3{,}000$, so she can make 4 loaves. The answer 3 loaves uses only 2,250 grams and leaves 750 grams unused.`,
+      solution: `Three kilograms is 3,000 grams, and $750 \\times 4 = 3{,}000$, so Sofia can make 4 loaves. The answer 3 loaves uses only 2,250 grams and leaves 750 grams unused.`,
     },
     {
       slot: 33,
       difficulty: 'hard',
-      stem: `Diego watched one movie that lasted 1 hour 35 minutes and a second movie that lasted 1 hour 40 minutes. How many minutes did he spend watching movies?`,
+      stem: `Diego watched one movie that lasted 1 hour 35 minutes and a second movie that lasted 1 hour 40 minutes. How many minutes did Diego spend watching movies?`,
       choices: [
         no(`275 minutes`, 'used-100-instead-of-60'),
         no(`75 minutes`, 'added-only-minutes'),
@@ -410,7 +410,7 @@ const skill: ContentSkill = {
     {
       slot: 34,
       difficulty: 'hard',
-      stem: `Nia saved 2 dollars 75 cents. Her brother Kofi saved 1 dollar 50 cents. How many cents did they save together?`,
+      stem: `Nia saved 2 dollars 75 cents. Nia's brother Kofi saved 1 dollar 50 cents. How many cents did they save together?`,
       choices: [
         ok(`425 cents`),
         no(`325 cents`, 'regrouping-error'),
@@ -446,7 +446,7 @@ const skill: ContentSkill = {
     {
       slot: 37,
       difficulty: 'hard',
-      stem: `Omar makes 2 liters of lemonade for a class picnic. He pours it into cups that each hold 250 milliliters. How many cups can he fill?`,
+      stem: `Omar makes 2 liters of lemonade for a class picnic. Omar pours it into cups that each hold 250 milliliters. How many cups can Omar fill?`,
       choices: [
         no(`500 cups`, 'multiplied-instead-of-divided'),
         no(`4 cups`, 'converted-only-one-liter'),
@@ -458,14 +458,14 @@ const skill: ContentSkill = {
     {
       slot: 38,
       difficulty: 'hard',
-      stem: `Zoe practices piano for 25 minutes every day for one week (7 days). How much time does she practice in all, in hours and minutes?`,
+      stem: `Zoe practices piano for 25 minutes every day for one week (7 days). How much time does Zoe practice in all, in hours and minutes?`,
       choices: [
         ok(`2 hours 55 minutes`),
         no(`1 hour 75 minutes`, 'used-100-instead-of-60'),
         no(`3 hours 55 minutes`, 'counted-extra-hour'),
         no(`2 hours 30 minutes`, 'counted-one-day-too-few'),
       ],
-      solution: `She practices $7 \\times 25 = 175$ minutes, and $175 - 120 = 55$, so that is 2 hours 55 minutes. The answer 2 hours 30 minutes is only 6 days of practice, which is 150 minutes.`,
+      solution: `Zoe practices $7 \\times 25 = 175$ minutes, and $175 - 120 = 55$, so that is 2 hours 55 minutes. The answer 2 hours 30 minutes is only 6 days of practice, which is 150 minutes.`,
     },
     {
       slot: 39,
@@ -482,14 +482,14 @@ const skill: ContentSkill = {
     {
       slot: 40,
       difficulty: 'hard',
-      stem: `Tomas walks 850 meters to school and 850 meters back home each day. How far does he walk in 5 school days, in kilometers and meters?`,
+      stem: `Tomas walks 850 meters to school and 850 meters back home each day. How far does Tomas walk in 5 school days, in kilometers and meters?`,
       choices: [
         no(`4 kilometers 250 meters`, 'counted-one-way-only'),
         no(`85 kilometers`, 'used-100-instead-of-1000'),
         ok(`8 kilometers 500 meters`),
         no(`6 kilometers 800 meters`, 'counted-one-day-too-few'),
       ],
-      solution: `Each day he walks $850 + 850 = 1{,}700$ meters, and $5 \\times 1{,}700 = 8{,}500$ meters, which is 8 kilometers 500 meters. The answer 4 kilometers 250 meters counts only the walk to school, not the walk home.`,
+      solution: `Each day Tomas walks $850 + 850 = 1{,}700$ meters, and $5 \\times 1{,}700 = 8{,}500$ meters, which is 8 kilometers 500 meters. The answer 4 kilometers 250 meters counts only the walk to school, not the walk home.`,
     },
   ],
 }

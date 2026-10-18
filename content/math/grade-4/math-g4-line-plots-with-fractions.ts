@@ -50,7 +50,7 @@ const skill: ContentSkill = {
     {
       slot: 4,
       difficulty: 'easy',
-      stem: `Priya measured six pencils in feet: $\\frac{1}{2}$, $\\frac{1}{4}$, $\\frac{1}{2}$, $\\frac{3}{4}$, $\\frac{1}{2}$, $\\frac{1}{4}$. She makes a line plot. How many X's go above $\\frac{1}{2}$?`,
+      stem: `Priya measured six pencils in feet: $\\frac{1}{2}$, $\\frac{1}{4}$, $\\frac{1}{2}$, $\\frac{3}{4}$, $\\frac{1}{2}$, $\\frac{1}{4}$. Priya makes a line plot. How many X's go above $\\frac{1}{2}$?`,
       choices: [
         ok(`3`),
         no(`2`, 'counted-one-too-few'),
@@ -146,7 +146,7 @@ const skill: ContentSkill = {
     {
       slot: 12,
       difficulty: 'medium',
-      stem: `Andre made a line plot of his walks to school in miles. There are 4 X's above $\\frac{3}{4}$. What is the total distance of those 4 walks?`,
+      stem: `Andre made a line plot of the walks Andre took to school in miles. There are 4 X's above $\\frac{3}{4}$. What is the total distance of those 4 walks?`,
       choices: [
         no(`$\\frac{12}{16}$ mile`, 'added-denominators'),
         no(`$\\frac{3}{4}$ mile`, 'used-one-value'),
@@ -170,7 +170,7 @@ const skill: ContentSkill = {
     {
       slot: 14,
       difficulty: 'medium',
-      stem: `Kenji measured 8 feathers in inches: $2\\frac{1}{8}$, $2\\frac{3}{8}$, $2\\frac{1}{8}$, $2\\frac{5}{8}$, $2\\frac{3}{8}$, $2\\frac{1}{8}$, $2\\frac{7}{8}$, $2\\frac{5}{8}$. On his line plot, what is the difference between the longest and shortest feather?`,
+      stem: `Kenji measured 8 feathers in inches: $2\\frac{1}{8}$, $2\\frac{3}{8}$, $2\\frac{1}{8}$, $2\\frac{5}{8}$, $2\\frac{3}{8}$, $2\\frac{1}{8}$, $2\\frac{7}{8}$, $2\\frac{5}{8}$. On Kenji's line plot, what is the difference between the longest and shortest feather?`,
       choices: [
         ok(`$\\frac{6}{8}$ inch`),
         no(`$5$ inches`, 'added-instead-of-subtracted'),
@@ -278,14 +278,14 @@ const skill: ContentSkill = {
     {
       slot: 23,
       difficulty: 'medium',
-      stem: `Ines made a line plot of how far she biked each day, in miles. The X's are: above $1\\frac{1}{4}$: 2, above $1\\frac{1}{2}$: 3, above $2$: 1. How many more miles did she bike on her longest day than on a $1\\frac{1}{4}$ mile day?`,
+      stem: `Ines made a line plot of how far Ines biked each day, in miles. The X's are: above $1\\frac{1}{4}$: 2, above $1\\frac{1}{2}$: 3, above $2$: 1. How many more miles did Ines bike on the longest day than on a $1\\frac{1}{4}$ mile day?`,
       choices: [
         ok(`$\\frac{3}{4}$ mile`),
         no(`$3\\frac{1}{4}$ miles`, 'added-instead-of-subtracted'),
         no(`$1$ mile`, 'subtracted-wholes-only'),
         no(`$\\frac{1}{2}$ mile`, 'used-wrong-mark'),
       ],
-      solution: `Her longest day is $2$ miles, and $2 - 1\\frac{1}{4} = \\frac{3}{4}$ mile. The answer $1$ mile subtracts only the whole numbers and forgets the $\\frac{1}{4}$.`,
+      solution: `The longest day is $2$ miles, and $2 - 1\\frac{1}{4} = \\frac{3}{4}$ mile. The answer $1$ mile subtracts only the whole numbers and forgets the $\\frac{1}{4}$.`,
     },
     {
       slot: 24,
@@ -302,7 +302,7 @@ const skill: ContentSkill = {
     {
       slot: 25,
       difficulty: 'easy',
-      stem: `Ayesha's crayon reaches 2 marks past the 3 on a ruler marked in quarter inches. Where should she put her X on a line plot?`,
+      stem: `Ayesha's crayon reaches 2 marks past the 3 on a ruler marked in quarter inches. Where should Ayesha put the X on a line plot?`,
       choices: [
         no(`$2\\frac{3}{4}$`, 'swapped-whole-and-parts'),
         no(`$3\\frac{1}{4}$`, 'counted-one-too-few'),
@@ -374,7 +374,7 @@ const skill: ContentSkill = {
     {
       slot: 31,
       difficulty: 'medium',
-      stem: `Hana measured six erasers in inches: $\\frac{1}{2}$, $\\frac{3}{8}$, $\\frac{1}{4}$, $\\frac{4}{8}$, $\\frac{2}{8}$, $\\frac{1}{2}$. Her line plot is marked in eighths. How many X's go above $\\frac{4}{8}$?`,
+      stem: `Hana measured six erasers in inches: $\\frac{1}{2}$, $\\frac{3}{8}$, $\\frac{1}{4}$, $\\frac{4}{8}$, $\\frac{2}{8}$, $\\frac{1}{2}$. Hana's line plot is marked in eighths. How many X's go above $\\frac{4}{8}$?`,
       choices: [
         no(`1`, 'ignored-equivalent-fractions'),
         no(`2`, 'counted-only-halves'),
@@ -386,14 +386,14 @@ const skill: ContentSkill = {
     {
       slot: 32,
       difficulty: 'hard',
-      stem: `A line plot shows 12 ribbon pieces in yards. The X's are: above $\\frac{1}{8}$: 3, above $\\frac{2}{8}$: 4, above $\\frac{3}{8}$: 3, above $\\frac{4}{8}$: 2. Nadia joins every piece that is $\\frac{3}{8}$ yard or longer. How long is her joined ribbon?`,
+      stem: `A line plot shows 12 ribbon pieces in yards. The X's are: above $\\frac{1}{8}$: 3, above $\\frac{2}{8}$: 4, above $\\frac{3}{8}$: 3, above $\\frac{4}{8}$: 2. Nadia joins every piece that is $\\frac{3}{8}$ yard or longer. How long is the joined ribbon?`,
       choices: [
         ok(`$2\\frac{1}{8}$ yards`),
         no(`$1$ yard`, 'excluded-the-equal-value'),
         no(`$\\frac{7}{8}$ yard`, 'counted-each-mark-once'),
         no(`$1\\frac{3}{8}$ yards`, 'chose-shorter-pieces'),
       ],
-      solution: `She uses three $\\frac{3}{8}$ pieces and two $\\frac{4}{8}$ pieces: $\\frac{9}{8} + \\frac{8}{8} = \\frac{17}{8} = 2\\frac{1}{8}$ yards. The answer $1$ yard uses only the $\\frac{4}{8}$ pieces, but "or longer" includes the $\\frac{3}{8}$ pieces too.`,
+      solution: `Nadia uses three $\\frac{3}{8}$ pieces and two $\\frac{4}{8}$ pieces: $\\frac{9}{8} + \\frac{8}{8} = \\frac{17}{8} = 2\\frac{1}{8}$ yards. The answer $1$ yard uses only the $\\frac{4}{8}$ pieces, but "or longer" includes the $\\frac{3}{8}$ pieces too.`,
     },
     {
       slot: 33,
@@ -446,7 +446,7 @@ const skill: ContentSkill = {
     {
       slot: 37,
       difficulty: 'hard',
-      stem: `On Diego's line plot of long jumps, his longest jump is $4\\frac{3}{8}$ feet and his shortest is $3\\frac{5}{8}$ feet. How much longer is the longest jump?`,
+      stem: `On Diego's line plot of long jumps, the longest jump is $4\\frac{3}{8}$ feet and the shortest is $3\\frac{5}{8}$ feet. How much longer is the longest jump?`,
       choices: [
         no(`$1\\frac{2}{8}$ feet`, 'subtracted-smaller-from-larger'),
         no(`$8$ feet`, 'added-instead-of-subtracted'),

@@ -86,7 +86,7 @@ const skill: ContentSkill = {
     {
       slot: 7,
       difficulty: 'easy',
-      stem: `Kai makes a pattern. He starts at 1 and follows the rule "add 2." Which statement is true about every number in his pattern?`,
+      stem: `Kai makes a pattern. Kai starts at 1 and follows the rule "add 2." Which statement is true about every number in Kai's pattern?`,
       choices: [
         no(`Every number is even.`, 'ignored-starting-number'),
         ok(`Every number is odd.`),
@@ -122,14 +122,14 @@ const skill: ContentSkill = {
     {
       slot: 10,
       difficulty: 'easy',
-      stem: `Ana has 5 dollars. She adds 3 dollars to her savings each week. How many dollars will she have after 4 weeks?`,
+      stem: `Ana has 5 dollars. Ana adds 3 dollars to savings each week. How many dollars will Ana have after 4 weeks?`,
       choices: [
         no(`20 dollars`, 'counted-one-too-many'),
         no(`14 dollars`, 'counted-one-too-few'),
         no(`12 dollars`, 'forgot-starting-amount'),
         ok(`17 dollars`),
       ],
-      solution: `Her savings go 5, 8, 11, 14, 17, so after 4 weeks she has 17 dollars. The answer 12 dollars counts only the money she added and forgets the 5 dollars she started with.`,
+      solution: `The savings go 5, 8, 11, 14, 17, so after 4 weeks Ana has 17 dollars. The answer 12 dollars counts only the money Ana added and forgets the 5 dollars Ana started with.`,
     },
     {
       slot: 11,
@@ -170,7 +170,7 @@ const skill: ContentSkill = {
     {
       slot: 14,
       difficulty: 'medium',
-      stem: `Lucia starts at 2 and follows the rule "multiply by 3." Which statement is true about all the numbers in her pattern?`,
+      stem: `Lucia starts at 2 and follows the rule "multiply by 3." Which statement is true about all the numbers in Lucia's pattern?`,
       choices: [
         no(`They are all odd.`, 'thought-times-three-makes-odd'),
         ok(`They are all even.`),
@@ -206,7 +206,7 @@ const skill: ContentSkill = {
     {
       slot: 17,
       difficulty: 'medium',
-      stem: `Desmond makes squares in a row with toothpicks. 1 square uses 4 toothpicks, 2 squares use 7, and 3 squares use 10. How many toothpicks does he need for 6 squares?`,
+      stem: `Desmond makes squares in a row with toothpicks. 1 square uses 4 toothpicks, 2 squares use 7, and 3 squares use 10. How many toothpicks does Desmond need for 6 squares?`,
       choices: [
         no(`24`, 'multiplied-squares-by-four'),
         ok(`19`),
@@ -482,7 +482,7 @@ const skill: ContentSkill = {
     {
       slot: 40,
       difficulty: 'hard',
-      stem: `Samir starts at 2 and follows the rule "multiply by 5." Which statement is true about his pattern?`,
+      stem: `Samir starts at 2 and follows the rule "multiply by 5." Which statement is true about Samir's pattern?`,
       choices: [
         no(`Every number ends in 2.`, 'overgeneralized-first-term'),
         ok(`Every number after the first ends in 0.`),

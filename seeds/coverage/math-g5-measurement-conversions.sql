@@ -190,7 +190,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('4f33b8f9-aefc-524f-9877-30247c85890d', null, (select id from public.skills where slug = 'math-g5-measurement-conversions'), null, 'medium',
-   $q$Priya rode her bike 1.5 kilometers to the library. How many meters did she ride?$q$, $q$[{"text":"15,000 meters","is_correct":false,"misconception_token":"too-many-zeros"},{"text":"150 meters","is_correct":false,"misconception_token":"too-few-zeros"},{"text":"1,500 meters","is_correct":true},{"text":"0.0015 meters","is_correct":false,"misconception_token":"divided-instead-of-multiplied"}]$q$::jsonb, $q$1,500 meters$q$, $q$There are 1,000 meters in 1 kilometer, so $1.5 \times 1{,}000 = 1{,}500$ meters. The answer 150 meters multiplies by 100, which is the rule for meters to centimeters.$q$, 'draft', null)
+   $q$Priya rode a bike 1.5 kilometers to the library. How many meters did Priya ride?$q$, $q$[{"text":"15,000 meters","is_correct":false,"misconception_token":"too-many-zeros"},{"text":"150 meters","is_correct":false,"misconception_token":"too-few-zeros"},{"text":"1,500 meters","is_correct":true},{"text":"0.0015 meters","is_correct":false,"misconception_token":"divided-instead-of-multiplied"}]$q$::jsonb, $q$1,500 meters$q$, $q$There are 1,000 meters in 1 kilometer, so $1.5 \times 1{,}000 = 1{,}500$ meters. The answer 150 meters multiplies by 100, which is the rule for meters to centimeters.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -242,7 +242,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('19a4b5d3-4c52-5cf5-88b3-1ac3132aab55', null, (select id from public.skills where slug = 'math-g5-measurement-conversions'), null, 'medium',
-   $q$There are 4 cups in 1 quart. Jada makes 5 quarts of soup. How many cups of soup does she make?$q$, $q$[{"text":"9 cups","is_correct":false,"misconception_token":"added-instead-of-multiplied"},{"text":"10 cups","is_correct":false,"misconception_token":"used-cups-per-pint"},{"text":"20 cups","is_correct":true},{"text":"$1\\frac{1}{4}$ cups","is_correct":false,"misconception_token":"divided-instead-of-multiplied"}]$q$::jsonb, $q$20 cups$q$, $q$Each quart is 4 cups, so $5 \times 4 = 20$ cups. The answer 10 cups uses 2 cups in each quart, but 2 cups make a pint, not a quart.$q$, 'draft', null)
+   $q$There are 4 cups in 1 quart. Jada makes 5 quarts of soup. How many cups of soup does Jada make?$q$, $q$[{"text":"9 cups","is_correct":false,"misconception_token":"added-instead-of-multiplied"},{"text":"10 cups","is_correct":false,"misconception_token":"used-cups-per-pint"},{"text":"20 cups","is_correct":true},{"text":"$1\\frac{1}{4}$ cups","is_correct":false,"misconception_token":"divided-instead-of-multiplied"}]$q$::jsonb, $q$20 cups$q$, $q$Each quart is 4 cups, so $5 \times 4 = 20$ cups. The answer 10 cups uses 2 cups in each quart, but 2 cups make a pint, not a quart.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -268,7 +268,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('17787938-7712-5c99-9c0e-0a7c35a981e1', null, (select id from public.skills where slug = 'math-g5-measurement-conversions'), null, 'medium',
-   $q$Ana ran 3 laps around a 400 meter track. How many kilometers did she run?$q$, $q$[{"text":"12 kilometers","is_correct":false,"misconception_token":"divided-by-hundred"},{"text":"1,200 kilometers","is_correct":false,"misconception_token":"did-not-convert"},{"text":"1.2 kilometers","is_correct":true},{"text":"0.12 kilometers","is_correct":false,"misconception_token":"divided-by-ten-thousand"}]$q$::jsonb, $q$1.2 kilometers$q$, $q$She ran $3 \times 400 = 1{,}200$ meters, and $1{,}200 \div 1{,}000 = 1.2$ kilometers. The answer 1,200 kilometers finds the meters but forgets to change them to kilometers.$q$, 'draft', null)
+   $q$Ana ran 3 laps around a 400 meter track. How many kilometers did Ana run?$q$, $q$[{"text":"12 kilometers","is_correct":false,"misconception_token":"divided-by-hundred"},{"text":"1,200 kilometers","is_correct":false,"misconception_token":"did-not-convert"},{"text":"1.2 kilometers","is_correct":true},{"text":"0.12 kilometers","is_correct":false,"misconception_token":"divided-by-ten-thousand"}]$q$::jsonb, $q$1.2 kilometers$q$, $q$Ana ran $3 \times 400 = 1{,}200$ meters, and $1{,}200 \div 1{,}000 = 1.2$ kilometers. The answer 1,200 kilometers finds the meters but forgets to change them to kilometers.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -294,7 +294,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('5a112909-97a7-5268-9f2a-0a6b5456f5be', null, (select id from public.skills where slug = 'math-g5-measurement-conversions'), null, 'medium',
-   $q$Keiko has a ribbon 2 meters long. She cuts it into pieces that are each 25 centimeters long. How many pieces does she get?$q$, $q$[{"text":"80 pieces","is_correct":false,"misconception_token":"used-millimeters-per-meter"},{"text":"50 pieces","is_correct":false,"misconception_token":"multiplied-instead-of-divided"},{"text":"4 pieces","is_correct":false,"misconception_token":"converted-only-one-meter"},{"text":"8 pieces","is_correct":true}]$q$::jsonb, $q$8 pieces$q$, $q$First change 2 meters to 200 centimeters, then $200 \div 25 = 8$ pieces. The answer 4 pieces only uses 100 centimeters, which is just 1 meter of the ribbon.$q$, 'draft', null)
+   $q$Keiko has a ribbon 2 meters long. Keiko cuts it into pieces that are each 25 centimeters long. How many pieces does Keiko get?$q$, $q$[{"text":"80 pieces","is_correct":false,"misconception_token":"used-millimeters-per-meter"},{"text":"50 pieces","is_correct":false,"misconception_token":"multiplied-instead-of-divided"},{"text":"4 pieces","is_correct":false,"misconception_token":"converted-only-one-meter"},{"text":"8 pieces","is_correct":true}]$q$::jsonb, $q$8 pieces$q$, $q$First change 2 meters to 200 centimeters, then $200 \div 25 = 8$ pieces. The answer 4 pieces only uses 100 centimeters, which is just 1 meter of the ribbon.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -385,7 +385,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('d54715e6-f5dc-5ff7-9ce5-7f02a479843d', null, (select id from public.skills where slug = 'math-g5-measurement-conversions'), null, 'medium',
-   $q$Diego is building a fence that is 12 yards long. Each board is 3 feet wide. How many boards does he need to cover the length?$q$, $q$[{"text":"36 boards","is_correct":false,"misconception_token":"stopped-after-converting"},{"text":"12 boards","is_correct":true},{"text":"4 boards","is_correct":false,"misconception_token":"did-not-convert"},{"text":"108 boards","is_correct":false,"misconception_token":"multiplied-instead-of-divided"}]$q$::jsonb, $q$12 boards$q$, $q$12 yards is $12 \times 3 = 36$ feet, and $36 \div 3 = 12$ boards. The answer 4 boards divides 12 by 3 without first changing yards to feet.$q$, 'draft', null)
+   $q$Diego is building a fence that is 12 yards long. Each board is 3 feet wide. How many boards does Diego need to cover the length?$q$, $q$[{"text":"36 boards","is_correct":false,"misconception_token":"stopped-after-converting"},{"text":"12 boards","is_correct":true},{"text":"4 boards","is_correct":false,"misconception_token":"did-not-convert"},{"text":"108 boards","is_correct":false,"misconception_token":"multiplied-instead-of-divided"}]$q$::jsonb, $q$12 boards$q$, $q$12 yards is $12 \times 3 = 36$ feet, and $36 \div 3 = 12$ boards. The answer 4 boards divides 12 by 3 without first changing yards to feet.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -424,7 +424,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('1a2fb41f-a75d-5383-bcdb-2590af97fd64', null, (select id from public.skills where slug = 'math-g5-measurement-conversions'), null, 'hard',
-   $q$Tomas walks 1.2 kilometers to school and then walks the same way home each day. How many meters does he walk in 5 school days?$q$, $q$[{"text":"6,000 meters","is_correct":false,"misconception_token":"forgot-the-trip-home"},{"text":"120,000 meters","is_correct":false,"misconception_token":"too-many-zeros"},{"text":"1,200 meters","is_correct":false,"misconception_token":"used-only-one-trip"},{"text":"12,000 meters","is_correct":true}]$q$::jsonb, $q$12,000 meters$q$, $q$Each day he walks $1.2 \times 2 = 2.4$ kilometers, so in 5 days he walks $2.4 \times 5 = 12$ kilometers, which is 12,000 meters. The answer 6,000 meters forgets that he also walks home each day.$q$, 'draft', null)
+   $q$Tomas walks 1.2 kilometers to school and then walks the same way home each day. How many meters does Tomas walk in 5 school days?$q$, $q$[{"text":"6,000 meters","is_correct":false,"misconception_token":"forgot-the-trip-home"},{"text":"120,000 meters","is_correct":false,"misconception_token":"too-many-zeros"},{"text":"1,200 meters","is_correct":false,"misconception_token":"used-only-one-trip"},{"text":"12,000 meters","is_correct":true}]$q$::jsonb, $q$12,000 meters$q$, $q$Each day Tomas walks $1.2 \times 2 = 2.4$ kilometers, so in 5 days Tomas walks $2.4 \times 5 = 12$ kilometers, which is 12,000 meters. The answer 6,000 meters forgets that Tomas also walks home each day.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -450,7 +450,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('40dec084-090d-5343-8fdf-0f0fac852f2e', null, (select id from public.skills where slug = 'math-g5-measurement-conversions'), null, 'hard',
-   $q$Leila has a ribbon 3 meters long. She uses 45 centimeters of ribbon for each of 4 bows. How many centimeters of ribbon are left?$q$, $q$[{"text":"120 centimeters","is_correct":true},{"text":"255 centimeters","is_correct":false,"misconception_token":"used-only-one-bow"},{"text":"2,820 centimeters","is_correct":false,"misconception_token":"mixed-millimeters-and-centimeters"},{"text":"180 centimeters","is_correct":false,"misconception_token":"gave-amount-used"}]$q$::jsonb, $q$120 centimeters$q$, $q$3 meters is 300 centimeters, the bows use $4 \times 45 = 180$ centimeters, and $300 - 180 = 120$ centimeters are left. The answer 255 centimeters subtracts only one bow instead of all four.$q$, 'draft', null)
+   $q$Leila has a ribbon 3 meters long. Leila uses 45 centimeters of ribbon for each of 4 bows. How many centimeters of ribbon are left?$q$, $q$[{"text":"120 centimeters","is_correct":true},{"text":"255 centimeters","is_correct":false,"misconception_token":"used-only-one-bow"},{"text":"2,820 centimeters","is_correct":false,"misconception_token":"mixed-millimeters-and-centimeters"},{"text":"180 centimeters","is_correct":false,"misconception_token":"gave-amount-used"}]$q$::jsonb, $q$120 centimeters$q$, $q$3 meters is 300 centimeters, the bows use $4 \times 45 = 180$ centimeters, and $300 - 180 = 120$ centimeters are left. The answer 255 centimeters subtracts only one bow instead of all four.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -476,7 +476,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('d12a153c-a5ca-599c-a3c2-fa9d101d27f6', null, (select id from public.skills where slug = 'math-g5-measurement-conversions'), null, 'hard',
-   $q$Isabel runs 400 meters in 80 seconds. If she keeps the same pace, how many minutes will it take her to run 1.2 kilometers?$q$, $q$[{"text":"240 minutes","is_correct":false,"misconception_token":"did-not-convert"},{"text":"2.4 minutes","is_correct":false,"misconception_token":"used-hundred-seconds-per-minute"},{"text":"4 minutes","is_correct":true},{"text":"3 minutes","is_correct":false,"misconception_token":"gave-number-of-laps"}]$q$::jsonb, $q$4 minutes$q$, $q$1.2 kilometers is 1,200 meters, which is $1{,}200 \div 400 = 3$ sets of 400 meters, so she needs $3 \times 80 = 240$ seconds, and $240 \div 60 = 4$ minutes. The answer 240 minutes is really 240 seconds that were never changed to minutes.$q$, 'draft', null)
+   $q$Isabel runs 400 meters in 80 seconds. At the same pace, how many minutes will it take Isabel to run 1.2 kilometers?$q$, $q$[{"text":"240 minutes","is_correct":false,"misconception_token":"did-not-convert"},{"text":"2.4 minutes","is_correct":false,"misconception_token":"used-hundred-seconds-per-minute"},{"text":"4 minutes","is_correct":true},{"text":"3 minutes","is_correct":false,"misconception_token":"gave-number-of-laps"}]$q$::jsonb, $q$4 minutes$q$, $q$1.2 kilometers is 1,200 meters, which is $1{,}200 \div 400 = 3$ sets of 400 meters, so Isabel needs $3 \times 80 = 240$ seconds, and $240 \div 60 = 4$ minutes. The answer 240 minutes is really 240 seconds that were never changed to minutes.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -502,7 +502,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('9f8bb0cc-6b8e-5a77-b8a7-42638a92c911', null, (select id from public.skills where slug = 'math-g5-measurement-conversions'), null, 'hard',
-   $q$A swimming pool is 25 meters long. Nadia swims 32 lengths of the pool. How many kilometers does she swim?$q$, $q$[{"text":"8 kilometers","is_correct":false,"misconception_token":"divided-by-hundred"},{"text":"0.8 kilometers","is_correct":true},{"text":"800 kilometers","is_correct":false,"misconception_token":"did-not-convert"},{"text":"0.08 kilometers","is_correct":false,"misconception_token":"divided-by-ten-thousand"}]$q$::jsonb, $q$0.8 kilometers$q$, $q$She swims $32 \times 25 = 800$ meters, and $800 \div 1{,}000 = 0.8$ kilometers. The answer 8 kilometers divides by only 100, but a kilometer is 1,000 meters.$q$, 'draft', null)
+   $q$A swimming pool is 25 meters long. Nadia swims 32 lengths of the pool. How many kilometers does Nadia swim?$q$, $q$[{"text":"8 kilometers","is_correct":false,"misconception_token":"divided-by-hundred"},{"text":"0.8 kilometers","is_correct":true},{"text":"800 kilometers","is_correct":false,"misconception_token":"did-not-convert"},{"text":"0.08 kilometers","is_correct":false,"misconception_token":"divided-by-ten-thousand"}]$q$::jsonb, $q$0.8 kilometers$q$, $q$Nadia swims $32 \times 25 = 800$ meters, and $800 \div 1{,}000 = 0.8$ kilometers. The answer 8 kilometers divides by only 100, but a kilometer is 1,000 meters.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -541,7 +541,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('ff0741b5-0a9b-5916-ba5c-bd07cffe6359', null, (select id from public.skills where slug = 'math-g5-measurement-conversions'), null, 'hard',
-   $q$Marisol needs 2.5 kilograms of flour for a bake sale. She has 3 bags that each hold 600 grams. How many more grams of flour does she need?$q$, $q$[{"text":"4,300 grams","is_correct":false,"misconception_token":"added-instead-of-subtracted"},{"text":"700 grams","is_correct":true},{"text":"1,900 grams","is_correct":false,"misconception_token":"used-only-one-bag"},{"text":"7,000 grams","is_correct":false,"misconception_token":"too-many-zeros"}]$q$::jsonb, $q$700 grams$q$, $q$2.5 kilograms is 2,500 grams, she has $3 \times 600 = 1{,}800$ grams, and $2{,}500 - 1{,}800 = 700$ grams more. The answer 1,900 grams subtracts only one bag instead of all three.$q$, 'draft', null)
+   $q$Marisol needs 2.5 kilograms of flour for a bake sale. Marisol has 3 bags that each hold 600 grams. How many more grams of flour does Marisol need?$q$, $q$[{"text":"4,300 grams","is_correct":false,"misconception_token":"added-instead-of-subtracted"},{"text":"700 grams","is_correct":true},{"text":"1,900 grams","is_correct":false,"misconception_token":"used-only-one-bag"},{"text":"7,000 grams","is_correct":false,"misconception_token":"too-many-zeros"}]$q$::jsonb, $q$700 grams$q$, $q$2.5 kilograms is 2,500 grams, Marisol has $3 \times 600 = 1{,}800$ grams, and $2{,}500 - 1{,}800 = 700$ grams more. The answer 1,900 grams subtracts only one bag instead of all three.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

@@ -385,7 +385,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('1241b54b-3831-5433-b14a-7b71f8a28d64', null, (select id from public.skills where slug = 'math-g4-place-value-and-rounding-multi-digit-numbers'), null, 'medium',
-   $q$Lucas built a number with 5 ten thousands, 2 thousands, 6 tens and 1 one. What number did he build?$q$, $q$[{"text":"52,061","is_correct":true},{"text":"520,061","is_correct":false,"misconception_token":"extra-place"},{"text":"5,261","is_correct":false,"misconception_token":"skipped-the-zero-place"},{"text":"52,610","is_correct":false,"misconception_token":"shifted-tens-and-ones-left"}]$q$::jsonb, $q$52,061$q$, $q$There are no hundreds, so a 0 goes in the hundreds place: 5 ten thousands, 2 thousands, 0 hundreds, 6 tens, 1 one makes 52,061. The answer 5,261 forgets the 0 and puts every digit in the wrong place.$q$, 'draft', null)
+   $q$Lucas built a number with 5 ten thousands, 2 thousands, 6 tens and 1 one. What number did Lucas build?$q$, $q$[{"text":"52,061","is_correct":true},{"text":"520,061","is_correct":false,"misconception_token":"extra-place"},{"text":"5,261","is_correct":false,"misconception_token":"skipped-the-zero-place"},{"text":"52,610","is_correct":false,"misconception_token":"shifted-tens-and-ones-left"}]$q$::jsonb, $q$52,061$q$, $q$There are no hundreds, so a 0 goes in the hundreds place: 5 ten thousands, 2 thousands, 0 hundreds, 6 tens, 1 one makes 52,061. The answer 5,261 forgets the 0 and puts every digit in the wrong place.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -463,7 +463,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('4f53148f-b547-52aa-8f8a-4f2a2140f170', null, (select id from public.skills where slug = 'math-g4-place-value-and-rounding-multi-digit-numbers'), null, 'hard',
-   $q$Elan rounded a number to the nearest hundred and got 8,300. Which could have been his number?$q$, $q$[{"text":"8,351","is_correct":false,"misconception_token":"rounded-down-past-five"},{"text":"8,390","is_correct":false,"misconception_token":"truncated-instead-of-rounding"},{"text":"8,239","is_correct":false,"misconception_token":"rounded-up-from-three"},{"text":"8,346","is_correct":true}]$q$::jsonb, $q$8,346$q$, $q$8,346 has a tens digit of 4, so it rounds down to 8,300. The number 8,351 has a tens digit of 5, so it rounds up to 8,400.$q$, 'draft', null)
+   $q$Elan rounded a number to the nearest hundred and got 8,300. Which could have been Elan's number?$q$, $q$[{"text":"8,351","is_correct":false,"misconception_token":"rounded-down-past-five"},{"text":"8,390","is_correct":false,"misconception_token":"truncated-instead-of-rounding"},{"text":"8,239","is_correct":false,"misconception_token":"rounded-up-from-three"},{"text":"8,346","is_correct":true}]$q$::jsonb, $q$8,346$q$, $q$8,346 has a tens digit of 4, so it rounds down to 8,300. The number 8,351 has a tens digit of 5, so it rounds up to 8,400.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

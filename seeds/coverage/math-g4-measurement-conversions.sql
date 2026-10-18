@@ -268,7 +268,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('acdae92b-ef69-5393-be54-d2b63f5fd536', null, (select id from public.skills where slug = 'math-g4-measurement-conversions'), null, 'medium',
-   $q$Aisha ran 2 kilometers in the morning and 750 meters in the afternoon. How many meters did she run in all?$q$, $q$[{"text":"2,750 meters","is_correct":true},{"text":"1,250 meters","is_correct":false,"misconception_token":"subtracted-instead-of-added"},{"text":"950 meters","is_correct":false,"misconception_token":"used-100-instead-of-1000"},{"text":"752 meters","is_correct":false,"misconception_token":"added-without-converting"}]$q$::jsonb, $q$2,750 meters$q$, $q$Two kilometers is 2,000 meters, and $2{,}000 + 750 = 2{,}750$ meters. The answer 752 meters adds 2 and 750 without changing the kilometers to meters.$q$, 'draft', null)
+   $q$Aisha ran 2 kilometers in the morning and 750 meters in the afternoon. How many meters did Aisha run in all?$q$, $q$[{"text":"2,750 meters","is_correct":true},{"text":"1,250 meters","is_correct":false,"misconception_token":"subtracted-instead-of-added"},{"text":"950 meters","is_correct":false,"misconception_token":"used-100-instead-of-1000"},{"text":"752 meters","is_correct":false,"misconception_token":"added-without-converting"}]$q$::jsonb, $q$2,750 meters$q$, $q$Two kilometers is 2,000 meters, and $2{,}000 + 750 = 2{,}750$ meters. The answer 752 meters adds 2 and 750 without changing the kilometers to meters.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -281,7 +281,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('327c0e0e-4524-555b-93d3-1c8c55701ae6', null, (select id from public.skills where slug = 'math-g4-measurement-conversions'), null, 'medium',
-   $q$Mateo's water bottle holds 1 liter. He drank 350 milliliters. How many milliliters are left in the bottle?$q$, $q$[{"text":"750 milliliters","is_correct":false,"misconception_token":"regrouping-error"},{"text":"350 milliliters","is_correct":false,"misconception_token":"gave-amount-used"},{"text":"650 milliliters","is_correct":true},{"text":"1,350 milliliters","is_correct":false,"misconception_token":"added-instead-of-subtracted"}]$q$::jsonb, $q$650 milliliters$q$, $q$One liter is 1,000 milliliters, and $1{,}000 - 350 = 650$ milliliters. The answer 1,350 milliliters adds the amount he drank instead of taking it away.$q$, 'draft', null)
+   $q$Mateo's water bottle holds 1 liter. Mateo drank 350 milliliters. How many milliliters are left in the bottle?$q$, $q$[{"text":"750 milliliters","is_correct":false,"misconception_token":"regrouping-error"},{"text":"350 milliliters","is_correct":false,"misconception_token":"gave-amount-used"},{"text":"650 milliliters","is_correct":true},{"text":"1,350 milliliters","is_correct":false,"misconception_token":"added-instead-of-subtracted"}]$q$::jsonb, $q$650 milliliters$q$, $q$One liter is 1,000 milliliters, and $1{,}000 - 350 = 650$ milliliters. The answer 1,350 milliliters adds the amount Mateo drank instead of taking it away.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -307,7 +307,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('eab566b8-960d-545a-82a7-f62b8451dfe1', null, (select id from public.skills where slug = 'math-g4-measurement-conversions'), null, 'medium',
-   $q$Priya has 3 dollars in her pocket. How many cents is that?$q$, $q$[{"text":"3,000 cents","is_correct":false,"misconception_token":"used-1000-instead-of-100"},{"text":"103 cents","is_correct":false,"misconception_token":"added-instead-of-multiplied"},{"text":"30 cents","is_correct":false,"misconception_token":"used-10-instead-of-100"},{"text":"300 cents","is_correct":true}]$q$::jsonb, $q$300 cents$q$, $q$One dollar is 100 cents, so $3 \times 100 = 300$ cents. The answer 30 cents uses 10 cents in a dollar, which is only a dime.$q$, 'draft', null)
+   $q$Priya has 3 dollars. How many cents is that?$q$, $q$[{"text":"3,000 cents","is_correct":false,"misconception_token":"used-1000-instead-of-100"},{"text":"103 cents","is_correct":false,"misconception_token":"added-instead-of-multiplied"},{"text":"30 cents","is_correct":false,"misconception_token":"used-10-instead-of-100"},{"text":"300 cents","is_correct":true}]$q$::jsonb, $q$300 cents$q$, $q$One dollar is 100 cents, so $3 \times 100 = 300$ cents. The answer 30 cents uses 10 cents in a dollar, which is only a dime.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -320,7 +320,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('8d33c119-8e0c-549e-bc47-3cf33b3ed83e', null, (select id from public.skills where slug = 'math-g4-measurement-conversions'), null, 'medium',
-   $q$Jamal buys a pencil for 45 cents and an eraser for 35 cents. He pays with 1 dollar. How much change does he get?$q$, $q$[{"text":"80 cents","is_correct":false,"misconception_token":"gave-total-cost"},{"text":"1 dollar 80 cents","is_correct":false,"misconception_token":"added-instead-of-subtracted"},{"text":"20 cents","is_correct":true},{"text":"55 cents","is_correct":false,"misconception_token":"subtracted-one-item-only"}]$q$::jsonb, $q$20 cents$q$, $q$The two items cost $45 + 35 = 80$ cents, and 1 dollar is 100 cents, so the change is $100 - 80 = 20$ cents. The answer 80 cents is what he spent, not the change.$q$, 'draft', null)
+   $q$Jamal buys a pencil for 45 cents and an eraser for 35 cents. Jamal pays with 1 dollar. How much change does Jamal get?$q$, $q$[{"text":"80 cents","is_correct":false,"misconception_token":"gave-total-cost"},{"text":"1 dollar 80 cents","is_correct":false,"misconception_token":"added-instead-of-subtracted"},{"text":"20 cents","is_correct":true},{"text":"55 cents","is_correct":false,"misconception_token":"subtracted-one-item-only"}]$q$::jsonb, $q$20 cents$q$, $q$The two items cost $45 + 35 = 80$ cents, and 1 dollar is 100 cents, so the change is $100 - 80 = 20$ cents. The answer 80 cents is what Jamal spent, not the change.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -372,7 +372,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('05b5d79a-93d9-5902-b603-5273cff2ed6b', null, (select id from public.skills where slug = 'math-g4-measurement-conversions'), null, 'medium',
-   $q$Elena's garden path is 6 meters long. Each stepping stone covers 50 centimeters of the path. How many stones does she need to cover the whole path?$q$, $q$[{"text":"120 stones","is_correct":false,"misconception_token":"used-1000-instead-of-100"},{"text":"11 stones","is_correct":false,"misconception_token":"counted-one-too-few"},{"text":"12 stones","is_correct":true},{"text":"300 stones","is_correct":false,"misconception_token":"multiplied-instead-of-divided"}]$q$::jsonb, $q$12 stones$q$, $q$Six meters is 600 centimeters, and $600 \div 50 = 12$ stones. The answer 120 stones changes 6 meters to 6,000 centimeters, which uses 1,000 instead of 100.$q$, 'draft', null)
+   $q$Elena's garden path is 6 meters long. Each stepping stone covers 50 centimeters of the path. How many stones does Elena need to cover the whole path?$q$, $q$[{"text":"120 stones","is_correct":false,"misconception_token":"used-1000-instead-of-100"},{"text":"11 stones","is_correct":false,"misconception_token":"counted-one-too-few"},{"text":"12 stones","is_correct":true},{"text":"300 stones","is_correct":false,"misconception_token":"multiplied-instead-of-divided"}]$q$::jsonb, $q$12 stones$q$, $q$Six meters is 600 centimeters, and $600 \div 50 = 12$ stones. The answer 120 stones changes 6 meters to 6,000 centimeters, which uses 1,000 instead of 100.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -411,7 +411,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('5d7c6841-356c-57f4-a660-d0aecaeec556', null, (select id from public.skills where slug = 'math-g4-measurement-conversions'), null, 'medium',
-   $q$Kwame filled a fish tank with 4 liters of water. Then he added 500 milliliters more. How many milliliters of water are in the tank?$q$, $q$[{"text":"4,500 milliliters","is_correct":true},{"text":"3,500 milliliters","is_correct":false,"misconception_token":"subtracted-instead-of-added"},{"text":"504 milliliters","is_correct":false,"misconception_token":"added-without-converting"},{"text":"900 milliliters","is_correct":false,"misconception_token":"used-100-instead-of-1000"}]$q$::jsonb, $q$4,500 milliliters$q$, $q$Four liters is 4,000 milliliters, and $4{,}000 + 500 = 4{,}500$ milliliters. The answer 504 milliliters adds 4 and 500 without changing the liters to milliliters.$q$, 'draft', null)
+   $q$Kwame filled a fish tank with 4 liters of water. Then Kwame added 500 milliliters more. How many milliliters of water are in the tank?$q$, $q$[{"text":"4,500 milliliters","is_correct":true},{"text":"3,500 milliliters","is_correct":false,"misconception_token":"subtracted-instead-of-added"},{"text":"504 milliliters","is_correct":false,"misconception_token":"added-without-converting"},{"text":"900 milliliters","is_correct":false,"misconception_token":"used-100-instead-of-1000"}]$q$::jsonb, $q$4,500 milliliters$q$, $q$Four liters is 4,000 milliliters, and $4{,}000 + 500 = 4{,}500$ milliliters. The answer 504 milliliters adds 4 and 500 without changing the liters to milliliters.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -424,7 +424,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('33a1fcee-202d-5bde-871e-2717f6db32a4', null, (select id from public.skills where slug = 'math-g4-measurement-conversions'), null, 'hard',
-   $q$Ravi has a rope that is 2 meters long. He cuts off 3 pieces that are each 45 centimeters long. How many centimeters of rope are left?$q$, $q$[{"text":"155 centimeters","is_correct":false,"misconception_token":"subtracted-only-one-piece"},{"text":"135 centimeters","is_correct":false,"misconception_token":"gave-amount-used"},{"text":"65 centimeters","is_correct":true},{"text":"1,865 centimeters","is_correct":false,"misconception_token":"used-1000-instead-of-100"}]$q$::jsonb, $q$65 centimeters$q$, $q$The rope is 200 centimeters, the pieces use $3 \times 45 = 135$ centimeters, and $200 - 135 = 65$ centimeters are left. The answer 155 centimeters takes away only one 45 centimeter piece.$q$, 'draft', null)
+   $q$Ravi has a rope that is 2 meters long. Ravi cuts off 3 pieces that are each 45 centimeters long. How many centimeters of rope are left?$q$, $q$[{"text":"155 centimeters","is_correct":false,"misconception_token":"subtracted-only-one-piece"},{"text":"135 centimeters","is_correct":false,"misconception_token":"gave-amount-used"},{"text":"65 centimeters","is_correct":true},{"text":"1,865 centimeters","is_correct":false,"misconception_token":"used-1000-instead-of-100"}]$q$::jsonb, $q$65 centimeters$q$, $q$The rope is 200 centimeters, the pieces use $3 \times 45 = 135$ centimeters, and $200 - 135 = 65$ centimeters are left. The answer 155 centimeters takes away only one 45 centimeter piece.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -437,7 +437,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('d5ac589b-c4ac-5ffa-a5c7-47482f4be3bd', null, (select id from public.skills where slug = 'math-g4-measurement-conversions'), null, 'hard',
-   $q$Sofia's bread recipe uses 750 grams of flour for each loaf. She has a 3 kilogram bag of flour. How many loaves can she make if she uses all the flour?$q$, $q$[{"text":"2,250 loaves","is_correct":false,"misconception_token":"multiplied-instead-of-divided"},{"text":"4 loaves","is_correct":true},{"text":"3 loaves","is_correct":false,"misconception_token":"counted-one-too-few"},{"text":"5 loaves","is_correct":false,"misconception_token":"counted-one-too-many"}]$q$::jsonb, $q$4 loaves$q$, $q$Three kilograms is 3,000 grams, and $750 \times 4 = 3{,}000$, so she can make 4 loaves. The answer 3 loaves uses only 2,250 grams and leaves 750 grams unused.$q$, 'draft', null)
+   $q$Sofia's bread recipe uses 750 grams of flour for each loaf. Sofia has a 3 kilogram bag of flour. How many loaves can Sofia make using all the flour?$q$, $q$[{"text":"2,250 loaves","is_correct":false,"misconception_token":"multiplied-instead-of-divided"},{"text":"4 loaves","is_correct":true},{"text":"3 loaves","is_correct":false,"misconception_token":"counted-one-too-few"},{"text":"5 loaves","is_correct":false,"misconception_token":"counted-one-too-many"}]$q$::jsonb, $q$4 loaves$q$, $q$Three kilograms is 3,000 grams, and $750 \times 4 = 3{,}000$, so Sofia can make 4 loaves. The answer 3 loaves uses only 2,250 grams and leaves 750 grams unused.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -450,7 +450,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('4240b5c0-3f34-527c-8565-67f1eb289b12', null, (select id from public.skills where slug = 'math-g4-measurement-conversions'), null, 'hard',
-   $q$Diego watched one movie that lasted 1 hour 35 minutes and a second movie that lasted 1 hour 40 minutes. How many minutes did he spend watching movies?$q$, $q$[{"text":"275 minutes","is_correct":false,"misconception_token":"used-100-instead-of-60"},{"text":"135 minutes","is_correct":false,"misconception_token":"converted-only-one-hour"},{"text":"195 minutes","is_correct":true},{"text":"75 minutes","is_correct":false,"misconception_token":"added-only-minutes"}]$q$::jsonb, $q$195 minutes$q$, $q$The first movie is $60 + 35 = 95$ minutes and the second is $60 + 40 = 100$ minutes, so together they are $95 + 100 = 195$ minutes. The answer 275 minutes counts each hour as 100 minutes.$q$, 'draft', null)
+   $q$Diego watched one movie that lasted 1 hour 35 minutes and a second movie that lasted 1 hour 40 minutes. How many minutes did Diego spend watching movies?$q$, $q$[{"text":"275 minutes","is_correct":false,"misconception_token":"used-100-instead-of-60"},{"text":"135 minutes","is_correct":false,"misconception_token":"converted-only-one-hour"},{"text":"195 minutes","is_correct":true},{"text":"75 minutes","is_correct":false,"misconception_token":"added-only-minutes"}]$q$::jsonb, $q$195 minutes$q$, $q$The first movie is $60 + 35 = 95$ minutes and the second is $60 + 40 = 100$ minutes, so together they are $95 + 100 = 195$ minutes. The answer 275 minutes counts each hour as 100 minutes.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -463,7 +463,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('c043c38f-e958-52b9-b7da-5499ac175215', null, (select id from public.skills where slug = 'math-g4-measurement-conversions'), null, 'hard',
-   $q$Nia saved 2 dollars 75 cents. Her brother Kofi saved 1 dollar 50 cents. How many cents did they save together?$q$, $q$[{"text":"325 cents","is_correct":false,"misconception_token":"regrouping-error"},{"text":"128 cents","is_correct":false,"misconception_token":"added-without-converting"},{"text":"425 cents","is_correct":true},{"text":"125 cents","is_correct":false,"misconception_token":"subtracted-instead-of-added"}]$q$::jsonb, $q$425 cents$q$, $q$Nia has 275 cents and Kofi has 150 cents, and $275 + 150 = 425$ cents. The answer 325 cents forgets that 75 cents plus 50 cents is more than a whole dollar.$q$, 'draft', null)
+   $q$Nia saved 2 dollars 75 cents. Nia's brother Kofi saved 1 dollar 50 cents. How many cents did they save together?$q$, $q$[{"text":"325 cents","is_correct":false,"misconception_token":"regrouping-error"},{"text":"128 cents","is_correct":false,"misconception_token":"added-without-converting"},{"text":"425 cents","is_correct":true},{"text":"125 cents","is_correct":false,"misconception_token":"subtracted-instead-of-added"}]$q$::jsonb, $q$425 cents$q$, $q$Nia has 275 cents and Kofi has 150 cents, and $275 + 150 = 425$ cents. The answer 325 cents forgets that 75 cents plus 50 cents is more than a whole dollar.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -502,7 +502,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('709ec247-2ac4-57c1-bda3-619ded6ff97d', null, (select id from public.skills where slug = 'math-g4-measurement-conversions'), null, 'hard',
-   $q$Omar makes 2 liters of lemonade for a class picnic. He pours it into cups that each hold 250 milliliters. How many cups can he fill?$q$, $q$[{"text":"8 cups","is_correct":true},{"text":"500 cups","is_correct":false,"misconception_token":"multiplied-instead-of-divided"},{"text":"9 cups","is_correct":false,"misconception_token":"counted-one-too-many"},{"text":"4 cups","is_correct":false,"misconception_token":"converted-only-one-liter"}]$q$::jsonb, $q$8 cups$q$, $q$Two liters is 2,000 milliliters, and $2{,}000 \div 250 = 8$ cups. The answer 4 cups uses only 1 liter, which is 1,000 milliliters.$q$, 'draft', null)
+   $q$Omar makes 2 liters of lemonade for a class picnic. Omar pours it into cups that each hold 250 milliliters. How many cups can Omar fill?$q$, $q$[{"text":"8 cups","is_correct":true},{"text":"500 cups","is_correct":false,"misconception_token":"multiplied-instead-of-divided"},{"text":"9 cups","is_correct":false,"misconception_token":"counted-one-too-many"},{"text":"4 cups","is_correct":false,"misconception_token":"converted-only-one-liter"}]$q$::jsonb, $q$8 cups$q$, $q$Two liters is 2,000 milliliters, and $2{,}000 \div 250 = 8$ cups. The answer 4 cups uses only 1 liter, which is 1,000 milliliters.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -515,7 +515,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('867afb39-81d6-5609-bf7d-09ce609d932f', null, (select id from public.skills where slug = 'math-g4-measurement-conversions'), null, 'hard',
-   $q$Zoe practices piano for 25 minutes every day for one week (7 days). How much time does she practice in all, in hours and minutes?$q$, $q$[{"text":"2 hours 30 minutes","is_correct":false,"misconception_token":"counted-one-day-too-few"},{"text":"1 hour 75 minutes","is_correct":false,"misconception_token":"used-100-instead-of-60"},{"text":"2 hours 55 minutes","is_correct":true},{"text":"3 hours 55 minutes","is_correct":false,"misconception_token":"counted-extra-hour"}]$q$::jsonb, $q$2 hours 55 minutes$q$, $q$She practices $7 \times 25 = 175$ minutes, and $175 - 120 = 55$, so that is 2 hours 55 minutes. The answer 2 hours 30 minutes is only 6 days of practice, which is 150 minutes.$q$, 'draft', null)
+   $q$Zoe practices piano for 25 minutes every day for one week (7 days). How much time does Zoe practice in all, in hours and minutes?$q$, $q$[{"text":"2 hours 30 minutes","is_correct":false,"misconception_token":"counted-one-day-too-few"},{"text":"1 hour 75 minutes","is_correct":false,"misconception_token":"used-100-instead-of-60"},{"text":"2 hours 55 minutes","is_correct":true},{"text":"3 hours 55 minutes","is_correct":false,"misconception_token":"counted-extra-hour"}]$q$::jsonb, $q$2 hours 55 minutes$q$, $q$Zoe practices $7 \times 25 = 175$ minutes, and $175 - 120 = 55$, so that is 2 hours 55 minutes. The answer 2 hours 30 minutes is only 6 days of practice, which is 150 minutes.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -541,7 +541,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('c20ed20a-9922-5515-99ca-091054b97dca', null, (select id from public.skills where slug = 'math-g4-measurement-conversions'), null, 'hard',
-   $q$Tomas walks 850 meters to school and 850 meters back home each day. How far does he walk in 5 school days, in kilometers and meters?$q$, $q$[{"text":"6 kilometers 800 meters","is_correct":false,"misconception_token":"counted-one-day-too-few"},{"text":"8 kilometers 500 meters","is_correct":true},{"text":"4 kilometers 250 meters","is_correct":false,"misconception_token":"counted-one-way-only"},{"text":"85 kilometers","is_correct":false,"misconception_token":"used-100-instead-of-1000"}]$q$::jsonb, $q$8 kilometers 500 meters$q$, $q$Each day he walks $850 + 850 = 1{,}700$ meters, and $5 \times 1{,}700 = 8{,}500$ meters, which is 8 kilometers 500 meters. The answer 4 kilometers 250 meters counts only the walk to school, not the walk home.$q$, 'draft', null)
+   $q$Tomas walks 850 meters to school and 850 meters back home each day. How far does Tomas walk in 5 school days, in kilometers and meters?$q$, $q$[{"text":"6 kilometers 800 meters","is_correct":false,"misconception_token":"counted-one-day-too-few"},{"text":"8 kilometers 500 meters","is_correct":true},{"text":"4 kilometers 250 meters","is_correct":false,"misconception_token":"counted-one-way-only"},{"text":"85 kilometers","is_correct":false,"misconception_token":"used-100-instead-of-1000"}]$q$::jsonb, $q$8 kilometers 500 meters$q$, $q$Each day Tomas walks $850 + 850 = 1{,}700$ meters, and $5 \times 1{,}700 = 8{,}500$ meters, which is 8 kilometers 500 meters. The answer 4 kilometers 250 meters counts only the walk to school, not the walk home.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

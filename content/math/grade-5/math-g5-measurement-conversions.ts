@@ -158,7 +158,7 @@ const skill: ContentSkill = {
     {
       slot: 13,
       difficulty: 'medium',
-      stem: `Priya rode her bike 1.5 kilometers to the library. How many meters did she ride?`,
+      stem: `Priya rode a bike 1.5 kilometers to the library. How many meters did Priya ride?`,
       choices: [
         no(`150 meters`, 'too-few-zeros'),
         no(`15,000 meters`, 'too-many-zeros'),
@@ -206,7 +206,7 @@ const skill: ContentSkill = {
     {
       slot: 17,
       difficulty: 'medium',
-      stem: `There are 4 cups in 1 quart. Jada makes 5 quarts of soup. How many cups of soup does she make?`,
+      stem: `There are 4 cups in 1 quart. Jada makes 5 quarts of soup. How many cups of soup does Jada make?`,
       choices: [
         no(`10 cups`, 'used-cups-per-pint'),
         ok(`20 cups`),
@@ -230,14 +230,14 @@ const skill: ContentSkill = {
     {
       slot: 19,
       difficulty: 'medium',
-      stem: `Ana ran 3 laps around a 400 meter track. How many kilometers did she run?`,
+      stem: `Ana ran 3 laps around a 400 meter track. How many kilometers did Ana run?`,
       choices: [
         no(`12 kilometers`, 'divided-by-hundred'),
         ok(`1.2 kilometers`),
         no(`0.12 kilometers`, 'divided-by-ten-thousand'),
         no(`1,200 kilometers`, 'did-not-convert'),
       ],
-      solution: `She ran $3 \\times 400 = 1{,}200$ meters, and $1{,}200 \\div 1{,}000 = 1.2$ kilometers. The answer 1,200 kilometers finds the meters but forgets to change them to kilometers.`,
+      solution: `Ana ran $3 \\times 400 = 1{,}200$ meters, and $1{,}200 \\div 1{,}000 = 1.2$ kilometers. The answer 1,200 kilometers finds the meters but forgets to change them to kilometers.`,
     },
     {
       slot: 20,
@@ -254,7 +254,7 @@ const skill: ContentSkill = {
     {
       slot: 21,
       difficulty: 'medium',
-      stem: `Keiko has a ribbon 2 meters long. She cuts it into pieces that are each 25 centimeters long. How many pieces does she get?`,
+      stem: `Keiko has a ribbon 2 meters long. Keiko cuts it into pieces that are each 25 centimeters long. How many pieces does Keiko get?`,
       choices: [
         ok(`8 pieces`),
         no(`4 pieces`, 'converted-only-one-meter'),
@@ -338,7 +338,7 @@ const skill: ContentSkill = {
     {
       slot: 28,
       difficulty: 'medium',
-      stem: `Diego is building a fence that is 12 yards long. Each board is 3 feet wide. How many boards does he need to cover the length?`,
+      stem: `Diego is building a fence that is 12 yards long. Each board is 3 feet wide. How many boards does Diego need to cover the length?`,
       choices: [
         ok(`12 boards`),
         no(`4 boards`, 'did-not-convert'),
@@ -374,14 +374,14 @@ const skill: ContentSkill = {
     {
       slot: 31,
       difficulty: 'hard',
-      stem: `Tomas walks 1.2 kilometers to school and then walks the same way home each day. How many meters does he walk in 5 school days?`,
+      stem: `Tomas walks 1.2 kilometers to school and then walks the same way home each day. How many meters does Tomas walk in 5 school days?`,
       choices: [
         no(`6,000 meters`, 'forgot-the-trip-home'),
         no(`1,200 meters`, 'used-only-one-trip'),
         ok(`12,000 meters`),
         no(`120,000 meters`, 'too-many-zeros'),
       ],
-      solution: `Each day he walks $1.2 \\times 2 = 2.4$ kilometers, so in 5 days he walks $2.4 \\times 5 = 12$ kilometers, which is 12,000 meters. The answer 6,000 meters forgets that he also walks home each day.`,
+      solution: `Each day Tomas walks $1.2 \\times 2 = 2.4$ kilometers, so in 5 days Tomas walks $2.4 \\times 5 = 12$ kilometers, which is 12,000 meters. The answer 6,000 meters forgets that Tomas also walks home each day.`,
     },
     {
       slot: 32,
@@ -398,7 +398,7 @@ const skill: ContentSkill = {
     {
       slot: 33,
       difficulty: 'hard',
-      stem: `Leila has a ribbon 3 meters long. She uses 45 centimeters of ribbon for each of 4 bows. How many centimeters of ribbon are left?`,
+      stem: `Leila has a ribbon 3 meters long. Leila uses 45 centimeters of ribbon for each of 4 bows. How many centimeters of ribbon are left?`,
       choices: [
         no(`255 centimeters`, 'used-only-one-bow'),
         ok(`120 centimeters`),
@@ -422,14 +422,14 @@ const skill: ContentSkill = {
     {
       slot: 35,
       difficulty: 'hard',
-      stem: `Isabel runs 400 meters in 80 seconds. If she keeps the same pace, how many minutes will it take her to run 1.2 kilometers?`,
+      stem: `Isabel runs 400 meters in 80 seconds. At the same pace, how many minutes will it take Isabel to run 1.2 kilometers?`,
       choices: [
         ok(`4 minutes`),
         no(`240 minutes`, 'did-not-convert'),
         no(`2.4 minutes`, 'used-hundred-seconds-per-minute'),
         no(`3 minutes`, 'gave-number-of-laps'),
       ],
-      solution: `1.2 kilometers is 1,200 meters, which is $1{,}200 \\div 400 = 3$ sets of 400 meters, so she needs $3 \\times 80 = 240$ seconds, and $240 \\div 60 = 4$ minutes. The answer 240 minutes is really 240 seconds that were never changed to minutes.`,
+      solution: `1.2 kilometers is 1,200 meters, which is $1{,}200 \\div 400 = 3$ sets of 400 meters, so Isabel needs $3 \\times 80 = 240$ seconds, and $240 \\div 60 = 4$ minutes. The answer 240 minutes is really 240 seconds that were never changed to minutes.`,
     },
     {
       slot: 36,
@@ -446,14 +446,14 @@ const skill: ContentSkill = {
     {
       slot: 37,
       difficulty: 'hard',
-      stem: `A swimming pool is 25 meters long. Nadia swims 32 lengths of the pool. How many kilometers does she swim?`,
+      stem: `A swimming pool is 25 meters long. Nadia swims 32 lengths of the pool. How many kilometers does Nadia swim?`,
       choices: [
         no(`8 kilometers`, 'divided-by-hundred'),
         ok(`0.8 kilometers`),
         no(`800 kilometers`, 'did-not-convert'),
         no(`0.08 kilometers`, 'divided-by-ten-thousand'),
       ],
-      solution: `She swims $32 \\times 25 = 800$ meters, and $800 \\div 1{,}000 = 0.8$ kilometers. The answer 8 kilometers divides by only 100, but a kilometer is 1,000 meters.`,
+      solution: `Nadia swims $32 \\times 25 = 800$ meters, and $800 \\div 1{,}000 = 0.8$ kilometers. The answer 8 kilometers divides by only 100, but a kilometer is 1,000 meters.`,
     },
     {
       slot: 38,
@@ -482,14 +482,14 @@ const skill: ContentSkill = {
     {
       slot: 40,
       difficulty: 'hard',
-      stem: `Marisol needs 2.5 kilograms of flour for a bake sale. She has 3 bags that each hold 600 grams. How many more grams of flour does she need?`,
+      stem: `Marisol needs 2.5 kilograms of flour for a bake sale. Marisol has 3 bags that each hold 600 grams. How many more grams of flour does Marisol need?`,
       choices: [
         no(`1,900 grams`, 'used-only-one-bag'),
         no(`4,300 grams`, 'added-instead-of-subtracted'),
         no(`7,000 grams`, 'too-many-zeros'),
         ok(`700 grams`),
       ],
-      solution: `2.5 kilograms is 2,500 grams, she has $3 \\times 600 = 1{,}800$ grams, and $2{,}500 - 1{,}800 = 700$ grams more. The answer 1,900 grams subtracts only one bag instead of all three.`,
+      solution: `2.5 kilograms is 2,500 grams, Marisol has $3 \\times 600 = 1{,}800$ grams, and $2{,}500 - 1{,}800 = 700$ grams more. The answer 1,900 grams subtracts only one bag instead of all three.`,
     },
   ],
 }

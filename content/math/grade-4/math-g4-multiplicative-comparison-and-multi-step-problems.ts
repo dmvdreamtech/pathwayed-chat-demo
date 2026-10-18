@@ -134,14 +134,14 @@ const skill: ContentSkill = {
     {
       slot: 11,
       difficulty: 'medium',
-      stem: `Rosa saved 8 dollars. Her brother saved 3 times as much as Rosa. How many dollars did they save together?`,
+      stem: `Rosa saved 8 dollars. Rosa's brother saved 3 times as much as Rosa. How many dollars did they save together?`,
       choices: [
         no(`24 dollars`, 'stopped-after-first-step'),
         no(`11 dollars`, 'added-instead-of-multiplied'),
         ok(`32 dollars`),
         no(`16 dollars`, 'subtracted-in-second-step'),
       ],
-      solution: `Her brother saved $3 \\times 8 = 24$ dollars, and together they saved $24 + 8 = 32$ dollars. The answer 24 dollars is only the brother's savings.`,
+      solution: `Rosa's brother saved $3 \\times 8 = 24$ dollars, and together they saved $24 + 8 = 32$ dollars. The answer 24 dollars is only the brother's savings.`,
     },
     {
       slot: 12,
@@ -158,26 +158,26 @@ const skill: ContentSkill = {
     {
       slot: 13,
       difficulty: 'medium',
-      stem: `A baker has 50 muffins. She fills as many boxes as she can with 6 muffins in each box. How many muffins are left over?`,
+      stem: `A baker has 50 muffins. The baker fills as many boxes as possible with 6 muffins in each box. How many muffins are left over?`,
       choices: [
         ok(`2`),
         no(`8`, 'gave-quotient-not-remainder'),
         no(`9`, 'rounded-quotient-up'),
         no(`44`, 'subtracted-one-group'),
       ],
-      solution: `$50 \\div 6 = 8$ R $2$, so she fills 8 boxes and 2 muffins are left over. The answer 8 is the number of full boxes, but the question asks for the muffins left over.`,
+      solution: `$50 \\div 6 = 8$ R $2$, so the baker fills 8 boxes and 2 muffins are left over. The answer 8 is the number of full boxes, but the question asks for the muffins left over.`,
     },
     {
       slot: 14,
       difficulty: 'medium',
-      stem: `Aiyana has a ribbon 39 inches long. She cuts it into pieces that are each 5 inches long. How many full 5-inch pieces can she cut?`,
+      stem: `Aiyana has a ribbon 39 inches long. Aiyana cuts it into pieces that are each 5 inches long. How many full 5-inch pieces can Aiyana cut?`,
       choices: [
         no(`8`, 'rounded-quotient-up'),
         ok(`7`),
         no(`4`, 'answered-with-remainder'),
         no(`34`, 'subtracted-one-group'),
       ],
-      solution: `$39 \\div 5 = 7$ R $4$, so she gets 7 full pieces and 4 inches are left. The answer 8 is wrong because the 4 inches left over is not enough for another 5-inch piece.`,
+      solution: `$39 \\div 5 = 7$ R $4$, so Aiyana gets 7 full pieces and 4 inches are left. The answer 8 is wrong because the 4 inches left over is not enough for another 5-inch piece.`,
     },
     {
       slot: 15,
@@ -278,7 +278,7 @@ const skill: ContentSkill = {
     {
       slot: 23,
       difficulty: 'medium',
-      stem: `Hana has 45 crayons. She puts the same number of crayons in each of 7 cups, as many as she can. How many crayons go in each cup?`,
+      stem: `Hana has 45 crayons. Hana puts the same number of crayons in each of 7 cups, as many as possible. How many crayons go in each cup?`,
       choices: [
         no(`7`, 'rounded-quotient-up'),
         no(`3`, 'answered-with-remainder'),
@@ -290,14 +290,14 @@ const skill: ContentSkill = {
     {
       slot: 24,
       difficulty: 'medium',
-      stem: `A board game costs 7 dollars. A scooter costs 9 times as much as the board game. Shira has 40 dollars. How many more dollars does she need to buy the scooter?`,
+      stem: `A board game costs 7 dollars. A scooter costs 9 times as much as the board game. Shira has 40 dollars. How many more dollars does Shira need to buy the scooter?`,
       choices: [
         no(`63 dollars`, 'stopped-after-first-step'),
         no(`33 dollars`, 'used-wrong-price'),
         no(`103 dollars`, 'added-instead-of-subtracted'),
         ok(`23 dollars`),
       ],
-      solution: `The scooter costs $9 \\times 7 = 63$ dollars, and $63 - 40 = 23$, so she needs 23 more dollars. The answer 63 dollars is the scooter's price, not what she still needs.`,
+      solution: `The scooter costs $9 \\times 7 = 63$ dollars, and $63 - 40 = 23$, so Shira needs 23 more dollars. The answer 63 dollars is the scooter's price, not what Shira still needs.`,
     },
     {
       slot: 25,
@@ -309,7 +309,7 @@ const skill: ContentSkill = {
         no(`18 dollars`, 'found-one-week-only'),
         no(`90 dollars`, 'added-instead-of-subtracted'),
       ],
-      solution: `Mila earns $4 \\times 6 = 24$ dollars a week, so after 3 weeks she has 72 dollars and Diego has 18 dollars, and $72 - 18 = 54$. The answer 72 dollars is Mila's total, not how much more she earned.`,
+      solution: `Mila earns $4 \\times 6 = 24$ dollars a week, so after 3 weeks Mila has 72 dollars and Diego has 18 dollars, and $72 - 18 = 54$. The answer 72 dollars is Mila's total, not how much more Mila earned.`,
     },
     {
       slot: 26,
@@ -326,14 +326,14 @@ const skill: ContentSkill = {
     {
       slot: 27,
       difficulty: 'easy',
-      stem: `Lena has 17 apples. She puts 5 apples in each bag. How many full bags can she make?`,
+      stem: `Lena has 17 apples. Lena puts 5 apples in each bag. How many full bags can Lena make?`,
       choices: [
         no(`4`, 'rounded-quotient-up'),
         no(`2`, 'answered-with-remainder'),
         no(`12`, 'subtracted-one-group'),
         ok(`3`),
       ],
-      solution: `$17 \\div 5 = 3$ R $2$, so she fills 3 bags and has 2 apples left. The answer 4 is wrong because 2 apples are not enough to fill a fourth bag.`,
+      solution: `$17 \\div 5 = 3$ R $2$, so Lena fills 3 bags and has 2 apples left. The answer 4 is wrong because 2 apples are not enough to fill a fourth bag.`,
     },
     {
       slot: 28,
@@ -374,14 +374,14 @@ const skill: ContentSkill = {
     {
       slot: 31,
       difficulty: 'medium',
-      stem: `Ravi needs 34 cookies for his class party. Cookies come in packs of 6. How many packs must he buy to have enough cookies?`,
+      stem: `Ravi needs 34 cookies for a class party. Cookies come in packs of 6. How many packs must Ravi buy to have enough cookies?`,
       choices: [
         no(`5 packs`, 'ignored-remainder'),
         no(`4 packs`, 'answered-with-remainder'),
         ok(`6 packs`),
         no(`204 packs`, 'multiplied-instead-of-divided'),
       ],
-      solution: `$34 \\div 6 = 5$ R $4$, so 5 packs give only 30 cookies and he needs one more pack for the last 4, making 6 packs. The answer 5 packs leaves him 4 cookies short.`,
+      solution: `$34 \\div 6 = 5$ R $4$, so 5 packs give only 30 cookies and Ravi needs one more pack for the last 4, making 6 packs. The answer 5 packs leaves Ravi 4 cookies short.`,
     },
     {
       slot: 32,
@@ -422,14 +422,14 @@ const skill: ContentSkill = {
     {
       slot: 35,
       difficulty: 'hard',
-      stem: `Tariq has 412 cards. He gives 98 cards to his cousin. Then he buys 3 packs with 12 cards in each pack. Which is the best estimate of how many cards he has now?`,
+      stem: `Tariq has 412 cards. Tariq gives 98 cards to a cousin. Then Tariq buys 3 packs with 12 cards in each pack. Which is the best estimate of how many cards Tariq has now?`,
       choices: [
         no(`about 540`, 'added-instead-of-subtracted'),
         no(`about 300`, 'ignored-last-step'),
         ok(`about 340`),
         no(`about 260`, 'subtracted-instead-of-added'),
       ],
-      solution: `He buys $3 \\times 12 = 36$ cards, so round to $400 - 100 + 40 = 340$; the exact answer $412 - 98 + 36 = 350$ is closest to about 340. The estimate about 300 forgets the 3 packs he bought.`,
+      solution: `Tariq buys $3 \\times 12 = 36$ cards, so round to $400 - 100 + 40 = 340$; the exact answer $412 - 98 + 36 = 350$ is closest to about 340. The estimate about 300 forgets the 3 packs Tariq bought.`,
     },
     {
       slot: 36,
