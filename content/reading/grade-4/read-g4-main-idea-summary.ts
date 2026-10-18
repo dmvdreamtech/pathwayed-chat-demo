@@ -28,7 +28,7 @@ const skill: ContentSkill = {
           right(`Maple syrup is made by collecting sap from trees and boiling it down.`),
           wrong(`Many of the foods that people eat come from trees and plants.`, 'too-broad'),
           wrong(`Maple syrup tastes better than any other topping for pancakes.`, 'unsupported-inference'),
-        ], `Every paragraph describes a step in turning tree sap into syrup, so the second choice is the main idea. The forty gallons fact is only one detail from paragraph 4.`),
+        ], `Every paragraph describes a step in turning tree sap into syrup, so "Maple syrup is made by collecting sap from trees and boiling it down" is the main idea. The forty gallons fact is only one detail from paragraph 4.`),
         q(2, 'easy', `Which detail supports the idea that making syrup needs the right kind of weather?`, [
           wrong(`A short tube called a tap goes into the hole.`, 'wrong-supporting-detail'),
           wrong(`Then it is poured into bottles while it is still hot.`, 'wrong-supporting-detail'),
@@ -44,9 +44,9 @@ const skill: ContentSkill = {
         q(4, 'medium', `Which is the best summary of the passage?`, [
           right(`In late winter, farmers tap maple trees to collect sap. They boil the sap until most of the water is gone, then strain and bottle the syrup.`),
           wrong(`Maple syrup is the best breakfast food in the world. Every family should visit a maple farm to watch the farmers work in winter.`, 'includes-opinion'),
-          wrong(`Sap drips out of a tap into a bucket or a long plastic line. Fresh sap looks like water and does not taste very sweet at all.`, 'too-narrow'),
+          wrong(`Sap drips out of a tap into a bucket or a long plastic line. Fresh sap looks like water and tastes only a little sweet.`, 'too-narrow'),
           wrong(`Farmers make syrup in the summer by squeezing maple leaves. The juice is mixed with sugar and poured into bottles to sell.`, 'contradicts-text'),
-        ], `The first choice tells the main steps in order without adding opinions. The third choice is accurate but only covers paragraph 3, so it leaves out most of the process.`),
+        ], `The summary about tapping trees, boiling the sap, and bottling the syrup tells the main steps in order without adding opinions. The summary about sap dripping into a bucket is accurate but only covers paragraph 3, so it leaves out most of the process.`),
         q(5, 'hard', `Why does the author include the fact that forty gallons of sap make only one gallon of syrup?`, [
           wrong(`To explain how farmers know when the sap will start to flow`, 'misreads-purpose'),
           right(`To show how much work and time it takes to make syrup`),
@@ -83,7 +83,7 @@ const skill: ContentSkill = {
           wrong(`Hot air balloons are the most beautiful things in the sky. Everyone should take a balloon ride at least once in their life.`, 'includes-opinion'),
           wrong(`A balloon rises when its engine starts. The pilot uses a steering wheel to turn left and right, just like a car.`, 'contradicts-text'),
           right(`A burner heats the air inside a balloon, making it lighter so the balloon rises. Cooling the air brings it down, and pilots use winds to travel.`),
-        ], `The fourth choice covers rising, sinking, and steering with the wind, which are the key ideas. The first choice is true but only tells about the parts from paragraph 2.`),
+        ], `The summary about the burner heating the air covers rising, sinking, and steering with the wind, which are the key ideas. The summary listing the envelope, basket, and burner is true but only tells about the parts from paragraph 2.`),
         q(10, 'hard', `Which sentence from the passage best states its central idea?`, [
           wrong(`Under it hangs a basket where the pilot and riders stand.`, 'too-narrow'),
           wrong(`Then the balloon sinks slowly back toward the earth.`, 'too-narrow'),
@@ -120,7 +120,7 @@ const skill: ContentSkill = {
           right(`Sea otters eat urchins, which eat kelp. With otters around, kelp forests stay healthy and give many animals a home.`),
           wrong(`Sea otters eat kelp all day long. When there are too many otters, the kelp forests disappear.`, 'contradicts-text'),
           wrong(`Sea otters are the cutest animals in the ocean. People should never let anything bad happen to them.`, 'includes-opinion'),
-        ], `The second choice tells how otters, urchins, and kelp are connected and why it matters. The third choice gets the facts backward, since urchins, not otters, eat the kelp.`),
+        ], `The summary "Sea otters eat urchins, which eat kelp" tells how otters, urchins, and kelp are connected and why it matters. The summary saying otters eat kelp all day gets the facts backward, since urchins, not otters, eat the kelp.`),
         q(15, 'hard', `Which detail is LEAST important to include in a summary of the passage?`, [
           wrong(`Sea otters eat sea urchins.`, 'misidentifies-key-idea'),
           wrong(`Urchins can eat a kelp forest down to bare rock.`, 'misidentifies-key-idea'),
@@ -132,10 +132,10 @@ const skill: ContentSkill = {
     {
       code: 'rg4-main-idea-summary-p04',
       title: 'The Bicycle Changes Over Time',
-      body: `The bicycles people ride today took many years to develop. Early inventors tried many ideas before they found a design that was safe and easy to ride.\n\nOne of the first bikes was built about two hundred years ago. It had two wheels and a seat, but no pedals. Riders sat on it and pushed along the ground with their feet. It was fun on smooth paths, but slow and hard on bumpy roads.\n\nLater, makers added pedals to the front wheel. To go faster, they made the front wheel bigger and bigger. Some front wheels were taller than a grown person! These high bikes were fast, but riders sat far above the ground. A small rock could make a rider tumble forward.\n\nThen came a design called the safety bicycle. Its two wheels were the same size. A chain connected the pedals to the back wheel. Riders sat lower, so they could put their feet on the ground. Soon, air-filled rubber tires made rides much smoother.\n\nThe safety bicycle quickly became popular. Workers rode to their jobs, and children rode to school. The basic shape of that bike is still used today, more than one hundred years later.`,
+      body: `The bicycles people ride today took many years to develop. Early inventors tried many ideas before they found a design that was safe and easy to ride.\n\nOne of the first bikes was built about two hundred years ago. It had two wheels and a seat, but no pedals. Riders sat on it and pushed along the ground with their feet. It was fun on smooth paths, but slow and hard on bumpy roads.\n\nLater, makers added pedals to the front wheel. To go faster, they made the front wheel bigger and bigger. Some front wheels were almost as tall as a grown person! These high bikes were fast, but riders sat far above the ground. A small rock could make a rider tumble forward.\n\nThen came a design called the safety bicycle. Its two wheels were the same size. A chain connected the pedals to the back wheel. Riders sat lower, so they could put their feet on the ground. Soon, air-filled rubber tires made rides much smoother.\n\nThe safety bicycle quickly became popular. Workers rode to their jobs, and children rode to school. The basic shape of that bike is still used today, more than one hundred years later.`,
       items: [
         q(16, 'easy', `What is the main idea of the passage?`, [
-          wrong(`Some old bicycles had front wheels taller than a grown person.`, 'too-narrow'),
+          wrong(`Some old bicycles had front wheels almost as tall as a grown person.`, 'too-narrow'),
           wrong(`Riding a bicycle is a healthy way to get to work or school.`, 'unsupported-inference'),
           wrong(`People have invented many ways to travel from place to place.`, 'too-broad'),
           right(`The bicycle changed over many years until it became safe and easy to ride.`),
@@ -157,7 +157,7 @@ const skill: ContentSkill = {
           wrong(`The first bicycle was the safety bicycle. Later, makers made the front wheel much bigger to make it safer.`, 'wrong-sequence'),
           right(`Early bikes had no pedals, and later ones had huge, risky front wheels. The safety bicycle fixed these problems and is still used today.`),
           wrong(`Bicycles are much better than cars. Everyone should ride a bike instead of driving to work each day.`, 'includes-opinion'),
-        ], `The third choice tells the main changes in order and how the story ends. The second choice mixes up the order, since the safety bicycle came after the high bikes.`),
+        ], `The summary that starts with early bikes having no pedals tells the main changes in order and how the story ends. The summary saying the first bicycle was the safety bicycle mixes up the order, since the safety bicycle came after the high bikes.`),
         q(20, 'hard', `How does the author develop the central idea of the passage?`, [
           wrong(`By comparing bicycles with cars and explaining which is faster`, 'misreads-structure'),
           wrong(`By giving the author's reasons that everyone should ride bikes`, 'misreads-structure'),
@@ -194,7 +194,7 @@ const skill: ContentSkill = {
           wrong(`Wheelchair basketball uses a smaller court and a lower hoop so that players can reach the basket from their seats.`, 'contradicts-text'),
           wrong(`Wheelchair basketball is the best sport ever invented. Every school should have a team and play it every single day.`, 'includes-opinion'),
           right(`Wheelchair basketball uses the same court, ball, and hoop as basketball. Some rules change, and special chairs help players move fast.`),
-        ], `The fourth choice includes what is the same, what changes, and the special chairs. The second choice is wrong because the passage says the court and hoop are the same size.`),
+        ], `The summary about the same court, ball, and hoop includes what is the same, what changes, and the special chairs. The summary about a smaller court and a lower hoop is wrong because the passage says the court and hoop are the same size.`),
         q(25, 'hard', `How does the last paragraph connect to the central idea of the passage?`, [
           wrong(`It adds a new topic about how teams travel to international games.`, 'misreads-structure'),
           right(`It sums up that small changes let many more players enjoy the game.`),
@@ -231,7 +231,7 @@ const skill: ContentSkill = {
           right(`Shadow puppetry is an old way to tell stories. Puppeteers hold flat puppets between a light and a screen, and the audience watches the shadows.`),
           wrong(`In a shadow puppet show, the audience sits behind the light and watches the colorful puppets move on a small stage.`, 'contradicts-text'),
           wrong(`Shadow puppetry is the most wonderful art in the world. Every student should give up painting and make puppets instead.`, 'includes-opinion'),
-        ], `The second choice tells what shadow puppetry is and how a show works. The third choice is wrong because the audience sits on the other side of the screen and sees only shadows.`),
+        ], `The summary "Shadow puppetry is an old way to tell stories" tells what shadow puppetry is and how a show works. The summary about colorful puppets on a small stage is wrong because the audience sits on the other side of the screen and sees only shadows.`),
         q(30, 'hard', `Which sentence would NOT belong in an objective summary of the passage?`, [
           wrong(`The audience sees the puppets' shadows on a cloth screen.`, 'misidentifies-key-idea'),
           wrong(`Puppeteers move puppets to make shadows bigger or smaller.`, 'misidentifies-key-idea'),
@@ -268,7 +268,7 @@ const skill: ContentSkill = {
           wrong(`Traffic lights all change on timers. Engineers are trying to make the timers faster so that drivers never have to wait.`, 'contradicts-text'),
           right(`Unlike timer lights, smart lights use wires, cameras, and buttons to sense traffic. This saves time and fuel, and engineers keep improving them.`),
           wrong(`Smart traffic lights are the greatest invention ever made. Every town should spend all of its money on new lights.`, 'includes-opinion'),
-        ], `The third choice covers how smart lights sense traffic, how they help, and how they are improving. The first choice is accurate but only retells paragraph 3.`),
+        ], `The summary that starts "Unlike timer lights" covers how smart lights sense traffic, how they help, and how they are improving. The summary about cameras counting cars is accurate but only retells paragraph 3.`),
         q(35, 'hard', `Why does the author begin the passage by describing lights that change on a timer?`, [
           wrong(`To show that timer lights are the newest kind of traffic light`, 'contradicts-text'),
           wrong(`To explain how a loop of wire under the road senses a car`, 'misreads-purpose'),
@@ -305,7 +305,7 @@ const skill: ContentSkill = {
           wrong(`Doctors say children need to move every day. Many students ride to school and then sit for hours, so a walk would give them a healthy start.`, 'too-narrow'),
           wrong(`The school already has a walking club that meets after school. Parent helpers bring special equipment so students can walk around the field.`, 'contradicts-text'),
           wrong(`The writer thinks students should stop riding the bus and walk all the way to school each morning so they can meet new friends.`, 'misreads-claim'),
-        ], `The first choice states the writer's claim and all the main reasons, including the answer about cost. The second choice is accurate but only covers the first reason from paragraph 2.`),
+        ], `The summary about the writer wanting a morning walking club states the claim and all the main reasons, including the answer about cost. The summary about doctors saying children need to move is accurate but only covers the first reason from paragraph 2.`),
         q(40, 'hard', `How does the writer develop the central idea of the passage?`, [
           wrong(`By telling a story about one student's first day in the club`, 'misreads-structure'),
           wrong(`By explaining the history of walking clubs at other schools`, 'misreads-structure'),
