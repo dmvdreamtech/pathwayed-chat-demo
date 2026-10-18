@@ -304,7 +304,7 @@ const skill: ContentSkill = {
             no(`At first,`, 'wrong-time-order'),
             ok(`In this way,`),
           ],
-          solution: `Sentence 7 sums up how the steps in sentences 3 to 6 work together, so "In this way" fits. "At first" is wrong because building the whole object is the end of the process, not the beginning.`,
+          solution: `Sentence 7 sums up how the steps in sentences 2 to 6 work together, so "In this way" fits. "At first" is wrong because building the whole object is the end of the process, not the beginning.`,
         },
         {
           slot: 22,
@@ -316,7 +316,7 @@ const skill: ContentSkill = {
             no(`Sentence 11`, 'removes-supporting-detail'),
             ok(`Sentence 12`),
           ],
-          solution: `The paragraph is about places where 3D printers are useful, and a paper printer running out of ink is a different kind of printer and a different idea. Sentence 11 belongs because students are one more group that finds 3D printers useful.`,
+          solution: `The paragraph is about places where 3D printers are useful, and a printer running out of ink does not name a place where 3D printers are useful. Sentence 11 belongs because students are one more group that finds 3D printers useful.`,
         },
         {
           slot: 23,
