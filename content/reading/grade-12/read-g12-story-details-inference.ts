@@ -47,7 +47,7 @@ const skill: ContentSkill = {
           choices: [
             wrong(`It destroyed the Pell farm and forced the family to sell their land.`, 'overstated-inference'),
             right(`It may have shifted the river so that Pell's east field ended up across it.`),
-            wrong(`It led Pell to accuse his neighbor of moving the property markers.`, 'literal-reading'),
+            wrong(`It led Pell to accuse a neighbor of moving the property markers.`, 'literal-reading'),
             wrong(`It proves that the 1890s surveyor drew the river in the wrong place.`, 'confuses-cause-effect'),
           ],
           solution: `A flood that had "taken the east field and given it to my neighbor" implies the river's channel moved and put the field on the neighbor's side. The phrase is figurative, so reading it as an accusation of theft is too literal.`,
@@ -292,7 +292,7 @@ const skill: ContentSkill = {
             wrong(`Photographing meteors with a camera for a science magazine`, 'misreads-detail'),
             wrong(`Measuring how much of the sky is covered by clouds each hour`, 'too-narrow'),
             right(`Counting streaks of light in one patch of sky for one hour`),
-            wrong(`Checking her cousin's count against the official survey total`, 'confuses-characters-actions'),
+            wrong(`Checking the cousin's count against the official survey total`, 'confuses-characters-actions'),
           ],
           solution: `The speaker states the job: "one hour, one patch of sky, a tally mark for every streak of light I saw." Cloud cover is recorded too, but only as one box on the form.`,
         },
@@ -424,7 +424,7 @@ const skill: ContentSkill = {
           stem: `Why does Kenji's backup station suddenly become important?`,
           choices: [
             wrong(`Mrs. Abernathy did not trust the finish camera's results.`, 'unsupported-inference'),
-            right(`The finish camera had stopped working before the 800 meters.`),
+            right(`The finish camera had stopped working and missed the 800 meters.`),
             wrong(`Kenji's watches were the most accurate timers at the meet.`, 'contradicts-text'),
             wrong(`The two runners asked to have their race timed again by hand.`, 'unsupported-inference'),
           ],
