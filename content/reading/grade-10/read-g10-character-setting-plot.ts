@@ -208,7 +208,7 @@ const skill: ContentSkill = {
             wrong(`She is mainly relieved that the race is over and has no strong feelings about the result.`, 'too-narrow'),
             right(`She holds both disappointment and pride at once, accepting a real cost for the team without pretending it is gone.`),
           ],
-          solution: `She "let them sting" yet finds "the other feeling," her joy in the team's win and Hana's race, "just as large," so both motives remain. The first choice is tempting but ignores that the time still stings.`,
+          solution: `She "let them sting" yet finds "the other feeling," her joy in the team's win and Hana's race, "just as large," so both motives remain. The choice saying she no longer cares about her time is tempting but ignores that the time still stings.`,
         },
       ],
     },
@@ -227,7 +227,7 @@ const skill: ContentSkill = {
             right(`The speaker does want the first chair but tries not to admit it.`),
             wrong(`The speaker dislikes Imani and refuses to watch her play at all.`, 'contradicts-text'),
           ],
-          solution: `"I tell myself a lot of things" hints that the first claim is something the speaker repeats rather than believes. The speaker watches Imani closely enough to "copy" her bow arm, so the last choice contradicts the stanza.`,
+          solution: `"I tell myself a lot of things" hints that "I do not want her chair" is something the speaker repeats rather than believes. The speaker watches Imani closely enough to "copy" her bow arm, so the choice saying the speaker refuses to watch her play contradicts the stanza.`,
         },
         {
           slot: 17,
@@ -247,7 +247,7 @@ const skill: ContentSkill = {
           stem: `The speaker practiced the solo "not to play it better than she did, / but to prove that I could have." What motive does this reveal?`,
           choices: [
             wrong(`A wish to replace Imani in the concert by learning the part secretly.`, 'unsupported-inference'),
-            right(`Wounded pride: the speaker wants to know she deserved the solo too.`),
+            right(`Wounded pride: the speaker wants proof of having deserved the solo too.`),
             wrong(`A simple love of practice that has nothing to do with Imani at all.`, 'too-narrow'),
             wrong(`A plan to help Imani by learning the part well enough to coach her.`, 'unsupported-inference'),
           ],
