@@ -95,7 +95,7 @@ const skill: ContentSkill = {
     {
       code: 'rg5-evidence-inference-p03',
       title: 'A Long Trip for a Tiny Bird',
-      body: `The ruby-throated hummingbird weighs about as much as a single paper clip. Yet each fall, many of these tiny birds fly from the eastern part of North America to Central America. Some cross a wide stretch of sea without stopping. That trip is about five hundred miles over open water.\n\nTo get ready, a hummingbird eats and eats. In the weeks before it leaves, it may nearly double its weight. The extra weight is stored fat, which the bird burns like fuel during the long flight. A bird that sets out too thin may not have enough energy to finish.\n\nHummingbirds travel alone, not in flocks. Young birds make the trip for the first time without an adult to follow. Scientists are still studying how the young birds know which way to go. Many believe the birds are born with a sense of direction.\n\nPeople can help hummingbirds along the way. Flowers such as bee balm and trumpet vine give them nectar. Some people hang feeders filled with sugar water. Experts suggest leaving feeders up for a few weeks after the last bird is seen. A late traveler passing through may still need a meal.`,
+      body: `The ruby-throated hummingbird weighs less than a nickel. Yet each fall, many of these tiny birds fly from the eastern part of North America to Central America. Some cross a wide stretch of sea without stopping. That trip is about five hundred miles over open water.\n\nTo get ready, a hummingbird eats and eats. In the weeks before it leaves, it may nearly double its weight. The extra weight is stored fat, which the bird burns like fuel during the long flight. A bird that sets out too thin may not have enough energy to finish.\n\nHummingbirds travel alone, not in flocks. Young birds make the trip for the first time without an adult to follow. Scientists are still studying how the young birds know which way to go. Many believe the birds are born with a sense of direction.\n\nPeople can help hummingbirds along the way. Flowers such as bee balm and trumpet vine give them nectar. Some people hang feeders filled with sugar water. Experts suggest leaving feeders up for a few weeks after the last bird is seen. A late traveler passing through may still need a meal.`,
       items: [
         q(11, 'easy', `According to the passage, why does a hummingbird gain weight before it migrates?`, [
           right(`The extra fat gives it energy to burn during the long flight.`),
@@ -123,7 +123,7 @@ const skill: ContentSkill = {
         ], `The sentence right after the advice gives the reason: a late bird may still pass by and need food. The flower sentence tells another way to feed birds, but not why feeders should stay up longer.`),
         q(15, 'hard', `Which two details from the passage together best support the idea that migration is risky for a hummingbird?`, [
           right(`It may fly about five hundred miles over open water, and a bird that is too thin may not finish.`),
-          wrong(`It weighs about as much as a paper clip, and people hang feeders filled with sugar water.`, 'wrong-supporting-detail'),
+          wrong(`It weighs less than a nickel, and people hang feeders filled with sugar water.`, 'wrong-supporting-detail'),
           wrong(`It travels alone instead of in a flock, and bee balm and trumpet vine give it nectar.`, 'wrong-supporting-detail'),
           wrong(`Scientists are still studying its sense of direction, and experts suggest feeders.`, 'too-narrow'),
         ], `A long flight over water with no place to stop, plus the warning that a thin bird "may not have enough energy to finish," both point to danger. Feeders and flowers are ways people help, not signs of risk.`),
@@ -151,7 +151,7 @@ const skill: ContentSkill = {
           wrong(`It is cheaper, because thin wires cost nothing to make or replace.`, 'unsupported-inference'),
           wrong(`It is lighter, because thin wires have no weight to carry at all.`, 'unsupported-inference'),
           wrong(`It is quicker, because crews never have to check the cable again.`, 'contradicts-text'),
-        ], `The passage says, "If a few wires wear out, the others still share the load," which shows the design keeps the bridge safe. It also says crews "check the cables often," so the last choice goes against the text.`),
+        ], `The passage says, "If a few wires wear out, the others still share the load," which shows the design keeps the bridge safe. It also says crews "check the cables often," so the choice about never checking the cable again goes against the text.`),
         q(19, 'medium', `Which quotation best supports the idea that engineers plan for wind before a bridge is built?`, [
           right(`"Engineers test small models in wind tunnels before building."`),
           wrong(`"Wind is a special challenge for long bridges."`, 'too-general'),
