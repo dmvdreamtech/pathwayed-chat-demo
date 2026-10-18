@@ -129,7 +129,7 @@ const skill: ContentSkill = {
             wrong(`"My aunt does not say anything about it."`, 'wrong-character'),
             right(`"I used to think a record was a way of holding on."`),
           ],
-          solution: `The words "I used to think" signal that the speaker's view is changing, and the next line states the new view. The other lines describe images or the aunt's behavior rather than a change in the speaker's thinking.`,
+          solution: `The words "I used to think" signal that the speaker's view is changing, and the next line states the new view. The lines about the "patient questions," the ticking ice, and the aunt's silence describe images or behavior rather than a change in the speaker's thinking.`,
         },
         {
           slot: 10,
@@ -227,7 +227,7 @@ const skill: ContentSkill = {
             wrong(`Scanning documents is a slow and repetitive job for a summer volunteer.`, 'topic-not-theme'),
             wrong(`Archivists should never change a plan once they have written it down.`, 'contradicts-text'),
           ],
-          solution: `Dae-jung argues that only E.M.'s notes show "what it was like to work there," and the archive changes its list and catalog to include her. The passage never judges whether the mill should have been built.`,
+          solution: `Dae-jung argues that only E.M.'s notes show "what it was like to work there," and the archive changes its list and catalog to include the weaver. The passage never judges whether the mill should have been built.`,
         },
         {
           slot: 17,
@@ -237,7 +237,7 @@ const skill: ContentSkill = {
             wrong(`A bored volunteer scans letters about cotton prices, a boiler, and a railroad dispute.`, 'too-narrow'),
             wrong(`A volunteer heroically saves the most important papers in the county from being lost forever.`, 'includes-opinion'),
             right(`A volunteer scanning mill records finds a weaver's margin notes, persuades the archivist to scan them, and credits the weaver in the catalog.`),
-            wrong(`A volunteer discovers the full name of the weaver E.M. and finds her living family.`, 'adds-false-detail'),
+            wrong(`A volunteer discovers the full name of the weaver E.M. and finds the weaver's living family.`, 'adds-false-detail'),
           ],
           solution: `The correct choice includes the discovery, the decision, and the catalog entry with no judgment. "Heroically" and "most important" are opinions, and the weaver's identity stays unknown.`,
         },
@@ -275,7 +275,7 @@ const skill: ContentSkill = {
             wrong(`It suggests the mill company was hiding E.M.'s identity on purpose.`, 'unsupported-inference'),
             wrong(`It shows that Dae-jung cares more about finishing quickly than about accuracy.`, 'contradicts-text'),
           ],
-          solution: `Every earlier record named the company, so typing E.M. gives a worker credit, and "identity unknown" shows the limits of that recovery. Nothing in the passage suggests the company deliberately hid her name.`,
+          solution: `Every earlier record named the company, so typing E.M. gives a worker credit, and "identity unknown" shows the limits of that recovery. Nothing in the passage suggests the company deliberately hid the weaver's name.`,
         },
       ],
     },
@@ -373,7 +373,7 @@ const skill: ContentSkill = {
             wrong(`A child asks a mapmaker for directions to her grandmother's farm and tells him a bridge washed away.`, 'too-narrow'),
             wrong(`A mapmaker and his former apprentice form a business together after a flood changes the valley.`, 'adds-false-detail'),
           ],
-          solution: `The correct choice covers the flood, Orrin's refusal, his loss of business, and his change. The first choice judges Orrin, and the fable never says he and Liesl join businesses.`,
+          solution: `The correct choice covers the flood, Orrin's refusal, his loss of business, and his change. The choice saying Orrin "gets exactly what he deserves" judges him, and the fable never says he and Liesl join businesses.`,
         },
         {
           slot: 28,
@@ -440,7 +440,7 @@ const skill: ContentSkill = {
             wrong(`Mrs. Kowalczyk compliments the app and asks where she should write her name.`, 'too-narrow'),
             wrong(`The senior center replaces its clipboard with Marisol's app after she adds a map feature.`, 'contradicts-text'),
           ],
-          solution: `The correct choice covers the failed app, the observation, and the new tool without judgment. The clipboard stays in use, and the final program has "no map," so the last choice contradicts the text.`,
+          solution: `The correct choice covers the failed app, the observation, and the new tool without judgment. The clipboard stays in use, and the final program has "no map," so the choice saying the center replaces its clipboard after a map is added contradicts the text.`,
         },
         {
           slot: 33,
