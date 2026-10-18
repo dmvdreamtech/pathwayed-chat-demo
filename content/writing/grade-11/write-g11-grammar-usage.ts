@@ -230,7 +230,7 @@ const skill: ContentSkill = {
     {
       slot: 19,
       difficulty: 'medium',
-      stem: `Read the sentence: "When Lucia handed the trophy to Aisha, she smiled." Which revision makes clear who smiled?`,
+      stem: `Read the sentence about two sisters, Lucia and Aisha: "When Lucia handed the trophy to Aisha, she smiled." Which revision makes clear who smiled?`,
       choices: [
         no(`When Lucia handed the trophy to Aisha, they smiled.`, 'pronoun-still-unclear'),
         no(`When Lucia handed the trophy to Aisha, she smiled at her.`, 'pronoun-still-unclear'),
@@ -314,7 +314,7 @@ const skill: ContentSkill = {
     {
       slot: 26,
       difficulty: 'medium',
-      stem: `Read the sentence: "Each of the rowing teams brought ___ own boat to the regatta." Which choice correctly completes the sentence?`,
+      stem: `Read the sentence: "Each of the rowing teams brought ___ own boat to the regatta." Which choice is correct in formal written English?`,
       choices: [
         no(`their`, 'plural-pronoun-singular-antecedent'),
         no(`it's`, 'contraction-for-possessive'),
