@@ -29,11 +29,11 @@ const skill: ContentSkill = {
       stem: `A student writes in a chemistry lab report: "The results were kind of off, so we redid the trial." Which revision best fits the formal style of a lab report?`,
       choices: [
         no(`The results were way off, so we redid the whole thing.`, 'informal-word'),
-        no(`The results were sort of inconsistent, so we redid it.`, 'informal-hedge'),
-        ok(`Because the results were inconsistent, the trial was repeated.`),
+        no(`The results were sort of inaccurate, so we redid it.`, 'informal-hedge'),
+        ok(`Because the results were inaccurate, the trial was repeated.`),
         no(`The results were inaccurate, so the trial was abandoned.`, 'changes-meaning'),
       ],
-      solution: `The correct revision replaces "kind of off" and "redid" with formal wording while keeping both facts. "Sort of inconsistent" still hedges in a casual way, and "abandoned" changes what the students actually did.`,
+      solution: `The correct revision replaces "kind of off" and "redid" with formal wording while keeping both facts. "Sort of inaccurate" still hedges in a casual way, and "abandoned" changes what the students actually did.`,
     },
     {
       slot: 3,
@@ -77,7 +77,7 @@ const skill: ContentSkill = {
       stem: `Jamal is writing to the city transit office: "Hey, the number 9 bus is always super late and it's annoying." Which revision best fits a formal letter?`,
       choices: [
         no(`Hey there, the number 9 bus runs late a ton and it's annoying.`, 'informal-greeting'),
-        ok(`The number 9 bus frequently runs late, which is frustrating for riders.`),
+        ok(`The number 9 bus frequently runs late, which is frustrating.`),
         no(`The number 9 bus is always super late, which really bugs me.`, 'informal-word'),
         no(`The number 9 bus is never on time, ever, period.`, 'informal-overstatement'),
       ],
@@ -129,7 +129,7 @@ const skill: ContentSkill = {
         no(`The invention of the printing press was an invention of the fifteenth century.`, 'redundancy-remains'),
         no(`The printing press was invented at some point in history.`, 'drops-detail'),
       ],
-      solution: `"Was invented" already tells us it is an invention, so "an invention that" can go. The last choice is short but loses the fifteenth century.`,
+      solution: `"Was invented" already tells us it is an invention, so "an invention that" can go. "At some point in history" is short but loses the fifteenth century.`,
     },
     {
       slot: 11,
@@ -165,7 +165,7 @@ const skill: ContentSkill = {
         ok(`Nothing turned up.`),
         no(`Nothing turned up, and the team kept looking, and the day went on.`, 'stringy-and'),
       ],
-      solution: `After a long sentence listing three actions, a three-word sentence lands with force. The first choice says the same thing but is so long that the contrast disappears.`,
+      solution: `After a long sentence listing three actions, a three-word sentence lands with force. The sentence beginning "Even though they had looked" says the same thing but is so long that the contrast disappears.`,
     },
     {
       slot: 14,
@@ -177,7 +177,7 @@ const skill: ContentSkill = {
         no(`The new solar panels on the library roof generate power that powers the lights of the building.`, 'repetitive-word'),
         ok(`The new solar panels on the library roof power the building's lights.`),
       ],
-      solution: `"Power the building's lights" already implies generating electricity, so the clause "that is used to" can be cut. The second choice is shorter but drops the library and the lights.`,
+      solution: `"Power the building's lights" already implies generating electricity, so the clause "that is used to" can be cut. "The new solar panels on the roof generate electricity" is shorter but drops the library and the lights.`,
     },
     {
       slot: 15,
@@ -225,7 +225,7 @@ const skill: ContentSkill = {
         no(`The chemist's goal was to combine each compound.`, 'wrong-meaning'),
         ok(`The chemist's goal was to isolate each compound.`),
       ],
-      solution: `"Goal" and "aim" mean the same thing, and "isolate" includes separating, so one word from each pair is enough. The first choice fixes only one of the two pairs.`,
+      solution: `"Goal" and "aim" mean the same thing, and "isolate" includes separating, so one word from each pair is enough. "The chemist's aim and goal" still repeats itself, and the version with "separate and isolate each and every" keeps one pair and adds another.`,
     },
     {
       slot: 19,
@@ -237,7 +237,7 @@ const skill: ContentSkill = {
         no(`Lucia Ferrante restored the clock tower, she is a retired engineer, the tower had been silent for decades.`, 'comma-splice'),
         no(`A retired engineer, the clock tower had been silent for decades until Lucia Ferrante restored it.`, 'dangling-modifier'),
       ],
-      solution: `An appositive ("a retired engineer") and a relative clause tuck the extra details into one clear sentence. The last choice is compact, but it makes the clock tower the retired engineer.`,
+      solution: `An appositive ("a retired engineer") and a relative clause tuck the extra details into one clear sentence. The version opening "A retired engineer, the clock tower" is compact, but it makes the clock tower the retired engineer.`,
     },
     {
       slot: 20,
@@ -261,7 +261,7 @@ const skill: ContentSkill = {
         no(`Importantly, it is worth noting that the wetland filters runoff before it reaches the bay.`, 'wordy-phrase'),
         no(`The wetland filters runoff.`, 'drops-detail'),
       ],
-      solution: `"It is important to note that" adds no information, so the sentence is stronger without it. The last choice cuts too much and loses where the runoff goes.`,
+      solution: `"It is important to note that" adds no information, so the sentence is stronger without it. "The wetland filters runoff" cuts too much and loses where the runoff goes.`,
     },
     {
       slot: 22,
@@ -273,7 +273,7 @@ const skill: ContentSkill = {
         ok(`People at the time did not understand how fungi spread.`),
         no(`People at the time didn't have a clue how fungi spread.`, 'informal-idiom'),
       ],
-      solution: `The correct choice replaces "folks," "back then," and "didn't have a clue" with formal wording. The first choice fixes the idiom but keeps the casual "folks."`,
+      solution: `The correct choice replaces "folks," "back then," and "didn't have a clue" with formal wording. "Folks at the time did not understand" fixes the idiom but keeps the casual "folks."`,
     },
     {
       slot: 23,
@@ -285,7 +285,7 @@ const skill: ContentSkill = {
         no(`The new transit line will reduce traffic, improving air quality, and to save commuters time.`, 'mixed-forms'),
         ok(`The new transit line will reduce traffic, improve air quality, and save commuters time.`),
       ],
-      solution: `Each item now begins with a verb ("reduce," "improve," "save"), so the list reads evenly. The first choice mixes a full clause with verb phrases, which breaks the pattern.`,
+      solution: `Each item now begins with a verb ("reduce," "improve," "save"), so the list reads evenly. "The air will be cleaner" is a full clause among verb phrases, which breaks the pattern.`,
     },
     {
       slot: 24,
@@ -309,7 +309,7 @@ const skill: ContentSkill = {
         ok(`The observatory is currently upgrading its telescope.`),
         no(`The observatory upgraded its telescope.`, 'wrong-tense'),
       ],
-      solution: `"Currently" replaces "at this point in time," and "is upgrading" replaces "is in the process of upgrading." The last choice is shorter but says the work is already finished.`,
+      solution: `"Currently" replaces "at this point in time," and "is upgrading" replaces "is in the process of upgrading." "The observatory upgraded its telescope" is shorter but says the work is already finished.`,
     },
     {
       slot: 26,
@@ -321,7 +321,7 @@ const skill: ContentSkill = {
         no(`Kwame Asante easily crushed his opponents in every round.`, 'loaded-verb'),
         no(`Kwame Asante defeated his weak opponents in every round.`, 'biased-word'),
       ],
-      solution: `The correct choice reports the result without praising or insulting anyone. The first choice drops "pathetic" but keeps the judgment "brilliant."`,
+      solution: `The correct choice reports the result without praising or insulting anyone. "The brilliant Kwame Asante won every round" drops "pathetic" but keeps the judgment "brilliant."`,
     },
     {
       slot: 27,
@@ -333,7 +333,7 @@ const skill: ContentSkill = {
         ok(`The twenty-six-mile marathon route passes through four neighborhoods.`),
         no(`The marathon route, which in length measures twenty-six miles long, passes through four neighborhoods.`, 'wordy'),
       ],
-      solution: `"Long" already refers to length, so "in length" is redundant, and the measurement fits neatly before the noun. The first choice cuts the clause but keeps "long in length."`,
+      solution: `"Long" already refers to length, so "in length" is redundant, and the measurement fits neatly before the noun. "The marathon route, twenty-six miles long in length" cuts "which is" but keeps "long in length."`,
     },
     {
       slot: 28,
@@ -357,7 +357,7 @@ const skill: ContentSkill = {
         no(`The ferry stops running in January when ice forms on the lake.`, 'starts-with-subject'),
         no(`Ice forms on the lake in January, the ferry stops running.`, 'comma-splice'),
       ],
-      solution: `Moving the "when" clause to the front changes the opening and keeps the cause clear. The last choice also starts differently, but it joins two sentences with only a comma.`,
+      solution: `Moving the "when" clause to the front changes the opening and keeps the cause clear. "Ice forms on the lake in January, the ferry stops running" also starts differently, but it joins two sentences with only a comma.`,
     },
     {
       slot: 30,
@@ -369,7 +369,7 @@ const skill: ContentSkill = {
         no(`The beakers were frozen overnight.`, 'changes-meaning'),
         ok(`The beakers were placed in the refrigerator briefly.`),
       ],
-      solution: `"Placed," "refrigerator," and "briefly" replace the casual "stuck," "fridge," and "for a bit." The second choice improves the verb but keeps "fridge" and "for a bit."`,
+      solution: `"Placed," "refrigerator," and "briefly" replace the casual "stuck," "fridge," and "for a bit." "The beakers were placed in the fridge for a bit" improves the verb but keeps "fridge" and "for a bit."`,
     },
     {
       slot: 31,
@@ -393,7 +393,7 @@ const skill: ContentSkill = {
         no(`This loss is kind of a serious problem for the birds.`, 'informal-hedge'),
         no(`This loss is a tragedy that should outrage every reader.`, 'loses-objectivity'),
       ],
-      solution: `The correct choice states the problem in the same calm, informational voice as sentences 1, 2, and 4. The last choice is formal in vocabulary but turns emotional and breaks the objective tone.`,
+      solution: `The correct choice states the problem in the same calm, informational voice as sentences 1, 2, and 4. "A tragedy that should outrage every reader" is formal in vocabulary but turns emotional and breaks the objective tone.`,
     },
     {
       slot: 33,
@@ -405,7 +405,7 @@ const skill: ContentSkill = {
         no(`The plan reduced energy.`, 'drops-detail'),
         ok(`Implementing the plan reduced the school's energy consumption.`),
       ],
-      solution: `Turning "implementation" and "reduction" into verbs removes the chain of "of" phrases while keeping every fact. The first choice is shorter but still buries the action in nouns.`,
+      solution: `Turning "implementation" and "reduction" into verbs removes the chain of "of" phrases while keeping every fact. "The plan's implementation resulted in a reduction" is shorter but still buries the action in nouns.`,
     },
     {
       slot: 34,
@@ -462,10 +462,10 @@ const skill: ContentSkill = {
       choices: [
         no(`The study proves that playing an instrument makes students smarter.`, 'overstates-claim'),
         no(`Musicians, as everyone knows, have amazing memories.`, 'biased-generalization'),
-        ok(`On average, students who played instruments scored higher on a memory test.`),
+        ok(`On average, students who played instruments scored higher on a memory test than students who did not.`),
         no(`Students who played instruments did better on some kind of test.`, 'vague'),
       ],
-      solution: `The correct sentence keeps "on average" and names the memory test, so it claims no more than the study found. The first choice sounds authoritative but turns a difference in scores into proof of cause.`,
+      solution: `The correct sentence keeps "on average," names the memory test, and states the comparison group, so it claims no more than the study found. "The study proves that playing an instrument makes students smarter" sounds authoritative but turns a difference in scores into proof of cause.`,
     },
     {
       slot: 39,
@@ -477,7 +477,7 @@ const skill: ContentSkill = {
         no(`Working through the night, the expedition departed before the cartographers finished the map.`, 'changes-meaning'),
         no(`The cartographers, working through the night, they finished the map before the expedition departed.`, 'redundant-subject'),
       ],
-      solution: `The opening phrase correctly modifies "the cartographers," who did the work. The first choice also starts with the phrase, but it says the map worked through the night.`,
+      solution: `The opening phrase correctly modifies "the cartographers," who did the work. "Working through the night, the map was finished" also starts with the phrase, but it says the map worked through the night.`,
     },
     {
       slot: 40,
