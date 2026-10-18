@@ -6579,9 +6579,9 @@ where public.generated_questions.status = 'draft' and public.generated_questions
 -- Passage wg5-opinion-writing-p07
 insert into public.passages (id, code, skill_id, sat_alignment, grade_band, title, body, status)
 values ('7ee0fca5-b698-5680-81f7-21dc5c143725', 'wg5-opinion-writing-p07', (select id from public.skills where slug = 'write-g5-opinion-writing'), null,
-        '3-5', $q$Chores Are Good for Kids$q$, $q$(1) In many homes, adults do most of the cooking, cleaning, and laundry. (2) Kids my age should have regular chores at home. (3) Chores teach responsibility. (4) When I feed our dog every morning, I know he depends on me. (5) If I forget, he waits by his empty bowl and whines.
+        '3-5', $q$Chores Are Good for Kids$q$, $q$(1) In many homes, adults do most of the cooking, cleaning, and laundry. (2) Kids my age should have regular chores at home. (3) Chores teach responsibility. (4) When I feed our dog every morning, I know our dog depends on me. (5) If I forget, the dog waits by the empty bowl and whines.
 
-(6) Chores also teach skills that kids will need later. (7) Specifically, sorting laundry, washing dishes, and making a grocery list are things every adult must know how to do. (8) My older brother Mateo said that his college roommate did not know how to wash his own clothes. (9) ______ the roommate turned all of his white socks pink.
+(6) Chores also teach skills that kids will need later. (7) Specifically, sorting laundry, washing dishes, and making a grocery list are things every adult must know how to do. (8) My older brother Mateo said that his college roommate did not know how to wash clothes. (9) ______ the roommate turned a whole pile of white socks pink.
 
 (10) Some kids say they are too busy with homework and sports. (11) Most chores take only ten or fifteen minutes a day. (12) Dogs are loyal animals that make great pets.$q$, 'draft')
 on conflict (id) do update set title = excluded.title, body = excluded.body
