@@ -14,7 +14,7 @@ const skill: ContentSkill = {
     {
       code: 'wg11-paragraph-transitions-p01',
       title: 'Lichens as Living Air Monitors',
-      body: `(1) Lichens, the crusty patches of color that cling to tree bark and old stone walls, are easy to overlook, yet ecologists increasingly rely on them as indicators of air quality. (2) A lichen is not a single organism but a partnership between a fungus and an alga or cyanobacterium, which together form a body that has no roots and no protective outer layer. (3) ____, a lichen absorbs water and dissolved nutrients directly from rain, fog, and the surrounding air. (4) This constant exposure makes lichens unusually sensitive to pollutants such as sulfur dioxide and excess nitrogen, which accumulate in their tissues rather than being filtered out. (5) Many hikers also enjoy photographing lichens because of their striking oranges and pale greens.
+      body: `(1) Lichens, the crusty patches of color that cling to tree bark and old stone walls, are easy to overlook, yet ecologists increasingly rely on them as indicators of air quality. (2) A lichen is not a single organism but a partnership between a fungus and an alga or cyanobacterium, which together form a body that has no roots and no waxy coating like the one that protects a leaf. (3) ____, a lichen absorbs water and dissolved nutrients directly from rain, fog, and the surrounding air. (4) This constant exposure makes lichens unusually sensitive to pollutants such as sulfur dioxide and excess nitrogen, which accumulate in their tissues rather than being filtered out. (5) Many hikers also enjoy photographing lichens because of their striking oranges and pale greens.
 
 (6) Because different species tolerate pollution to different degrees, the mix of lichens growing in an area can tell researchers a great deal about the air there. (7) Leafy and shrubby species, which expose a large surface area to the air, tend to disappear first when pollution rises. (8) Flat, crusty species, by contrast, often survive in conditions that would eliminate their more delicate relatives. (9) ____, a city park dominated by crusty lichens probably has poorer air than a rural forest where shrubby lichens hang thickly from the branches.
 
@@ -30,7 +30,7 @@ const skill: ContentSkill = {
             no(`For instance,`, 'example-for-effect'),
             no(`Meanwhile,`, 'time-for-effect'),
           ],
-          solution: `Sentence 2 says a lichen has no roots and no protective layer, and sentence 3 gives the consequence: it absorbs water directly from the air, so "As a result" fits. "In contrast" is wrong because sentence 3 follows from sentence 2 rather than opposing it.`,
+          solution: `Sentence 2 says a lichen has no roots and no waxy coating, and sentence 3 gives the consequence: it absorbs water directly from the air, so "As a result" fits. "In contrast" is wrong because sentence 3 follows from sentence 2 rather than opposing it.`,
         },
         {
           slot: 2,
