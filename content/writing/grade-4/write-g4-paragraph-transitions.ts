@@ -387,7 +387,7 @@ const skill: ContentSkill = {
             no(`The first paragraph tells a problem, and the second tells how it was solved.`, 'invents-problem-solution'),
             no(`The first paragraph compares two classes, and the second compares two ribbons.`, 'invents-comparison'),
           ],
-          solution: `Paragraph 1 uses time words like "first," "After that," and "Then" to list events, and paragraph 2 explains that Field Day is not only about winning. Paragraph 2 does not list events in time order, so the first wrong choice does not fit.`,
+          solution: `Paragraph 1 uses time words like "first," "After that," and "Then" to list events, and paragraph 2 explains that Field Day is not only about winning. Paragraph 2 does not list events in time order, so the choice "Both paragraphs list the Field Day events in time order" does not fit.`,
         },
       ],
     },
