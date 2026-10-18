@@ -66,7 +66,7 @@ const skill: ContentSkill = {
             ok(`Although the cost concern is reasonable, the evidence shows that shifting hours addresses it without reducing service.`),
             no(`Many people feel strongly about libraries, and those feelings are important to respect.`, 'vague-wording'),
           ],
-          solution: `The correct revision acknowledges the opposing view respectfully and points back to the evidence in sentences (9) and (10). The first choice still attacks opponents personally instead of answering their reasoning.`,
+          solution: `The correct revision acknowledges the opposing view respectfully and points back to the evidence in sentences (9) and (10). The choice saying opponents have "clearly never needed the library after work" still attacks opponents personally instead of answering their reasoning.`,
         },
         {
           slot: 5,
@@ -103,7 +103,7 @@ const skill: ContentSkill = {
             no(`Paper for printed books is made from trees, which grow in forests around the world.`, 'irrelevant-detail'),
             no(`Some students prefer backpacks with wheels, while others like shoulder straps.`, 'off-topic'),
           ],
-          solution: `The correct revision adds specific evidence that connects book weight to a real problem for students. The first choice appeals to what "everyone knows" instead of offering evidence.`,
+          solution: `The correct revision adds specific evidence that connects book weight to a real problem for students. The choice about heavy books being "annoying" appeals to what "everyone knows" instead of offering evidence.`,
         },
         {
           slot: 7,
@@ -242,7 +242,7 @@ const skill: ContentSkill = {
           choices: [
             no(`Old buildings are interesting, and some are more interesting than others.`, 'vague-wording'),
             no(`The Harlow Street Depot was built of brick in the year 1911.`, 'fact-not-claim'),
-            ok(`The county should restore the Harlow Street Depot as a museum and community hall rather than allow its demolition.`),
+            ok(`The council should restore the Harlow Street Depot as a museum and community hall rather than allow its demolition.`),
             no(`Every old building in Kessington must be saved, no matter what it costs.`, 'overstated-claim'),
           ],
           solution: `The correct choice takes a clear, arguable position that the rest of the essay supports. The date of construction is a fact, not a claim anyone could argue against.`,
@@ -293,7 +293,7 @@ const skill: ContentSkill = {
             ok(`By granting that the housing need is real, the writer appears fair and sets up the solution in sentence (8) that meets that need without demolition.`),
             no(`It adds a statistic showing how many families in Kessington need housing.`, 'invents-evidence'),
           ],
-          solution: `Acknowledging a valid opposing point builds credibility and prepares the reader for a solution that satisfies both sides. Sentence (7) contains no statistic, so the last choice describes evidence that is not in the text.`,
+          solution: `Acknowledging a valid opposing point builds credibility and prepares the reader for a solution that satisfies both sides. Sentence (7) contains no statistic, so the choice about a statistic on families needing housing describes evidence that is not in the text.`,
         },
       ],
     },
@@ -565,7 +565,7 @@ const skill: ContentSkill = {
             no(`They show that the old dishwasher is too damaged to be repaired.`, 'misreads-evidence'),
             no(`They prove that reusable dishware will never need to be replaced.`, 'overstated-claim'),
           ],
-          solution: `Sentence (8) admits a $16,000 yearly cost, and sentence (9) compares it with the $21,000 from sentence (4), showing a savings. The text says the dishwasher can be repaired, so the third choice misreads it.`,
+          solution: `Sentence (8) admits a $16,000 yearly cost, and sentence (9) compares it with the $21,000 from sentence (4), showing a savings. The text says the dishwasher can be repaired, so the choice calling it too damaged to repair misreads it.`,
         },
         {
           slot: 40,
