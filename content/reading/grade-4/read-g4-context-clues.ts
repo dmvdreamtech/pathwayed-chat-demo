@@ -227,7 +227,7 @@ const skill: ContentSkill = {
             wrong(`wash`, 'unrelated-meaning'),
             wrong(`borrow`, 'unsupported-inference'),
           ],
-          solution: `Tomas explains the word himself: "giving them to the shelter for free." Selling would mean getting money, which is the opposite of free.`,
+          solution: `Tomas explains the word right away: "giving them to the shelter for free." Selling would mean getting money, which is the opposite of free.`,
         },
         {
           slot: 17,
@@ -273,7 +273,7 @@ const skill: ContentSkill = {
             wrong(`a trip in a car`, 'wrong-meaning-multiple-meaning'),
             wrong(`a road up to a house`, 'wrong-meaning-multiple-meaning'),
             right(`an effort to collect things for a cause`),
-            wrong(`a strong wish to win`, 'unrelated-meaning'),
+            wrong(`a strong wish to win`, 'wrong-meaning-multiple-meaning'),
           ],
           solution: `Amara explains, "We can collect blankets from the whole neighborhood," so this drive is a plan to gather things. "Drive" can mean a car trip, but nobody drives anywhere in her plan.`,
         },
@@ -282,7 +282,7 @@ const skill: ContentSkill = {
     {
       code: 'rg4-context-clues-p05',
       title: 'How Bridges Stay Up',
-      body: `Every day, bridges carry cars, trucks, and people over rivers and roads. How does a bridge hold so much weight without falling down?\n\nThe answer is that a good bridge spreads out its load. The load is all the weight a bridge must carry, from heavy trucks to the bridge's own steel and concrete. If all that weight pressed on one small spot, the bridge could sag or even collapse into the river below. Engineers, the people who plan and design bridges and buildings, work hard so that never happens.\n\nOne strong shape is the arch. An arch curves up like a rainbow. When weight presses down on top, the curve pushes the force out to each end and down into the ground. Some stone arch bridges have stood for hundreds of years.\n\nAnother kind is the suspension bridge. Its road hangs from thick steel cables. The cables stretch between tall towers and are tied to solid rock at both ends. These bridges can span very long distances, reaching all the way across wide bays.\n\nEngineers also test their ideas before building. They make small models and add weight until the models bend. These tests reveal weak spots that are hard to see just by looking. Then the engineers fix the problems before a real bridge is built.`,
+      body: `Every day, bridges carry cars, trucks, and people over rivers and roads. How does a bridge hold so much weight without falling down?\n\nThe answer is that a good bridge spreads out its load. The load is all the weight a bridge must carry, from heavy trucks to the bridge's own steel and concrete. If all that weight pressed on one small spot, the bridge could sag or even collapse into the river below. Engineers, the people who plan and design bridges and buildings, work hard so that never happens.\n\nOne strong shape is the arch. An arch curves up like a rainbow. When weight presses down on top, the curve pushes the force out to each end and down into the ground. Some stone arch bridges have stood for hundreds of years.\n\nAnother kind is the suspension bridge. Its road hangs from thick steel cables. The cables stretch between tall towers and are held by heavy anchors in the ground at both ends. These bridges can span very long distances, reaching all the way across wide bays.\n\nEngineers also test their ideas before building. They make small models and add weight until the models bend. These tests reveal weak spots that are hard to see just by looking. Then the engineers fix the problems before a real bridge is built.`,
       items: [
         {
           slot: 21,

@@ -4404,7 +4404,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('d7c5ddf7-8e79-5e64-b719-4b5ccfebe07f', null, (select id from public.skills where slug = 'read-g4-context-clues'), null, 'easy',
-   $q$In paragraph 2, Tomas wants people to "donate" old blankets. What does "donate" mean?$q$, $q$[{"text":"borrow","is_correct":false,"misconception_token":"unsupported-inference"},{"text":"give for free","is_correct":true},{"text":"wash","is_correct":false,"misconception_token":"unrelated-meaning"},{"text":"sell","is_correct":false,"misconception_token":"opposite-meaning"}]$q$::jsonb, $q$give for free$q$, $q$Tomas explains the word himself: "giving them to the shelter for free." Selling would mean getting money, which is the opposite of free.$q$, 'draft', 'f5af89f5-7982-5da6-a9e6-96952857d88b')
+   $q$In paragraph 2, Tomas wants people to "donate" old blankets. What does "donate" mean?$q$, $q$[{"text":"borrow","is_correct":false,"misconception_token":"unsupported-inference"},{"text":"give for free","is_correct":true},{"text":"wash","is_correct":false,"misconception_token":"unrelated-meaning"},{"text":"sell","is_correct":false,"misconception_token":"opposite-meaning"}]$q$::jsonb, $q$give for free$q$, $q$Tomas explains the word right away: "giving them to the shelter for free." Selling would mean getting money, which is the opposite of free.$q$, 'draft', 'f5af89f5-7982-5da6-a9e6-96952857d88b')
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -4456,7 +4456,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('dca448a7-67bd-5884-b132-106dc3b37a66', null, (select id from public.skills where slug = 'read-g4-context-clues'), null, 'hard',
-   $q$In paragraph 2, Amara says, "Let's hold a blanket drive." What does "drive" mean in this sentence?$q$, $q$[{"text":"an effort to collect things for a cause","is_correct":true},{"text":"a strong wish to win","is_correct":false,"misconception_token":"unrelated-meaning"},{"text":"a road up to a house","is_correct":false,"misconception_token":"wrong-meaning-multiple-meaning"},{"text":"a trip in a car","is_correct":false,"misconception_token":"wrong-meaning-multiple-meaning"}]$q$::jsonb, $q$an effort to collect things for a cause$q$, $q$Amara explains, "We can collect blankets from the whole neighborhood," so this drive is a plan to gather things. "Drive" can mean a car trip, but nobody drives anywhere in her plan.$q$, 'draft', 'f5af89f5-7982-5da6-a9e6-96952857d88b')
+   $q$In paragraph 2, Amara says, "Let's hold a blanket drive." What does "drive" mean in this sentence?$q$, $q$[{"text":"an effort to collect things for a cause","is_correct":true},{"text":"a strong wish to win","is_correct":false,"misconception_token":"wrong-meaning-multiple-meaning"},{"text":"a road up to a house","is_correct":false,"misconception_token":"wrong-meaning-multiple-meaning"},{"text":"a trip in a car","is_correct":false,"misconception_token":"wrong-meaning-multiple-meaning"}]$q$::jsonb, $q$an effort to collect things for a cause$q$, $q$Amara explains, "We can collect blankets from the whole neighborhood," so this drive is a plan to gather things. "Drive" can mean a car trip, but nobody drives anywhere in her plan.$q$, 'draft', 'f5af89f5-7982-5da6-a9e6-96952857d88b')
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -4475,7 +4475,7 @@ The answer is that a good bridge spreads out its load. The load is all the weigh
 
 One strong shape is the arch. An arch curves up like a rainbow. When weight presses down on top, the curve pushes the force out to each end and down into the ground. Some stone arch bridges have stood for hundreds of years.
 
-Another kind is the suspension bridge. Its road hangs from thick steel cables. The cables stretch between tall towers and are tied to solid rock at both ends. These bridges can span very long distances, reaching all the way across wide bays.
+Another kind is the suspension bridge. Its road hangs from thick steel cables. The cables stretch between tall towers and are held by heavy anchors in the ground at both ends. These bridges can span very long distances, reaching all the way across wide bays.
 
 Engineers also test their ideas before building. They make small models and add weight until the models bend. These tests reveal weak spots that are hard to see just by looking. Then the engineers fix the problems before a real bridge is built.$q$, 'draft')
 on conflict (id) do update set title = excluded.title, body = excluded.body
