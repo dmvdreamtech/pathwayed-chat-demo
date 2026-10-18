@@ -28,7 +28,7 @@ const skill: ContentSkill = {
           wrong(`Glaciers are made of ice, and scientists enjoy visiting them in the summer months.`, 'unsupported-inference'),
           wrong(`Glaciers move a few feet each day, and their rocks feel rough like sandpaper.`, 'too-narrow'),
           wrong(`Snow falls in winter, and lakes are found in many parts of the world today.`, 'too-broad'),
-        ], `The passage first tells how glaciers form and move, then explains how they carve valleys and leave ridges and lakes. The third choice only lists small details instead of main ideas.`),
+        ], `The passage first tells how glaciers form and move, then explains how they carve valleys and leave ridges and lakes. The choice about moving a few feet each day and rocks feeling like sandpaper only lists small details instead of main ideas.`),
         q(2, 'easy', `Which detail best supports the idea that glaciers change the shape of the land?`, [
           wrong(`The bottom layers of snow slowly turn into solid ice.`, 'wrong-supporting-detail'),
           right(`A glacier can carve a narrow river valley into a wide valley shaped like the letter U.`),
@@ -52,7 +52,7 @@ const skill: ContentSkill = {
           wrong(`Rocks carried by a glacier grind valleys into new shapes.`, 'misidentifies-key-idea'),
           right(`Glaciers are probably the most interesting things in nature.`),
           wrong(`Melting glaciers can leave behind ridges of rock and new lakes.`, 'misidentifies-key-idea'),
-        ], `A summary gives only the important ideas from the text, so a personal opinion such as "the most interesting things in nature" does not belong. The other three sentences restate key ideas from the passage.`),
+        ], `A summary gives only the important ideas from the text, so a personal opinion such as "the most interesting things in nature" does not belong. The sentences about how glaciers form, how their rocks grind valleys and what they leave when they melt all restate key ideas from the passage.`),
       ],
     },
     {
@@ -89,7 +89,7 @@ const skill: ContentSkill = {
           wrong(`The bicycle was invented to help workers get to their jobs. Families did not ride bikes until brakes were added.`, 'contradicts-text'),
           right(`Early bicycles were heavy, hard to steer or dangerous. Builders added chains, equal wheels, air tires and brakes, and the safer bikes became a common way to travel.`),
           wrong(`High-wheel bikes were exciting and fast. It is too bad people stopped riding them, because they were the most fun kind of bike.`, 'includes-opinion'),
-        ], `The correct summary includes the early problems, the improvements and the result, which are the key ideas. The first choice only retells paragraph 1.`),
+        ], `The correct summary includes the early problems, the improvements and the result, which are the key ideas. The summary about early bicycles having no pedals only retells paragraph 1.`),
       ],
     },
     {
@@ -126,7 +126,7 @@ const skill: ContentSkill = {
           wrong(`City streets are hot and often flood. The only way to fix these problems is for every neighbor to plant a tree.`, 'contradicts-text'),
           wrong(`Trees are the best part of any city. People who live on streets with no trees are missing out on a lot.`, 'includes-opinion'),
           right(`Street trees cool city blocks and soak up rain that could cause floods. They need room for roots and regular watering, but with care they help for decades.`),
-        ], `The correct summary covers the benefits, the challenges and the long life of street trees. The first choice only covers the cooling details from paragraph 2.`),
+        ], `The correct summary covers the benefits, the challenges and the long life of street trees. The summary about trees blocking sunlight and giving off water only covers the cooling details from paragraph 2.`),
       ],
     },
     {
@@ -163,7 +163,7 @@ const skill: ContentSkill = {
           right(`An octopus has no shell, so it stays safe by changing its color and skin texture to blend in. If that fails, it squirts ink or squeezes into tiny cracks.`),
           wrong(`An octopus is the coolest animal in the sea. Its tricks are amazing, and it would make a great pet for anyone.`, 'includes-opinion'),
           wrong(`An octopus has bones that are very small. It hides in coral during the day and hunts for food at night.`, 'contradicts-text'),
-        ], `The correct summary names the main hiding and escaping tricks without opinions. The first choice only retells paragraph 2.`),
+        ], `The correct summary names the main hiding and escaping tricks without opinions. The summary about turning red, brown, white or speckled only retells paragraph 2.`),
       ],
     },
     {
@@ -200,7 +200,7 @@ const skill: ContentSkill = {
           wrong(`Artists wrap each piece of glass with lead. They melt metal where the strips meet so the pieces hold tight.`, 'too-narrow'),
           right(`Glassmakers melt sand and add metals to make colored glass. An artist plans the design, cuts the pieces, joins them with lead and seals the window, which can last for centuries.`),
           wrong(`Artists heat sand on the beach to make a window. They paint colors onto clear glass after it is set in the frame.`, 'contradicts-text'),
-        ], `The correct summary follows every main step in order without adding opinions. The second choice only retells paragraph 4.`),
+        ], `The correct summary follows every main step in order without adding opinions. The summary about wrapping each piece with lead only retells paragraph 4.`),
       ],
     },
     {
@@ -237,7 +237,7 @@ const skill: ContentSkill = {
           wrong(`Solar power is clean and free, but it does not work at night.`, 'misidentifies-key-idea'),
           wrong(`Batteries can store solar power for use after dark.`, 'misidentifies-key-idea'),
           right(`The panels on the rooftops are tilted toward the sky.`),
-        ], `The tilt of the panels is a minor detail that does not help explain the main ideas, so it does not belong in a summary. The other sentences state how solar power works, its benefits and its limits.`),
+        ], `The tilt of the panels is a minor detail that does not help explain the main ideas, so it does not belong in a summary. The sentences about solar cells making a current, solar power being clean but not working at night, and batteries storing power all state key ideas.`),
       ],
     },
     {
@@ -274,7 +274,7 @@ const skill: ContentSkill = {
           wrong(`Jump rope is more fun than any other sport. Kids who do not jump rope are missing the best exercise there is.`, 'includes-opinion'),
           wrong(`Jump rope started in gyms and later moved to playgrounds. Only adults are allowed to enter jump rope contests.`, 'contradicts-text'),
           right(`Jump rope is a competitive sport with speed, freestyle and double Dutch events. It also builds a strong heart, balance and timing, and it can be practiced almost anywhere.`),
-        ], `The correct summary covers the different events and the benefits of the sport. The first choice only retells the double Dutch paragraph.`),
+        ], `The correct summary covers the different events and the benefits of the sport. The summary about two long ropes keeping a steady rhythm only retells the double Dutch paragraph.`),
       ],
     },
     {
@@ -308,10 +308,10 @@ const skill: ContentSkill = {
         ], `Paragraph 5 mentions the worry that the switch is hard, then says it only means moving times on a schedule. The author does not agree that the idea is bad.`),
         q(40, 'hard', `Which is the best summary of the passage?`, [
           wrong(`Students rush through lunch to get to recess. They throw away half of their sandwiches and skip their fruit.`, 'too-narrow'),
-          right(`The author argues that recess should come before lunch. Students would eat more, the lunchroom would be calmer and classes would be more ready to learn, and the change is easy to make.`),
+          right(`The author argues that recess should come before lunch. Students would eat more, the lunchroom would be calmer and students would be more ready to learn, and the change is easy to make.`),
           wrong(`The author argues that recess should be removed so students have more time to eat and study in class.`, 'contradicts-text'),
           wrong(`Recess is the best part of the day. Every student loves recess more than lunch, so it should always come first.`, 'includes-opinion'),
-        ], `The correct summary states the author's claim, the main reasons and the answer to the worry. The first choice only retells one detail from paragraph 2.`),
+        ], `The correct summary states the author's claim, the main reasons and the answer to the worry. The summary about rushing through lunch and throwing away sandwiches only retells one detail from paragraph 2.`),
       ],
     },
   ],
