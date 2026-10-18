@@ -105,7 +105,7 @@ const skill: ContentSkill = {
             wrong(`Chotu finds the lost river, and Luz paints the high shelf.`, 'misreads-detail'),
             wrong(`Chotu gets the art box down, and Luz frees the shady spot.`, 'reverses-texts'),
           ],
-          solution: `The elephant blocks the shade by the well until Chotu moves him, and Luz uses a broom to slide the art box off the shelf. The last choice swaps the two problems.`,
+          solution: `The elephant blocks the shade by the well until Chotu moves him, and Luz uses a broom to slide the art box off the shelf. The choice that gives Chotu the art box swaps the two problems.`,
         },
         {
           slot: 8,
@@ -117,7 +117,7 @@ const skill: ContentSkill = {
             wrong(`It is best to wait for someone else to fix a problem.`, 'reverses-meaning'),
             wrong(`Tall people are usually better at solving hard problems.`, 'reverses-meaning'),
           ],
-          solution: `In both stories the smallest character succeeds where bigger ones could not, using a good idea. The tall kids in Text 2 actually fail, so the last choice is backward.`,
+          solution: `In both stories the smallest character succeeds where bigger ones could not, using a good idea. The tall kids in Text 2 actually fail, so the choice saying tall people are better is backward.`,
         },
         {
           slot: 9,
@@ -129,12 +129,12 @@ const skill: ContentSkill = {
             wrong(`Chotu works with a team, while Luz waits for the teacher to return.`, 'contradicts-text'),
             wrong(`Both of them climb up high to reach the thing they need.`, 'misses-difference'),
           ],
-          solution: `Chotu talks the elephant into going to the river, and Luz hooks the box with a broom. Luz does not climb at all, so the last choice misses the difference.`,
+          solution: `Chotu talks the elephant into going to the river, and Luz hooks the box with a broom. Luz does not climb at all, so the choice saying both climb up high misses the difference.`,
         },
         {
           slot: 10,
           difficulty: 'hard',
-          stem: `Both stories end with the small character being recognized. How do the endings show this differently?`,
+          stem: `Both stories end after the small character succeeds. How are the endings different?`,
           choices: [
             right(`Chotu quietly enjoys the result, while Luz is pointed out by the whole class.`),
             wrong(`Chotu is thanked by the elephant, while Luz keeps her idea a secret.`, 'contradicts-text'),
@@ -196,7 +196,7 @@ const skill: ContentSkill = {
             wrong(`Text 2 has no speaker at all, while Text 1 is told by a girl named Ji-woo.`, 'confuses-point-of-view'),
             wrong(`Both texts are written in stanzas that rhyme at the end of every line.`, 'misses-difference'),
           ],
-          solution: `Text 2 is a poem with short lines grouped into stanzas, and Text 1 is a story told in paragraphs. Text 1 is not written in stanzas, so the second choice reverses the texts.`,
+          solution: `Text 2 is a poem with short lines grouped into stanzas, and Text 1 is a story told in paragraphs. Text 1 is not written in stanzas, so the choice saying Text 1 uses stanzas reverses the texts.`,
         },
         {
           slot: 15,
@@ -208,7 +208,7 @@ const skill: ContentSkill = {
             wrong(`Ji-woo cries when frost comes, while the poem's speaker spills the bucket of sap.`, 'unsupported-inference'),
             wrong(`Both children run away from the grown-up and go play somewhere else instead.`, 'unsupported-inference'),
           ],
-          solution: `Ji-woo "picked one early and took a big bite," and the poem's speaker says "I want to taste it now!" Ji-woo never says those words, so the second choice swaps the texts.`,
+          solution: `Ji-woo "picked one early and took a big bite," and the poem's speaker says "I want to taste it now!" Ji-woo never says those words, so the choice that gives her that line swaps the texts.`,
         },
       ],
     },
@@ -251,7 +251,7 @@ const skill: ContentSkill = {
             wrong(`Sports are more fun than music and dancing.`, 'unsupported-inference'),
             wrong(`It is best to practice alone where no one sees.`, 'contradicts-text'),
           ],
-          solution: `Both characters slip or fall, try again, and succeed. Neither one stops after falling, so the second choice is the opposite of the theme.`,
+          solution: `Both characters slip or fall, try again, and succeed. Neither one stops after falling, so the choice "If you fall once, it is time to stop and rest" is the opposite of the theme.`,
         },
         {
           slot: 19,
@@ -318,7 +318,7 @@ const skill: ContentSkill = {
             wrong(`Each helper brings and eats only his or her own lunch.`, 'misreads-detail'),
             wrong(`Food is shared in Text 1 but not in Text 2.`, 'misses-similarity'),
           ],
-          solution: `Mrs. Reyes serves rice cakes to everyone, and the grandmothers bring baskets of potatoes and corn for lunch. Food is part of both stories, so the last choice misses a similarity.`,
+          solution: `Mrs. Reyes serves rice cakes to everyone, and the grandmothers bring baskets of potatoes and corn for lunch. Food is part of both stories, so the choice saying food is shared only in Text 1 misses a similarity.`,
         },
         {
           slot: 24,
@@ -342,7 +342,7 @@ const skill: ContentSkill = {
             wrong(`Text 1 ends with tired people going home, while Text 2 ends with a quarrel.`, 'contradicts-text'),
             wrong(`Both endings show that the workers wish they had stayed home that day.`, 'reverses-meaning'),
           ],
-          solution: `Text 1 ends with cheering children and says it "felt like a party," while Rosa's father says "Next year, it will be our turn to help again." The second choice switches the endings.`,
+          solution: `Text 1 ends with cheering children and says it "felt like a party," while Rosa's father says "Next year, it will be our turn to help again." The choice that puts the promise in Text 1 switches the endings.`,
         },
       ],
     },
@@ -428,7 +428,7 @@ const skill: ContentSkill = {
             wrong(`A family that moves to a new village.`, 'unsupported-inference'),
             wrong(`A tortoise that learns how to fly.`, 'only-one-text'),
           ],
-          solution: `Chidi's grandmother teaches through stories, and Niamh's grandad teaches her to read the sky. The tortoise is only part of a story inside Text 1.`,
+          solution: `Chidi's grandmother teaches through stories, and Niamh's grandad teaches Niamh to read the sky. The tortoise is only part of a story inside Text 1.`,
         },
         {
           slot: 32,
@@ -459,12 +459,12 @@ const skill: ContentSkill = {
           difficulty: 'hard',
           stem: `Both children change their minds. Which choice describes each change correctly?`,
           choices: [
-            right(`Chidi stops feeling bored, and Niamh stops doubting her grandad.`),
+            right(`Chidi stops feeling bored, and Niamh stops doubting Grandad.`),
             wrong(`Chidi stops doubting his grandmother, and Niamh stops feeling bored.`, 'reverses-texts'),
-            wrong(`Chidi decides he dislikes stories, and Niamh decides she dislikes rain.`, 'contradicts-text'),
+            wrong(`Chidi decides he dislikes stories, and Niamh decides rain is no good.`, 'contradicts-text'),
             wrong(`Both children decide to move away and live with their grandparents.`, 'unsupported-inference'),
           ],
-          solution: `Chidi first says "there is nothing to do" but then asks for another story. Niamh laughs because "the sun is out," then sees the rain arrive and starts watching the sky herself.`,
+          solution: `Chidi first says "there is nothing to do" but then asks for another story. Niamh laughs because "the sun is out," then sees the rain arrive and starts watching the sky each day.`,
         },
         {
           slot: 35,
@@ -483,7 +483,7 @@ const skill: ContentSkill = {
     {
       code: 'rg4-comparing-texts-p08',
       title: 'Finding Home',
-      body: `Text 1: The Smell of Home (a story from Pakistan and England)\n\nBilal's family moved from Lahore to a rainy town in England. Everything felt strange. The streets were quiet, and the air smelled of wet leaves instead of spices.\n\nAt school, Bilal ate lunch alone. Then one day, his mother packed warm parathas. A boy named Owen sniffed the air. "What is that? It smells amazing," he said. Bilal shared half. Owen shared his apple.\n\nThat weekend, Owen came over to learn how to roll parathas. Flour got everywhere. Bilal laughed for the first time in weeks. The rainy town felt a little more like home.\n\nText 2: First Snow (a poem from Peru and Canada)\n\nIn Lima, the ocean was warm.\nHere, the wind bites my nose.\nI miss my abuela's kitchen\nand the songs on the radio.\n\nThen my neighbor, Mei,\nknocks on my door one day.\n"It's snowing! Come outside!"\nShe shows me how to play.\n\nWe build a snow friend, tall and round.\nI give it my red scarf from home.\nNow a little piece of Lima\nstands in Canada's snow.`,
+      body: `Text 1: The Smell of Home (a story from Pakistan and England)\n\nBilal's family moved from Lahore to a rainy town in England. Everything felt strange. The streets were quiet, and the air smelled of wet leaves instead of spices.\n\nAt school, Bilal ate lunch alone. Then one day, his mother packed warm parathas. A boy named Owen sniffed the air. "What is that? It smells amazing," he said. Bilal shared half. Owen shared his apple.\n\nThat weekend, Owen came over to learn how to roll parathas. Flour got everywhere. Bilal laughed for the first time in weeks. The rainy town felt a little more like home.\n\nText 2: First Snow (a poem from Peru and Canada)\n\nIn Lima, the sun was warm.\nHere, the wind bites my nose.\nI miss my abuela's kitchen\nand the songs on the radio.\n\nThen my neighbor, Mei,\nknocks on my door one day.\n"It's snowing! Come outside!"\nShe shows me how to play.\n\nWe build a snow friend, tall and round.\nI give it my red scarf from home.\nNow a little piece of Lima\nstands in Canada's snow.`,
       items: [
         {
           slot: 36,
@@ -528,7 +528,7 @@ const skill: ContentSkill = {
           choices: [
             right(`Bilal teaches Owen to make parathas, and the speaker puts a scarf from home on the snow friend.`),
             wrong(`Bilal gives Owen a scarf from Lahore, and the speaker cooks parathas with Mei.`, 'reverses-texts'),
-            wrong(`Bilal plays songs on the radio, and the speaker shows Mei the warm ocean.`, 'unsupported-inference'),
+            wrong(`Bilal plays songs on the radio, and the speaker takes Mei to the ocean.`, 'unsupported-inference'),
             wrong(`Bilal forgets about Lahore, and the speaker throws away the red scarf.`, 'contradicts-text'),
           ],
           solution: `Owen comes over "to learn how to roll parathas," a food from Bilal's old home, and the speaker gives the snow friend "my red scarf from home." The scarf belongs to Text 2, not Text 1.`,
