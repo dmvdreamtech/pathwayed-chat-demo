@@ -347,7 +347,7 @@ const skill: ContentSkill = {
           difficulty: 'hard',
           stem: `Why is sentence (1) an effective way to begin this argument?`,
           choices: [
-            ok(`It shows the problem matters to these students because deep water is close to their school.`),
+            ok(`It shows the problem matters to these students because a lake is close to their school.`),
             no(`It states the exact claim that the rest of the essay will defend.`, 'confuses-hook-with-claim'),
             no(`It answers an opposing claim before anyone has raised it.`, 'mislabels-sentence-role'),
             no(`It gives the main evidence about how much the program would cost.`, 'misreads-purpose'),
@@ -458,7 +458,7 @@ const skill: ContentSkill = {
             no(`In conclusion,`, 'conclusion-for-addition'),
             ok(`In addition,`),
           ],
-          solution: `Sentence (8) adds a second answer to the cost worry after sentence (7), so "In addition" fits. "On the other hand" would wrongly signal that the parent group's offer goes against the point in sentence (7).`,
+          solution: `Sentence (8) adds another answer to the cost worry on top of sentence (7), so "In addition" fits. "On the other hand" would wrongly signal that the parent group's offer goes against the point in sentence (7).`,
         },
         {
           slot: 32,
