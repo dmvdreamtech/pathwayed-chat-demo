@@ -393,7 +393,7 @@ const skill: ContentSkill = {
         no(`Rohan's only, sister Lucia, plays goalie on the soccer team.`, 'comma-splits-noun-phrase'),
         ok(`Rohan's only sister, Lucia, plays goalie on the soccer team.`),
       ],
-      solution: `Because Rohan has only one sister, her name is extra information rather than information that tells which sister, so "Lucia" is set off with two commas. Leaving out the commas would suggest he has more than one sister.`,
+      solution: `Because Rohan has only one sister, her name is extra information rather than information that tells which sister, so "Lucia" is set off with two commas. Leaving out the commas would suggest Rohan has more than one sister.`,
     },
     {
       slot: 33,
@@ -405,7 +405,7 @@ const skill: ContentSkill = {
         no(`The poet Rafael Montoya, read three poems at the library.`, 'comma-between-subject-verb'),
         no(`The poet, Rafael Montoya read three poems at the library.`, 'missing-closing-comma'),
       ],
-      solution: `There are many poets, so the name "Rafael Montoya" is needed to tell which poet read, and it takes no commas. Setting the name off with commas would treat it as extra information, as if there were only one poet in the world.`,
+      solution: `There are many poets, so the name "Rafael Montoya" is needed to tell which poet read, and it takes no commas. Setting the name off with commas would treat it as extra information, as if only one poet had visited.`,
     },
     {
       slot: 34,
@@ -417,7 +417,7 @@ const skill: ContentSkill = {
         ok(`Our next-door neighbor, Mrs. Abernathy, teaches chemistry at Riverside High School.`),
         no(`Our next-door Neighbor, Mrs. Abernathy, teaches chemistry at Riverside High School.`, 'common-noun-capitalized'),
       ],
-      solution: `We have only one next-door neighbor, so her name is extra information and is set off by commas, "chemistry" is a general subject in lowercase, and the full school name is capitalized. The first choice gets the commas right but wrongly capitalizes "Chemistry."`,
+      solution: `We have only one next-door neighbor, so her name is extra information and is set off by commas, "chemistry" is a general subject in lowercase, and the full school name is capitalized. The choice with "teaches Chemistry" gets the commas right but wrongly capitalizes the subject.`,
     },
     {
       slot: 35,
@@ -453,7 +453,7 @@ const skill: ContentSkill = {
         ok(`During winter break, Hamid read The Girl Who Mapped the Stars.`),
         no(`During winter break, Hamid read the girl who mapped the stars.`, 'title-lowercase'),
       ],
-      solution: `Seasons are not capitalized, and in a title the important words, including the pronoun "Who," are capitalized while a small word like "the" in the middle is not. The second choice wrongly treats "who" as a small connecting word.`,
+      solution: `Seasons are not capitalized, and in a title the important words, including the pronoun "Who," are capitalized while a small word like "the" in the middle is not. The choice with "The Girl who Mapped" wrongly treats "who" as a small connecting word.`,
     },
     {
       slot: 38,
@@ -465,7 +465,7 @@ const skill: ContentSkill = {
         no(`Ines saw a monarch butterfly (the kind that travels south) each fall resting on the fence.`, 'parentheses-around-wrong-words'),
         no(`Ines saw a monarch butterfly the kind that travels, south each fall, resting on the fence.`, 'commas-around-wrong-words'),
       ],
-      solution: `"The kind that travels south each fall" is an aside about the butterfly, so the whole phrase is enclosed in parentheses. The first choice opens the aside with a comma but never closes it, so "fall resting on the fence" runs together.`,
+      solution: `"The kind that travels south each fall" is an aside about the butterfly, so the whole phrase is enclosed in parentheses. The choice that puts a comma after "butterfly" opens the aside but never closes it, so "fall resting on the fence" runs together.`,
     },
     {
       slot: 39,
@@ -489,7 +489,7 @@ const skill: ContentSkill = {
         no(`Dr. Achterberg, a scientist who studies glaciers will speak to our class on Friday.`, 'missing-closing-comma'),
         ok(`Dr. Achterberg, a scientist who studies glaciers, will speak to our class on Friday.`),
       ],
-      solution: `The whole phrase "a scientist who studies glaciers" renames Dr. Achterberg, so one comma goes before it and one after it. The first choice adds a comma after "scientist," which wrongly splits the appositive from the clause that tells what kind of scientist Dr. Achterberg is.`,
+      solution: `The whole phrase "a scientist who studies glaciers" renames Dr. Achterberg, so one comma goes before it and one after it. The choice "Dr. Achterberg, a scientist, who studies glaciers, will speak" adds a comma after "scientist," which wrongly splits the appositive from the clause that tells what kind of scientist Dr. Achterberg is.`,
     },
   ],
 }
