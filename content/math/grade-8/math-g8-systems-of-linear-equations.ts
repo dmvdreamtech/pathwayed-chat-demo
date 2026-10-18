@@ -290,7 +290,7 @@ const skill: ContentSkill = {
     {
       slot: 24,
       difficulty: 'medium',
-      stem: `Priya is 4 years older than her brother Dev. Their ages add up to 26. How old is Priya?`,
+      stem: `Priya is 4 years older than Dev, Priya's brother. Their ages add up to 26. How old is Priya?`,
       choices: [
         ok(`15`),
         no(`11`, 'gave-the-other-variable'),
@@ -422,7 +422,7 @@ const skill: ContentSkill = {
     {
       slot: 35,
       difficulty: 'hard',
-      stem: `Camila buys apples for 50 cents each and pears for 75 cents each. She buys 14 pieces of fruit and pays 8 dollars and 50 cents. How many pears does she buy?`,
+      stem: `Camila buys apples for 50 cents each and pears for 75 cents each. Camila buys 14 pieces of fruit and pays 8 dollars and 50 cents. How many pears does Camila buy?`,
       choices: [
         no(`8`, 'gave-the-other-variable'),
         no(`7`, 'split-the-total-evenly'),
@@ -434,14 +434,14 @@ const skill: ContentSkill = {
     {
       slot: 36,
       difficulty: 'hard',
-      stem: `Tomas paddles a kayak 12 miles downstream in 2 hours and paddles back 12 miles upstream in 3 hours. What is his paddling speed in still water, in miles per hour?`,
+      stem: `Tomas paddles a kayak 12 miles downstream in 2 hours and paddles back 12 miles upstream in 3 hours. What is Tomas's paddling speed in still water, in miles per hour?`,
       choices: [
         ok(`5`),
         no(`6`, 'used-downstream-speed-only'),
         no(`1`, 'gave-the-current-speed'),
         no(`10`, 'added-without-halving'),
       ],
-      solution: `His speeds are 6 and 4 miles per hour, so $k + c = 6$ and $k - c = 4$; adding gives $2k = 10$ and $k = 5$. The choice $6$ is his downstream speed, which includes help from the current.`,
+      solution: `Tomas's speeds are 6 and 4 miles per hour, so $k + c = 6$ and $k - c = 4$; adding gives $2k = 10$ and $k = 5$. The choice $6$ is the downstream speed, which includes help from the current.`,
     },
     {
       slot: 37,

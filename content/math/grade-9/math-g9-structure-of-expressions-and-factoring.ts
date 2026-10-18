@@ -65,9 +65,9 @@ const skill: ContentSkill = {
       stem: `Amara rents a kayak at a lake. The total cost, in dollars, for $n$ hours is $15n + 40$. What does the 40 represent?`,
       choices: [
         no(`the cost for each hour of rental`, 'swapped-rate-and-fee'),
-        ok(`a fixed fee charged no matter how many hours she rents`),
+        ok(`a fixed fee charged no matter how many hours Amara rents`),
         no(`the total cost of renting for 15 hours`, 'misread-coefficient-as-hours'),
-        no(`the number of hours she rents the kayak`, 'confused-constant-with-variable'),
+        no(`the number of hours Amara rents the kayak`, 'confused-constant-with-variable'),
       ],
       solution: `The term $15n$ changes with the number of hours, so 15 dollars is the hourly rate, while 40 is a constant term added once, a fixed fee. Calling 40 the hourly cost swaps the roles of the coefficient and the constant.`,
     },
@@ -122,7 +122,7 @@ const skill: ContentSkill = {
     {
       slot: 10,
       difficulty: 'easy',
-      stem: `The area of Priya's rectangular garden is $x^2 + 8x$ square meters, where the width is $x$ meters. She rewrites the area as $x(x + 8)$. What does $x + 8$ represent?`,
+      stem: `The area of Priya's rectangular garden is $x^2 + 8x$ square meters, where the width is $x$ meters. Priya rewrites the area as $x(x + 8)$. What does $x + 8$ represent?`,
       choices: [
         ok(`the length of the garden, which is 8 meters more than the width`),
         no(`the perimeter of the garden`, 'confused-area-and-perimeter'),

@@ -74,12 +74,12 @@ const skill: ContentSkill = {
     {
       slot: 6,
       difficulty: 'easy',
-      stem: `Kenji's line of fit for his savings is $y = 15x + 20$, where $x$ is the number of weeks and $y$ is dollars saved. What does the 15 mean?`,
+      stem: `Kenji's line of fit for the savings is $y = 15x + 20$, where $x$ is the number of weeks and $y$ is dollars saved. What does the 15 mean?`,
       choices: [
-        no(`He started with 15 dollars.`, 'confused-slope-with-intercept'),
-        ok(`He saves about 15 dollars each week.`),
-        no(`He has saved for 15 weeks.`, 'confused-slope-with-input'),
-        no(`He will have 15 dollars in all.`, 'confused-slope-with-output'),
+        no(`Kenji started with 15 dollars.`, 'confused-slope-with-intercept'),
+        ok(`Kenji saves about 15 dollars each week.`),
+        no(`Kenji has saved for 15 weeks.`, 'confused-slope-with-input'),
+        no(`Kenji will have 15 dollars in all.`, 'confused-slope-with-output'),
       ],
       solution: `The 15 is the slope, the number multiplied by the weeks, so it is the amount added each week. The starting amount is the 20, not the 15.`,
     },

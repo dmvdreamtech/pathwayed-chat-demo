@@ -338,7 +338,7 @@ const skill: ContentSkill = {
     {
       slot: 28,
       difficulty: 'medium',
-      stem: `Mateo's phone plan costs 38 dollars in a month when he uses 4 gigabytes and 53 dollars when he uses 9 gigabytes. The cost is a linear function of the data used. What is the fixed monthly fee?`,
+      stem: `Mateo's phone plan costs 38 dollars in a month when Mateo uses 4 gigabytes and 53 dollars when Mateo uses 9 gigabytes. The cost is a linear function of the data used. What is the fixed monthly fee?`,
       choices: [
         no(`3 dollars`, 'gave-rate-not-intercept'),
         no(`9.5 dollars`, 'divided-cost-by-usage'),

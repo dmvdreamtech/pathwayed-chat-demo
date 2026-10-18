@@ -129,7 +129,7 @@ const skill: ContentSkill = {
         ok(`$A(w) = 50 + 15w$`),
         no(`$A(w) = 50 - 15w$`, 'sign-error'),
       ],
-      solution: `She starts with 50 dollars and the amount grows by 15 dollars per week, so $A(w) = 50 + 15w$. The choice $15 + 50w$ treats the starting amount as the weekly deposit.`,
+      solution: `Amara starts with 50 dollars and the amount grows by 15 dollars per week, so $A(w) = 50 + 15w$. The choice $15 + 50w$ treats the starting amount as the weekly deposit.`,
     },
     {
       slot: 11,
@@ -458,7 +458,7 @@ const skill: ContentSkill = {
     {
       slot: 38,
       difficulty: 'hard',
-      stem: `Kenji's salary is 42,000 dollars in year 1 and rises by 1,500 dollars each year, so year $n$ pays $S(n) = 42000 + 1500(n - 1)$ dollars. In which year does his salary first reach 54,000 dollars?`,
+      stem: `Kenji's salary is 42,000 dollars in year 1 and rises by 1,500 dollars each year, so year $n$ pays $S(n) = 42000 + 1500(n - 1)$ dollars. In which year does Kenji's salary first reach 54,000 dollars?`,
       choices: [
         no(`Year 8`, 'forgot-n-minus-one'),
         ok(`Year 9`),

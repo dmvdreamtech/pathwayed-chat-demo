@@ -86,14 +86,14 @@ const skill: ContentSkill = {
     {
       slot: 7,
       difficulty: 'easy',
-      stem: `Concert tickets cost 8 dollars each, and Kofi has 50 dollars to spend. Which inequality shows the number of tickets $t$ he can buy?`,
+      stem: `Concert tickets cost 8 dollars each, and Kofi has 50 dollars to spend. Which inequality shows the number of tickets $t$ Kofi can buy?`,
       choices: [
         no(`$8t \\ge 50$`, 'reversed-inequality'),
         no(`$t + 8 \\le 50$`, 'added-instead-of-multiplied'),
         ok(`$8t \\le 50$`),
         no(`$50t \\le 8$`, 'swapped-price-and-budget'),
       ],
-      solution: `Buying $t$ tickets costs $8t$ dollars, and this cannot be more than 50, so $8t \\le 50$. The choice $8t \\ge 50$ says he must spend at least 50 dollars, which reverses the budget limit.`,
+      solution: `Buying $t$ tickets costs $8t$ dollars, and this cannot be more than 50, so $8t \\le 50$. The choice $8t \\ge 50$ says Kofi must spend at least 50 dollars, which reverses the budget limit.`,
     },
     {
       slot: 8,
@@ -122,7 +122,7 @@ const skill: ContentSkill = {
     {
       slot: 10,
       difficulty: 'easy',
-      stem: `An art teacher has $p$ packs of colored pencils with 12 pencils in each pack, plus 5 loose pencils. She has 77 pencils in all. Which equation represents this situation?`,
+      stem: `An art teacher has $p$ packs of colored pencils with 12 pencils in each pack, plus 5 loose pencils. The teacher has 77 pencils in all. Which equation represents this situation?`,
       choices: [
         no(`$5p + 12 = 77$`, 'swapped-rate-and-extra'),
         ok(`$12p + 5 = 77$`),
@@ -206,7 +206,7 @@ const skill: ContentSkill = {
     {
       slot: 17,
       difficulty: 'medium',
-      stem: `At a school bake sale, Lena sells muffins for 3 dollars each and cookies for 2 dollars each. She earns 60 dollars in all. If $m$ is the number of muffins and $c$ is the number of cookies, which equation represents this situation?`,
+      stem: `At a school bake sale, Lena sells muffins for 3 dollars each and cookies for 2 dollars each. Lena earns 60 dollars in all. If $m$ is the number of muffins and $c$ is the number of cookies, which equation represents this situation?`,
       choices: [
         no(`$2m + 3c = 60$`, 'swapped-prices'),
         ok(`$3m + 2c = 60$`),
@@ -254,14 +254,14 @@ const skill: ContentSkill = {
     {
       slot: 21,
       difficulty: 'medium',
-      stem: `Ravi has 120 dollars saved and adds 15 dollars each week. He wants to have at least 300 dollars. Which inequality can he use to find the number of weeks $w$?`,
+      stem: `Ravi has 120 dollars saved and adds 15 dollars each week. Ravi wants to have at least 300 dollars. Which inequality can Ravi use to find the number of weeks $w$?`,
       choices: [
         ok(`$120 + 15w \\ge 300$`),
         no(`$120 + 15w \\le 300$`, 'reversed-inequality'),
         no(`$15 + 120w \\ge 300$`, 'swapped-rate-and-start'),
         no(`$135w \\ge 300$`, 'combined-start-and-rate'),
       ],
-      solution: `After $w$ weeks he has $120 + 15w$ dollars, and this must be at least 300, so $120 + 15w \\ge 300$, which gives $w \\ge 12$. The choice $15 + 120w \\ge 300$ treats the starting amount as the weekly savings.`,
+      solution: `After $w$ weeks Ravi has $120 + 15w$ dollars, and this must be at least 300, so $120 + 15w \\ge 300$, which gives $w \\ge 12$. The choice $15 + 120w \\ge 300$ treats the starting amount as the weekly savings.`,
     },
     {
       slot: 22,
@@ -338,7 +338,7 @@ const skill: ContentSkill = {
     {
       slot: 28,
       difficulty: 'medium',
-      stem: `Renting a bike costs 7 dollars plus 3 dollars per hour. Juno can spend at most 25 dollars. Which inequality shows the number of hours $h$ she can rent the bike?`,
+      stem: `Renting a bike costs 7 dollars plus 3 dollars per hour. Juno can spend at most 25 dollars. Which inequality shows the number of hours $h$ Juno can rent the bike?`,
       choices: [
         no(`$3 + 7h \\le 25$`, 'swapped-rate-and-fee'),
         no(`$7 + 3h \\ge 25$`, 'reversed-inequality'),
@@ -470,7 +470,7 @@ const skill: ContentSkill = {
     {
       slot: 39,
       difficulty: 'hard',
-      stem: `Priya models a path of uniform width $x$ meters around a 10 meter by 6 meter garden and simplifies her equation to $x^2 + 8x - 20 = 0$. The solutions are $x = 2$ and $x = -10$. Which statement is correct?`,
+      stem: `Priya models a path of uniform width $x$ meters around a 10 meter by 6 meter garden and simplifies the equation to $x^2 + 8x - 20 = 0$. The solutions are $x = 2$ and $x = -10$. Which statement is correct?`,
       choices: [
         no(`Both $x = 2$ and $x = -10$ are viable widths.`, 'kept-negative-solution'),
         ok(`Only $x = 2$ is viable, since a width cannot be negative.`),

@@ -333,7 +333,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('45758ec2-912c-5a4c-a5f0-304bdcb26cad', null, (select id from public.skills where slug = 'math-g8-systems-of-linear-equations'), null, 'medium',
-   $q$Priya is 4 years older than her brother Dev. Their ages add up to 26. How old is Priya?$q$, $q$[{"text":"13","is_correct":false,"misconception_token":"split-the-total-evenly"},{"text":"22","is_correct":false,"misconception_token":"subtracted-without-halving"},{"text":"15","is_correct":true},{"text":"11","is_correct":false,"misconception_token":"gave-the-other-variable"}]$q$::jsonb, $q$15$q$, $q$Use $p = d + 4$ and $p + d = 26$, so $2d + 4 = 26$, $d = 11$, and Priya is $11 + 4 = 15$. The choice $11$ is Dev's age, not Priya's.$q$, 'draft', null)
+   $q$Priya is 4 years older than Dev, Priya's brother. Their ages add up to 26. How old is Priya?$q$, $q$[{"text":"13","is_correct":false,"misconception_token":"split-the-total-evenly"},{"text":"22","is_correct":false,"misconception_token":"subtracted-without-halving"},{"text":"15","is_correct":true},{"text":"11","is_correct":false,"misconception_token":"gave-the-other-variable"}]$q$::jsonb, $q$15$q$, $q$Use $p = d + 4$ and $p + d = 26$, so $2d + 4 = 26$, $d = 11$, and Priya is $11 + 4 = 15$. The choice $11$ is Dev's age, not Priya's.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -476,7 +476,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('a6fbc0f0-3cff-522c-b186-af41469ca533', null, (select id from public.skills where slug = 'math-g8-systems-of-linear-equations'), null, 'hard',
-   $q$Camila buys apples for 50 cents each and pears for 75 cents each. She buys 14 pieces of fruit and pays 8 dollars and 50 cents. How many pears does she buy?$q$, $q$[{"text":"3","is_correct":false,"misconception_token":"divided-by-wrong-price"},{"text":"6","is_correct":true},{"text":"8","is_correct":false,"misconception_token":"gave-the-other-variable"},{"text":"7","is_correct":false,"misconception_token":"split-the-total-evenly"}]$q$::jsonb, $q$6$q$, $q$In cents, $a + p = 14$ and $50a + 75p = 850$; if all 14 were apples they would cost 700 cents, and each pear adds 25 cents, so $p = 150 \div 25 = 6$. The choice $8$ is the number of apples.$q$, 'draft', null)
+   $q$Camila buys apples for 50 cents each and pears for 75 cents each. Camila buys 14 pieces of fruit and pays 8 dollars and 50 cents. How many pears does Camila buy?$q$, $q$[{"text":"3","is_correct":false,"misconception_token":"divided-by-wrong-price"},{"text":"6","is_correct":true},{"text":"8","is_correct":false,"misconception_token":"gave-the-other-variable"},{"text":"7","is_correct":false,"misconception_token":"split-the-total-evenly"}]$q$::jsonb, $q$6$q$, $q$In cents, $a + p = 14$ and $50a + 75p = 850$; if all 14 were apples they would cost 700 cents, and each pear adds 25 cents, so $p = 150 \div 25 = 6$. The choice $8$ is the number of apples.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -489,7 +489,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('dfb4571a-0c47-5941-96e1-2e9de5d0ab1a', null, (select id from public.skills where slug = 'math-g8-systems-of-linear-equations'), null, 'hard',
-   $q$Tomas paddles a kayak 12 miles downstream in 2 hours and paddles back 12 miles upstream in 3 hours. What is his paddling speed in still water, in miles per hour?$q$, $q$[{"text":"6","is_correct":false,"misconception_token":"used-downstream-speed-only"},{"text":"1","is_correct":false,"misconception_token":"gave-the-current-speed"},{"text":"10","is_correct":false,"misconception_token":"added-without-halving"},{"text":"5","is_correct":true}]$q$::jsonb, $q$5$q$, $q$His speeds are 6 and 4 miles per hour, so $k + c = 6$ and $k - c = 4$; adding gives $2k = 10$ and $k = 5$. The choice $6$ is his downstream speed, which includes help from the current.$q$, 'draft', null)
+   $q$Tomas paddles a kayak 12 miles downstream in 2 hours and paddles back 12 miles upstream in 3 hours. What is Tomas's paddling speed in still water, in miles per hour?$q$, $q$[{"text":"6","is_correct":false,"misconception_token":"used-downstream-speed-only"},{"text":"1","is_correct":false,"misconception_token":"gave-the-current-speed"},{"text":"10","is_correct":false,"misconception_token":"added-without-halving"},{"text":"5","is_correct":true}]$q$::jsonb, $q$5$q$, $q$Tomas's speeds are 6 and 4 miles per hour, so $k + c = 6$ and $k - c = 4$; adding gives $2k = 10$ and $k = 5$. The choice $6$ is the downstream speed, which includes help from the current.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

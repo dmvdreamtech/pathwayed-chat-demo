@@ -146,7 +146,7 @@ const skill: ContentSkill = {
     {
       slot: 12,
       difficulty: 'easy',
-      stem: `Amara tracks her savings. At weeks $0, 1, 2, 3$ she has $5, 8, 11, 14$ dollars. What is the average rate of change of her savings from week 0 to week 3?`,
+      stem: `Amara tracks savings. At weeks $0, 1, 2, 3$ Amara has $5, 8, 11, 14$ dollars. What is the average rate of change of Amara's savings from week 0 to week 3?`,
       choices: [
         no(`$9$ dollars per week`, 'forgot-to-divide-by-run'),
         ok(`$3$ dollars per week`),
@@ -242,7 +242,7 @@ const skill: ContentSkill = {
     {
       slot: 20,
       difficulty: 'medium',
-      stem: `Tomás records his distance on a long bike ride. At times $t = 0, 1, 2, 3, 4$ hours he has gone $0, 18, 34, 52, 66$ kilometers. What is his average speed, the average rate of change of distance, from $t = 1$ to $t = 3$?`,
+      stem: `Tomás records the distance on a long bike ride. At times $t = 0, 1, 2, 3, 4$ hours Tomás has gone $0, 18, 34, 52, 66$ kilometers. What is Tomás's average speed, the average rate of change of distance, from $t = 1$ to $t = 3$?`,
       choices: [
         ok(`$17$ kilometers per hour`),
         no(`$34$ kilometers per hour`, 'forgot-to-divide-by-run'),

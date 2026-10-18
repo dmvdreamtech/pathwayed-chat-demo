@@ -398,7 +398,7 @@ const skill: ContentSkill = {
     {
       slot: 33,
       difficulty: 'hard',
-      stem: `A cylinder of frozen yogurt has a radius of 3 inches and a height of 8 inches. Kenji fills cones that each have a radius of 1.5 inches and a height of 4 inches. How many full cones can he fill?`,
+      stem: `A cylinder of frozen yogurt has a radius of 3 inches and a height of 8 inches. Kenji fills cones that each have a radius of 1.5 inches and a height of 4 inches. How many full cones can Kenji fill?`,
       choices: [
         no(`$8$ cones`, 'forgot-one-third'),
         no(`$6$ cones`, 'used-container-radius-for-cone'),
@@ -482,7 +482,7 @@ const skill: ContentSkill = {
     {
       slot: 40,
       difficulty: 'hard',
-      stem: `Diego rolls a ball of clay with a radius of 3 centimeters. He reshapes all of it into a cylinder with a radius of 3 centimeters. How tall is the cylinder?`,
+      stem: `Diego rolls a ball of clay with a radius of 3 centimeters. Diego reshapes all of it into a cylinder with a radius of 3 centimeters. How tall is the cylinder?`,
       choices: [
         ok(`$4$ centimeters`),
         no(`$3$ centimeters`, 'forgot-four-thirds'),

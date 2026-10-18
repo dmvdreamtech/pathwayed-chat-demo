@@ -515,7 +515,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('d5711ad8-a16c-5249-83f2-2b401c0544aa', null, (select id from public.skills where slug = 'math-g9-solving-quadratic-equations'), null, 'hard',
-   $q$At a math club puzzle night, Tariq says that the sum of a number and its square is 56. Which numbers could he be thinking of?$q$, $q$[{"text":"$-7$ or $8$","is_correct":false,"misconception_token":"sign-error"},{"text":"$28$ or $-28$","is_correct":false,"misconception_token":"halved-instead-of-solving"},{"text":"$7$ or $-8$","is_correct":true},{"text":"$7$ only","is_correct":false,"misconception_token":"forgot-negative-solution"}]$q$::jsonb, $q$$7$ or $-8$$q$, $q$Solve $n^2 + n = 56$, so $n^2 + n - 56 = 0$ and $(n + 8)(n - 7) = 0$, giving $n = 7$ or $n = -8$. The choice $7$ only misses $-8$, and $(-8)^2 + (-8) = 64 - 8 = 56$ works too.$q$, 'draft', null)
+   $q$At a math club puzzle night, Tariq says that the sum of a number and its square is 56. Which numbers could Tariq be thinking of?$q$, $q$[{"text":"$-7$ or $8$","is_correct":false,"misconception_token":"sign-error"},{"text":"$28$ or $-28$","is_correct":false,"misconception_token":"halved-instead-of-solving"},{"text":"$7$ or $-8$","is_correct":true},{"text":"$7$ only","is_correct":false,"misconception_token":"forgot-negative-solution"}]$q$::jsonb, $q$$7$ or $-8$$q$, $q$Solve $n^2 + n = 56$, so $n^2 + n - 56 = 0$ and $(n + 8)(n - 7) = 0$, giving $n = 7$ or $n = -8$. The choice $7$ only misses $-8$, and $(-8)^2 + (-8) = 64 - 8 = 56$ works too.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

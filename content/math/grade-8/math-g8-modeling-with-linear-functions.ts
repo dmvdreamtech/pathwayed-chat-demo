@@ -26,7 +26,7 @@ const skill: ContentSkill = {
     {
       slot: 2,
       difficulty: 'easy',
-      stem: `Jada measures her plant each week. Its height in centimeters after $w$ weeks is $h = 3w + 7$. What does the 3 tell you?`,
+      stem: `Jada measures a plant each week. Its height in centimeters after $w$ weeks is $h = 3w + 7$. What does the 3 tell you?`,
       choices: [
         no(`The plant was 3 centimeters tall when Jada started.`, 'confused-rate-with-initial-value'),
         no(`The plant grows 7 centimeters each week.`, 'swapped-rate-and-initial-value'),
@@ -105,7 +105,7 @@ const skill: ContentSkill = {
         no(`Walking away from home at a steady speed.`, 'read-flat-as-increasing'),
         no(`Walking a total of 3 miles in that time.`, 'confused-height-with-change'),
       ],
-      solution: `A horizontal line means the distance from home is not changing, so Priya stayed 3 miles away. The 3 is how far she was from home, not how far she walked during that half hour.`,
+      solution: `A horizontal line means the distance from home is not changing, so Priya stayed 3 miles away. The 3 is how far Priya was from home, not how far Priya walked during that half hour.`,
     },
     {
       slot: 9,
@@ -158,26 +158,26 @@ const skill: ContentSkill = {
     {
       slot: 13,
       difficulty: 'medium',
-      stem: `Lena saves the same amount each week. After 2 weeks she has 15 dollars, and after 5 weeks she has 27 dollars. How much does she save each week?`,
+      stem: `Lena saves the same amount each week. After 2 weeks Lena has 15 dollars, and after 5 weeks Lena has 27 dollars. How much does Lena save each week?`,
       choices: [
         ok(`4 dollars`),
         no(`12 dollars`, 'forgot-to-divide-by-change-in-x'),
         no(`7.50 dollars`, 'divided-y-by-x'),
         no(`5.40 dollars`, 'divided-last-y-by-last-x'),
       ],
-      solution: `Her savings grew by $27 - 15 = 12$ dollars in $5 - 2 = 3$ weeks, so she saves $12 \\div 3 = 4$ dollars a week. The choice 12 dollars is the total growth over 3 weeks, not the amount for one week.`,
+      solution: `Lena's savings grew by $27 - 15 = 12$ dollars in $5 - 2 = 3$ weeks, so Lena saves $12 \\div 3 = 4$ dollars a week. The choice 12 dollars is the total growth over 3 weeks, not the amount for one week.`,
     },
     {
       slot: 14,
       difficulty: 'medium',
-      stem: `Ravi adds the same amount to his savings each week. After 2 weeks he has 15 dollars, and after 5 weeks he has 27 dollars. How much did he have at the start, before week 1?`,
+      stem: `Ravi adds the same amount to savings each week. After 2 weeks Ravi has 15 dollars, and after 5 weeks Ravi has 27 dollars. How much did Ravi have at the start, before week 1?`,
       choices: [
         no(`15 dollars`, 'used-first-point-as-initial-value'),
         no(`11 dollars`, 'subtracted-rate-only-once'),
         ok(`7 dollars`),
         no(`3 dollars`, 'subtracted-total-change'),
       ],
-      solution: `He saves $\\frac{27 - 15}{3} = 4$ dollars a week, so going back 2 weeks from 15 gives $15 - 2(4) = 7$ dollars. The choice 11 dollars only goes back 1 week.`,
+      solution: `Ravi saves $\\frac{27 - 15}{3} = 4$ dollars a week, so going back 2 weeks from 15 gives $15 - 2(4) = 7$ dollars. The choice 11 dollars only goes back 1 week.`,
     },
     {
       slot: 15,
@@ -278,14 +278,14 @@ const skill: ContentSkill = {
     {
       slot: 23,
       difficulty: 'medium',
-      stem: `Omar walks away from home at a steady pace for 10 minutes, stays at a friend's house for 5 minutes, and then walks back home at a steady pace. Which describes the graph of his distance from home over time?`,
+      stem: `Omar walks away from home at a steady pace for 10 minutes, stays at a friend's house for 5 minutes, and then walks back home at a steady pace. Which describes the graph of Omar's distance from home over time?`,
       choices: [
         no(`A rising line, then a horizontal line, then another rising line.`, 'read-returning-as-increasing'),
         no(`A rising line, then a falling line, then a horizontal line.`, 'wrong-order-of-segments'),
         ok(`A rising line, then a horizontal line, then a falling line to 0.`),
         no(`A rising line, then a horizontal line, then a sudden drop to 0.`, 'showed-return-as-instant'),
       ],
-      solution: `His distance grows while he walks away, stays the same during the visit, and shrinks back to 0 as he walks home. Walking home makes the distance go down, so the last part cannot be rising.`,
+      solution: `Omar's distance grows while Omar walks away, stays the same during the visit, and shrinks back to 0 on the walk home. Walking home makes the distance go down, so the last part cannot be rising.`,
     },
     {
       slot: 24,

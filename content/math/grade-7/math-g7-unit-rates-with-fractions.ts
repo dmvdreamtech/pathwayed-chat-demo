@@ -14,7 +14,7 @@ const skill: ContentSkill = {
     {
       slot: 1,
       difficulty: 'easy',
-      stem: `Aisha walks $\\frac{1}{2}$ mile every $\\frac{1}{4}$ hour. How many miles does she walk per hour?`,
+      stem: `Aisha walks $\\frac{1}{2}$ mile every $\\frac{1}{4}$ hour. How many miles does Aisha walk per hour?`,
       choices: [
         ok(`$2$ miles`),
         no(`$\\frac{1}{8}$ mile`, 'multiplied-instead-of-divided'),
@@ -38,7 +38,7 @@ const skill: ContentSkill = {
     {
       slot: 3,
       difficulty: 'easy',
-      stem: `Diego paints $\\frac{2}{3}$ of a wall in $\\frac{1}{3}$ hour. At this rate, how many walls can he paint in one hour?`,
+      stem: `Diego paints $\\frac{2}{3}$ of a wall in $\\frac{1}{3}$ hour. At this rate, how many walls can Diego paint in one hour?`,
       choices: [
         no(`$\\frac{2}{9}$ wall`, 'multiplied-instead-of-divided'),
         no(`$\\frac{1}{2}$ wall`, 'divided-in-wrong-order'),
@@ -74,14 +74,14 @@ const skill: ContentSkill = {
     {
       slot: 6,
       difficulty: 'easy',
-      stem: `Kenji jogs $\\frac{3}{4}$ mile in $\\frac{1}{4}$ hour. Which statement gives his unit rate?`,
+      stem: `Kenji jogs $\\frac{3}{4}$ mile in $\\frac{1}{4}$ hour. Which statement gives Kenji's unit rate?`,
       choices: [
         no(`$\\frac{1}{3}$ mile per hour`, 'divided-in-wrong-order'),
         no(`$\\frac{3}{16}$ mile per hour`, 'multiplied-instead-of-divided'),
         ok(`$3$ miles per hour`),
         no(`$1$ mile per hour`, 'added-the-fractions'),
       ],
-      solution: `His unit rate is $\\frac{3}{4} \\div \\frac{1}{4} = 3$ miles per hour, since four quarter hours each cover $\\frac{3}{4}$ mile. The answer $\\frac{1}{3}$ mile per hour divides the time by the distance, which is backwards.`,
+      solution: `Kenji's unit rate is $\\frac{3}{4} \\div \\frac{1}{4} = 3$ miles per hour, since four quarter hours each cover $\\frac{3}{4}$ mile. The answer $\\frac{1}{3}$ mile per hour divides the time by the distance, which is backwards.`,
     },
     {
       slot: 7,
@@ -98,7 +98,7 @@ const skill: ContentSkill = {
     {
       slot: 8,
       difficulty: 'easy',
-      stem: `Luis types 1 page in $\\frac{1}{3}$ hour. How many pages does he type per hour?`,
+      stem: `Luis types 1 page in $\\frac{1}{3}$ hour. How many pages does Luis type per hour?`,
       choices: [
         no(`$\\frac{1}{3}$ page`, 'multiplied-instead-of-divided'),
         no(`$\\frac{4}{3}$ pages`, 'added-the-fractions'),
@@ -110,14 +110,14 @@ const skill: ContentSkill = {
     {
       slot: 9,
       difficulty: 'easy',
-      stem: `Priya walks 2 miles in $\\frac{1}{2}$ hour. How many hours does she take to walk one mile?`,
+      stem: `Priya walks 2 miles in $\\frac{1}{2}$ hour. How many hours does Priya take to walk one mile?`,
       choices: [
         no(`$4$ hours`, 'divided-in-wrong-order'),
         ok(`$\\frac{1}{4}$ hour`),
         no(`$1$ hour`, 'multiplied-instead-of-divided'),
         no(`$2\\frac{1}{2}$ hours`, 'added-the-numbers'),
       ],
-      solution: `Hours per mile is $\\frac{1}{2} \\div 2 = \\frac{1}{4}$ hour. The answer 4 hours is her speed in miles per hour, which divides miles by hours instead of hours by miles.`,
+      solution: `Hours per mile is $\\frac{1}{2} \\div 2 = \\frac{1}{4}$ hour. The answer 4 hours is Priya's speed in miles per hour, which divides miles by hours instead of hours by miles.`,
     },
     {
       slot: 10,
@@ -158,7 +158,7 @@ const skill: ContentSkill = {
     {
       slot: 13,
       difficulty: 'medium',
-      stem: `Mateo rides his bike $2\\frac{1}{2}$ miles in $\\frac{1}{6}$ hour. What is his speed in miles per hour?`,
+      stem: `Mateo rides a bike $2\\frac{1}{2}$ miles in $\\frac{1}{6}$ hour. What is Mateo's speed in miles per hour?`,
       choices: [
         no(`$3$ miles per hour`, 'ignored-whole-number-part'),
         no(`$\\frac{5}{12}$ mile per hour`, 'multiplied-instead-of-divided'),
@@ -182,26 +182,26 @@ const skill: ContentSkill = {
     {
       slot: 15,
       difficulty: 'medium',
-      stem: `Hana walks $\\frac{1}{2}$ mile in 10 minutes. What is her speed in miles per hour?`,
+      stem: `Hana walks $\\frac{1}{2}$ mile in 10 minutes. What is Hana's speed in miles per hour?`,
       choices: [
         no(`$\\frac{1}{20}$ mile per hour`, 'did-not-convert-minutes-to-hours'),
         no(`$\\frac{1}{12}$ mile per hour`, 'multiplied-instead-of-divided'),
         no(`$20$ miles per hour`, 'divided-in-wrong-order'),
         ok(`$3$ miles per hour`),
       ],
-      solution: `Ten minutes is $\\frac{10}{60} = \\frac{1}{6}$ hour, so her speed is $\\frac{1}{2} \\div \\frac{1}{6} = 3$ miles per hour. The answer $\\frac{1}{20}$ is her speed in miles per minute, because the minutes were never changed to hours.`,
+      solution: `Ten minutes is $\\frac{10}{60} = \\frac{1}{6}$ hour, so Hana's speed is $\\frac{1}{2} \\div \\frac{1}{6} = 3$ miles per hour. The answer $\\frac{1}{20}$ is the speed in miles per minute, because the minutes were never changed to hours.`,
     },
     {
       slot: 16,
       difficulty: 'medium',
-      stem: `Olu mows $\\frac{3}{8}$ acre of lawn in $\\frac{1}{2}$ hour. How many acres does he mow per hour?`,
+      stem: `Olu mows $\\frac{3}{8}$ acre of lawn in $\\frac{1}{2}$ hour. How many acres does Olu mow per hour?`,
       choices: [
         no(`$\\frac{4}{3}$ acres`, 'divided-in-wrong-order'),
         ok(`$\\frac{3}{4}$ acre`),
         no(`$\\frac{3}{16}$ acre`, 'multiplied-instead-of-divided'),
         no(`$\\frac{7}{8}$ acre`, 'added-the-fractions'),
       ],
-      solution: `Acres per hour is $\\frac{3}{8} \\div \\frac{1}{2} = \\frac{3}{8} \\times 2 = \\frac{3}{4}$ acre. The answer $\\frac{3}{16}$ acre multiplies by $\\frac{1}{2}$, which is less than he mows in only half an hour.`,
+      solution: `Acres per hour is $\\frac{3}{8} \\div \\frac{1}{2} = \\frac{3}{8} \\times 2 = \\frac{3}{4}$ acre. The answer $\\frac{3}{16}$ acre multiplies by $\\frac{1}{2}$, which is less than Olu mows in only half an hour.`,
     },
     {
       slot: 17,
@@ -221,11 +221,11 @@ const skill: ContentSkill = {
       stem: `Ana walks $\\frac{2}{3}$ mile in $\\frac{1}{4}$ hour. Ben walks $\\frac{3}{4}$ mile in $\\frac{1}{3}$ hour. Who walks faster?`,
       choices: [
         no(`Ben, because $\\frac{3}{4}$ mile is farther`, 'compared-distance-only'),
-        no(`Ben, because he walks for more time`, 'thought-more-time-means-faster'),
+        no(`Ben, because Ben walks for more time`, 'thought-more-time-means-faster'),
         ok(`Ana, at $2\\frac{2}{3}$ miles per hour`),
         no(`They walk at the same speed`, 'subtracted-instead-of-divided'),
       ],
-      solution: `Ana's rate is $\\frac{2}{3} \\div \\frac{1}{4} = \\frac{8}{3} = 2\\frac{2}{3}$ miles per hour and Ben's is $\\frac{3}{4} \\div \\frac{1}{3} = \\frac{9}{4} = 2\\frac{1}{4}$ miles per hour, so Ana is faster. Ben walks farther, but he also takes longer, so distance alone does not decide speed.`,
+      solution: `Ana's rate is $\\frac{2}{3} \\div \\frac{1}{4} = \\frac{8}{3} = 2\\frac{2}{3}$ miles per hour and Ben's is $\\frac{3}{4} \\div \\frac{1}{3} = \\frac{9}{4} = 2\\frac{1}{4}$ miles per hour, so Ana is faster. Ben walks farther, but Ben also takes longer, so distance alone does not decide speed.`,
     },
     {
       slot: 19,
@@ -278,7 +278,7 @@ const skill: ContentSkill = {
     {
       slot: 23,
       difficulty: 'medium',
-      stem: `Mei types 45 words in $\\frac{3}{4}$ minute. How many words does she type per minute?`,
+      stem: `Mei types 45 words in $\\frac{3}{4}$ minute. How many words does Mei type per minute?`,
       choices: [
         no(`$33\\frac{3}{4}$ words`, 'multiplied-instead-of-divided'),
         no(`$\\frac{1}{60}$ word`, 'divided-in-wrong-order'),
@@ -374,19 +374,19 @@ const skill: ContentSkill = {
     {
       slot: 31,
       difficulty: 'hard',
-      stem: `Zainab skates $\\frac{2}{3}$ mile in $\\frac{1}{6}$ hour. At this rate, how far does she skate in $1\\frac{1}{2}$ hours?`,
+      stem: `Zainab skates $\\frac{2}{3}$ mile in $\\frac{1}{6}$ hour. At this rate, how far does Zainab skate in $1\\frac{1}{2}$ hours?`,
       choices: [
         no(`$4$ miles`, 'stopped-at-unit-rate'),
         no(`$1$ mile`, 'multiplied-distance-by-new-time'),
         ok(`$6$ miles`),
         no(`$\\frac{3}{8}$ mile`, 'divided-in-wrong-order'),
       ],
-      solution: `Her unit rate is $\\frac{2}{3} \\div \\frac{1}{6} = 4$ miles per hour, so in $1\\frac{1}{2}$ hours she skates $4 \\times \\frac{3}{2} = 6$ miles. The answer 4 miles is only the distance for one hour.`,
+      solution: `Zainab's unit rate is $\\frac{2}{3} \\div \\frac{1}{6} = 4$ miles per hour, so in $1\\frac{1}{2}$ hours Zainab skates $4 \\times \\frac{3}{2} = 6$ miles. The answer 4 miles is only the distance for one hour.`,
     },
     {
       slot: 32,
       difficulty: 'hard',
-      stem: `Carlos paints $\\frac{3}{4}$ square yard of a mural in 15 minutes. How many square yards does he paint per hour?`,
+      stem: `Carlos paints $\\frac{3}{4}$ square yard of a mural in 15 minutes. How many square yards does Carlos paint per hour?`,
       choices: [
         no(`$\\frac{1}{20}$ square yard`, 'did-not-convert-minutes-to-hours'),
         no(`$11\\frac{1}{4}$ square yards`, 'multiplied-instead-of-divided'),
@@ -410,14 +410,14 @@ const skill: ContentSkill = {
     {
       slot: 34,
       difficulty: 'hard',
-      stem: `Lena reads $\\frac{3}{8}$ of a book in $\\frac{1}{2}$ hour. At this rate, how many hours will it take her to read the whole book?`,
+      stem: `Lena reads $\\frac{3}{8}$ of a book in $\\frac{1}{2}$ hour. At this rate, how many hours will it take Lena to read the whole book?`,
       choices: [
         no(`$\\frac{3}{4}$ hour`, 'found-books-per-hour'),
         no(`$\\frac{3}{16}$ hour`, 'multiplied-instead-of-divided'),
         ok(`$1\\frac{1}{3}$ hours`),
         no(`$\\frac{7}{8}$ hour`, 'added-the-fractions'),
       ],
-      solution: `Hours per book is $\\frac{1}{2} \\div \\frac{3}{8} = \\frac{1}{2} \\times \\frac{8}{3} = \\frac{4}{3} = 1\\frac{1}{3}$ hours. The answer $\\frac{3}{4}$ is the part of the book she reads in one hour, not the time for the whole book.`,
+      solution: `Hours per book is $\\frac{1}{2} \\div \\frac{3}{8} = \\frac{1}{2} \\times \\frac{8}{3} = \\frac{4}{3} = 1\\frac{1}{3}$ hours. The answer $\\frac{3}{4}$ is the part of the book Lena reads in one hour, not the time for the whole book.`,
     },
     {
       slot: 35,
@@ -477,7 +477,7 @@ const skill: ContentSkill = {
         no(`Sofia, by $\\frac{1}{6}$ square meter per hour`, 'reversed-the-comparison'),
         no(`Ravi, by $\\frac{1}{24}$ square meter per hour`, 'compared-times-only'),
       ],
-      solution: `Ravi paints $\\frac{5}{6} \\div \\frac{1}{3} = \\frac{5}{2}$ and Sofia paints $\\frac{7}{8} \\div \\frac{3}{8} = \\frac{7}{3}$ square meters per hour, and $\\frac{5}{2} - \\frac{7}{3} = \\frac{1}{6}$, so Ravi is faster. Sofia paints a bigger area, but she also takes more time, so comparing areas alone is misleading.`,
+      solution: `Ravi paints $\\frac{5}{6} \\div \\frac{1}{3} = \\frac{5}{2}$ and Sofia paints $\\frac{7}{8} \\div \\frac{3}{8} = \\frac{7}{3}$ square meters per hour, and $\\frac{5}{2} - \\frac{7}{3} = \\frac{1}{6}$, so Ravi is faster. Sofia paints a bigger area, but Sofia also takes more time, so comparing areas alone is misleading.`,
     },
     {
       slot: 40,

@@ -458,7 +458,7 @@ const skill: ContentSkill = {
     {
       slot: 38,
       difficulty: 'hard',
-      stem: `At a math club puzzle night, Tariq says that the sum of a number and its square is 56. Which numbers could he be thinking of?`,
+      stem: `At a math club puzzle night, Tariq says that the sum of a number and its square is 56. Which numbers could Tariq be thinking of?`,
       choices: [
         no(`$-7$ or $8$`, 'sign-error'),
         no(`$7$ only`, 'forgot-negative-solution'),
