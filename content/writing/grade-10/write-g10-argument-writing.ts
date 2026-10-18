@@ -125,7 +125,7 @@ const skill: ContentSkill = {
             ok(`Because oral history builds real research skills without weakening writing, the department should adopt it this spring.`),
             no(`The department should also take every sophomore on a field trip to the state capital.`, 'introduces-new-topic'),
           ],
-          solution: `The correct choice restates the claim formally and connects it to the evidence about research skills and writing scores. The first choice keeps an unfair, dismissive tone toward those who disagree.`,
+          solution: `The correct choice restates the claim formally and connects it to the evidence about research skills and writing scores. The choice "Anyone who disagrees has obviously never listened to a really good interview" keeps an unfair, dismissive tone toward those who disagree.`,
         },
         {
           slot: 9,
@@ -243,7 +243,7 @@ const skill: ContentSkill = {
             no(`Honestly, coaches should kind of just get over it and follow the new rules.`, 'keeps-informal-tone'),
             no(`Coaches have many opinions, and every opinion matters a great deal in a debate.`, 'vague-wording'),
           ],
-          solution: `The correct revision respects the coaches' view while pointing to the evidence in sentences (9) and (10). The first choice still attacks the coaches instead of answering their reasoning.`,
+          solution: `The correct revision respects the coaches' view while pointing to the evidence in sentences (9) and (10). The choice "Coaches who disagree simply do not understand how the game of baseball works" still attacks the coaches instead of answering their reasoning.`,
         },
         {
           slot: 17,
@@ -350,7 +350,7 @@ const skill: ContentSkill = {
             ok(`The writer reports a result but avoids claiming the piano definitely caused it.`),
             no(`The writer admits that the piano made the waiting area less clean.`, 'misreads-evidence'),
           ],
-          solution: `The word "possibly" shows the writer is careful not to overstate what the litter data proves, which keeps the reasoning honest. The sentence does not claim proof, so the first choice misreads it.`,
+          solution: `The word "possibly" shows the writer is careful not to overstate what the litter data proves, which keeps the reasoning honest. The sentence does not claim proof, so the choice "The writer proves that the piano was the only reason litter decreased" misreads it.`,
         },
         {
           slot: 25,
