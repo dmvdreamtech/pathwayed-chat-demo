@@ -123,19 +123,19 @@ const skill: ContentSkill = {
             no(`"I learned to read the toll book myself, and no clerk could cheat me after that," this shows the school was useful.`, 'comma-splice-unfixed'),
             no(`A quotation: "I learned to read the toll book myself, and no clerk could cheat me after that."`, 'dropped-quotation'),
           ],
-          solution: `The first choice names the speaker and sets up the quotation with a complete sentence and a colon. Writing "Adjei says that" wrongly makes it sound as if Adjei himself learned to read the toll book.`,
+          solution: `The revision that credits a letter from a former student names the speaker and sets up the quotation with a complete sentence and a colon. Writing "Adjei says that" wrongly makes it sound as if Adjei learned to read the toll book.`,
         },
         {
           slot: 9,
           difficulty: 'medium',
           stem: `Which sentence would best fill the blank in sentence 11 by explaining how the quotation supports the claim?`,
           choices: [
-            ok(`The student valued reading because it protected his pay, which shows that the school taught skills tied directly to canal work.`),
+            ok(`The student valued reading because it protected the student's pay, which shows that the school taught skills tied directly to canal work.`),
             no(`The student was clearly the smartest person who ever attended the school at Lock Nine.`, 'unsupported-inference'),
             no(`Toll books listed the charges that boats paid each time they passed through a lock.`, 'summary-not-analysis'),
             no(`Adjei's essay also includes several other letters written by students of the school.`, 'evidence-without-analysis'),
           ],
-          solution: `The quotation shows a worker using reading to guard his earnings, so the first choice connects it to the claim about lessons built around canal life. Defining a toll book only adds information and never explains why the quotation matters.`,
+          solution: `The quotation shows a worker using reading to guard those earnings, so the choice about reading protecting the student's pay connects it to the claim about lessons built around canal life. Defining a toll book only adds information and never explains why the quotation matters.`,
         },
         {
           slot: 10,
@@ -192,7 +192,7 @@ const skill: ContentSkill = {
             no(`Marisol will probably take over the ferry for good and run it for the rest of her life.`, 'unsupported-inference'),
             no(`The bell is the most important object in the story, and readers should pay close attention to it.`, 'vague-explanation'),
           ],
-          solution: `The first choice explains what the waiting and the slow ringing reveal about Marisol's new sense of responsibility. The second choice only retells the events in sentence 7 without saying what they show.`,
+          solution: `The choice about seeing the bell as a duty to every passenger explains what the waiting and the slow ringing reveal about Marisol's new sense of responsibility. The choice "Marisol rang the bell twice, slowly" only retells the events in sentence 7 without saying what they show.`,
         },
         {
           slot: 14,
@@ -275,7 +275,7 @@ const skill: ContentSkill = {
             no(`Weekday boardings rose 11 percent at stops with screens and 2 percent at stops without them.`, 'evidence-without-analysis'),
             no(`Haddad's study shows that Brennick should spend its money on new buses instead of screens.`, 'unsupported-inference'),
           ],
-          solution: `The first choice restates the claim and keeps the limitation from sentence 10, so it matches what the evidence can support. Claiming the result holds in every city stretches one study far beyond its data.`,
+          solution: `The choice about screens changing how waits felt restates the claim and keeps the limitation from sentence 10, so it matches what the evidence can support. Claiming the result holds in every city stretches one study far beyond its data.`,
         },
         {
           slot: 20,
@@ -322,7 +322,7 @@ const skill: ContentSkill = {
             no(`Most rowers probably prefer evening practices because they are tired early in the morning.`, 'unsupported-inference'),
             no(`Abebe's survey found that the average return rate for new rowers across twenty clubs is 46 percent.`, 'mismatched-evidence'),
           ],
-          solution: `The first choice pairs Leaupepe's claim with independent evidence from sentence 8 that addresses the same point, schedules. The 46 percent figure is from another source but does not speak to practice times.`,
+          solution: `The choice citing Abebe's survey on flexible practice times pairs Leaupepe's claim with independent evidence from sentence 8 that addresses the same point, schedules. The 46 percent figure is from another source but does not speak to practice times.`,
         },
         {
           slot: 23,
@@ -346,7 +346,7 @@ const skill: ContentSkill = {
             no(`Taken together, these sources show that Leaupepe is an excellent coach whom every rower admires.`, 'unsupported-inference'),
             no(`Taken together, these sources show that rowing is a difficult sport that takes a great deal of practice.`, 'off-topic-conclusion'),
           ],
-          solution: `The first choice draws on all three sources and names the two policies that more than one source supports. Saying every club should copy Halvern goes beyond what a study of one club can show.`,
+          solution: `The choice naming partners and flexible schedules draws on all three sources and names the two policies that more than one source supports. Saying every club should copy Halvern goes beyond what a study of one club can show.`,
         },
         {
           slot: 25,
@@ -419,7 +419,7 @@ const skill: ContentSkill = {
             no(`The speaker will most likely throw the cracked bowl away and start the whole process over.`, 'contradicts-evidence'),
             no(`Cracked bowls usually happen when a kiln heats up or cools down too quickly.`, 'off-topic-fact'),
           ],
-          solution: `The first choice connects the word "rang" to the speaker's acceptance, which is the draft's claim. Saying she will throw the bowl away contradicts the admiring tone of the quoted line.`,
+          solution: `The choice about the cracked bowl that still "rang" connects that word to the speaker's acceptance, which is the draft's claim. Saying she will throw the bowl away contradicts the admiring tone of the quoted line.`,
         },
         {
           slot: 30,
@@ -466,7 +466,7 @@ const skill: ContentSkill = {
             no(`As a result of the traffic data`, 'confuses-cause-effect'),
             no(`Despite having no interest in plants`, 'unsupported-inference'),
           ],
-          solution: `Sentence 5 suggests moths near amber lights can visit flowers, and the primrose check tests that idea, so the first phrase connects the two. The plant study does not contrast with the moth counts; it builds on them.`,
+          solution: `Sentence 5 suggests moths near amber lights can visit flowers, and the primrose check tests that idea, so "To test whether this mattered for the flowers" connects the two. The plant study does not contrast with the moth counts; it builds on them.`,
         },
         {
           slot: 33,
@@ -478,7 +478,7 @@ const skill: ContentSkill = {
             no(`The extra seed pods prove that amber light helps every kind of plant grow faster and taller.`, 'overgeneralization'),
             no(`Plants near amber lamps produced more seed pods than plants near white lamps during the study.`, 'restates-evidence'),
           ],
-          solution: `The first choice explains why the seed pods matter: they show moths doing the pollinating the claim is about. The last choice only repeats sentence 7 without explaining it.`,
+          solution: `The choice beginning "Since moths pollinate this flower" explains why the seed pods matter: they show moths doing the pollinating the claim is about. The choice that says plants near amber lamps produced more seed pods only repeats sentence 7 without explaining it.`,
         },
         {
           slot: 34,
@@ -542,12 +542,12 @@ const skill: ContentSkill = {
           difficulty: 'medium',
           stem: `The writer wants to add this quotation after sentence 7: the ice record "turns a teacher's habit into a measuring stick for a changing lake." Which version integrates it most smoothly?`,
           choices: [
-            ok(`Castellanos sums up the value of this work when she writes that the ice record "turns a teacher's habit into a measuring stick for a changing lake."`),
+            ok(`Castellanos sums up the value of this work by writing that the ice record "turns a teacher's habit into a measuring stick for a changing lake."`),
             no(`Ferrante wrote in her diary that the ice record "turns a teacher's habit into a measuring stick for a changing lake."`, 'misattributed-quotation'),
             no(`Castellanos says that "turns a teacher's habit into a measuring stick for a changing lake."`, 'grammar-mismatch'),
             no(`"Turns a teacher's habit into a measuring stick for a changing lake." This is from the article.`, 'dropped-quotation'),
           ],
-          solution: `The first choice names Castellanos as the source and builds the quotation into a complete, grammatical sentence. The version beginning "Castellanos says that" leaves the quoted phrase without a subject, so the sentence does not work.`,
+          solution: `The version beginning "Castellanos sums up the value of this work" names Castellanos as the source and builds the quotation into a complete, grammatical sentence. The version beginning "Castellanos says that" leaves the quoted phrase without a subject, so the sentence does not work.`,
         },
         {
           slot: 39,
@@ -559,7 +559,7 @@ const skill: ContentSkill = {
             no(`Castellanos's account shows that Lake Tamsin will stop freezing completely within the next few decades.`, 'unsupported-inference'),
             no(`Castellanos's account shows that Ferrante kept weather diaries at Lake Tamsin from 1871 to 1912.`, 'summary-not-analysis'),
           ],
-          solution: `The first choice restates the claim and names the two checks that made the records trustworthy, staying within the evidence. The draft reports one carefully tested diary, so it cannot support a claim about every old diary.`,
+          solution: `The choice about Bello checking the diaries against a second source restates the claim and names the two checks that made the records trustworthy, staying within the evidence. The draft reports one carefully tested diary, so it cannot support a claim about every old diary.`,
         },
         {
           slot: 40,
