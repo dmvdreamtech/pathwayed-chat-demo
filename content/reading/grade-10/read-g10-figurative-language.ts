@@ -105,7 +105,7 @@ const skill: ContentSkill = {
             wrong(`The demonstrations were fake, and the rope was never really cut.`, 'unsupported-inference'),
             wrong(`Actors were hired to ride the platforms instead of the inventors.`, 'contradicts-text'),
           ],
-          solution: `The paragraph describes a builder high "above a crowd," an assistant cutting the rope and an audience that gasps, all features of a staged show. The passage says the builder himself rode, so actors were not hired.`,
+          solution: `The paragraph describes a builder high "above a crowd," an assistant cutting the rope and an audience that gasps, all features of a staged show. The passage says the builder rode the platform, so actors were not hired.`,
         },
         {
           slot: 8,
@@ -148,7 +148,7 @@ const skill: ContentSkill = {
     {
       code: 'rg10-figurative-language-p03',
       title: 'The Piano in the Driveway',
-      body: `The piano arrived on a Saturday, strapped to a borrowed trailer and wrapped in two moving blankets. Mrs. Halvorsen, who had owned it for forty years, had described it on the phone as "a piano with a lot of history." Luis Echeverria and his father soon learned what that meant.\n\nOne leg wobbled. Three of the white keys had lost their ivory tops, and the lowest notes buzzed as if a bee were trapped inside. When Luis pressed middle C, the sound arrived a moment late, like a guest who had stopped to take off his coat.\n\nHis father ran a hand along the scratched lid. "Mrs. Halvorsen called it vintage," he said. "I would have called it old."\n\n"Isn't that the same thing?" Luis asked.\n\n"Not to the person selling it," his father said, smiling.\n\nThey spent the afternoon working in the driveway. His father tightened the leg with a new bolt. Luis found a matching set of key tops online and glued them on with a steady hand. A neighbor who tuned pianos on weekends stopped by and spent an hour adjusting the strings, humming each note under her breath until it matched her tuning fork.\n\nBy evening, the buzz was gone and middle C answered right away. Luis played the only song he knew by heart, slowly at first and then with more confidence. Two kids from across the street wandered over and sat on the curb to listen.\n\nWhen the song ended, his father nodded at the instrument. "Now," he said, "it is not old and it is not vintage. It is ours." Luis decided that was the best word of all.`,
+      body: `The piano arrived on a Saturday, strapped to a borrowed trailer and wrapped in two moving blankets. Mrs. Halvorsen, who had owned it for forty years, had described it on the phone as "a piano with a lot of history." Luis Echeverria and his father soon learned what that meant.\n\nOne leg wobbled. Three of the white keys had lost their ivory tops, and the lowest notes buzzed as if a bee were trapped inside. When Luis pressed middle C, the sound arrived a moment late, like a guest who had stopped to take off a coat.\n\nHis father ran a hand along the scratched lid. "Mrs. Halvorsen called it vintage," he said. "I would have called it old."\n\n"Isn't that the same thing?" Luis asked.\n\n"Not to the person selling it," his father said, smiling.\n\nThey spent the afternoon working in the driveway. His father tightened the leg with a new bolt. Luis found a matching set of key tops online and glued them on with a steady hand. A neighbor who tuned pianos on weekends stopped by and spent an hour adjusting the strings, humming each note under her breath until it matched her tuning fork.\n\nBy evening, the buzz was gone and middle C answered right away. Luis played the only song he knew by heart, slowly at first and then with more confidence. Two kids from across the street wandered over and sat on the curb to listen.\n\nWhen the song ended, his father nodded at the instrument. "Now," he said, "it is not old and it is not vintage. It is ours." Luis decided that was the best word of all.`,
       items: [
         {
           slot: 11,
@@ -165,7 +165,7 @@ const skill: ContentSkill = {
         {
           slot: 12,
           difficulty: 'easy',
-          stem: `The sound of middle C "arrived a moment late, like a guest who had stopped to take off his coat." What does this simile show?`,
+          stem: `The sound of middle C "arrived a moment late, like a guest who had stopped to take off a coat." What does this simile show?`,
           choices: [
             right(`The note sounded with a small, noticeable delay after the key was pressed.`),
             wrong(`Someone had left a coat inside the piano that blocked the strings.`, 'literal-reading'),
@@ -251,7 +251,7 @@ const skill: ContentSkill = {
             wrong(`It tells the buyer the bike is in perfect condition and ready to ride.`, 'contradicts-text'),
             right(`It makes a list of real repairs sound small, warm and easy to handle.`),
           ],
-          solution: `"A little love" makes serious work, such as "new brakes, new tires and an afternoon of work," sound minor and affectionate. A euphemism softens the problem rather than warning clearly, so the "warns clearly" choice reverses its purpose.`,
+          solution: `"A little love" makes serious work, such as "new brakes, new tires and an afternoon of work," sound minor and affectionate. A euphemism softens the problem rather than warning clearly, so the choice "It warns the buyer clearly that the bike is unsafe and should be avoided" reverses its purpose.`,
         },
         {
           slot: 19,
@@ -342,7 +342,7 @@ const skill: ContentSkill = {
             wrong(`It proves that the director's phrase was meant as a harsh insult to the crew.`, 'misreads-tone'),
             wrong(`It suggests that she forgot her cues and needed the note to remember them.`, 'contradicts-text'),
           ],
-          solution: `Her cues "landed exactly on time," and she keeps the sheet "as a reminder of how they got there," so the euphemism becomes literally true. Nothing suggests she disagreed with the director; she adopts his phrase.`,
+          solution: `Her cues "landed exactly on time," and she keeps the sheet "as a reminder of how they got there," so the euphemism becomes literally true. Nothing suggests she disagreed with the director; she adopts the phrase as her own.`,
         },
       ],
     },
