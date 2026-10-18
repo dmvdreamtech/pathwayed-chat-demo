@@ -165,7 +165,7 @@ const skill: ContentSkill = {
         no(`Sea turtles lay their eggs on sandy beaches, and at night.`, 'awkward-fragment'),
         no(`At night sea turtles lay eggs, and they lay eggs on beaches.`, 'still-repetitive'),
       ],
-      solution: `Adding "at night" to the first sentence keeps every fact and drops the repeated "they lay them." The last choice combines the ideas but still says "lay eggs" twice.`,
+      solution: `Adding "at night" to the first sentence keeps every fact and drops the repeated "they lay them." The choice "At night sea turtles lay eggs, and they lay eggs on beaches." combines the ideas but still says "lay eggs" twice.`,
     },
     {
       slot: 14,
@@ -189,7 +189,7 @@ const skill: ContentSkill = {
         no(`Chess is the most fun game in the whole world.`, 'adds-new-facts'),
         ok(`I think chess is fun to play.`),
       ],
-      solution: `"In my opinion" and "I think" mean the same thing, so one is enough, and "a game that is" adds nothing. The first choice still says the opinion part twice.`,
+      solution: `"In my opinion" and "I think" mean the same thing, so one is enough, and "a game that is" adds nothing. The choice "In my opinion, I think chess is fun to play." still says the opinion part twice.`,
     },
     {
       slot: 16,
@@ -213,7 +213,7 @@ const skill: ContentSkill = {
         no(`The long blue train left Platform 9 in a hurry.`, 'adds-new-facts'),
         no(`The train left, it was 6:00 a.m. at Platform 3.`, 'comma-splice-unfixed'),
       ],
-      solution: `This choice adds the time and place from the notes in one clear sentence. The third choice sounds more exciting, but its color, platform number and hurry are not in the notes.`,
+      solution: `The sentence "The train left Platform 3 at 6:00 a.m." adds the time and place from the notes in one clear sentence. The sentence about the long blue train sounds more exciting, but its color, platform number and hurry are not in the notes.`,
     },
     {
       slot: 18,
@@ -225,7 +225,7 @@ const skill: ContentSkill = {
         ok(`Lucia wore her rain boots because the hiking trail was muddy.`),
         no(`Lucia wore her rain boots, the hiking trail was muddy.`, 'comma-splice-unfixed'),
       ],
-      solution: `The mud is the reason for the boots, so "because" shows the link. The second choice flips cause and effect, as if the boots made the trail muddy.`,
+      solution: `The mud is the reason for the boots, so "because" shows the link. The choice "The hiking trail was muddy because Lucia wore her rain boots." flips cause and effect, as if the boots made the trail muddy.`,
     },
     {
       slot: 19,
@@ -237,7 +237,7 @@ const skill: ContentSkill = {
         no(`Owen plays the violin and Owen plays the piano too.`, 'still-repetitive'),
         ok(`Owen plays the violin and the piano.`),
       ],
-      solution: `Joining the two instruments with "and" keeps both facts and says "Owen plays" only once. Using "or" makes it sound as if he plays only one of them.`,
+      solution: `Joining the two instruments with "and" keeps both facts and says "Owen plays" only once. Using "or" makes it sound as if Owen plays only one of them.`,
     },
     {
       slot: 20,
@@ -261,7 +261,7 @@ const skill: ContentSkill = {
         no(`The farmers market sells fresh peaches on Saturday mornings.`, 'drops-meaning'),
         no(`The farmers market opens Saturday and the farmers market closes at noon and sells peaches.`, 'still-repetitive'),
       ],
-      solution: `The "which" clause and "and" hold all three facts while naming the market only once. The third choice is smooth, but it loses the closing time of noon.`,
+      solution: `The "which" clause and "and" hold all three facts while naming the market only once. The choice about peaches on Saturday mornings is smooth, but it loses the closing time of noon.`,
     },
     {
       slot: 22,
@@ -273,7 +273,7 @@ const skill: ContentSkill = {
         ok(`Because it was raining, the soccer game was postponed.`),
         no(`Because it rained, the game was postponed to Sunday afternoon.`, 'adds-new-facts'),
       ],
-      solution: `"Because" replaces "due to the fact that," and "postponed" means put off until a later time. The last choice is short, but the sentence never said the game moved to Sunday.`,
+      solution: `"Because" replaces "due to the fact that," and "postponed" means put off until a later time. The choice that says "postponed to Sunday afternoon" is short, but the sentence never said the game moved to Sunday.`,
     },
     {
       slot: 23,
@@ -297,7 +297,7 @@ const skill: ContentSkill = {
         no(`The brave firefighters who were brave carried the ladder to the roof.`, 'still-repetitive'),
         ok(`The brave firefighters carried the ladder to the roof.`),
       ],
-      solution: `"Who were brave" can shrink to the single word "brave" in front of "firefighters." The first choice is shorter, but it drops the detail that they were brave.`,
+      solution: `"Who were brave" can shrink to the single word "brave" in front of "firefighters." "The firefighters carried the ladder to the roof." is shorter, but it drops the detail that they were brave.`,
     },
     {
       slot: 25,
@@ -309,7 +309,7 @@ const skill: ContentSkill = {
         no(`Our art teacher, Ms. Okafor, taught us something.`, 'drops-meaning'),
         no(`Ms. Okafor, our art teacher, taught us to make clay bowls and vases.`, 'adds-new-facts'),
       ],
-      solution: `Setting "our art teacher" off with commas tucks the first sentence into the second. The last choice combines well, but vases were never mentioned.`,
+      solution: `Setting "our art teacher" off with commas tucks the first sentence into the second. The choice that adds "and vases" combines well, but vases were never mentioned.`,
     },
     {
       slot: 26,
@@ -321,7 +321,7 @@ const skill: ContentSkill = {
         ok(`When the storm came, the wind blew and the lights went out.`),
         no(`The lights went out, so the storm came and the wind blew.`, 'confuses-cause-effect'),
       ],
-      solution: `Starting with "When" ties the events together in time and makes one smooth sentence. The first choice is joined, but a chain of "and" sounds just as choppy.`,
+      solution: `Starting with "When" ties the events together in time and makes one smooth sentence. "The storm came and the wind blew and the lights went out." is joined, but a chain of "and" sounds just as choppy.`,
     },
     {
       slot: 27,
@@ -345,7 +345,7 @@ const skill: ContentSkill = {
         ok(`Wind turbines change the energy of moving air into electricity.`),
         no(`Wind turbines are fun to look at and pretty cool.`, 'opinion-not-fact'),
       ],
-      solution: `This sentence uses exact, serious words that fit a report. The first choice has the same idea, but "like" and "totally awesome" are casual words for talking with friends.`,
+      solution: `This sentence uses exact, serious words that fit a report. The sentence "Wind turbines are, like, totally awesome at making power." has the same idea, but "like" and "totally awesome" are casual words for talking with friends.`,
     },
     {
       slot: 29,
@@ -357,7 +357,7 @@ const skill: ContentSkill = {
         no(`Lines after school or not, let me know whatever.`, 'unclear-message'),
         ok(`Want to practice our lines for the play after school?`),
       ],
-      solution: `A friendly note to a classmate can sound relaxed, like everyday talk. The first choice is correct English, but it sounds stiff and strange between friends.`,
+      solution: `A friendly note to a classmate can sound relaxed, like everyday talk. "I formally request your presence at a rehearsal of our lines." is correct English, but it sounds stiff and strange between friends.`,
     },
     {
       slot: 30,
@@ -381,7 +381,7 @@ const skill: ContentSkill = {
         ok(`Each fall, monarch butterflies migrate thousands of miles to Mexico.`),
         no(`Each fall, monarch butterflies travel thousands of miles to Mexico to find food.`, 'adds-new-facts'),
       ],
-      solution: `This sentence keeps the season, the distance and the place, with no repeated "they." The last choice is smooth, but "to find food" is a new reason the original never gave.`,
+      solution: `This sentence keeps the season, the distance and the place, with no repeated "they." The choice that ends "to find food" is smooth, but "to find food" is a new reason the original never gave.`,
     },
     {
       slot: 32,
@@ -393,7 +393,7 @@ const skill: ContentSkill = {
         no(`Could the school please add a recycling bin and a new sink to the art room? Thank you.`, 'adds-new-facts'),
         no(`Can we get a bin? Thx for reading this!`, 'too-informal-abbreviation'),
       ],
-      solution: `"Could the school please" and "Thank you" are polite, formal wording that keeps the same request. The third choice is formal too, but it asks for a sink that Ayaan never mentioned.`,
+      solution: `"Could the school please" and "Thank you" are polite, formal wording that keeps the same request. The choice that adds "a new sink" is formal too, but it asks for a sink that Ayaan never mentioned.`,
     },
     {
       slot: 33,
@@ -405,7 +405,7 @@ const skill: ContentSkill = {
         no(`At 3:00 p.m., the chorus sang together in unison.`, 'partly-redundant'),
         ok(`At 3:00 p.m., the chorus sang in unison.`),
       ],
-      solution: `"P.m." already means afternoon, and "in unison" already means together, so both extras can go. The third choice fixes the time but still says "together in unison."`,
+      solution: `"P.m." already means afternoon, and "in unison" already means together, so both extras can go. "At 3:00 p.m., the chorus sang together in unison." fixes the time but still says "together in unison."`,
     },
     {
       slot: 34,
@@ -417,7 +417,7 @@ const skill: ContentSkill = {
         ok(`The Millbrook Canal, which opened in 1825, connected Lake Avery to the Pine River.`),
         no(`Lake Avery opened in 1825 and connected the Millbrook Canal to the Pine River.`, 'changes-meaning'),
       ],
-      solution: `The "which" clause tucks the opening date beside the canal's name and keeps the rest in order. The second choice splits "Lake Avery to the Pine River," so it no longer makes sense.`,
+      solution: `The "which" clause tucks the opening date beside the canal's name and keeps the rest in order. "The Millbrook Canal, which connected Lake Avery, opened in 1825 to the Pine River." splits "Lake Avery to the Pine River," so it no longer makes sense.`,
     },
     {
       slot: 35,
@@ -441,7 +441,7 @@ const skill: ContentSkill = {
         no(`"Your arrival has been noted with great happiness."`, 'too-formal-stiff'),
         no(`"I see that you have arrived here now."`, 'flat-no-feeling'),
       ],
-      solution: `Story dialogue should sound like the character, and an excited young child would speak in short, casual bursts. The first choice is correct but sounds like a stiff adult, not a happy eight-year-old.`,
+      solution: `Story dialogue should sound like the character, and an excited young child would speak in short, casual bursts. "Greetings, cousin. I am pleased by your arrival." is correct but sounds like a stiff adult, not a happy eight-year-old.`,
     },
     {
       slot: 37,
@@ -453,7 +453,7 @@ const skill: ContentSkill = {
         no(`Kenji wrote the temperature in his notebook before checking the school weather station.`, 'changes-order'),
         ok(`After checking the school weather station, Kenji wrote the temperature in his notebook.`),
       ],
-      solution: `"After checking" keeps the events in order and makes Kenji the one who did both. The first choice makes it sound as if the notebook checked the station.`,
+      solution: `"After checking" keeps the events in order and makes Kenji the one who did both. "Checking the weather station, the notebook recorded the temperature." makes it sound as if the notebook checked the station.`,
     },
     {
       slot: 38,
@@ -477,7 +477,7 @@ const skill: ContentSkill = {
         no(`At the planetarium, we saw a show about Jupiter and learned that its rings are made of ice and rock.`, 'changes-facts'),
         no(`We went to the planetarium, we saw a show, we learned about Saturn's rings.`, 'comma-splice-unfixed'),
       ],
-      solution: `Opening with "At the planetarium" breaks the pattern of "We..." and joins the ideas smoothly. The third choice is built the same way, but it swaps Saturn for Jupiter.`,
+      solution: `Opening with "At the planetarium" breaks the pattern of "We..." and joins the ideas smoothly. The choice about a show on Jupiter is built the same way, but it swaps Saturn for Jupiter.`,
     },
     {
       slot: 40,
@@ -489,7 +489,7 @@ const skill: ContentSkill = {
         no(`The bread did not rise, and the yeast was old.`, 'drops-meaning'),
         ok(`The bread did not rise because the yeast was too old.`),
       ],
-      solution: `"The reason why" and "because" say the same thing, so keeping only "because" is clearer. The first choice still pairs "the reason" with "because" and also drops "too."`,
+      solution: `"The reason why" and "because" say the same thing, so keeping only "because" is clearer. "The reason the bread didn't rise is because the yeast was old." still pairs "the reason" with "because" and also drops "too."`,
     },
   ],
 }
