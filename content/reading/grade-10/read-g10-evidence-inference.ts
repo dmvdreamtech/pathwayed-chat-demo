@@ -67,7 +67,7 @@ const skill: ContentSkill = {
         {
           slot: 5,
           difficulty: 'hard',
-          stem: `The passage ends by saying the project succeeded more because of shared work than technology. Which detail gives the strongest support for that view?`,
+          stem: `The passage ends with Quispe's view that the project succeeded more because of shared work than because of technology. Which detail gives the strongest support for that view?`,
           choices: [
             wrong(`The mesh is fine plastic stretched between two tall poles.`, 'supports-different-claim'),
             right(`Wind and dust damage the nets, so residents take turns inspecting and patching them weekly.`),
@@ -81,7 +81,7 @@ const skill: ContentSkill = {
     {
       code: 'rg10-evidence-inference-p02',
       title: 'When Every Town Kept Its Own Clock',
-      body: `In the 1850s, the river town of Halvering set its clocks by the sun. When the sun stood highest over the courthouse, the town bell rang noon. The town of Brookmoor, forty miles to the east, did the same, which meant its noon arrived about three minutes earlier. For most people this difference hardly mattered, since few traveled far enough in a day to notice.\n\nThe railroad changed that. When the Halvering and Eastern Line opened in 1861, its timetables listed departures in Halvering time, but each station along the route kept its own local hour. A passenger boarding in Brookmoor had to subtract minutes in her head to know when the train would actually arrive. Station clerks posted conversion tables, and travelers complained that the tables were often wrong. In 1863, two freight trains were scheduled onto the same single track because their crews read different clocks. They stopped within sight of each other, and no one was hurt, but the railroad's directors were alarmed.\n\nWithin a year, the line adopted a single standard time for every station, based on the clock in its Halvering office. Some Brookmoor residents objected at first. A local newspaper grumbled that the railroad was trying to own the sun. Yet merchants soon found it easier to promise deliveries, and the town council quietly reset the courthouse clock to match the station.\n\nBy 1880, nearly every town in the region had followed. Historians of the area note that the change came not from a law but from the practical needs of people who had begun to move goods and passengers faster than the sun appeared to move.`,
+      body: `In the 1850s, the river town of Halvering set its clocks by the sun. When the sun stood highest over the courthouse, the town bell rang noon. The town of Brookmoor, forty miles to the east, did the same, which meant its noon arrived about three minutes earlier. For most people this difference hardly mattered, since few traveled far enough in a day to notice.\n\nThe railroad changed that. When the Halvering and Eastern Line opened in 1861, its timetables listed departures in Halvering time, but each station along the route kept its own local hour. A passenger boarding in Brookmoor had to subtract minutes in their head to know when the train would actually arrive. Station clerks posted conversion tables, and travelers complained that the tables were often wrong. In 1863, two freight trains were scheduled onto the same single track because their crews read different clocks. They stopped within sight of each other, and no one was hurt, but the railroad's directors were alarmed.\n\nWithin a year, the line adopted a single standard time for every station, based on the clock in its Halvering office. Some Brookmoor residents objected at first. A local newspaper grumbled that the railroad was trying to own the sun. Yet merchants soon found it easier to promise deliveries, and the town council quietly reset the courthouse clock to match the station.\n\nBy 1880, nearly every town in the region had followed. Historians of the area note that the change came not from a law but from the practical needs of people who had begun to move goods and passengers faster than the sun appeared to move.`,
       items: [
         {
           slot: 6,
@@ -127,7 +127,7 @@ const skill: ContentSkill = {
             wrong(`Some Brookmoor residents objected at first.`, 'contradicts-claim'),
             right(`The town council quietly reset the courthouse clock to match the station.`),
             wrong(`Station clerks posted conversion tables for travelers.`, 'wrong-time-period'),
-            wrong(`A passenger boarding in Brookmoor had to subtract minutes in her head.`, 'wrong-time-period'),
+            wrong(`A passenger boarding in Brookmoor had to subtract minutes in their head.`, 'wrong-time-period'),
           ],
           solution: `Resetting the courthouse clock to the station's time shows the town officially adopted railroad time. The early objections show resistance, which is the opposite of acceptance.`,
         },
@@ -215,7 +215,7 @@ const skill: ContentSkill = {
     {
       code: 'rg10-evidence-inference-p04',
       title: 'Pacing the Long Row',
-      body: `Every spring, the rowing coaches at Delmont Ridge High School noticed the same pattern at their two-kilometer races. Their rowers would burst off the starting line, lead for the first few hundred meters and then fade badly in the final stretch. Coach Ingrid Halvorsen suspected the problem was pacing rather than fitness.\n\nTo test her idea, she used the rowing machines in the team's training room, which display each rower's speed and power on a screen. For three weeks, half the team trained with a target pace shown on the display and were told to hold it evenly from start to finish. The other half trained as usual, rowing as hard as they felt they could. At the end of the three weeks, every rower completed a timed two-kilometer test on the machines.\n\nThe even-pace group finished, on average, eleven seconds faster than they had before the experiment. The other group improved by only three seconds. Halvorsen also reviewed the power readings and saw that the even-pace rowers produced less power in the first minute than the other group, but they kept much more of their power in the last minute.\n\nSeveral rowers said the even pace felt too slow at the start, and two admitted they ignored the screen during the first test. Halvorsen did not count those two in her results. This season, she plans to have the whole team practice even pacing on the water, where wind and current make a steady speed harder to judge than on a machine.`,
+      body: `Every spring, the rowing coaches at Delmont Ridge High School noticed the same pattern at their two-kilometer races. Their rowers would burst off the starting line, lead for the first few hundred meters and then fade badly in the final stretch. Coach Ingrid Halvorsen suspected the problem was pacing rather than fitness.\n\nTo test the idea, Halvorsen used the rowing machines in the team's training room, which display each rower's speed and power on a screen. For three weeks, half the team trained with a target pace shown on the display and were told to hold it evenly from start to finish. The other half trained as usual, rowing as hard as they felt they could. At the end of the three weeks, every rower completed a timed two-kilometer test on the machines.\n\nThe even-pace group finished, on average, eleven seconds faster than they had before the experiment. The other group improved by only three seconds. Halvorsen also reviewed the power readings and saw that the even-pace rowers produced less power in the first minute than the other group, but they kept much more of their power in the last minute.\n\nSeveral rowers said the even pace felt too slow at the start, and two admitted they ignored the screen during the first test. Halvorsen did not count those two in the results. This season, Halvorsen plans to have the whole team practice even pacing on the water, where wind and current make a steady speed harder to judge than on a machine.`,
       items: [
         {
           slot: 16,
@@ -260,7 +260,7 @@ const skill: ContentSkill = {
           choices: [
             wrong(`Their times were too slow to be recorded by the rowing machines.`, 'unsupported-inference'),
             wrong(`They had been placed in the wrong group at the start of the study.`, 'unsupported-inference'),
-            wrong(`She wanted to make the even-pace group's results look as weak as possible.`, 'contradicts-text'),
+            wrong(`Halvorsen wanted to make the even-pace group's results look as weak as possible.`, 'contradicts-text'),
             right(`They did not actually follow the even pace, so their times could not test the method.`),
           ],
           solution: `The experiment tested whether holding an even pace helps, and rowers who ignored the target pace did not use that method. Nothing in the text says their times were too slow to record or that they were in the wrong group.`,
@@ -270,19 +270,19 @@ const skill: ContentSkill = {
           difficulty: 'hard',
           stem: `What can be inferred from Halvorsen's plan for this season?`,
           choices: [
-            wrong(`She believes the machine results prove her rowers will now win every race.`, 'overstatement'),
-            right(`She is not yet sure the machine results will carry over to real racing conditions.`),
-            wrong(`She thinks the rowing machines gave inaccurate speed and power readings.`, 'unsupported-inference'),
-            wrong(`She has decided that pacing matters less on the water than fitness does.`, 'contradicts-text'),
+            wrong(`Halvorsen believes the machine results prove the team will now win every race.`, 'overstatement'),
+            right(`Halvorsen is not yet sure the machine results will carry over to real racing conditions.`),
+            wrong(`Halvorsen thinks the rowing machines gave inaccurate speed and power readings.`, 'unsupported-inference'),
+            wrong(`Halvorsen has decided that pacing matters less on the water than fitness does.`, 'contradicts-text'),
           ],
-          solution: `She wants the team to practice on the water because "wind and current make a steady speed harder to judge," which shows she knows the machine success may not transfer automatically. Nothing suggests she doubts the machines' readings.`,
+          solution: `Halvorsen wants the team to practice on the water because "wind and current make a steady speed harder to judge," which shows the coach knows the machine success may not transfer automatically. Nothing suggests Halvorsen doubts the machines' readings.`,
         },
       ],
     },
     {
       code: 'rg10-evidence-inference-p05',
       title: 'Saving the Faded Banner',
-      body: `For nearly a century, a silk banner hung in the entrance hall of the Marrowfield Guild of Weavers. Painted with the guild's symbol, a golden shuttle crossed by two threads, it greeted every visitor. By 2018, however, the gold had faded to a dull tan, and the silk had split in dozens of places.\n\nThe guild hired textile conservator Lucía Abernethy-Okafor to examine it. She began by studying the banner under a microscope and found that the silk fibers had become brittle. The damage was worst on the side that had faced a tall window, while a strip near the bottom edge, which had been hidden behind a wooden rail, kept nearly its original color. Abernethy-Okafor explained that sunlight breaks down both silk and many dyes, and that the hidden strip showed what the whole banner once looked like.\n\nRepainting the faded areas was never considered. Conservators generally try to preserve what remains rather than replace it, so that future researchers can study the original materials. Instead, Abernethy-Okafor sewed the split silk onto a backing of fine, dyed netting using stitches thinner than a human hair. The work took eleven months.\n\nThe banner now hangs in a room without windows, under lights that switch on only when a visitor enters. A printed reproduction, made from photographs of the hidden strip, hangs in the old entrance hall so that guests can see the bright gold the original once showed. Some members admit that they miss seeing the real banner each day, but most agree that it would not survive another century by the window.`,
+      body: `For nearly a century, a silk banner hung in the entrance hall of the Marrowfield Guild of Weavers. Painted with the guild's symbol, a golden shuttle crossed by two threads, it greeted every visitor. By 2018, however, the gold had faded to a dull tan, and the silk had split in dozens of places.\n\nThe guild hired textile conservator Lucía Abernethy-Okafor to examine it. Abernethy-Okafor began by studying the banner under a microscope and found that the silk fibers had become brittle. The damage was worst on the side that had faced a tall window, while a strip near the bottom edge, which had been hidden behind a wooden rail, kept nearly its original color. Abernethy-Okafor explained that sunlight breaks down both silk and many dyes, and that the hidden strip showed what the whole banner once looked like.\n\nRepainting the faded areas was never considered. Conservators generally try to preserve what remains rather than replace it, so that future researchers can study the original materials. Instead, Abernethy-Okafor sewed the split silk onto a backing of fine, dyed netting using stitches thinner than a human hair. The work took eleven months.\n\nThe banner now hangs in a room without windows, under lights that switch on only when a visitor enters. A printed reproduction, made from photographs of the hidden strip, hangs in the old entrance hall so that guests can see the bright gold the original once showed. Some members admit that they miss seeing the real banner each day, but most agree that it would not survive another century by the window.`,
       items: [
         {
           slot: 21,
@@ -318,7 +318,7 @@ const skill: ContentSkill = {
             wrong(`Paint would not stick to silk that had become brittle.`, 'unsupported-inference'),
             right(`Conservators try to keep original materials so future researchers can study them.`),
           ],
-          solution: `The third paragraph says conservators "try to preserve what remains rather than replace it, so that future researchers can study the original materials." The original color was known from the hidden strip, so the first choice contradicts the text.`,
+          solution: `The third paragraph says conservators "try to preserve what remains rather than replace it, so that future researchers can study the original materials." The original color was known from the hidden strip, so the choice "No one knew what color the banner had originally been" contradicts the text.`,
         },
         {
           slot: 24,
@@ -361,7 +361,7 @@ const skill: ContentSkill = {
             wrong(`It stops pedestrians from pressing the crossing button.`, 'contradicts-text'),
             wrong(`It sends a warning to cars on the side streets to slow down.`, 'unsupported-inference'),
           ],
-          solution: `The second paragraph says "the signal can hold the green for a few extra seconds." It also states that the system "never changes a light instantly," so the first choice contradicts the text.`,
+          solution: `The second paragraph says "the signal can hold the green for a few extra seconds." It also states that the system "never changes a light instantly," so the choice "It turns the light green instantly so the bus never has to stop" contradicts the text.`,
         },
         {
           slot: 27,
@@ -440,7 +440,7 @@ const skill: ContentSkill = {
             wrong(`"Best by" means food is unsafe the next day, while "use by" is only a suggestion.`, 'reverses-relationship'),
             wrong(`"Best by" is set by health offices, while "use by" is set by stores.`, 'unsupported-inference'),
           ],
-          solution: `The passage says "best by" usually refers to "quality, such as flavor or crispness, rather than safety," while "use by" foods "deserve closer attention." The third choice repeats the families' mistaken belief that the passage corrects.`,
+          solution: `The passage says "best by" usually refers to "quality, such as flavor or crispness, rather than safety," while "use by" foods "deserve closer attention." The choice saying "best by" means food is unsafe the next day repeats the families' mistaken belief that the passage corrects.`,
         },
         {
           slot: 33,
@@ -464,7 +464,7 @@ const skill: ContentSkill = {
             wrong(`They wanted the office to deliver their guide to each household.`, 'contradicts-text'),
             wrong(`They believed the office printed the dates that appear on food packages.`, 'unsupported-inference'),
           ],
-          solution: `The class "learned from the county health office" what "best by" usually means, and that knowledge became the basis of the guide. The students delivered the guide themselves, so the third choice contradicts the text.`,
+          solution: `The class "learned from the county health office" what "best by" usually means, and that knowledge became the basis of the guide. The students delivered the guide themselves, so the choice "They wanted the office to deliver their guide to each household" contradicts the text.`,
         },
         {
           slot: 35,
@@ -476,7 +476,7 @@ const skill: ContentSkill = {
             right(`The guide probably helped, but the size of the drop may be somewhat overstated.`),
             wrong(`The first survey was less reliable than the second because it was shorter.`, 'unsupported-inference'),
           ],
-          solution: `Achterberg notes that honest recording and families knowing "they were being watched" could affect the numbers, which questions the size of the effect without dismissing it. He never says families invented their logs, so "meaningless" goes beyond the text.`,
+          solution: `Achterberg notes that honest recording and families knowing "they were being watched" could affect the numbers, which questions the size of the effect without dismissing it. Achterberg never says families invented their logs, so "meaningless" goes beyond the text.`,
         },
       ],
     },
