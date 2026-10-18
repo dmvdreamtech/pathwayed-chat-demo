@@ -418,7 +418,7 @@ const skill: ContentSkill = {
           choices: [
             ok(`From the father's shirt to the speaker "wearing the whole family," Kahale turns a quilt into a lasting home for family memories.`),
             no(`The poem "Patchwork" was written by Leilani Kahale and has four stanzas that do not rhyme.`, 'summary-not-conclusion'),
-            no(`Kahale must have had a very close family, since she wrote a whole poem about a quilt.`, 'unsupported-inference'),
+            no(`Kahale must have had a very close family, since Kahale wrote a whole poem about a quilt.`, 'unsupported-inference'),
             no(`Quilts are a popular craft in many countries, and some are displayed in museums.`, 'off-topic-generalization'),
           ],
           solution: `The best conclusion recalls key evidence and restates the claim about memory. The choice about Kahale's own family assumes the speaker is the poet, which the draft never establishes.`,
@@ -500,7 +500,7 @@ const skill: ContentSkill = {
           stem: `In sentence 5, why is it important that the writer says "Mehta suggests" instead of stating the explanation as a plain fact?`,
           choices: [
             ok(`The explanation is Mehta's interpretation of the data, not something the tray weights measured directly, so it should be credited to him.`),
-            no(`Mehta did not take part in the study himself, so the writer is showing that he disagrees with it.`, 'misreads-passage'),
+            no(`Mehta did not take part in the study himself, so the writer is showing that Mehta disagrees with it.`, 'misreads-passage'),
             no(`Using a researcher's name in every sentence is required in any essay that uses evidence.`, 'overgeneralized-rule'),
             no(`The phrase shows that the writer believes the explanation is false and wants readers to doubt it.`, 'misreads-purpose'),
           ],
@@ -571,7 +571,7 @@ const skill: ContentSkill = {
           stem: `Which sentence, added after sentence 8, best explains how the quotation supports the writer's point?`,
           choices: [
             ok(`Haddad's warning shows that the tanks were only useful if families kept the water clean, which is why the workshops mattered as much as the tanks.`),
-            no(`This quotation is the longest one in Haddad's article, so it must be the most important idea she presents.`, 'length-equals-strength'),
+            no(`This quotation is the longest one in Haddad's article, so it must be the most important idea in the article.`, 'length-equals-strength'),
             no(`Dirty water can carry many kinds of bacteria and minerals that are harmful for people to drink.`, 'outside-knowledge'),
             no(`Haddad means that the town should stop using tanks and find a cleaner source of water instead.`, 'misreads-quotation'),
           ],
