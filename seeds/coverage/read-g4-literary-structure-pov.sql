@@ -38,7 +38,7 @@ I chose a dragon shape with a long tail made from strips of old newspaper. My li
 
 On the morning of the festival, the wind was strong. My hands shook as I let out the string. For a moment, the dragon dipped toward the grass, and my stomach dipped with it. Then a gust caught the wings, and the kite climbed higher than the trees.
 
-Tomas jumped up and down. "Go, Lina!" he shouted. A woman next to us asked where we had bought such a fine kite. I felt my face get warm.
+Tomas jumped up and down. "Go, Lina! Fly it higher, sister!" he shouted. A woman next to us asked where we had bought such a fine kite. I felt my face get warm.
 
 "We made it," I said. Then I handed Tomas the string so he could feel the dragon pull.$q$, 'draft')
 on conflict (id) do update set title = excluded.title, body = excluded.body
@@ -711,7 +711,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('32dd1fd8-ced0-55eb-910d-b01ce07d6807', null, (select id from public.skills where slug = 'read-g4-literary-structure-pov'), null, 'hard',
-   $q$Why can Version Two include the father's whisper while Version One cannot?$q$, $q$[{"text":"Because Version One is a poem and has no room for dialogue","is_correct":false,"misconception_token":"confuses-prose-and-poetry"},{"text":"Because Diego chose to keep his father's words a secret from readers","is_correct":false,"misconception_token":"unsupported-inference"},{"text":"Because the father was not at the swim meet in Version One","is_correct":false,"misconception_token":"unsupported-inference"},{"text":"Because Diego, in the pool, could not hear it, but an outside narrator can tell it","is_correct":true}]$q$::jsonb, $q$Because Diego, in the pool, could not hear it, but an outside narrator can tell it$q$, $q$A first person narrator can only tell what he sees, hears, and feels, and Diego was on the block and in the water, too far to hear a whisper. A third person narrator is not limited to Diego's view, so Version Two can include it.$q$, 'draft', '1e39d97b-4fda-56b5-83a2-ff759e4bb067')
+   $q$Why can Version Two include the father's whisper while Version One cannot?$q$, $q$[{"text":"Because Version One is a poem and has no room for dialogue","is_correct":false,"misconception_token":"confuses-prose-and-poetry"},{"text":"Because Diego chose to keep his father's words a secret from readers","is_correct":false,"misconception_token":"unsupported-inference"},{"text":"Because the father was not at the swim meet in Version One","is_correct":false,"misconception_token":"unsupported-inference"},{"text":"Because Diego was too far away to hear it, but an outside narrator can tell it","is_correct":true}]$q$::jsonb, $q$Because Diego was too far away to hear it, but an outside narrator can tell it$q$, $q$A first person narrator can only tell what he sees, hears, and feels, and Diego was on the block and in the water, too far to hear a whisper. A third person narrator is not limited to Diego's view, so Version Two can include it.$q$, 'draft', '1e39d97b-4fda-56b5-83a2-ff759e4bb067')
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

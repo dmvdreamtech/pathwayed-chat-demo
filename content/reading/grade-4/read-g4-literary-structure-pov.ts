@@ -20,7 +20,7 @@ I chose a dragon shape with a long tail made from strips of old newspaper. My li
 
 On the morning of the festival, the wind was strong. My hands shook as I let out the string. For a moment, the dragon dipped toward the grass, and my stomach dipped with it. Then a gust caught the wings, and the kite climbed higher than the trees.
 
-Tomas jumped up and down. "Go, Lina!" he shouted. A woman next to us asked where we had bought such a fine kite. I felt my face get warm.
+Tomas jumped up and down. "Go, Lina! Fly it higher, sister!" he shouted. A woman next to us asked where we had bought such a fine kite. I felt my face get warm.
 
 "We made it," I said. Then I handed Tomas the string so he could feel the dragon pull.`,
       items: [
@@ -657,7 +657,7 @@ Diego stood on the starting block and stared at the water. His team was in last 
           choices: [
             wrong(`Because the father was not at the swim meet in Version One`, 'unsupported-inference'),
             wrong(`Because Version One is a poem and has no room for dialogue`, 'confuses-prose-and-poetry'),
-            right(`Because Diego, in the pool, could not hear it, but an outside narrator can tell it`),
+            right(`Because Diego was too far away to hear it, but an outside narrator can tell it`),
             wrong(`Because Diego chose to keep his father's words a secret from readers`, 'unsupported-inference'),
           ],
           solution: `A first person narrator can only tell what he sees, hears, and feels, and Diego was on the block and in the water, too far to hear a whisper. A third person narrator is not limited to Diego's view, so Version Two can include it.`,
