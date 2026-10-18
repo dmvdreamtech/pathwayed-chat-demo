@@ -62,7 +62,7 @@ const skill: ContentSkill = {
             wrong(`"It would also mean cleaner air near the playground."`, 'misjudges-relevance'),
             wrong(`"But paint costs much less than building a new road."`, 'misjudges-relevance'),
           ],
-          solution: `A bakery on the street gives no reason to add bike lanes. The other sentences each back up a reason: safety, cleaner air or low cost.`,
+          solution: `A bakery on the street gives no reason to add bike lanes. The Elmford crash sentence, the cleaner air sentence and the paint cost sentence each back up a reason: safety, cleaner air or low cost.`,
         },
         {
           slot: 5,
@@ -129,7 +129,7 @@ const skill: ContentSkill = {
             wrong(`People can keep swimming even when they are very old.`, 'mismatched-reason'),
             wrong(`Only campers who pass a swim test may go canoeing at Bayview.`, 'mismatched-reason'),
           ],
-          solution: `Free lessons for 200 children show that lessons do not have to cost much. The other details support other points, such as safety or exercise.`,
+          solution: `Free lessons for 200 children show that lessons do not have to cost much. The lifeguard detail supports safety, the very old swimmers detail supports exercise, and the Bayview canoeing detail supports other activities.`,
         },
         {
           slot: 10,
@@ -196,7 +196,7 @@ const skill: ContentSkill = {
             wrong(`"Owls hunt only small animals like mice and voles."`, 'misjudges-relevance'),
             wrong(`"He also saw far fewer mice in his fields."`, 'misjudges-relevance'),
           ],
-          solution: `How pretty an owl looks does not show that it helps a farm. The other sentences show owls eating mice, sparing other animals or reducing mice in fields.`,
+          solution: `How pretty an owl looks does not show that it helps a farm. The sentences about three or four mice a night, hunting only small animals and Reyes seeing fewer mice show owls eating mice, sparing other animals or reducing mice in fields.`,
         },
         {
           slot: 15,
@@ -531,7 +531,7 @@ const skill: ContentSkill = {
             wrong(`It repeats it: both paragraphs say exactly the same thing in new words.`, 'too-shallow'),
             wrong(`It is not connected: it is a separate fact about how electricity works.`, 'misjudges-relevance'),
           ],
-          solution: `The author uses the first point as a step toward the next: cooler buildings need less air conditioning, so owners pay smaller bills. The two paragraphs make different points, so they do not just repeat each other.`,
+          solution: `The author uses the cooler building point as a step toward the air conditioning point: cooler buildings need less air conditioning, so owners pay smaller bills. The two paragraphs make different points, so they do not just repeat each other.`,
         },
         {
           slot: 40,
