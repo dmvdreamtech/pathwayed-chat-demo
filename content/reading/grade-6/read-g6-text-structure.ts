@@ -38,7 +38,7 @@ const skill: ContentSkill = {
             wrong(`"envelope," "basket," "fan," and "burner"`, 'key-nouns-not-signals'),
             wrong(`"calm," "careful," "gently," and "freely"`, 'describing-words-not-signals'),
         ],
-          solution: `Paragraphs 2 through 5 each begin with a time order word that signals the next step. The other choices are describing words or names of parts, and they do not show how the paragraphs connect.`,
+          solution: `Paragraphs 2 through 5 each begin with a time order word that signals the next step. Words like "huge" and "calm" describe things, and words like "envelope" and "burner" name parts, so they do not show how the paragraphs connect.`,
         },
         {
           slot: 3,
@@ -81,7 +81,7 @@ const skill: ContentSkill = {
     {
       code: 'rg6-text-structure-p02',
       title: 'From Wooden Runner to Modern Bike',
-      body: `The bicycle you ride today took about two hundred years to develop. Each new design fixed a problem with the one that came before it, and sometimes the fix created a brand new problem.\n\nThe earliest version, built in the early 1800s, had two wooden wheels and a seat but no pedals. Riders pushed along the ground with their feet, a little like riding a scooter. It was fun on smooth paths but tiring on hills.\n\nIn the 1860s, inventors attached pedals directly to the front wheel. Now riders could keep their feet off the ground. However, the wheels were made of wood and iron, and the ride was so bumpy that people nicknamed these machines "boneshakers."\n\nBuilders soon learned that a bigger front wheel traveled farther with each turn of the pedals. By the 1870s, some front wheels were taller than a grown man. These high-wheel bicycles were fast, but riders sat so high that a small rock could send them tumbling over the handlebars.\n\nThe answer came in the 1880s with the "safety bicycle." It had two wheels of the same size and a chain that connected the pedals to the back wheel. Riders sat low and could put a foot down to stop. Soon after, air-filled rubber tires made the ride much smoother.\n\nModern bikes still follow the safety bicycle's basic shape. Lighter metals, many gears, and better brakes have been added, but the main idea has lasted well over a hundred years.`,
+      body: `The bicycle you ride today took about two hundred years to develop. Each new design fixed a problem with the one that came before it, and sometimes the fix created a brand new problem.\n\nThe earliest version, built in the early 1800s, had two wooden wheels and a seat but no pedals. Riders pushed along the ground with their feet, a little like riding a scooter. It was fun on smooth paths but tiring on hills.\n\nIn the 1860s, inventors attached pedals directly to the front wheel. Now riders could keep their feet off the ground. However, the wheels were made of wood and iron, and the ride was so bumpy that people nicknamed these machines "boneshakers."\n\nBuilders soon learned that a bigger front wheel traveled farther with each turn of the pedals. By the 1870s, some front wheels were about five feet tall. These high-wheel bicycles were fast, but riders sat so high that a small rock could send them tumbling over the handlebars.\n\nThe answer came in the 1880s with the "safety bicycle." It had two wheels of the same size and a chain that connected the pedals to the back wheel. Riders sat low and could put a foot down to stop. Soon after, air-filled rubber tires made the ride much smoother.\n\nModern bikes still follow the safety bicycle's basic shape. Lighter metals, many gears, and better brakes have been added, but the main idea has lasted well over a hundred years.`,
       items: [
         {
           slot: 6,
@@ -134,7 +134,7 @@ const skill: ContentSkill = {
         {
           slot: 10,
           difficulty: 'hard',
-          stem: `Besides time order, which pattern repeats inside paragraphs 2 through 5?`,
+          stem: `Besides time order, which pattern repeats inside paragraphs 2 through 4?`,
           choices: [
             right(`Each paragraph presents a design along with a problem that the next design tries to fix.`),
             wrong(`Each paragraph compares a bicycle with a different kind of vehicle from the same time.`, 'unsupported-inference'),
@@ -526,7 +526,7 @@ const skill: ContentSkill = {
           difficulty: 'hard',
           stem: `What do paragraphs 2, 3, and 4 have in common in the way they are built?`,
           choices: [
-            right(`Each names a challenge caused by floating and then explains how astronauts handle it.`),
+            right(`Each names a challenge of life without gravity and then explains how astronauts handle it.`),
             wrong(`Each begins with a question and ends with an answer given by an astronaut.`, 'unsupported-inference'),
             wrong(`Each compares how the task is done on two different space stations.`, 'wrong-structure'),
             wrong(`Each lists steps in time order that astronauts must follow every morning.`, 'wrong-structure'),
