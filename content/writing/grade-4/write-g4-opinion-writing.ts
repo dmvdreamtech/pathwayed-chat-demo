@@ -87,7 +87,7 @@ const skill: ContentSkill = {
       title: 'A Chess Club for Kids',
       body: `(1) Our town library has books, computers, and a big table that sits empty after school. (2) The library should start a weekly chess club for kids. (3) Chess helps kids practice thinking ahead. (4) Each player has to plan several moves before touching a piece. (5) Planning ahead is a skill students also use in math.
 
-(6) A chess club would also help kids make new friends. (7) Players from different schools could meet and learn from each other. (8) My neighbor Tomas joined a chess club in another town, and now he plays with kids from three schools. (9) ______ the club would be cheap to run. (10) Volunteers from town could teach the games for free.
+(6) A chess club would also help kids make new friends. (7) Players from different schools could meet and learn from each other. (8) My neighbor Tomas joined a chess club in another town, and now Tomas plays with kids from three schools. (9) ______ the club would be cheap to run. (10) Volunteers from town could teach the games for free.
 
 (11) Chess is fun, and it makes kids smarter. (12) The library also has some old maps hanging on the wall.`,
       items: [
@@ -146,7 +146,7 @@ const skill: ContentSkill = {
           choices: [
             no(`Chess is the most fun game in the world, and everyone agrees.`, 'overgeneralization'),
             no(`Some people think checkers is easier to learn than chess is.`, 'new-topic-in-conclusion'),
-            no(`Tomas plays chess every Saturday morning with his new friends.`, 'detail-not-conclusion'),
+            no(`Tomas plays chess every Saturday morning with friends from the club.`, 'detail-not-conclusion'),
             ok(`A chess club would help kids think ahead and make friends, and it would cost very little.`),
           ],
           solution: `The correct choice sums up all three reasons from the piece: thinking ahead, making friends, and low cost. Sentence (11) and the "everyone agrees" choice make big claims the piece never supports.`,
