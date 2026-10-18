@@ -26,7 +26,7 @@ const skill: ContentSkill = {
             wrong(`Dev's kite is much larger than Lucia's, so it is harder to carry.`, 'unsupported-inference'),
             wrong(`Both kites are red diamonds with the same long ribbon tail.`, 'contradicts-text'),
           ],
-          solution: `Dev "had made his kite from a kit" and it was "a neat red diamond," while Lucia built hers "from scratch" and it was "lopsided." Choice B swaps the two cousins.`,
+          solution: `Dev "had made his kite from a kit" and it was "a neat red diamond," while Lucia built hers "from scratch" and it was "lopsided." The choice saying Dev's kite is homemade and lopsided swaps the two cousins.`,
         },
         {
           slot: 2,
@@ -50,7 +50,7 @@ const skill: ContentSkill = {
             right(`Dev looks to the booklet for answers, while Lucia tests her own changes.`),
             wrong(`Both cousins give up and sit in the grass until the contest ends.`, 'contradicts-text'),
           ],
-          solution: `Dev stares at the booklet, but Lucia pulls her kite down, tears off some tail, adds ribbon and keeps trying. Choice A reverses what each cousin does.`,
+          solution: `Dev stares at the booklet, but Lucia pulls her kite down, tears off some tail, adds ribbon and keeps trying. The choice saying Dev keeps changing his kite reverses what each cousin does.`,
         },
         {
           slot: 4,
@@ -74,7 +74,7 @@ const skill: ContentSkill = {
             wrong(`He liked flying kites at first, but now he never wants to fly one again.`, 'unsupported-inference'),
             wrong(`He worked with Lucia at first, but now he wants to build kites alone.`, 'contradicts-text'),
           ],
-          solution: `Dev first "followed each step in the booklet," but at the end he asks to build the next kite "without a booklet." Choice A gets the change backwards, since Dev was never careless.`,
+          solution: `Dev first "followed each step in the booklet," but at the end he asks to build the next kite "without a booklet." The choice saying he was careless at first gets the change backwards, since Dev was never careless.`,
         },
       ],
     },
@@ -117,7 +117,7 @@ const skill: ContentSkill = {
             wrong(`The city has birds singing, while the bay has buses and car horns.`, 'confuses-settings'),
             wrong(`Both places have the same sounds of boats and waves.`, 'too-general'),
           ],
-          solution: `In the city, "A bus sighs" and "A neighbor's door clicks shut." At the bay, "The roosters argue with the gulls." Choice C swaps the sounds between the two places.`,
+          solution: `In the city, "A bus sighs" and "A neighbor's door clicks shut." At the bay, "The roosters argue with the gulls." The choice giving the city birds and the bay buses swaps the sounds between the two places.`,
         },
         {
           slot: 9,
@@ -129,7 +129,7 @@ const skill: ContentSkill = {
             wrong(`"In the city, I hurry" and "At Abuela's, nobody hurries"`, 'wrong-detail-type'),
             right(`"one thin stripe across my bed" and "light pours through the window"`),
           ],
-          solution: `Only choice D describes light: a thin stripe in the city and light that "pours" at the bay. The other pairs compare sounds, food or pace, not light.`,
+          solution: `Only the pair with "one thin stripe" and "light pours" describes light: a thin stripe in the city and light that "pours" at the bay. The other pairs compare sounds, food or pace, not light.`,
         },
         {
           slot: 10,
@@ -160,7 +160,7 @@ const skill: ContentSkill = {
             right(`She dives at every flash she sees, while he waits and strikes once.`),
             wrong(`She fishes in a river, while he fishes in the ocean.`, 'contradicts-text'),
           ],
-          solution: `The kingfisher dives "at every flash of silver," but the heron stands still and "struck once." Choice A swaps the two birds.`,
+          solution: `The kingfisher dives "at every flash of silver," but the heron stands still and "struck once." The choice saying she stands still in the reeds swaps the two birds.`,
         },
         {
           slot: 12,
@@ -184,7 +184,7 @@ const skill: ContentSkill = {
             wrong(`The kingfisher flies away to a new marsh, while the heron stays and goes hungry.`, 'contradicts-text'),
             wrong(`Both birds stop fishing and rest in the shade until the rain returns.`, 'unsupported-inference'),
           ],
-          solution: `The kingfisher "dove again and again, growing more tired each day," while the heron "waited by the deepest pool and caught enough to eat." Choice B reverses the birds.`,
+          solution: `The kingfisher "dove again and again, growing more tired each day," while the heron "waited by the deepest pool and caught enough to eat." The choice saying the kingfisher waits by the deepest pool reverses the birds.`,
         },
         {
           slot: 14,
@@ -194,7 +194,7 @@ const skill: ContentSkill = {
             wrong(`She cares more about catching fish than he does.`, 'unsupported-inference'),
             wrong(`She is embarrassed about missing and wants to hide it.`, 'misreads-tone'),
             wrong(`She thinks the heron is lazy and tells him so.`, 'unsupported-inference'),
-            right(`She values staying busy, while he values patience.`),
+            right(`She values trying again and again, while he values patience.`),
           ],
           solution: `The kingfisher is proud of all her diving even when she catches "nothing but a beak full of mud," while the heron stays "slow and quiet." She never calls the heron lazy in the story.`,
         },
@@ -227,12 +227,12 @@ const skill: ContentSkill = {
             wrong(`Both dig in the same hole beside Dr. Lindqvist.`, 'contradicts-text'),
             right(`Nadia digs deep near a big rock, while Omar works slowly on flat ground.`),
           ],
-          solution: `Nadia "dug as deep as she could" near a big rock, and Omar "picked a flat patch of ground and worked slowly." Choice A switches the siblings.`,
+          solution: `Nadia "dug as deep as she could" near a big rock, and Omar "picked a flat patch of ground and worked slowly." The choice saying Nadia works slowly on flat ground switches the siblings.`,
         },
         {
           slot: 17,
           difficulty: 'easy',
-          stem: `What does Omar find in his tray that surprises everyone?`,
+          stem: `Which find from Omar's tray does Dr. Lindqvist say shows the desert was once a lake?`,
           choices: [
             wrong(`A large dinosaur bone`, 'confuses-characters'),
             right(`A small fish tooth`),
@@ -294,7 +294,7 @@ const skill: ContentSkill = {
             wrong(`Both of them ride a bus to school.`, 'contradicts-text'),
             wrong(`Wen rode a horse, while Mira rides a bike.`, 'unsupported-inference'),
           ],
-          solution: `Wen "walked two miles each way, even in snow," and Mira "rode a yellow bus" that stopped outside her building. Choice A swaps them.`,
+          solution: `Wen "walked two miles each way, even in snow," and Mira "rode a yellow bus" that stopped outside her building. The choice saying Wen rode a bus swaps them.`,
         },
         {
           slot: 22,
@@ -306,7 +306,7 @@ const skill: ContentSkill = {
             right(`Wen's class had ages six to fourteen, while Mira's are all ten or eleven.`),
             wrong(`Wen's class had special teachers, while Mira's has only one.`, 'confuses-settings'),
           ],
-          solution: `The text says Wen's class had students "ages six to fourteen" and Mira's are "all ten or eleven years old." Choice B is a real difference, but it is about tools, not the students.`,
+          solution: `The text says Wen's class had students "ages six to fourteen" and Mira's are "all ten or eleven years old." The chalk and computers choice is a real difference, but it is about tools, not the students.`,
         },
         {
           slot: 23,
@@ -330,7 +330,7 @@ const skill: ContentSkill = {
             wrong(`She expects he was happy, but he says he was bored waiting.`, 'reverses-change'),
             wrong(`She expects he was lonely, but he says he had many friends.`, 'unsupported-inference'),
           ],
-          solution: `Mira asks, "Didn't you get bored," and Wen answers, "Never. I listened to their lessons, too." Choice C reverses what each of them says.`,
+          solution: `Mira asks, "Didn't you get bored," and Wen answers, "Never. I listened to their lessons, too." The choice saying she expects he was happy reverses what each of them says.`,
         },
         {
           slot: 25,
@@ -385,7 +385,7 @@ const skill: ContentSkill = {
             wrong(`The speaker switched to a shorter race in a smaller pool.`, 'contradicts-text'),
             right(`The speaker stopped swimming with the head up and breathed every third stroke.`),
           ],
-          solution: `At the first meet the speaker "swam with my head up," but in August "I breathed every third stroke, / the way Coach Ama taught." Choice B gets the change backwards.`,
+          solution: `At the first meet the speaker "swam with my head up," but in August "I breathed every third stroke, / the way Coach Ama taught." The choice saying the speaker swam with the head up gets the change backwards.`,
         },
         {
           slot: 29,
@@ -440,7 +440,7 @@ const skill: ContentSkill = {
             right(`Hana wanted triangles for support, while Luis wanted paint and an arch.`),
             wrong(`Hana wanted a longer bridge, while Luis wanted a shorter one.`, 'unsupported-inference'),
           ],
-          solution: `Hana "wanted to glue extra triangles along the sides," but Luis painted the bridge and "added a tall arch on top." Choices A and B mix up which partner wanted what.`,
+          solution: `Hana "wanted to glue extra triangles along the sides," but Luis painted the bridge and "added a tall arch on top." The choices giving Hana the paint or the arch mix up which partner wanted what.`,
         },
         {
           slot: 33,
@@ -495,7 +495,7 @@ const skill: ContentSkill = {
             wrong(`Nia works quickly, while Ravi works slowly and carefully.`, 'confuses-characters'),
             wrong(`Nia makes cups, while Ravi makes only plates.`, 'unsupported-inference'),
           ],
-          solution: `If Nia's rim "tilted even a little, she squashed the clay," but Ravi's bowls wobbled and "he kept every one." Choice A switches the two friends.`,
+          solution: `If Nia's rim "tilted even a little, she squashed the clay," but Ravi's bowls wobbled and "he kept every one." The choice saying Nia keeps every piece switches the two friends.`,
         },
         {
           slot: 37,
@@ -519,7 +519,7 @@ const skill: ContentSkill = {
             wrong(`Both friends refuse to take part because they are shy about their work.`, 'unsupported-inference'),
             wrong(`Ravi gets upset about the show, while Nia is excited to show her bowl.`, 'contradicts-text'),
           ],
-          solution: `"Ravi picked his five favorites in a minute," but Nia "felt her stomach drop" and whispered that she did not have enough. Choice B reverses the two reactions.`,
+          solution: `"Ravi picked his five favorites in a minute," but Nia "felt her stomach drop" and whispered that she did not have enough. The choice saying Nia quickly picks five pieces reverses the two reactions.`,
         },
         {
           slot: 39,
