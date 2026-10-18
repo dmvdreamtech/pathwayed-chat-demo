@@ -117,7 +117,7 @@ const skill: ContentSkill = {
             wrong(`It shows that the chemical fingerprint method does not work on ochre.`, 'unsupported-inference'),
             wrong(`It suggests that Kettle Hill is closer to the shelter than Vasquez said.`, 'misreads-detail'),
           ],
-          solution: `Malhotra says unknown ochre beds with similar chemistry "could lie within a day's walk," an alternative explanation the current evidence cannot exclude. He does not prove the pigment is local; he only says it might be.`,
+          solution: `Malhotra says unknown ochre beds with similar chemistry "could lie within a day's walk," an alternative explanation the current evidence cannot exclude. Malhotra does not prove the pigment is local, only that it might be.`,
         },
         {
           slot: 9,
@@ -527,11 +527,11 @@ const skill: ContentSkill = {
           stem: `Which sentence makes a claim that the author does not support with evidence?`,
           choices: [
             right(`With so many birds crowded together, they must be getting sick more often.`),
-            wrong(`It is low in the protein and minerals that waterfowl get from plants.`, 'accepts-supported-claim'),
+            wrong(`Young birds that eat mostly bread can develop weak wing bones.`, 'accepts-supported-claim'),
             wrong(`Each summer, our volunteer group tests the water at six spots.`, 'accepts-supported-claim'),
             wrong(`The number of geese has also climbed, from about 40 to more than 200.`, 'accepts-supported-claim'),
           ],
-          solution: `The author offers no illness records for the flock; "must be getting sick" is an assumption. The goose count is a reported observation, and the claim about protein is backed by the wildlife office's records of weak wing bones.`,
+          solution: `The author offers no illness records for the flock; "must be getting sick" is an assumption. The goose count is a reported observation, and the claim about weak wing bones is backed by the county wildlife office's records of goslings at Millbrook.`,
         },
         {
           slot: 40,
