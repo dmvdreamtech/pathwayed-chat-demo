@@ -184,12 +184,12 @@ const skill: ContentSkill = {
       difficulty: 'medium',
       stem: `Which sentence uses punctuation correctly to introduce an explanation?`,
       choices: [
-        no(`The master glassblower gave the apprentices one piece of advice; never rush the cooling process.`, 'semicolon-for-colon'),
+        no(`The master glassblower gave the apprentices one: piece of advice never rush the cooling process.`, 'colon-misplaced'),
         no(`The master glassblower gave: the apprentices one piece of advice, never rush the cooling process.`, 'colon-after-verb'),
         no(`The master glassblower gave the apprentices one piece of advice, never rush the cooling process.`, 'comma-splice'),
         ok(`The master glassblower gave the apprentices one piece of advice: never rush the cooling process.`),
       ],
-      solution: `A colon after a complete clause can introduce the specific item the clause points to, here the piece of advice. A semicolon is wrong because the words after it are not a separate clause with its own subject.`,
+      solution: `A colon after a complete clause can introduce the specific item the clause points to, here the piece of advice. A colon placed after "one" cuts the phrase "one piece of advice" in two before the clause is complete.`,
     },
     {
       slot: 16,
@@ -230,7 +230,7 @@ const skill: ContentSkill = {
     {
       slot: 19,
       difficulty: 'medium',
-      stem: `Read the sentence: "The ___ editor of the student newspaper checked every quotation against her interview notes twice." Which choice correctly fills the blank?`,
+      stem: `Read the sentence: "The ___ editor of the student newspaper checked every quotation against the interview notes twice." Which choice correctly fills the blank?`,
       choices: [
         ok(`conscientious`),
         no(`consientious`, 'missing-c'),
@@ -278,7 +278,7 @@ const skill: ContentSkill = {
     {
       slot: 23,
       difficulty: 'medium',
-      stem: `Lucia is writing the title of her research paper about traditional boat building. Which title is capitalized correctly?`,
+      stem: `Lucia is writing the title of a research paper about traditional boat building. Which title is capitalized correctly?`,
       choices: [
         no(`The Art Of Building A Canoe`, 'minor-words-capitalized'),
         no(`the Art of Building a Canoe`, 'first-word-lowercase'),
@@ -328,10 +328,10 @@ const skill: ContentSkill = {
       difficulty: 'medium',
       stem: `Which sentence about the pottery sale is punctuated correctly?`,
       choices: [
-        ok(`At the pottery sale, Amara bought three small ceramic bowls for her grandmother.`),
-        no(`At the pottery sale, Amara bought three, small, ceramic bowls for her grandmother.`, 'comma-between-cumulative-adjectives'),
-        no(`At the pottery sale, Amara bought three small, ceramic bowls for her grandmother.`, 'comma-between-cumulative-adjectives'),
-        no(`At the pottery sale, Amara bought three small ceramic, bowls for her grandmother.`, 'comma-before-noun'),
+        ok(`At the pottery sale, Amara bought three small ceramic bowls for the family table.`),
+        no(`At the pottery sale, Amara bought three, small, ceramic bowls for the family table.`, 'comma-between-cumulative-adjectives'),
+        no(`At the pottery sale, Amara bought three small, ceramic bowls for the family table.`, 'comma-between-cumulative-adjectives'),
+        no(`At the pottery sale, Amara bought three small ceramic, bowls for the family table.`, 'comma-before-noun'),
       ],
       solution: `"Three small ceramic" are cumulative adjectives: each one builds on the words after it, and they cannot be reordered or joined with "and," so no commas are used. Placing a comma between "small" and "ceramic" treats them as coordinate adjectives when they are not.`,
     },
@@ -441,7 +441,7 @@ const skill: ContentSkill = {
         ok(`The first water samples were contaminated; the second set, however, produced reliable data.`),
         no(`The first water samples were contaminated; however the second set, produced reliable data.`, 'comma-between-subject-verb'),
       ],
-      solution: `A semicolon joins the two independent clauses, and "however" sits in the middle of the second clause, so it is set off by commas on both sides. Commas around "however" cannot also join the two clauses, so the first choice is a comma splice.`,
+      solution: `A semicolon joins the two independent clauses, and "however" sits in the middle of the second clause, so it is set off by commas on both sides. Commas around "however" cannot also join the two clauses, so the version with only commas, "contaminated, the second set, however," is a comma splice.`,
     },
     {
       slot: 37,
@@ -453,7 +453,7 @@ const skill: ContentSkill = {
         no(`The conscientious volunteers will definitely keep a separate record for each occurence of flooding.`, 'misspelled-occurrence'),
         ok(`The conscientious volunteers will definitely keep a separate record for each occurrence of flooding.`),
       ],
-      solution: `"Definitely," "separate," and "occurrence" are all spelled correctly only in the last choice; "occurrence" needs both a double c and a double r. Each other choice contains one common misspelling, such as "definately" or "occurence."`,
+      solution: `Only one sentence spells all three tricky words correctly: "definitely," "separate," and "occurrence," which needs both a double c and a double r. Each other choice contains one common misspelling, such as "definately," "seperate," or "occurence."`,
     },
     {
       slot: 38,
