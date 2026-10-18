@@ -93,7 +93,7 @@ const skill: ContentSkill = {
             wrong(`"Coach says the exchange zone is twenty meters long."`, 'irrelevant-detail'),
             wrong(`"careful, a little late, never looking at my face"`, 'wrong-moment'),
           ],
-          solution: `Legs that "have already quit" shows she is running on will alone. The line about being careful describes how she usually passes the baton, not her condition in this race.`,
+          solution: `The line about legs that "have already quit" shows she is running on will alone. The line about being careful describes how she usually passes the baton, not her condition in this race.`,
         },
         {
           slot: 7,
@@ -271,7 +271,7 @@ const skill: ContentSkill = {
           stem: `What does Felix's decision to hand Amara the pliers and data sheet most strongly suggest?`,
           choices: [
             wrong(`He is too excited to hold the pliers steady himself.`, 'surface-reading'),
-            right(`He is marking the moment by passing on responsibility, as he was taught.`),
+            right(`He is marking the moment by passing on responsibility to Amara.`),
             wrong(`He doubts the band number and wants a second opinion.`, 'contradicts-text'),
             wrong(`He wants Amara to replace the old band with a new one.`, 'contradicts-text'),
           ],
@@ -440,7 +440,7 @@ const skill: ContentSkill = {
             wrong(`He sat with two kids who explained the jokes to him.`, 'unsupported-inference'),
             wrong(`He asked Noor to repeat the lines after each scene.`, 'unsupported-inference'),
           ],
-          solution: `The first sentence says that for eleven years he read "the movie from the actors' faces and guessing the rest." The caption sign is new this year, so it does not describe past years.`,
+          solution: `The first sentence says that for eleven years he sat in the back row, "reading the movie from the actors' faces and guessing the rest." The caption sign is new this year, so it does not describe past years.`,
         },
         {
           slot: 33,
