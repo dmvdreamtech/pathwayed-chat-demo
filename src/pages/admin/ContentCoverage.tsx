@@ -62,7 +62,8 @@ export function ContentCoverage() {
       <p className="staff-headline">{headline(c)}</p>
       <p className="muted staff-small">
         Complete means the skill exists and has at least 40 published questions a named reviewer approved. Each skill
-        counts up to its target. SAT is on <Link to="/admin/sat-coverage">its own page</Link>.
+        counts up to its target. SAT is on <Link to="/admin/sat-coverage">its own page</Link>. Reviews happen on{' '}
+        <Link to="/admin/review">the review page</Link>.
       </p>
 
       <div className="staff-tabs" role="tablist">

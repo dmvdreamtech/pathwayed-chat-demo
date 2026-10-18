@@ -960,6 +960,90 @@ export interface Database {
           published_reviewed: number
         }[]
       }
+      // Migration 0043: skill-level review, platform admins only.
+      review_queue: {
+        Args: Record<string, never>
+        Returns: {
+          skill_id: string
+          slug: string
+          name: string
+          subject: string
+          grade: number | null
+          drafts: number
+          drafts_failing: number
+          state: string
+          open_review_id: string | null
+          last_reviewer: string | null
+          last_decided_at: string | null
+        }[]
+      }
+      start_skill_review: {
+        Args: { p_skill_id: string; p_reviewer: string }
+        Returns: string
+      }
+      skill_review_items: {
+        Args: { p_review_id: string }
+        Returns: {
+          id: string
+          n: number
+          stem: string
+          choices: Json
+          correct_answer: string
+          solution: string
+          difficulty: string
+          render_mode: string | null
+          prompt: Json | null
+          passage_title: string | null
+          passage_body: string | null
+        }[]
+      }
+      finish_skill_review: {
+        Args: { p_review_id: string; p_flags: Json }
+        Returns: { status: string; published: number; flagged: number }[]
+      }
+      full_review_items: {
+        Args: { p_skill_id: string }
+        Returns: {
+          id: string
+          stem: string
+          choices: Json
+          correct_answer: string
+          solution: string
+          difficulty: string
+          render_mode: string | null
+          prompt: Json | null
+          passage_title: string | null
+          passage_body: string | null
+          issues: string[]
+          last_flag: string | null
+        }[]
+      }
+      review_question: {
+        Args: { p_question_id: string; p_reviewer: string; p_approve: boolean; p_note?: string | null }
+        Returns: string
+      }
+      fix_draft_queue: {
+        Args: Record<string, never>
+        Returns: {
+          draft_id: string
+          original_id: string
+          skill_slug: string
+          reasons: string[]
+          changes: string | null
+          original_stem: string
+          original_choices: Json
+          original_solution: string
+          draft_stem: string
+          draft_choices: Json
+          draft_solution: string
+          draft_issues: string[]
+          render_mode: string | null
+        }[]
+      }
+      decide_fix_draft: {
+        Args: { p_draft_id: string; p_reviewer: string; p_approve: boolean; p_note?: string | null }
+        Returns: string
+      }
       // Migration 0039: the /staff dashboard, the caller's own school only.
       staff_dashboard: {
         Args: Record<string, never>

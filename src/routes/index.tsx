@@ -33,6 +33,7 @@ import { StaffProgram } from '@/pages/staff/StaffProgram'
 import { StaffStudent } from '@/pages/staff/StaffStudent'
 import { SatCoverage } from '@/pages/admin/SatCoverage'
 import { ContentCoverage } from '@/pages/admin/ContentCoverage'
+import { ContentReview } from '@/pages/admin/ContentReview'
 import { StaffAdmin } from '@/pages/admin/StaffAdmin'
 
 export function AppRoutes() {
@@ -61,6 +62,8 @@ export function AppRoutes() {
       <Route path="/admin/sat-coverage" element={<SatCoverage />} />
       {/* Platform admins only: K-12 Reading, Writing and Math coverage (migration 0040). */}
       <Route path="/admin/coverage" element={<ContentCoverage />} />
+      {/* Platform admins only: skill-level review before publishing (migration 0043). */}
+      <Route path="/admin/review" element={<ContentReview />} />
       {/* Platform admins only: each school's staff list (migration 0038). */}
       <Route path="/admin/staff" element={<StaffAdmin />} />
       <Route path="/students" element={<StudentPicker />} />

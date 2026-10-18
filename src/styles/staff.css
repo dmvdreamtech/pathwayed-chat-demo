@@ -539,3 +539,11 @@
     padding: 12px 14px;
   }
 }
+
+/* /admin/review (migration 0043) */
+.review-choices { margin: 6px 0 8px 18px; padding: 0; }
+.review-choices li { margin: 2px 0; }
+.review-correct { font-weight: 600; }
+.review-passage { margin: 6px 0; }
+.review-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 640px) { .review-compare { grid-template-columns: 1fr; } }
