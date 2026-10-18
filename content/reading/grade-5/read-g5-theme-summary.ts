@@ -117,7 +117,7 @@ const skill: ContentSkill = {
             wrong(`Both of them decide that the wind is too strong to fight against.`, 'contradicts-text'),
             wrong(`Both of them work together to build a stronger web on the high branch.`, 'adds-false-detail'),
           ],
-          solution: `The grasshopper says, "Why not give up," while the spider climbs down and studies the wind. The first choice swaps the two characters' attitudes.`,
+          solution: `The grasshopper says, "Why not give up," while the spider climbs down and studies the wind. The choice "The spider wants to quit, but the grasshopper tells her to keep trying" swaps the two characters' attitudes.`,
         },
         {
           slot: 9,
@@ -138,7 +138,7 @@ const skill: ContentSkill = {
           choices: [
             wrong(`To show that the spider is lazy and does not want to climb down.`, 'misreads-character'),
             right(`To show that repeating a failed plan does not work, which sets up her change.`),
-            wrong(`To prove that the grasshopper was right when he told her to give up.`, 'contradicts-text'),
+            wrong(`To prove that the grasshopper was right when it told her to give up.`, 'contradicts-text'),
             wrong(`To explain that spiders must rebuild their webs every single night.`, 'literal-reading'),
           ],
           solution: `The second failure makes the spider's final words about "doing the same thing" meaningful. The ending shows the grasshopper was wrong, since the spider did not give up and succeeded.`,
@@ -263,7 +263,7 @@ const skill: ContentSkill = {
             wrong(`He goes from feeling proud of his speed to feeling embarrassed by it.`, 'reverses-sequence'),
             wrong(`He goes from trusting his coach to being angry with her choice.`, 'unsupported-inference'),
           ],
-          solution: `The story begins with Kenji knowing he is slowest and ends with him feeling "part of the team." The third choice reverses the order of his feelings.`,
+          solution: `The story begins with Kenji knowing he is slowest and ends with him feeling "part of the team." The choice "He goes from feeling proud of his speed to feeling embarrassed by it" reverses the order of his feelings.`,
         },
         {
           slot: 20,
@@ -303,7 +303,7 @@ const skill: ContentSkill = {
           choices: [
             wrong(`Lucia draws a frog wearing a tiny space helmet while Dev works on fixing the jumping code.`, 'too-narrow'),
             right(`Two partners who build separate games face a crash, then combine their best ideas into one game that works.`),
-            wrong(`Dev's rocket game is better than Lucia's frog game, so the class chooses to play his game.`, 'includes-opinion'),
+            wrong(`Dev's rocket game is better than Lucia's frog game, so the class chooses to play Dev's game.`, 'includes-opinion'),
             wrong(`Lucia and Dev argue so much that their teacher makes them start a brand new project together.`, 'adds-false-detail'),
           ],
           solution: `This summary covers the disagreement, the crash and how they solve it. The frog drawing is one small detail from near the end, so that choice is too narrow.`,
@@ -323,14 +323,14 @@ const skill: ContentSkill = {
         {
           slot: 24,
           difficulty: 'medium',
-          stem: `What does Dev's suggestion after the crash show about how he responds to the challenge?`,
+          stem: `What does Dev's suggestion after the crash show about how Dev responds to the challenge?`,
           choices: [
-            wrong(`He blames Lucia for the crash and wants to finish the game alone.`, 'misreads-character'),
-            wrong(`He believes his rocket game is still the only one worth saving.`, 'misreads-character'),
-            right(`He is willing to value Lucia's work and find a solution together.`),
-            wrong(`He wants to give up and turn in the project late next week.`, 'contradicts-text'),
+            wrong(`Dev blames Lucia for the crash and wants to finish the game alone.`, 'misreads-character'),
+            wrong(`Dev believes the rocket game is still the only one worth saving.`, 'misreads-character'),
+            right(`Dev is willing to value Lucia's work and find a solution together.`),
+            wrong(`Dev wants to give up and turn in the project late next week.`, 'contradicts-text'),
           ],
-          solution: `Dev praises Lucia's lily pads and suggests using "the best parts of both." This is a change from his earlier claim that his idea was better, so the second choice describes the old Dev, not his response here.`,
+          solution: `Dev praises Lucia's lily pads and suggests using "the best parts of both." This is a change from Dev's earlier claim that the rocket idea was better, so the choice "Dev believes the rocket game is still the only one worth saving" describes Dev before the crash, not the response here.`,
         },
         {
           slot: 25,
@@ -385,7 +385,7 @@ const skill: ContentSkill = {
             wrong(`At first he is grateful, but at the end he complains about setting the table.`, 'reverses-sequence'),
             wrong(`At first he is bored, and at the end he is still bored and tired.`, 'misses-change'),
           ],
-          solution: `Tomas groans about "a whole day without screens" and ends by doing his chore "without a word" and smiling. The last choice ignores that he clearly changes.`,
+          solution: `Tomas groans about "a whole day without screens" and ends by doing his chore "without a word" and smiling. The choice "At first he is bored, and at the end he is still bored and tired" ignores that he clearly changes.`,
         },
         {
           slot: 29,
