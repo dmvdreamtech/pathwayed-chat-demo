@@ -196,7 +196,7 @@ const skill: ContentSkill = {
             wrong(`Both characters are proud from the start and show their special thing right away.`, 'misses-difference'),
             wrong(`Both characters dislike their special thing until a teacher makes them share it.`, 'unsupported-inference'),
           ],
-          solution: `Farid sees the chess sign and goes to the club himself, but Aiko "quickly closed the lid" and ate in the library. Aiko is not proud at first, so the choices saying both were proud miss the difference.`,
+          solution: `Farid sees the chess sign and goes to the club himself, but Aiko "quickly closed the lid" and ate in the library. Aiko is not proud at first, so "Both characters are proud from the start and show their special thing right away" misses the difference.`,
         },
         {
           slot: 15,
@@ -251,7 +251,7 @@ const skill: ContentSkill = {
             wrong(`Children should never be allowed to use equipment by themselves.`, 'unsupported-inference'),
             wrong(`It is easy to forget about home once you move somewhere new.`, 'reverses-meaning'),
           ],
-          solution: `Zuri brings rain into the dome, and Mateo looks down at his town each night, so both find a way to feel close to Earth. Neither character forgets home, which is why the last choice is wrong.`,
+          solution: `Zuri brings rain into the dome, and Mateo looks down at his town each night, so both find a way to feel close to Earth. Neither character forgets home, so "It is easy to forget about home once you move somewhere new" is wrong.`,
         },
         {
           slot: 19,
