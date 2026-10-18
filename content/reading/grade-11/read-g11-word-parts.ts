@@ -62,12 +62,12 @@ const skill: ContentSkill = {
             wrong(`Rejected an idea after careful study`, 'opposite-meaning'),
             wrong(`Observed the stars through a telescope`, 'context-only-guess'),
           ],
-          solution: `To theorize is to form a theory, a proposed explanation, and the scholars only believed the answer "lay in the stars." Nothing in the passage says they proved it, so the second choice claims too much certainty.`,
+          solution: `To theorize is to form a theory, a proposed explanation, and the scholars only believed the answer "lay in the stars." Nothing in the passage says they proved it, so the choice "Proved an idea through repeated experiments" claims too much certainty.`,
         },
         {
           slot: 5,
           difficulty: 'hard',
-          stem: `The prefix ana- can mean "against" or "out of," and chron means "time." Why would describing an eighteenth-century captain checking a satellite screen be an "anachronism"?`,
+          stem: `The prefix ana- can mean "against" or "backward," and chron means "time." Why would describing an eighteenth-century captain checking a satellite screen be an "anachronism"?`,
           choices: [
             right(`It places an object in a time period where it could not have existed.`),
             wrong(`It describes a navigation method that was too slow to be useful.`, 'context-only-guess'),
@@ -440,7 +440,7 @@ const skill: ContentSkill = {
             wrong(`It is strong enough for everyone to feel it.`, 'unsupported-inference'),
             wrong(`It is recorded by only one instrument at a time.`, 'ignores-root-clues'),
           ],
-          solution: `Omnipresent means present in all places, matching "thousands of small tremors around the world every day." The passage says no one may feel them, so the third choice contradicts the text.`,
+          solution: `Omnipresent means present in all places, matching "thousands of small tremors around the world every day." The passage says no one may feel them, so the choice "It is strong enough for everyone to feel it" contradicts the text.`,
         },
         {
           slot: 33,
@@ -483,7 +483,7 @@ const skill: ContentSkill = {
     {
       code: 'rg11-word-parts-p08',
       title: 'Board Seven',
-      body: `Kofi Mensah had grown up in a household where three languages drifted through every meal, and by sixteen he was something of a polyglot, comfortable in English, French, and Twi, with a growing command of Spanish. So when the city hosted an international youth chess tournament, the organizers asked him to volunteer as an interpreter.\n\nThe job turned out to be more versatile than he expected. In a single morning he translated the rules for a player from Senegal, helped a coach from Peru find the right bus, and explained a seating chart to a family from Quebec. The players came from diverse backgrounds, but the games themselves were played in near silence.\n\nThe trouble began in the fourth round. A digital clock on board seven began to malfunction, adding minutes to one player's time while the other player's display froze. Neither player noticed until the arbiter, Ms. Petrova, saw the numbers jump.\n\nThe player from Peru, Rafael Quispe, looked worried. He spoke little English and feared he would be blamed. Kofi knelt beside him and translated as Ms. Petrova examined the clock. "No one here is culpable," she said firmly. "This is a battery fault, not anyone's doing." She reset both times based on the moves recorded on the score sheets.\n\nAfterward Rafael thanked Kofi in Spanish, then tried the words again in English. Kofi laughed and answered in both.\n\nThat evening his aunt asked whether all his language study had paid off. Kofi thought about it. "Before today it was mostly theoretical," he said. "I knew I could translate. Today I actually did it, and it mattered."`,
+      body: `Kofi Mensah had grown up in a household where three languages drifted through every meal, and by sixteen he was something of a polyglot, comfortable in English, French, and Twi, with a growing command of Spanish. So when the city hosted an international youth chess tournament, the organizers asked him to volunteer as an interpreter.\n\nThe job required him to be more versatile than he expected. In a single morning he translated the rules for a player from Senegal, helped a coach from Peru find the right bus, and explained a seating chart to a family from Quebec. The players came from diverse backgrounds, but the games themselves were played in near silence.\n\nThe trouble began in the fourth round. A digital clock on board seven began to malfunction, adding minutes to one player's time while the other player's display froze. Neither player noticed until the arbiter, Ms. Petrova, saw the numbers jump.\n\nThe player from Peru, Rafael Quispe, looked worried. He spoke little English and feared he would be blamed. Kofi knelt beside him and translated as Ms. Petrova examined the clock. "No one here is culpable," she said firmly. "This is a battery fault, not anyone's doing." She reset both times based on the moves recorded on the score sheets.\n\nAfterward Rafael thanked Kofi in Spanish, then tried the words again in English. Kofi laughed and answered in both.\n\nThat evening his aunt asked whether all his language study had paid off. Kofi thought about it. "Before today it was mostly theoretical," he said. "I knew I could translate. Today I actually did it, and it mattered."`,
       items: [
         {
           slot: 36,
@@ -500,14 +500,14 @@ const skill: ContentSkill = {
         {
           slot: 37,
           difficulty: 'medium',
-          stem: `The Latin root vers means "turn." Why does the passage say the interpreter job was "more versatile" than Kofi expected?`,
+          stem: `The Latin root vers means "turn." Why did the interpreter job require Kofi to be "more versatile" than he expected?`,
           choices: [
             right(`It required him to turn to many different kinds of tasks.`),
             wrong(`It required him to translate the rules over and over.`, 'too-narrow'),
             wrong(`It required him to rotate between chess boards every hour.`, 'too-literal'),
             wrong(`It required him to play chess against visiting players.`, 'unsupported-inference'),
           ],
-          solution: `Versatile describes something that turns easily to many uses, and Kofi translated rules, found a bus, and explained a seating chart in one morning. Rotating between boards treats "turn" too literally as physical movement.`,
+          solution: `Versatile describes someone who turns easily to many uses, and Kofi translated rules, found a bus, and explained a seating chart in one morning. Rotating between boards treats "turn" too literally as physical movement.`,
         },
         {
           slot: 38,
