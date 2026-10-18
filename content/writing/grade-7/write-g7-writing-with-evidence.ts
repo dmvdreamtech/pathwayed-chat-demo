@@ -66,7 +66,7 @@ const skill: ContentSkill = {
             no(`Some fireflies flash green light, while other kinds of fireflies flash yellow light.`, 'off-topic-fact'),
             no(`Desai reports that fireflies in bright yards flashed about half as often as others.`, 'evidence-without-analysis'),
           ],
-          solution: `A strong conclusion sums up the analysis from both paragraphs, and only the first choice joins the light problem and the larvae problem. Repeating the study from sentence 4 restates one piece of evidence without pulling the draft together.`,
+          solution: `A strong conclusion sums up the analysis from both paragraphs, and only the choice about "dark nights and messy, leafy ground" joins the light problem and the larvae problem. Repeating the study from sentence 4 restates one piece of evidence without pulling the draft together.`,
         },
         {
           slot: 5,
@@ -123,7 +123,7 @@ const skill: ContentSkill = {
             no(`In conclusion, the ice also had to last all summer in the icehouse.`, 'premature-conclusion'),
             no(`Even so, the ice did not really need to last for very long at all.`, 'contradicts-text'),
           ],
-          solution: `The first choice reminds the reader of paragraph 1 (cutting) and introduces paragraph 2 (storing). "In conclusion" signals the end of the draft even though a whole paragraph of new evidence follows.`,
+          solution: `"Cutting the ice was only half the job" reminds the reader of paragraph 1 (cutting) and introduces paragraph 2 (storing). "In conclusion" signals the end of the draft even though a whole paragraph of new evidence follows.`,
         },
         {
           slot: 9,
@@ -192,7 +192,7 @@ const skill: ContentSkill = {
             no(`This story is about a girl named Rosa who is a swimmer on a team.`, 'topic-not-claim'),
             no(`Swimming is a good sport because it keeps people strong and healthy.`, 'off-topic-fact'),
           ],
-          solution: `The first choice ties the beginning and end of the story back to the claim about patience. Repeating the quotation from sentence 8 gives evidence again but does not sum up what it shows.`,
+          solution: `The choice about "sprinting early to pacing herself" ties the beginning and end of the story back to the claim about patience. Repeating the quotation from sentence 8 gives evidence again but does not sum up what it shows.`,
         },
         {
           slot: 14,
@@ -273,7 +273,7 @@ const skill: ContentSkill = {
             no(`Mori writes that a regular artificial hand can cost thousands of dollars to make.`, 'evidence-without-analysis'),
             no(`In the end, every child in the world will soon have a printed plastic hand.`, 'overgeneralizes'),
           ],
-          solution: `The first choice sums up both paragraphs, cost and design, and links them to the claim. Saying the hands "are good" stays vague and does not explain what the evidence showed.`,
+          solution: `The choice saying "families can afford new ones and children enjoy wearing them" sums up both paragraphs, cost and design, and links them to the claim. Saying the hands "are good" stays vague and does not explain what the evidence showed.`,
         },
         {
           slot: 20,
@@ -411,7 +411,7 @@ const skill: ContentSkill = {
             no(`every single person in Millbrook, who now walks the trail every day.`, 'overgeneralizes'),
             no(`prove that trains are no longer useful for anyone in any town.`, 'unsupported-inference'),
           ],
-          solution: `Sentence 11 should explain all three examples in paragraph 2, and only the first ending covers students, older residents, and shops. The bakery ending is accurate but covers just one of the three examples.`,
+          solution: `Sentence 11 should explain all three examples in paragraph 2, and only the ending about students, older neighbors, and nearby shops covers all three. The bakery ending is accurate but covers just one of the three examples.`,
         },
         {
           slot: 30,
