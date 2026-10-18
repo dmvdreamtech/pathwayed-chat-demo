@@ -5069,7 +5069,7 @@ values ('d8959c71-718a-5511-93fa-d9e3b9351460', 'wg5-informative-writing-p04', (
 
 (4) Year after year, the snow piles up. (5) The weight of the top layers presses down on the snow below. (6) Over time, the buried snow is squeezed into thick, solid ice. (7) This process can take hundreds of years.
 
-(8) Glaciers are always on the move. (9) Their own heavy weight makes them slide downhill. (10) Most glaciers creep only a few inches a day. (11) As a glacier moves, it scrapes the ground and drags rocks along with it. (12) Many valleys and lakes were carved this way long ago.
+(8) Glaciers are always on the move. (9) Their own heavy weight makes them slide downhill. (10) Most glaciers creep only inches or feet a day. (11) As a glacier moves, it scrapes the ground and drags rocks along with it. (12) Many valleys and lakes were carved this way long ago.
 
 (13) Glaciers matter to people, too. (14) In some places, melting glacier ice feeds rivers that supply drinking water.$q$, 'draft')
 on conflict (id) do update set title = excluded.title, body = excluded.body
@@ -5145,7 +5145,7 @@ insert into public.passages (id, code, skill_id, sat_alignment, grade_band, titl
 values ('075ac29d-42d1-50cc-a90f-ed3cbc277d19', 'wg5-informative-writing-p05', (select id from public.skills where slug = 'write-g5-informative-writing'), null,
         '3-5', $q$Sweeping on Ice$q$, $q$(1) Curling is a winter sport played on a long sheet of ice. (2) Two teams of four players take turns sliding heavy granite stones toward a target. (3) The target is a set of painted rings called the house.
 
-(4) Each stone weighs about forty pounds and has a handle on top. (5) A player pushes off and releases the stone with a gentle twist. (6) The twist makes the stone curl, or bend, as it travels. (7) That is how the sport got its name.
+(4) Each stone weighs about forty pounds and has a handle on top. (5) A player pushes off and releases the stone with a gentle twist. (6) The twist makes the stone curl, or bend, as it travels. (7) Many people say that is how the sport got its name.
 
 (8) Two teammates hurry ahead of the moving stone with brooms. (9) They sweep the ice hard in front of it. (10) Sweeping warms the ice a tiny bit and makes it smoother. (11) The stone slides farther and curls less. (12) The team captain, called the skip, calls out directions to the sweepers. (13) My favorite winter sport is sledding.
 
@@ -5360,7 +5360,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('0e3d017c-5c76-5c37-99b9-068c7982d209', null, (select id from public.skills where slug = 'write-g5-informative-writing'), null, 'hard',
-   $q$The writer wants to combine sentences 4 and 5 into one clear sentence. Which revision is best?$q$, $q$[{"text":"Braille is built from a small unit called a cell, which has room for six dots in two columns of three.","is_correct":true},{"text":"Braille is built from a small unit called a cell because it has room for six dots in two columns of three.","is_correct":false,"misconception_token":"false-cause"},{"text":"Although braille is built from a small unit called a cell, it has room for six dots in two columns of three.","is_correct":false,"misconception_token":"false-contrast"},{"text":"Braille is built from a small unit called a cell, each cell has room for six dots in two columns of three.","is_correct":false,"misconception_token":"comma-splice-unfixed"}]$q$::jsonb, $q$Braille is built from a small unit called a cell, which has room for six dots in two columns of three.$q$, $q$Using "which" joins the definition of a cell to its description correctly. The first choice joins two complete sentences with only a comma, which is a comma splice.$q$, 'draft', '8ab93566-2387-576b-ba4f-90379ab47c67')
+   $q$The writer wants to combine sentences 4 and 5 into one clear sentence. Which revision is best?$q$, $q$[{"text":"Braille is built from a small unit called a cell, which has room for six dots in two columns of three.","is_correct":true},{"text":"Braille is built from a small unit called a cell because it has room for six dots in two columns of three.","is_correct":false,"misconception_token":"false-cause"},{"text":"Although braille is built from a small unit called a cell, it has room for six dots in two columns of three.","is_correct":false,"misconception_token":"false-contrast"},{"text":"Braille is built from a small unit called a cell, each cell has room for six dots in two columns of three.","is_correct":false,"misconception_token":"comma-splice-unfixed"}]$q$::jsonb, $q$Braille is built from a small unit called a cell, which has room for six dots in two columns of three.$q$, $q$Using "which" joins the definition of a cell to its description correctly. The choice that adds "each cell has room" after a comma joins two complete sentences with only a comma, which is a comma splice.$q$, 'draft', '8ab93566-2387-576b-ba4f-90379ab47c67')
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -5410,7 +5410,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('5dd1c873-63f0-5068-9995-b209062c0846', null, (select id from public.skills where slug = 'write-g5-informative-writing'), null, 'medium',
-   $q$The writer wants to show that sentence 12 tells the most important benefit. Which phrase would best begin it?$q$, $q$[{"text":"For instance,","is_correct":false,"misconception_token":"example-signal-for-new-idea"},{"text":"Especially important,","is_correct":true},{"text":"Earlier that day,","is_correct":false,"misconception_token":"wrong-time-order"},{"text":"On the other hand,","is_correct":false,"misconception_token":"false-contrast"}]$q$::jsonb, $q$Especially important,$q$, $q$"Especially important" tells readers that this benefit stands out from the others. "On the other hand" would wrongly suggest that saving energy goes against the benefits before it.$q$, 'draft', '107cc17e-79cd-5987-9247-28719809c54a')
+   $q$The writer wants to show that sentence 12 tells the most important benefit. Which phrase would best begin it?$q$, $q$[{"text":"For instance,","is_correct":false,"misconception_token":"example-signal-for-new-idea"},{"text":"Most important of all,","is_correct":true},{"text":"Earlier that day,","is_correct":false,"misconception_token":"wrong-time-order"},{"text":"On the other hand,","is_correct":false,"misconception_token":"false-contrast"}]$q$::jsonb, $q$Most important of all,$q$, $q$"Most important of all" tells readers that this benefit stands out from the others. "On the other hand" would wrongly suggest that saving energy goes against the benefits before it.$q$, 'draft', '107cc17e-79cd-5987-9247-28719809c54a')
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
