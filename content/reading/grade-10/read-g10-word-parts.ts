@@ -445,7 +445,7 @@ const skill: ContentSkill = {
         {
           slot: 33,
           difficulty: 'medium',
-          stem: `The prefix re- can mean "back," and duc means "lead," so to reduce is to lead something back to a smaller amount. What does it mean that the terrace design "greatly reduces erosion"?`,
+          stem: `The prefix re- can mean "back," and duc means "lead," so to reduce is to lead something back to a smaller amount. In the second paragraph, rain soaking into each terrace "greatly reduces erosion." What does this tell you terraces do?`,
           choices: [
             right(`They make much less soil wash away`),
             wrong(`They cause much more soil to wash away`, 'opposite-meaning'),
@@ -536,7 +536,7 @@ const skill: ContentSkill = {
         {
           slot: 40,
           difficulty: 'hard',
-          stem: `The suffix -ial turns the noun "benefit" into the adjective "beneficial." What does the cast mean by "the most beneficial thing they could do for the shelter"?`,
+          stem: `The adjective "beneficial" comes from the same Latin source as the noun "benefit," with the adjective suffix -al added. What does the cast mean by "the most beneficial thing they could do for the shelter"?`,
           choices: [
             right(`The action that would help the shelter the most`),
             wrong(`The action that would cost the shelter the least`, 'confuses-related-idea'),
