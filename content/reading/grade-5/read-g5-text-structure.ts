@@ -50,7 +50,7 @@ const skill: ContentSkill = {
             wrong(`Both texts compare two ways of keeping food cold.`, 'wrong-structure'),
             wrong(`Both texts describe a problem and then give a solution.`, 'wrong-structure'),
           ],
-          solution: `Text A follows the harvest step by step, and Text B gives causes (refrigerators, factory ice) and their effect (the harvest ended). The second choice has the two texts switched.`,
+          solution: `Text A follows the harvest step by step, and Text B gives causes (refrigerators, factory ice) and their effect (the harvest ended). The choice that says Text A explains why something changed has the two texts switched.`,
         },
         {
           slot: 4,
@@ -117,7 +117,7 @@ const skill: ContentSkill = {
             wrong(`Text A follows one arch bridge being built, while Text B sets it beside another kind.`, 'reverses-texts'),
             wrong(`Both texts explain the causes of an arch bridge falling down.`, 'unsupported-inference'),
           ],
-          solution: `Text A contrasts arch bridges with suspension bridges, and Text B tells the Carver Creek bridge's construction from spring to winter. The third choice switches the two texts.`,
+          solution: `Text A contrasts arch bridges with suspension bridges, and Text B tells the Carver Creek bridge's construction from spring to winter. The choice that says Text A follows one arch bridge being built switches the two texts.`,
         },
         {
           slot: 9,
@@ -184,7 +184,7 @@ const skill: ContentSkill = {
             wrong(`Both texts tell the life of a camel in the order it happens.`, 'wrong-structure'),
             wrong(`Text B argues that the camel is a better desert animal than the fox.`, 'unsupported-inference'),
           ],
-          solution: `Text B gives the cause (heat harms the body), and Text A contrasts the camel's and fox's ways of handling it. The second choice switches the jobs of the texts.`,
+          solution: `Text B gives the cause (heat harms the body), and Text A contrasts the camel's and fox's ways of handling it. The choice that says Text A explains why animals need to stay cool switches the jobs of the texts.`,
         },
         {
           slot: 14,
@@ -282,7 +282,7 @@ const skill: ContentSkill = {
     {
       code: 'rg5-text-structure-p05',
       title: 'Indoor and Beach Volleyball',
-      body: `Text A: Same Ball, Different Game\n\nIndoor volleyball and beach volleyball share the same basic idea. In both games, players hit a ball over a net and try to make it land on the other side. However, the two games differ in many ways. Indoor teams have six players each, while beach teams have only two. Indoor games are played on a hard wooden floor. Beach games, in contrast, are played on deep sand. Finally, an indoor ball is heavier and harder than the soft, lighter beach ball.\n\nText B: Why Sand Changes Everything\n\nSand makes beach volleyball a tough sport. When a player pushes off to jump, the sand shifts under her feet. Because of this, she cannot jump as high as she could on a wooden floor. Running is also slower, since each step sinks into the ground. As a result, beach players must guess where the ball will go and start moving early. The wind outside also pushes the light ball around. So players learn to read the weather as well as the game.`,
+      body: `Text A: Same Ball, Different Game\n\nIndoor volleyball and beach volleyball share the same basic idea. In both games, players hit a ball over a net and try to make it land on the other side. However, the two games differ in many ways. Indoor teams have six players each, while beach teams have only two. Indoor games are played on a hard wooden floor. Beach games, in contrast, are played on deep sand. Finally, an indoor ball is smaller and harder than the soft beach ball.\n\nText B: Why Sand Changes Everything\n\nSand makes beach volleyball a tough sport. When a player pushes off to jump, the sand shifts under the player's feet. Because of this, the player cannot jump as high as on a wooden floor. Running is also slower, since each step sinks into the ground. As a result, beach players must guess where the ball will go and start moving early. The wind outside also pushes the soft ball around. So players learn to read the weather as well as the game.`,
       items: [
         {
           slot: 21,
@@ -318,17 +318,17 @@ const skill: ContentSkill = {
             wrong(`Both texts use sand as the first step in learning to play.`, 'wrong-structure'),
             wrong(`Both texts say sand is a problem that has been solved.`, 'unsupported-inference'),
           ],
-          solution: `Text A contrasts the "hard wooden floor" with "deep sand," and Text B shows sand causing lower jumps and slower running. The second choice switches the two texts.`,
+          solution: `Text A contrasts the "hard wooden floor" with "deep sand," and Text B shows sand causing lower jumps and slower running. The choice that says Text A explains what sand causes players to do switches the two texts.`,
         },
         {
           slot: 24,
           difficulty: 'medium',
           stem: `In Text B, which sentence states an EFFECT of the shifting sand?`,
           choices: [
-            right(`"Because of this, she cannot jump as high as she could on a wooden floor."`),
+            right(`"Because of this, the player cannot jump as high as on a wooden floor."`),
             wrong(`"Sand makes beach volleyball a tough sport."`, 'too-broad'),
             wrong(`"Indoor teams have six players each, while beach teams have only two."`, 'confuses-texts'),
-            wrong(`"The wind outside also pushes the light ball around."`, 'confuses-cause-effect'),
+            wrong(`"The wind outside also pushes the soft ball around."`, 'confuses-cause-effect'),
           ],
           solution: `"Because of this" links the shifting sand to the lower jump. The wind sentence names a different cause, not an effect of sand.`,
         },
@@ -483,7 +483,7 @@ const skill: ContentSkill = {
     {
       code: 'rg5-text-structure-p08',
       title: 'Shaping Clay',
-      body: `Text A: Making a Clay Bowl\n\nMaking a clay bowl takes several days. First, the potter presses and folds the clay to remove air bubbles. Next, she shapes the bowl, either by hand or on a spinning wheel. Then the bowl must dry slowly for about a week. After it is dry, the bowl is baked in a very hot oven called a kiln. This first baking makes it hard. Finally, the potter paints on a glaze and bakes the bowl again to give it a shiny coat.\n\nText B: Two Ways to Shape Clay\n\nPotters can shape clay by hand or on a wheel. Both methods start with the same soft clay, and both can make beautiful bowls. However, they feel very different to use. Hand building is slow and quiet. The potter pinches the clay or stacks coils of it like rope. Because it needs no machine, it is easy to try at home. Wheel throwing, on the other hand, is fast. The spinning wheel helps make bowls that are round and even. Yet it takes a lot of practice to learn.`,
+      body: `Text A: Making a Clay Bowl\n\nMaking a clay bowl takes several days. First, the potter presses and folds the clay to remove air bubbles. Next, the potter shapes the bowl, either by hand or on a spinning wheel. Then the bowl must dry slowly for about a week. After it is dry, the bowl is baked in a very hot oven called a kiln. This first baking makes it hard. Finally, the potter paints on a glaze and bakes the bowl again to give it a shiny coat.\n\nText B: Two Ways to Shape Clay\n\nPotters can shape clay by hand or on a wheel. Both methods start with the same soft clay, and both can make beautiful bowls. However, they feel very different to use. Hand building is slow and quiet. The potter pinches the clay or stacks coils of it like rope. Because it needs no machine, it is easy to try at home. Wheel throwing, on the other hand, is fast. The spinning wheel helps make bowls that are round and even. Yet it takes a lot of practice to learn.`,
       items: [
         {
           slot: 36,
