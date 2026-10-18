@@ -373,7 +373,7 @@ const skill: ContentSkill = {
             wrong(`They use up all the energy right away.`, 'opposite-meaning'),
             wrong(`They catch rainwater to make electricity.`, 'unsupported-inference'),
           ],
-          solution: `The sentence says the saved energy keeps "the lights stay on after dark," when the panels make no power. Saving for a rainy day means saving for a time of need, not only for actual rain.`,
+          solution: `The sentence says the saved energy means "the lights stay on after dark," when the panels make no power. Saving for a rainy day means saving for a time of need, not only for actual rain.`,
         },
         {
           slot: 28,
