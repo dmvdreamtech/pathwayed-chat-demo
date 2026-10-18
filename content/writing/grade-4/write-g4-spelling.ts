@@ -19,7 +19,7 @@ const skill: ContentSkill = {
         ok(`her`),
         no(`hur`, 'spells-by-sound'),
         no(`herr`, 'doubles-final-consonant'),
-        no(`hir`, 'wrong-vowel'),
+        no(`hre`, 'letter-order-swap'),
       ],
       solution: `"Her" is the correct spelling of the word that shows the kite belongs to Amara. "Hur" spells the sound but uses the wrong vowel letter.`,
     },

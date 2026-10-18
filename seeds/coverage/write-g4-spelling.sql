@@ -34,7 +34,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('4a5ae654-798f-5904-86f3-761b90a2ed56', null, (select id from public.skills where slug = 'write-g4-spelling'), null, 'easy',
-   $q$Read the sentence: "Amara left ____ kite on the bench after the festival." Which word correctly completes the sentence?$q$, $q$[{"text":"hur","is_correct":false,"misconception_token":"spells-by-sound"},{"text":"her","is_correct":true},{"text":"herr","is_correct":false,"misconception_token":"doubles-final-consonant"},{"text":"hir","is_correct":false,"misconception_token":"wrong-vowel"}]$q$::jsonb, $q$her$q$, $q$"Her" is the correct spelling of the word that shows the kite belongs to Amara. "Hur" spells the sound but uses the wrong vowel letter.$q$, 'draft', null)
+   $q$Read the sentence: "Amara left ____ kite on the bench after the festival." Which word correctly completes the sentence?$q$, $q$[{"text":"hur","is_correct":false,"misconception_token":"spells-by-sound"},{"text":"her","is_correct":true},{"text":"herr","is_correct":false,"misconception_token":"doubles-final-consonant"},{"text":"hre","is_correct":false,"misconception_token":"letter-order-swap"}]$q$::jsonb, $q$her$q$, $q$"Her" is the correct spelling of the word that shows the kite belongs to Amara. "Hur" spells the sound but uses the wrong vowel letter.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
