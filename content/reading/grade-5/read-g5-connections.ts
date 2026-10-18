@@ -62,7 +62,7 @@ const skill: ContentSkill = {
             wrong(`Kelp grew back, urchin numbers dropped, and fish returned.`, 'wrong-sequence'),
             wrong(`Urchin numbers rose, kelp broke loose, and fish moved away.`, 'confuses-events'),
           ],
-          solution: `Paragraph 5 says urchin numbers dropped, the kelp slowly grew back, and then the fish returned. The last choice describes what happened when otters disappeared, not when they returned.`,
+          solution: `Paragraph 5 says urchin numbers dropped, the kelp slowly grew back, and then the fish returned. The choice "Urchin numbers rose, kelp broke loose, and fish moved away" describes what happened when otters disappeared, not when they returned.`,
         },
         {
           slot: 5,
@@ -196,7 +196,7 @@ const skill: ContentSkill = {
             wrong(`The wind enters the vent and carries the balloon sideways.`, 'unsupported-inference'),
             wrong(`The burner turns off by itself, so the balloon stays level.`, 'unsupported-inference'),
           ],
-          solution: `Paragraph 3 says the vent lets warm air escape and cooler air take its place, which is one way to come down. The second choice reverses which air leaves and which enters.`,
+          solution: `Paragraph 3 says the vent lets warm air escape and cooler air take its place, which is one way to come down. The choice "Cool air escapes and warm air enters, so the balloon rises" reverses which air leaves and which enters.`,
         },
         {
           slot: 15,
@@ -282,7 +282,7 @@ const skill: ContentSkill = {
     {
       code: 'rg5-connections-p05',
       title: 'Passing the Baton',
-      body: `In a relay race, four runners share one race. Each runner carries a short tube called a baton for part of the distance and then hands it to the next runner. The team's time depends on the speed of every runner and on how well they pass the baton.\n\nThe pass must happen inside a marked area called the exchange zone. If the baton changes hands outside the zone, the team is disqualified. This rule makes timing very important.\n\nCoach Lena Petrov teaches her runners a careful system. As the incoming runner gets close, the next runner starts running before the baton arrives. That way, the two are moving at almost the same speed when they meet. The incoming runner calls out a signal, and the next runner reaches back without turning around. The baton is placed firmly into the open hand.\n\nIf the next runner starts too early, the incoming runner cannot catch up inside the zone. If the next runner starts too late, the incoming runner has to slow down, and the team loses time.\n\nLast season, Coach Petrov's team did not have the fastest runners in the league. Still, they won the championship. Their smooth passes saved small fractions of a second at every exchange.`,
+      body: `In a relay race, four runners share one race. Each runner carries a short tube called a baton for part of the distance and then hands it to the next runner. The team's time depends on the speed of every runner and on how well they pass the baton.\n\nThe pass must happen inside a marked area called the exchange zone. If the baton changes hands outside the zone, the team is disqualified. This rule makes timing very important.\n\nCoach Lena Petrov teaches the team a careful system. As the incoming runner gets close, the next runner starts running before the baton arrives. That way, the two are moving at almost the same speed when they meet. The incoming runner calls out a signal, and the next runner reaches back without turning around. The baton is placed firmly into the open hand.\n\nIf the next runner starts too early, the incoming runner cannot catch up inside the zone. If the next runner starts too late, the incoming runner has to slow down, and the team loses time.\n\nLast season, Coach Petrov's team did not have the fastest runners in the league. Still, they won the championship. Their smooth passes saved small fractions of a second at every exchange.`,
       items: [
         {
           slot: 21,
@@ -342,7 +342,7 @@ const skill: ContentSkill = {
             wrong(`To show that the fastest runner on a relay team should always go last.`, 'unsupported-inference'),
             wrong(`To show that a relay team's time depends only on how fast each runner is.`, 'contradicts-text'),
           ],
-          solution: `The last paragraph says the team won because smooth passes saved time at every exchange, which connects back to paragraph 1: time depends on speed and on passing. The last choice leaves out passing, which the passage says also matters.`,
+          solution: `The last paragraph says the team won because smooth passes saved time at every exchange, which connects back to paragraph 1: time depends on speed and on passing. The choice about time depending only on speed leaves out passing, which the passage says also matters.`,
         },
       ],
     },
@@ -428,7 +428,7 @@ const skill: ContentSkill = {
             wrong(`It sends the information to the town's traffic engineer.`, 'confuses-individuals'),
             wrong(`It keeps the information until the timer runs out.`, 'confuses-events'),
           ],
-          solution: `Paragraph 2 says the sensor sends its information to a small computer in a metal box beside the road. Ms. Natarajan reported results, but the sensor does not send data to her.`,
+          solution: `Paragraph 2 says the sensor sends its information to a small computer in a metal box beside the road. Priya Natarajan reported results, but the sensor does not send data to the traffic engineer.`,
         },
         {
           slot: 32,
@@ -440,7 +440,7 @@ const skill: ContentSkill = {
             wrong(`Older ones had no red light; newer ones show red and green.`, 'unsupported-inference'),
             wrong(`Older ones worked together; newer ones work alone at corners.`, 'contradicts-text'),
           ],
-          solution: `Paragraph 1 says older signals gave each direction the same seconds on a timer, and paragraph 2 says newer ones respond to traffic using sensors. The second choice swaps the two.`,
+          solution: `Paragraph 1 says older signals gave each direction the same seconds on a timer, and paragraph 2 says newer ones respond to traffic using sensors. The choice "Older ones used sensors; newer ones run on a simple timer" swaps the two.`,
         },
         {
           slot: 33,
@@ -476,7 +476,7 @@ const skill: ContentSkill = {
             wrong(`Sensors measure fuel, so the computer warns drivers, so they buy cars that use less.`, 'unsupported-inference'),
             wrong(`Cars burn less fuel, so they drive faster, so they spend less time at red lights.`, 'reverses-relationship'),
           ],
-          solution: `Paragraphs 3 and 5 connect the steps: signals respond to traffic, drivers spend less time stopped, and cars burn less fuel because they sit still with engines running less often. The last choice reverses cause and effect.`,
+          solution: `Paragraphs 3 and 5 connect the steps: signals respond to traffic, drivers spend less time stopped, and cars burn less fuel because they sit still with engines running less often. The choice "Cars burn less fuel, so they drive faster" reverses cause and effect.`,
         },
       ],
     },
