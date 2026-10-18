@@ -282,7 +282,7 @@ The first reason is safety. When the Brennard Sports Medicine Clinic surveyed si
 
 The second reason is success. Parents worry that variety will cost their children a college roster spot, yet a survey of athletes at Ostrava State University found that seven of every ten had played more than one sport in high school.
 
-I have also watched variety pay off on my own teams. Dario Okonjo ran cross-country for me in the fall and played basketball in the winter. The footwork he learned on the court made him one of the smoothest runners I ever coached, and he went on to compete in college.
+I have also watched variety pay off on my own teams. Dario Okonjo ran cross-country for me in the fall and played basketball in the winter. Footwork learned on the court made Dario one of the smoothest runners I ever coached, and Dario went on to compete in college.
 
 Finally, athletes who play several sports enjoy them more and are less likely to quit before graduation.
 
@@ -552,7 +552,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('28a2d2d7-a747-5512-a200-b273a789372c', null, (select id from public.skills where slug = 'read-g12-argument-evidence'), null, 'medium',
-   $q$Which statement from the passage presents a false choice between only two options?$q$, $q$[{"text":"It closes the trail from dusk to dawn to protect the neighbors.","is_correct":false,"misconception_token":"misidentifies-flaw"},{"text":"Either the county builds this trail now, or the corridor stays a dump forever.","is_correct":true},{"text":"Our own small towns could see the same kind of growth.","is_correct":false,"misconception_token":"misidentifies-flaw"},{"text":"A trail would connect their neighborhoods directly to the campus.","is_correct":false,"misconception_token":"misidentifies-flaw"}]$q$::jsonb, $q$Either the county builds this trail now, or the corridor stays a dump forever.$q$, $q$The final paragraph claims only two outcomes are possible, ignoring options such as cleaning the corridor or building a trail later. The cafe sentence is a weak comparison, but it does not reduce the choices to two.$q$, 'draft', '4edd66d6-6d04-5b9f-bb6a-423afcb39df1')
+   $q$Which of the writer's statements presents a false choice between only two options?$q$, $q$[{"text":"It closes the trail from dusk to dawn to protect the neighbors.","is_correct":false,"misconception_token":"misidentifies-flaw"},{"text":"Either the county builds this trail now, or the corridor stays a dump forever.","is_correct":true},{"text":"Our own small towns could see the same kind of growth.","is_correct":false,"misconception_token":"misidentifies-flaw"},{"text":"A trail would connect their neighborhoods directly to the campus.","is_correct":false,"misconception_token":"misidentifies-flaw"}]$q$::jsonb, $q$Either the county builds this trail now, or the corridor stays a dump forever.$q$, $q$The final paragraph claims only two outcomes are possible, ignoring options such as cleaning the corridor or building a trail later. The cafe sentence is a weak comparison, but it does not reduce the choices to two.$q$, 'draft', '4edd66d6-6d04-5b9f-bb6a-423afcb39df1')
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
