@@ -361,7 +361,7 @@ const skill: ContentSkill = {
             wrong(`As a flashback that begins at the grocery and moves back to the start.`, 'misreads-sequence'),
             wrong(`As a conversation between the speaker and the driver from start to end.`, 'misreads-structure'),
           ],
-          solution: `Each stanza opens with "First stop," "Second stop," and so on, following the bus route forward. The driver speaks only once, so the poem is not built as a conversation.`,
+          solution: `Each stanza opens with "First stop," "Second stop," and so on, following the bus route forward. The driver is quoted only at the fifth stop, so the poem is not built as a conversation.`,
         },
         {
           slot: 27,
@@ -373,7 +373,7 @@ const skill: ContentSkill = {
             wrong(`Through long speeches in which he explains his views about the job.`, 'contradicts-text'),
             wrong(`Through other passengers who describe him to the speaker on the bus.`, 'unsupported-inference'),
           ],
-          solution: `He greets everyone, turns gently for the sleeping nurse, trades with the baker, and waits at the empty stop. He speaks only two short sentences, and no passenger describes him.`,
+          solution: `He greets everyone, turns gently for the sleeping nurse, trades with the baker, and waits at the empty stop. His only quoted words are two short sentences, and no passenger describes him.`,
         },
         {
           slot: 28,
@@ -394,7 +394,7 @@ const skill: ContentSkill = {
           choices: [
             right(`Having watched him care for others, readers find his encouragement to the speaker believable.`),
             wrong(`It delays the speaker's stop so readers forget why the speaker is riding the bus at all.`, 'misreads-structure'),
-            wrong(`It shows the speaker is the least important passenger, so his words are only polite.`, 'misreads-tone'),
+            wrong(`It shows the speaker is the least important passenger, so the driver's words are only polite.`, 'misreads-tone'),
             wrong(`It hides the fact that the speaker is nervous until the very last line of the poem.`, 'contradicts-text'),
           ],
           solution: `The earlier stops build a pattern of Mr. Okafor noticing people, so "You look like someone people can count on" feels earned. The crooked name tag in the first stanza already hints at the speaker's new job and nerves.`,
