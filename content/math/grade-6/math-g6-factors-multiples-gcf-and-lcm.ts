@@ -206,7 +206,7 @@ const skill: ContentSkill = {
     {
       slot: 17,
       difficulty: 'medium',
-      stem: `Amara has 24 red beads and 36 blue beads. She wants to make identical bead kits, each with the same number of red beads and the same number of blue beads, with no beads left over. What is the greatest number of kits she can make?`,
+      stem: `Amara has 24 red beads and 36 blue beads. Amara wants to make identical bead kits, each with the same number of red beads and the same number of blue beads, with no beads left over. What is the greatest number of kits Amara can make?`,
       choices: [
         no(`$6$`, 'common-factor-not-greatest'),
         ok(`$12$`),
@@ -218,7 +218,7 @@ const skill: ContentSkill = {
     {
       slot: 18,
       difficulty: 'medium',
-      stem: `Rolls come in bags of 8 and veggie patties come in boxes of 10. Luis wants exactly the same number of rolls and patties. What is the smallest number of each he can buy?`,
+      stem: `Rolls come in bags of 8 and veggie patties come in boxes of 10. Luis wants exactly the same number of rolls and patties. What is the smallest number of each Luis can buy?`,
       choices: [
         no(`$80$`, 'multiplied-the-numbers'),
         no(`$2$`, 'found-gcf-instead'),
@@ -398,14 +398,14 @@ const skill: ContentSkill = {
     {
       slot: 33,
       difficulty: 'hard',
-      stem: `Cups come in packs of 8 and plates come in packs of 12. Priya wants the same number of cups and plates, using as few packs as possible. How many packs of cups should she buy?`,
+      stem: `Cups come in packs of 8 and plates come in packs of 12. Priya wants the same number of cups and plates, using as few packs as possible. How many packs of cups should Priya buy?`,
       choices: [
         no(`$2$`, 'gave-packs-of-plates'),
         no(`$24$`, 'gave-lcm-not-packs'),
         no(`$4$`, 'used-gcf-instead'),
         ok(`$3$`),
       ],
-      solution: `The LCM of 8 and 12 is 24, so she needs 24 cups, which is $24 \\div 8 = 3$ packs. The answer 2 is the number of plate packs, since $24 \\div 12 = 2$.`,
+      solution: `The LCM of 8 and 12 is 24, so Priya needs 24 cups, which is $24 \\div 8 = 3$ packs. The answer 2 is the number of plate packs, since $24 \\div 12 = 2$.`,
     },
     {
       slot: 34,
@@ -434,14 +434,14 @@ const skill: ContentSkill = {
     {
       slot: 36,
       difficulty: 'hard',
-      stem: `Ravi practices piano every 4 days and swims every 6 days. He did both on day 1 of the month. On what day of the month will he next do both?`,
+      stem: `Ravi practices piano every 4 days and swims every 6 days. Ravi did both on day 1 of the month. On what day of the month will Ravi next do both?`,
       choices: [
         no(`Day 12`, 'forgot-to-count-from-day-1'),
         ok(`Day 13`),
         no(`Day 25`, 'multiplied-the-numbers'),
         no(`Day 11`, 'added-the-numbers'),
       ],
-      solution: `The LCM of 4 and 6 is 12, so he does both 12 days after day 1, which is day $1 + 12 = 13$. The answer Day 12 forgets that the counting starts on day 1, not day 0.`,
+      solution: `The LCM of 4 and 6 is 12, so Ravi does both 12 days after day 1, which is day $1 + 12 = 13$. The answer Day 12 forgets that the counting starts on day 1, not day 0.`,
     },
     {
       slot: 37,
@@ -482,7 +482,7 @@ const skill: ContentSkill = {
     {
       slot: 40,
       difficulty: 'hard',
-      stem: `Zainab is covering a rectangle that is 84 inches long and 60 inches wide with square tiles, all the same size, without cutting any tiles. What is the side length of the largest tile she can use, in inches?`,
+      stem: `Zainab is covering a rectangle that is 84 inches long and 60 inches wide with square tiles, all the same size, without cutting any tiles. What is the side length of the largest tile Zainab can use, in inches?`,
       choices: [
         no(`$6$`, 'common-factor-not-greatest'),
         no(`$420$`, 'found-lcm-instead'),

@@ -99,7 +99,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('aee38ebf-03a3-5eff-ad5b-076ffa19b1e3', null, (select id from public.skills where slug = 'math-g6-multi-digit-and-decimal-computation'), null, 'easy',
-   $q$Amara buys 3 notebooks. Each notebook costs 2.45 dollars. How many dollars does she spend in all?$q$, $q$[{"text":"$6.25$","is_correct":false,"misconception_token":"dropped-carry"},{"text":"$5.45$","is_correct":false,"misconception_token":"added-instead"},{"text":"$7.35$","is_correct":true},{"text":"$73.5$","is_correct":false,"misconception_token":"misplaced-decimal"}]$q$::jsonb, $q$$7.35$$q$, $q$Multiply $3 \times 2.45 = 7.35$, so she spends 7.35 dollars. The answer $6.25$ comes from forgetting to carry when $3 \times 5 = 15$ and $3 \times 4 = 12$.$q$, 'draft', null)
+   $q$Amara buys 3 notebooks. Each notebook costs 2.45 dollars. How many dollars does Amara spend in all?$q$, $q$[{"text":"$6.25$","is_correct":false,"misconception_token":"dropped-carry"},{"text":"$5.45$","is_correct":false,"misconception_token":"added-instead"},{"text":"$7.35$","is_correct":true},{"text":"$73.5$","is_correct":false,"misconception_token":"misplaced-decimal"}]$q$::jsonb, $q$$7.35$$q$, $q$Multiply $3 \times 2.45 = 7.35$, so Amara spends 7.35 dollars. The answer $6.25$ comes from forgetting to carry when $3 \times 5 = 15$ and $3 \times 4 = 12$.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -216,7 +216,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('dd078607-8f99-56a0-b8e3-90efa7489e09', null, (select id from public.skills where slug = 'math-g6-multi-digit-and-decimal-computation'), null, 'medium',
-   $q$Keisha has a ribbon 12.6 meters long. She cuts it into pieces that are each 0.6 meters long. How many pieces does she get?$q$, $q$[{"text":"$7.56$","is_correct":false,"misconception_token":"multiplied-instead"},{"text":"$210$","is_correct":false,"misconception_token":"shifted-dividend-too-far"},{"text":"$21$","is_correct":true},{"text":"$2.1$","is_correct":false,"misconception_token":"shifted-divisor-only"}]$q$::jsonb, $q$$21$$q$, $q$Divide $12.6 \div 0.6$, which is the same as $126 \div 6 = 21$ pieces. The answer $7.56$ multiplies the lengths instead of finding how many $0.6$ meter pieces fit.$q$, 'draft', null)
+   $q$Keisha has a ribbon 12.6 meters long. Keisha cuts it into pieces that are each 0.6 meters long. How many pieces does that make?$q$, $q$[{"text":"$7.56$","is_correct":false,"misconception_token":"multiplied-instead"},{"text":"$210$","is_correct":false,"misconception_token":"shifted-dividend-too-far"},{"text":"$21$","is_correct":true},{"text":"$2.1$","is_correct":false,"misconception_token":"shifted-divisor-only"}]$q$::jsonb, $q$$21$$q$, $q$Divide $12.6 \div 0.6$, which is the same as $126 \div 6 = 21$ pieces. The answer $7.56$ multiplies the lengths instead of finding how many $0.6$ meter pieces fit.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -255,7 +255,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('3910fa70-0e20-5baa-b9d2-c6449fe59518', null, (select id from public.skills where slug = 'math-g6-multi-digit-and-decimal-computation'), null, 'medium',
-   $q$Ravi runs 3.75 kilometers each day for 6 days. How many kilometers does he run in all?$q$, $q$[{"text":"$18.2$","is_correct":false,"misconception_token":"dropped-carry"},{"text":"$9.75$","is_correct":false,"misconception_token":"added-instead"},{"text":"$22.5$","is_correct":true},{"text":"$225$","is_correct":false,"misconception_token":"ignored-decimal-point"}]$q$::jsonb, $q$$22.5$$q$, $q$Multiply $6 \times 3.75 = 22.50$, so he runs 22.5 kilometers. The answer $9.75$ adds $6$ and $3.75$ instead of multiplying.$q$, 'draft', null)
+   $q$Ravi runs 3.75 kilometers each day for 6 days. How many kilometers does Ravi run in all?$q$, $q$[{"text":"$18.2$","is_correct":false,"misconception_token":"dropped-carry"},{"text":"$9.75$","is_correct":false,"misconception_token":"added-instead"},{"text":"$22.5$","is_correct":true},{"text":"$225$","is_correct":false,"misconception_token":"ignored-decimal-point"}]$q$::jsonb, $q$$22.5$$q$, $q$Multiply $6 \times 3.75 = 22.50$, so Ravi runs 22.5 kilometers. The answer $9.75$ adds $6$ and $3.75$ instead of multiplying.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -294,7 +294,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('e7006d91-696d-5ce8-abba-d14b3e8e2552', null, (select id from public.skills where slug = 'math-g6-multi-digit-and-decimal-computation'), null, 'medium',
-   $q$Lucia has 50 dollars. She buys 3 shirts that cost 12.75 dollars each. How many dollars does she have left?$q$, $q$[{"text":"$11.75$","is_correct":true},{"text":"$88.25$","is_correct":false,"misconception_token":"added-instead"},{"text":"$38.25$","is_correct":false,"misconception_token":"answered-total-spent"},{"text":"$37.25$","is_correct":false,"misconception_token":"subtracted-one-price-only"}]$q$::jsonb, $q$$11.75$$q$, $q$The shirts cost $3 \times 12.75 = 38.25$ dollars, and $50 - 38.25 = 11.75$ dollars are left. The answer $38.25$ is the amount she spent, not the amount left over.$q$, 'draft', null)
+   $q$Lucia has 50 dollars. Lucia buys 3 shirts that cost 12.75 dollars each. How many dollars does Lucia have left?$q$, $q$[{"text":"$11.75$","is_correct":true},{"text":"$88.25$","is_correct":false,"misconception_token":"added-instead"},{"text":"$38.25$","is_correct":false,"misconception_token":"answered-total-spent"},{"text":"$37.25$","is_correct":false,"misconception_token":"subtracted-one-price-only"}]$q$::jsonb, $q$$11.75$$q$, $q$The shirts cost $3 \times 12.75 = 38.25$ dollars, and $50 - 38.25 = 11.75$ dollars are left. The answer $38.25$ is the amount spent, not the amount left over.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -437,7 +437,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('e692aaa5-2f7d-549b-9e4d-3a39c7f183c6', null, (select id from public.skills where slug = 'math-g6-multi-digit-and-decimal-computation'), null, 'hard',
-   $q$A granola recipe uses 0.75 cups of oats for each batch. Nia has 6 cups of oats. How many batches can she make?$q$, $q$[{"text":"$4.5$","is_correct":false,"misconception_token":"multiplied-instead"},{"text":"$80$","is_correct":false,"misconception_token":"shifted-dividend-too-far"},{"text":"$8$","is_correct":true},{"text":"$0.8$","is_correct":false,"misconception_token":"shifted-divisor-only"}]$q$::jsonb, $q$$8$$q$, $q$Divide $6 \div 0.75$, which is the same as $600 \div 75 = 8$ batches. The answer $4.5$ multiplies $6 \times 0.75$, but the question asks how many groups of $0.75$ fit in $6$.$q$, 'draft', null)
+   $q$A granola recipe uses 0.75 cups of oats for each batch. Nia has 6 cups of oats. How many batches can Nia make?$q$, $q$[{"text":"$4.5$","is_correct":false,"misconception_token":"multiplied-instead"},{"text":"$80$","is_correct":false,"misconception_token":"shifted-dividend-too-far"},{"text":"$8$","is_correct":true},{"text":"$0.8$","is_correct":false,"misconception_token":"shifted-divisor-only"}]$q$::jsonb, $q$$8$$q$, $q$Divide $6 \div 0.75$, which is the same as $600 \div 75 = 8$ batches. The answer $4.5$ multiplies $6 \times 0.75$, but the question asks how many groups of $0.75$ fit in $6$.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

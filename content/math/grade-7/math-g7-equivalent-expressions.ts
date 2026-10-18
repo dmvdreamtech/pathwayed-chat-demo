@@ -146,7 +146,7 @@ const skill: ContentSkill = {
     {
       slot: 12,
       difficulty: 'easy',
-      stem: `Tomas buys $n$ notebooks that cost 2 dollars each and $n$ folders that cost 3 dollars each. Which expression gives his total cost in dollars?`,
+      stem: `Tomas buys $n$ notebooks that cost 2 dollars each and $n$ folders that cost 3 dollars each. Which expression gives the total cost in dollars?`,
       choices: [
         no(`$6n$`, 'multiplied-prices'),
         no(`$n + 5$`, 'added-prices-to-count'),
@@ -242,7 +242,7 @@ const skill: ContentSkill = {
     {
       slot: 20,
       difficulty: 'medium',
-      stem: `Priya's dinner bill is $b$ dollars. She adds a 15% tip, so she pays $b + 0.15b$ dollars. Which expression is equivalent to $b + 0.15b$?`,
+      stem: `Priya's dinner bill is $b$ dollars. With a 15% tip, Priya pays $b + 0.15b$ dollars. Which expression is equivalent to $b + 0.15b$?`,
       choices: [
         no(`$1.5b$`, 'misplaced-decimal-in-percent'),
         no(`$0.15b$`, 'kept-only-the-tip'),

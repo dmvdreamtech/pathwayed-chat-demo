@@ -177,7 +177,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('2fdf248a-41bc-59f5-8139-7cd2a2dc1712', null, (select id from public.skills where slug = 'math-g7-equivalent-expressions'), null, 'easy',
-   $q$Tomas buys $n$ notebooks that cost 2 dollars each and $n$ folders that cost 3 dollars each. Which expression gives his total cost in dollars?$q$, $q$[{"text":"$n + 5$","is_correct":false,"misconception_token":"added-prices-to-count"},{"text":"$2n + 3$","is_correct":false,"misconception_token":"forgot-to-multiply-second-price"},{"text":"$5n$","is_correct":true},{"text":"$6n$","is_correct":false,"misconception_token":"multiplied-prices"}]$q$::jsonb, $q$$5n$$q$, $q$The notebooks cost $2n$ and the folders cost $3n$, and $2n + 3n = 5n$ dollars. The choice $6n$ multiplies the two prices, but the costs should be added.$q$, 'draft', null)
+   $q$Tomas buys $n$ notebooks that cost 2 dollars each and $n$ folders that cost 3 dollars each. Which expression gives the total cost in dollars?$q$, $q$[{"text":"$n + 5$","is_correct":false,"misconception_token":"added-prices-to-count"},{"text":"$2n + 3$","is_correct":false,"misconception_token":"forgot-to-multiply-second-price"},{"text":"$5n$","is_correct":true},{"text":"$6n$","is_correct":false,"misconception_token":"multiplied-prices"}]$q$::jsonb, $q$$5n$$q$, $q$The notebooks cost $2n$ and the folders cost $3n$, and $2n + 3n = 5n$ dollars. The choice $6n$ multiplies the two prices, but the costs should be added.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -281,7 +281,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('7ca6465b-ab0e-59f7-95fd-edc5cd9b3b4e', null, (select id from public.skills where slug = 'math-g7-equivalent-expressions'), null, 'medium',
-   $q$Priya's dinner bill is $b$ dollars. She adds a 15% tip, so she pays $b + 0.15b$ dollars. Which expression is equivalent to $b + 0.15b$?$q$, $q$[{"text":"$1.15b$","is_correct":true},{"text":"$0.15b$","is_correct":false,"misconception_token":"kept-only-the-tip"},{"text":"$b + 15$","is_correct":false,"misconception_token":"treated-percent-as-dollars"},{"text":"$1.5b$","is_correct":false,"misconception_token":"misplaced-decimal-in-percent"}]$q$::jsonb, $q$$1.15b$$q$, $q$The bill $b$ is the same as $1b$, and $1b + 0.15b = 1.15b$. The choice $1.5b$ would be a 50% tip, because $0.15$ was misread as $0.5$.$q$, 'draft', null)
+   $q$Priya's dinner bill is $b$ dollars. With a 15% tip, Priya pays $b + 0.15b$ dollars. Which expression is equivalent to $b + 0.15b$?$q$, $q$[{"text":"$1.15b$","is_correct":true},{"text":"$0.15b$","is_correct":false,"misconception_token":"kept-only-the-tip"},{"text":"$b + 15$","is_correct":false,"misconception_token":"treated-percent-as-dollars"},{"text":"$1.5b$","is_correct":false,"misconception_token":"misplaced-decimal-in-percent"}]$q$::jsonb, $q$$1.15b$$q$, $q$The bill $b$ is the same as $1b$, and $1b + 0.15b = 1.15b$. The choice $1.5b$ would be a 50% tip, because $0.15$ was misread as $0.5$.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

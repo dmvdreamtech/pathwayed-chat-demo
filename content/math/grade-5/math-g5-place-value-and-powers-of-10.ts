@@ -146,7 +146,7 @@ const skill: ContentSkill = {
     {
       slot: 12,
       difficulty: 'easy',
-      stem: `Mateo fills 10 flower pots. Each pot holds 3.5 kilograms of soil. How many kilograms of soil does he use in all?`,
+      stem: `Mateo fills 10 flower pots. Each pot holds 3.5 kilograms of soil. How many kilograms of soil does Mateo use in all?`,
       choices: [
         no(`$3.50$`, 'appended-zero-after-decimal'),
         ok(`$35$`),
@@ -458,7 +458,7 @@ const skill: ContentSkill = {
     {
       slot: 38,
       difficulty: 'hard',
-      stem: `Rafael has 3.6 liters of juice. He pours it equally into 10 cups. Then he pours one of those cups equally into 10 small cups. How many liters are in each small cup?`,
+      stem: `Rafael has 3.6 liters of juice. Rafael pours it equally into 10 cups. Then Rafael pours one of those cups equally into 10 small cups. How many liters are in each small cup?`,
       choices: [
         no(`0.36 liters`, 'did-only-one-step'),
         no(`36 liters`, 'multiplied-instead-of-divided'),
@@ -482,7 +482,7 @@ const skill: ContentSkill = {
     {
       slot: 40,
       difficulty: 'hard',
-      stem: `Nadia divided a number by $10^3$ and got $0.405$. What number did she start with?`,
+      stem: `Nadia divided a number by $10^3$ and got $0.405$. What number did Nadia start with?`,
       choices: [
         no(`$4{,}050$`, 'moved-four-places'),
         ok(`$405$`),

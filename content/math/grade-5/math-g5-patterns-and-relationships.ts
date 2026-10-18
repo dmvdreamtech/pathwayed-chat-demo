@@ -81,7 +81,7 @@ const skill: ContentSkill = {
         ok(`24`),
         no(`30`, 'counted-one-too-many'),
       ],
-      solution: `Jun's totals go 0, 6, 12, 18, 24, so after 4 days he has 24 stickers. The answer 12 is how many Amara has after 4 days, not Jun.`,
+      solution: `Jun's totals go 0, 6, 12, 18, 24, so after 4 days Jun has 24 stickers. The answer 12 is how many Amara has after 4 days, not Jun.`,
     },
     {
       slot: 7,
@@ -218,7 +218,7 @@ const skill: ContentSkill = {
     {
       slot: 18,
       difficulty: 'medium',
-      stem: `Mei packs muffins for a school bake sale. Each box holds 6 muffins. She writes ordered pairs (boxes, muffins): $(0, 0)$, $(1, 6)$, $(2, 12)$, $(3, 18)$. Which ordered pair shows 5 boxes?`,
+      stem: `Mei packs muffins for a school bake sale. Each box holds 6 muffins. Mei writes ordered pairs (boxes, muffins): $(0, 0)$, $(1, 6)$, $(2, 12)$, $(3, 18)$. Which ordered pair shows 5 boxes?`,
       choices: [
         no(`$(5, 24)$`, 'counted-one-too-few'),
         no(`$(5, 11)$`, 'added-instead-of-multiplied'),
@@ -374,9 +374,9 @@ const skill: ContentSkill = {
     {
       slot: 31,
       difficulty: 'hard',
-      stem: `Pattern A starts at 0 and adds 4. Pattern B starts at 0 and adds 8. Kwame says, "Each B term is always 4 more than its A term." Which statement best explains his mistake?`,
+      stem: `Pattern A starts at 0 and adds 4. Pattern B starts at 0 and adds 8. Kwame says, "Each B term is always 4 more than its A term." Which statement best explains Kwame's mistake?`,
       choices: [
-        no(`He is right, because 8 is 4 more than 4.`, 'checked-only-one-pair'),
+        no(`Kwame is right, because 8 is 4 more than 4.`, 'checked-only-one-pair'),
         no(`B is really 8 more than A each time.`, 'additive-instead-of-multiplicative'),
         no(`A is really twice B each time.`, 'reversed-the-relationship'),
         ok(`The gap grows each step; B is really twice A.`),
@@ -446,7 +446,7 @@ const skill: ContentSkill = {
     {
       slot: 37,
       difficulty: 'hard',
-      stem: `Leila cooks rice. For every 1 cup of rice she uses 3 cups of water. Her table shows Water: 0, 3, 6, 9 and Rice: 0, 1, 2, 3. How many cups of rice go with 21 cups of water?`,
+      stem: `Leila cooks rice. For every 1 cup of rice Leila uses 3 cups of water. The table shows Water: 0, 3, 6, 9 and Rice: 0, 1, 2, 3. How many cups of rice go with 21 cups of water?`,
       choices: [
         no(`18`, 'subtracted-the-rule'),
         no(`63`, 'multiplied-instead-of-divided'),

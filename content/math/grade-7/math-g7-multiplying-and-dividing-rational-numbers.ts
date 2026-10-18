@@ -326,7 +326,7 @@ const skill: ContentSkill = {
     {
       slot: 27,
       difficulty: 'medium',
-      stem: `On a hike, Priya's elevation changes by $-450$ feet in $\\frac{3}{4}$ of an hour. At the same steady rate, what is her change in elevation per hour?`,
+      stem: `On a hike, Priya's elevation changes by $-450$ feet in $\\frac{3}{4}$ of an hour. At the same steady rate, what is Priya's change in elevation per hour?`,
       choices: [
         no(`$-337.5$ feet`, 'multiplied-instead-of-divided'),
         ok(`$-600$ feet`),
@@ -446,7 +446,7 @@ const skill: ContentSkill = {
     {
       slot: 37,
       difficulty: 'hard',
-      stem: `Rosa dives from the surface at a steady rate and reaches $-27.3$ meters after $6.5$ minutes. What is her rate of change in depth, in meters per minute?`,
+      stem: `Rosa dives from the surface at a steady rate and reaches $-27.3$ meters after $6.5$ minutes. What is Rosa's rate of change in depth, in meters per minute?`,
       choices: [
         no(`$4.2$`, 'ignored-direction-of-change'),
         ok(`$-4.2$`),

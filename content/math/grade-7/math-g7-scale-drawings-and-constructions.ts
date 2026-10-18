@@ -170,7 +170,7 @@ const skill: ContentSkill = {
     {
       slot: 14,
       difficulty: 'medium',
-      stem: `Priya is drawing her bedroom with the scale 1 inch represents 1.5 feet. Her bedroom is 12 feet long. How long should it be in her drawing?`,
+      stem: `Priya is drawing a bedroom with the scale 1 inch represents 1.5 feet. The bedroom is 12 feet long. How long should it be in the drawing?`,
       choices: [
         no(`18 inches`, 'multiplied-instead-of-divided'),
         no(`10.5 inches`, 'subtracted-the-scale'),
@@ -242,7 +242,7 @@ const skill: ContentSkill = {
     {
       slot: 20,
       difficulty: 'hard',
-      stem: `Mei makes a new scale drawing of a park where every length is twice as long as in her old drawing. How does the area of the park in the new drawing compare with the old one?`,
+      stem: `Mei makes a new scale drawing of a park where every length is twice as long as in Mei's old drawing. How does the area of the park in the new drawing compare with the old one?`,
       choices: [
         no(`It is 2 times as large`, 'scaled-area-by-length-factor'),
         no(`It is 8 times as large`, 'cubed-the-scale-factor'),
@@ -266,7 +266,7 @@ const skill: ContentSkill = {
     {
       slot: 22,
       difficulty: 'hard',
-      stem: `A classroom is 24 feet long and 16 feet wide. Jamal draws it using the scale 1 inch represents 8 feet. What is the area of the classroom in his drawing?`,
+      stem: `A classroom is 24 feet long and 16 feet wide. Jamal draws it using the scale 1 inch represents 8 feet. What is the area of the classroom in Jamal's drawing?`,
       choices: [
         no(`48 square inches`, 'scaled-area-by-length-factor'),
         ok(`6 square inches`),
@@ -290,7 +290,7 @@ const skill: ContentSkill = {
     {
       slot: 24,
       difficulty: 'medium',
-      stem: `Ana draws a soccer field using the scale 1 inch represents 20 yards. The field is 6 inches long in her drawing. How long is the real field?`,
+      stem: `Ana draws a soccer field using the scale 1 inch represents 20 yards. The field is 6 inches long in Ana's drawing. How long is the real field?`,
       choices: [
         no(`26 yards`, 'added-instead-of-multiplied'),
         no(`1,200 yards`, 'place-value-slip'),
@@ -338,7 +338,7 @@ const skill: ContentSkill = {
     {
       slot: 28,
       difficulty: 'medium',
-      stem: `Keisha uses three sticks, each 5 inches long, to make a triangle. How many different triangles can she make?`,
+      stem: `Keisha uses three sticks, each 5 inches long, to make a triangle. How many different triangles can Keisha make?`,
       choices: [
         ok(`Exactly one, because three side lengths that work fix the shape and size`),
         no(`More than one, because the angles could be different`, 'thought-angles-can-change-with-fixed-sides'),
@@ -362,7 +362,7 @@ const skill: ContentSkill = {
     {
       slot: 30,
       difficulty: 'medium',
-      stem: `Diego wants to draw a triangle with angles of $70^\\circ$, $80^\\circ$, and $40^\\circ$. How many such triangles can he draw?`,
+      stem: `Diego wants to draw a triangle with angles of $70^\\circ$, $80^\\circ$, and $40^\\circ$. How many such triangles can Diego draw?`,
       choices: [
         no(`Exactly one, because each angle is less than $90^\\circ$`, 'did-not-check-angle-sum'),
         no(`More than one, because no side lengths are given`, 'did-not-check-angle-sum'),
@@ -458,7 +458,7 @@ const skill: ContentSkill = {
     {
       slot: 38,
       difficulty: 'medium',
-      stem: `Tomas wants to draw a triangle that has one angle of $100^\\circ$ and another angle of $90^\\circ$. How many such triangles can he draw?`,
+      stem: `Tomas wants to draw a triangle that has one angle of $100^\\circ$ and another angle of $90^\\circ$. How many such triangles can Tomas draw?`,
       choices: [
         no(`Exactly one`, 'did-not-check-angle-sum'),
         no(`More than one`, 'did-not-check-angle-sum'),
@@ -470,7 +470,7 @@ const skill: ContentSkill = {
     {
       slot: 39,
       difficulty: 'hard',
-      stem: `Lena has straws that are 2, 3, 5, 6, and 9 inches long. Which three straws can she join end to end to make a triangle?`,
+      stem: `Lena has straws that are 2, 3, 5, 6, and 9 inches long. Which three straws can Lena join end to end to make a triangle?`,
       choices: [
         no(`2, 3, and 5 inches`, 'allowed-sum-equal-to-third-side'),
         no(`3, 5, and 9 inches`, 'ignored-triangle-inequality'),

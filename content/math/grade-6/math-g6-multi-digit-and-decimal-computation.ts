@@ -74,14 +74,14 @@ const skill: ContentSkill = {
     {
       slot: 6,
       difficulty: 'easy',
-      stem: `Amara buys 3 notebooks. Each notebook costs 2.45 dollars. How many dollars does she spend in all?`,
+      stem: `Amara buys 3 notebooks. Each notebook costs 2.45 dollars. How many dollars does Amara spend in all?`,
       choices: [
         no(`$5.45$`, 'added-instead'),
         no(`$73.5$`, 'misplaced-decimal'),
         no(`$6.25$`, 'dropped-carry'),
         ok(`$7.35$`),
       ],
-      solution: `Multiply $3 \\times 2.45 = 7.35$, so she spends 7.35 dollars. The answer $6.25$ comes from forgetting to carry when $3 \\times 5 = 15$ and $3 \\times 4 = 12$.`,
+      solution: `Multiply $3 \\times 2.45 = 7.35$, so Amara spends 7.35 dollars. The answer $6.25$ comes from forgetting to carry when $3 \\times 5 = 15$ and $3 \\times 4 = 12$.`,
     },
     {
       slot: 7,
@@ -182,7 +182,7 @@ const skill: ContentSkill = {
     {
       slot: 15,
       difficulty: 'medium',
-      stem: `Keisha has a ribbon 12.6 meters long. She cuts it into pieces that are each 0.6 meters long. How many pieces does she get?`,
+      stem: `Keisha has a ribbon 12.6 meters long. Keisha cuts it into pieces that are each 0.6 meters long. How many pieces does that make?`,
       choices: [
         no(`$2.1$`, 'shifted-divisor-only'),
         no(`$7.56$`, 'multiplied-instead'),
@@ -218,14 +218,14 @@ const skill: ContentSkill = {
     {
       slot: 18,
       difficulty: 'medium',
-      stem: `Ravi runs 3.75 kilometers each day for 6 days. How many kilometers does he run in all?`,
+      stem: `Ravi runs 3.75 kilometers each day for 6 days. How many kilometers does Ravi run in all?`,
       choices: [
         ok(`$22.5$`),
         no(`$9.75$`, 'added-instead'),
         no(`$225$`, 'ignored-decimal-point'),
         no(`$18.2$`, 'dropped-carry'),
       ],
-      solution: `Multiply $6 \\times 3.75 = 22.50$, so he runs 22.5 kilometers. The answer $9.75$ adds $6$ and $3.75$ instead of multiplying.`,
+      solution: `Multiply $6 \\times 3.75 = 22.50$, so Ravi runs 22.5 kilometers. The answer $9.75$ adds $6$ and $3.75$ instead of multiplying.`,
     },
     {
       slot: 19,
@@ -254,14 +254,14 @@ const skill: ContentSkill = {
     {
       slot: 21,
       difficulty: 'medium',
-      stem: `Lucia has 50 dollars. She buys 3 shirts that cost 12.75 dollars each. How many dollars does she have left?`,
+      stem: `Lucia has 50 dollars. Lucia buys 3 shirts that cost 12.75 dollars each. How many dollars does Lucia have left?`,
       choices: [
         no(`$37.25$`, 'subtracted-one-price-only'),
         no(`$38.25$`, 'answered-total-spent'),
         ok(`$11.75$`),
         no(`$88.25$`, 'added-instead'),
       ],
-      solution: `The shirts cost $3 \\times 12.75 = 38.25$ dollars, and $50 - 38.25 = 11.75$ dollars are left. The answer $38.25$ is the amount she spent, not the amount left over.`,
+      solution: `The shirts cost $3 \\times 12.75 = 38.25$ dollars, and $50 - 38.25 = 11.75$ dollars are left. The answer $38.25$ is the amount spent, not the amount left over.`,
     },
     {
       slot: 22,
@@ -386,7 +386,7 @@ const skill: ContentSkill = {
     {
       slot: 32,
       difficulty: 'hard',
-      stem: `A granola recipe uses 0.75 cups of oats for each batch. Nia has 6 cups of oats. How many batches can she make?`,
+      stem: `A granola recipe uses 0.75 cups of oats for each batch. Nia has 6 cups of oats. How many batches can Nia make?`,
       choices: [
         no(`$4.5$`, 'multiplied-instead'),
         no(`$0.8$`, 'shifted-divisor-only'),

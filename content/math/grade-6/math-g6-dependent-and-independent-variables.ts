@@ -14,14 +14,14 @@ const skill: ContentSkill = {
     {
       slot: 1,
       difficulty: 'easy',
-      stem: `Amara earns 8 dollars for every hour she walks dogs. The amount she earns depends on the hours she works. Which quantity is the dependent variable?`,
+      stem: `Amara earns 8 dollars for every hour of dog walking. The amount earned depends on the hours worked. Which quantity is the dependent variable?`,
       choices: [
-        no(`The number of hours she works`, 'swapped-dependent-independent'),
-        ok(`The amount of money she earns`),
-        no(`The 8 dollars she earns each hour`, 'chose-the-constant-rate'),
-        no(`The number of dogs she owns`, 'chose-unrelated-quantity'),
+        no(`The number of hours worked`, 'swapped-dependent-independent'),
+        ok(`The amount of money earned`),
+        no(`The 8 dollars earned each hour`, 'chose-the-constant-rate'),
+        no(`The number of dogs Amara owns`, 'chose-unrelated-quantity'),
       ],
-      solution: `The money she earns changes because of the hours she works, so the money is the dependent variable. The hours are the independent variable, because they are the quantity that causes the change.`,
+      solution: `The money earned changes because of the hours worked, so the money is the dependent variable. The hours are the independent variable, because they are the quantity that causes the change.`,
     },
     {
       slot: 2,
@@ -170,14 +170,14 @@ const skill: ContentSkill = {
     {
       slot: 14,
       difficulty: 'easy',
-      stem: `Leila reads 20 pages each day. Let $d$ be the number of days and $p$ be the total pages she has read. Which equation shows the relationship?`,
+      stem: `Leila reads 20 pages each day. Let $d$ be the number of days and $p$ be the total pages Leila has read. Which equation shows the relationship?`,
       choices: [
         ok(`$p = 20d$`),
         no(`$d = 20p$`, 'swapped-dependent-independent'),
         no(`$p = d + 20$`, 'added-instead-of-multiplied'),
         no(`$p = 20 - d$`, 'subtracted-instead-of-multiplied'),
       ],
-      solution: `She adds 20 pages for every day, so the pages are 20 times the days: $p = 20d$. The equation $d = 20p$ makes the days depend on the pages, which reverses the relationship.`,
+      solution: `Leila adds 20 pages for every day, so the pages are 20 times the days: $p = 20d$. The equation $d = 20p$ makes the days depend on the pages, which reverses the relationship.`,
     },
     {
       slot: 15,
@@ -194,14 +194,14 @@ const skill: ContentSkill = {
     {
       slot: 16,
       difficulty: 'easy',
-      stem: `A baker needs more cups of flour when she makes more batches of muffins. Which sentence describes the variables correctly?`,
+      stem: `A baker needs more cups of flour when the baker makes more batches of muffins. Which sentence describes the variables correctly?`,
       choices: [
         no(`The cups of flour are independent and the batches are dependent.`, 'swapped-dependent-independent'),
         no(`The batches and the cups of flour are both independent.`, 'thinks-both-independent'),
         ok(`The batches are independent and the cups of flour are dependent.`),
         no(`The muffins are independent and the batches are dependent.`, 'chose-unrelated-quantity'),
       ],
-      solution: `The flour needed depends on how many batches she makes, so the batches are independent and the flour is dependent. Saying the flour is independent reverses which quantity causes the change.`,
+      solution: `The flour needed depends on how many batches the baker makes, so the batches are independent and the flour is dependent. Saying the flour is independent reverses which quantity causes the change.`,
     },
     {
       slot: 17,
@@ -218,14 +218,14 @@ const skill: ContentSkill = {
     {
       slot: 18,
       difficulty: 'medium',
-      stem: `Priya watches videos on her tablet, and the battery level goes down the longer she watches. Which quantity is the dependent variable?`,
+      stem: `Priya watches videos on a tablet, and the battery level goes down the longer Priya watches. Which quantity is the dependent variable?`,
       choices: [
-        no(`The minutes she spends watching`, 'swapped-dependent-independent'),
+        no(`The minutes spent watching`, 'swapped-dependent-independent'),
         no(`The number of videos on the tablet`, 'chose-unrelated-quantity'),
         ok(`The battery level of the tablet`),
         no(`The size of the tablet screen`, 'chose-unrelated-quantity'),
       ],
-      solution: `The battery level changes because of the minutes she watches, so the battery level is the dependent variable. The minutes watching are the independent variable, the quantity that drives the change.`,
+      solution: `The battery level changes because of the minutes Priya watches, so the battery level is the dependent variable. The minutes watching are the independent variable, the quantity that drives the change.`,
     },
     {
       slot: 19,
@@ -266,14 +266,14 @@ const skill: ContentSkill = {
     {
       slot: 22,
       difficulty: 'medium',
-      stem: `Rosa's pay at a garden center is listed by hours. 1 hour: 12 dollars. 2 hours: 24 dollars. 3 hours: 36 dollars. How much does she earn in 5 hours?`,
+      stem: `Rosa's pay at a garden center is listed by hours. 1 hour: 12 dollars. 2 hours: 24 dollars. 3 hours: 36 dollars. How much does Rosa earn in 5 hours?`,
       choices: [
         no(`48 dollars`, 'counted-one-too-few'),
         no(`17 dollars`, 'added-instead-of-multiplied'),
         ok(`60 dollars`),
         no(`72 dollars`, 'counted-one-too-many'),
       ],
-      solution: `She earns 12 dollars per hour, so $p = 12h$ and $12 \\times 5 = 60$ dollars. The answer 48 dollars is the pay for 4 hours, one hour short.`,
+      solution: `Rosa earns 12 dollars per hour, so $p = 12h$ and $12 \\times 5 = 60$ dollars. The answer 48 dollars is the pay for 4 hours, one hour short.`,
     },
     {
       slot: 23,
@@ -314,7 +314,7 @@ const skill: ContentSkill = {
     {
       slot: 26,
       difficulty: 'medium',
-      stem: `Teo is always 3 years older than his sister Rosa. Let $r$ be Rosa's age and $t$ be Teo's age. Which equation gives Teo's age in terms of Rosa's age?`,
+      stem: `Teo is always 3 years older than Rosa. Let $r$ be Rosa's age and $t$ be Teo's age. Which equation gives Teo's age in terms of Rosa's age?`,
       choices: [
         no(`$r = t + 3$`, 'swapped-dependent-independent'),
         no(`$t = 3r$`, 'multiplied-instead-of-added'),
@@ -386,14 +386,14 @@ const skill: ContentSkill = {
     {
       slot: 32,
       difficulty: 'hard',
-      stem: `Kira has 14 dollars saved and adds 7 dollars each week. Her savings after $w$ weeks are $s = 7w + 14$. After how many weeks will she have 56 dollars?`,
+      stem: `Kira has 14 dollars saved and adds 7 dollars each week. Kira's savings after $w$ weeks are $s = 7w + 14$. After how many weeks will Kira have 56 dollars?`,
       choices: [
         no(`8 weeks`, 'ignored-starting-amount'),
         no(`42 weeks`, 'forgot-to-divide-by-rate'),
         no(`10 weeks`, 'added-start-instead-of-subtracting'),
         ok(`6 weeks`),
       ],
-      solution: `Take away the starting 14 dollars, $56 - 14 = 42$, then divide by 7 to get 6 weeks; check $7 \\times 6 + 14 = 56$. The answer 8 weeks divides 56 by 7 and forgets she already had 14 dollars.`,
+      solution: `Take away the starting 14 dollars, $56 - 14 = 42$, then divide by 7 to get 6 weeks; check $7 \\times 6 + 14 = 56$. The answer 8 weeks divides 56 by 7 and forgets Kira already had 14 dollars.`,
     },
     {
       slot: 33,
@@ -446,14 +446,14 @@ const skill: ContentSkill = {
     {
       slot: 37,
       difficulty: 'hard',
-      stem: `Naomi bikes at a steady speed. She chooses a distance for each ride and then records how long the ride takes. In her records, which quantity is the independent variable?`,
+      stem: `Naomi bikes at a steady speed. Naomi chooses a distance for each ride and then records how long the ride takes. In Naomi's records, which quantity is the independent variable?`,
       choices: [
         no(`The time each ride takes`, 'swapped-dependent-independent'),
-        ok(`The distance she chooses for each ride`),
-        no(`Her steady speed`, 'chose-the-constant-rate'),
-        no(`The number of rides she takes`, 'chose-unrelated-quantity'),
+        ok(`The distance chosen for each ride`),
+        no(`The steady speed`, 'chose-the-constant-rate'),
+        no(`The number of rides taken`, 'chose-unrelated-quantity'),
       ],
-      solution: `Naomi picks the distance first, and the time depends on that distance, so the distance is the independent variable. The time is the dependent variable because it is the result she records.`,
+      solution: `Naomi picks the distance first, and the time depends on that distance, so the distance is the independent variable. The time is the dependent variable because it is the result Naomi records.`,
     },
     {
       slot: 38,

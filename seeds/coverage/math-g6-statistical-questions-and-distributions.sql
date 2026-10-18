@@ -112,7 +112,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('6eb4e1de-198c-5ae1-83d2-1aceb2c9cda9', null, (select id from public.skills where slug = 'math-g6-statistical-questions-and-distributions'), null, 'medium',
-   $q$Amara's quiz scores this month were 5, 7, 8, 8, 10, 10. What is the mean of her scores?$q$, $q$[{"text":"$48$","is_correct":false,"misconception_token":"stopped-at-the-sum"},{"text":"$8$","is_correct":true},{"text":"$9.6$","is_correct":false,"misconception_token":"divided-by-wrong-count"},{"text":"$5$","is_correct":false,"misconception_token":"found-the-range"}]$q$::jsonb, $q$$8$$q$, $q$The scores add to $48$, and there are 6 scores, so the mean is $48 \div 6 = 8$. The choice $9.6$ comes from dividing by 5 instead of 6.$q$, 'draft', null)
+   $q$Amara's quiz scores this month were 5, 7, 8, 8, 10, 10. What is the mean of these scores?$q$, $q$[{"text":"$48$","is_correct":false,"misconception_token":"stopped-at-the-sum"},{"text":"$8$","is_correct":true},{"text":"$9.6$","is_correct":false,"misconception_token":"divided-by-wrong-count"},{"text":"$5$","is_correct":false,"misconception_token":"found-the-range"}]$q$::jsonb, $q$$8$$q$, $q$The scores add to $48$, and there are 6 scores, so the mean is $48 \div 6 = 8$. The choice $9.6$ comes from dividing by 5 instead of 6.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -450,7 +450,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('3623255f-493d-5f41-8f84-3ee45547af0d', null, (select id from public.skills where slug = 'math-g6-statistical-questions-and-distributions'), null, 'hard',
-   $q$Diego's first five game scores have a mean of 80. His sixth score is 92. What is the mean of all six scores?$q$, $q$[{"text":"$92$","is_correct":false,"misconception_token":"used-the-new-value-only"},{"text":"$82$","is_correct":true},{"text":"$98.4$","is_correct":false,"misconception_token":"divided-by-wrong-count"},{"text":"$86$","is_correct":false,"misconception_token":"averaged-the-mean-and-new-value"}]$q$::jsonb, $q$$82$$q$, $q$Five scores with mean 80 add to $400$, so all six add to $400 + 92 = 492$, and $492 \div 6 = 82$. The choice $86$ averages 80 and 92 as if the new score counted as much as all five old scores.$q$, 'draft', null)
+   $q$Diego's first five game scores have a mean of 80. Diego's sixth score is 92. What is the mean of all six scores?$q$, $q$[{"text":"$92$","is_correct":false,"misconception_token":"used-the-new-value-only"},{"text":"$82$","is_correct":true},{"text":"$98.4$","is_correct":false,"misconception_token":"divided-by-wrong-count"},{"text":"$86$","is_correct":false,"misconception_token":"averaged-the-mean-and-new-value"}]$q$::jsonb, $q$$82$$q$, $q$Five scores with mean 80 add to $400$, so all six add to $400 + 92 = 492$, and $492 \div 6 = 82$. The choice $86$ averages 80 and 92 as if the new score counted as much as all five old scores.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -502,7 +502,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('8e1aa087-8c2e-5d99-afc9-34a925774b2b', null, (select id from public.skills where slug = 'math-g6-statistical-questions-and-distributions'), null, 'hard',
-   $q$Lena's first four test scores are 78, 85, 90 and 83. What score does she need on her fifth test so that the mean of all five scores is 85?$q$, $q$[{"text":"$89$","is_correct":true},{"text":"$4$","is_correct":false,"misconception_token":"gave-the-difference-only"},{"text":"$84$","is_correct":false,"misconception_token":"gave-the-current-mean"},{"text":"$85$","is_correct":false,"misconception_token":"used-the-target-as-the-score"}]$q$::jsonb, $q$$89$$q$, $q$A mean of 85 on five tests needs a total of $5 \times 85 = 425$, and her four scores add to $336$, so she needs $425 - 336 = 89$. Scoring 85 would not be enough, because her current mean is only 84.$q$, 'draft', null)
+   $q$Lena's first four test scores are 78, 85, 90 and 83. What score does Lena need on the fifth test so that the mean of all five scores is 85?$q$, $q$[{"text":"$89$","is_correct":true},{"text":"$4$","is_correct":false,"misconception_token":"gave-the-difference-only"},{"text":"$84$","is_correct":false,"misconception_token":"gave-the-current-mean"},{"text":"$85$","is_correct":false,"misconception_token":"used-the-target-as-the-score"}]$q$::jsonb, $q$$89$$q$, $q$A mean of 85 on five tests needs a total of $5 \times 85 = 425$, and Lena's four scores add to $336$, so Lena needs $425 - 336 = 89$. Scoring 85 would not be enough, because Lena's current mean is only 84.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

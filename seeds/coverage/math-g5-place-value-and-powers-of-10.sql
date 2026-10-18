@@ -177,7 +177,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('0fcb19fa-497b-5702-9e0f-c3a37f761650', null, (select id from public.skills where slug = 'math-g5-place-value-and-powers-of-10'), null, 'easy',
-   $q$Mateo fills 10 flower pots. Each pot holds 3.5 kilograms of soil. How many kilograms of soil does he use in all?$q$, $q$[{"text":"$0.35$","is_correct":false,"misconception_token":"divided-instead-of-multiplied"},{"text":"$350$","is_correct":false,"misconception_token":"moved-two-places"},{"text":"$3.50$","is_correct":false,"misconception_token":"appended-zero-after-decimal"},{"text":"$35$","is_correct":true}]$q$::jsonb, $q$$35$$q$, $q$Ten pots of 3.5 kilograms is $3.5 \times 10 = 35$ kilograms. Writing $3.50$ only adds a zero and leaves the amount for one pot.$q$, 'draft', null)
+   $q$Mateo fills 10 flower pots. Each pot holds 3.5 kilograms of soil. How many kilograms of soil does Mateo use in all?$q$, $q$[{"text":"$0.35$","is_correct":false,"misconception_token":"divided-instead-of-multiplied"},{"text":"$350$","is_correct":false,"misconception_token":"moved-two-places"},{"text":"$3.50$","is_correct":false,"misconception_token":"appended-zero-after-decimal"},{"text":"$35$","is_correct":true}]$q$::jsonb, $q$$35$$q$, $q$Ten pots of 3.5 kilograms is $3.5 \times 10 = 35$ kilograms. Writing $3.50$ only adds a zero and leaves the amount for one pot.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -515,7 +515,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('5e3060b3-fd43-59d0-aa9d-e8634b954524', null, (select id from public.skills where slug = 'math-g5-place-value-and-powers-of-10'), null, 'hard',
-   $q$Rafael has 3.6 liters of juice. He pours it equally into 10 cups. Then he pours one of those cups equally into 10 small cups. How many liters are in each small cup?$q$, $q$[{"text":"0.0036 liters","is_correct":false,"misconception_token":"moved-three-places"},{"text":"36 liters","is_correct":false,"misconception_token":"multiplied-instead-of-divided"},{"text":"0.036 liters","is_correct":true},{"text":"0.36 liters","is_correct":false,"misconception_token":"did-only-one-step"}]$q$::jsonb, $q$0.036 liters$q$, $q$Each cup has $3.6 \div 10 = 0.36$ liters, and each small cup has $0.36 \div 10 = 0.036$ liters. The answer 0.36 liters stops after the first pour.$q$, 'draft', null)
+   $q$Rafael has 3.6 liters of juice. Rafael pours it equally into 10 cups. Then Rafael pours one of those cups equally into 10 small cups. How many liters are in each small cup?$q$, $q$[{"text":"0.0036 liters","is_correct":false,"misconception_token":"moved-three-places"},{"text":"36 liters","is_correct":false,"misconception_token":"multiplied-instead-of-divided"},{"text":"0.036 liters","is_correct":true},{"text":"0.36 liters","is_correct":false,"misconception_token":"did-only-one-step"}]$q$::jsonb, $q$0.036 liters$q$, $q$Each cup has $3.6 \div 10 = 0.36$ liters, and each small cup has $0.36 \div 10 = 0.036$ liters. The answer 0.36 liters stops after the first pour.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -541,7 +541,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('30e293a8-33a9-50c5-a3db-ba52275f52b7', null, (select id from public.skills where slug = 'math-g5-place-value-and-powers-of-10'), null, 'hard',
-   $q$Nadia divided a number by $10^3$ and got $0.405$. What number did she start with?$q$, $q$[{"text":"$4{,}050$","is_correct":false,"misconception_token":"moved-four-places"},{"text":"$405$","is_correct":true},{"text":"$0.000405$","is_correct":false,"misconception_token":"divided-instead-of-multiplied"},{"text":"$40.5$","is_correct":false,"misconception_token":"moved-two-places"}]$q$::jsonb, $q$$405$$q$, $q$To undo dividing by $10^3$, multiply $0.405$ by $1{,}000$, which gives $405$. Check: $405 \div 1{,}000 = 0.405$. The answer $0.000405$ divides again instead of undoing the division.$q$, 'draft', null)
+   $q$Nadia divided a number by $10^3$ and got $0.405$. What number did Nadia start with?$q$, $q$[{"text":"$4{,}050$","is_correct":false,"misconception_token":"moved-four-places"},{"text":"$405$","is_correct":true},{"text":"$0.000405$","is_correct":false,"misconception_token":"divided-instead-of-multiplied"},{"text":"$40.5$","is_correct":false,"misconception_token":"moved-two-places"}]$q$::jsonb, $q$$405$$q$, $q$To undo dividing by $10^3$, multiply $0.405$ by $1{,}000$, which gives $405$. Check: $405 \div 1{,}000 = 0.405$. The answer $0.000405$ divides again instead of undoing the division.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

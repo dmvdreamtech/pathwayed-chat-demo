@@ -26,22 +26,22 @@ const skill: ContentSkill = {
     {
       slot: 2,
       difficulty: 'easy',
-      stem: `A park ranger wants to know the average length of the 2,000 fish in a lake. She catches and measures 40 fish. What is the sample?`,
+      stem: `A park ranger wants to know the average length of the 2,000 fish in a lake. The ranger catches and measures 40 fish. What is the sample?`,
       choices: [
         no(`All 2,000 fish in the lake`, 'confused-sample-with-population'),
         no(`The average length of the fish`, 'named-the-statistic-not-the-group'),
-        ok(`The 40 fish she caught and measured`),
-        no(`The 1,960 fish she did not catch`, 'subtracted-sample-from-population'),
+        ok(`The 40 fish the ranger caught and measured`),
+        no(`The 1,960 fish the ranger did not catch`, 'subtracted-sample-from-population'),
       ],
       solution: `The sample is the part of the population that is actually measured, which is the 40 fish. All 2,000 fish make up the population, not the sample.`,
     },
     {
       slot: 3,
       difficulty: 'easy',
-      stem: `Diego wants to know what music the students at his middle school like. Which sample is most likely to represent all the students?`,
+      stem: `Diego wants to know what music the students at Diego's middle school like. Which sample is most likely to represent all the students?`,
       choices: [
         no(`The 25 students in the school band`, 'biased-by-shared-interest'),
-        no(`His 10 closest friends`, 'convenience-sample'),
+        no(`Diego's 10 closest friends`, 'convenience-sample'),
         no(`The first 20 students who arrive at the music room`, 'biased-by-location'),
         ok(`60 students picked at random from the full school list`),
       ],
@@ -98,7 +98,7 @@ const skill: ContentSkill = {
     {
       slot: 8,
       difficulty: 'easy',
-      stem: `Amara wants to know how much sleep seventh graders at her school get. Which group is a random sample of seventh graders?`,
+      stem: `Amara wants to know how much sleep seventh graders at Amara's school get. Which group is a random sample of seventh graders?`,
       choices: [
         ok(`30 seventh graders whose names are drawn from a hat holding every seventh grader's name`),
         no(`30 seventh graders who volunteer by signing a sheet in the hallway`, 'voluntary-response-sample'),
@@ -182,7 +182,7 @@ const skill: ContentSkill = {
     {
       slot: 15,
       difficulty: 'medium',
-      stem: `Keanu wants to know how students at his school feel about a later start time. He posts a survey online, and anyone who wants to can answer it. Why might the results be biased?`,
+      stem: `Keanu wants to know how students at Keanu's school feel about a later start time. Keanu posts a survey online, and anyone who wants to can answer it. Why might the results be biased?`,
       choices: [
         no(`Online surveys always have too few answers to use`, 'thinks-online-means-small'),
         ok(`Students with strong feelings are more likely to choose to answer`),
@@ -242,7 +242,7 @@ const skill: ContentSkill = {
     {
       slot: 20,
       difficulty: 'medium',
-      stem: `A bag holds 400 marbles of different colors. Nia shakes the bag and draws 20 marbles without looking. Her sample is: Red: 7, Blue: 9, Green: 4. About how many blue marbles are in the bag?`,
+      stem: `A bag holds 400 marbles of different colors. Nia shakes the bag and draws 20 marbles without looking. The sample is: Red: 7, Blue: 9, Green: 4. About how many blue marbles are in the bag?`,
       choices: [
         no(`9`, 'used-sample-count-as-population-count'),
         no(`140`, 'used-the-wrong-color'),
@@ -278,9 +278,9 @@ const skill: ContentSkill = {
     {
       slot: 23,
       difficulty: 'medium',
-      stem: `To estimate the average height of seventh graders at her school, Priya measures the 15 players on the basketball team. What is the main problem with her sample?`,
+      stem: `To estimate the average height of seventh graders at school, Priya measures the 15 players on the basketball team. What is the main problem with this sample?`,
       choices: [
-        no(`She measured too many students for a school survey`, 'thinks-larger-is-worse'),
+        no(`Priya measured too many students for a school survey`, 'thinks-larger-is-worse'),
         no(`Height cannot be estimated from a sample`, 'rejects-sampling'),
         no(`The players were chosen at random from the whole grade`, 'confuses-chosen-with-random'),
         ok(`Basketball players are often taller than other students`),
@@ -338,7 +338,7 @@ const skill: ContentSkill = {
     {
       slot: 28,
       difficulty: 'medium',
-      stem: `A farmer has 1,500 apple trees. She picks 30 trees at random and finds that 4 of them have a leaf disease. About how many of her trees have the disease?`,
+      stem: `A farmer has 1,500 apple trees. The farmer picks 30 trees at random and finds that 4 of them have a leaf disease. About how many of the trees have the disease?`,
       choices: [
         ok(`200`),
         no(`120`, 'scaled-by-wrong-factor'),
@@ -350,7 +350,7 @@ const skill: ContentSkill = {
     {
       slot: 29,
       difficulty: 'medium',
-      stem: `Mateo wants to estimate the fraction of students at his school who are left-handed. Which sample would give the most reliable estimate?`,
+      stem: `Mateo wants to estimate the fraction of students at Mateo's school who are left-handed. Which sample would give the most reliable estimate?`,
       choices: [
         no(`5 students chosen at random from the whole school`, 'ignores-sample-size'),
         no(`100 students from the art club`, 'biased-by-shared-interest'),
@@ -449,16 +449,16 @@ const skill: ContentSkill = {
       stem: `Rosa surveyed a random sample of 25 students and found that 40 percent want a school garden. Theo surveyed a random sample of 200 students at the same school and found that 46 percent want a garden. Whose estimate is probably more reliable, and why?`,
       choices: [
         no(`Rosa's, because a smaller sample has fewer mistakes`, 'thinks-smaller-is-better'),
-        no(`Rosa's, because her percent is lower`, 'judged-by-the-result'),
+        no(`Rosa's, because Rosa's percent is lower`, 'judged-by-the-result'),
         no(`They are equally reliable because both samples are random`, 'ignores-sample-size'),
-        ok(`Theo's, because his random sample is much larger`),
+        ok(`Theo's, because Theo's random sample is much larger`),
       ],
       solution: `Both samples are random, but a larger random sample usually gives an estimate closer to the true value, so Theo's 200 students is more reliable. Being random removes bias, but a small sample of 25 can still vary a lot by chance.`,
     },
     {
       slot: 38,
       difficulty: 'hard',
-      stem: `A pond has some number of fish. A scientist catches a random sample of 80 fish and finds that 12 are trout. She estimates there are 330 trout in the pond. Using the sample, about how many fish are in the pond in all?`,
+      stem: `A pond has some number of fish. A scientist catches a random sample of 80 fish and finds that 12 are trout. The scientist estimates there are 330 trout in the pond. Using the sample, about how many fish are in the pond in all?`,
       choices: [
         ok(`2,200`),
         no(`1,870`, 'used-the-wrong-part'),

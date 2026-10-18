@@ -242,7 +242,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('db15f934-214f-5f6d-8b1d-e837f10cc6db', null, (select id from public.skills where slug = 'math-g6-factors-multiples-gcf-and-lcm'), null, 'medium',
-   $q$Amara has 24 red beads and 36 blue beads. She wants to make identical bead kits, each with the same number of red beads and the same number of blue beads, with no beads left over. What is the greatest number of kits she can make?$q$, $q$[{"text":"$12$","is_correct":true},{"text":"$72$","is_correct":false,"misconception_token":"found-lcm-instead"},{"text":"$6$","is_correct":false,"misconception_token":"common-factor-not-greatest"},{"text":"$60$","is_correct":false,"misconception_token":"added-the-numbers"}]$q$::jsonb, $q$$12$$q$, $q$The number of kits must divide both 24 and 36, and the greatest such number is the GCF, 12. Six kits would also work, but 12 is the greatest number of kits.$q$, 'draft', null)
+   $q$Amara has 24 red beads and 36 blue beads. Amara wants to make identical bead kits, each with the same number of red beads and the same number of blue beads, with no beads left over. What is the greatest number of kits Amara can make?$q$, $q$[{"text":"$12$","is_correct":true},{"text":"$72$","is_correct":false,"misconception_token":"found-lcm-instead"},{"text":"$6$","is_correct":false,"misconception_token":"common-factor-not-greatest"},{"text":"$60$","is_correct":false,"misconception_token":"added-the-numbers"}]$q$::jsonb, $q$$12$$q$, $q$The number of kits must divide both 24 and 36, and the greatest such number is the GCF, 12. Six kits would also work, but 12 is the greatest number of kits.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -255,7 +255,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('53f65c5e-dbb5-5103-8b58-59bf0a35216e', null, (select id from public.skills where slug = 'math-g6-factors-multiples-gcf-and-lcm'), null, 'medium',
-   $q$Rolls come in bags of 8 and veggie patties come in boxes of 10. Luis wants exactly the same number of rolls and patties. What is the smallest number of each he can buy?$q$, $q$[{"text":"$40$","is_correct":true},{"text":"$18$","is_correct":false,"misconception_token":"added-the-numbers"},{"text":"$2$","is_correct":false,"misconception_token":"found-gcf-instead"},{"text":"$80$","is_correct":false,"misconception_token":"multiplied-the-numbers"}]$q$::jsonb, $q$$40$$q$, $q$The amount must be a multiple of both 8 and 10, and the least common multiple is 40. The answer 80 also works, but it is not the smallest amount.$q$, 'draft', null)
+   $q$Rolls come in bags of 8 and veggie patties come in boxes of 10. Luis wants exactly the same number of rolls and patties. What is the smallest number of each Luis can buy?$q$, $q$[{"text":"$40$","is_correct":true},{"text":"$18$","is_correct":false,"misconception_token":"added-the-numbers"},{"text":"$2$","is_correct":false,"misconception_token":"found-gcf-instead"},{"text":"$80$","is_correct":false,"misconception_token":"multiplied-the-numbers"}]$q$::jsonb, $q$$40$$q$, $q$The amount must be a multiple of both 8 and 10, and the least common multiple is 40. The answer 80 also works, but it is not the smallest amount.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -450,7 +450,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('c7c042da-bf1c-52b3-908f-8fb330bb7933', null, (select id from public.skills where slug = 'math-g6-factors-multiples-gcf-and-lcm'), null, 'hard',
-   $q$Cups come in packs of 8 and plates come in packs of 12. Priya wants the same number of cups and plates, using as few packs as possible. How many packs of cups should she buy?$q$, $q$[{"text":"$3$","is_correct":true},{"text":"$4$","is_correct":false,"misconception_token":"used-gcf-instead"},{"text":"$24$","is_correct":false,"misconception_token":"gave-lcm-not-packs"},{"text":"$2$","is_correct":false,"misconception_token":"gave-packs-of-plates"}]$q$::jsonb, $q$$3$$q$, $q$The LCM of 8 and 12 is 24, so she needs 24 cups, which is $24 \div 8 = 3$ packs. The answer 2 is the number of plate packs, since $24 \div 12 = 2$.$q$, 'draft', null)
+   $q$Cups come in packs of 8 and plates come in packs of 12. Priya wants the same number of cups and plates, using as few packs as possible. How many packs of cups should Priya buy?$q$, $q$[{"text":"$3$","is_correct":true},{"text":"$4$","is_correct":false,"misconception_token":"used-gcf-instead"},{"text":"$24$","is_correct":false,"misconception_token":"gave-lcm-not-packs"},{"text":"$2$","is_correct":false,"misconception_token":"gave-packs-of-plates"}]$q$::jsonb, $q$$3$$q$, $q$The LCM of 8 and 12 is 24, so Priya needs 24 cups, which is $24 \div 8 = 3$ packs. The answer 2 is the number of plate packs, since $24 \div 12 = 2$.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -489,7 +489,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('a89a0a57-acb0-5723-8243-7ff1847ac9f8', null, (select id from public.skills where slug = 'math-g6-factors-multiples-gcf-and-lcm'), null, 'hard',
-   $q$Ravi practices piano every 4 days and swims every 6 days. He did both on day 1 of the month. On what day of the month will he next do both?$q$, $q$[{"text":"Day 12","is_correct":false,"misconception_token":"forgot-to-count-from-day-1"},{"text":"Day 11","is_correct":false,"misconception_token":"added-the-numbers"},{"text":"Day 25","is_correct":false,"misconception_token":"multiplied-the-numbers"},{"text":"Day 13","is_correct":true}]$q$::jsonb, $q$Day 13$q$, $q$The LCM of 4 and 6 is 12, so he does both 12 days after day 1, which is day $1 + 12 = 13$. The answer Day 12 forgets that the counting starts on day 1, not day 0.$q$, 'draft', null)
+   $q$Ravi practices piano every 4 days and swims every 6 days. Ravi did both on day 1 of the month. On what day of the month will Ravi next do both?$q$, $q$[{"text":"Day 12","is_correct":false,"misconception_token":"forgot-to-count-from-day-1"},{"text":"Day 11","is_correct":false,"misconception_token":"added-the-numbers"},{"text":"Day 25","is_correct":false,"misconception_token":"multiplied-the-numbers"},{"text":"Day 13","is_correct":true}]$q$::jsonb, $q$Day 13$q$, $q$The LCM of 4 and 6 is 12, so Ravi does both 12 days after day 1, which is day $1 + 12 = 13$. The answer Day 12 forgets that the counting starts on day 1, not day 0.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -541,7 +541,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('53ef79f7-48ef-5cd1-9d50-54c430c2905d', null, (select id from public.skills where slug = 'math-g6-factors-multiples-gcf-and-lcm'), null, 'hard',
-   $q$Zainab is covering a rectangle that is 84 inches long and 60 inches wide with square tiles, all the same size, without cutting any tiles. What is the side length of the largest tile she can use, in inches?$q$, $q$[{"text":"$420$","is_correct":false,"misconception_token":"found-lcm-instead"},{"text":"$6$","is_correct":false,"misconception_token":"common-factor-not-greatest"},{"text":"$28$","is_correct":false,"misconception_token":"factor-of-only-one-number"},{"text":"$12$","is_correct":true}]$q$::jsonb, $q$$12$$q$, $q$The tile side must divide both 84 and 60, and the greatest number that does is the GCF, 12. The answer 28 divides 84 but not 60, so some tiles would have to be cut.$q$, 'draft', null)
+   $q$Zainab is covering a rectangle that is 84 inches long and 60 inches wide with square tiles, all the same size, without cutting any tiles. What is the side length of the largest tile Zainab can use, in inches?$q$, $q$[{"text":"$420$","is_correct":false,"misconception_token":"found-lcm-instead"},{"text":"$6$","is_correct":false,"misconception_token":"common-factor-not-greatest"},{"text":"$28$","is_correct":false,"misconception_token":"factor-of-only-one-number"},{"text":"$12$","is_correct":true}]$q$::jsonb, $q$$12$$q$, $q$The tile side must divide both 84 and 60, and the greatest number that does is the GCF, 12. The answer 28 divides 84 but not 60, so some tiles would have to be cut.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

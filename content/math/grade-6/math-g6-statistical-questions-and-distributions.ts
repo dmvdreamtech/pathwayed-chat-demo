@@ -86,7 +86,7 @@ const skill: ContentSkill = {
     {
       slot: 7,
       difficulty: 'medium',
-      stem: `Amara's quiz scores this month were 5, 7, 8, 8, 10, 10. What is the mean of her scores?`,
+      stem: `Amara's quiz scores this month were 5, 7, 8, 8, 10, 10. What is the mean of these scores?`,
       choices: [
         no(`$48$`, 'stopped-at-the-sum'),
         no(`$9.6$`, 'divided-by-wrong-count'),
@@ -398,7 +398,7 @@ const skill: ContentSkill = {
     {
       slot: 33,
       difficulty: 'hard',
-      stem: `Diego's first five game scores have a mean of 80. His sixth score is 92. What is the mean of all six scores?`,
+      stem: `Diego's first five game scores have a mean of 80. Diego's sixth score is 92. What is the mean of all six scores?`,
       choices: [
         no(`$86$`, 'averaged-the-mean-and-new-value'),
         ok(`$82$`),
@@ -446,14 +446,14 @@ const skill: ContentSkill = {
     {
       slot: 37,
       difficulty: 'hard',
-      stem: `Lena's first four test scores are 78, 85, 90 and 83. What score does she need on her fifth test so that the mean of all five scores is 85?`,
+      stem: `Lena's first four test scores are 78, 85, 90 and 83. What score does Lena need on the fifth test so that the mean of all five scores is 85?`,
       choices: [
         no(`$85$`, 'used-the-target-as-the-score'),
         ok(`$89$`),
         no(`$84$`, 'gave-the-current-mean'),
         no(`$4$`, 'gave-the-difference-only'),
       ],
-      solution: `A mean of 85 on five tests needs a total of $5 \\times 85 = 425$, and her four scores add to $336$, so she needs $425 - 336 = 89$. Scoring 85 would not be enough, because her current mean is only 84.`,
+      solution: `A mean of 85 on five tests needs a total of $5 \\times 85 = 425$, and Lena's four scores add to $336$, so Lena needs $425 - 336 = 89$. Scoring 85 would not be enough, because Lena's current mean is only 84.`,
     },
     {
       slot: 38,

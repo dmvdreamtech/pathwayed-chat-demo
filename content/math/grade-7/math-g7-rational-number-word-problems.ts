@@ -26,26 +26,26 @@ const skill: ContentSkill = {
     {
       slot: 2,
       difficulty: 'easy',
-      stem: `A diver is at $-18$ meters, which means 18 meters below the surface. She swims up 7 meters. What is her new position?`,
+      stem: `A diver is at $-18$ meters, which means 18 meters below the surface. The diver swims up 7 meters. What is the diver's new position?`,
       choices: [
         no(`$-25$ meters`, 'subtracted-instead-of-added'),
         ok(`$-11$ meters`),
         no(`$11$ meters`, 'dropped-the-negative-sign'),
         no(`$25$ meters`, 'added-absolute-values'),
       ],
-      solution: `Swimming up means adding, so $-18 + 7 = -11$ meters, which is still below the surface. The answer $-25$ moves her deeper, which is the wrong direction.`,
+      solution: `Swimming up means adding, so $-18 + 7 = -11$ meters, which is still below the surface. The answer $-25$ moves the diver deeper, which is the wrong direction.`,
     },
     {
       slot: 3,
       difficulty: 'easy',
-      stem: `Kofi owes his sister 15 dollars, so his balance with her is $-15$. He pays her back 9 dollars. What is his balance now?`,
+      stem: `Kofi owes 15 dollars to an older sister, so Kofi's balance with her is $-15$. Kofi pays her back 9 dollars. What is Kofi's balance now?`,
       choices: [
         no(`$-24$`, 'added-the-debt'),
         no(`$6$`, 'dropped-the-negative-sign'),
         ok(`$-6$`),
         no(`$24$`, 'added-absolute-values'),
       ],
-      solution: `Paying back part of a debt adds to the balance, so $-15 + 9 = -6$; he still owes 6 dollars. The answer $6$ forgets that he has not paid off the whole debt yet.`,
+      solution: `Paying back part of a debt adds to the balance, so $-15 + 9 = -6$; Kofi still owes 6 dollars. The answer $6$ forgets that Kofi has not paid off the whole debt yet.`,
     },
     {
       slot: 4,
@@ -74,14 +74,14 @@ const skill: ContentSkill = {
     {
       slot: 6,
       difficulty: 'easy',
-      stem: `Priya starts a hike at 120 feet above sea level and walks down into a valley at $-30$ feet. How many feet did she descend?`,
+      stem: `Priya starts a hike at 120 feet above sea level and walks down into a valley at $-30$ feet. How many feet did Priya descend?`,
       choices: [
         no(`$90$ feet`, 'subtracted-absolute-values'),
         ok(`$150$ feet`),
         no(`$30$ feet`, 'used-only-the-ending-point'),
         no(`$120$ feet`, 'used-only-the-starting-point'),
       ],
-      solution: `The distance is $120 - (-30) = 120 + 30 = 150$ feet, because she walks 120 feet down to sea level and then 30 more. The answer $90$ subtracts 30 from 120 as if the valley were above sea level.`,
+      solution: `The distance is $120 - (-30) = 120 + 30 = 150$ feet, because Priya walks 120 feet down to sea level and then 30 more. The answer $90$ subtracts 30 from 120 as if the valley were above sea level.`,
     },
     {
       slot: 7,
@@ -98,7 +98,7 @@ const skill: ContentSkill = {
     {
       slot: 8,
       difficulty: 'easy',
-      stem: `Amara's lunch account has a balance of $-12$. She deposits 20 dollars. What is her new balance?`,
+      stem: `Amara's lunch account has a balance of $-12$. Amara deposits 20 dollars. What is the new balance?`,
       choices: [
         no(`$-32$`, 'subtracted-the-deposit'),
         ok(`$8$`),
@@ -122,7 +122,7 @@ const skill: ContentSkill = {
     {
       slot: 10,
       difficulty: 'easy',
-      stem: `In a quiz game, Ravi's score changes by $-3$ points for each wrong answer. He gives 4 wrong answers. What is the total change in his score?`,
+      stem: `In a quiz game, Ravi's score changes by $-3$ points for each wrong answer. Ravi gives 4 wrong answers. What is the total change in Ravi's score?`,
       choices: [
         no(`$-7$ points`, 'added-instead-of-multiplied'),
         no(`$12$ points`, 'dropped-the-negative-sign'),
@@ -170,19 +170,19 @@ const skill: ContentSkill = {
     {
       slot: 14,
       difficulty: 'medium',
-      stem: `Malik owes his cousin 18 dollars and 50 cents. He earns 30 dollars and pays off the whole debt. How much money does he have left?`,
+      stem: `Malik owes a cousin 18 dollars and 50 cents. Malik earns 30 dollars and pays off the whole debt. How much money does Malik have left?`,
       choices: [
         no(`48 dollars and 50 cents`, 'added-the-debt'),
         no(`12 dollars and 50 cents`, 'subtraction-regrouping-error'),
         ok(`11 dollars and 50 cents`),
         no(`11 dollars and 5 cents`, 'decimal-place-value-slip'),
       ],
-      solution: `His money is $30 + (-18.50) = 11.50$, so he has 11 dollars and 50 cents. The answer 12 dollars and 50 cents forgets to regroup a dollar when taking away the 50 cents.`,
+      solution: `Malik's money is $30 + (-18.50) = 11.50$, so Malik has 11 dollars and 50 cents. The answer 12 dollars and 50 cents forgets to regroup a dollar when taking away the 50 cents.`,
     },
     {
       slot: 15,
       difficulty: 'medium',
-      stem: `A diver starts at the surface and goes down $\\frac{3}{4}$ meter each second for 12 seconds. What is her position after 12 seconds?`,
+      stem: `A diver starts at the surface and goes down $\\frac{3}{4}$ meter each second for 12 seconds. What is the diver's position after 12 seconds?`,
       choices: [
         no(`$9$ meters`, 'dropped-the-negative-sign'),
         no(`$-16$ meters`, 'divided-instead-of-multiplied'),
@@ -206,7 +206,7 @@ const skill: ContentSkill = {
     {
       slot: 17,
       difficulty: 'medium',
-      stem: `A climber starts in a cave at $-12.5$ meters and climbs up $30.25$ meters. What is her new elevation?`,
+      stem: `A climber starts in a cave at $-12.5$ meters and climbs up $30.25$ meters. What is the climber's new elevation?`,
       choices: [
         no(`$-42.75$ meters`, 'subtracted-instead-of-added'),
         ok(`$17.75$ meters`),
@@ -254,14 +254,14 @@ const skill: ContentSkill = {
     {
       slot: 21,
       difficulty: 'medium',
-      stem: `Lena's savings balance is $-45$ because she borrowed money. She deposits 15 dollars each week. After how many weeks will her balance be 30 dollars?`,
+      stem: `Lena's savings balance is $-45$ because Lena borrowed money. Lena deposits 15 dollars each week. After how many weeks will Lena's balance be 30 dollars?`,
       choices: [
         no(`$1$ week`, 'subtracted-debt-from-goal'),
         no(`$2$ weeks`, 'ignored-the-debt'),
         no(`$3$ weeks`, 'stopped-at-zero'),
         ok(`$5$ weeks`),
       ],
-      solution: `She must go from $-45$ to $30$, a change of $30 - (-45) = 75$ dollars, and $75 \\div 15 = 5$ weeks. The answer $3$ weeks only brings her balance back to zero.`,
+      solution: `Lena must go from $-45$ to $30$, a change of $30 - (-45) = 75$ dollars, and $75 \\div 15 = 5$ weeks. The answer $3$ weeks only brings Lena's balance back to zero.`,
     },
     {
       slot: 22,
@@ -314,19 +314,19 @@ const skill: ContentSkill = {
     {
       slot: 26,
       difficulty: 'medium',
-      stem: `A diver is at $-20\\frac{1}{4}$ feet. She rises $8\\frac{1}{2}$ feet, then sinks $3\\frac{3}{4}$ feet. What is her final position?`,
+      stem: `A diver is at $-20\\frac{1}{4}$ feet. The diver rises $8\\frac{1}{2}$ feet, then sinks $3\\frac{3}{4}$ feet. What is the diver's final position?`,
       choices: [
         ok(`$-15\\frac{1}{2}$ feet`),
         no(`$-32\\frac{1}{2}$ feet`, 'treated-rise-as-sinking'),
         no(`$-8$ feet`, 'treated-sinking-as-rising'),
         no(`$15\\frac{1}{2}$ feet`, 'dropped-the-negative-sign'),
       ],
-      solution: `Compute $-20\\frac{1}{4} + 8\\frac{1}{2} - 3\\frac{3}{4} = -15\\frac{1}{2}$ feet. The answer $-8$ adds the $3\\frac{3}{4}$ feet, but sinking moves her down, so it must be subtracted.`,
+      solution: `Compute $-20\\frac{1}{4} + 8\\frac{1}{2} - 3\\frac{3}{4} = -15\\frac{1}{2}$ feet. The answer $-8$ adds the $3\\frac{3}{4}$ feet, but sinking moves the diver down, so it must be subtracted.`,
     },
     {
       slot: 27,
       difficulty: 'medium',
-      stem: `In a game, Sofia's score changed by $+5$, $-8$, $+3$, and $-2$ points in four rounds. What was her total change?`,
+      stem: `In a game, Sofia's score changed by $+5$, $-8$, $+3$, and $-2$ points in four rounds. What was Sofia's total change?`,
       choices: [
         no(`$2$ points`, 'wrong-sign-on-sum'),
         ok(`$-2$ points`),
@@ -350,14 +350,14 @@ const skill: ContentSkill = {
     {
       slot: 29,
       difficulty: 'medium',
-      stem: `Theo has 42 dollars in his account. He buys 3 tickets that cost 16 dollars and 25 cents each, and the account lets him go below zero. What is true about his account now?`,
+      stem: `Theo has 42 dollars in a bank account. Theo buys 3 tickets that cost 16 dollars and 25 cents each, and the account can go below zero. What is true about Theo's account now?`,
       choices: [
-        no(`He has 6 dollars and 75 cents left`, 'wrong-sign-on-difference'),
-        no(`He owes 7 dollars and 25 cents`, 'subtraction-regrouping-error'),
-        no(`He has 25 dollars and 75 cents left`, 'subtracted-only-one-ticket'),
-        ok(`He owes 6 dollars and 75 cents`),
+        no(`Theo has 6 dollars and 75 cents left`, 'wrong-sign-on-difference'),
+        no(`Theo owes 7 dollars and 25 cents`, 'subtraction-regrouping-error'),
+        no(`Theo has 25 dollars and 75 cents left`, 'subtracted-only-one-ticket'),
+        ok(`Theo owes 6 dollars and 75 cents`),
       ],
-      solution: `The tickets cost $3 \\times 16.25 = 48.75$, and $42 - 48.75 = -6.75$, so he owes 6 dollars and 75 cents. Saying he has 6 dollars and 75 cents left misses that he spent more than he had.`,
+      solution: `The tickets cost $3 \\times 16.25 = 48.75$, and $42 - 48.75 = -6.75$, so Theo owes 6 dollars and 75 cents. Saying Theo has 6 dollars and 75 cents left misses that Theo spent more than was in the account.`,
     },
     {
       slot: 30,
@@ -386,14 +386,14 @@ const skill: ContentSkill = {
     {
       slot: 32,
       difficulty: 'hard',
-      stem: `A diver at $-36$ meters rises $1\\frac{1}{2}$ meters per minute for 10 minutes, then sinks $\\frac{3}{4}$ meter per minute for 8 minutes. Where is she now?`,
+      stem: `A diver at $-36$ meters rises $1\\frac{1}{2}$ meters per minute for 10 minutes, then sinks $\\frac{3}{4}$ meter per minute for 8 minutes. Where is the diver now?`,
       choices: [
         no(`$-15$ meters`, 'treated-sinking-as-rising'),
         ok(`$-27$ meters`),
         no(`$-57$ meters`, 'treated-rise-as-sinking'),
         no(`$-21$ meters`, 'forgot-the-second-part'),
       ],
-      solution: `She rises $10 \\times 1\\frac{1}{2} = 15$ and sinks $8 \\times \\frac{3}{4} = 6$, so $-36 + 15 - 6 = -27$ meters. The answer $-21$ stops after the rising part and forgets that she sank 6 meters.`,
+      solution: `The diver rises $10 \\times 1\\frac{1}{2} = 15$ and sinks $8 \\times \\frac{3}{4} = 6$, so $-36 + 15 - 6 = -27$ meters. The answer $-21$ stops after the rising part and forgets that the diver sank 6 meters.`,
     },
     {
       slot: 33,
@@ -470,14 +470,14 @@ const skill: ContentSkill = {
     {
       slot: 39,
       difficulty: 'hard',
-      stem: `Owen's balance is $-38.40$. Each week he deposits 12 dollars and 80 cents and spends 4 dollars and 80 cents. After how many weeks will his balance first be above zero?`,
+      stem: `Owen's balance is $-38.40$. Each week Owen deposits 12 dollars and 80 cents and spends 4 dollars and 80 cents. After how many weeks will Owen's balance first be above zero?`,
       choices: [
         no(`$4$ weeks`, 'rounded-down'),
         no(`$3$ weeks`, 'ignored-the-spending'),
         ok(`$5$ weeks`),
         no(`$8$ weeks`, 'divided-by-spending'),
       ],
-      solution: `Each week his balance grows by $12.80 - 4.80 = 8$ dollars, and $38.40 \\div 8 = 4.8$, so he needs 5 whole weeks. After 4 weeks he would still be at $-6.40$, which is below zero.`,
+      solution: `Each week Owen's balance grows by $12.80 - 4.80 = 8$ dollars, and $38.40 \\div 8 = 4.8$, so Owen needs 5 whole weeks. After 4 weeks the balance would still be at $-6.40$, which is below zero.`,
     },
     {
       slot: 40,
