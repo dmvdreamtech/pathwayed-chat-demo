@@ -114,7 +114,7 @@ const skill: ContentSkill = {
       choices: [
         ok(`stopped`),
         no(`stoped`, 'no-doubling'),
-        no(`stopt`, 'spells-by-sound'),
+        no(`stopted`, 'adds-extra-ending'),
         no(`stopd`, 'drops-vowel'),
       ],
       solution: `"Stop" ends in one vowel and one consonant, so the p doubles before "ed": "stopped." "Stoped" forgets to double the p and would look like it rhymes with "hoped."`,
@@ -405,7 +405,7 @@ const skill: ContentSkill = {
         no(`The scientists made a surprising discovary in the cave.`, 'wrong-vowel'),
         ok(`The scientists made a surprising discovery in the cave.`),
       ],
-      solution: `Only the last sentence spells "scientists," "surprising" and "discovery" all correctly. The first sentence leaves the c out of "scientists," which is easy to miss because the c is silent.`,
+      solution: `Only "The scientists made a surprising discovery in the cave." spells "scientists," "surprising" and "discovery" all correctly. The sentence with "sientists" leaves the c out, which is easy to miss because the c is silent.`,
     },
     {
       slot: 34,
@@ -453,7 +453,7 @@ const skill: ContentSkill = {
         no(`The crew was carefull not to crack the anceint clay pots.`, 'error-unfixed'),
         no(`The crew was carefule not to crack the ancient clay pots.`, 'adds-silent-e'),
       ],
-      solution: `The suffix is spelled "ful" with one l, so "careful" is correct. The third choice leaves "carefull" unfixed and also misspells "ancient."`,
+      solution: `The suffix is spelled "ful" with one l, so "careful" is correct. The choice that still says "carefull" leaves the error unfixed and also misspells "ancient."`,
     },
     {
       slot: 38,
