@@ -230,7 +230,7 @@ const skill: ContentSkill = {
     {
       slot: 19,
       difficulty: 'medium',
-      stem: `To measure across a pond, Tomasz marks points so that $\\triangle ABC$ and $\\triangle ADE$ share vertex $A$, with $B$ on $\\overline{AD}$, $C$ on $\\overline{AE}$, and $\\overline{BC} \\parallel \\overline{DE}$. He measures $AB = 30$ m, $BC = 18$ m and $AD = 50$ m. How long is $\\overline{DE}$?`,
+      stem: `To measure across a pond, Tomasz marks points so that $\\triangle ABC$ and $\\triangle ADE$ share vertex $A$, with $B$ on $\\overline{AD}$, $C$ on $\\overline{AE}$, and $\\overline{BC} \\parallel \\overline{DE}$. Tomasz measures $AB = 30$ m, $BC = 18$ m and $AD = 50$ m. How long is $\\overline{DE}$?`,
       choices: [
         no(`$38$ m`, 'added-difference'),
         no(`$10.8$ m`, 'inverted-ratio'),
@@ -386,7 +386,7 @@ const skill: ContentSkill = {
     {
       slot: 32,
       difficulty: 'hard',
-      stem: `A street lamp is 6 m tall. Kwame, who is 1.5 m tall, stands 9 m from the base of the lamp on level ground. How long is his shadow?`,
+      stem: `A street lamp is 6 m tall. Kwame, who is 1.5 m tall, stands 9 m from the base of the lamp on level ground. How long is Kwame's shadow?`,
       choices: [
         no(`$2.25$ m`, 'used-distance-not-total'),
         ok(`$3$ m`),
@@ -434,7 +434,7 @@ const skill: ContentSkill = {
     {
       slot: 36,
       difficulty: 'hard',
-      stem: `Ingrid places a mirror flat on the ground 30 m from the base of a building. She stands 2 m from the mirror on the other side and sees the top of the building in it. Her eyes are 1.6 m above the ground. Since the angles of reflection are equal, the two right triangles are similar. How tall is the building?`,
+      stem: `Ingrid places a mirror flat on the ground 30 m from the base of a building. Ingrid stands 2 m from the mirror on the other side and sees the top of the building in it. Ingrid's eyes are 1.6 m above the ground. Since the angles of reflection are equal, the two right triangles are similar. How tall is the building?`,
       choices: [
         no(`$37.5$ m`, 'inverted-ratio'),
         ok(`$24$ m`),

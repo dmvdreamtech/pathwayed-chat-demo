@@ -290,7 +290,7 @@ const skill: ContentSkill = {
     {
       slot: 24,
       difficulty: 'hard',
-      stem: `Kenji wants to check whether $1 + 2i$ is a solution of $x^2 - 2x + 5 = 0$, so he substitutes it into the left side. What value does he get?`,
+      stem: `Kenji wants to check whether $1 + 2i$ is a solution of $x^2 - 2x + 5 = 0$, so Kenji substitutes it into the left side. What value does Kenji get?`,
       choices: [
         no(`$8$`, 'treated-i-squared-as-1'),
         no(`$-4i$`, 'squared-each-term-only'),

@@ -14,7 +14,7 @@ const skill: ContentSkill = {
     {
       slot: 1,
       difficulty: 'easy',
-      stem: `To construct with compass and straightedge, Lena opens her compass to a width greater than half of segment $\\overline{AB}$. She draws an arc centered at $A$ and an arc with the same width centered at $B$, and the arcs cross at points $P$ and $Q$. What is line $PQ$?`,
+      stem: `To construct with compass and straightedge, Lena opens the compass to a width greater than half of segment $\\overline{AB}$. Lena draws an arc centered at $A$ and an arc with the same width centered at $B$, and the arcs cross at points $P$ and $Q$. What is line $PQ$?`,
       choices: [
         ok(`the perpendicular bisector of $\\overline{AB}$`),
         no(`a line parallel to $\\overline{AB}$`, 'thinks-arcs-make-parallel-line'),
@@ -50,7 +50,7 @@ const skill: ContentSkill = {
     {
       slot: 4,
       difficulty: 'easy',
-      stem: `Ji-woo is copying $\\angle ABC$ onto a ray with endpoint $E$. She draws an arc centered at $B$ that crosses the sides of the angle at $D$ and $F$, then an arc with the same width centered at $E$ that crosses the ray at $G$. What should she do next?`,
+      stem: `Ji-woo is copying $\\angle ABC$ onto a ray with endpoint $E$. Ji-woo draws an arc centered at $B$ that crosses the sides of the angle at $D$ and $F$, then an arc with the same width centered at $E$ that crosses the ray at $G$. What should Ji-woo do next?`,
       choices: [
         ok(`set the compass to the distance $DF$ and draw an arc centered at $G$ crossing the arc through $G$`),
         no(`set the compass to the distance $BD$ and draw an arc centered at $G$ crossing the arc through $G$`, 'copied-radius-instead-of-chord'),
@@ -86,7 +86,7 @@ const skill: ContentSkill = {
     {
       slot: 7,
       difficulty: 'easy',
-      stem: `Starting at point $A_1$ on a circle, Priya keeps the compass at the radius and marks six points $A_1, A_2, A_3, A_4, A_5, A_6$ in order around the circle. Which three points should she connect to form an equilateral triangle inscribed in the circle?`,
+      stem: `Starting at point $A_1$ on a circle, Priya keeps the compass at the radius and marks six points $A_1, A_2, A_3, A_4, A_5, A_6$ in order around the circle. Which three points should Priya connect to form an equilateral triangle inscribed in the circle?`,
       choices: [
         no(`$A_1$, $A_2$ and $A_3$`, 'connected-consecutive-points'),
         no(`$A_1$, $A_2$ and $A_4$`, 'used-uneven-spacing'),
@@ -98,7 +98,7 @@ const skill: ContentSkill = {
     {
       slot: 8,
       difficulty: 'easy',
-      stem: `Keisha wants the shortest path from a tree at point $T$ to a straight fence along line $\\ell$. She draws an arc centered at $T$ that crosses $\\ell$ at $R$ and $S$, then draws arcs of equal width centered at $R$ and $S$ that cross at point $U$ on the other side of $\\ell$. What is line $TU$?`,
+      stem: `Keisha wants the shortest path from a tree at point $T$ to a straight fence along line $\\ell$. Keisha draws an arc centered at $T$ that crosses $\\ell$ at $R$ and $S$, then draws arcs of equal width centered at $R$ and $S$ that cross at point $U$ on the other side of $\\ell$. What is line $TU$?`,
       choices: [
         no(`the line through $T$ parallel to $\\ell$`, 'confused-with-parallel-construction'),
         no(`the line through $T$ that makes a $45^\\circ$ angle with $\\ell$`, 'thinks-arcs-make-45-degrees'),
@@ -110,7 +110,7 @@ const skill: ContentSkill = {
     {
       slot: 9,
       difficulty: 'easy',
-      stem: `In a circle with center $O$, Mateo draws diameter $\\overline{AC}$. He then constructs the perpendicular bisector of $\\overline{AC}$, which meets the circle at $B$ and $D$. What figure is $ABCD$?`,
+      stem: `In a circle with center $O$, Mateo draws diameter $\\overline{AC}$. Mateo then constructs the perpendicular bisector of $\\overline{AC}$, which meets the circle at $B$ and $D$. What figure is $ABCD$?`,
       choices: [
         ok(`a square`),
         no(`a regular hexagon`, 'confused-with-hexagon-construction'),
@@ -122,7 +122,7 @@ const skill: ContentSkill = {
     {
       slot: 10,
       difficulty: 'easy',
-      stem: `To draw a line through point $P$ parallel to line $\\ell$, Sofia draws a transversal through $P$ that meets $\\ell$ at $Q$. She then copies the angle formed at $Q$ to point $P$ in the corresponding position. Why is the new line parallel to $\\ell$?`,
+      stem: `To draw a line through point $P$ parallel to line $\\ell$, Sofia draws a transversal through $P$ that meets $\\ell$ at $Q$. Sofia then copies the angle formed at $Q$ to point $P$ in the corresponding position. Why is the new line parallel to $\\ell$?`,
       choices: [
         no(`vertical angles are congruent`, 'cited-vertical-angles'),
         no(`both lines are perpendicular to the transversal`, 'assumed-right-angle'),
@@ -158,7 +158,7 @@ const skill: ContentSkill = {
     {
       slot: 13,
       difficulty: 'medium',
-      stem: `Tomasz lays out a hexagonal flower bed. He stakes a rope of length $4$ m at a center point to mark a circle, then steps the same $4$ m rope around the circle to mark six vertices of a regular hexagon. What is the perimeter of the hexagon, in meters?`,
+      stem: `Tomasz lays out a hexagonal flower bed. Tomasz stakes a rope of length $4$ m at a center point to mark a circle, then steps the same $4$ m rope around the circle to mark six vertices of a regular hexagon. What is the perimeter of the hexagon, in meters?`,
       choices: [
         ok(`$24$`),
         no(`$48$`, 'used-diameter-as-side'),
@@ -170,7 +170,7 @@ const skill: ContentSkill = {
     {
       slot: 14,
       difficulty: 'medium',
-      stem: `To bisect $\\angle XYZ$, Amaka draws an arc centered at $Y$ that crosses ray $YX$ at $M$ and ray $YZ$ at $N$. What should she do next?`,
+      stem: `To bisect $\\angle XYZ$, Amaka draws an arc centered at $Y$ that crosses ray $YX$ at $M$ and ray $YZ$ at $N$. What should Amaka do next?`,
       choices: [
         no(`draw arcs of equal width centered at $X$ and $Z$ that cross inside the angle, then draw a ray from $Y$ through that point`, 'used-original-endpoints'),
         ok(`draw arcs of equal width centered at $M$ and $N$ that cross inside the angle at $K$, then draw ray $YK$`),
@@ -194,7 +194,7 @@ const skill: ContentSkill = {
     {
       slot: 16,
       difficulty: 'medium',
-      stem: `Ravi constructs the perpendicular bisector of $\\overline{AB}$ and picks a point $P$ on it. He finds $PA = 3x + 2$ and $PB = 5x - 6$. What is $PA$?`,
+      stem: `Ravi constructs the perpendicular bisector of $\\overline{AB}$ and picks a point $P$ on it. Ravi finds $PA = 3x + 2$ and $PB = 5x - 6$. What is $PA$?`,
       choices: [
         no(`$4$`, 'stopped-at-x'),
         ok(`$14$`),
@@ -206,7 +206,7 @@ const skill: ContentSkill = {
     {
       slot: 17,
       difficulty: 'easy',
-      stem: `Lucia wants to copy segment $\\overline{AB}$ onto a ray that starts at point $C$. She has opened her compass to the length $AB$. What is her next step?`,
+      stem: `Lucia wants to copy segment $\\overline{AB}$ onto a ray that starts at point $C$. Lucia has opened the compass to the length $AB$. What is Lucia's next step?`,
       choices: [
         no(`place the compass point on $A$ and draw an arc crossing the ray`, 'centered-on-wrong-point'),
         no(`lay the straightedge along $\\overline{AB}$ and read off its length`, 'used-straightedge-as-ruler'),
@@ -218,7 +218,7 @@ const skill: ContentSkill = {
     {
       slot: 18,
       difficulty: 'medium',
-      stem: `Through point $P$ not on line $\\ell$, Hiroshi constructs line $m$ perpendicular to $\\ell$. He then constructs line $n$ through $P$ perpendicular to $m$. How is line $n$ related to line $\\ell$?`,
+      stem: `Through point $P$ not on line $\\ell$, Hiroshi constructs line $m$ perpendicular to $\\ell$. Hiroshi then constructs line $n$ through $P$ perpendicular to $m$. How is line $n$ related to line $\\ell$?`,
       choices: [
         no(`$n$ is perpendicular to $\\ell$`, 'thinks-two-perpendiculars-give-perpendicular'),
         ok(`$n$ is parallel to $\\ell$`),
@@ -242,14 +242,14 @@ const skill: ContentSkill = {
     {
       slot: 20,
       difficulty: 'hard',
-      stem: `Bao tries to copy a $37^\\circ$ angle $\\angle ABC$. He draws an arc centered at $B$ crossing the sides at $D$ and $F$, and an arc with the same width centered at $E$ crossing the new ray at $G$. By mistake he then keeps the compass at width $BD$, draws an arc centered at $G$ that meets the first arc at $H$, and draws ray $EH$. What is the measure of $\\angle GEH$?`,
+      stem: `Bao tries to copy a $37^\\circ$ angle $\\angle ABC$. Bao draws an arc centered at $B$ crossing the sides at $D$ and $F$, and an arc with the same width centered at $E$ crossing the new ray at $G$. By mistake Bao then keeps the compass at width $BD$, draws an arc centered at $G$ that meets the first arc at $H$, and draws ray $EH$. What is the measure of $\\angle GEH$?`,
       choices: [
         no(`$37^\\circ$`, 'thinks-copy-still-correct'),
         no(`$74^\\circ$`, 'doubled-the-angle'),
         ok(`$60^\\circ$`),
         no(`$90^\\circ$`, 'assumed-right-angle'),
       ],
-      solution: `Now $EG = EH = GH = BD$, so triangle $EGH$ is equilateral and $\\angle GEH = 60^\\circ$ no matter what angle he started with. The choice $37^\\circ$ assumes the copy still works, but the copy needs the chord $DF$, not the radius.`,
+      solution: `Now $EG = EH = GH = BD$, so triangle $EGH$ is equilateral and $\\angle GEH = 60^\\circ$ no matter what angle Bao started with. The choice $37^\\circ$ assumes the copy still works, but the copy needs the chord $DF$, not the radius.`,
     },
     {
       slot: 21,
@@ -266,7 +266,7 @@ const skill: ContentSkill = {
     {
       slot: 22,
       difficulty: 'medium',
-      stem: `To construct a line perpendicular to line $\\ell$ at point $P$ on $\\ell$, Carmen draws an arc centered at $P$ that crosses $\\ell$ at $A$ and $B$. What should she do next?`,
+      stem: `To construct a line perpendicular to line $\\ell$ at point $P$ on $\\ell$, Carmen draws an arc centered at $P$ that crosses $\\ell$ at $A$ and $B$. What should Carmen do next?`,
       choices: [
         no(`draw arcs centered at $A$ and $B$ with width $PA$, then join their crossing point to $P$`, 'kept-width-equal-to-pa'),
         ok(`open the compass wider than $PA$, draw arcs centered at $A$ and $B$ that cross at $Q$, then draw line $PQ$`),
@@ -278,7 +278,7 @@ const skill: ContentSkill = {
     {
       slot: 23,
       difficulty: 'hard',
-      stem: `Segment $\\overline{AB}$ is $14$ cm long. Dmitri sets his compass to $9$ cm and draws arcs centered at $A$ and $B$ that cross at $P$ and $Q$. What is the distance $PQ$ in centimeters?`,
+      stem: `Segment $\\overline{AB}$ is $14$ cm long. Dmitri sets the compass to $9$ cm and draws arcs centered at $A$ and $B$ that cross at $P$ and $Q$. What is the distance $PQ$ in centimeters?`,
       choices: [
         no(`$4\\sqrt{2}$`, 'forgot-to-double'),
         no(`$18$`, 'doubled-compass-width'),
@@ -338,7 +338,7 @@ const skill: ContentSkill = {
     {
       slot: 28,
       difficulty: 'medium',
-      stem: `A city planner draws a new street through point $P$ parallel to Main Street, line $\\ell$. A diagonal road through $P$ meets $\\ell$ at $Q$ and makes a $65^\\circ$ angle with $\\ell$. She copies this angle at $P$ in the alternate interior position. What is the measure of the copied angle?`,
+      stem: `A city planner draws a new street through point $P$ parallel to Main Street, line $\\ell$. A diagonal road through $P$ meets $\\ell$ at $Q$ and makes a $65^\\circ$ angle with $\\ell$. The planner copies this angle at $P$ in the alternate interior position. What is the measure of the copied angle?`,
       choices: [
         no(`$115^\\circ$`, 'used-supplement'),
         no(`$25^\\circ$`, 'used-complement'),
@@ -398,7 +398,7 @@ const skill: ContentSkill = {
     {
       slot: 33,
       difficulty: 'medium',
-      stem: `For an art project, Dev constructs an equilateral triangle, bisects one of its angles, and then bisects one of the two new angles. What is the measure of the smallest angle he has made?`,
+      stem: `For an art project, Dev constructs an equilateral triangle, bisects one of its angles, and then bisects one of the two new angles. What is the measure of the smallest angle Dev has made?`,
       choices: [
         no(`$30^\\circ$`, 'stopped-after-one-bisection'),
         no(`$20^\\circ$`, 'trisected-instead-of-bisected'),
@@ -410,7 +410,7 @@ const skill: ContentSkill = {
     {
       slot: 34,
       difficulty: 'easy',
-      stem: `Ayesha needs a strip of fabric three times as long as a pattern piece $\\overline{AB}$ that is $4.2$ cm long. She sets her compass to $AB$ and copies the segment three times end to end along a ray. How long is the strip, in centimeters?`,
+      stem: `Ayesha needs a strip of fabric three times as long as a pattern piece $\\overline{AB}$ that is $4.2$ cm long. Ayesha sets the compass to $AB$ and copies the segment three times end to end along a ray. How long is the strip, in centimeters?`,
       choices: [
         no(`$7.2$`, 'added-instead-of-multiplied'),
         no(`$8.4$`, 'copied-only-twice'),
@@ -434,7 +434,7 @@ const skill: ContentSkill = {
     {
       slot: 36,
       difficulty: 'hard',
-      stem: `While copying $\\angle ABC$, Felipe draws an arc of radius $6$ cm centered at $B$ that crosses the sides at $D$ and $F$. He measures the chord $DF = 6\\sqrt{2}$ cm. What is the measure of $\\angle ABC$?`,
+      stem: `While copying $\\angle ABC$, Felipe draws an arc of radius $6$ cm centered at $B$ that crosses the sides at $D$ and $F$. Felipe measures the chord $DF = 6\\sqrt{2}$ cm. What is the measure of $\\angle ABC$?`,
       choices: [
         no(`$45^\\circ$`, 'read-root-two-as-45-degrees'),
         no(`$60^\\circ$`, 'assumed-equilateral'),

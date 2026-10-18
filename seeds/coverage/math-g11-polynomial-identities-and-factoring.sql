@@ -177,7 +177,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('48a9123d-401e-5385-8329-c5be72ace2b7', null, (select id from public.skills where slug = 'math-g11-polynomial-identities-and-factoring'), null, 'easy',
-   $q$Lin computes $99^2$ in her head by writing $99 = 100 - 1$. What is $99^2$?$q$, $q$[{"text":"$9999$","is_correct":false,"misconception_token":"forgot-middle-term"},{"text":"$9901$","is_correct":false,"misconception_token":"did-not-double-middle-term"},{"text":"$10201$","is_correct":false,"misconception_token":"sign-error-middle-term"},{"text":"$9801$","is_correct":true}]$q$::jsonb, $q$$9801$$q$, $q$$(100 - 1)^2 = 100^2 - 2(100)(1) + 1^2 = 10000 - 200 + 1 = 9801$. The choice $9999$ computes $100^2 - 1^2$ and leaves out the middle term.$q$, 'draft', null)
+   $q$Lin computes $99^2$ mentally by writing $99 = 100 - 1$. What is $99^2$?$q$, $q$[{"text":"$9999$","is_correct":false,"misconception_token":"forgot-middle-term"},{"text":"$9901$","is_correct":false,"misconception_token":"did-not-double-middle-term"},{"text":"$10201$","is_correct":false,"misconception_token":"sign-error-middle-term"},{"text":"$9801$","is_correct":true}]$q$::jsonb, $q$$9801$$q$, $q$$(100 - 1)^2 = 100^2 - 2(100)(1) + 1^2 = 10000 - 200 + 1 = 9801$. The choice $9999$ computes $100^2 - 1^2$ and leaves out the middle term.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -268,7 +268,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('03231f29-d9e7-573b-a319-0f8f375de1f0', null, (select id from public.skills where slug = 'math-g11-polynomial-identities-and-factoring'), null, 'medium',
-   $q$Kiri builds a square of tiles that is $n$ tiles on each side, then enlarges it to a square that is $n + 1$ tiles on each side. Which expression gives the number of tiles she adds?$q$, $q$[{"text":"$1$","is_correct":false,"misconception_token":"distributed-exponent-over-sum"},{"text":"$2n + 1$","is_correct":true},{"text":"$n + 1$","is_correct":false,"misconception_token":"did-not-double-middle-term"},{"text":"$2n$","is_correct":false,"misconception_token":"dropped-constant-term"}]$q$::jsonb, $q$$2n + 1$$q$, $q$She adds $(n + 1)^2 - n^2 = n^2 + 2n + 1 - n^2 = 2n + 1$ tiles. The choice $1$ treats $(n + 1)^2$ as $n^2 + 1$ and loses the $2n$ term.$q$, 'draft', null)
+   $q$Kiri builds a square of tiles that is $n$ tiles on each side, then enlarges it to a square that is $n + 1$ tiles on each side. Which expression gives the number of tiles Kiri adds?$q$, $q$[{"text":"$1$","is_correct":false,"misconception_token":"distributed-exponent-over-sum"},{"text":"$2n + 1$","is_correct":true},{"text":"$n + 1$","is_correct":false,"misconception_token":"did-not-double-middle-term"},{"text":"$2n$","is_correct":false,"misconception_token":"dropped-constant-term"}]$q$::jsonb, $q$$2n + 1$$q$, $q$Kiri adds $(n + 1)^2 - n^2 = n^2 + 2n + 1 - n^2 = 2n + 1$ tiles. The choice $1$ treats $(n + 1)^2$ as $n^2 + 1$ and loses the $2n$ term.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -281,7 +281,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('8548f137-05b1-56e6-ad3b-3cddb48d8466', null, (select id from public.skills where slug = 'math-g11-polynomial-identities-and-factoring'), null, 'medium',
-   $q$Ayesha uses the identity $(x^2 - y^2)^2 + (2xy)^2 = (x^2 + y^2)^2$ with $x = 5$ and $y = 2$ to pick whole number side lengths, in feet, for a right triangle garden bed. Which side lengths does she get?$q$, $q$[{"text":"$9$, $20$, $29$","is_correct":false,"misconception_token":"squared-the-difference"},{"text":"$21$, $10$, $29$","is_correct":false,"misconception_token":"forgot-factor-of-two"},{"text":"$21$, $20$, $29$","is_correct":true},{"text":"$21$, $20$, $41$","is_correct":false,"misconception_token":"added-legs-for-hypotenuse"}]$q$::jsonb, $q$$21$, $20$, $29$$q$, $q$The legs are $x^2 - y^2 = 25 - 4 = 21$ and $2xy = 20$, and the hypotenuse is $x^2 + y^2 = 29$; indeed $441 + 400 = 841 = 29^2$. The choice with 10 uses $xy$ instead of $2xy$.$q$, 'draft', null)
+   $q$Ayesha uses the identity $(x^2 - y^2)^2 + (2xy)^2 = (x^2 + y^2)^2$ with $x = 5$ and $y = 2$ to pick whole number side lengths, in feet, for a right triangle garden bed. Which side lengths does Ayesha get?$q$, $q$[{"text":"$9$, $20$, $29$","is_correct":false,"misconception_token":"squared-the-difference"},{"text":"$21$, $10$, $29$","is_correct":false,"misconception_token":"forgot-factor-of-two"},{"text":"$21$, $20$, $29$","is_correct":true},{"text":"$21$, $20$, $41$","is_correct":false,"misconception_token":"added-legs-for-hypotenuse"}]$q$::jsonb, $q$$21$, $20$, $29$$q$, $q$The legs are $x^2 - y^2 = 25 - 4 = 21$ and $2xy = 20$, and the hypotenuse is $x^2 + y^2 = 29$; indeed $441 + 400 = 841 = 29^2$. The choice with 10 uses $xy$ instead of $2xy$.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

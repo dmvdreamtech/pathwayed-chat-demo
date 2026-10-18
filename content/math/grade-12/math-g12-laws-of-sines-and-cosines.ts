@@ -254,7 +254,7 @@ const skill: ContentSkill = {
     {
       slot: 21,
       difficulty: 'medium',
-      stem: `To measure across a river, Ingrid marks points $A$ and $B$ 120 meters apart on one bank and sights a tree $C$ on the far bank. She measures $m\\angle CAB = 72^\\circ$ and $m\\angle CBA = 58^\\circ$. To the nearest tenth of a meter, what is the distance $AC$?`,
+      stem: `To measure across a river, Ingrid marks points $A$ and $B$ 120 meters apart on one bank and sights a tree $C$ on the far bank. Ingrid measures $m\\angle CAB = 72^\\circ$ and $m\\angle CBA = 58^\\circ$. To the nearest tenth of a meter, what is the distance $AC$?`,
       choices: [
         no(`$149.0$ meters`, 'found-wrong-side'),
         ok(`$132.8$ meters`),
@@ -326,7 +326,7 @@ const skill: ContentSkill = {
     {
       slot: 27,
       difficulty: 'medium',
-      stem: `Yusuf hikes 5 kilometers along a straight trail, turns $40^\\circ$ to his left, and hikes 3 more kilometers in a straight line. To the nearest tenth of a kilometer, how far is he from his starting point?`,
+      stem: `Yusuf hikes 5 kilometers along a straight trail, turns $40^\\circ$ to the left, and hikes 3 more kilometers in a straight line. To the nearest tenth of a kilometer, how far is Yusuf from the starting point?`,
       choices: [
         ok(`$7.5$ kilometers`),
         no(`$3.3$ kilometers`, 'used-turn-angle-as-interior-angle'),
@@ -422,7 +422,7 @@ const skill: ContentSkill = {
     {
       slot: 35,
       difficulty: 'hard',
-      stem: `A soccer goal is 7.32 meters wide. Lucia stands 20 meters from one goalpost and 22 meters from the other. To the nearest tenth of a degree, what is the angle between her lines of sight to the two posts?`,
+      stem: `A soccer goal is 7.32 meters wide. Lucia stands 20 meters from one goalpost and 22 meters from the other. To the nearest tenth of a degree, what is the angle between Lucia's lines of sight to the two posts?`,
       choices: [
         no(`$5.0^\\circ$`, 'forgot-to-square-side'),
         no(`$160.7^\\circ$`, 'sign-error-in-law-of-cosines'),

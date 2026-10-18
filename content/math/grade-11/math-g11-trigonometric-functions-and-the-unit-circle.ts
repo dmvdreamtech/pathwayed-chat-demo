@@ -278,14 +278,14 @@ const skill: ContentSkill = {
     {
       slot: 23,
       difficulty: 'medium',
-      stem: `Priya rides a Ferris wheel with a diameter of 40 meters whose center is 22 meters above the ground. It makes one full turn every 12 minutes, and she boards at the lowest point at $t = 0$. Which function gives her height $h$, in meters, after $t$ minutes?`,
+      stem: `Priya rides a Ferris wheel with a diameter of 40 meters whose center is 22 meters above the ground. It makes one full turn every 12 minutes, and Priya boards at the lowest point at $t = 0$. Which function gives Priya's height $h$, in meters, after $t$ minutes?`,
       choices: [
         no(`$h(t) = 22 - 40\\cos\\left(\\frac{\\pi t}{6}\\right)$`, 'used-diameter-as-amplitude'),
         ok(`$h(t) = 22 - 20\\cos\\left(\\frac{\\pi t}{6}\\right)$`),
         no(`$h(t) = 22 - 20\\cos(12t)$`, 'used-period-as-coefficient'),
         no(`$h(t) = 20 - 22\\cos\\left(\\frac{\\pi t}{6}\\right)$`, 'swapped-amplitude-and-midline'),
       ],
-      solution: `The midline is the center height 22, the amplitude is the radius 20, $b = \\frac{2\\pi}{12} = \\frac{\\pi}{6}$, and $-\\cos$ starts at the minimum, giving $h(0) = 2$. The choice with $40$ uses the diameter, which would send her 18 meters below ground.`,
+      solution: `The midline is the center height 22, the amplitude is the radius 20, $b = \\frac{2\\pi}{12} = \\frac{\\pi}{6}$, and $-\\cos$ starts at the minimum, giving $h(0) = 2$. The choice with $40$ uses the diameter, which would send Priya 18 meters below ground.`,
     },
     {
       slot: 24,
@@ -314,14 +314,14 @@ const skill: ContentSkill = {
     {
       slot: 26,
       difficulty: 'medium',
-      stem: `Hana walks along a circular path modeled by the unit circle. She starts at $(1, 0)$ and walks counterclockwise a distance of $\\frac{3\\pi}{2}$ units. At which point does she stop?`,
+      stem: `Hana walks along a circular path modeled by the unit circle. Hana starts at $(1, 0)$ and walks counterclockwise a distance of $\\frac{3\\pi}{2}$ units. At which point does Hana stop?`,
       choices: [
         ok(`$(0, -1)$`),
         no(`$(0, 1)$`, 'went-clockwise'),
         no(`$(-1, 0)$`, 'stopped-at-pi'),
         no(`$(1, 0)$`, 'thought-it-was-a-full-turn'),
       ],
-      solution: `On the unit circle, arc length equals the angle in radians, so she turns $\\frac{3\\pi}{2}$, three quarters of a turn, ending at $(0, -1)$. The choice $(0, 1)$ is where she would stop walking clockwise.`,
+      solution: `On the unit circle, arc length equals the angle in radians, so Hana turns $\\frac{3\\pi}{2}$, three quarters of a turn, ending at $(0, -1)$. The choice $(0, 1)$ is where Hana would stop walking clockwise.`,
     },
     {
       slot: 27,

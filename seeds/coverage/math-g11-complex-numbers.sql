@@ -333,7 +333,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('a2edc112-24c3-571a-944e-8a4b170327a5', null, (select id from public.skills where slug = 'math-g11-complex-numbers'), null, 'hard',
-   $q$Kenji wants to check whether $1 + 2i$ is a solution of $x^2 - 2x + 5 = 0$, so he substitutes it into the left side. What value does he get?$q$, $q$[{"text":"$8i$","is_correct":false,"misconception_token":"did-not-distribute-negative"},{"text":"$-4i$","is_correct":false,"misconception_token":"squared-each-term-only"},{"text":"$0$","is_correct":true},{"text":"$8$","is_correct":false,"misconception_token":"treated-i-squared-as-1"}]$q$::jsonb, $q$$0$$q$, $q$$(1 + 2i)^2 = 1 + 4i - 4 = -3 + 4i$, and $-2(1 + 2i) = -2 - 4i$, so the total is $-3 + 4i - 2 - 4i + 5 = 0$ and $1 + 2i$ is a solution. The choice $8$ comes from using $i^2 = 1$ when squaring.$q$, 'draft', null)
+   $q$Kenji wants to check whether $1 + 2i$ is a solution of $x^2 - 2x + 5 = 0$, so Kenji substitutes it into the left side. What value does Kenji get?$q$, $q$[{"text":"$8i$","is_correct":false,"misconception_token":"did-not-distribute-negative"},{"text":"$-4i$","is_correct":false,"misconception_token":"squared-each-term-only"},{"text":"$0$","is_correct":true},{"text":"$8$","is_correct":false,"misconception_token":"treated-i-squared-as-1"}]$q$::jsonb, $q$$0$$q$, $q$$(1 + 2i)^2 = 1 + 4i - 4 = -3 + 4i$, and $-2(1 + 2i) = -2 - 4i$, so the total is $-3 + 4i - 2 - 4i + 5 = 0$ and $1 + 2i$ is a solution. The choice $8$ comes from using $i^2 = 1$ when squaring.$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

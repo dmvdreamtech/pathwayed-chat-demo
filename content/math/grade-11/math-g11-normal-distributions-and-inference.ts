@@ -127,7 +127,7 @@ const skill: ContentSkill = {
         no(`Ask the first 50 students who arrive in the cafeteria`, 'used-convenience-sample'),
         ok(`Number every student from 1 to 900 and use a random number generator to pick 50 numbers`),
         no(`Post an online form and use the first 50 students who reply`, 'used-voluntary-response-sample'),
-        no(`Have the class president choose 50 students she knows`, 'used-judgment-sample'),
+        no(`Have the class president choose 50 students the president knows`, 'used-judgment-sample'),
       ],
       solution: `Numbering the whole population and choosing by random numbers gives every group of 50 students the same chance of being picked. The online form is a voluntary response sample, which over represents students who choose to reply.`,
     },
@@ -184,12 +184,12 @@ const skill: ContentSkill = {
       difficulty: 'medium',
       stem: `Amara scored $88$ on a chemistry test with mean $80$ and standard deviation $4$. Bao scored $90$ on a history test with mean $84$ and standard deviation $5$. Which statement correctly compares their performances relative to their classes?`,
       choices: [
-        ok(`Amara did relatively better, since her z-score is $2$ and Bao's is $1.2$`),
+        ok(`Amara did relatively better, since Amara's z-score is $2$ and Bao's is $1.2$`),
         no(`Bao did relatively better, since $90$ is higher than $88$`, 'compared-raw-scores'),
-        no(`Bao did relatively better, since his test had the larger standard deviation`, 'misread-larger-sd-as-better'),
+        no(`Bao did relatively better, since Bao's test had the larger standard deviation`, 'misread-larger-sd-as-better'),
         no(`They did equally well, since both scored above the mean`, 'ignored-distance-from-mean'),
       ],
-      solution: `Amara: $z = \\frac{88 - 80}{4} = 2$. Bao: $z = \\frac{90 - 84}{5} = 1.2$. Amara is farther above her mean in standard deviation units; comparing the raw scores $90$ and $88$ ignores that the tests have different means and spreads.`,
+      solution: `Amara: $z = \\frac{88 - 80}{4} = 2$. Bao: $z = \\frac{90 - 84}{5} = 1.2$. Amara is farther above the test's mean in standard deviation units; comparing the raw scores $90$ and $88$ ignores that the tests have different means and spreads.`,
     },
     {
       slot: 16,
@@ -398,7 +398,7 @@ const skill: ContentSkill = {
     {
       slot: 33,
       difficulty: 'hard',
-      stem: `Keanu measures the reaction times of a random sample of 40 students and gets a sample mean of $51.4$ hundredths of a second. He simulates 200 samples of size 40 from a population modeled on his data; the simulated means are approximately normal with mean $51.4$ and standard deviation $1.8$. Using a margin of error of two standard deviations, which interval estimates the population mean?`,
+      stem: `Keanu measures the reaction times of a random sample of 40 students and gets a sample mean of $51.4$ hundredths of a second. Keanu simulates 200 samples of size 40 from a population modeled on the sample data; the simulated means are approximately normal with mean $51.4$ and standard deviation $1.8$. Using a margin of error of two standard deviations, which interval estimates the population mean?`,
       choices: [
         no(`$49.6$ to $53.2$`, 'used-one-standard-deviation'),
         ok(`$47.8$ to $55.0$`),

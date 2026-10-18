@@ -242,7 +242,7 @@ const skill: ContentSkill = {
     {
       slot: 20,
       difficulty: 'medium',
-      stem: `Keanu makes each free throw with probability $0.7$, independently. In a contest he takes 3 shots, and each made shot is worth 2 points. What is his expected score?`,
+      stem: `Keanu makes each free throw with probability $0.7$, independently. In a contest Keanu takes 3 shots, and each made shot is worth 2 points. What is Keanu's expected score?`,
       choices: [
         no(`$2.1$`, 'forgot-point-value'),
         no(`$1.4$`, 'used-one-attempt'),
@@ -410,7 +410,7 @@ const skill: ContentSkill = {
     {
       slot: 34,
       difficulty: 'hard',
-      stem: `On a practice test, each question has 5 choices. A correct answer earns 1 point and a wrong answer loses $\\frac{1}{4}$ point. Bilal rules out one wrong choice and guesses at random among the rest. What is his expected score on that question?`,
+      stem: `On a practice test, each question has 5 choices. A correct answer earns 1 point and a wrong answer loses $\\frac{1}{4}$ point. Bilal rules out one wrong choice and guesses at random among the rest. What is Bilal's expected score on that question?`,
       choices: [
         no(`$0$`, 'forgot-eliminated-choice'),
         no(`$\\frac{1}{4}$`, 'ignored-penalty'),

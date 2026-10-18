@@ -170,7 +170,7 @@ const skill: ContentSkill = {
     {
       slot: 14,
       difficulty: 'medium',
-      stem: `Luca has 64 m of fencing to enclose a rectangular garden. What is the greatest area he can enclose?`,
+      stem: `Luca has 64 m of fencing to enclose a rectangular garden. What is the greatest area Luca can enclose?`,
       choices: [
         no(`1,024 square meters`, 'used-half-perimeter-as-side'),
         no(`240 square meters`, 'did-not-maximize'),
@@ -374,7 +374,7 @@ const skill: ContentSkill = {
     {
       slot: 31,
       difficulty: 'hard',
-      stem: `Keisha's bedroom floor is a rectangle 12 ft by 15 ft. She buys the largest circular rug that fits on the floor. Using $3.14$ for $\\pi$, how many square feet of floor are left uncovered?`,
+      stem: `Keisha's bedroom floor is a rectangle 12 ft by 15 ft. Keisha buys the largest circular rug that fits on the floor. Using $3.14$ for $\\pi$, how many square feet of floor are left uncovered?`,
       choices: [
         no(`$3.4$ square feet`, 'used-longer-side-as-diameter'),
         no(`$142.3$ square feet`, 'subtracted-circumference'),

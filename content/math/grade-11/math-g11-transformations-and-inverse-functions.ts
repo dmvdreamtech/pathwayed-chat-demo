@@ -254,7 +254,7 @@ const skill: ContentSkill = {
     {
       slot: 21,
       difficulty: 'medium',
-      stem: `A taxi charges $C(m) = 2.5m + 4$ dollars for a ride of $m$ miles. Use the inverse of $C$ to find how many miles Kofi rode if his fare was 19 dollars:`,
+      stem: `A taxi charges $C(m) = 2.5m + 4$ dollars for a ride of $m$ miles. Use the inverse of $C$ to find how many miles Kofi rode if the fare was 19 dollars:`,
       choices: [
         ok(`$6$ miles`),
         no(`$9.2$ miles`, 'sign-error-undoing-addition'),
@@ -350,7 +350,7 @@ const skill: ContentSkill = {
     {
       slot: 29,
       difficulty: 'medium',
-      stem: `A currency kiosk gives $P(d) = 18d - 36$ pesos for $d$ dollars, after a flat fee. Nadia wants to receive 1,224 pesos. Using the inverse of $P$, how many dollars must she exchange?`,
+      stem: `A currency kiosk gives $P(d) = 18d - 36$ pesos for $d$ dollars, after a flat fee. Nadia wants to receive 1,224 pesos. Using the inverse of $P$, how many dollars must Nadia exchange?`,
       choices: [
         no(`$66$ dollars`, 'sign-error-undoing-subtraction'),
         no(`$104$ dollars`, 'undid-steps-in-wrong-order'),

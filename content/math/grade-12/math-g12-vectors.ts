@@ -410,14 +410,14 @@ const skill: ContentSkill = {
     {
       slot: 34,
       difficulty: 'hard',
-      stem: `Amara swims across a river 60 m wide, always heading straight across at 2 m/s relative to the water. The current flows downstream at 1.5 m/s. How far downstream from her starting point does she reach the other bank?`,
+      stem: `Amara swims across a river 60 m wide, always heading straight across at 2 m/s relative to the water. The current flows downstream at 1.5 m/s. How far downstream from the starting point does Amara reach the other bank?`,
       choices: [
         no(`$80$ m`, 'inverted-speed-ratio'),
         no(`$36$ m`, 'used-resultant-speed-for-time'),
         ok(`$45$ m`),
         no(`$75$ m`, 'gave-total-path-length'),
       ],
-      solution: `Only her $2$ m/s component crosses the river, so the crossing takes $\\frac{60}{2} = 30$ s, and the current carries her $1.5 \\cdot 30 = 45$ m downstream. The choice $36$ m divides the width by the resultant speed $2.5$ m/s, which is not the speed across the river.`,
+      solution: `Only Amara's $2$ m/s component crosses the river, so the crossing takes $\\frac{60}{2} = 30$ s, and the current carries Amara $1.5 \\cdot 30 = 45$ m downstream. The choice $36$ m divides the width by the resultant speed $2.5$ m/s, which is not the speed across the river.`,
     },
     {
       slot: 35,

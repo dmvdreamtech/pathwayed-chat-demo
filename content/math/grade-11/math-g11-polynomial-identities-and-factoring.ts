@@ -146,7 +146,7 @@ const skill: ContentSkill = {
     {
       slot: 12,
       difficulty: 'easy',
-      stem: `Lin computes $99^2$ in her head by writing $99 = 100 - 1$. What is $99^2$?`,
+      stem: `Lin computes $99^2$ mentally by writing $99 = 100 - 1$. What is $99^2$?`,
       choices: [
         no(`$9999$`, 'forgot-middle-term'),
         no(`$9901$`, 'did-not-double-middle-term'),
@@ -230,19 +230,19 @@ const skill: ContentSkill = {
     {
       slot: 19,
       difficulty: 'medium',
-      stem: `Kiri builds a square of tiles that is $n$ tiles on each side, then enlarges it to a square that is $n + 1$ tiles on each side. Which expression gives the number of tiles she adds?`,
+      stem: `Kiri builds a square of tiles that is $n$ tiles on each side, then enlarges it to a square that is $n + 1$ tiles on each side. Which expression gives the number of tiles Kiri adds?`,
       choices: [
         no(`$1$`, 'distributed-exponent-over-sum'),
         no(`$2n$`, 'dropped-constant-term'),
         no(`$n + 1$`, 'did-not-double-middle-term'),
         ok(`$2n + 1$`),
       ],
-      solution: `She adds $(n + 1)^2 - n^2 = n^2 + 2n + 1 - n^2 = 2n + 1$ tiles. The choice $1$ treats $(n + 1)^2$ as $n^2 + 1$ and loses the $2n$ term.`,
+      solution: `Kiri adds $(n + 1)^2 - n^2 = n^2 + 2n + 1 - n^2 = 2n + 1$ tiles. The choice $1$ treats $(n + 1)^2$ as $n^2 + 1$ and loses the $2n$ term.`,
     },
     {
       slot: 20,
       difficulty: 'medium',
-      stem: `Ayesha uses the identity $(x^2 - y^2)^2 + (2xy)^2 = (x^2 + y^2)^2$ with $x = 5$ and $y = 2$ to pick whole number side lengths, in feet, for a right triangle garden bed. Which side lengths does she get?`,
+      stem: `Ayesha uses the identity $(x^2 - y^2)^2 + (2xy)^2 = (x^2 + y^2)^2$ with $x = 5$ and $y = 2$ to pick whole number side lengths, in feet, for a right triangle garden bed. Which side lengths does Ayesha get?`,
       choices: [
         no(`$21$, $10$, $29$`, 'forgot-factor-of-two'),
         ok(`$21$, $20$, $29$`),

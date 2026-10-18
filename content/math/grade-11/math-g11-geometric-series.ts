@@ -98,14 +98,14 @@ const skill: ContentSkill = {
     {
       slot: 8,
       difficulty: 'easy',
-      stem: `Lena saves 1 dollar on the first day of a challenge and doubles the amount she saves each day after that. How many dollars has she saved in total after 10 days?`,
+      stem: `Lena saves 1 dollar on the first day of a challenge and doubles the amount saved each day after that. How many dollars has Lena saved in total after 10 days?`,
       choices: [
         no(`$512$`, 'gave-last-term'),
         ok(`$1023$`),
         no(`$1024$`, 'used-r-to-the-n-as-sum'),
         no(`$2047$`, 'used-one-too-many-terms'),
       ],
-      solution: `The daily amounts are $1, 2, 4, \\ldots, 2^9$, so the total is $\\frac{1 - 2^{10}}{1 - 2} = 2^{10} - 1 = 1023$ dollars. The choice $512$ is what she saves on day 10 alone.`,
+      solution: `The daily amounts are $1, 2, 4, \\ldots, 2^9$, so the total is $\\frac{1 - 2^{10}}{1 - 2} = 2^{10} - 1 = 1023$ dollars. The choice $512$ is what Lena saves on day 10 alone.`,
     },
     {
       slot: 9,
@@ -158,7 +158,7 @@ const skill: ContentSkill = {
     {
       slot: 13,
       difficulty: 'medium',
-      stem: `Priya deposits 200 dollars at the start of each year into an account that earns 5% interest compounded once a year. To the nearest dollar, how much is in the account right after her 10th deposit?`,
+      stem: `Priya deposits 200 dollars at the start of each year into an account that earns 5% interest compounded once a year. To the nearest dollar, how much is in the account right after Priya's 10th deposit?`,
       choices: [
         no(`$2000$`, 'ignored-interest'),
         ok(`$2516$`),
@@ -290,7 +290,7 @@ const skill: ContentSkill = {
     {
       slot: 24,
       difficulty: 'medium',
-      stem: `Jamal deposits 1000 dollars at the end of each year into an account that earns 4% interest compounded yearly. To the nearest cent, how much is in the account right after his 5th deposit?`,
+      stem: `Jamal deposits 1000 dollars at the end of each year into an account that earns 4% interest compounded yearly. To the nearest cent, how much is in the account right after Jamal's 5th deposit?`,
       choices: [
         ok(`$5416.32$`),
         no(`$5000.00$`, 'ignored-interest'),
@@ -338,7 +338,7 @@ const skill: ContentSkill = {
     {
       slot: 28,
       difficulty: 'medium',
-      stem: `Tomas runs 20 kilometers in the first week of a training taper and 10% fewer kilometers each week after that. To the nearest tenth of a kilometer, how far does he run in total over 6 weeks?`,
+      stem: `Tomas runs 20 kilometers in the first week of a training taper and 10% fewer kilometers each week after that. To the nearest tenth of a kilometer, how far does Tomas run in total over 6 weeks?`,
       choices: [
         no(`$120.0$`, 'ignored-decay'),
         ok(`$93.7$`),
@@ -362,7 +362,7 @@ const skill: ContentSkill = {
     {
       slot: 30,
       difficulty: 'medium',
-      stem: `Ana's starting salary is 40000 dollars, and she gets a 3% raise at the start of each new year. To the nearest dollar, how much does she earn in total over her first 10 years?`,
+      stem: `Ana's starting salary is 40000 dollars, and Ana gets a 3% raise at the start of each new year. To the nearest dollar, how much does Ana earn in total over the first 10 years?`,
       choices: [
         no(`$400000$`, 'ignored-raises'),
         no(`$53757$`, 'used-a1-r-to-the-n'),
@@ -410,7 +410,7 @@ const skill: ContentSkill = {
     {
       slot: 34,
       difficulty: 'hard',
-      stem: `Kofi can afford car payments of 300 dollars per month for 24 months. At 0.5% interest per month, the most he can borrow is $\\sum_{k=1}^{24} \\frac{300}{1.005^k}$. To the nearest cent, what is this amount?`,
+      stem: `Kofi can afford car payments of 300 dollars per month for 24 months. At 0.5% interest per month, the most Kofi can borrow is $\\sum_{k=1}^{24} \\frac{300}{1.005^k}$. To the nearest cent, what is this amount?`,
       choices: [
         no(`$7200.00$`, 'ignored-interest'),
         no(`$7629.59$`, 'computed-future-value'),
@@ -458,7 +458,7 @@ const skill: ContentSkill = {
     {
       slot: 38,
       difficulty: 'hard',
-      stem: `Elena wants 10000 dollars in an account right after her 8th equal deposit, made at the end of each year at 6% interest compounded yearly. To the nearest dollar, how much should each deposit be?`,
+      stem: `Elena wants 10000 dollars in an account right after the 8th equal deposit, made at the end of each year at 6% interest compounded yearly. To the nearest dollar, how much should each deposit be?`,
       choices: [
         no(`$1250$`, 'ignored-interest'),
         no(`$784$`, 'discounted-goal-then-divided'),
