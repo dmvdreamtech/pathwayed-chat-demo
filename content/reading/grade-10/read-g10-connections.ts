@@ -139,7 +139,7 @@ const skill: ContentSkill = {
             right(`The shift to one time happened through everyday use before the government made it official.`),
             wrong(`The government forced towns like Breck to give up local time against their will.`, 'contradicts-text'),
             wrong(`The law was unnecessary because most towns had returned to local time by 1874.`, 'contradicts-text'),
-            wrong(`Teodor Abara wrote the national law himself after his railway plan succeeded.`, 'unsupported-inference'),
+            wrong(`Teodor Abara wrote the national law after the railway time plan succeeded.`, 'unsupported-inference'),
           ],
           solution: `The author shows railway time spreading through banks, schools and councils before 1874, so the law recognized a change already made. The councils had adopted it themselves, so the law did not force them.`,
         },
