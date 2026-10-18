@@ -442,7 +442,7 @@ insert into public.passages (id, code, skill_id, sat_alignment, grade_band, titl
 values ('98c2fc6a-c533-5793-8309-0f64488ef78e', 'rg5-argument-evidence-p06', (select id from public.skills where slug = 'read-g5-argument-evidence'), null,
         '3-5', $q$Shade for Every Street$q$, $q$On a sunny summer afternoon, a city sidewalk can feel like the inside of an oven. Dark pavement and rooftops soak up heat all day and give it off at night. One simple fix stands out: cities should plant more trees along their streets.
 
-Trees cool the air around them. Their leaves shade the ground, so sunlight never reaches the pavement below. Trees also release water vapor from their leaves, which cools the air much like sweat cools skin. Students in Carver City measured sidewalk temperatures on the same afternoon. The sidewalk in full sun was 128 degrees, but the sidewalk under a large oak was only 89 degrees.
+Trees cool the air around them. Their leaves shade the ground, so much less sunlight reaches the pavement below. Trees also release water vapor from their leaves, which cools the air much like sweat cools skin. Students in Carver City measured sidewalk temperatures on the same afternoon. The sidewalk in full sun was 128 degrees, but the sidewalk under a large oak was only 89 degrees.
 
 Cooler streets also save money. When buildings are shaded, people run their air conditioners less. In one neighborhood study, homes with large trees on the sunny side used about one fifth less electricity for cooling each summer.
 
