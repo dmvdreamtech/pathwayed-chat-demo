@@ -28,7 +28,7 @@ const skill: ContentSkill = {
           wrong(`Fog nets collect water when tiny droplets strike plastic threads, merge into drops, and run into a gutter.`, 'too-narrow'),
           wrong(`Fog nets have now replaced truck deliveries and solved the water problems of every dry coastal town.`, 'contradicts-text'),
           wrong(`Strong coastal winds make fog collection impossible, so villages should rely on trucks and barrels.`, 'contradicts-text'),
-        ], `The passage traces the village from no way to use fog, through failures and adjustments, to a dependable but limited supply. The second choice describes only the mechanism in paragraph 2, not the passage as a whole.`),
+        ], `The passage traces the village from no way to use fog, through failures and adjustments, to a dependable but limited supply. The choice about droplets striking plastic threads describes only the mechanism in paragraph 2, not the passage as a whole.`),
         q(2, 'easy', `Which detail from the passage most directly supports the idea that adjustments made the project succeed?`, [
           right(`The cooperative switched to a double layer of mesh, angled the panels, and added cables so frames could flex.`),
           wrong(`For generations, residents watched the fog drift past their homes without any way to keep it.`, 'irrelevant-detail'),
@@ -46,7 +46,7 @@ const skill: ContentSkill = {
           wrong(`A dry coastal village built a brilliant system of fog nets that every desert town should copy. The engineer's clever design proves that technology can solve any shortage if people work hard enough.`, 'includes-opinion'),
           wrong(`A coastal village stretched plastic mesh between poles on a ridge facing the sea. Fog droplets collide with the threads, merge into drops, and run down into a gutter that leads to a tank.`, 'too-narrow'),
           wrong(`A coastal village tried fog nets, but strong winds tore them in the first winter. Because the yield drops in late summer, the village decided that trucks remain its only reliable source.`, 'misreads-outcome'),
-        ], `The first choice covers the problem, the adjustments, the results and the limits without judgment. The second adds praise and a claim the passage never makes.`),
+        ], `The summary that mentions early failures and design changes covers the problem, the adjustments, the results and the limits without judgment. The summary calling the system "brilliant" adds praise and a claim the passage never makes.`),
         q(5, 'hard', `How does the final sentence refine the central idea of the passage?`, [
           right(`It shifts the lesson from the nets themselves to the process of patient adjustment that made a local resource reliable.`),
           wrong(`It suggests that the main achievement of the project was attracting visitors and tourism to the village.`, 'literal-reading'),
@@ -83,7 +83,7 @@ const skill: ContentSkill = {
           wrong(`Merrow's towns once set clocks by the sun, which was a wiser and more natural system. The railway company forced its own time on the province, and residents lost something valuable.`, 'includes-opinion'),
           wrong(`The Merrow Line stopped in a dozen towns, and its timetables were hard to read. Passengers missed connections, and trains waiting on single tracks faced real hazards.`, 'too-narrow'),
           wrong(`Merrow's towns set clocks by the sun until a Fenwick newspaper proposed a shared time. The assembly agreed at once, and the railway then adjusted its schedules.`, 'confuses-sequence'),
-        ], `The first choice gives the full sequence from sun time to law without judging it. The second adds the opinion that sun time was "wiser" and that residents "lost something valuable," which the passage does not state.`),
+        ], `The summary ending "spread despite objections and later became law" gives the full sequence from sun time to law without judging it. The summary calling sun time "wiser" adds the opinion that sun time was "wiser" and that residents "lost something valuable," which the passage does not state.`),
         q(10, 'hard', `How does the final paragraph relate the specific history of Merrow to a broader idea?`, [
           right(`It treats the Merrow story as an example of how new technology can reshape habits that once seemed natural.`),
           wrong(`It suggests that Merrow should restore local sun time now that fewer people travel by train.`, 'unsupported-inference'),
@@ -102,7 +102,7 @@ const skill: ContentSkill = {
           wrong(`Dark asphalt shingles and tar absorb most of the sunlight that strikes them and release it as heat.`, 'too-narrow'),
           wrong(`Reflective roof coatings are too costly and inconvenient for cities to use, so Corvana abandoned them.`, 'contradicts-text'),
           wrong(`Planting shade trees is the only effective way for a city to lower its summer temperatures.`, 'overgeneralization'),
-        ], `The passage explains the problem, describes the test, weighs results and trade-offs, and ends with coatings as "one part of a wider effort." The second choice is only the opening explanation.`),
+        ], `The passage explains the problem, describes the test, weighs results and trade-offs, and ends with coatings as "one part of a wider effort." The choice about asphalt shingles and tar is only the opening explanation.`),
         q(12, 'easy', `Which detail best supports the claim that the coatings helped residents?`, [
           right(`Residents of coated apartment buildings used their air conditioners less and paid lower electric bills.`),
           wrong(`Crews applied the coating to apartment buildings, a library and several small stores.`, 'irrelevant-detail'),
@@ -157,7 +157,7 @@ const skill: ContentSkill = {
           wrong(`Young fish follow reef sounds, so Ferreira's team placed speakers on damaged reefs. This creative and moving experiment proves that people can rescue the oceans if they simply listen.`, 'includes-opinion'),
           wrong(`Ferreira's team played recordings of a thriving reef every night for six weeks. Other damaged patches nearby received silent speakers so the team could compare the results.`, 'too-narrow'),
           wrong(`Young fish follow reef sounds, but damaged reefs grow quiet. Researchers found that speakers repaired the coral within six weeks, so replanting is no longer needed.`, 'misreads-outcome'),
-        ], `The first choice covers the cause, the test, the result and the caution without judgment. The fourth invents a claim that speakers repaired coral, which paragraph 4 directly denies.`),
+        ], `The summary ending "sound must be combined with other restoration efforts" covers the cause, the test, the result and the caution without judgment. The summary saying speakers "repaired the coral within six weeks" invents a claim that speakers repaired coral, which paragraph 4 directly denies.`),
         q(20, 'hard', `How does the final paragraph refine the central idea?`, [
           right(`It frames sound as a starting point for recovery and suggests a new view of reefs as places to hear as well as see.`),
           wrong(`It withdraws the earlier findings by admitting that the speakers had no measurable effect on the fish.`, 'contradicts-text'),
@@ -176,7 +176,7 @@ const skill: ContentSkill = {
           wrong(`Early basketball chairs had tall backs, large handles and wheels set straight up and down.`, 'too-narrow'),
           wrong(`Darius Okafor was the greatest wheelchair basketball player in the history of Larkmoor.`, 'unsupported-inference'),
           wrong(`Wheelchair basketball has become less exciting because modern chairs make the game too easy.`, 'contradicts-text'),
-        ], `The passage traces how player feedback led to design changes and how those changes transformed play, as the final sentence states. The second choice is only a detail from paragraph 1.`),
+        ], `The passage traces how player feedback led to design changes and how those changes transformed play, as the final sentence states. The description of tall backs, large handles and straight wheels is only a detail from paragraph 1.`),
         q(22, 'medium', `How does the second paragraph develop the central idea?`, [
           right(`It gives an example of an athlete shaping his own chair through repeated requests to a builder.`),
           wrong(`It explains the physics of camber and why a wider base makes a chair harder to tip.`, 'misplaces-detail'),
@@ -194,7 +194,7 @@ const skill: ContentSkill = {
           wrong(`Early wheelchair basketball used heavy hospital chairs, which was unfair to athletes. Thanks to heroic players like Okafor, the sport finally became worth watching for fans everywhere.`, 'includes-opinion'),
           wrong(`Angling the tops of a chair's wheels inward, called camber, widens its base at the floor. This makes the chair harder to tip and allows tighter turns.`, 'too-narrow'),
           wrong(`Early wheelchair basketball used heavy hospital chairs until manufacturers designed new ones on their own and then taught players how to use them.`, 'contradicts-text'),
-        ], `The first choice covers the starting point, the cooperative changes and their effect on the game. The fourth reverses the passage, which says change "came largely from the athletes themselves."`),
+        ], `The summary that says athletes worked with builders covers the starting point, the cooperative changes and their effect on the game. The summary saying manufacturers designed new chairs "on their own" reverses the passage, which says change "came largely from the athletes themselves."`),
         q(25, 'hard', `How do the two central ideas in the final sentence relate to each other?`, [
           right(`Cooperation between builders and users produces better tools, and those tools in turn transform the activity they serve.`),
           wrong(`Builders and users often disagree, and these disagreements usually prevent new tools from being adopted.`, 'contradicts-text'),
@@ -231,7 +231,7 @@ const skill: ContentSkill = {
           wrong(`Many old wax cylinders are fragile, and it is a tragedy that so many were neglected. Every museum has a duty to fund light scanning before these priceless voices are lost forever.`, 'includes-opinion'),
           wrong(`A camera measures the depth of a cylinder's groove at thousands of points. Software calculates how a needle would move and converts that motion into sound.`, 'too-narrow'),
           wrong(`Many old wax cylinders are fragile, so the archive copies them by playing each one very slowly with a softer needle before the wax decays.`, 'misreads-detail'),
-        ], `The first choice states the problem, the solution and its trade-off without opinion. The fourth misstates the method, which uses light and never touches the cylinder.`),
+        ], `The summary describing scanning with light states the problem, the solution and its trade-off without opinion. The summary about "a softer needle" misstates the method, which uses light and never touches the cylinder.`),
         q(30, 'hard', `How does the final paragraph shape the central idea of the passage?`, [
           right(`It weighs the method's slowness and the limits of old recordings against its main advantage, preserving sound without harm.`),
           wrong(`It concludes that the method's cost outweighs its benefits, so the archive plans to stop scanning.`, 'contradicts-text'),
@@ -262,7 +262,7 @@ const skill: ContentSkill = {
           wrong(`The author shows that Ashgrove's council foolishly destroyed its main street, and that only selfish officials would care more about paint than about their own neighbors.`, 'includes-opinion'),
           wrong(`The author reports that store owners in Merrin Falls said customers stayed longer after the town added seating along its shopping street.`, 'too-narrow'),
           wrong(`The author agrees with the council that benches cost too much, but suggests building a few new ones far from the main street.`, 'contradicts-text'),
-        ], `An objective summary of an argument reports the author's claim and reasons without adding new judgments, as the first choice does. The second inserts harsh opinions the author never expresses.`),
+        ], `An objective summary of an argument reports the author's claim and reasons without adding new judgments, as the summary citing benefits for walkers, local stores and community life does. The summary saying the council "foolishly destroyed" the street and calling officials "selfish" inserts harsh opinions the author never expresses.`),
         q(34, 'hard', `How does the final paragraph strengthen the author's central claim?`, [
           right(`It addresses the council's objections about cost and low use, showing that the author's proposal is practical.`),
           wrong(`It admits that the council was right and that the benches should probably stay removed.`, 'contradicts-text'),
@@ -305,7 +305,7 @@ const skill: ContentSkill = {
           wrong(`One study found handwritten notes led to better understanding than typed notes. This proves that laptops harm learning, and schools that still allow them are making a serious mistake.`, 'ignores-later-evidence'),
           wrong(`A follow-up study gave some typists an instruction to summarize the lecture in their own words. Those students wrote shorter notes, and their scores rose to nearly match the handwriting group.`, 'too-narrow'),
           wrong(`Research shows that typing is now the best way to take notes, since typists who summarize score higher than any students who write by hand on paper.`, 'overstates-finding'),
-        ], `The first choice covers both studies and the conclusion without judgment. The second stops at the first study and adds an opinion that the passage's later evidence contradicts.`),
+        ], `The summary ending "method matters more than tool" covers both studies and the conclusion without judgment. The summary claiming "laptops harm learning" stops at the first study and adds an opinion that the passage's later evidence contradicts.`),
         q(40, 'hard', `How does the final paragraph extend the central idea of the passage?`, [
           right(`It applies the research to classrooms, suggesting that teaching note-taking methods matters more than restricting devices.`),
           wrong(`It returns to the first study's conclusion and recommends that schools replace laptops with paper.`, 'contradicts-text'),
