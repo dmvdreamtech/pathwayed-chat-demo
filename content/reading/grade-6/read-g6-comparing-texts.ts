@@ -74,7 +74,7 @@ const skill: ContentSkill = {
             wrong(`Text 1 ends with the kite falling, while Text 2 ends with the kite flying high.`, 'contradicts-text'),
             wrong(`Both endings repeat Priya's advice to give the kite some line and wait for wind.`, 'only-one-text'),
           ],
-          solution: `Text 1 ends with "I barely did anything" and "That was the hard part," which the reader must interpret, while Text 2 ends with the general statement "Some things only rise when you trust them to." Text 1 does not state a rule, so the reversed choice is wrong.`,
+          solution: `Text 1 ends with "I barely did anything" and "That was the hard part," which the reader must interpret, while Text 2 ends with the general statement "Some things only rise when you trust them to." Text 1 does not state a rule, so the choice saying Text 1 states it as a rule for everyone is wrong.`,
         },
       ],
     },
@@ -110,7 +110,7 @@ const skill: ContentSkill = {
         {
           slot: 8,
           difficulty: 'medium',
-          stem: `How do the two texts treat the advice that jumping is easy?`,
+          stem: `How do the two texts treat the advice that others give about jumping into the deep water?`,
           choices: [
             right(`Text 1 presents the coach's advice as true, while Text 2 questions whether others understand.`),
             wrong(`Text 1 shows the coach's advice is wrong, while Text 2 agrees with everyone completely.`, 'reverses-texts'),
@@ -184,7 +184,7 @@ const skill: ContentSkill = {
             wrong(`It says that someone drew a map with arrows to show the butterfly the way.`, 'contradicts-text'),
             wrong(`It admits the butterfly is lost and does not know which way to fly.`, 'contradicts-text'),
           ],
-          solution: `The poem says "No one drew a map for me" but "something in my orange wings is pointing me to go," and "I follow what I know." It directly denies the map, so that choice is wrong.`,
+          solution: `The poem says "No one drew a map for me" but "something in my orange wings is pointing me to go," and "I follow what I know." It directly denies the map, so the choice saying someone drew a map is wrong.`,
         },
         {
           slot: 14,
@@ -306,7 +306,7 @@ const skill: ContentSkill = {
             wrong(`Text 1 uses phone calls with no picture, while Text 2 uses telegrams sent by wire.`, 'unsupported-inference'),
             wrong(`Both texts use the same method, talking face to face once a week on a laptop.`, 'misses-difference'),
           ],
-          solution: `Rafael and Abuelo talk "in front of the laptop" and see each other on screen, while the sister in Text 2 "checked the box" for weeks before a letter came. The methods are opposite of what the reversed choice says.`,
+          solution: `Rafael and Abuelo talk "in front of the laptop" and see each other on screen, while the sister in Text 2 "checked the box" for weeks before a letter came. The choice saying Text 1 uses letters and Text 2 uses a video call has the methods backward.`,
         },
         {
           slot: 23,
@@ -373,7 +373,7 @@ const skill: ContentSkill = {
             wrong(`Winter storms are dangerous and should be feared by all.`, 'unsupported-inference'),
             wrong(`Helping others is only worth it when you are thanked.`, 'reverses-meaning'),
           ],
-          solution: `Hana and her father clear Mrs. Lindqvist's walk, and the whole lane digs out together and frees a stuck car. In Text 1 the helpers choose not to be thanked, so the last choice reverses the story's idea.`,
+          solution: `Hana and her father clear Mrs. Lindqvist's walk, and the whole lane digs out together and frees a stuck car. In Text 1 the helpers choose not to be thanked, so the choice "Helping others is only worth it when you are thanked" reverses the story's idea.`,
         },
         {
           slot: 28,
