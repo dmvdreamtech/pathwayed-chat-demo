@@ -196,7 +196,7 @@ const skill: ContentSkill = {
             wrong(`Red shows up only on cloudy days with very warm nights.`, 'contradicts-text'),
             wrong(`Red comes from chlorophyll, but yellow comes from sugar.`, 'confuses-details'),
           ],
-          solution: `Paragraph 4 says, "Red colors are not in the leaf all summer," and trees make red in the fall, while paragraph 3 says yellow was hiding all summer. The second choice flips this connection around.`,
+          solution: `Paragraph 4 says, "Red colors are not in the leaf all summer," and trees make red in the fall, while paragraph 3 says yellow was hiding all summer. The choice "Yellow is made new in fall, but red was there all summer" flips this connection around.`,
         },
         {
           slot: 15,
