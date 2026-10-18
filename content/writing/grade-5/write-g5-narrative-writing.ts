@@ -287,11 +287,11 @@ const skill: ContentSkill = {
           stem: `The writer wants to add Wren's words to sentence 10 during the handoff. Which dialogue best fits the events and keeps the action moving?`,
           choices: [
             no(`"I really like your new sneakers," Wren said.`, 'dialogue-no-purpose'),
-            no(`"Don't drop it again," Wren said, and she walked off slowly.`, 'contradicts-events'),
-            ok(`"Got it!" Wren shouted as she grabbed the baton and sprinted away.`),
+            no(`"Don't drop it again," Wren said, walking off slowly.`, 'contradicts-events'),
+            ok(`"Got it!" Wren shouted, grabbing the baton and sprinting away.`),
             no(`"We practiced for two weeks," Wren said.`, 'repeats-old-detail'),
           ],
-          solution: `Wren's quick shout and sprint keep the race moving and lead into sentence 11, where she runs like the wind. The choice where she walks off slowly contradicts how fast she runs in sentence 11.`,
+          solution: `Wren's quick shout and sprint keep the race moving and lead into sentence 11, where Wren runs like the wind. The choice where Wren walks off slowly contradicts how fast Wren runs in sentence 11.`,
         },
       ],
     },
@@ -416,7 +416,7 @@ const skill: ContentSkill = {
           difficulty: 'medium',
           stem: `The writer wants to replace sentence 7 with dialogue that moves the story forward. Which choice does this best?`,
           choices: [
-            ok(`Principal Nakamura unfolded a yellowed page. "Listen to this," she said, and began to read.`),
+            ok(`Principal Nakamura unfolded a yellowed page. "Listen to this," the principal said, and began to read.`),
             no(`"Good morning, students," Principal Nakamura said.`, 'dialogue-no-purpose'),
             no(`"Please go back to your classrooms now," Principal Nakamura said.`, 'contradicts-events'),
             no(`"This box is made of metal," Principal Nakamura said.`, 'repeats-old-detail'),
@@ -480,7 +480,7 @@ const skill: ContentSkill = {
             ok(`For the rest of the week, we added more lily pads and a timer to make the game harder.`),
             no(`Then the frog hopped off the screen all over again.`, 'contradicts-events'),
           ],
-          solution: `"For the rest of the week" bridges the gap between the second night and game night and tells what the sisters did. The sentence about the first night goes backward in time and repeats sentence 4.`,
+          solution: `"For the rest of the week" bridges the gap between the second night and game night and tells what the narrator and Marisol did. The sentence about the first night goes backward in time and repeats sentence 4.`,
         },
         {
           slot: 34,
