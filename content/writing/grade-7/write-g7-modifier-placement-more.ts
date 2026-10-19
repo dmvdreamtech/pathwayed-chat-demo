@@ -20,9 +20,9 @@ const skill: ContentSkill = {
         no(`Lucia bought a bike with a flat tire from a neighbor.`, 'flags-correct-phrase-order'),
         ok(`Lucia bought a bike from a neighbor with a flat tire.`),
         no(`From a neighbor, Lucia bought a bike that needed a chain.`, 'flags-opening-phrase'),
-        no(`Lucia rode her new bike to the park after school.`, 'flags-ordinary-sentence'),
+        no(`Lucia rode the new bike to the park after school.`, 'flags-ordinary-sentence'),
       ],
-      solution: `In "a neighbor with a flat tire," the phrase sits next to "neighbor," so it sounds like the neighbor has the flat tire. Moving the phrase next to "bike," as in the first sentence, fixes the problem.`,
+      solution: `In "a neighbor with a flat tire," the phrase sits next to "neighbor," so it sounds like the neighbor has the flat tire. Moving the phrase next to "bike," as in "Lucia bought a bike with a flat tire from a neighbor," fixes the problem.`,
     },
     {
       slot: 2,
@@ -34,7 +34,7 @@ const skill: ContentSkill = {
         no(`Kenji packed a sweater for the only trip.`, 'only-modifies-wrong-noun'),
         no(`Kenji packed a sweater for the trip only.`, 'only-modifies-purpose'),
       ],
-      solution: `"Only" limits the word right after it, so "only a sweater" says the sweater was the one thing he packed. "Only Kenji" means no one else packed a sweater, which is a different idea.`,
+      solution: `"Only" limits the word right after it, so "only a sweater" says the sweater was the one thing Kenji packed. "Only Kenji" means no one else packed a sweater, which is a different idea.`,
     },
     {
       slot: 3,
@@ -58,7 +58,7 @@ const skill: ContentSkill = {
         no(`The comma after "auditorium" should be taken out.`, 'blames-punctuation'),
         no(`Nothing is wrong, because the phrase clearly describes Tomas.`, 'misses-dangling-modifier'),
       ],
-      solution: `An opening phrase describes the subject that comes right after the comma, and here that subject is "the stage lights," which cannot walk. Tomas is the walker, but he is not the subject, so the phrase dangles.`,
+      solution: `An opening phrase describes the subject that comes right after the comma, and here that subject is "the stage lights," which cannot walk. Tomas is the walker but not the subject, so the phrase dangles.`,
     },
     {
       slot: 5,
@@ -66,7 +66,7 @@ const skill: ContentSkill = {
       stem: `Which revision corrects this sentence: "Reaching for the top shelf, the jar of pickles slipped from Mei's hand."?`,
       choices: [
         no(`The jar of pickles, reaching for the top shelf, slipped from Mei's hand.`, 'moves-modifier-keeps-wrong-noun'),
-        ok(`Reaching for the top shelf, Mei let the jar of pickles slip from her hand.`),
+        ok(`Reaching for the top shelf, Mei dropped the jar of pickles.`),
         no(`Reaching for the top shelf, the jar of pickles quickly slipped from Mei's hand.`, 'adds-words-keeps-dangler'),
         no(`Reaching for the top shelf; the jar of pickles slipped from Mei's hand.`, 'punctuation-fix-for-modifier'),
       ],
@@ -82,7 +82,7 @@ const skill: ContentSkill = {
         ok(`Farah read almost all of the pages.`),
         no(`Farah read all of the pages almost.`, 'almost-at-end'),
       ],
-      solution: `"Almost all" puts "almost" right before the amount it limits, so it means most of the pages. "Almost read" suggests she came close to reading but never started.`,
+      solution: `"Almost all" puts "almost" right before the amount it limits, so it means most of the pages. "Almost read" suggests Farah came close to reading but never started.`,
     },
     {
       slot: 7,
@@ -106,7 +106,7 @@ const skill: ContentSkill = {
         no(`Aiyana, covered in mud, watched the dog run through the kitchen.`, 'phrase-attached-to-person'),
         no(`Covered in mud, Aiyana watched the dog run through the kitchen.`, 'opening-phrase-wrong-subject'),
       ],
-      solution: `When "covered in mud" opens the sentence, it describes the subject right after the comma, which is "the dog." At the end of the first sentence, it sits next to "kitchen," so the kitchen sounds muddy.`,
+      solution: `When "covered in mud" opens the sentence, it describes the subject right after the comma, which is "the dog." In "The dog ran through Aiyana's kitchen covered in mud," it sits next to "kitchen," so the kitchen sounds muddy.`,
     },
     {
       slot: 9,
@@ -123,7 +123,7 @@ const skill: ContentSkill = {
     {
       slot: 10,
       difficulty: 'medium',
-      stem: `Which revision corrects this sentence: "When only six years old, Leon's grandmother taught him to bake bread."?`,
+      stem: `Which revision corrects this sentence about a boy named Leon: "When only six years old, Leon's grandmother taught him to bake bread."?`,
       choices: [
         no(`When only six years old, Leon's grandmother taught Leon to bake bread.`, 'possessive-as-subject'),
         no(`Leon's grandmother, when only six years old, taught him to bake bread.`, 'moves-dangler-to-middle'),
@@ -190,12 +190,12 @@ const skill: ContentSkill = {
         no(`The history quiz, after studying all weekend, felt easy.`, 'moves-dangler-to-middle'),
         no(`The history quiz felt easy to Dev after studying all weekend.`, 'adds-person-not-as-subject'),
       ],
-      solution: `The phrase "after studying all weekend" needs a person as the subject, and only the correct choice makes Dev the subject. Adding "to Dev" names him, but "the history quiz" is still the subject, so the quiz still seems to have studied.`,
+      solution: `The phrase "after studying all weekend" needs a person as the subject, and only the correct choice makes Dev the subject. Adding "to Dev" names Dev, but "the history quiz" is still the subject, so the quiz still seems to have studied.`,
     },
     {
       slot: 16,
       difficulty: 'hard',
-      stem: `Which sentence has NO modifier error?`,
+      stem: `Which sentence about Yusuf and his uncle has NO modifier error?`,
       choices: [
         no(`Hoping to see the eclipse, the roof was where Yusuf set up his telescope.`, 'misses-dangling-modifier'),
         no(`Yusuf set up the telescope on the roof that his uncle had lent him.`, 'misses-misplaced-clause'),
@@ -207,14 +207,14 @@ const skill: ContentSkill = {
     {
       slot: 17,
       difficulty: 'hard',
-      stem: `Chiara found a letter in her grandmother's attic, and the letter was written in Italian. Which sentence says this clearly?`,
+      stem: `Chiara found a letter in Grandma Rosa's attic, and the letter was written in Italian. Which sentence says this clearly?`,
       choices: [
-        ok(`In her grandmother's attic, Chiara found a letter written in Italian.`),
-        no(`Chiara found a letter in her grandmother's attic written in Italian.`, 'phrase-next-to-wrong-noun'),
-        no(`Written in Italian, Chiara found a letter in her grandmother's attic.`, 'opening-phrase-wrong-subject'),
-        no(`Chiara, written in Italian, found a letter in her grandmother's attic.`, 'phrase-attached-to-person'),
+        ok(`In Grandma Rosa's attic, Chiara found a letter written in Italian.`),
+        no(`Chiara found a letter in Grandma Rosa's attic written in Italian.`, 'phrase-next-to-wrong-noun'),
+        no(`Written in Italian, Chiara found a letter in Grandma Rosa's attic.`, 'opening-phrase-wrong-subject'),
+        no(`Chiara, written in Italian, found a letter in Grandma Rosa's attic.`, 'phrase-attached-to-person'),
       ],
-      solution: `"Written in Italian" must sit right after "letter," and moving the attic phrase to the front makes room for that. In the second choice, the phrase follows "attic," so the attic seems to be written in Italian.`,
+      solution: `"Written in Italian" must sit right after "letter," and moving the attic phrase to the front makes room for that. In "Chiara found a letter in Grandma Rosa's attic written in Italian," the phrase follows "attic," so the attic seems to be written in Italian.`,
     },
     {
       slot: 18,
@@ -238,7 +238,7 @@ const skill: ContentSkill = {
         ok(`Only Tariq ran extra laps after practice.`),
         no(`Tariq ran extra laps after the only practice.`, 'only-modifies-practice'),
       ],
-      solution: `"Only Tariq" limits the subject, so it means no other player ran extra laps. "Only after practice" instead limits when he ran, which is a different message.`,
+      solution: `"Only Tariq" limits the subject, so it means no other player ran extra laps. "Only after practice" instead limits when Tariq ran, which is a different message.`,
     },
     {
       slot: 20,
