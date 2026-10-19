@@ -207,13 +207,20 @@ function Rows({ rows, labels = true }: { rows: { image: string; count: number }[
   )
 }
 
+/** Text size for a word tile: big for a short word, smaller for a sentence or one long word. */
+function wordSize(value: string): string {
+  const longestWord = Math.max(...value.split(/\s+/).map((w) => w.length))
+  if (longestWord > 9 || value.length > 16) return 'picq-word-xlong'
+  return value.length > 5 ? 'picq-word-long' : ''
+}
+
 export function PictureFigure({ figure, place, label }: { figure: PictureTile | PicturePrompt; place: Place; label?: string }) {
   switch (figure.kind) {
     case 'number':
     case 'letter':
       return <span className="picq-num">{figure.value}</span>
     case 'word':
-      return <span className={`picq-word ${figure.value.length > 5 ? 'picq-word-long' : ''}`}>{figure.value}</span>
+      return <span className={`picq-word ${wordSize(figure.value)}`}>{figure.value}</span>
     case 'object_group':
       return <Group image={figure.image} count={figure.count} variant={place === 'tile' ? 'tile' : figure.count === 1 ? 'solo' : 'count'} />
     case 'clock':
