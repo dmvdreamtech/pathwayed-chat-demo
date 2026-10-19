@@ -74,7 +74,7 @@ const skill: ContentSkill = {
             wrong(`It repeats the facts about the east side to stress how unfair the old route was.`, 'too-narrow'),
             right(`It extends the effects of the app beyond repairs, to public trust and repaving plans.`),
           ],
-          solution: `The last paragraph says the change "has had effects beyond the roads themselves," naming trust and repaving decisions. The grandmother is not mentioned again, so that choice is not supported.`,
+          solution: `The last paragraph says the change "has had effects beyond the roads themselves," naming trust and repaving decisions. The grandmother is not mentioned again, so the choice saying her pothole was finally fixed is not supported.`,
         },
       ],
     },
