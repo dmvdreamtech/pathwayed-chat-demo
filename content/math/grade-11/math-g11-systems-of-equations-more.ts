@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g11-systems-of-equations-more',
+  extends: 'systems-of-equations',
+  subject: 'math',
+  grade: 11,
+  group: 'Reasoning with Equations',
+  name: 'Systems of Equations',
+  standards: ['HSA.REI.C.7'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Where does the circle $x^2 + y^2 = 25$ meet the line $y = 0$?`,
+      choices: [
+        ok(`$(5, 0)$ and $(-5, 0)$`),
+        no(`$(5, 0)$ only`, 'kept-only-positive-root'),
+        no(`$(25, 0)$ and $(-25, 0)$`, 'forgot-to-take-square-root'),
+        no(`$(0, 5)$ and $(0, -5)$`, 'swapped-coordinates'),
+      ],
+      solution: `Put $y = 0$ into the circle: $x^2 = 25$, so $x = 5$ or $x = -5$. Both points $(5, 0)$ and $(-5, 0)$ are solutions. The answer $(5, 0)$ only misses the negative square root.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `How many points do the circle $x^2 + y^2 = 9$ and the vertical line $x = 3$ have in common?`,
+      choices: [
+        no(`$0$`, 'tangent-point-not-counted'),
+        ok(`$1$`),
+        no(`$2$`, 'assumed-line-always-crosses-twice'),
+        no(`infinitely many`, 'confused-touching-with-overlapping'),
+      ],
+      solution: `Substitute $x = 3$: $9 + y^2 = 9$, so $y^2 = 0$ and $y = 0$. The only shared point is $(3, 0)$, so there is $1$ point. The line just touches the circle (it is tangent), so the answer is not $2$.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `What is the greatest number of points where a line and a parabola can intersect?`,
+      choices: [
+        no(`$1$`, 'thought-only-one-crossing'),
+        no(`$3$`, 'added-the-degrees'),
+        no(`infinitely many`, 'treated-curve-like-coincident-lines'),
+        ok(`$2$`),
+      ],
+      solution: `Substituting the line into the parabola gives a quadratic equation, and a quadratic has at most $2$ real solutions. So a line and a parabola meet in at most $2$ points. The answer $3$ adds the degrees $1$ and $2$, which is not how the count works.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Which point is a solution of the system $y = x^2 + 1$ and $y = 2x$?`,
+      choices: [
+        no(`$(0, 1)$`, 'checked-only-the-parabola'),
+        no(`$(2, 4)$`, 'checked-only-the-line'),
+        ok(`$(1, 2)$`),
+        no(`$(2, 1)$`, 'swapped-coordinates'),
+      ],
+      solution: `Set $x^2 + 1 = 2x$, so $x^2 - 2x + 1 = 0$ and $(x - 1)^2 = 0$, giving $x = 1$ and $y = 2$. The point $(1, 2)$ works in both equations. The point $(0, 1)$ is on the parabola but not on the line, since $2 \\cdot 0 = 0$.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `How many real solutions does the system $y = x^2$ and $y = -1$ have?`,
+      choices: [
+        ok(`$0$`),
+        no(`$1$`, 'assumed-line-touches-vertex'),
+        no(`$2$`, 'ignored-negative-under-square-root'),
+        no(`infinitely many`, 'confused-no-solution-with-infinite'),
+      ],
+      solution: `Setting $x^2 = -1$ has no real solution because a square is never negative. On a graph, the horizontal line $y = -1$ lies below the vertex $(0, 0)$ of the parabola, so they never meet: $0$ solutions. The answer $2$ comes from writing $x = \\pm 1$, but $(\\pm 1)^2 = 1$, not $-1$.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Solve the system $x = 2$, $y = 3$, and $x + y + z = 10$:`,
+      choices: [
+        no(`$(2, 3, 10)$`, 'forgot-to-subtract-known-values'),
+        ok(`$(2, 3, 5)$`),
+        no(`$(2, 3, 15)$`, 'added-instead-of-subtracted'),
+        no(`$(3, 2, 5)$`, 'swapped-x-and-y'),
+      ],
+      solution: `Substitute $x = 2$ and $y = 3$: $2 + 3 + z = 10$, so $z = 5$. The solution is $(2, 3, 5)$. The answer $(2, 3, 15)$ adds $5$ to $10$ instead of subtracting.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Solve the system $x^2 + y^2 = 25$ and $y = x + 1$:`,
+      choices: [
+        no(`$(3, 4)$ only`, 'kept-only-positive-root'),
+        no(`$(-3, -2)$ and $(4, 5)$`, 'sign-error-factoring'),
+        ok(`$(3, 4)$ and $(-4, -3)$`),
+        no(`$(4, 3)$ and $(-3, -4)$`, 'swapped-coordinates'),
+      ],
+      solution: `Substitute: $x^2 + (x + 1)^2 = 25$, so $2x^2 + 2x - 24 = 0$, which is $x^2 + x - 12 = 0$, or $(x + 4)(x - 3) = 0$. Then $x = 3$ gives $y = 4$ and $x = -4$ gives $y = -3$. Both $(3, 4)$ and $(-4, -3)$ are solutions. The pair $(-3, -2)$ and $(4, 5)$ comes from reading the factors with the wrong signs.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Solve the system $y = x^2 - 4$ and $y = 3x$:`,
+      choices: [
+        ok(`$(4, 12)$ and $(-1, -3)$`),
+        no(`$(-4, -12)$ and $(1, 3)$`, 'sign-error-factoring'),
+        no(`$(4, 12)$ only`, 'kept-only-positive-root'),
+        no(`$(4, 12)$ and $(-1, 3)$`, 'dropped-sign-on-y'),
+      ],
+      solution: `Set $x^2 - 4 = 3x$, so $x^2 - 3x - 4 = 0$, or $(x - 4)(x + 1) = 0$. Then $x = 4$ gives $y = 12$ and $x = -1$ gives $y = -3$. Both $(4, 12)$ and $(-1, -3)$ are solutions. The point $(-1, 3)$ is wrong because $3 \\cdot (-1) = -3$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `How many points do the parabola $y = x^2 - 4x + 2$ and the line $y = 2x - 7$ share?`,
+      choices: [
+        no(`$0$`, 'misread-zero-discriminant-as-none'),
+        no(`$2$`, 'assumed-two-solutions-from-quadratic'),
+        ok(`$1$`),
+        no(`it cannot be found without a graph`, 'thought-graph-required'),
+      ],
+      solution: `Set $x^2 - 4x + 2 = 2x - 7$, so $x^2 - 6x + 9 = 0$. The discriminant is $36 - 36 = 0$, so there is exactly $1$ solution, $x = 3$, at the point $(3, -1)$. The line is tangent to the parabola. A quadratic does not always have $2$ solutions; a zero discriminant means one.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `For which value of $k$ does the horizontal line $y = k$ meet the parabola $y = x^2 + 4$ at exactly one point?`,
+      choices: [
+        no(`$k = 0$`, 'used-x-axis-instead-of-vertex'),
+        no(`$k = -4$`, 'sign-error-on-vertex'),
+        no(`$k = 2$`, 'took-square-root-of-vertex-value'),
+        ok(`$k = 4$`),
+      ],
+      solution: `Setting $x^2 + 4 = k$ gives $x^2 = k - 4$, which has exactly one solution only when $k - 4 = 0$. So $k = 4$, the line through the vertex $(0, 4)$. The value $k = 0$ is the x-axis, which this parabola never reaches.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Solve the system $x^2 + y^2 = 10$ and $y = 3x$:`,
+      choices: [
+        no(`$(1, 3)$ only`, 'kept-only-positive-root'),
+        ok(`$(1, 3)$ and $(-1, -3)$`),
+        no(`$(1, 3)$ and $(-1, 3)$`, 'dropped-sign-on-y'),
+        no(`$(3, 1)$ and $(-3, -1)$`, 'swapped-coordinates'),
+      ],
+      solution: `Substitute: $x^2 + 9x^2 = 10$, so $10x^2 = 10$ and $x = 1$ or $x = -1$. Then $y = 3x$ gives $3$ and $-3$, so the solutions are $(1, 3)$ and $(-1, -3)$. The answer $(1, 3)$ only misses the negative square root.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `How many solutions does the system $x^2 + y^2 = 4$ and $y = x + 5$ have?`,
+      choices: [
+        ok(`no solutions`),
+        no(`$1$ solution`, 'assumed-line-is-tangent'),
+        no(`$2$ solutions`, 'sign-error-in-discriminant'),
+        no(`infinitely many solutions`, 'confused-no-solution-with-infinite'),
+      ],
+      solution: `Substitute: $x^2 + (x + 5)^2 = 4$, so $2x^2 + 10x + 21 = 0$. The discriminant is $100 - 168 = -68$, which is negative, so there are no solutions. On a graph, the line passes outside the circle of radius $2$. Getting $2$ solutions comes from computing $100 + 168$ instead.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Solve the system $x + y + z = 6$, $y + z = 4$, and $z = 1$:`,
+      choices: [
+        no(`$(1, 3, 2)$`, 'reversed-order-of-variables'),
+        no(`$(2, 4, 1)$`, 'forgot-to-subtract-z'),
+        no(`$(6, 4, 1)$`, 'read-constants-as-values'),
+        ok(`$(2, 3, 1)$`),
+      ],
+      solution: `Work upward: $z = 1$, then $y + 1 = 4$ gives $y = 3$, then $x + 3 + 1 = 6$ gives $x = 2$. The solution is $(2, 3, 1)$. The answer $(2, 4, 1)$ treats $y$ as $4$ without subtracting $z$.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A ball's path is modeled by $y = -x^2 + 6x$ and a ramp by the line $y = x + 4$. At which points does the path meet the ramp?`,
+      choices: [
+        ok(`$(1, 5)$ and $(4, 8)$`),
+        no(`$(-1, 3)$ and $(-4, 0)$`, 'sign-error-factoring'),
+        no(`$(1, 5)$ only`, 'kept-only-one-root'),
+        no(`$(1, 4)$ and $(4, 1)$`, 'used-roots-as-a-point'),
+      ],
+      solution: `Set $-x^2 + 6x = x + 4$, so $x^2 - 5x + 4 = 0$, or $(x - 1)(x - 4) = 0$. Then $x = 1$ gives $y = 5$ and $x = 4$ gives $y = 8$. Both $(1, 5)$ and $(4, 8)$ are on the path and the ramp. The pair $(1, 4)$ and $(4, 1)$ just reuses the two $x$ values instead of finding $y$.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Substituting $y = x - 2$ into $x^2 + y^2 = 20$ gives which equation?`,
+      choices: [
+        no(`$2x^2 - 16 = 0$`, 'squared-binomial-term-by-term'),
+        ok(`$2x^2 - 4x - 16 = 0$`),
+        no(`$2x^2 - 2x - 16 = 0$`, 'dropped-doubling-of-middle-term'),
+        no(`$2x^2 + 4x - 16 = 0$`, 'sign-error-middle-term'),
+      ],
+      solution: `$(x - 2)^2 = x^2 - 4x + 4$, so $x^2 + x^2 - 4x + 4 = 20$, which becomes $2x^2 - 4x - 16 = 0$. The equation $2x^2 - 16 = 0$ comes from squaring as $x^2 + 4$ and losing the middle term $-4x$.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `For what value of $b$ does the line $y = 2x + b$ touch the parabola $y = x^2$ at exactly one point?`,
+      choices: [
+        no(`$b = 1$`, 'sign-error-in-discriminant'),
+        ok(`$b = -1$`),
+        no(`$b = 0$`, 'assumed-line-through-vertex'),
+        no(`$b = -4$`, 'dropped-4-in-4ac'),
+      ],
+      solution: `Set $x^2 = 2x + b$, so $x^2 - 2x - b = 0$. Exactly one solution needs discriminant $0$: $(-2)^2 - 4(1)(-b) = 4 + 4b = 0$, so $b = -1$. The line $y = 2x - 1$ touches the parabola at $(1, 1)$. The value $b = 0$ gives two points, $(0, 0)$ and $(2, 4)$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Solve the system $x^2 + y^2 = 25$ and $x + y = 7$:`,
+      choices: [
+        no(`$(3, 4)$ only`, 'kept-only-one-root'),
+        no(`$(-3, 10)$ and $(-4, 11)$`, 'sign-error-factoring'),
+        no(`$(3, 4)$, $(4, 3)$, $(-3, -4)$ and $(-4, -3)$`, 'included-circle-points-not-on-line'),
+        ok(`$(3, 4)$ and $(4, 3)$`),
+      ],
+      solution: `Write $y = 7 - x$ and substitute: $x^2 + 49 - 14x + x^2 = 25$, so $2x^2 - 14x + 24 = 0$, or $(x - 3)(x - 4) = 0$. Then $x = 3$ gives $y = 4$ and $x = 4$ gives $y = 3$, so the solutions are $(3, 4)$ and $(4, 3)$. The points $(-3, -4)$ and $(-4, -3)$ are on the circle, but their coordinates add to $-7$, not $7$.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Solve the system $x + y + z = 6$, $2x - y + z = 3$, and $x + 2y - z = 2$:`,
+      choices: [
+        ok(`$(1, 2, 3)$`),
+        no(`$(3, 2, 1)$`, 'reversed-order-of-variables'),
+        no(`$(2, 1, 3)$`, 'swapped-x-and-y'),
+        no(`$(1, 2, 9)$`, 'sign-error-solving-for-z'),
+      ],
+      solution: `Add the first and third equations: $2x + 3y = 8$. Add the second and third: $3x + y = 5$, so $y = 5 - 3x$. Then $2x + 15 - 9x = 8$ gives $x = 1$, so $y = 2$ and $z = 6 - 1 - 2 = 3$. Check: $2 - 2 + 3 = 3$ and $1 + 4 - 3 = 2$. The answer $(1, 2, 9)$ solves the first equation as $z = 6 + x + y$.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `For which radii $r$ does the line $y = x + 4$ cross the circle $x^2 + y^2 = r^2$ at two points?`,
+      choices: [
+        no(`$r > 4$`, 'used-intercept-as-distance'),
+        no(`$r = 2\\sqrt{2}$`, 'gave-tangent-case'),
+        ok(`$r > 2\\sqrt{2}$`),
+        no(`$r < 2\\sqrt{2}$`, 'reversed-inequality'),
+      ],
+      solution: `Substitute: $x^2 + (x + 4)^2 = r^2$, so $2x^2 + 8x + 16 - r^2 = 0$. Two points need a positive discriminant: $64 - 8(16 - r^2) = 8r^2 - 64 > 0$, so $r^2 > 8$ and $r > 2\\sqrt{2}$. At $r = 2\\sqrt{2}$ the line is only tangent, with one point.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Solve the system $y = x^2 - 2x - 3$ and $y = -x + 3$:`,
+      choices: [
+        no(`$(-3, 6)$ and $(2, 1)$`, 'sign-error-factoring'),
+        ok(`$(3, 0)$ and $(-2, 5)$`),
+        no(`$(3, 0)$ and $(-2, -5)$`, 'dropped-sign-on-y'),
+        no(`$(3, 0)$ only`, 'kept-only-positive-root'),
+      ],
+      solution: `Set $x^2 - 2x - 3 = -x + 3$, so $x^2 - x - 6 = 0$, or $(x - 3)(x + 2) = 0$. Then $x = 3$ gives $y = 0$ and $x = -2$ gives $y = -(-2) + 3 = 5$. Both $(3, 0)$ and $(-2, 5)$ are solutions. The point $(-2, -5)$ loses the sign when computing $-(-2)$.`,
+    },
+  ],
+}
+
+export default skill
