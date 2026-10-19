@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g9-linear-inequalities-more',
+  extends: 'linear-inequalities',
+  subject: 'math',
+  grade: 9,
+  group: 'Reasoning with Equations and Inequalities',
+  name: 'Linear Inequalities',
+  standards: ['HSA.REI.B.3'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is the solution of $x - 9 > -2$?`,
+      choices: [
+        ok(`$x > 7$`),
+        no(`$x > -11$`, 'subtracted-instead-of-added'),
+        no(`$x < 7$`, 'reversed-inequality-without-reason'),
+        no(`$x \\geq 7$`, 'changed-strict-to-inclusive'),
+      ],
+      solution: `Add $9$ to both sides: $x > -2 + 9$, so $x > 7$. Adding a number does not reverse the sign, and the sign stays strict, so $x \\geq 7$ wrongly includes $7$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Which description of a number line graph shows the solution of $x \\leq -2$?`,
+      choices: [
+        ok(`A closed circle at $-2$, shaded to the left`),
+        no(`An open circle at $-2$, shaded to the left`, 'used-open-circle-for-inclusive'),
+        no(`A closed circle at $-2$, shaded to the right`, 'shaded-wrong-direction'),
+        no(`A closed circle at $2$, shaded to the left`, 'dropped-negative-sign'),
+      ],
+      solution: `The symbol $\\leq$ includes $-2$, so the circle at $-2$ is closed (filled in). Values less than $-2$ lie to the left, so shade to the left. An open circle would leave $-2$ out.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Which value of $x$ makes $x + 4 < 1$ true?`,
+      choices: [
+        ok(`$-4$`),
+        no(`$-3$`, 'included-boundary-in-strict-inequality'),
+        no(`$-2$`, 'compared-negatives-by-absolute-value'),
+        no(`$4$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `Subtract $4$ from both sides: $x < -3$. Of the choices, only $-4$ is less than $-3$; check it: $-4 + 4 = 0$, and $0 < 1$. The value $-3$ gives $1 < 1$, which is false because the sign is strict.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What is the solution of $\\frac{x}{-3} \\geq 2$?`,
+      choices: [
+        ok(`$x \\leq -6$`),
+        no(`$x \\geq -6$`, 'forgot-to-flip-inequality'),
+        no(`$x \\geq 6$`, 'ignored-negative-divisor'),
+        no(`$x \\leq -\\frac{2}{3}$`, 'divided-instead-of-multiplied'),
+      ],
+      solution: `Multiply both sides by $-3$. Multiplying by a negative number reverses the sign: $x \\leq 2 \\cdot (-3)$, so $x \\leq -6$. The answer $x \\geq -6$ forgets to reverse the sign.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A number $n$ decreased by 7 is no more than 15. Which inequality shows all possible values of $n$?`,
+      choices: [
+        ok(`$n \\leq 22$`),
+        no(`$n < 22$`, 'read-no-more-than-as-strict'),
+        no(`$n \\geq 22$`, 'read-no-more-than-as-at-least'),
+        no(`$n \\leq 8$`, 'subtracted-instead-of-added'),
+      ],
+      solution: `"No more than" means less than or equal to: $n - 7 \\leq 15$. Add $7$ to both sides to get $n \\leq 22$. The answer $n < 22$ wrongly leaves out $22$, which is allowed.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `What is the solution of $0.5x \\geq 3$?`,
+      choices: [
+        ok(`$x \\geq 6$`),
+        no(`$x \\geq 1.5$`, 'multiplied-instead-of-divided'),
+        no(`$x \\leq 6$`, 'reversed-inequality-without-reason'),
+        no(`$x \\geq 2.5$`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `Divide both sides by $0.5$, a positive number, so the sign stays the same: $x \\geq 3 \\div 0.5 = 6$. The answer $x \\geq 1.5$ multiplies by $0.5$ instead of dividing.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `What is the solution of $7 - x \\leq 2$?`,
+      choices: [
+        ok(`$x \\geq 5$`),
+        no(`$x \\leq 5$`, 'forgot-to-flip-inequality'),
+        no(`$x \\geq -5$`, 'sign-error-dividing-by-negative-one'),
+        no(`$x \\geq -9$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `Subtract $7$ from both sides: $-x \\leq -5$. Divide by $-1$ and reverse the sign: $x \\geq 5$. Check with $x = 6$: $7 - 6 = 1$, and $1 \\leq 2$. The answer $x \\leq 5$ forgets to reverse the sign.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What is the solution of $-2(x + 3) > 8$?`,
+      choices: [
+        ok(`$x < -7$`),
+        no(`$x > -7$`, 'forgot-to-flip-inequality'),
+        no(`$x < -2.5$`, 'distributed-to-first-term-only'),
+        no(`$x < -1$`, 'sign-error-distributing-negative'),
+      ],
+      solution: `Distribute: $-2x - 6 > 8$. Add $6$: $-2x > 14$. Divide by $-2$ and reverse the sign: $x < -7$. The answer $x < -1$ comes from writing $-2 \\cdot 3$ as $+6$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `What is the solution of $\\frac{3}{4}x - 2 < 7$?`,
+      choices: [
+        ok(`$x < 12$`),
+        no(`$x < \\frac{27}{4}$`, 'multiplied-by-fraction-instead-of-dividing'),
+        no(`$x < \\frac{20}{3}$`, 'subtracted-instead-of-added'),
+        no(`$x > 12$`, 'reversed-inequality-without-reason'),
+      ],
+      solution: `Add $2$ to both sides: $\\frac{3}{4}x < 9$. Multiply both sides by $\\frac{4}{3}$, which is positive, so the sign stays: $x < 12$. The answer $x < \\frac{27}{4}$ multiplies $9$ by $\\frac{3}{4}$ instead of dividing by it.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Which description of a number line graph shows the solution of $3x + 1 > -8$?`,
+      choices: [
+        ok(`An open circle at $-3$, shaded to the right`),
+        no(`A closed circle at $-3$, shaded to the right`, 'used-closed-circle-for-strict'),
+        no(`An open circle at $-3$, shaded to the left`, 'shaded-wrong-direction'),
+        no(`An open circle at $-\\frac{7}{3}$, shaded to the right`, 'added-instead-of-subtracted'),
+      ],
+      solution: `Subtract $1$: $3x > -9$. Divide by $3$: $x > -3$. The sign is strict, so $-3$ itself is not a solution and the circle is open; values greater than $-3$ are to the right.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `What is the solution of $2x + 5 \\geq 6x - 11$?`,
+      choices: [
+        ok(`$x \\leq 4$`),
+        no(`$x \\geq 4$`, 'forgot-to-flip-inequality'),
+        no(`$x \\geq -2$`, 'added-variable-term-instead-of-subtracting'),
+        no(`$x \\leq 1.5$`, 'combined-constants-with-wrong-sign'),
+      ],
+      solution: `Subtract $6x$ from both sides: $-4x + 5 \\geq -11$. Subtract $5$: $-4x \\geq -16$. Divide by $-4$ and reverse the sign: $x \\leq 4$. Check with $x = 0$: $5 \\geq -11$ is true, and $0 \\leq 4$.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Jordan can spend at most 50 dollars for a party, and spending exactly 50 dollars is allowed. Jordan has already spent 14 dollars on a cake, and muffins cost 4 dollars each and are sold only as whole muffins. Which inequality shows the whole number of muffins $m$ Jordan can buy?`,
+      choices: [
+        ok(`$m \\leq 9$`),
+        no(`$m \\geq 9$`, 'reversed-at-most-as-at-least'),
+        no(`$m \\leq 16$`, 'added-instead-of-subtracted'),
+        no(`$m \\leq 12.5$`, 'ignored-amount-already-spent'),
+      ],
+      solution: `The total cost can be at most 50 dollars: $14 + 4m \\leq 50$. Subtract $14$: $4m \\leq 36$. Divide by $4$: $m \\leq 9$. The answer $m \\leq 12.5$ forgets the 14 dollars already spent on the cake.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `What is the solution of $\\frac{x + 4}{-2} < 3$?`,
+      choices: [
+        ok(`$x > -10$`),
+        no(`$x < -10$`, 'forgot-to-flip-inequality'),
+        no(`$x > -2$`, 'added-instead-of-subtracted'),
+        no(`$x > -\\frac{11}{2}$`, 'divided-instead-of-multiplied'),
+      ],
+      solution: `Multiply both sides by $-2$ and reverse the sign: $x + 4 > -6$. Subtract $4$: $x > -10$. The answer $x < -10$ keeps the original sign even though both sides were multiplied by a negative number.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Which value of $x$ is a solution of $5 - 2x \\geq 11$?`,
+      choices: [
+        ok(`$-3$`),
+        no(`$0$`, 'forgot-to-flip-inequality'),
+        no(`$3$`, 'dropped-negative-coefficient'),
+        no(`$4$`, 'combined-unlike-terms'),
+      ],
+      solution: `Subtract $5$: $-2x \\geq 6$. Divide by $-2$ and reverse the sign: $x \\leq -3$. The value $-3$ works because the sign includes equality: $5 - 2(-3) = 11$, and $11 \\geq 11$. The value $0$ gives $5 \\geq 11$, which is false.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `What is the solution of $0.2x + 1.5 > 0.7x - 1$?`,
+      choices: [
+        ok(`$x < 5$`),
+        no(`$x > 5$`, 'forgot-to-flip-inequality'),
+        no(`$x < 1$`, 'moved-constant-without-changing-sign'),
+        no(`$x < 1.25$`, 'multiplied-instead-of-divided'),
+      ],
+      solution: `Subtract $0.2x$ from both sides: $1.5 > 0.5x - 1$. Add $1$: $2.5 > 0.5x$. Divide by $0.5$: $5 > x$, which is $x < 5$. Check with $x = 0$: $1.5 > -1$ is true.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `What is the solution of $4(x - 1) - 2x \\leq 3(x + 2)$?`,
+      choices: [
+        ok(`$x \\geq -10$`),
+        no(`$x \\leq -10$`, 'forgot-to-flip-inequality'),
+        no(`$x \\geq -6$`, 'distributed-to-first-term-only'),
+        no(`$x \\geq 10$`, 'sign-error-dividing-by-negative-one'),
+      ],
+      solution: `Distribute: $4x - 4 - 2x \\leq 3x + 6$, so $2x - 4 \\leq 3x + 6$. Subtract $3x$ and add $4$: $-x \\leq 10$. Divide by $-1$ and reverse the sign: $x \\geq -10$. Check with $x = 0$: $-4 \\leq 6$ is true.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `What is the solution of $3(2x - 1) < 6x + 4$?`,
+      choices: [
+        ok(`All real numbers`),
+        no(`No solution`, 'thought-variables-canceling-means-no-solution'),
+        no(`$x < \\frac{7}{12}$`, 'added-variable-terms-instead-of-subtracting'),
+        no(`$x < 7$`, 'treated-zero-coefficient-as-one'),
+      ],
+      solution: `Distribute: $6x - 3 < 6x + 4$. Subtract $6x$ from both sides: $-3 < 4$. The variable is gone and the statement left is always true, so every real number is a solution. The answer "No solution" would fit only if the statement left were false.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A bike rental shop offers two plans. Plan A costs 30 dollars plus 2 dollars per hour. Plan B costs 12 dollars plus 5 dollars per hour. Hours are charged at the same rate for any fraction of an hour, so $h$ can be any positive number. For which numbers of hours $h$ is Plan A strictly cheaper than Plan B (not equal in cost)?`,
+      choices: [
+        ok(`$h > 6$`),
+        no(`$h < 6$`, 'forgot-to-flip-inequality'),
+        no(`$h > 14$`, 'added-instead-of-subtracted'),
+        no(`$h > \\frac{18}{7}$`, 'added-variable-terms-instead-of-subtracting'),
+      ],
+      solution: `Plan A is cheaper when $30 + 2h < 12 + 5h$. Subtract $2h$ and $12$ from both sides: $18 < 3h$. Divide by $3$: $6 < h$, which is $h > 6$. Check with $h = 7$: Plan A costs 44 dollars and Plan B costs 47 dollars.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `What is the solution of $\\frac{x}{3} - \\frac{x}{4} \\geq 2$?`,
+      choices: [
+        ok(`$x \\geq 24$`),
+        no(`$x \\leq -2$`, 'subtracted-denominators'),
+        no(`$x \\geq \\frac{1}{6}$`, 'divided-instead-of-multiplied'),
+        no(`$x \\geq \\frac{24}{7}$`, 'added-fractions-instead-of-subtracting'),
+      ],
+      solution: `Use the common denominator $12$: $\\frac{4x}{12} - \\frac{3x}{12} = \\frac{x}{12}$, so $\\frac{x}{12} \\geq 2$. Multiply by $12$: $x \\geq 24$. Check with $x = 24$: $8 - 6 = 2$, and $2 \\geq 2$.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `In the inequality $ax - 5 > 7$, the number $a$ is negative. Which inequality gives the solution for $x$?`,
+      choices: [
+        ok(`$x < \\frac{12}{a}$`),
+        no(`$x > \\frac{12}{a}$`, 'forgot-to-flip-for-negative-coefficient'),
+        no(`$x < \\frac{2}{a}$`, 'subtracted-instead-of-added'),
+        no(`$x < 12a$`, 'multiplied-instead-of-divided'),
+      ],
+      solution: `Add $5$: $ax > 12$. Dividing by $a$, a negative number, reverses the sign: $x < \\frac{12}{a}$. For example, with $a = -2$ this gives $x < -6$, and $x = -7$ checks: $14 - 5 = 9$, and $9 > 7$.`,
+    },
+  ],
+}
+
+export default skill
