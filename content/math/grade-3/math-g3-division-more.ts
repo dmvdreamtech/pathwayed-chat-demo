@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g3-division-more',
+  extends: 'division',
+  subject: 'math',
+  grade: 3,
+  group: 'Operations and Algebraic Thinking',
+  name: 'Division',
+  standards: ['3.OA.C.7'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is $12 \\div 3$?`,
+      choices: [
+        ok(`$4$`),
+        no(`$9$`, 'subtracted-instead-of-divided'),
+        no(`$15$`, 'added-instead-of-divided'),
+        no(`$3$`, 'recalled-neighbor-fact'),
+      ],
+      solution: `Think of the multiplication fact: $3 \\times 4 = 12$, so $12 \\div 3 = 4$. The choice $9$ comes from $12 - 3$, which is subtraction, not division.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is $35 \\div 5$?`,
+      choices: [
+        no(`$30$`, 'subtracted-instead-of-divided'),
+        ok(`$7$`),
+        no(`$40$`, 'added-instead-of-divided'),
+        no(`$6$`, 'recalled-neighbor-fact'),
+      ],
+      solution: `Since $5 \\times 7 = 35$, the quotient is $35 \\div 5 = 7$. The choice $6$ comes from the nearby fact $5 \\times 6 = 30$, which does not make $35$.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Which multiplication fact helps you find $36 \\div 4$?`,
+      choices: [
+        no(`$4 \\times 8 = 32$`, 'recalled-neighbor-fact'),
+        no(`$36 \\times 4 = 144$`, 'multiplied-the-given-numbers'),
+        ok(`$4 \\times 9 = 36$`),
+        no(`$4 + 32 = 36$`, 'used-an-addition-fact'),
+      ],
+      solution: `To divide $36$ by $4$, ask what number times $4$ makes $36$. The fact $4 \\times 9 = 36$ shows the answer is $9$. The fact $4 \\times 8 = 32$ does not make $36$.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What is $0 \\div 5$?`,
+      choices: [
+        ok(`$0$`),
+        no(`$5$`, 'thought-zero-divided-gives-divisor'),
+        no(`$1$`, 'thought-zero-divided-gives-one'),
+        no(`It cannot be done`, 'thought-zero-cannot-be-divided'),
+      ],
+      solution: `If $0$ things are shared among $5$ groups, each group gets $0$. Also, $5 \\times 0 = 0$, so $0 \\div 5 = 0$. The choice $5$ mixes up the number being divided with the number of groups.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `What is $9 \\div 1$?`,
+      choices: [
+        no(`$1$`, 'thought-dividing-by-one-gives-one'),
+        no(`$8$`, 'subtracted-instead-of-divided'),
+        no(`$10$`, 'added-instead-of-divided'),
+        ok(`$9$`),
+      ],
+      solution: `Putting $9$ things into $1$ group leaves all $9$ in that group, and $1 \\times 9 = 9$. So $9 \\div 1 = 9$. The choice $8$ comes from $9 - 1$.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Rosa has 18 crayons. Rosa shares them equally among 3 friends. How many crayons does each friend get?`,
+      choices: [
+        no(`$15$`, 'subtracted-instead-of-divided'),
+        ok(`$6$`),
+        no(`$21$`, 'added-instead-of-divided'),
+        no(`$54$`, 'multiplied-instead-of-divided'),
+      ],
+      solution: `Sharing equally means dividing: $18 \\div 3 = 6$, because $3 \\times 6 = 18$. The choice $54$ comes from $18 \\times 3$, which would make more crayons, not share them.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `What number goes in the box to make $\\square \\times 6 = 48$ true?`,
+      choices: [
+        no(`$42$`, 'subtracted-instead-of-divided'),
+        no(`$54$`, 'added-instead-of-divided'),
+        no(`$7$`, 'recalled-neighbor-fact'),
+        ok(`$8$`),
+      ],
+      solution: `The missing factor is $48 \\div 6$. Since $8 \\times 6 = 48$, the box is $8$. The choice $7$ gives $7 \\times 6 = 42$, which is too small.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What is $81 \\div 9$?`,
+      choices: [
+        no(`$72$`, 'subtracted-instead-of-divided'),
+        ok(`$9$`),
+        no(`$8$`, 'recalled-neighbor-fact'),
+        no(`$90$`, 'added-instead-of-divided'),
+      ],
+      solution: `Since $9 \\times 9 = 81$, the quotient is $81 \\div 9 = 9$. The choice $8$ comes from $9 \\times 8 = 72$, which does not make $81$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Which division fact is in the same fact family as $6 \\times 7 = 42$?`,
+      choices: [
+        no(`$7 \\div 42 = 6$`, 'reversed-dividend-and-divisor'),
+        ok(`$42 \\div 6 = 7$`),
+        no(`$42 - 6 = 36$`, 'used-subtraction-instead-of-division'),
+        no(`$48 \\div 6 = 8$`, 'chose-a-different-fact-family'),
+      ],
+      solution: `The fact family of $6$, $7$ and $42$ uses only those three numbers, with $42$ as the whole. So $42 \\div 6 = 7$ belongs. The choice $7 \\div 42 = 6$ puts the whole in the wrong place, and $48 \\div 6 = 8$ uses different numbers.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A gym class has 32 students. The teacher makes teams of 4 students each. How many teams are there?`,
+      choices: [
+        ok(`$8$`),
+        no(`$28$`, 'subtracted-instead-of-divided'),
+        no(`$36$`, 'added-instead-of-divided'),
+        no(`$128$`, 'multiplied-instead-of-divided'),
+      ],
+      solution: `Find how many groups of $4$ are in $32$: $32 \\div 4 = 8$, because $4 \\times 8 = 32$. The choice $28$ only takes away one team of $4$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Coach Rivera has 45 cones and puts 5 cones in each row. How many rows of cones are there?`,
+      choices: [
+        no(`$8$`, 'recalled-neighbor-fact'),
+        no(`$40$`, 'subtracted-instead-of-divided'),
+        ok(`$9$`),
+        no(`$50$`, 'added-instead-of-divided'),
+      ],
+      solution: `The number of rows is $45 \\div 5 = 9$, because $5 \\times 9 = 45$. The choice $8$ would use only $5 \\times 8 = 40$ cones.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `What number goes in the box to make $\\square \\div 7 = 4$ true?`,
+      choices: [
+        no(`$3$`, 'subtracted-the-given-numbers'),
+        no(`$11$`, 'added-the-given-numbers'),
+        ok(`$28$`),
+        no(`$21$`, 'recalled-neighbor-fact'),
+      ],
+      solution: `The box is the number that is split into groups of $7$ to get $4$. Multiply: $7 \\times 4 = 28$, and $28 \\div 7 = 4$. The choice $21$ gives $21 \\div 7 = 3$, not $4$.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Which fact can you use to check that $72 \\div 9 = 8$ is correct?`,
+      choices: [
+        no(`$9 \\times 7 = 63$`, 'recalled-neighbor-fact'),
+        no(`$72 - 9 = 63$`, 'used-subtraction-to-check'),
+        no(`$72 \\times 9 = 648$`, 'multiplied-dividend-by-divisor'),
+        ok(`$9 \\times 8 = 72$`),
+      ],
+      solution: `To check a division, multiply the quotient by the divisor and see if you get the starting number: $9 \\times 8 = 72$. The fact $72 - 9 = 63$ is true but uses subtraction, so it does not check the division.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Milo reads 6 pages of a book each day. How many days will it take Milo to read 60 pages?`,
+      choices: [
+        no(`$54$`, 'subtracted-instead-of-divided'),
+        ok(`$10$`),
+        no(`$66$`, 'added-instead-of-divided'),
+        no(`$9$`, 'recalled-neighbor-fact'),
+      ],
+      solution: `Find how many groups of $6$ make $60$: $60 \\div 6 = 10$, because $6 \\times 10 = 60$. The choice $9$ gives only $6 \\times 9 = 54$ pages.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `What is $64 \\div 8$?`,
+      choices: [
+        no(`$56$`, 'subtracted-instead-of-divided'),
+        no(`$7$`, 'recalled-neighbor-fact'),
+        no(`$72$`, 'added-instead-of-divided'),
+        ok(`$8$`),
+      ],
+      solution: `Since $8 \\times 8 = 64$, the quotient is $64 \\div 8 = 8$. The choice $7$ comes from $8 \\times 7 = 56$, which is too small.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `What number goes in the box to make $63 \\div \\square = 7$ true?`,
+      choices: [
+        ok(`$9$`),
+        no(`$56$`, 'subtracted-instead-of-divided'),
+        no(`$70$`, 'added-instead-of-divided'),
+        no(`$8$`, 'recalled-neighbor-fact'),
+      ],
+      solution: `Ask what number times $7$ makes $63$. Since $7 \\times 9 = 63$, the box is $9$, and $63 \\div 9 = 7$. The choice $8$ gives $7 \\times 8 = 56$, not $63$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Mr. Ortiz has 3 packs of pencils with 10 pencils in each pack. He shares all the pencils equally among 5 students. How many pencils does each student get?`,
+      choices: [
+        no(`$2$`, 'used-only-one-pack'),
+        ok(`$6$`),
+        no(`$25$`, 'subtracted-instead-of-divided'),
+        no(`$150$`, 'multiplied-instead-of-divided'),
+      ],
+      solution: `First find the total: $3 \\times 10 = 30$ pencils. Then share: $30 \\div 5 = 6$ pencils each. The choice $2$ comes from sharing only one pack, $10 \\div 5$.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A garden has 56 plants in 8 equal rows. Ms. Park moves all the plants into 7 equal rows instead. How many plants are in each row now?`,
+      choices: [
+        no(`$7$`, 'used-the-old-number-of-rows'),
+        no(`$49$`, 'subtracted-instead-of-divided'),
+        ok(`$8$`),
+        no(`$63$`, 'added-instead-of-divided'),
+      ],
+      solution: `The garden still has $56$ plants. Split them into $7$ equal rows: $56 \\div 7 = 8$. The choice $7$ is the old row size, $56 \\div 8$, from before the plants were moved.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A number divided by 6 equals 9. What is that same number divided by 9?`,
+      choices: [
+        no(`$54$`, 'stopped-after-finding-the-number'),
+        no(`$9$`, 'repeated-the-given-quotient'),
+        no(`$15$`, 'added-divisor-and-quotient'),
+        ok(`$6$`),
+      ],
+      solution: `If the number divided by $6$ is $9$, the number is $6 \\times 9 = 54$. Then $54 \\div 9 = 6$. The choice $54$ is the number itself, not the answer to the second division.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Jada started with 70 beads to make bracelets that use 10 beads each. Jada has already used beads from the pile to make 3 bracelets. How many more bracelets can Jada make with the beads that are left?`,
+      choices: [
+        no(`$7$`, 'forgot-the-bracelets-already-made'),
+        ok(`$4$`),
+        no(`$60$`, 'subtracted-instead-of-divided'),
+        no(`$10$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `All $70$ beads make $70 \\div 10 = 7$ bracelets. Jada already made $3$, so $7 - 3 = 4$ more bracelets. The choice $7$ is the total number of bracelets and forgets the $3$ already made.`,
+    },
+  ],
+}
+
+export default skill
