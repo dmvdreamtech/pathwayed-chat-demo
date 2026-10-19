@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g12-trigonometric-functions-more',
+  extends: 'trigonometric-functions',
+  subject: 'math',
+  grade: 12,
+  group: 'Functions',
+  name: 'Trigonometric Functions',
+  standards: ['HSF.TF.A.2'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Convert $270^\\circ$ to radians:`,
+      choices: [
+        ok(`$\\frac{3\\pi}{2}$`),
+        no(`$\\frac{2\\pi}{3}$`, 'inverted-conversion-fraction'),
+        no(`$270\\pi$`, 'multiplied-by-pi-without-dividing-by-180'),
+        no(`$\\frac{3}{2}$`, 'dropped-pi'),
+      ],
+      solution: `Multiply degrees by $\\frac{\\pi}{180}$: $270 \\cdot \\frac{\\pi}{180} = \\frac{270\\pi}{180} = \\frac{3\\pi}{2}$ radians. The choice $\\frac{2\\pi}{3}$ flips the fraction $\\frac{270}{180}$ upside down.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Convert $\\frac{3\\pi}{4}$ radians to degrees:`,
+      choices: [
+        no(`$270^\\circ$`, 'used-360-degrees-for-pi'),
+        ok(`$135^\\circ$`),
+        no(`$45^\\circ$`, 'gave-the-reference-angle'),
+        no(`$0.75^\\circ$`, 'dropped-pi'),
+      ],
+      solution: `Since $\\pi$ radians equals $180^\\circ$, replace $\\pi$ with $180^\\circ$: $\\frac{3 \\cdot 180^\\circ}{4} = 135^\\circ$. The choice $270^\\circ$ treats $\\pi$ as $360^\\circ$, but a full turn of $360^\\circ$ is $2\\pi$ radians.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `On the unit circle, what are the coordinates of the point at an angle of $\\frac{\\pi}{2}$ radians, measured counterclockwise from the positive $x$-axis?`,
+      choices: [
+        no(`$(1, 0)$`, 'swapped-x-and-y-coordinates'),
+        no(`$(0, -1)$`, 'measured-clockwise'),
+        no(`$(-1, 0)$`, 'used-pi-instead-of-pi-over-2'),
+        ok(`$(0, 1)$`),
+      ],
+      solution: `An angle of $\\frac{\\pi}{2}$ radians is a quarter turn, which points straight up the positive $y$-axis, so the point is $(\\cos\\frac{\\pi}{2}, \\sin\\frac{\\pi}{2}) = (0, 1)$. The choice $(1, 0)$ swaps the coordinates; that point is at $0$ radians.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `In which quadrant is $\\cos\\theta > 0$ and $\\sin\\theta < 0$?`,
+      choices: [
+        ok(`Quadrant IV`),
+        no(`Quadrant II`, 'swapped-sine-and-cosine-signs'),
+        no(`Quadrant I`, 'only-checked-cosine'),
+        no(`Quadrant III`, 'only-checked-sine'),
+      ],
+      solution: `Cosine is the $x$-coordinate and sine is the $y$-coordinate on the unit circle. A positive $x$ and a negative $y$ put the point to the right of and below the origin, which is Quadrant IV. The choice Quadrant II has negative $x$ and positive $y$, the reverse of what is asked.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `What is the reference angle for $150^\\circ$?`,
+      choices: [
+        no(`$60^\\circ$`, 'measured-to-the-y-axis'),
+        ok(`$30^\\circ$`),
+        no(`$210^\\circ$`, 'subtracted-from-360-in-quadrant-ii'),
+        no(`$330^\\circ$`, 'added-180-degrees'),
+      ],
+      solution: `A reference angle is the acute angle to the $x$-axis. For $150^\\circ$ in Quadrant II, it is $180^\\circ - 150^\\circ = 30^\\circ$. The choice $60^\\circ$ comes from $150^\\circ - 90^\\circ$, which measures to the $y$-axis instead.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Convert $45^\\circ$ to radians:`,
+      choices: [
+        no(`$4\\pi$`, 'inverted-conversion-fraction'),
+        no(`$\\frac{\\pi}{8}$`, 'divided-by-360-instead-of-180'),
+        ok(`$\\frac{\\pi}{4}$`),
+        no(`$\\frac{\\pi}{45}$`, 'divided-pi-by-the-degrees'),
+      ],
+      solution: `Multiply by $\\frac{\\pi}{180}$: $45 \\cdot \\frac{\\pi}{180} = \\frac{45\\pi}{180} = \\frac{\\pi}{4}$ radians. The choice $\\frac{\\pi}{8}$ divides by $360$, but $180^\\circ$ (not $360^\\circ$) equals $\\pi$ radians.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `The angle $\\frac{7\\pi}{6}$ is in radians. What is $\\sin\\frac{7\\pi}{6}$?`,
+      choices: [
+        no(`$\\frac{1}{2}$`, 'ignored-quadrant-sign'),
+        ok(`$-\\frac{1}{2}$`),
+        no(`$-\\frac{\\sqrt{3}}{2}$`, 'swapped-sine-and-cosine'),
+        no(`$\\frac{\\sqrt{3}}{2}$`, 'swapped-sine-and-cosine-and-ignored-sign'),
+      ],
+      solution: `$\\frac{7\\pi}{6}$ is $\\frac{\\pi}{6}$ past $\\pi$, so it lies in Quadrant III with reference angle $\\frac{\\pi}{6}$. There $\\sin\\frac{\\pi}{6} = \\frac{1}{2}$, and sine is negative in Quadrant III, so $\\sin\\frac{7\\pi}{6} = -\\frac{1}{2}$. The choice $\\frac{1}{2}$ forgets the negative sign.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `The angle $-\\frac{\\pi}{3}$ is in radians. What is $\\cos\\left(-\\frac{\\pi}{3}\\right)$?`,
+      choices: [
+        ok(`$\\frac{1}{2}$`),
+        no(`$-\\frac{1}{2}$`, 'treated-cosine-as-odd'),
+        no(`$\\frac{\\sqrt{3}}{2}$`, 'swapped-sine-and-cosine'),
+        no(`$-\\frac{\\sqrt{3}}{2}$`, 'gave-sine-of-the-angle'),
+      ],
+      solution: `Turning $\\frac{\\pi}{3}$ clockwise lands in Quadrant IV, where the $x$-coordinate is positive. So $\\cos\\left(-\\frac{\\pi}{3}\\right) = \\cos\\frac{\\pi}{3} = \\frac{1}{2}$. The choice $-\\frac{1}{2}$ assumes a negative angle always flips the sign, but that only happens for sine.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `The angle $-\\frac{\\pi}{4}$ is in radians. What is $\\sin\\left(-\\frac{\\pi}{4}\\right)$?`,
+      choices: [
+        no(`$\\frac{\\sqrt{2}}{2}$`, 'ignored-the-negative-angle'),
+        no(`$-1$`, 'computed-tangent-instead'),
+        ok(`$-\\frac{\\sqrt{2}}{2}$`),
+        no(`$-\\sqrt{2}$`, 'took-the-reciprocal'),
+      ],
+      solution: `A clockwise turn of $\\frac{\\pi}{4}$ ends in Quadrant IV, where the $y$-coordinate is negative. Since $\\sin\\frac{\\pi}{4} = \\frac{\\sqrt{2}}{2}$, we get $\\sin\\left(-\\frac{\\pi}{4}\\right) = -\\frac{\\sqrt{2}}{2}$. The choice $-1$ is $\\tan\\left(-\\frac{\\pi}{4}\\right)$, not the sine.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `The angle $\\frac{13\\pi}{6}$ is in radians. What is $\\cos\\frac{13\\pi}{6}$?`,
+      choices: [
+        no(`$\\frac{1}{2}$`, 'swapped-sine-and-cosine'),
+        no(`$-\\frac{\\sqrt{3}}{2}$`, 'subtracted-pi-instead-of-2pi'),
+        no(`$-\\frac{1}{2}$`, 'subtracted-pi-and-used-sine'),
+        ok(`$\\frac{\\sqrt{3}}{2}$`),
+      ],
+      solution: `$\\frac{13\\pi}{6}$ is more than one full turn. Subtract $2\\pi = \\frac{12\\pi}{6}$ to get the coterminal angle $\\frac{\\pi}{6}$, so $\\cos\\frac{13\\pi}{6} = \\cos\\frac{\\pi}{6} = \\frac{\\sqrt{3}}{2}$. The choice $-\\frac{\\sqrt{3}}{2}$ subtracts only $\\pi$, which gives $\\frac{7\\pi}{6}$, an angle that is not coterminal.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `The angle $\\frac{7\\pi}{4}$ is in radians. What is $\\tan\\frac{7\\pi}{4}$?`,
+      choices: [
+        ok(`$-1$`),
+        no(`$1$`, 'ignored-quadrant-sign'),
+        no(`$-\\frac{\\sqrt{2}}{2}$`, 'gave-sine-instead-of-tangent'),
+        no(`$-\\sqrt{3}$`, 'used-pi-over-3-reference-angle'),
+      ],
+      solution: `$\\frac{7\\pi}{4}$ is $\\frac{\\pi}{4}$ short of $2\\pi$, so it is in Quadrant IV with reference angle $\\frac{\\pi}{4}$. There $\\tan\\frac{\\pi}{4} = 1$, and tangent is negative in Quadrant IV, so $\\tan\\frac{7\\pi}{4} = -1$. The choice $-\\frac{\\sqrt{2}}{2}$ is the sine of the angle.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `On the unit circle, what are the coordinates of the point at an angle of $\\frac{5\\pi}{6}$ radians?`,
+      choices: [
+        no(`$\\left(-\\frac{1}{2}, \\frac{\\sqrt{3}}{2}\\right)$`, 'swapped-x-and-y-coordinates'),
+        ok(`$\\left(-\\frac{\\sqrt{3}}{2}, \\frac{1}{2}\\right)$`),
+        no(`$\\left(\\frac{\\sqrt{3}}{2}, \\frac{1}{2}\\right)$`, 'ignored-quadrant-sign'),
+        no(`$\\left(-\\frac{\\sqrt{3}}{2}, -\\frac{1}{2}\\right)$`, 'placed-in-quadrant-iii'),
+      ],
+      solution: `$\\frac{5\\pi}{6}$ is in Quadrant II with reference angle $\\frac{\\pi}{6}$. The point is $(\\cos\\theta, \\sin\\theta)$; $\\cos\\frac{\\pi}{6} = \\frac{\\sqrt{3}}{2}$ becomes negative and $\\sin\\frac{\\pi}{6} = \\frac{1}{2}$ stays positive, giving $\\left(-\\frac{\\sqrt{3}}{2}, \\frac{1}{2}\\right)$. The choice $\\left(-\\frac{1}{2}, \\frac{\\sqrt{3}}{2}\\right)$ is the point for $\\frac{2\\pi}{3}$.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A central angle in a circle of radius $4$ cm cuts off an arc $10$ cm long. What is the measure of the angle in radians?`,
+      choices: [
+        no(`$40$`, 'multiplied-arc-by-radius'),
+        no(`$0.4$`, 'divided-radius-by-arc'),
+        no(`$1.25$`, 'divided-by-diameter'),
+        ok(`$2.5$`),
+      ],
+      solution: `Radian measure is arc length divided by radius: $\\theta = \\frac{s}{r} = \\frac{10}{4} = 2.5$ radians. The choice $1.25$ divides by the diameter, $8$ cm, instead of the radius.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `What is the amplitude of $y = -3\\sin(2x) + 1$?`,
+      choices: [
+        ok(`$3$`),
+        no(`$-3$`, 'kept-the-negative-sign'),
+        no(`$2$`, 'used-the-coefficient-of-x'),
+        no(`$4$`, 'added-the-vertical-shift'),
+      ],
+      solution: `The amplitude is the absolute value of the number multiplying the sine: $|-3| = 3$. The negative sign only reflects the graph, and amplitude is a distance, so it cannot be $-3$.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `With $x$ in radians, what is the period of $y = 2\\cos(3x)$?`,
+      choices: [
+        no(`$6\\pi$`, 'multiplied-2pi-by-b'),
+        ok(`$\\frac{2\\pi}{3}$`),
+        no(`$\\pi$`, 'divided-by-the-amplitude'),
+        no(`$\\frac{3}{2\\pi}$`, 'inverted-the-period-formula'),
+      ],
+      solution: `For $y = a\\cos(bx)$ the period is $\\frac{2\\pi}{|b|}$. Here $b = 3$, so the period is $\\frac{2\\pi}{3}$. The choice $6\\pi$ multiplies by $3$, but a larger $b$ squeezes the graph, so the period gets shorter.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Which angle between $0$ and $2\\pi$ radians is coterminal with $-\\frac{5\\pi}{4}$ radians?`,
+      choices: [
+        no(`$\\frac{5\\pi}{4}$`, 'dropped-the-negative-sign'),
+        no(`$\\frac{\\pi}{4}$`, 'gave-the-reference-angle'),
+        ok(`$\\frac{3\\pi}{4}$`),
+        no(`$\\frac{13\\pi}{4}$`, 'computed-2pi-minus-the-angle'),
+      ],
+      solution: `Coterminal angles differ by full turns of $2\\pi$. Add $2\\pi = \\frac{8\\pi}{4}$: $-\\frac{5\\pi}{4} + \\frac{8\\pi}{4} = \\frac{3\\pi}{4}$, which is between $0$ and $2\\pi$. The choice $\\frac{5\\pi}{4}$ just drops the sign, but turning $\\frac{5\\pi}{4}$ clockwise ends in Quadrant II, not Quadrant III.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `The angle $-\\frac{11\\pi}{3}$ is in radians. What is $\\sin\\left(-\\frac{11\\pi}{3}\\right)$?`,
+      choices: [
+        no(`$-\\frac{\\sqrt{3}}{2}$`, 'ignored-the-negative-angle'),
+        ok(`$\\frac{\\sqrt{3}}{2}$`),
+        no(`$\\frac{1}{2}$`, 'swapped-sine-and-cosine'),
+        no(`$\\sqrt{3}$`, 'computed-tangent-instead'),
+      ],
+      solution: `Add two full turns, $4\\pi = \\frac{12\\pi}{3}$: $-\\frac{11\\pi}{3} + \\frac{12\\pi}{3} = \\frac{\\pi}{3}$. So $\\sin\\left(-\\frac{11\\pi}{3}\\right) = \\sin\\frac{\\pi}{3} = \\frac{\\sqrt{3}}{2}$. The choice $-\\frac{\\sqrt{3}}{2}$ is $\\sin\\frac{11\\pi}{3}$, the value for the positive angle.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A function of the form $y = a\\sin(bx) + d$, with $a > 0$, $b > 0$ and $x$ in radians, has a maximum value of $9$, a minimum value of $-3$ and a period of $\\pi$. Which equation fits?`,
+      choices: [
+        no(`$y = 12\\sin(2x) + 3$`, 'used-full-range-as-amplitude'),
+        no(`$y = 6\\sin\\left(\\frac{1}{2}x\\right) + 3$`, 'inverted-b-from-the-period'),
+        ok(`$y = 6\\sin(2x) + 3$`),
+        no(`$y = 6\\sin(2x) + 6$`, 'added-max-and-distance-of-min'),
+      ],
+      solution: `The amplitude is half the distance from max to min: $\\frac{9 - (-3)}{2} = 6$. The midline is the average: $\\frac{9 + (-3)}{2} = 3$. The period is $\\frac{2\\pi}{b} = \\pi$, so $b = 2$. That gives $y = 6\\sin(2x) + 3$. The choice $y = 12\\sin(2x) + 3$ uses the whole distance $12$ as the amplitude.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `An angle $\\theta$ in Quadrant IV has $\\sin\\theta = -\\frac{12}{13}$. What is $\\tan\\theta$?`,
+      choices: [
+        ok(`$-\\frac{12}{5}$`),
+        no(`$\\frac{12}{5}$`, 'ignored-quadrant-sign'),
+        no(`$-\\frac{5}{12}$`, 'inverted-the-tangent-ratio'),
+        no(`$-\\frac{12}{13}$`, 'gave-sine-instead-of-tangent'),
+      ],
+      solution: `Use $\\sin^2\\theta + \\cos^2\\theta = 1$: $\\cos^2\\theta = 1 - \\frac{144}{169} = \\frac{25}{169}$, and cosine is positive in Quadrant IV, so $\\cos\\theta = \\frac{5}{13}$. Then $\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta} = \\frac{-12/13}{5/13} = -\\frac{12}{5}$. The choice $-\\frac{5}{12}$ divides cosine by sine instead.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `The angles are in radians. What is the exact value of $\\sin\\frac{4\\pi}{3} + \\cos\\frac{11\\pi}{6}$?`,
+      choices: [
+        no(`$-\\sqrt{3}$`, 'wrong-sign-on-cosine-in-quadrant-iv'),
+        no(`$\\sqrt{3}$`, 'wrong-sign-on-sine-in-quadrant-iii'),
+        ok(`$0$`),
+        no(`$\\frac{\\sqrt{3} - 1}{2}$`, 'used-cosine-value-for-the-sine-term'),
+      ],
+      solution: `$\\frac{4\\pi}{3}$ is in Quadrant III with reference angle $\\frac{\\pi}{3}$, so $\\sin\\frac{4\\pi}{3} = -\\frac{\\sqrt{3}}{2}$. $\\frac{11\\pi}{6}$ is in Quadrant IV with reference angle $\\frac{\\pi}{6}$, so $\\cos\\frac{11\\pi}{6} = \\frac{\\sqrt{3}}{2}$. The sum is $-\\frac{\\sqrt{3}}{2} + \\frac{\\sqrt{3}}{2} = 0$. The choice $-\\sqrt{3}$ makes the cosine negative, but cosine is positive in Quadrant IV.`,
+    },
+  ],
+}
+
+export default skill
