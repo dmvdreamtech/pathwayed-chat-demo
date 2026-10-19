@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g5-decimal-operations-more',
+  extends: 'decimal-operations',
+  subject: 'math',
+  grade: 5,
+  group: 'Number and Operations in Base Ten',
+  name: 'Decimal Operations',
+  standards: ['5.NBT.B.7'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is $3.25 + 1.4$?`,
+      choices: [
+        ok(`$4.65$`),
+        no(`$3.39$`, 'lined-up-last-digits'),
+        no(`$4.29$`, 'added-decimal-parts-as-whole-numbers'),
+        no(`$0.465$`, 'misplaced-decimal-point'),
+      ],
+      solution: `Line up the decimal points and write $1.4$ as $1.40$. Then $3.25 + 1.40 = 4.65$. The choice $3.39$ lines up the last digits, which adds $0.14$ instead of $1.4$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is $6 - 2.35$?`,
+      choices: [
+        no(`$4.35$`, 'subtracted-whole-parts-only'),
+        no(`$4.65$`, 'forgot-to-reduce-ones-after-regrouping'),
+        ok(`$3.65$`),
+        no(`$8.35$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `Write $6$ as $6.00$. Regroup one whole into tenths and hundredths: $6.00 - 2.35 = 3.65$. The choice $4.65$ regroups for the hundredths and tenths but forgets that the ones digit drops from $6$ to $5$.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `What is $0.07 \\times 3$?`,
+      choices: [
+        no(`$2.1$`, 'too-few-decimal-places'),
+        ok(`$0.21$`),
+        no(`$0.021$`, 'too-many-decimal-places'),
+        no(`$3.07$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Three groups of $7$ hundredths make $21$ hundredths, which is $0.21$. The choice $2.1$ is $21$ tenths, ten times too large.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What is $1.5 \\times 2$?`,
+      choices: [
+        no(`$0.3$`, 'misplaced-decimal-point'),
+        no(`$2.5$`, 'multiplied-only-the-ones'),
+        no(`$3.5$`, 'added-instead-of-multiplied'),
+        ok(`$3$`),
+      ],
+      solution: `Two groups of $1.5$ is $1.5 + 1.5 = 3$. The choice $2.5$ doubles the ones but forgets to double the $0.5$.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A water bottle holds 0.75 liters. Ravi drinks 0.5 liters. How many liters are left in the bottle?`,
+      choices: [
+        ok(`0.25 liters`),
+        no(`0.7 liters`, 'lined-up-last-digits'),
+        no(`1.25 liters`, 'added-instead-of-subtracted'),
+        no(`0.2 liters`, 'dropped-the-hundredths'),
+      ],
+      solution: `Write $0.5$ as $0.50$ and subtract: $0.75 - 0.50 = 0.25$, so 0.25 liters are left. The answer 0.7 liters lines up the $5$ in $0.5$ under the hundredths digit, which subtracts only $0.05$.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `What is $8.1 - 0.6$?`,
+      choices: [
+        no(`$8.5$`, 'subtracted-smaller-digit-from-larger'),
+        ok(`$7.5$`),
+        no(`$2.1$`, 'misaligned-place-values'),
+        no(`$8.7$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `There are not enough tenths, so regroup one whole: $8.1$ is $7$ ones and $11$ tenths, and $11 - 6 = 5$ tenths, giving $7.5$. The choice $8.5$ takes $1$ from $6$ instead of regrouping.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `What is $2.4 \\div 0.6$?`,
+      choices: [
+        no(`$0.4$`, 'scaled-only-the-divisor'),
+        no(`$40$`, 'scaled-only-the-dividend'),
+        ok(`$4$`),
+        no(`$1.44$`, 'multiplied-instead-of-divided'),
+      ],
+      solution: `Ask how many groups of $0.6$ fit in $2.4$. Multiply both numbers by $10$: $24 \\div 6 = 4$. Check: $4 \\times 0.6 = 2.4$. The choice $40$ changes $2.4$ to $24$ but leaves $0.6$ alone, so it finds $24 \\div 0.6$ instead.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What is $0.15 \\times 0.3$?`,
+      choices: [
+        ok(`$0.045$`),
+        no(`$0.45$`, 'too-few-decimal-places'),
+        no(`$45$`, 'ignored-decimal-points'),
+        no(`$0.0045$`, 'too-many-decimal-places'),
+      ],
+      solution: `Multiply $15 \\times 3 = 45$. Hundredths times tenths gives thousandths, so the product is $45$ thousandths, or $0.045$. The choice $0.45$ only counts two decimal places, but there are three in all.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `A bag of rice weighs 2.5 kilograms. How many kilograms do 6 bags weigh?`,
+      choices: [
+        no(`1.5 kilograms`, 'misplaced-decimal-point'),
+        no(`12.5 kilograms`, 'multiplied-only-the-ones'),
+        ok(`15 kilograms`),
+        no(`8.5 kilograms`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Multiply $6 \\times 2.5$. Six groups of $2$ is $12$ and six groups of $0.5$ is $3$, so the total is $12 + 3 = 15$ kilograms. The answer 12.5 kilograms multiplies the $2$ by $6$ but leaves the $0.5$ as it was.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `What is $9 \\div 0.5$?`,
+      choices: [
+        no(`$4.5$`, 'multiplied-instead-of-divided'),
+        no(`$1.8$`, 'misplaced-decimal-in-quotient'),
+        no(`$8.5$`, 'subtracted-instead-of-divided'),
+        ok(`$18$`),
+      ],
+      solution: `Ask how many halves fit in $9$. Each whole holds $2$ halves, so $9$ wholes hold $9 \\times 2 = 18$ halves. Check: $18 \\times 0.5 = 9$. The choice $4.5$ is $9 \\times 0.5$, which takes half of $9$ instead of counting halves.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `What is $4.08 - 1.5$?`,
+      choices: [
+        no(`$3.93$`, 'lined-up-last-digits'),
+        ok(`$2.58$`),
+        no(`$3.58$`, 'forgot-to-reduce-ones-after-regrouping'),
+        no(`$5.58$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `Write $1.5$ as $1.50$. The hundredths give $8 - 0 = 8$. For the tenths, regroup one whole: $10 - 5 = 5$ tenths, leaving $3 - 1 = 2$ ones. The difference is $2.58$. The choice $3.93$ lines up the last digits, which subtracts $0.15$ instead of $1.5$.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `What is $3.5 \\times 1.2$?`,
+      choices: [
+        ok(`$4.2$`),
+        no(`$3.1$`, 'multiplied-matching-places-only'),
+        no(`$42$`, 'ignored-decimal-points'),
+        no(`$0.42$`, 'too-many-decimal-places'),
+      ],
+      solution: `Multiply $35 \\times 12 = 420$. There are two decimal places in all, so the product is $4.20$, or $4.2$. Estimate to check: $3.5 \\times 1$ is $3.5$, so the answer should be a little more than $3.5$. The choice $3.1$ only multiplies ones by ones and tenths by tenths, which misses the cross parts.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A school buys 4 packs of markers. Each pack costs 3.85 dollars. How much do the 4 packs cost in all?`,
+      choices: [
+        no(`1.54 dollars`, 'misplaced-decimal-point'),
+        no(`7.85 dollars`, 'added-instead-of-multiplied'),
+        ok(`15.40 dollars`),
+        no(`12.85 dollars`, 'multiplied-only-the-ones'),
+      ],
+      solution: `Multiply $4 \\times 3.85$. Four groups of $3$ is $12$ and four groups of $0.85$ is $3.40$, so the total is $12 + 3.40 = 15.40$ dollars. The answer 12.85 dollars multiplies the $3$ by $4$ but forgets the $0.85$ in each pack.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Three friends share 7.35 dollars equally. How much money does each friend get?`,
+      choices: [
+        no(`24.5 dollars`, 'misplaced-decimal-in-quotient'),
+        ok(`2.45 dollars`),
+        no(`22.05 dollars`, 'multiplied-instead-of-divided'),
+        no(`2.35 dollars`, 'divided-whole-part-only'),
+      ],
+      solution: `Divide $7.35 \\div 3$. Three goes into $7$ two times with $1$ left, making $13$ tenths; $13 \\div 3$ is $4$ with $1$ tenth left, making $15$ hundredths; $15 \\div 3 = 5$. Each friend gets 2.45 dollars. Check: $3 \\times 2.45 = 7.35$. The answer 2.35 dollars divides only the $7$ and keeps the $0.35$ without sharing it.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Which expression has the same value as $4.8 \\div 0.6$?`,
+      choices: [
+        no(`$48 \\div 0.6$`, 'scaled-only-the-dividend'),
+        no(`$4.8 \\div 6$`, 'scaled-only-the-divisor'),
+        ok(`$48 \\div 6$`),
+        no(`$480 \\div 6$`, 'scaled-by-different-powers-of-ten'),
+      ],
+      solution: `Multiplying both the dividend and the divisor by the same number, here $10$, keeps the quotient the same: $4.8 \\div 0.6 = 48 \\div 6 = 8$. The expression $48 \\div 0.6$ multiplies only $4.8$ by $10$, which makes the quotient ten times as large.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `What is $7.2 \\div 0.08$?`,
+      choices: [
+        no(`$9$`, 'shifted-decimal-too-few-places'),
+        no(`$0.9$`, 'misplaced-decimal-in-quotient'),
+        ok(`$90$`),
+        no(`$900$`, 'scaled-dividend-more-than-divisor'),
+      ],
+      solution: `Multiply both numbers by $100$ so the divisor is a whole number: $720 \\div 8 = 90$. Check: $90 \\times 0.08 = 7.2$. The choice $9$ treats the problem as $72 \\div 8$, but $0.08$ needs two places to become $8$, so $7.2$ must also move two places to $720$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Tomas buys 2.5 pounds of grapes. The grapes cost 2.40 dollars per pound. Tomas pays with a 10 dollar bill. How much change does Tomas get?`,
+      choices: [
+        ok(`4 dollars`),
+        no(`6 dollars`, 'gave-cost-not-change'),
+        no(`5.20 dollars`, 'multiplied-only-the-ones'),
+        no(`5.10 dollars`, 'added-instead-of-multiplied'),
+      ],
+      solution: `The grapes cost $2.5 \\times 2.40$. Two pounds cost $4.80$ and half a pound costs $1.20$, so the total is $6.00$ dollars. The change is $10 - 6 = 4$ dollars. The answer 6 dollars is the cost of the grapes, not the change.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A baker has 4.5 kilograms of flour. Each batch of bread uses 0.25 kilograms. How many batches can the baker make with all of the flour?`,
+      choices: [
+        no(`1.8 batches`, 'misplaced-decimal-in-quotient'),
+        no(`1.125 batches`, 'multiplied-instead-of-divided'),
+        ok(`18 batches`),
+        no(`180 batches`, 'scaled-dividend-more-than-divisor'),
+      ],
+      solution: `Divide $4.5 \\div 0.25$. Multiply both numbers by $100$: $450 \\div 25 = 18$. Another way: there are $4$ quarter kilograms in each kilogram, so $4.5 \\times 4 = 18$ batches. The answer 1.125 batches is $4.5 \\times 0.25$, which finds a quarter of the flour instead of how many quarters fit.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A rectangular garden is 3.4 meters long and 2.5 meters wide. What is the area of the garden in square meters?`,
+      choices: [
+        no(`5.9 square meters`, 'added-length-and-width'),
+        no(`11.8 square meters`, 'found-perimeter-instead-of-area'),
+        no(`6.2 square meters`, 'multiplied-matching-places-only'),
+        ok(`8.5 square meters`),
+      ],
+      solution: `Area is length times width: $3.4 \\times 2.5$. Multiply $34 \\times 25 = 850$; there are two decimal places in all, so the area is $8.50$, or $8.5$ square meters. The answer 6.2 square meters multiplies only $3 \\times 2$ and $0.4 \\times 0.5$ and leaves out the cross parts.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `What number goes in the box to make $\\square \\times 0.6 = 2.7$ true?`,
+      choices: [
+        no(`$1.62$`, 'multiplied-instead-of-divided'),
+        ok(`$4.5$`),
+        no(`$0.45$`, 'misplaced-decimal-in-quotient'),
+        no(`$2.1$`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `The missing factor is $2.7 \\div 0.6$. Multiply both numbers by $10$: $27 \\div 6 = 4.5$. Check: $4.5 \\times 0.6 = 2.7$. The choice $1.62$ is $2.7 \\times 0.6$, but a missing factor is found by dividing.`,
+    },
+  ],
+}
+
+export default skill
