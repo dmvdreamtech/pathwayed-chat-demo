@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g12-advanced-functions-more',
+  extends: 'advanced-functions',
+  subject: 'math',
+  grade: 12,
+  group: 'Functions',
+  name: 'Advanced Functions',
+  standards: ['HSF.IF.A.2'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `If $f(x) = 3x - 8$, what is $f(-2)$?`,
+      choices: [
+        no(`$-2$`, 'dropped-negative-sign-of-input'),
+        ok(`$-14$`),
+        no(`$-7$`, 'added-coefficient-instead-of-multiplying'),
+        no(`$14$`, 'subtracted-in-wrong-order'),
+      ],
+      solution: `Replace $x$ with $-2$: $3(-2) - 8 = -6 - 8 = -14$. The choice $-2$ treats the input as $2$, giving $6 - 8$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `If $g(t) = t^2 - 4t$, what is $g(-3)$?`,
+      choices: [
+        no(`$-3$`, 'dropped-negative-in-product'),
+        no(`$3$`, 'squared-negative-as-negative'),
+        no(`$-21$`, 'two-sign-errors'),
+        ok(`$21$`),
+      ],
+      solution: `Substitute $-3$ for $t$: $(-3)^2 - 4(-3) = 9 + 12 = 21$. The choice $3$ comes from writing $(-3)^2$ as $-9$; squaring a negative number gives a positive result.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `If $h(x) = |x - 5|$, what is $h(2)$?`,
+      choices: [
+        ok(`$3$`),
+        no(`$-3$`, 'ignored-absolute-value'),
+        no(`$7$`, 'added-instead-of-subtracted'),
+        no(`$2$`, 'returned-the-input'),
+      ],
+      solution: `Compute inside the bars first: $2 - 5 = -3$. The absolute value of $-3$ is $3$, so $h(2) = 3$. The choice $-3$ forgets that an absolute value is never negative.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A table for the function $f(x) = 3x + 1$ lists the pairs $f(1) = 4$, $f(2) = 7$, $f(3) = 10$ and $f(4) = 13$. For what value of $x$ does $f(x) = 10$?`,
+      choices: [
+        no(`$10$`, 'confused-input-and-output'),
+        no(`$31$`, 'evaluated-at-the-output-value'),
+        ok(`$3$`),
+        no(`$4$`, 'read-the-next-row'),
+      ],
+      solution: `The statement $f(x) = 10$ asks for the input whose output is $10$. The table shows $f(3) = 10$, so $x = 3$. The choice $31$ is $f(10)$, which uses $10$ as an input instead of an output.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A bowling alley charges according to $C(n) = 12n + 30$, where $C(n)$ is the total cost in dollars for a party of $n$ people. What is $C(5)$?`,
+      choices: [
+        no(`$420$`, 'added-before-multiplying'),
+        no(`$47$`, 'added-instead-of-multiplying'),
+        no(`$60$`, 'dropped-the-constant'),
+        ok(`$90$`),
+      ],
+      solution: `Substitute $5$ for $n$: $12(5) + 30 = 60 + 30 = 90$, so a party of 5 costs 90 dollars. The choice $60$ leaves out the fixed charge of 30 dollars.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `If $f(x) = x^3 - 2x$, what is $f(2)$?`,
+      choices: [
+        no(`$2$`, 'cubed-as-times-three'),
+        ok(`$4$`),
+        no(`$0$`, 'squared-instead-of-cubed'),
+        no(`$12$`, 'sign-error-on-subtraction'),
+      ],
+      solution: `Substitute $2$: $2^3 - 2(2) = 8 - 4 = 4$. The choice $2$ comes from treating $2^3$ as $2 \\times 3 = 6$.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `If $f(x) = 2x + 5$, which expression is equal to $f(a + 3)$?`,
+      choices: [
+        no(`$2a + 8$`, 'distributed-to-first-term-only'),
+        no(`$2a + 16$`, 'added-f-of-a-and-f-of-3'),
+        ok(`$2a + 11$`),
+        no(`$2a + 6$`, 'dropped-the-constant'),
+      ],
+      solution: `Replace every $x$ with $(a + 3)$: $2(a + 3) + 5 = 2a + 6 + 5 = 2a + 11$. The choice $2a + 8$ multiplies only the $a$ by $2$ and not the $3$.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `If $f(x) = x^2 + 1$, which expression is equal to $f(x + 2)$?`,
+      choices: [
+        ok(`$x^2 + 4x + 5$`),
+        no(`$x^2 + 5$`, 'squared-term-by-term'),
+        no(`$x^2 + 3$`, 'added-2-to-the-output'),
+        no(`$x^2 + 2x + 5$`, 'forgot-to-double-the-middle-term'),
+      ],
+      solution: `Substitute $(x + 2)$ for $x$: $(x + 2)^2 + 1 = x^2 + 4x + 4 + 1 = x^2 + 4x + 5$. The choice $x^2 + 3$ is $f(x) + 2$, which adds $2$ to the output instead of the input.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `If $f(x) = 4x - 7$, what value of $x$ makes $f(x) = 13$?`,
+      choices: [
+        no(`$45$`, 'evaluated-instead-of-solving'),
+        no(`$1.5$`, 'subtracted-instead-of-adding'),
+        no(`$20$`, 'forgot-to-divide'),
+        ok(`$5$`),
+      ],
+      solution: `Set the rule equal to $13$: $4x - 7 = 13$, so $4x = 20$ and $x = 5$. Check: $f(5) = 20 - 7 = 13$. The choice $45$ is $f(13)$, which treats $13$ as the input.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `If $f(x) = x^2 - 6$, which values of $x$ make $f(x) = 10$?`,
+      choices: [
+        no(`$x = 4$ only`, 'missed-the-negative-root'),
+        ok(`$x = 4$ or $x = -4$`),
+        no(`$x = 2$ or $x = -2$`, 'subtracted-instead-of-adding'),
+        no(`$x = 94$`, 'evaluated-instead-of-solving'),
+      ],
+      solution: `Solve $x^2 - 6 = 10$: $x^2 = 16$, so $x = 4$ or $x = -4$. Both work because $(-4)^2 = 16$ as well. The answer "$x = 4$ only" leaves out the negative square root.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `The height of a ball, in feet, $t$ seconds after it is thrown is $h(t) = -16t^2 + 64t$. Which statement best explains what $h(2) = 64$ means?`,
+      choices: [
+        no(`After 64 seconds, the ball is 2 feet high.`, 'swapped-input-and-output'),
+        no(`The ball rises 64 feet every 2 seconds.`, 'treated-value-as-a-rate'),
+        ok(`After 2 seconds, the ball is 64 feet high.`),
+        no(`The ball stays in the air for 2 seconds.`, 'confused-output-with-duration'),
+      ],
+      solution: `In $h(t)$ the input $t$ is time in seconds and the output is height in feet. So $h(2) = 64$ says that at $t = 2$ seconds the height is 64 feet. Check: $-16(4) + 64(2) = -64 + 128 = 64$.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `If $f(x) = 3x - 1$ and $g(x) = x^2$, what is $f(2) + g(-3)$?`,
+      choices: [
+        no(`$-4$`, 'squared-negative-as-negative'),
+        no(`$15$`, 'dropped-the-constant'),
+        no(`$-1$`, 'doubled-instead-of-squared'),
+        ok(`$14$`),
+      ],
+      solution: `Find each value separately: $f(2) = 3(2) - 1 = 5$ and $g(-3) = (-3)^2 = 9$. Then $5 + 9 = 14$. The choice $-4$ uses $g(-3) = -9$, but squaring a negative gives a positive.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `If $f(x) = 5 \\cdot 2^x$, what is $f(3)$?`,
+      choices: [
+        ok(`$40$`),
+        no(`$1000$`, 'multiplied-before-applying-exponent'),
+        no(`$30$`, 'multiplied-by-the-exponent'),
+        no(`$13$`, 'added-instead-of-multiplying'),
+      ],
+      solution: `Apply the exponent first: $2^3 = 8$, then multiply by $5$ to get $40$. The choice $1000$ multiplies $5 \\cdot 2 = 10$ first and then cubes, which breaks the order of operations.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A function is defined in two pieces: $f(x) = x + 4$ when $x < 1$, and $f(x) = 3x$ when $x \\geq 1$. What is $f(1)$?`,
+      choices: [
+        no(`$5$`, 'used-wrong-piece-at-boundary'),
+        ok(`$3$`),
+        no(`$8$`, 'added-both-pieces'),
+        no(`$1$`, 'returned-the-input'),
+      ],
+      solution: `The input $1$ satisfies $x \\geq 1$, so use $f(x) = 3x$: $f(1) = 3$. The choice $5$ uses the rule $x + 4$, which only applies when $x$ is less than $1$.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `If $f(x) = \\frac{x + 6}{x - 2}$, what is $f(-2)$?`,
+      choices: [
+        no(`$1$`, 'dropped-negative-sign'),
+        no(`$-2$`, 'forgot-to-subtract-in-denominator'),
+        no(`undefined`, 'ignored-negative-input'),
+        ok(`$-1$`),
+      ],
+      solution: `Substitute $-2$: the numerator is $-2 + 6 = 4$ and the denominator is $-2 - 2 = -4$, so $f(-2) = \\frac{4}{-4} = -1$. The answer "undefined" would only happen at $x = 2$, where the denominator is $0$.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `If $f(x) = x^2 - 3x$, which expression is equal to $f(a + 1) - f(a)$?`,
+      choices: [
+        no(`$-2$`, 'squared-term-by-term'),
+        ok(`$2a - 2$`),
+        no(`$-4a - 2$`, 'distributed-minus-to-first-term-only'),
+        no(`$2a + 2$`, 'sign-error-distributing-coefficient'),
+      ],
+      solution: `First $f(a + 1) = (a + 1)^2 - 3(a + 1) = a^2 + 2a + 1 - 3a - 3 = a^2 - a - 2$. Subtract $f(a) = a^2 - 3a$: $(a^2 - a - 2) - (a^2 - 3a) = 2a - 2$. The choice $-2$ comes from writing $(a + 1)^2$ as $a^2 + 1$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A club's profit in dollars from selling $n$ shirts is $P(n) = 15n - 200$. How many shirts must the club sell so that $P(n) = 100$?`,
+      choices: [
+        no(`$1300$`, 'evaluated-instead-of-solving'),
+        no(`$300$`, 'forgot-to-divide'),
+        ok(`$20$`),
+        no(`$\\frac{40}{3}$`, 'solved-for-zero-profit'),
+      ],
+      solution: `Set $15n - 200 = 100$, so $15n = 300$ and $n = 20$ shirts. The choice $1300$ is $P(100)$, which treats the profit of 100 dollars as the number of shirts.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `If $f(x) = x^2 - 5$, what is $f(f(2))$?`,
+      choices: [
+        no(`$-1$`, 'stopped-after-one-step'),
+        no(`$1$`, 'multiplied-instead-of-nesting'),
+        ok(`$-4$`),
+        no(`$11$`, 'squared-twice-then-subtracted-once'),
+      ],
+      solution: `Work from the inside out: $f(2) = 4 - 5 = -1$. Then $f(-1) = (-1)^2 - 5 = 1 - 5 = -4$. The choice $-1$ is only the inner value $f(2)$.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A function has the rule $f(x) = ax + 1$, and $f(3) = 7$. What is $f(-5)$?`,
+      choices: [
+        ok(`$-9$`),
+        no(`$11$`, 'dropped-negative-sign'),
+        no(`$-\\frac{32}{3}$`, 'ignored-constant-when-finding-a'),
+        no(`$-10$`, 'forgot-to-add-constant'),
+      ],
+      solution: `Use $f(3) = 7$ to find $a$: $3a + 1 = 7$, so $a = 2$. Then $f(-5) = 2(-5) + 1 = -10 + 1 = -9$. The choice $-10$ stops before adding the $1$.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `In a science lab, $T(m)$ is the temperature of a liquid in degrees Celsius $m$ minutes after heating begins. What does the expression $T(10) + 5$ represent?`,
+      choices: [
+        no(`The temperature 15 minutes after heating begins.`, 'added-to-input-instead-of-output'),
+        ok(`A temperature 5 degrees higher than the temperature at 10 minutes.`),
+        no(`The temperature 50 minutes after heating begins.`, 'multiplied-the-inputs'),
+        no(`The time when the temperature reaches 15 degrees.`, 'swapped-input-and-output'),
+      ],
+      solution: `$T(10)$ is the temperature at 10 minutes, an output in degrees. Adding $5$ outside the parentheses raises that output by 5 degrees. The temperature 15 minutes after heating begins would be written $T(15)$, with the $5$ added to the input.`,
+    },
+  ],
+}
+
+export default skill
