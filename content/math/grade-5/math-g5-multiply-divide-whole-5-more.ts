@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g5-multiply-divide-whole-5-more',
+  extends: 'multiply-divide-whole-5',
+  subject: 'math',
+  grade: 5,
+  group: 'Number and Operations in Base Ten',
+  name: 'Multiply & Divide Whole Numbers',
+  standards: ['5.NBT.B.5'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is $37 \\times 6$?`,
+      choices: [
+        ok(`$222$`),
+        no(`$182$`, 'forgot-to-add-carried-digit'),
+        no(`$43$`, 'added-instead-of-multiplied'),
+        no(`$1842$`, 'wrote-each-partial-product-side-by-side'),
+      ],
+      solution: `Multiply the ones: $7 \\times 6 = 42$, so write $2$ and carry $4$. Multiply the tens: $3 \\times 6 = 18$, then add the carried $4$ to get $22$. The product is $222$. The value $182$ forgets to add the carried $4$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is $62 \\times 40$?`,
+      choices: [
+        no(`$248$`, 'dropped-the-zero'),
+        ok(`$2480$`),
+        no(`$24{,}800$`, 'added-an-extra-zero'),
+        no(`$102$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Think of $40$ as $4 \\times 10$. First $62 \\times 4 = 248$, then multiply by $10$ to get $2480$. The value $248$ forgets that the $4$ stands for $4$ tens.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `What is $53 \\times 21$?`,
+      choices: [
+        no(`$159$`, 'no-place-value-shift-in-second-row'),
+        no(`$1060$`, 'forgot-ones-partial-product'),
+        ok(`$1113$`),
+        no(`$74$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Find the partial products: $53 \\times 1 = 53$ and $53 \\times 20 = 1060$. Add them: $53 + 1060 = 1113$. The value $159$ comes from writing $106$ without shifting it one place to the left, so the $2$ in $21$ was treated as $2$ ones instead of $2$ tens.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What is $168 \\div 14$?`,
+      choices: [
+        no(`$154$`, 'subtracted-instead-of-divided'),
+        no(`$2352$`, 'multiplied-instead-of-divided'),
+        no(`$182$`, 'added-instead-of-divided'),
+        ok(`$12$`),
+      ],
+      solution: `Ask how many groups of $14$ make $168$. Since $14 \\times 10 = 140$ and $14 \\times 2 = 28$, and $140 + 28 = 168$, the quotient is $10 + 2 = 12$. Check: $14 \\times 12 = 168$.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A class reads 15 pages each day for 28 days. How many pages does the class read in all?`,
+      choices: [
+        ok(`$420$`),
+        no(`$168$`, 'no-place-value-shift-in-second-row'),
+        no(`$380$`, 'forgot-to-add-carried-digit'),
+        no(`$43$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Multiply $28 \\times 15$. The partial products are $28 \\times 5 = 140$ and $28 \\times 10 = 280$. Add them: $140 + 280 = 420$ pages. The value $168$ adds $140$ and $28$, forgetting that the $1$ in $15$ means $1$ ten.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A baker has 100 muffins and puts 12 muffins in each box. How many boxes are completely filled?`,
+      choices: [
+        no(`$9$`, 'rounded-up-for-leftovers'),
+        ok(`$8$`),
+        no(`$4$`, 'gave-the-remainder'),
+        no(`$88$`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `Divide: $100 \\div 12 = 8$ R$4$, because $12 \\times 8 = 96$ and $100 - 96 = 4$. Eight boxes are full and the $4$ extra muffins do not fill another box, so the answer is $8$. The value $9$ would need $108$ muffins.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `What is $473 \\times 28$?`,
+      choices: [
+        no(`$4730$`, 'no-place-value-shift-in-second-row'),
+        ok(`$13{,}244$`),
+        no(`$12{,}724$`, 'forgot-to-add-carried-digit'),
+        no(`$9460$`, 'forgot-ones-partial-product'),
+      ],
+      solution: `Find the partial products: $473 \\times 8 = 3784$ and $473 \\times 20 = 9460$. Add them: $3784 + 9460 = 13{,}244$. The value $4730$ adds $3784$ and $946$, which forgets to shift the second row because the $2$ means $2$ tens.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What is $3062 \\times 47$?`,
+      choices: [
+        no(`$17{,}014$`, 'skipped-the-zero-digit'),
+        no(`$33{,}682$`, 'no-place-value-shift-in-second-row'),
+        no(`$122{,}480$`, 'forgot-ones-partial-product'),
+        ok(`$143{,}914$`),
+      ],
+      solution: `Find the partial products: $3062 \\times 7 = 21{,}434$ and $3062 \\times 40 = 122{,}480$. Add them: $21{,}434 + 122{,}480 = 143{,}914$. The value $17{,}014$ comes from dropping the $0$ in the hundreds place and multiplying $362 \\times 47$ instead.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `A rectangular garden is 125 feet long and 64 feet wide. What is the area of the garden in square feet?`,
+      choices: [
+        ok(`$8000$`),
+        no(`$378$`, 'found-perimeter-instead-of-area'),
+        no(`$189$`, 'added-instead-of-multiplied'),
+        no(`$1250$`, 'no-place-value-shift-in-second-row'),
+      ],
+      solution: `Area is length times width: $125 \\times 64$. The partial products are $125 \\times 4 = 500$ and $125 \\times 60 = 7500$, and $500 + 7500 = 8000$ square feet. The value $378$ is the perimeter, the distance around the garden.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `What is $4230 \\div 47$?`,
+      choices: [
+        no(`$9$`, 'dropped-zero-in-quotient'),
+        no(`$900$`, 'added-an-extra-zero'),
+        ok(`$90$`),
+        no(`$4183$`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `Since $47 \\times 9 = 423$, then $47 \\times 90 = 4230$. So $4230 \\div 47 = 90$. The value $9$ forgets the zero in the ones place of the quotient: $47 \\times 9$ is only $423$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `What are the quotient and remainder of $1000 \\div 27$?`,
+      choices: [
+        no(`$37$`, 'dropped-the-remainder'),
+        ok(`$37$ R$1$`),
+        no(`$36$ R$28$`, 'remainder-not-less-than-divisor'),
+        no(`$3$ R$19$`, 'stopped-before-last-digit'),
+      ],
+      solution: `Since $27 \\times 37 = 999$ and $1000 - 999 = 1$, the answer is $37$ R$1$. The answer $36$ R$28$ leaves a remainder bigger than $27$, which means one more group of $27$ still fits.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A museum has 314 visitors for a tour. Each tour group can have at most 26 visitors. What is the fewest number of groups needed so that every visitor is in a group?`,
+      choices: [
+        no(`$12$`, 'ignored-the-remainder'),
+        no(`$2$`, 'gave-the-remainder'),
+        no(`$288$`, 'subtracted-instead-of-divided'),
+        ok(`$13$`),
+      ],
+      solution: `Divide: $314 \\div 26 = 12$ R$2$, because $26 \\times 12 = 312$. Twelve full groups hold $312$ visitors, and the $2$ visitors left still need a group, so $13$ groups are needed. The answer $12$ leaves $2$ visitors without a group.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Tavi multiplied $64 \\times 23$ by writing $192$ on the first row and $128$ directly below it with no shift, then added to get $320$. What is the correct product?`,
+      choices: [
+        ok(`$1472$`),
+        no(`$320$`, 'no-place-value-shift-in-second-row'),
+        no(`$1280$`, 'forgot-ones-partial-product'),
+        no(`$87$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `The second row is $64 \\times 20$, not $64 \\times 2$, so it is $1280$. Add the partial products: $192 + 1280 = 1472$. The value $320$ is Tavi's answer, which treats the $2$ tens in $23$ as $2$ ones.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A gym orders 36 cases of tennis balls. Each case holds 48 balls. How many tennis balls does the gym order?`,
+      choices: [
+        no(`$432$`, 'no-place-value-shift-in-second-row'),
+        ok(`$1728$`),
+        no(`$1688$`, 'forgot-to-add-carried-digit'),
+        no(`$84$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Multiply $48 \\times 36$. The partial products are $48 \\times 6 = 288$ and $48 \\times 30 = 1440$. Add them: $288 + 1440 = 1728$ balls. The value $1688$ forgets the $4$ carried when finding $8 \\times 6 = 48$, giving $248$ instead of $288$.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `A roll has 500 inches of ribbon. Imani cuts as many 36-inch pieces as possible. How many inches of ribbon are left on the roll?`,
+      choices: [
+        no(`$13$`, 'gave-the-quotient'),
+        no(`$14$`, 'rounded-up-for-leftovers'),
+        ok(`$32$`),
+        no(`$468$`, 'gave-the-amount-used'),
+      ],
+      solution: `Divide: $500 \\div 36 = 13$ R$32$, because $36 \\times 13 = 468$ and $500 - 468 = 32$. The question asks for the ribbon left over, which is the remainder, $32$ inches. The value $13$ is the number of pieces cut, not the inches left.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Theater A sold 245 tickets for 18 dollars each. Theater B sold 312 tickets for 14 dollars each. Which theater collected more money, and how many more dollars did it collect?`,
+      choices: [
+        ok(`Theater A, 42 more dollars`),
+        no(`Theater B, 67 more dollars`, 'compared-ticket-counts-only'),
+        no(`Theater A, 4 more dollars`, 'compared-prices-only'),
+        no(`Theater A, 645 more dollars`, 'no-place-value-shift-in-second-row'),
+      ],
+      solution: `Theater A: $245 \\times 18 = 245 \\times 8 + 245 \\times 10 = 1960 + 2450 = 4410$ dollars. Theater B: $312 \\times 14 = 312 \\times 4 + 312 \\times 10 = 1248 + 3120 = 4368$ dollars. Since $4410 - 4368 = 42$, Theater A collected 42 more dollars. Theater B sold more tickets, but the higher price at Theater A makes its total larger.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `What is $9984 \\div 78$?`,
+      choices: [
+        no(`$12$ R$62$`, 'stopped-before-last-digit'),
+        ok(`$128$`),
+        no(`$1208$`, 'wrote-extra-zero-in-quotient'),
+        no(`$9906$`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `Use long division. $99 \\div 78 = 1$ R$21$. Bring down the $8$: $218 \\div 78 = 2$ R$62$. Bring down the $4$: $624 \\div 78 = 8$ exactly. The quotient is $128$. Check: $78 \\times 128 = 9984$. The answer $12$ R$62$ stops before bringing down the last digit.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Rafael saves 85 dollars each month for 36 months. Then Rafael buys as many tablets as possible for the after school club, and each tablet costs 95 dollars. How many tablets can Rafael buy?`,
+      choices: [
+        no(`$33$`, 'rounded-up-for-leftovers'),
+        no(`$20$`, 'gave-the-remainder'),
+        ok(`$32$`),
+        no(`$3060$`, 'stopped-after-first-step'),
+      ],
+      solution: `First find the savings: $85 \\times 36 = 85 \\times 6 + 85 \\times 30 = 510 + 2550 = 3060$ dollars. Then divide by the price: $3060 \\div 95 = 32$ R$20$, because $95 \\times 32 = 3040$. The $20$ dollars left over are not enough for another tablet, so the answer is $32$. Buying $33$ tablets would cost $3135$ dollars.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `What is $4076 \\times 59$?`,
+      choices: [
+        no(`$57{,}064$`, 'no-place-value-shift-in-second-row'),
+        no(`$28{,}084$`, 'skipped-the-zero-digit'),
+        no(`$203{,}800$`, 'forgot-ones-partial-product'),
+        ok(`$240{,}484$`),
+      ],
+      solution: `Find the partial products: $4076 \\times 9 = 36{,}684$ and $4076 \\times 50 = 203{,}800$. Add them: $36{,}684 + 203{,}800 = 240{,}484$. The value $28{,}084$ drops the $0$ in the hundreds place and multiplies $476 \\times 59$ instead.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Coach Ellis has 1200 stickers to share equally among 32 players. Each player gets the same whole number of stickers, and the coach keeps any stickers left over. How many stickers does the coach keep?`,
+      choices: [
+        no(`$37$`, 'gave-the-quotient'),
+        ok(`$16$`),
+        no(`$1184$`, 'gave-the-amount-used'),
+        no(`$24$`, 'stopped-before-last-digit'),
+      ],
+      solution: `Divide: $1200 \\div 32 = 37$ R$16$, because $32 \\times 37 = 1184$ and $1200 - 1184 = 16$. Each player gets $37$ stickers and the coach keeps the remainder, $16$ stickers. The value $24$ is the remainder from $120 \\div 32$, which stops before bringing down the last digit.`,
+    },
+  ],
+}
+
+export default skill
