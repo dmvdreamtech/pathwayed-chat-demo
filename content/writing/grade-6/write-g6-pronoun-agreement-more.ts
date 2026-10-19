@@ -15,7 +15,7 @@ const skill: ContentSkill = {
     {
       slot: 1,
       difficulty: 'easy',
-      stem: `Read the sentence: "The mayor ______ cut the ribbon at the new skate park." Which pronoun correctly fills the blank?`,
+      stem: `Read the sentence: "Mayor Okafor and her staff arrived early, and the mayor ______ cut the ribbon at the new skate park." Which pronoun correctly fills the blank?`,
       choices: [
         ok(`herself`),
         no(`her`, 'wrong-pronoun-case'),
@@ -39,7 +39,7 @@ const skill: ContentSkill = {
     {
       slot: 3,
       difficulty: 'easy',
-      stem: `Read the sentence: "The librarian thanked Tavi and ______ for shelving the atlases." Which pronoun correctly fills the blank?`,
+      stem: `Read the sentences: "Tavi's brother stayed after school to help. The librarian thanked Tavi and ______ for shelving the atlases." Which pronoun correctly fills the blank?`,
       choices: [
         no(`he`, 'subject-case-as-object'),
         no(`himself`, 'reflexive-misuse'),
@@ -123,7 +123,7 @@ const skill: ContentSkill = {
     {
       slot: 10,
       difficulty: 'medium',
-      stem: `Which sentence uses pronouns correctly?`,
+      stem: `Ravi and his brother built a birdhouse. Which sentence about them uses pronouns correctly?`,
       choices: [
         no(`Him and Ravi built a birdhouse for the porch.`, 'object-case-as-subject'),
         ok(`Ravi and he built a birdhouse for the porch.`),
@@ -207,7 +207,7 @@ const skill: ContentSkill = {
     {
       slot: 17,
       difficulty: 'hard',
-      stem: `Which sentence contains a vague pronoun?`,
+      stem: `Two boys, Kenji and Arturo, play on the same soccer team. Which sentence contains a vague pronoun?`,
       choices: [
         no(`Kenji finished practice, and then he called Arturo.`, 'clear-reference-mistaken-as-vague'),
         ok(`Kenji called Arturo after he finished practice.`),
