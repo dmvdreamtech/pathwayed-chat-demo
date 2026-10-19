@@ -543,6 +543,12 @@
 /* /admin/review (migration 0043) */
 .review-choices { margin: 6px 0 8px 18px; padding: 0; }
 .review-choices li { margin: 2px 0; }
+/* K-2 picture items on the review page: the tiles as the child sees them, each
+   with its spoken label underneath. The .picq rules come from app-screens.css. */
+.review-picture { max-width: 520px; }
+.review-picture .picq { margin: 8px 0; }
+.review-picture .picq-tile { flex-direction: column; gap: 6px; cursor: default; }
+.review-tile-label { color: #445; }
 .review-correct { font-weight: 600; }
 .review-passage { margin: 6px 0; }
 .review-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }

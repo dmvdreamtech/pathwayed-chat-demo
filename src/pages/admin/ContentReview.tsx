@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { StaffShell } from '@/components/staff/StaffShell'
 import { MathText } from '@/components/MathText'
+import { PictureFigure } from '@/components/PictureFigure'
+import { speakWithNikki } from '@/lib/voice'
 import { useAuth } from '@/context/AuthContext'
 import {
   buildFlags,
@@ -63,7 +65,55 @@ function Choices({ choices }: { choices: Choice[] }) {
   )
 }
 
+/**
+ * A K-2 picture item as the child gets it: the stem is spoken, the tiles are
+ * pictures. The reviewer hears it with the same voice and sees each tile with
+ * its spoken label and the key.
+ */
+function PictureItem({ item }: { item: ReviewItem }) {
+  const spoken = `${item.stem} Your choices are: ${item.choices.map((c) => c.text).join(', ')}.`
+  return (
+    <div className="kid-screen review-picture">
+      <p>
+        <button type="button" className="staff-btn staff-small" onClick={() => void speakWithNikki(spoken)}>
+          Play the question
+        </button>{' '}
+        <button type="button" className="staff-btn staff-small" onClick={() => void speakWithNikki(item.solution)}>
+          Play the feedback
+        </button>
+      </p>
+      <p>
+        <b>Spoken:</b> {item.stem}
+      </p>
+      {item.prompt && (
+        <div className="picq">
+          <div className="picq-prompt">
+            <PictureFigure figure={item.prompt} place="prompt" />
+          </div>
+        </div>
+      )}
+      <div className="picq">
+        <div className="picq-tiles" data-count={item.choices.length}>
+          {item.choices.map((c, i) => (
+            <div key={i} className={`picq-tile ${c.correct ? 'correct' : ''}`}>
+              {c.tile ? <PictureFigure figure={c.tile} place="tile" label={c.text} /> : <span className="picq-num">{c.text}</span>}
+              <span className="staff-small review-tile-label">
+                {c.text} {c.correct ? <b>(key)</b> : null}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <p className="staff-small">
+        <b>Spoken feedback:</b> {item.solution}
+      </p>
+      <p className="muted staff-small">Difficulty: {item.difficulty}</p>
+    </div>
+  )
+}
+
 function Question({ item }: { item: ReviewItem }) {
+  if (item.renderMode === 'audio_picture') return <PictureItem item={item} />
   return (
     <>
       {item.passageBody && (

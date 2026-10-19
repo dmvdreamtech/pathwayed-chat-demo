@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/supabase'
 import type { Json } from '@/lib/database.types'
+import { parsePicturePrompt, parsePictureTile, type PicturePrompt, type PictureTile } from '@/lib/pictureModel'
 
 /**
  * /admin/review: skill-level review before publishing (migration 0043).
@@ -29,6 +30,8 @@ export interface Choice {
   text: string
   correct: boolean
   misconception: string | null
+  /** K-2 picture items: the tile the child taps. */
+  tile?: PictureTile
 }
 
 export interface ReviewItem {
@@ -38,6 +41,9 @@ export interface ReviewItem {
   correctAnswer: string
   solution: string
   difficulty: string
+  /** 'audio_picture' for K-2 picture-tap items (spoken stem, tiles). */
+  renderMode: string
+  prompt: PicturePrompt | null
   passageTitle: string | null
   passageBody: string | null
   issues: string[]
@@ -64,10 +70,12 @@ export function parseChoices(raw: Json | null | undefined): Choice[] {
     const o = (c ?? {}) as Record<string, Json>
     const tile = (o.tile ?? null) as Record<string, Json> | null
     const text = typeof o.text === 'string' && o.text !== '' ? o.text : typeof tile?.label === 'string' ? tile.label : ''
+    const picture = parsePictureTile(o.tile)
     return {
       text,
       correct: o.is_correct === true,
       misconception: typeof o.misconception_token === 'string' ? o.misconception_token : null,
+      ...(picture ? { tile: picture } : {}),
     }
   })
 }
@@ -145,6 +153,8 @@ export async function loadSample(reviewId: string): Promise<Load<ReviewItem[]>> 
       correctAnswer: r.correct_answer,
       solution: r.solution,
       difficulty: r.difficulty,
+      renderMode: r.render_mode ?? 'text',
+      prompt: parsePicturePrompt(r.prompt),
       passageTitle: r.passage_title,
       passageBody: r.passage_body,
       issues: [],
@@ -172,6 +182,8 @@ export async function loadFullReview(skillId: string): Promise<Load<ReviewItem[]
       correctAnswer: r.correct_answer,
       solution: r.solution,
       difficulty: r.difficulty,
+      renderMode: r.render_mode ?? 'text',
+      prompt: parsePicturePrompt(r.prompt),
       passageTitle: r.passage_title,
       passageBody: r.passage_body,
       issues: r.issues ?? [],
