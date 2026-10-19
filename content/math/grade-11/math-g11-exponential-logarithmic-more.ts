@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g11-exponential-logarithmic-more',
+  extends: 'exponential-logarithmic',
+  subject: 'math',
+  grade: 11,
+  group: 'Functions',
+  name: 'Exponential & Logarithmic',
+  standards: ['HSF.LE.A.4'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Which expression gives the exact solution of $10^x = 50$?`,
+      choices: [
+        ok(`$x = \\log 50$`),
+        no(`$x = 5$`, 'divided-by-the-base'),
+        no(`$x = \\log_{50} 10$`, 'swapped-base-and-argument'),
+        no(`$x = \\ln 50$`, 'used-natural-log-for-base-10'),
+      ],
+      solution: `The logarithm base $10$ answers the question "$10$ to what power gives $50$?", so $x = \\log 50 \\approx 1.70$. The answer $5$ comes from dividing $50$ by $10$, but $10^5 = 100{,}000$, not $50$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Which expression gives the exact solution of $e^x = 9$?`,
+      choices: [
+        no(`$x = \\log 9$`, 'used-common-log-for-base-e'),
+        no(`$x = e^9$`, 'applied-exponential-instead-of-log'),
+        ok(`$x = \\ln 9$`),
+        no(`$x = \\dfrac{9}{e}$`, 'divided-by-the-base'),
+      ],
+      solution: `The natural log $\\ln$ undoes base $e$. Taking $\\ln$ of both sides gives $x = \\ln 9 \\approx 2.20$. The answer $\\log 9$ uses base $10$, which only undoes powers of $10$.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Which equation shows $2^x = 7$ rewritten in logarithmic form?`,
+      choices: [
+        no(`$x = \\log_7 2$`, 'swapped-base-and-argument'),
+        ok(`$x = \\log_2 7$`),
+        no(`$x = \\dfrac{7}{2}$`, 'divided-by-the-base'),
+        no(`$x = 2^7$`, 'raised-base-to-the-result'),
+      ],
+      solution: `In $b^x = y$, the base $b$ becomes the base of the log and $y$ goes inside: $x = \\log_b y$. Here that is $x = \\log_2 7$. The answer $\\log_7 2$ swaps the base and the number inside the log.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Which equation is the exponential form of $\\ln 20 = x$?`,
+      choices: [
+        no(`$10^x = 20$`, 'used-base-10-for-ln'),
+        no(`$x^e = 20$`, 'swapped-base-and-exponent'),
+        no(`$e^{20} = x$`, 'swapped-argument-and-exponent'),
+        ok(`$e^x = 20$`),
+      ],
+      solution: `The natural log has base $e$, so $\\ln 20 = x$ means $e$ raised to the power $x$ gives $20$: $e^x = 20$. The answer $10^x = 20$ uses base $10$, which belongs to the common log, not $\\ln$.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `What is the value of $\\ln(e^4)$?`,
+      choices: [
+        ok(`$4$`),
+        no(`$e^4$`, 'ignored-the-log'),
+        no(`$4e$`, 'multiplied-by-e'),
+        no(`$1$`, 'treated-ln-of-any-power-of-e-as-1'),
+      ],
+      solution: `$\\ln$ asks "$e$ to what power?" For $e^4$ that power is $4$, so $\\ln(e^4) = 4$. The answer $1$ is only correct for $\\ln e$, which is $e$ to the first power.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `What is the value of $\\log(0.001)$?`,
+      choices: [
+        no(`$3$`, 'dropped-negative-sign'),
+        ok(`$-3$`),
+        no(`$-2$`, 'counted-zeros-after-decimal-point'),
+        no(`$-1000$`, 'negated-the-reciprocal'),
+      ],
+      solution: `Write $0.001$ as a power of $10$: $0.001 = \\dfrac{1}{1000} = 10^{-3}$, so $\\log(0.001) = -3$. The answer $3$ forgets that a number between $0$ and $1$ has a negative log.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Which expression gives the exact solution of $3 \\cdot 10^x = 600$?`,
+      choices: [
+        ok(`$x = \\log 200$`),
+        no(`$x = \\log 597$`, 'subtracted-instead-of-divided'),
+        no(`$x = \\log 1800$`, 'multiplied-instead-of-divided'),
+        no(`$x = \\dfrac{\\log 600}{3}$`, 'divided-the-log-by-the-coefficient'),
+      ],
+      solution: `First isolate the power by dividing both sides by $3$: $10^x = 200$. Then take the common log: $x = \\log 200 \\approx 2.30$. The answer $\\dfrac{\\log 600}{3}$ divides after taking the log, but the $3$ multiplies the power, so it must be divided out first.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Which expression gives the exact solution of $5e^x = 40$?`,
+      choices: [
+        no(`$x = \\ln 35$`, 'subtracted-instead-of-divided'),
+        ok(`$x = \\ln 8$`),
+        no(`$x = \\dfrac{\\ln 40}{5}$`, 'divided-the-log-by-the-coefficient'),
+        no(`$x = \\log 8$`, 'used-common-log-for-base-e'),
+      ],
+      solution: `Divide both sides by $5$ to get $e^x = 8$, then take the natural log: $x = \\ln 8 \\approx 2.08$. The answer $\\log 8$ isolates the power correctly but uses base $10$ instead of base $e$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Which expression gives the exact solution of $e^{2t} = 15$?`,
+      choices: [
+        no(`$t = 2\\ln 15$`, 'multiplied-by-the-coefficient'),
+        no(`$t = \\ln 7.5$`, 'divided-inside-the-log'),
+        no(`$t = \\ln 13$`, 'subtracted-the-coefficient'),
+        ok(`$t = \\dfrac{\\ln 15}{2}$`),
+      ],
+      solution: `Taking the natural log of both sides gives $2t = \\ln 15$, so $t = \\dfrac{\\ln 15}{2} \\approx 1.35$. The answer $\\ln 7.5$ divides the $15$ by $2$, but the $2$ is part of the exponent, not a factor of $15$.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Which expression gives the exact solution of $10^{3x} = 500$?`,
+      choices: [
+        no(`$x = \\log \\dfrac{500}{3}$`, 'divided-inside-the-log'),
+        ok(`$x = \\dfrac{\\log 500}{3}$`),
+        no(`$x = 3\\log 500$`, 'multiplied-by-the-coefficient'),
+        no(`$x = \\dfrac{\\ln 500}{3}$`, 'used-natural-log-for-base-10'),
+      ],
+      solution: `Taking the common log of both sides gives $3x = \\log 500$, so $x = \\dfrac{\\log 500}{3} \\approx 0.90$. The answer $3\\log 500$ multiplies by $3$ when the equation $3x = \\log 500$ calls for dividing by $3$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Use a calculator to solve $2^x = 20$. What is $x$, rounded to the nearest hundredth?`,
+      choices: [
+        no(`$10$`, 'divided-by-the-base'),
+        no(`$0.23$`, 'inverted-change-of-base'),
+        ok(`$4.32$`),
+        no(`$1.00$`, 'divided-inside-the-log'),
+      ],
+      solution: `Write $x = \\log_2 20$ and use change of base: $x = \\dfrac{\\log 20}{\\log 2} \\approx \\dfrac{1.3010}{0.3010} \\approx 4.32$. Check: $2^4 = 16$ and $2^5 = 32$, so $x$ should be between $4$ and $5$. The answer $0.23$ divides $\\log 2$ by $\\log 20$, which is upside down.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A science class starts a culture of 50 cells that doubles every hour, so after $t$ hours it has $50 \\cdot 2^t$ cells. Which expression gives the number of hours until there are 1,200 cells?`,
+      choices: [
+        no(`$t = \\log_2 1150$`, 'subtracted-initial-amount'),
+        no(`$t = \\log_2 60000$`, 'multiplied-by-initial-amount'),
+        no(`$t = \\log_{24} 2$`, 'swapped-base-and-argument'),
+        ok(`$t = \\log_2 24$`),
+      ],
+      solution: `Set $50 \\cdot 2^t = 1200$ and divide by $50$: $2^t = 24$. In log form, $t = \\log_2 24 \\approx 4.58$ hours. The answer $\\log_2 1150$ subtracts the starting $50$, but $50$ multiplies the power, so you divide by it.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Which expression gives the exact solution of $4 \\cdot 10^x + 3 = 83$?`,
+      choices: [
+        ok(`$x = \\log 20$`),
+        no(`$x = \\log 17.75$`, 'divided-before-subtracting'),
+        no(`$x = \\log 21.5$`, 'added-instead-of-subtracted'),
+        no(`$x = \\dfrac{\\log 80}{4}$`, 'divided-the-log-by-the-coefficient'),
+      ],
+      solution: `Undo the steps in reverse order. Subtract $3$: $4 \\cdot 10^x = 80$. Divide by $4$: $10^x = 20$. Take the common log: $x = \\log 20 \\approx 1.30$. The answer $\\log 17.75$ divides $83$ by $4$ before subtracting the $3$, so the $3$ is never divided.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Use a calculator to solve $e^x = 0.5$. What is $x$, rounded to the nearest hundredth?`,
+      choices: [
+        no(`$0.69$`, 'dropped-negative-sign'),
+        ok(`$-0.69$`),
+        no(`$-0.30$`, 'used-common-log-for-base-e'),
+        no(`$1.65$`, 'applied-exponential-instead-of-log'),
+      ],
+      solution: `Take the natural log: $x = \\ln 0.5 \\approx -0.693$, which rounds to $-0.69$. The value is negative because $e^x$ is less than $1$ only when $x < 0$. The answer $-0.30$ is $\\log 0.5$, which uses base $10$ instead of base $e$.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Which expression gives the exact solution of $10^{x - 2} = 45$?`,
+      choices: [
+        no(`$x = \\log 45 - 2$`, 'moved-the-shift-with-wrong-sign'),
+        no(`$x = \\log 47$`, 'added-shift-inside-the-log'),
+        ok(`$x = 2 + \\log 45$`),
+        no(`$x = 2\\log 45$`, 'multiplied-by-the-shift'),
+      ],
+      solution: `Taking the common log gives $x - 2 = \\log 45$. Adding $2$ to both sides gives $x = 2 + \\log 45 \\approx 3.65$. The answer $\\log 45 - 2$ subtracts the $2$ instead of adding it to undo $x - 2$.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `A town's population is modeled by $P = 400e^{0.03t}$, where $t$ is years since the town was founded. To the nearest hundredth of a year, when does the population reach 1,000?`,
+      choices: [
+        no(`$0.03$ years`, 'multiplied-by-the-rate'),
+        no(`$13.26$ years`, 'used-common-log-for-base-e'),
+        ok(`$30.54$ years`),
+        no(`$213.23$ years`, 'subtracted-initial-amount'),
+      ],
+      solution: `Set $400e^{0.03t} = 1000$ and divide by $400$: $e^{0.03t} = 2.5$. Take the natural log: $0.03t = \\ln 2.5$, so $t = \\dfrac{\\ln 2.5}{0.03} \\approx \\dfrac{0.9163}{0.03} \\approx 30.54$ years. The answer $13.26$ years uses $\\log 2.5$, but base $e$ needs $\\ln$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Marisol deposits 2,000 dollars in an account that grows continuously, with balance $A = 2000e^{0.04t}$ after $t$ years. To the nearest hundredth of a year, how long until the balance doubles?`,
+      choices: [
+        no(`$25.00$ years`, 'ignored-the-log'),
+        no(`$7.53$ years`, 'used-common-log-for-base-e'),
+        no(`$0.03$ years`, 'multiplied-by-the-rate'),
+        ok(`$17.33$ years`),
+      ],
+      solution: `Doubling means $2000e^{0.04t} = 4000$, so $e^{0.04t} = 2$. Take the natural log: $0.04t = \\ln 2$, so $t = \\dfrac{\\ln 2}{0.04} \\approx \\dfrac{0.6931}{0.04} \\approx 17.33$ years. The answer $25.00$ years divides $1$ by $0.04$ and skips the $\\ln 2$ entirely.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Use a calculator to solve $3 \\cdot 2^{5t} = 60$. What is $t$, rounded to the nearest hundredth?`,
+      choices: [
+        ok(`$0.86$`),
+        no(`$4.32$`, 'forgot-to-divide-by-the-coefficient-of-t'),
+        no(`$21.61$`, 'multiplied-by-the-coefficient-of-t'),
+        no(`$1.17$`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `Divide by $3$: $2^{5t} = 20$. In log form, $5t = \\log_2 20 = \\dfrac{\\log 20}{\\log 2} \\approx 4.3219$. Divide by $5$: $t \\approx 0.864$, which rounds to $0.86$. The answer $4.32$ is the value of $5t$, not $t$.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A lab sample holds 80 grams of a substance whose amount after $t$ days is $A = 80(0.5)^{t/5}$. To the nearest hundredth of a day, when are 30 grams left?`,
+      choices: [
+        no(`$1.42$ days`, 'forgot-to-multiply-by-5'),
+        ok(`$7.08$ days`),
+        no(`$0.28$ days`, 'divided-by-5-instead-of-multiplying'),
+        no(`$6.25$ days`, 'assumed-linear-decay'),
+      ],
+      solution: `Set $80(0.5)^{t/5} = 30$ and divide by $80$: $(0.5)^{t/5} = 0.375$. Then $\\dfrac{t}{5} = \\dfrac{\\log 0.375}{\\log 0.5} \\approx 1.415$, so $t \\approx 5 \\times 1.415 \\approx 7.08$ days. The answer $6.25$ days assumes the sample loses the same 8 grams every day, but it loses half every 5 days, which is not a steady amount.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Which expression gives the exact solution of $2e^{3x} - 5 = 9$?`,
+      choices: [
+        no(`$x = \\dfrac{\\ln 9.5}{3}$`, 'divided-before-adding-the-constant'),
+        no(`$x = 3\\ln 7$`, 'multiplied-by-the-coefficient'),
+        ok(`$x = \\dfrac{\\ln 7}{3}$`),
+        no(`$x = \\dfrac{\\ln 2}{3}$`, 'subtracted-instead-of-added'),
+      ],
+      solution: `Add $5$: $2e^{3x} = 14$. Divide by $2$: $e^{3x} = 7$. Take the natural log: $3x = \\ln 7$, so $x = \\dfrac{\\ln 7}{3} \\approx 0.65$. The answer $\\dfrac{\\ln 2}{3}$ subtracts the $5$ from $9$ instead of adding it.`,
+    },
+  ],
+}
+
+export default skill
