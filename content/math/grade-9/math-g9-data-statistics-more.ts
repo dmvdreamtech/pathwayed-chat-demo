@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g9-data-statistics-more',
+  extends: 'data-statistics',
+  subject: 'math',
+  grade: 9,
+  group: 'Statistics and Probability',
+  name: 'Data & Statistics',
+  standards: ['HSS.ID.A.2'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `A box plot of daily bike rentals shows a minimum of 6, a first quartile of 14, a median of 20, a third quartile of 29, and a maximum of 40. What is the interquartile range (IQR)?`,
+      choices: [
+        ok(`$15$`),
+        no(`$34$`, 'computed-range-instead'),
+        no(`$9$`, 'subtracted-median-from-q3'),
+        no(`$43$`, 'added-quartiles'),
+      ],
+      solution: `The IQR is the third quartile minus the first quartile: $29 - 14 = 15$. The value $34$ is the range, $40 - 6$, which measures the spread of all the data, not the middle half.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A data set has one value that is far larger than all the others. Which measure of center is least affected by that outlier?`,
+      choices: [
+        no(`the mean`, 'thought-mean-resists-outliers'),
+        ok(`the median`),
+        no(`the range`, 'chose-a-measure-of-spread'),
+        no(`the standard deviation`, 'chose-sd-as-center'),
+      ],
+      solution: `The median depends only on the middle position of the ordered data, so one extreme value barely moves it. The mean adds in every value, so a huge outlier pulls the mean toward it. The range and standard deviation measure spread, not center.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Which measure of spread uses only the middle half of a data set?`,
+      choices: [
+        no(`the range`, 'confused-range-with-iqr'),
+        no(`the standard deviation`, 'thought-sd-ignores-extremes'),
+        no(`the median`, 'chose-a-measure-of-center'),
+        ok(`the interquartile range`),
+      ],
+      solution: `The interquartile range is $Q_3 - Q_1$, the width of the middle $50\\%$ of the data. The range uses the minimum and maximum, and the standard deviation uses every value. The median is a measure of center.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Set A is 3, 7, 12, 18 and Set B is 5, 6, 9, 30. How much greater is the range of Set B than the range of Set A?`,
+      choices: [
+        ok(`$10$`),
+        no(`$12$`, 'compared-maximums'),
+        no(`$2$`, 'compared-minimums'),
+        no(`$25$`, 'reported-range-of-one-set'),
+      ],
+      solution: `The range of Set A is $18 - 3 = 15$ and the range of Set B is $30 - 5 = 25$, so Set B's range is $25 - 15 = 10$ greater. The value $12$ compares only the largest values, $30 - 18$, and ignores the smallest values.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Set A is 4, 6, 9, 11, 15 and Set B is 2, 8, 10, 13, 20. How much greater is the median of Set B than the median of Set A?`,
+      choices: [
+        no(`$1.6$`, 'compared-means-instead'),
+        no(`$7$`, 'compared-ranges'),
+        ok(`$1$`),
+        no(`$5$`, 'compared-maximums'),
+      ],
+      solution: `Both sets are already in order with 5 values, so each median is the third value: $9$ for Set A and $10$ for Set B. The difference is $10 - 9 = 1$. The value $1.6$ is the difference of the means, $10.6 - 9$, not the medians.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Two data sets are both strongly skewed and have outliers. Which pair of statistics is most appropriate for comparing their centers and spreads?`,
+      choices: [
+        no(`mean and standard deviation`, 'used-mean-and-sd-for-skewed-data'),
+        no(`median and standard deviation`, 'paired-median-with-sd'),
+        no(`mean and interquartile range`, 'paired-mean-with-iqr'),
+        ok(`median and interquartile range`),
+      ],
+      solution: `For skewed data with outliers, the median and the interquartile range are resistant: extreme values do not pull them much. The mean and standard deviation both use every value, so outliers distort them, and that makes them better for roughly symmetric data.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Find the quartiles by leaving the median out of both halves. What is the interquartile range of the data set 2, 4, 5, 7, 9, 12, 14, 18, 21?`,
+      choices: [
+        no(`$9$`, 'included-median-in-halves'),
+        ok(`$11.5$`),
+        no(`$19$`, 'computed-range-instead'),
+        no(`$7$`, 'subtracted-median-from-q3'),
+      ],
+      solution: `There are 9 values, so the median is the fifth value, $9$. Leave it out of both halves. The lower half 2, 4, 5, 7 has $Q_1 = \\frac{4 + 5}{2} = 4.5$, and the upper half 12, 14, 18, 21 has $Q_3 = \\frac{14 + 18}{2} = 16$. The IQR is $16 - 4.5 = 11.5$. The value $9$ comes from putting the median into both halves, which gives $Q_1 = 5$ and $Q_3 = 14$.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `The data set 12, 14, 15, 15, 16, 18 has a mean of 15. If the 18 is replaced by 60, by how much does the mean increase?`,
+      choices: [
+        no(`$42$`, 'forgot-to-divide-by-count'),
+        no(`$0$`, 'thought-mean-resists-outliers'),
+        no(`$6$`, 'divided-by-n-plus-one'),
+        ok(`$7$`),
+      ],
+      solution: `The sum grows by $60 - 18 = 42$, and the mean is the sum divided by the 6 values, so the mean grows by $\\frac{42}{6} = 7$, from $15$ to $22$. The median stays at $15$, which shows the mean is the measure pulled by the outlier. The value $42$ is the change in the sum, not the mean.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'hard',
+      stem: `What is the population standard deviation of the data set 2, 4, 4, 4, 5, 5, 7, 9?`,
+      choices: [
+        ok(`$2$`),
+        no(`$4$`, 'forgot-square-root'),
+        no(`$32$`, 'did-not-divide-by-count'),
+        no(`$1.5$`, 'computed-mean-absolute-deviation'),
+      ],
+      solution: `The mean is $\\frac{40}{8} = 5$. The squared deviations are $9, 1, 1, 1, 0, 0, 4, 16$, which add to $32$. Divide by 8 to get the variance, $4$, then take the square root: $\\sqrt{4} = 2$. The value $4$ is the variance; the standard deviation needs the square root.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A teacher adds 10 points to every student's test score. What happens to the mean and the standard deviation of the scores?`,
+      choices: [
+        no(`Both the mean and the standard deviation increase by 10.`, 'thought-shift-changes-spread'),
+        ok(`The mean increases by 10 and the standard deviation stays the same.`),
+        no(`The mean stays the same and the standard deviation increases by 10.`, 'reversed-shift-effects'),
+        no(`Neither the mean nor the standard deviation changes.`, 'ignored-the-shift'),
+      ],
+      solution: `Adding the same amount to every value slides the whole data set up by 10, so the mean rises by 10. Every score moves together, so the distances from the mean do not change, and the standard deviation stays the same.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A data set has a mean of 12 and a standard deviation of 4. If every value is multiplied by 3, what is the new standard deviation?`,
+      choices: [
+        no(`$4$`, 'thought-scaling-leaves-sd'),
+        no(`$7$`, 'added-instead-of-multiplied'),
+        ok(`$12$`),
+        no(`$36$`, 'scaled-sd-by-square-of-factor'),
+      ],
+      solution: `Multiplying every value by 3 also multiplies every distance from the mean by 3, so the standard deviation becomes $4 \\times 3 = 12$. The value $36$ multiplies by $3^2 = 9$, which is what happens to the variance, not the standard deviation.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Daily sales at two stores are summarized. Store A: minimum 10, first quartile 15, median 22, third quartile 30, maximum 41. Store B: minimum 8, first quartile 19, median 24, third quartile 27, maximum 50. Which statement is true?`,
+      choices: [
+        ok(`Store B has the greater median and the smaller IQR.`),
+        no(`Store A has the greater median and the smaller IQR.`, 'reversed-the-comparison'),
+        no(`Store B has the greater median and the greater IQR.`, 'used-range-for-spread'),
+        no(`Store A has the greater median and the greater IQR.`, 'misread-five-number-summary'),
+      ],
+      solution: `The medians are $22$ for Store A and $24$ for Store B, so Store B's is greater. The IQRs are $30 - 15 = 15$ for Store A and $27 - 19 = 8$ for Store B, so Store B's middle half is narrower. Store B does have the greater range, $50 - 8 = 42$, but the range is not the IQR.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A data set is strongly skewed to the right, with a long tail of large values, and its mean is 48. Which statement about its median is most likely true?`,
+      choices: [
+        no(`The median is equal to 48.`, 'assumed-mean-equals-median'),
+        no(`The median is greater than 48.`, 'reversed-skew-direction'),
+        ok(`The median is less than 48.`),
+        no(`Nothing can be said about the median without the data.`, 'thought-shape-gives-no-information'),
+      ],
+      solution: `In a right-skewed distribution, the few large values in the tail pull the mean up, while the median stays with the bulk of the data. So the median is most likely less than the mean of $48$. The mean and median are equal only for a symmetric distribution.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Two lab groups timed a reaction, in seconds. Group A recorded 12, 15, 18, 15 and Group B recorded 10, 20, 14, 16. Which statement compares the groups correctly?`,
+      choices: [
+        no(`The groups have the same mean and the same spread.`, 'ignored-spread'),
+        no(`Group A has the greater mean.`, 'miscalculated-mean'),
+        ok(`The groups have the same mean, and Group B's times are more spread out.`),
+        no(`The groups have the same mean, and Group A's times are more spread out.`, 'reversed-spread-comparison'),
+      ],
+      solution: `Both sums are $60$, so both means are $\\frac{60}{4} = 15$. Group A's times run from $12$ to $18$, a range of $6$, while Group B's run from $10$ to $20$, a range of $10$, and Group B's values sit farther from $15$. Equal means do not mean equal spread.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `The data set 5, 6, 8, 9, 12, 32 has a mean of 12. If the outlier 32 is removed, by how much does the mean decrease?`,
+      choices: [
+        no(`$0.5$`, 'tracked-median-instead'),
+        ok(`$4$`),
+        no(`$20$`, 'subtracted-outlier-from-mean'),
+        no(`$8$`, 'reported-new-mean'),
+      ],
+      solution: `Without 32, the values 5, 6, 8, 9, 12 add to $40$, so the new mean is $\\frac{40}{5} = 8$. The mean drops by $12 - 8 = 4$. The median only moves from $8.5$ to $8$, a change of $0.5$, which is why the median is called resistant to outliers.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Set P is 0, 10, 10, 10, 20 and Set Q is 0, 0, 10, 20, 20. Both sets have a mean of 10 and a range of 20. Which statement is true?`,
+      choices: [
+        no(`The sets have the same standard deviation because they have the same range.`, 'equated-range-with-sd'),
+        no(`Set P has the greater standard deviation.`, 'reversed-spread-comparison'),
+        no(`The standard deviations cannot be compared without the medians.`, 'thought-sd-needs-median'),
+        ok(`Set Q has the greater standard deviation.`),
+      ],
+      solution: `In Set P, three values sit right at the mean, so the squared deviations add to $100 + 0 + 0 + 0 + 100 = 200$. In Set Q, four values are $10$ away from the mean, so they add to $400$. More values far from the mean means a greater standard deviation for Set Q, even though the ranges match.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Class A has 20 students with a mean score of 80. Class B has 30 students with a mean score of 70. What is the mean score of all 50 students together?`,
+      choices: [
+        no(`$75$`, 'averaged-the-means'),
+        ok(`$74$`),
+        no(`$76$`, 'swapped-class-sizes'),
+        no(`$150$`, 'added-the-means'),
+      ],
+      solution: `Find the total of all scores: $20 \\times 80 = 1600$ and $30 \\times 70 = 2100$, for $3700$. Divide by 50 students: $\\frac{3700}{50} = 74$. The value $75$ averages the two means as if the classes were the same size, but Class B has more students, so the combined mean is closer to $70$.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A dot plot shows how many books 11 students read over the summer: 2 students read 1 book, 3 read 2 books, 2 read 3 books, 1 read 4 books, 2 read 6 books, and 1 read 9 books. Find the quartiles by leaving the median out of both halves. What is the interquartile range?`,
+      choices: [
+        no(`$8$`, 'computed-range-instead'),
+        no(`$3$`, 'included-median-in-halves'),
+        no(`$6$`, 'reported-q3-as-iqr'),
+        ok(`$4$`),
+      ],
+      solution: `List the data in order: 1, 1, 2, 2, 2, 3, 3, 4, 6, 6, 9. The median is the sixth value, $3$. The lower half 1, 1, 2, 2, 2 has $Q_1 = 2$, and the upper half 3, 4, 6, 6, 9 has $Q_3 = 6$. The IQR is $6 - 2 = 4$. The value $3$ comes from putting the median into both halves, which gives $Q_3 = 5$.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'medium',
+      stem: `Over many races, Runner A's 5-kilometer times have a mean of 24 minutes and a standard deviation of 0.5 minutes. Runner B's times have a mean of 23 minutes and a standard deviation of 2.5 minutes. Which runner's times are more consistent?`,
+      choices: [
+        ok(`Runner A, because the standard deviation is smaller.`),
+        no(`Runner B, because the mean time is faster.`, 'confused-faster-with-consistent'),
+        no(`Both are equally consistent, because the means are close.`, 'ignored-sd-values'),
+        no(`It cannot be told from the mean and standard deviation.`, 'thought-sd-not-about-consistency'),
+      ],
+      solution: `Consistency is about spread. Runner A's standard deviation of $0.5$ minutes is much smaller than Runner B's $2.5$ minutes, so Runner A's times stay closer to that runner's mean. Runner B is faster on average, but a lower mean says nothing about how much the times vary.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A set of 9 values has a mean of 50 and a population standard deviation of 6. A tenth value, exactly 50, is added. What happens to the mean and the population standard deviation?`,
+      choices: [
+        no(`The mean and the standard deviation both stay the same.`, 'thought-mean-value-leaves-sd-unchanged'),
+        no(`The mean stays the same and the standard deviation increases.`, 'thought-more-data-means-more-spread'),
+        ok(`The mean stays the same and the standard deviation decreases.`),
+        no(`The mean increases and the standard deviation stays the same.`, 'thought-adding-a-value-raises-mean'),
+      ],
+      solution: `The new sum is $450 + 50 = 500$, so the mean is still $\\frac{500}{10} = 50$. The new value has a deviation of $0$, so the sum of squared deviations stays the same but is now divided by 10 instead of 9. The variance drops from $36$ to $32.4$, so the standard deviation decreases.`,
+    },
+  ],
+}
+
+export default skill
