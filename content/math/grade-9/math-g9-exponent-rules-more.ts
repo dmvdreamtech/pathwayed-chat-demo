@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g9-exponent-rules-more',
+  extends: 'exponent-rules',
+  subject: 'math',
+  grade: 9,
+  group: 'Seeing Structure in Expressions',
+  name: 'Exponent Rules',
+  standards: ['HSA.SSE.A.2'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Simplify $y^4 \\cdot y^6 \\cdot y$:`,
+      choices: [
+        ok(`$y^{11}$`),
+        no(`$y^{10}$`, 'forgot-exponent-on-lone-variable'),
+        no(`$y^{24}$`, 'multiplied-exponents-when-multiplying-powers'),
+        no(`$3y^{11}$`, 'counted-factors-as-coefficient'),
+      ],
+      solution: `A lone $y$ means $y^1$. Same base, so add the exponents: $4 + 6 + 1 = 11$, giving $y^{11}$. The choice $y^{10}$ leaves out the exponent of $1$ on the last $y$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Simplify $\\left(\\frac{a}{b}\\right)^5$, where $b \\neq 0$:`,
+      choices: [
+        no(`$\\frac{a^5}{b}$`, 'raised-numerator-only'),
+        ok(`$\\frac{a^5}{b^5}$`),
+        no(`$\\frac{5a}{5b}$`, 'multiplied-by-exponent'),
+        no(`$\\frac{a}{b^5}$`, 'raised-denominator-only'),
+      ],
+      solution: `A power of a quotient raises both the top and the bottom to that power: $\\left(\\frac{a}{b}\\right)^5 = \\frac{a^5}{b^5}$. The choice $\\frac{a^5}{b}$ raises only the numerator.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Evaluate $-3^2$:`,
+      choices: [
+        no(`$9$`, 'applied-exponent-to-negative-sign'),
+        no(`$-6$`, 'multiplied-base-by-exponent'),
+        no(`$6$`, 'multiplied-base-by-exponent-and-dropped-sign'),
+        ok(`$-9$`),
+      ],
+      solution: `Without parentheses, the exponent applies only to the $3$: $-3^2 = -(3 \\cdot 3) = -9$. The choice $9$ would be the value of $(-3)^2$, where the negative sign is inside the parentheses.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Assume $x \\neq 0$ and $y \\neq 0$. What is the value of $(4x^2 y)^0$?`,
+      choices: [
+        ok(`$1$`),
+        no(`$0$`, 'zero-exponent-gives-zero'),
+        no(`$4$`, 'zero-exponent-on-variables-only'),
+        no(`$4x^2 y$`, 'treated-zero-exponent-as-one'),
+      ],
+      solution: `Any nonzero quantity raised to the power $0$ equals $1$, and the exponent applies to the whole product in parentheses, so the value is $1$. The choice $4$ applies the zero exponent to the variables but not to the coefficient.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which expression is equal to $\\frac{1}{m^4}$, where $m \\neq 0$?`,
+      choices: [
+        no(`$-m^4$`, 'negative-exponent-means-negative-value'),
+        no(`$m^4$`, 'ignored-the-reciprocal'),
+        ok(`$m^{-4}$`),
+        no(`$4^{-m}$`, 'swapped-base-and-exponent'),
+      ],
+      solution: `A negative exponent means a reciprocal: $m^{-4} = \\frac{1}{m^4}$. The choice $-m^4$ treats the negative exponent as making the value negative, but it only moves the power to the denominator.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Simplify $\\frac{12x^8}{3x^2}$, where $x \\neq 0$:`,
+      choices: [
+        no(`$4x^4$`, 'divided-exponents'),
+        ok(`$4x^6$`),
+        no(`$9x^6$`, 'subtracted-coefficients'),
+        no(`$4x^{10}$`, 'added-exponents-when-dividing'),
+      ],
+      solution: `Divide the coefficients, $12 \\div 3 = 4$, and subtract the exponents, $8 - 2 = 6$, to get $4x^6$. The choice $4x^4$ divides the exponents, but dividing powers of the same base subtracts them.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Simplify $(-2x^3)^3$:`,
+      choices: [
+        no(`$8x^9$`, 'lost-negative-sign-on-odd-power'),
+        ok(`$-8x^9$`),
+        no(`$-2x^9$`, 'did-not-raise-coefficient'),
+        no(`$-8x^6$`, 'added-exponents-for-power-of-power'),
+      ],
+      solution: `Raise each factor to the third power: $(-2)^3 = -8$ and $(x^3)^3 = x^{9}$, so the result is $-8x^9$. The choice $8x^9$ drops the negative sign, but a negative number cubed stays negative.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Simplify $(3a^2 b^3)(-4a^5 b)$:`,
+      choices: [
+        no(`$-12a^{10} b^3$`, 'multiplied-exponents-when-multiplying-powers'),
+        no(`$-a^7 b^4$`, 'added-coefficients'),
+        no(`$-12a^7 b^3$`, 'forgot-exponent-on-lone-variable'),
+        ok(`$-12a^7 b^4$`),
+      ],
+      solution: `Multiply the coefficients, $3 \\cdot (-4) = -12$, then add exponents on each base: $a^{2+5} = a^7$ and $b^{3+1} = b^4$. The result is $-12a^7 b^4$. The choice $-12a^{10} b^3$ multiplies the exponents instead of adding them.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Which expression is equivalent to $9^x$?`,
+      choices: [
+        ok(`$3^{2x}$`),
+        no(`$3^{x + 2}$`, 'added-instead-of-multiplied-exponents'),
+        no(`$2 \\cdot 3^x$`, 'added-instead-of-multiplied-factors'),
+        no(`$3^x$`, 'ignored-that-9-is-3-squared'),
+      ],
+      solution: `Since $9 = 3^2$, we have $9^x = (3^2)^x = 3^{2x}$ by the power of a power rule. The choice $3^{x + 2}$ adds the exponents, but a power raised to a power multiplies them.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Simplify $\\frac{x^{-3} y^5}{x^2 y^{-1}}$ and write the result using only positive exponents. Assume $x \\neq 0$ and $y \\neq 0$:`,
+      choices: [
+        no(`$\\frac{y^4}{x^5}$`, 'mishandled-negative-exponent-in-denominator'),
+        ok(`$\\frac{y^6}{x^5}$`),
+        no(`$\\frac{y^6}{x}$`, 'added-exponents-when-dividing'),
+        no(`$x^5 y^6$`, 'dropped-negative-sign-on-exponent'),
+      ],
+      solution: `Subtract exponents base by base: $x^{-3 - 2} = x^{-5}$ and $y^{5 - (-1)} = y^6$. Then $x^{-5} y^6 = \\frac{y^6}{x^5}$. The choice $\\frac{y^4}{x^5}$ treats $5 - (-1)$ as $4$, but subtracting a negative adds.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A school's backup drive holds $2^{40}$ bytes. Each video file from the drama club is $2^{25}$ bytes. How many of these files fit on the drive?`,
+      choices: [
+        no(`$2^{65}$`, 'added-exponents-when-dividing'),
+        no(`$1^{15}$`, 'divided-the-bases'),
+        ok(`$2^{15}$`),
+        no(`$15$`, 'dropped-the-base'),
+      ],
+      solution: `Divide the drive size by the file size: $\\frac{2^{40}}{2^{25}} = 2^{40 - 25} = 2^{15}$. The choice $2^{65}$ adds the exponents, which would multiply the two sizes instead of dividing them.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `What value of $n$ makes $x^n \\cdot x^4 = x^{12}$ true for every nonzero $x$?`,
+      choices: [
+        no(`$3$`, 'divided-exponents'),
+        no(`$16$`, 'added-instead-of-subtracted'),
+        no(`$48$`, 'multiplied-exponents-when-multiplying-powers'),
+        ok(`$8$`),
+      ],
+      solution: `Multiplying powers of the same base adds the exponents, so $n + 4 = 12$ and $n = 8$. The choice $3$ comes from $12 \\div 4$, which would be right only if the exponents were multiplied.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Which expression is equivalent to $x^{12}$ for every nonzero $x$?`,
+      choices: [
+        no(`$x^4 \\cdot x^3$`, 'multiplied-exponents-when-multiplying-powers'),
+        ok(`$(x^4)^3$`),
+        no(`$(x^6)^6$`, 'added-exponents-for-power-of-power'),
+        no(`$\\frac{x^{24}}{x^2}$`, 'divided-exponents'),
+      ],
+      solution: `A power of a power multiplies the exponents: $(x^4)^3 = x^{4 \\cdot 3} = x^{12}$. The choice $x^4 \\cdot x^3$ equals $x^{7}$, because multiplying powers adds the exponents rather than multiplying them.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Simplify $\\left(\\frac{2x^4}{y^2}\\right)^3$, where $y \\neq 0$:`,
+      choices: [
+        ok(`$\\frac{8x^{12}}{y^6}$`),
+        no(`$\\frac{2x^{12}}{y^6}$`, 'did-not-raise-coefficient'),
+        no(`$\\frac{6x^{12}}{y^6}$`, 'multiplied-coefficient-by-exponent'),
+        no(`$\\frac{8x^7}{y^5}$`, 'added-exponents-for-power-of-power'),
+      ],
+      solution: `Raise every factor in the numerator and denominator to the third power: $2^3 = 8$, $(x^4)^3 = x^{12}$, and $(y^2)^3 = y^6$. The result is $\\frac{8x^{12}}{y^6}$. The choice $\\frac{6x^{12}}{y^6}$ multiplies $2$ by $3$ instead of cubing it.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Evaluate $\\left(\\frac{2}{5}\\right)^{-2}$:`,
+      choices: [
+        no(`$\\frac{4}{25}$`, 'ignored-negative-exponent'),
+        no(`$-\\frac{4}{25}$`, 'negative-exponent-means-negative-value'),
+        ok(`$\\frac{25}{4}$`),
+        no(`$\\frac{5}{2}$`, 'took-reciprocal-without-squaring'),
+      ],
+      solution: `A negative exponent flips the fraction: $\\left(\\frac{2}{5}\\right)^{-2} = \\left(\\frac{5}{2}\\right)^2 = \\frac{25}{4}$. The choice $\\frac{4}{25}$ squares the fraction but never takes the reciprocal.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Write $8^4 \\cdot 4^3$ as a single power of $2$:`,
+      choices: [
+        no(`$2^7$`, 'used-original-exponents-only'),
+        no(`$32^7$`, 'multiplied-bases-and-added-exponents'),
+        ok(`$2^{18}$`),
+        no(`$2^{72}$`, 'multiplied-exponents-when-multiplying-powers'),
+      ],
+      solution: `Rewrite each base as a power of $2$: $8^4 = (2^3)^4 = 2^{12}$ and $4^3 = (2^2)^3 = 2^6$. Then $2^{12} \\cdot 2^6 = 2^{18}$. The choice $32^7$ multiplies the bases $8$ and $4$, but bases can only be combined that way when the exponents match.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Simplify $\\frac{(3x^2 y^{-1})^2}{9x^{-2} y^3}$ and write the result using only positive exponents. Assume $x \\neq 0$ and $y \\neq 0$:`,
+      choices: [
+        ok(`$\\frac{x^6}{y^5}$`),
+        no(`$\\frac{x^2}{y^5}$`, 'mishandled-negative-exponent-in-denominator'),
+        no(`$\\frac{x^6}{y^4}$`, 'did-not-raise-every-factor'),
+        no(`$\\frac{x^6}{3y^5}$`, 'did-not-raise-coefficient'),
+      ],
+      solution: `First square the numerator: $(3x^2 y^{-1})^2 = 9x^4 y^{-2}$. Then divide: $\\frac{9}{9} = 1$, $x^{4 - (-2)} = x^6$, and $y^{-2 - 3} = y^{-5}$. The result is $\\frac{x^6}{y^5}$. The choice $\\frac{x^2}{y^5}$ computes $4 - (-2)$ as $2$, but subtracting a negative exponent adds.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `If $2^a = 5$, what is the value of $2^{a + 3}$?`,
+      choices: [
+        no(`$125$`, 'raised-result-to-the-power'),
+        no(`$15$`, 'multiplied-by-the-added-exponent'),
+        no(`$13$`, 'added-instead-of-multiplied'),
+        ok(`$40$`),
+      ],
+      solution: `By the product rule, $2^{a + 3} = 2^a \\cdot 2^3 = 5 \\cdot 8 = 40$. The choice $13$ adds $8$ to $5$, but adding exponents corresponds to multiplying the powers.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Which expression is equivalent to $2^n + 2^n$?`,
+      choices: [
+        no(`$2^{2n}$`, 'added-exponents-when-adding'),
+        ok(`$2^{n + 1}$`),
+        no(`$2^{n^2}$`, 'multiplied-exponents-when-adding'),
+        no(`$4^{2n}$`, 'added-bases-and-exponents'),
+      ],
+      solution: `Two copies of $2^n$ make $2 \\cdot 2^n = 2^1 \\cdot 2^n = 2^{n + 1}$. The choice $2^{2n}$ adds the exponents, but that rule is for multiplying powers, not adding them.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `If $3^x = 7$, what is the value of $9^x$?`,
+      choices: [
+        no(`$21$`, 'multiplied-by-3-instead-of-squaring'),
+        no(`$14$`, 'doubled-instead-of-squared'),
+        ok(`$49$`),
+        no(`$63$`, 'multiplied-by-9-instead-of-squaring'),
+      ],
+      solution: `Since $9 = 3^2$, $9^x = (3^2)^x = (3^x)^2 = 7^2 = 49$. The choice $14$ doubles $7$, but the exponent $2$ on the base means squaring, not doubling.`,
+    },
+  ],
+}
+
+export default skill
