@@ -397,7 +397,7 @@ const skill: ContentSkill = {
             wrong(`To explain why the actors preferred the older gel lights.`, 'unsupported-inference'),
             wrong(`To describe the final choice the theater made.`, 'confuses-paragraphs'),
           ],
-          solution: `Paragraph 4 begins "the deciding difference was time" and focuses only on testing colors during rehearsal. The final choice is described in paragraph 5.`,
+          solution: `Paragraph 4 opens "For Adeyemi, the deciding difference was time" and focuses only on testing colors during rehearsal. The theater's mix of both systems is described in paragraph 5.`,
         },
         {
           slot: 30,
