@@ -16,9 +16,9 @@ const skill: ContentSkill = {
       title: 'The Rebuttal',
       body: `(1) The final round of the regional debate tournament was held in the school auditorium, and the stage lights were so bright that I could not see a single face in the audience. (2) My partner, Priya Raman, and I had argued the same side of the same resolution six times that weekend: that our city should keep its public libraries open until midnight. (3) We had won five of those rounds, but the team across the stage had won all six. (4) Their first speaker, a calm junior named Elias Okafor, opened with a statistic about late-night library use that I had never seen before.
 
-(5) I scribbled notes so fast that my pen tore through the paper. (6) Priya slid a folded card across the table. (7) It said, "He's citing a study about a different city." (8) The auditorium was built in 1962 and holds about nine hundred people.
+(5) I scribbled notes so fast that my pen tore through the paper. (6) Priya slid a folded card across the table. (7) It said, "That study is about a different city." (8) The auditorium was built in 1962 and holds about nine hundred people.
 
-(9) I stood up for the rebuttal with my hands shaking. (10) I explained, as evenly as I could, that the study came from a city three times our size with a completely different bus system. (11) Then I asked the judges to look at our own city's numbers, which we had gathered by visiting branches and counting visitors after eight o'clock. (12) Elias nodded slowly while I spoke, as if he were taking the point seriously.
+(9) I stood up for the rebuttal with my hands shaking. (10) I explained, as evenly as I could, that the study came from a city three times our size with a completely different bus system. (11) Then I asked the judges to look at our own city's numbers, which we had gathered by visiting branches and counting visitors after eight o'clock. (12) Elias nodded slowly while I spoke, as if taking the point seriously.
 
 (13) The judges voted two to one for the other team. (14) We lost.`,
       items: [
@@ -40,7 +40,7 @@ const skill: ContentSkill = {
           stem: `Which sentence would best replace sentence 14 as a conclusion that reflects on the experience?`,
           choices: [
             no(`The tournament ended later that afternoon, and the buses took every team back to their own schools.`, 'flat-ending-no-reflection'),
-            ok(`On the bus home, Priya and I kept rereading her card, prouder of that one rebuttal than of all five wins.`),
+            ok(`On the bus home, Priya and I kept rereading the folded card, prouder of that one rebuttal than of all five wins.`),
             no(`Debate tournaments are held in many states, and thousands of students compete in them each year.`, 'generic-fact-ending'),
             no(`The resolution we argued said that our city should keep its public libraries open until midnight.`, 'restates-situation'),
           ],
@@ -66,7 +66,7 @@ const skill: ContentSkill = {
             ok(`For a moment the lights blurred, and I heard my own voice before I realized I had started talking.`),
             no(`Debaters usually have about four minutes to deliver a rebuttal speech in the final round.`, 'adds-unrelated-fact'),
             no(`Later that evening, my family asked me how the tournament had gone, and I told them everything.`, 'jumps-ahead-in-time'),
-            no(`Elias had won a tournament the previous spring, and his partner had won one the year before.`, 'shifts-focus-from-narrator'),
+            no(`Elias had won a tournament the previous spring, and Elias's partner had won one the year before.`, 'shifts-focus-from-narrator'),
           ],
           solution: `The correct sentence stays inside the narrator's experience and stretches a few seconds of nerves. The sentence about the family jumps forward in time instead of slowing the moment.`,
         },
@@ -141,7 +141,7 @@ const skill: ContentSkill = {
             ok(`"She kept writing for four years," I told Mr. Delgado. "People should read her." He handed me the key to the display case.`),
             no(`"Clara Voss was born in the nineteenth century," I said, and Mr. Delgado wrote that down.`, 'dialogue-off-point'),
           ],
-          solution: `The correct choice uses the narrator's words to show why Clara matters and ends with an action that answers the request. The first choice uses dialogue but only repeats a yes, adding nothing about the characters.`,
+          solution: `The correct choice uses the narrator's words to show why Clara matters and ends with an action that answers the request. The choice in which Mr. Delgado says "Yes, it can" uses dialogue but only repeats a yes, adding nothing about the characters.`,
         },
         {
           slot: 10,
@@ -190,7 +190,7 @@ const skill: ContentSkill = {
             no(`Our class went to Miller Creek in October with kick nets and white plastic trays.`, 'restates-situation'),
             ok(`Walking back with numb feet, I kept picturing those three tails, proof the creek was alive.`),
           ],
-          solution: `The correct choice reflects on the meaning of the discovery and echoes the vivid detail in sentence 14. The first choice adds an event but no reflection.`,
+          solution: `The correct choice reflects on the meaning of the discovery and echoes the vivid detail in sentence 14. The choice ending "and we wrote our lab reports" adds an event but no reflection.`,
         },
         {
           slot: 13,
@@ -235,9 +235,9 @@ const skill: ContentSkill = {
       title: 'The Exchange Zone',
       body: `(1) In a sprint relay, the baton must pass between runners inside a zone just thirty meters long, and a single fumble can end a race. (2) I ran the third leg for our team, which meant I received the baton on the curve and handed it to our anchor, Dominique Asante. (3) All season, our handoffs had been clumsy. (4) At the state qualifier, we dropped the baton in the final exchange and did not finish.
 
-(5) Coach Ferreira changed our practices after that. (6) Every afternoon for two weeks, Dominique and I ran nothing but handoffs, sometimes forty in a row. (7) She would start running when I reached a strip of tape on the track, and I would shout "Stick!" when I was close enough to place the baton in her open hand. (8) At first she started too early and I could not catch her. (9) Then she started too late and we nearly collided. (10) Slowly, we moved the tape until we found the right spot. (11) The track had been resurfaced the previous summer with a new rubber coating.
+(5) Coach Ferreira changed our practices after that. (6) Every afternoon for two weeks, Dominique and I ran nothing but handoffs, sometimes forty in a row. (7) Dominique would start running when I reached a strip of tape on the track, and I would shout "Stick!" when I was close enough to place the baton in an open hand. (8) At first Dominique started too early and I could not catch up. (9) Then the start came too late and we nearly collided. (10) Slowly, we moved the tape until we found the right spot. (11) The track had been resurfaced the previous summer with a new rubber coating.
 
-(12) It was the championship meet. (13) I came off the curve, saw the tape, and watched Dominique begin to run. (14) "Stick!" I shouted. (15) The baton smacked into her palm, and she was gone. (16) We finished second, our fastest time of the year.`,
+(12) It was the championship meet. (13) I came off the curve, saw the tape, and watched Dominique begin to run. (14) "Stick!" I shouted. (15) The baton smacked into an open palm, and Dominique was gone. (16) We finished second, our fastest time of the year.`,
       items: [
         {
           slot: 16,
@@ -281,7 +281,7 @@ const skill: ContentSkill = {
           stem: `Which sentence, added after sentence 16, would best conclude the narrative with reflection?`,
           choices: [
             no(`The team that won first place had also won the championship the year before.`, 'shifts-focus-from-narrator'),
-            ok(`I never touched the baton that night without thinking of all those afternoons with the tape.`),
+            ok(`After that night, I never held a baton without thinking of all those afternoons with the tape.`),
             no(`After the race, we packed our bags and rode home on the team bus.`, 'flat-ending-no-reflection'),
             no(`A sprint relay requires four runners, and each runs about one hundred meters.`, 'generic-fact-ending'),
           ],
@@ -370,7 +370,7 @@ const skill: ContentSkill = {
             no(`Lucia has not been introduced yet, so the reader would not know who was speaking.`, 'misreads-character-introduction'),
             no(`Sentence 12 is the narrative's conclusion, and conclusions should never include actions.`, 'misreads-function'),
           ],
-          solution: `A squeeze on the shoulder shows the relief without stating it, and it fits a setting where talking would be out of place. Lucia is introduced in sentence 6, so the reader already knows her.`,
+          solution: `A squeeze on the shoulder shows the relief without stating it, and it fits a setting where talking would be out of place. Lucia is introduced in sentence 6, so the reader already knows who Lucia is.`,
         },
       ],
     },
@@ -492,7 +492,7 @@ const skill: ContentSkill = {
             ok(`When I said the word "opening," Tariq rolled a pawn across the table like a marble.`),
             no(`Nobody listened, because opening strategy is difficult for many players.`, 'adds-cause-not-detail'),
           ],
-          solution: `The correct choice gives a specific action that lets the reader see the lesson falling apart. The other choices only restate that nobody listened or add a general explanation.`,
+          solution: `The correct choice gives a specific action that lets the reader see the lesson falling apart. The choices that begin "Nobody listened" only restate the problem or add a general explanation.`,
         },
         {
           slot: 34,
