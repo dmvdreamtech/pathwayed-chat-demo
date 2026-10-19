@@ -165,7 +165,7 @@ const skill: ContentSkill = {
         no(`The bridge opened in 1932 and it was made of steel and it spanned the river gorge.`, 'stringy-coordination'),
         no(`The bridge, which spanned the river gorge, opened in 1932.`, 'drops-detail'),
       ],
-      solution: `Turning "made of steel" into the adjective "steel" and the gorge detail into a clause keeps all three facts in one smooth sentence. The last choice is smooth too, but it drops the fact that the bridge was steel.`,
+      solution: `Turning "made of steel" into the adjective "steel" and the gorge detail into a clause keeps all three facts in one smooth sentence. The choice "The bridge, which spanned the river gorge, opened in 1932" is smooth too, but it drops the fact that the bridge was steel.`,
     },
     {
       slot: 14,
@@ -225,7 +225,7 @@ const skill: ContentSkill = {
         no(`The internship taught Priya to analyze data, and also grant proposals, and presenting findings.`, 'faulty-parallelism'),
         no(`The internship taught Priya to analyze data and present findings.`, 'drops-detail'),
       ],
-      solution: `Putting all three skills in the same verb form makes the list balanced and easy to read. The shortest choice is parallel, but it leaves out grant proposals.`,
+      solution: `Putting all three skills in the same verb form makes the list balanced and easy to read. "To analyze data and present findings" is parallel, but it leaves out grant proposals.`,
     },
     {
       slot: 19,
@@ -270,10 +270,10 @@ const skill: ContentSkill = {
       choices: [
         no(`We really need the cash to fix up our busted boats.`, 'informal-word'),
         no(`We need the money super badly to repair our boats.`, 'informal-intensifier'),
-        ok(`The grant would allow us to repair our damaged boats.`),
-        no(`The grant would allow us to replace our entire fleet.`, 'changes-meaning'),
+        ok(`We urgently need these funds to repair our damaged boats.`),
+        no(`We urgently need these funds to replace our entire fleet.`, 'changes-meaning'),
       ],
-      solution: `The correct choice keeps the request and the purpose but uses formal words like "repair" and "damaged." Replacing the entire fleet is formal, but it asks for something the draft never mentioned.`,
+      solution: `The correct choice keeps the need and the purpose but uses formal words like "urgently," "repair" and "damaged." Replacing the entire fleet is formal, but it asks for something the draft never mentioned.`,
     },
     {
       slot: 23,
@@ -285,7 +285,7 @@ const skill: ContentSkill = {
         no(`The botanist's past history in field research made her the ideal choice to lead the expedition.`, 'redundancy-remains'),
         no(`The botanist's lack of field research made her an ideal choice to lead the expedition.`, 'changes-meaning'),
       ],
-      solution: `A history is always in the past, so "past" repeats the idea. The third choice changes a preposition but keeps "past history."`,
+      solution: `A history is always in the past, so "past" repeats the idea. The choice with "past history in field research" changes a preposition but keeps "past history."`,
     },
     {
       slot: 24,
@@ -297,7 +297,7 @@ const skill: ContentSkill = {
         ok(`Opened in 1998, the museum displays six working printing presses and offers weekly demonstrations.`),
         no(`The museum opened in 1998, the museum displays six printing presses, the museum offers demonstrations.`, 'comma-splice'),
       ],
-      solution: `The opening participial phrase and the compound verb remove the repeated "The museum" and keep all three facts. The second choice varies the structure too, but it leaves out the weekly demonstrations.`,
+      solution: `The opening participial phrase and the compound verb remove the repeated "The museum" and keep all three facts. The choice "Opened in 1998, the museum displays six working printing presses" varies the structure too, but it leaves out the weekly demonstrations.`,
     },
     {
       slot: 25,
@@ -321,7 +321,7 @@ const skill: ContentSkill = {
         no(`The committee just counted up how many folks showed.`, 'informal-word'),
         no(`The committee used interviews to explain why attendance fell.`, 'changes-meaning'),
       ],
-      solution: `Plain formal words like "used," "methods," and "measure" say the same thing without the inflated phrasing. The second choice is a little shorter but keeps the pompous "utilized" and "ascertain."`,
+      solution: `Plain formal words like "used," "methods," and "measure" say the same thing without the inflated phrasing. The choice with "quantitative methodologies" is a little shorter but keeps the pompous "utilized" and "ascertain."`,
     },
     {
       slot: 27,
@@ -357,7 +357,7 @@ const skill: ContentSkill = {
         no(`One should verify sources after citing them in a paper.`, 'changes-meaning'),
         ok(`One should verify sources before citing them in a paper.`),
       ],
-      solution: `Changing "you cite them" to "citing them" removes the shift from "one" to "you." The second choice simply reverses the shift, so the pronouns still clash.`,
+      solution: `Changing "you cite them" to "citing them" removes the shift from "one" to "you." The choice "You should verify sources before one cites them" simply reverses the shift, so the pronouns still clash.`,
     },
     {
       slot: 30,
@@ -381,7 +381,7 @@ const skill: ContentSkill = {
         ok(`After three seasons of sifting through layers of ash and silt, the team finally uncovered a carved bone flute.`),
         no(`After three seasons of sifting through layers of ash and silt, the team uncovered many ancient objects.`, 'vague-wording'),
       ],
-      solution: `Placing the long introductory phrase first and the flute last creates a periodic sentence that delays the key detail. The first choice contains the same facts but announces the flute immediately, so there is no suspense.`,
+      solution: `Placing the long introductory phrase first and the flute last creates a periodic sentence that delays the key detail. The choice that begins "The team uncovered a carved bone flute" contains the same facts but announces the flute immediately, so there is no suspense.`,
     },
     {
       slot: 32,
@@ -417,7 +417,7 @@ const skill: ContentSkill = {
         no(`At 6 a.m. in the morning, the students launched a helium balloon that rose up to 30 kilometers.`, 'redundancy-remains'),
         no(`At 6 a.m., the students initiated the release of a balloon containing helium, which ascended to 30 kilometers.`, 'inflated-diction'),
       ],
-      solution: `The correct revision cuts "in the morning," "gas," "up," and "in height," all of which repeat ideas already stated, and keeps the time, the helium, and the altitude. The second choice is shorter still, but it drops the launch time.`,
+      solution: `The correct revision cuts "in the morning," "gas," "up," and "in height," all of which repeat ideas already stated, and keeps the time, the helium, and the altitude. The choice that begins "The students launched" is shorter still, but it drops the launch time.`,
     },
     {
       slot: 35,
@@ -429,7 +429,7 @@ const skill: ContentSkill = {
         no(`Mycorrhizae, networks of fungi, allow trees to exchange nutrients.`, 'drops-detail'),
         no(`Networks of fungi that link tree roots allow mycorrhizae to exchange nutrients.`, 'changes-meaning'),
       ],
-      solution: `The appositive "networks of fungi that link tree roots" defines the term inside the sentence and keeps all three facts. The third choice also uses an appositive but loses the detail that the networks link roots.`,
+      solution: `The appositive "networks of fungi that link tree roots" defines the term inside the sentence and keeps all three facts. The choice "Mycorrhizae, networks of fungi, allow trees to exchange nutrients" also uses an appositive but loses the detail that the networks link roots.`,
     },
     {
       slot: 36,
@@ -441,7 +441,7 @@ const skill: ContentSkill = {
         ok(`Rarely has the town seen such a large crowd at a chess tournament.`),
         no(`Rarely ever has the town seen such a big old crowd at a chess tournament.`, 'informal-word'),
       ],
-      solution: `When a sentence opens with a negative adverb like "Rarely," the helping verb comes before the subject: "has the town seen." The first choice opens with "Rarely" but keeps normal word order, which sounds ungrammatical.`,
+      solution: `When a sentence opens with a negative adverb like "Rarely," the helping verb comes before the subject: "has the town seen." "Rarely the town has seen" keeps normal word order, which sounds ungrammatical.`,
     },
     {
       slot: 37,
@@ -465,7 +465,7 @@ const skill: ContentSkill = {
         no(`The seawall took two years to build, but a winter storm destroyed it completely in one night.`, 'adds-new-fact'),
         ok(`The seawall took two years to build and nearly as long to repair after a single winter storm.`),
       ],
-      solution: `The paired phrases "two years to build" and "nearly as long to repair" mirror each other, so the contrast stands out. The first choice keeps the facts but blurs the comparison with the vague "took a while."`,
+      solution: `The paired phrases "two years to build" and "nearly as long to repair" mirror each other, so the contrast stands out. The choice ending "repairs took a while" keeps the facts but blurs the comparison with the vague "took a while."`,
     },
     {
       slot: 39,
@@ -477,7 +477,7 @@ const skill: ContentSkill = {
         no(`The museum's board surprisingly approved a glass addition that may harm the historic building.`, 'loaded-language'),
         no(`The museum's board rejected a glass addition to the historic building.`, 'changes-meaning'),
       ],
-      solution: `Removing "shockingly," "bizarre," and "will surely ruin" leaves only the facts, which is what objective reporting requires. The third choice softens the wording, but "surprisingly" and the prediction of harm still carry the writer's opinion.`,
+      solution: `Removing "shockingly," "bizarre," and "will surely ruin" leaves only the facts, which is what objective reporting requires. The choice with "may harm" softens the wording, but "surprisingly" and the prediction of harm still carry the writer's opinion.`,
     },
     {
       slot: 40,
@@ -489,7 +489,7 @@ const skill: ContentSkill = {
         ok(`In a study of 40 students, music during review sessions modestly improved memory scores.`),
         no(`In a study of 40 students of all ages, music during review sessions doubled memory scores.`, 'adds-new-fact'),
       ],
-      solution: `The correct choice matches the study's size, setting, and modest result without overstating it. The first choice keeps the strong word "proves" and claims a large effect for every student, which the evidence does not support.`,
+      solution: `The correct choice matches the study's size, setting, and modest result without overstating it. The choice "This study proves that music greatly improves memory in every student" keeps the strong word "proves" and claims a large effect for every student, which the evidence does not support.`,
     },
   ],
 }
