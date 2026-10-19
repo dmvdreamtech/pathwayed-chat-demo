@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g8-functions-more',
+  extends: 'functions',
+  subject: 'math',
+  grade: 8,
+  group: 'Functions',
+  name: 'Functions',
+  standards: ['8.F.A.1'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Which set of ordered pairs is NOT a function?`,
+      choices: [
+        ok(`$\\{(2, 3), (2, 7), (4, 1), (5, 0)\\}$`),
+        no(`$\\{(1, 5), (2, 5), (3, 5), (4, 5)\\}$`, 'thought-repeated-outputs-break-function'),
+        no(`$\\{(0, 0), (1, 1), (2, 4), (3, 9)\\}$`, 'confused-nonlinear-with-not-function'),
+        no(`$\\{(3, 1), (1, 3), (4, 2), (2, 4)\\}$`, 'confused-swapped-pairs-with-repeated-input'),
+      ],
+      solution: `A function pairs each input with exactly one output. In $\\{(2, 3), (2, 7), (4, 1), (5, 0)\\}$ the input $2$ is paired with both $3$ and $7$, so it is not a function. The set where every output is $5$ is still a function, because repeated outputs are allowed.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A function rule says: output $= 3 \\times$ input $- 2$. What is the output when the input is $6$?`,
+      choices: [
+        ok(`$16$`),
+        no(`$12$`, 'subtracted-before-multiplying'),
+        no(`$20$`, 'added-instead-of-subtracted'),
+        no(`$4$`, 'ignored-the-multiplier'),
+      ],
+      solution: `Multiply first, then subtract: $3 \\times 6 = 18$ and $18 - 2 = 16$. The value $12$ comes from subtracting first, $3 \\times (6 - 2)$, which the rule does not say.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `In a function, each input is paired with how many outputs?`,
+      choices: [
+        ok(`Exactly one`),
+        no(`Any number of outputs`, 'thought-inputs-can-have-many-outputs'),
+        no(`Exactly one, and each output must come from only one input`, 'thought-outputs-must-be-unique'),
+        no(`Zero or one`, 'thought-inputs-can-lack-outputs'),
+      ],
+      solution: `By definition, a function assigns to each input exactly one output. Two different inputs may share the same output, so there is no rule that each output comes from only one input.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A mapping diagram has inputs $1$, $2$ and $3$. Arrows go from $1$ to $5$, from $2$ to $5$, and from $3$ to $8$. Which statement is true?`,
+      choices: [
+        ok(`It is a function, because each input has exactly one output.`),
+        no(`It is not a function, because $5$ is the output for two inputs.`, 'thought-repeated-outputs-break-function'),
+        no(`It is not a function, because the inputs do not all have the same output.`, 'thought-all-inputs-share-an-output'),
+        no(`It is a function, because each output has exactly one input.`, 'reversed-input-and-output-roles'),
+      ],
+      solution: `Each input has one arrow leaving it, so each input has exactly one output, and the relation is a function. The output $5$ having two inputs is allowed, so that does not stop it from being a function.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A function $f$ is given by a table. The inputs $-2$, $-1$, $0$, $1$, $2$ have outputs $5$, $3$, $1$, $-1$, $-3$ in that order. What is $f(-1)$?`,
+      choices: [
+        ok(`$3$`),
+        no(`$-1$`, 'used-opposite-input'),
+        no(`$1$`, 'read-output-at-input-zero'),
+        no(`$5$`, 'read-output-at-input-negative-two'),
+      ],
+      solution: `Find the input $-1$ in the table and read its output, which is $3$. The value $-1$ is the output for the input $1$, not $-1$.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `The graph of a function is the set of ordered pairs (input, output). If $f(4) = 9$, which point is on the graph of $f$?`,
+      choices: [
+        ok(`$(4, 9)$`),
+        no(`$(9, 4)$`, 'swapped-input-and-output'),
+        no(`$(4, 4)$`, 'repeated-the-input'),
+        no(`$(0, 9)$`, 'dropped-the-input'),
+      ],
+      solution: `$f(4) = 9$ means the input $4$ gives the output $9$, so the point is $(4, 9)$ with the input first. The point $(9, 4)$ puts the output first.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `A table pairs the inputs $1$, $2$, $2$, $3$ with the outputs $4$, $6$, $8$, $10$ in that order. Which statement is true?`,
+      choices: [
+        ok(`It is not a function, because the input $2$ has the outputs $6$ and $8$.`),
+        no(`It is a function, because every output is different.`, 'thought-unique-outputs-make-function'),
+        no(`It is not a function, because the outputs go up by $2$ each time.`, 'confused-pattern-with-definition'),
+        no(`It is a function, because the inputs are listed in increasing order.`, 'thought-ordered-inputs-make-function'),
+      ],
+      solution: `The input $2$ appears twice with two different outputs, $6$ and $8$, so the table is not a function. Having all different outputs does not help when one input has two outputs.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Each graph below is described in words. Which graph does NOT show $y$ as a function of $x$?`,
+      choices: [
+        ok(`A circle centered at the origin with radius $5$`),
+        no(`A horizontal line through $(0, 3)$`, 'thought-horizontal-line-fails'),
+        no(`A V shape with its corner at the origin, opening upward`, 'thought-corners-break-function'),
+        no(`A U shaped curve opening upward with its lowest point at $(0, -2)$`, 'confused-curved-graph-with-not-function'),
+      ],
+      solution: `A vertical line such as $x = 3$ crosses the circle at $(3, 4)$ and $(3, -4)$, so the input $3$ has two outputs and the circle is not a function. A horizontal line gives every input the single output $3$, so it is a function.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Each choice lists ordered pairs (input, output), one pair for each item described. Which list of pairs is a function?`,
+      choices: [
+        ok(`The pairs (student, height in centimeters measured at noon today), one for each student in a class`),
+        no(`The pairs (age in years, student), one for each student at a school`, 'reversed-input-and-output'),
+        no(`The pairs (zip code, street name), one for each street in a city`, 'ignored-multiple-outputs'),
+        no(`The pairs (positive number, a number whose square is that positive number), one for each such number`, 'forgot-negative-square-root'),
+      ],
+      solution: `One student has one height at one moment, so each input gets exactly one output. The square root pairs include both $(9, 3)$ and $(9, -3)$, so the input $9$ has two outputs and that list is not a function. Many students share an age and a zip code holds many streets, so those inputs also repeat with different outputs.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `If $f(x) = -2x + 7$, what is $f(-3)$?`,
+      choices: [
+        ok(`$13$`),
+        no(`$1$`, 'dropped-negative-sign-of-input'),
+        no(`$-13$`, 'negated-the-whole-result'),
+        no(`$4$`, 'ignored-the-coefficient'),
+      ],
+      solution: `Substitute $-3$ for $x$: $-2 \\times (-3) = 6$ and $6 + 7 = 13$. The value $1$ comes from using $3$ instead of $-3$, which gives $-6 + 7$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `The relation $\\{(1, 4), (3, k), (5, 6), (3, 9)\\}$ is a function. What must $k$ be?`,
+      choices: [
+        ok(`$9$`),
+        no(`$4$`, 'matched-output-of-first-pair'),
+        no(`$6$`, 'matched-output-of-another-pair'),
+        no(`$3$`, 'set-output-equal-to-input'),
+      ],
+      solution: `The input $3$ appears twice. For the relation to be a function, the input $3$ can have only one output, and one pair already gives it $9$, so $k = 9$. Choosing $4$ would give the input $3$ two outputs, $4$ and $9$.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `If $g(x) = \\frac{x}{2} + 5$, what is $g(10)$?`,
+      choices: [
+        ok(`$10$`),
+        no(`$7.5$`, 'added-before-dividing'),
+        no(`$25$`, 'multiplied-instead-of-divided'),
+        no(`$5$`, 'ignored-the-constant'),
+      ],
+      solution: `Divide first, then add: $10 \\div 2 = 5$ and $5 + 5 = 10$. The value $7.5$ comes from adding first and then dividing, $(10 + 5) \\div 2$.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `For the function $f(x) = 4x - 1$, which input gives the output $19$?`,
+      choices: [
+        ok(`$5$`),
+        no(`$75$`, 'evaluated-at-the-output'),
+        no(`$4.5$`, 'subtracted-instead-of-added'),
+        no(`$20$`, 'skipped-dividing'),
+      ],
+      solution: `Solve $4x - 1 = 19$: add $1$ to get $4x = 20$, then divide by $4$ to get $x = 5$. Check: $4 \\times 5 - 1 = 19$. The value $75$ is $f(19)$, which treats $19$ as an input instead of an output.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A taxi ride costs 3 dollars plus 2 dollars per mile. The total cost $C$ in dollars is a function of the miles $m$. Which ordered pair $(m, C)$ is on the graph of this function?`,
+      choices: [
+        ok(`$(4, 11)$`),
+        no(`$(11, 4)$`, 'swapped-input-and-output'),
+        no(`$(4, 20)$`, 'applied-rate-to-base-fee'),
+        no(`$(4, 8)$`, 'ignored-the-base-fee'),
+      ],
+      solution: `For $4$ miles the cost is $3 + 2 \\times 4 = 11$ dollars, so the pair is $(4, 11)$ with miles first. The pair $(4, 8)$ leaves out the 3 dollar starting fee.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `The graph of a function $f$ contains the points $(-2, 5)$, $(0, 1)$ and $(3, -5)$. Which point could NOT also be on the graph of $f$?`,
+      choices: [
+        ok(`$(0, 4)$`),
+        no(`$(4, 1)$`, 'thought-repeated-outputs-break-function'),
+        no(`$(1, 0)$`, 'thought-reversed-pair-conflicts'),
+        no(`$(-5, 3)$`, 'confused-swapped-point-with-repeated-input'),
+      ],
+      solution: `The input $0$ already has the output $1$, so $(0, 4)$ would give it a second output and $f$ would no longer be a function. The point $(4, 1)$ is fine: it uses a new input, and sharing the output $1$ is allowed.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `The relation $y^2 = x$ pairs inputs $x$ with outputs $y$. Which input shows that $y$ is NOT a function of $x$?`,
+      choices: [
+        ok(`$x = 9$, which is paired with both $y = 3$ and $y = -3$`),
+        no(`$x = 0$, which is paired with $y = 0$`, 'picked-input-with-one-output'),
+        no(`$x = 3$, which is paired with $y = 9$`, 'swapped-input-and-output'),
+        no(`$x = -4$, which is paired with both $y = 2$ and $y = -2$`, 'ignored-sign-of-square'),
+      ],
+      solution: `Both $3^2$ and $(-3)^2$ equal $9$, so the input $9$ has two outputs, and $y$ is not a function of $x$. The input $-4$ does not work, because $2^2$ and $(-2)^2$ are $4$, not $-4$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `If $f(x) = 5 - 2x$, what is $f(4) - f(1)$?`,
+      choices: [
+        ok(`$-6$`),
+        no(`$6$`, 'subtracted-in-wrong-order'),
+        no(`$-1$`, 'evaluated-at-difference-of-inputs'),
+        no(`$-3$`, 'found-only-first-value'),
+      ],
+      solution: `$f(4) = 5 - 8 = -3$ and $f(1) = 5 - 2 = 3$, so $f(4) - f(1) = -3 - 3 = -6$. The value $-1$ is $f(3)$, found by subtracting the inputs first, but $f(4) - f(1)$ means subtracting the outputs.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Which rule does NOT describe a function from input to output?`,
+      choices: [
+        ok(`Input a positive number; output a number whose absolute value equals the input.`),
+        no(`Input any number; output its absolute value.`, 'confused-absolute-value-with-two-outputs'),
+        no(`Input any number; output $7$.`, 'thought-constant-rule-not-function'),
+        no(`Input a whole number; output its remainder when divided by $3$.`, 'thought-repeated-outputs-break-function'),
+      ],
+      solution: `For the input $6$, both $6$ and $-6$ have absolute value $6$, so the rule allows two outputs and is not a function. Outputting the absolute value gives exactly one result for each input, so that rule is a function.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `For which value of $k$ is the relation $\\{(k, 2), (4, 6), (-1, 0), (5, 3)\\}$ NOT a function?`,
+      choices: [
+        ok(`$4$`),
+        no(`$6$`, 'matched-output-of-another-pair'),
+        no(`$2$`, 'matched-its-own-output'),
+        no(`$3$`, 'matched-output-of-last-pair'),
+      ],
+      solution: `If $k = 4$, the input $4$ is paired with both $2$ and $6$, which breaks the rule of one output per input. With $k = 6$, the input $6$ is new, so the relation is still a function; matching an output does not matter.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A graph is made of a horizontal line segment from $(1, 1)$ to $(5, 1)$ together with the single point $(3, 4)$. Treat $x$ as the input and $y$ as the output. Which statement is true?`,
+      choices: [
+        ok(`It is not a function, because $x = 3$ is paired with both $y = 1$ and $y = 4$.`),
+        no(`It is a function, because every point has a different $x$ value.`, 'missed-shared-input'),
+        no(`It is not a function, because $y = 1$ is paired with many $x$ values.`, 'thought-repeated-outputs-break-function'),
+        no(`It is a function, because a horizontal segment passes the vertical line test.`, 'checked-only-part-of-graph'),
+      ],
+      solution: `The segment includes the point $(3, 1)$, and the graph also has $(3, 4)$, so the input $3$ has two outputs and the graph is not a function. Many inputs sharing the output $1$ is allowed.`,
+    },
+  ],
+}
+
+export default skill
