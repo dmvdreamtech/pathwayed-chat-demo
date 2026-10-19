@@ -22,7 +22,7 @@ const skill: ContentSkill = {
         no(`On Tuesday, Priya and aunt Rosa drove to Phoenix.`, 'lowercase-title-before-name'),
         no(`On Tuesday, Priya and Aunt Rosa drove to phoenix.`, 'lowercase-city-name'),
       ],
-      solution: `Days of the week, titles used with a name, and city names all begin with capital letters. The first choice forgets that "Tuesday" is a proper noun.`,
+      solution: `Days of the week, titles used with a name, and city names all begin with capital letters. The choice that writes "tuesday" forgets that the day is a proper noun.`,
     },
     {
       slot: 2,
@@ -70,7 +70,7 @@ const skill: ContentSkill = {
         no(`Leilani said, "the bus is late again."`, 'lowercase-quote-start'),
         no(`Leilani said, The bus is late again."`, 'missing-opening-quote'),
       ],
-      solution: `A comma comes after "said," the quotation begins with a capital letter, and quotation marks surround all of Leilani's words. The second choice leaves out the comma before the quotation.`,
+      solution: `A comma comes after "said," the quotation begins with a capital letter, and quotation marks surround all of Leilani's words. Writing "Leilani said" with no comma leaves out the comma before the quotation.`,
     },
     {
       slot: 6,
@@ -111,14 +111,14 @@ const skill: ContentSkill = {
     {
       slot: 9,
       difficulty: 'hard',
-      stem: `This sentence reports what Rafael said without using his exact words. Which version is punctuated correctly?`,
+      stem: `This sentence reports what Rafael said without using Rafael's exact words. Which version is punctuated correctly?`,
       choices: [
         no(`Rafael told us that "the game was canceled."`, 'quotes-around-indirect-speech'),
         ok(`Rafael told us that the game was canceled.`),
         no(`Rafael told us that, the game was canceled.`, 'comma-before-that-clause'),
         no(`Rafael told us, "The game was canceled".`, 'period-outside-quote'),
       ],
-      solution: `The word "that" shows the sentence reports what Rafael said instead of quoting him, so no quotation marks or commas are needed. Adding quotation marks around reported speech is the tempting error.`,
+      solution: `The word "that" shows the sentence reports what Rafael said instead of quoting Rafael, so no quotation marks or commas are needed. Adding quotation marks around reported speech is the tempting error.`,
     },
     {
       slot: 10,
@@ -161,12 +161,12 @@ const skill: ContentSkill = {
       difficulty: 'medium',
       stem: `Which sentence correctly joins two complete sentences with "and"?`,
       choices: [
-        no(`Grace fed the rabbits and her brother cleaned the cage.`, 'missing-comma-compound-sentence'),
+        no(`Grace fed the rabbits and Omar cleaned the cage.`, 'missing-comma-compound-sentence'),
         no(`Grace fed the rabbits, and cleaned the cage.`, 'comma-in-compound-predicate'),
-        ok(`Grace fed the rabbits, and her brother cleaned the cage.`),
-        no(`Grace fed the rabbits and, her brother cleaned the cage.`, 'comma-after-conjunction'),
+        ok(`Grace fed the rabbits, and Omar cleaned the cage.`),
+        no(`Grace fed the rabbits and, Omar cleaned the cage.`, 'comma-after-conjunction'),
       ],
-      solution: `"Grace fed the rabbits" and "her brother cleaned the cage" are both complete, so a comma goes before "and." The second choice has only one subject, so it does not need a comma.`,
+      solution: `"Grace fed the rabbits" and "Omar cleaned the cage" are both complete, so a comma goes before "and." The choice "Grace fed the rabbits, and cleaned the cage." has only one subject, so it should not have a comma.`,
     },
     {
       slot: 14,
@@ -187,10 +187,10 @@ const skill: ContentSkill = {
       choices: [
         ok(`Dmitri painted the birdhouse and hung it on the oak tree.`),
         no(`Dmitri painted the birdhouse, and hung it on the oak tree.`, 'comma-in-compound-predicate'),
-        no(`Dmitri painted the birdhouse and his sister hung it up.`, 'missing-comma-compound-sentence'),
-        no(`Dmitri painted the birdhouse, his sister hung it up.`, 'comma-splice'),
+        no(`Dmitri painted the birdhouse and Lena hung it up.`, 'missing-comma-compound-sentence'),
+        no(`Dmitri painted the birdhouse, Lena hung it up.`, 'comma-splice'),
       ],
-      solution: `The correct sentence has one subject, Dmitri, doing two actions, so no comma is needed before "and." A sentence with a second subject, like "his sister," would need a comma before "and."`,
+      solution: `The correct sentence has one subject, Dmitri, doing two actions, so no comma is needed before "and." A sentence with a second subject, like "Lena," would need a comma before "and."`,
     },
     {
       slot: 16,
@@ -207,7 +207,7 @@ const skill: ContentSkill = {
     {
       slot: 17,
       difficulty: 'easy',
-      stem: `Read the sentence: Kwame was ____ that his kite would fly in the strong wind. Which word is spelled correctly?`,
+      stem: `Read the sentence: Kwame was ____ that the kite would fly in the strong wind. Which word is spelled correctly?`,
       choices: [
         no(`sertain`, 'c-spelled-as-s'),
         no(`certin`, 'drops-unstressed-vowel'),
@@ -219,7 +219,7 @@ const skill: ContentSkill = {
     {
       slot: 18,
       difficulty: 'medium',
-      stem: `Read the sentence: Lucia's grandmother gave her a ____ necklace for her birthday. Which word is spelled correctly?`,
+      stem: `Read the sentence: Lucia wore a ____ necklace to the party. Which word is spelled correctly?`,
       choices: [
         no(`beutiful`, 'missing-vowel-team-letter'),
         ok(`beautiful`),
