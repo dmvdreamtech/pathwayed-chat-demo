@@ -197,11 +197,11 @@ const skill: ContentSkill = {
       stem: `Read the sentence: "The archivists faced a difficult choice, restore the faded map or scan it exactly as it was." Which revision is punctuated correctly?`,
       choices: [
         ok(`The archivists faced a difficult choice: restore the faded map or scan it exactly as it was.`),
-        no(`The archivists faced a difficult choice; restore the faded map or scan it exactly as it was.`, 'semicolon-before-fragment'),
+        no(`The archivists faced a difficult choice; restore the faded map or scan it exactly as it was.`, 'semicolon-for-colon'),
         no(`The archivists faced: a difficult choice, restore the faded map or scan it exactly as it was.`, 'colon-after-verb'),
         no(`The archivists faced a difficult choice. Restore the faded map or scan it exactly as it was.`, 'unintended-command'),
       ],
-      solution: `The first clause is complete, and what follows spells out the choice, so a colon is the right mark. A semicolon would require a full independent clause after it, and "restore the faded map or scan it" is not one here.`,
+      solution: `The first clause is complete, and what follows spells out the choice, so a colon is the right mark. A semicolon or a period would cut the explanation off as a separate statement, so "restore the faded map" would read as a command to the reader instead of the choice the archivists faced.`,
     },
     {
       slot: 17,
