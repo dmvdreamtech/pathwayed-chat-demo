@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g8-linear-thinking-more',
+  extends: 'linear-thinking',
+  subject: 'math',
+  grade: 8,
+  group: 'Expressions and Equations',
+  name: 'Linear Thinking',
+  standards: ['8.EE.B.5'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `The graph of a proportional relationship between hours worked, $x$, and dollars earned, $y$, is a line through the origin and the point $(5, 30)$. What is the unit rate in dollars per hour?`,
+      choices: [
+        ok(`$6$`),
+        no(`$\\frac{1}{6}$`, 'inverted-rate'),
+        no(`$30$`, 'used-y-value-as-rate'),
+        no(`$25$`, 'subtracted-coordinates'),
+      ],
+      solution: `The unit rate is $y$ divided by $x$: $30 \\div 5 = 6$ dollars per hour. The choice $\\frac{1}{6}$ divides $x$ by $y$, which gives hours per dollar instead.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A table shows a proportional relationship between gallons of gas, $x$, and miles driven, $y$: 2 gallons gives 50 miles, 4 gallons gives 100 miles, and 6 gallons gives 150 miles. Which equation represents the relationship?`,
+      choices: [
+        no(`$y = 50x$`, 'used-first-y-value-as-rate'),
+        ok(`$y = 25x$`),
+        no(`$y = \\frac{1}{25}x$`, 'inverted-rate'),
+        no(`$y = x + 48$`, 'additive-pattern'),
+      ],
+      solution: `Divide each $y$ by its $x$: $50 \\div 2 = 25$, $100 \\div 4 = 25$, $150 \\div 6 = 25$, so $y = 25x$. The choice $y = 50x$ uses the first $y$-value as the rate, but 50 miles goes with 2 gallons, not 1.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `The equation $y = 3.5x$ gives the number of pages, $y$, a student reads in $x$ minutes. Which point lies on the graph of this equation?`,
+      choices: [
+        no(`$(14, 4)$`, 'swapped-coordinates'),
+        no(`$(4, 7.5)$`, 'added-instead-of-multiplied'),
+        ok(`$(4, 14)$`),
+        no(`$(0, 3.5)$`, 'thinks-graph-starts-at-rate'),
+      ],
+      solution: `When $x = 4$, $y = 3.5 \\times 4 = 14$, so $(4, 14)$ is on the graph. The point $(14, 4)$ switches the coordinates; $x$ is always listed first.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `The graph of a proportional relationship between the number of tickets bought, $x$, and the total cost in dollars, $y$, passes through the point $(1, 12)$. What does the 12 represent?`,
+      choices: [
+        no(`The number of tickets bought for each dollar`, 'inverted-rate'),
+        no(`The total cost of all the tickets`, 'confused-unit-rate-with-total'),
+        no(`A starting fee paid before any tickets are bought`, 'thinks-point-is-y-intercept'),
+        ok(`The cost of one ticket, in dollars`),
+      ],
+      solution: `At $x = 1$ ticket the cost is 12 dollars, so 12 is the cost per ticket, which is the unit rate and the slope. A starting fee would be where the line crosses the $y$-axis, but a proportional graph passes through $(0, 0)$.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which equation represents a proportional relationship whose graph is a line through the origin with slope 6?`,
+      choices: [
+        ok(`$y = 6x$`),
+        no(`$y = 6x + 1$`, 'included-nonzero-intercept'),
+        no(`$y = x + 6$`, 'additive-not-multiplicative'),
+        no(`$y = \\frac{6}{x}$`, 'divided-instead-of-multiplied'),
+      ],
+      solution: `A proportional relationship has the form $y = kx$, where $k$ is the slope, so $y = 6x$. The equation $y = 6x + 1$ has slope 6, but its line crosses the $y$-axis at 1, not at the origin.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Pump A fills a tank according to $y = 12x$, where $y$ is gallons and $x$ is minutes. Pump B fills 33 gallons in 3 minutes at a constant rate. Which pump is faster, and by how much?`,
+      choices: [
+        no(`Pump B, by 21 gallons per minute`, 'compared-total-to-rate'),
+        ok(`Pump A, by 1 gallon per minute`),
+        no(`Pump B, by 1 gallon per minute`, 'reversed-comparison'),
+        no(`Pump A, by 9 gallons per minute`, 'used-time-value-as-rate'),
+      ],
+      solution: `Pump B's rate is $33 \\div 3 = 11$ gallons per minute, and Pump A's rate is 12, so Pump A is faster by $12 - 11 = 1$ gallon per minute. The choice "Pump B, by 21 gallons per minute" compares Pump B's 33 total gallons with Pump A's rate.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Ava walks so that $d = 0.2t$, where $d$ is miles and $t$ is minutes. Ben walks at a constant rate, and the graph of Ben's distance is a line through the origin and the point $(20, 5)$, with minutes on the horizontal axis. Who walks faster, and by how much?`,
+      choices: [
+        no(`Ava, by 0.05 mile per minute`, 'reversed-comparison'),
+        no(`Ben, by 4.8 miles per minute`, 'compared-point-value-to-rate'),
+        ok(`Ben, by 0.05 mile per minute`),
+        no(`Ben, by 3.8 miles per minute`, 'inverted-one-rate'),
+      ],
+      solution: `Ben's rate is $5 \\div 20 = 0.25$ mile per minute and Ava's is $0.2$, so Ben is faster by $0.25 - 0.2 = 0.05$ mile per minute. The choice "Ben, by 3.8 miles per minute" uses $20 \\div 5 = 4$, which is minutes per mile, not miles per minute.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A table shows a proportional relationship: when $x = 4$, $y = 6$; when $x = 10$, $y = 15$; when $x = 16$, $y = 24$. What is the constant of proportionality?`,
+      choices: [
+        ok(`$1.5$`),
+        no(`$\\frac{2}{3}$`, 'inverted-rate'),
+        no(`$2$`, 'subtracted-instead-of-divided'),
+        no(`$9$`, 'used-change-in-y-without-dividing'),
+      ],
+      solution: `Divide $y$ by $x$ for any row: $6 \\div 4 = 1.5$, $15 \\div 10 = 1.5$, $24 \\div 16 = 1.5$. The choice $2$ comes from $6 - 4$, but a constant of proportionality is a quotient, not a difference.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `A graph shows a straight line through the origin and the point $(3, 2)$. Which equation does the graph represent?`,
+      choices: [
+        no(`$y = \\frac{3}{2}x$`, 'inverted-rate'),
+        ok(`$y = \\frac{2}{3}x$`),
+        no(`$y = 2x$`, 'used-y-coordinate-as-slope'),
+        no(`$y = x - 1$`, 'additive-pattern'),
+      ],
+      solution: `The slope is rise over run: $\\frac{2 - 0}{3 - 0} = \\frac{2}{3}$, and the line passes through the origin, so $y = \\frac{2}{3}x$. The equation $y = \\frac{3}{2}x$ divides run by rise; it would pass through $(2, 3)$ instead.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A bakery sells 8 bagels for 10 dollars, and the cost is proportional to the number of bagels. On a graph with bagels on the $x$-axis and dollars on the $y$-axis, which point is also on the line?`,
+      choices: [
+        no(`$(25, 20)$`, 'swapped-coordinates'),
+        no(`$(20, 22)$`, 'additive-pattern'),
+        no(`$(16, 12.8)$`, 'inverted-rate'),
+        ok(`$(20, 25)$`),
+      ],
+      solution: `The unit rate is $10 \\div 8 = 1.25$ dollars per bagel, and $20 \\times 1.25 = 25$, so $(20, 25)$ is on the line. The point $(16, 12.8)$ uses $8 \\div 10 = 0.8$, which is bagels per dollar, not dollars per bagel.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Lemonade Recipe A uses sugar and water in a proportional relationship: 4 cups of water with 1 cup of sugar, and 8 cups of water with 2 cups of sugar. Recipe B follows $s = 0.3w$, where $s$ is cups of sugar and $w$ is cups of water. Which recipe uses more sugar per cup of water, and by how much?`,
+      choices: [
+        no(`Recipe A, by 0.05 cup of sugar per cup of water`, 'reversed-comparison'),
+        ok(`Recipe B, by 0.05 cup of sugar per cup of water`),
+        no(`Recipe A, by 3.7 cups of sugar per cup of water`, 'inverted-one-rate'),
+        no(`Recipe A, by 0.7 cup of sugar per cup of water`, 'compared-point-value-to-rate'),
+      ],
+      solution: `Recipe A uses $1 \\div 4 = 0.25$ cup of sugar per cup of water, and Recipe B uses $0.3$, so Recipe B uses $0.3 - 0.25 = 0.05$ cup more. The choice with 3.7 compares $4$ cups of water per cup of sugar with $0.3$, mixing two different kinds of rate.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `The graph of a proportional relationship passes through the points $(6, 21)$ and $(10, 35)$. What is the slope of the line?`,
+      choices: [
+        no(`$\\frac{2}{7}$`, 'inverted-rate'),
+        no(`$14$`, 'forgot-to-divide-by-change-in-x'),
+        no(`$4$`, 'used-change-in-x'),
+        ok(`$3.5$`),
+      ],
+      solution: `Slope is change in $y$ over change in $x$: $\\frac{35 - 21}{10 - 6} = \\frac{14}{4} = 3.5$. Check: $21 \\div 6 = 3.5$ too, as expected for a proportional relationship. The choice $14$ stops at the change in $y$ without dividing by the change in $x$.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `The equation $c = 2.75p$ gives the cost $c$, in dollars, of $p$ pounds of apples. How many pounds of apples can be bought for 22 dollars?`,
+      choices: [
+        ok(`$8$`),
+        no(`$60.5$`, 'multiplied-instead-of-divided'),
+        no(`$19.25$`, 'subtracted-rate-from-total'),
+        no(`$0.125$`, 'divided-in-wrong-order'),
+      ],
+      solution: `Substitute $c = 22$: $22 = 2.75p$, so $p = 22 \\div 2.75 = 8$ pounds. The choice $60.5$ multiplies $22$ by $2.75$, which would be the cost of 22 pounds, not the pounds for 22 dollars.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Three proportional relationships are graphed on the same axes. Line P passes through the origin and $(4, 10)$. Line Q is the graph of $y = 2.2x$. Line R comes from a table where $x = 5$ gives $y = 12$. Which line is steepest?`,
+      choices: [
+        no(`Line R`, 'compared-y-values'),
+        no(`Line Q`, 'compared-inverted-rates'),
+        ok(`Line P`),
+        no(`All three lines are equally steep`, 'assumed-proportional-lines-share-slope'),
+      ],
+      solution: `Find each slope: Line P is $10 \\div 4 = 2.5$, Line Q is $2.2$, and Line R is $12 \\div 5 = 2.4$. The greatest slope is $2.5$, so Line P is steepest. Choosing Line R because 12 is the biggest $y$-value ignores that its $x$-value is also bigger.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Car X's graph of miles driven against gallons used is a line through the origin and $(6, 192)$. Car Y follows $m = 30g$, where $m$ is miles and $g$ is gallons. How many more miles does Car X travel than Car Y on 10 gallons?`,
+      choices: [
+        no(`$2$`, 'forgot-to-multiply-by-gallons'),
+        ok(`$20$`),
+        no(`$162$`, 'compared-point-value-to-rate'),
+        no(`$620$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `Car X gets $192 \\div 6 = 32$ miles per gallon, so on 10 gallons it goes $320$ miles; Car Y goes $30 \\times 10 = 300$ miles. The difference is $320 - 300 = 20$ miles. The choice $2$ is the difference in miles per gallon, not in miles for 10 gallons.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Snail A moves at a constant rate; its graph of centimeters against minutes is a line through the origin and $(8, 3)$. Snail B moves 2.4 centimeters in 6 minutes at a constant rate. Both start together. After how many minutes will the faster snail be 2 centimeters ahead?`,
+      choices: [
+        no(`$0.05$`, 'multiplied-instead-of-divided'),
+        no(`$5$`, 'used-one-rate-only'),
+        no(`about $2.6$`, 'added-rates'),
+        ok(`$80$`),
+      ],
+      solution: `Snail A moves $3 \\div 8 = 0.375$ cm per minute and Snail B moves $2.4 \\div 6 = 0.4$ cm per minute, so Snail B gains $0.025$ cm each minute. To gain 2 cm takes $2 \\div 0.025 = 80$ minutes. The choice $5$ is $2 \\div 0.4$, the time for Snail B alone to move 2 cm, not to get 2 cm ahead.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `The graph of a proportional relationship passes through the points $(a, 12)$ and $(9, 27)$. What is the value of $a$?`,
+      choices: [
+        ok(`$4$`),
+        no(`$36$`, 'set-up-inverted-proportion'),
+        no(`$-6$`, 'additive-pattern'),
+        no(`$3$`, 'reported-unit-rate'),
+      ],
+      solution: `The constant of proportionality is $27 \\div 9 = 3$, so $12 = 3a$ and $a = 4$. The choice $36$ comes from $\\frac{a}{12} = \\frac{27}{9}$, which pairs the coordinates the wrong way. The choice $3$ is the unit rate, not the $x$-value.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Maya's savings grow in a proportional relationship; the graph is a line through the origin that rises 15 dollars every 2 weeks. Leo's savings follow $s = 8w$, where $s$ is dollars and $w$ is weeks. Both start at 0 dollars. After how many weeks will Leo have 10 dollars more than Maya?`,
+      choices: [
+        no(`$1.25$`, 'used-one-rate-only'),
+        no(`$5$`, 'multiplied-instead-of-divided'),
+        ok(`$20$`),
+        no(`Never, because Maya always saves more`, 'compared-total-to-rate'),
+      ],
+      solution: `Maya saves $15 \\div 2 = 7.5$ dollars per week and Leo saves 8, so Leo gains $0.5$ dollar each week. To get 10 dollars ahead takes $10 \\div 0.5 = 20$ weeks. Saying Maya always saves more compares Maya's 15 dollars for 2 weeks with Leo's 8 dollars for 1 week.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Which relationship has the same constant of proportionality as $y = 0.6x$?`,
+      choices: [
+        no(`A line through the origin and $(9, 15)$`, 'inverted-rate'),
+        ok(`A table where $x = 10, 25, 40$ gives $y = 6, 15, 24$`),
+        no(`A table where $x = 10, 20, 30$ gives $y = 6, 16, 26$`, 'additive-pattern'),
+        no(`A line through $(0, 0.6)$ and $(1, 1.6)$`, 'thinks-y-intercept-is-rate'),
+      ],
+      solution: `In the table with $x = 10, 25, 40$, every ratio is $6 \\div 10 = 15 \\div 25 = 24 \\div 40 = 0.6$. The other table starts at $6 \\div 10 = 0.6$, but $16 \\div 20 = 0.8$, because it adds 10 each time instead of keeping a constant ratio.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A bus travels at a constant speed; its graph of miles against hours is a line through the origin and $(2.5, 150)$. A train travels 260 miles in 4 hours at a constant speed. Both leave the same station at the same time going the same direction. How many miles apart are they after 3.5 hours?`,
+      choices: [
+        no(`$5$`, 'forgot-to-multiply-by-time'),
+        no(`$110$`, 'compared-point-values'),
+        ok(`$17.5$`),
+        no(`$437.5$`, 'added-rates'),
+      ],
+      solution: `The bus goes $150 \\div 2.5 = 60$ miles per hour and the train goes $260 \\div 4 = 65$ miles per hour, so the gap grows by 5 miles each hour. After 3.5 hours they are $5 \\times 3.5 = 17.5$ miles apart. The choice $5$ is the gap after only 1 hour.`,
+    },
+  ],
+}
+
+export default skill
