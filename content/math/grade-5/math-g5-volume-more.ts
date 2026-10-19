@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g5-volume-more',
+  extends: 'volume',
+  subject: 'math',
+  grade: 5,
+  group: 'Measurement and Data',
+  name: 'Volume',
+  standards: ['5.MD.C.5'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Priya builds a rectangular prism out of unit cubes. The bottom layer has 4 rows with 6 cubes in each row, and the prism is 3 layers tall. How many unit cubes does Priya use?`,
+      choices: [
+        ok(`72`),
+        no(`13`, 'added-the-dimensions'),
+        no(`24`, 'counted-one-layer-only'),
+        no(`27`, 'added-layers-instead-of-multiplying'),
+      ],
+      solution: `One layer has $4 \\times 6 = 24$ cubes. There are 3 layers, so the prism uses $24 \\times 3 = 72$ cubes. The choice 24 counts only the bottom layer.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A rectangular prism has a base area of 15 square units and a height of 4 units. What is its volume in cubic units?`,
+      choices: [
+        no(`19`, 'added-base-and-height'),
+        ok(`60`),
+        no(`15`, 'gave-base-area-only'),
+        no(`4`, 'gave-height-only'),
+      ],
+      solution: `Use $V = B \\times h$: $15 \\times 4 = 60$ cubic units. The choice 19 adds the base area and the height instead of multiplying.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A box is 7 units long, 2 units wide, and 3 units tall. What is its volume in cubic units?`,
+      choices: [
+        no(`12`, 'added-the-dimensions'),
+        no(`14`, 'multiplied-only-length-and-width'),
+        ok(`42`),
+        no(`82`, 'found-surface-area'),
+      ],
+      solution: `Use $V = l \\times w \\times h$: $7 \\times 2 \\times 3 = 42$ cubic units. The choice 14 is only the area of the base, $7 \\times 2$, without multiplying by the height.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A cube has edges that are each 3 units long. What is its volume in cubic units?`,
+      choices: [
+        no(`9`, 'found-area-of-one-face'),
+        no(`12`, 'found-perimeter-of-a-face'),
+        no(`54`, 'found-surface-area'),
+        ok(`27`),
+      ],
+      solution: `All three edges of a cube are equal, so $V = 3 \\times 3 \\times 3 = 27$ cubic units. The choice 9 is $3 \\times 3$, the area of just one face.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which expression gives the volume of a rectangular prism that is 9 units long, 2 units wide, and 5 units tall?`,
+      choices: [
+        ok(`$9 \\times 2 \\times 5$`),
+        no(`$9 + 2 + 5$`, 'added-the-dimensions'),
+        no(`$9 \\times 2$`, 'multiplied-only-length-and-width'),
+        no(`$(9 \\times 2) + 5$`, 'added-height-instead-of-multiplying'),
+      ],
+      solution: `Volume is length times width times height, so the expression is $9 \\times 2 \\times 5$. The expression $(9 \\times 2) + 5$ finds the base area correctly but then adds the height instead of multiplying by it.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A cube that is 1 centimeter on each edge has a volume of 1 cubic centimeter. How many of these cubes fill a box that is 2 centimeters long, 7 centimeters wide, and 4 centimeters tall?`,
+      choices: [
+        no(`13`, 'added-the-dimensions'),
+        no(`14`, 'counted-one-layer-only'),
+        no(`100`, 'found-surface-area'),
+        ok(`56`),
+      ],
+      solution: `One layer holds $2 \\times 7 = 14$ cubes, and there are 4 layers, so the box holds $14 \\times 4 = 56$ cubes, a volume of 56 cubic centimeters. The choice 14 counts only one layer.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `A rectangular prism has a volume of 90 cubic units. It is 6 units long and 5 units wide. What is its height in units?`,
+      choices: [
+        ok(`3`),
+        no(`15`, 'divided-by-one-dimension-only'),
+        no(`30`, 'gave-base-area'),
+        no(`79`, 'subtracted-the-dimensions'),
+      ],
+      solution: `The base area is $6 \\times 5 = 30$ square units. Since $V = B \\times h$, the height is $90 \\div 30 = 3$ units. The choice 15 divides 90 by 6 only and forgets the width.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A box has a volume of 84 cubic units. It is 7 units long and 3 units tall. How wide is the box in units?`,
+      choices: [
+        no(`12`, 'divided-by-one-dimension-only'),
+        ok(`4`),
+        no(`21`, 'gave-product-of-known-dimensions'),
+        no(`74`, 'subtracted-the-dimensions'),
+      ],
+      solution: `Multiply the known edges: $7 \\times 3 = 21$. Then the width is $84 \\div 21 = 4$ units. Check: $7 \\times 4 \\times 3 = 84$. The choice 12 is $84 \\div 7$, which still needs to be divided by the height.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `A solid figure is made by joining two rectangular prisms side by side with no gaps or overlap. Prism A is 6 units long, 2 units wide, and 3 units tall. Prism B is 3 units long, 2 units wide, and 3 units tall. What is the total volume of the figure in cubic units?`,
+      choices: [
+        no(`36`, 'found-only-one-prism'),
+        no(`19`, 'added-all-dimensions'),
+        ok(`54`),
+        no(`648`, 'multiplied-the-volumes'),
+      ],
+      solution: `Volume is additive. Prism A is $6 \\times 2 \\times 3 = 36$ cubic units and Prism B is $3 \\times 2 \\times 3 = 18$ cubic units, so the figure is $36 + 18 = 54$ cubic units. The choice 36 counts only Prism A.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A sandbox at a park is shaped like a rectangular prism that is 8 feet long, 5 feet wide, and 2 feet deep. How many cubic feet of sand will fill it to the top?`,
+      choices: [
+        no(`15`, 'added-the-dimensions'),
+        no(`40`, 'multiplied-only-length-and-width'),
+        no(`132`, 'found-surface-area'),
+        ok(`80`),
+      ],
+      solution: `The space inside is $8 \\times 5 \\times 2 = 80$ cubic feet, so 80 cubic feet of sand fills it. The choice 40 is the area of the bottom, $8 \\times 5$, without using the depth.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `The base of a rectangular prism is a rectangle 9 units long and 4 units wide. The prism is 5 units tall. What is its volume in cubic units?`,
+      choices: [
+        ok(`180`),
+        no(`36`, 'gave-base-area-only'),
+        no(`18`, 'added-the-dimensions'),
+        no(`41`, 'added-height-instead-of-multiplying'),
+      ],
+      solution: `First find the base area: $B = 9 \\times 4 = 36$ square units. Then $V = B \\times h = 36 \\times 5 = 180$ cubic units. The choice 41 adds the height to the base area instead of multiplying.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Box A is 4 units long, 4 units wide, and 5 units tall. Box B is 2 units long, 8 units wide, and 6 units tall. Which statement is true?`,
+      choices: [
+        no(`Box B holds 3 more cubic units than Box A`, 'compared-sums-of-dimensions'),
+        ok(`Box B holds 16 more cubic units than Box A`),
+        no(`Box A holds 16 more cubic units than Box B`, 'reversed-the-comparison'),
+        no(`The two boxes hold the same amount`, 'compared-base-areas-only'),
+      ],
+      solution: `Box A has volume $4 \\times 4 \\times 5 = 80$ cubic units and Box B has volume $2 \\times 8 \\times 6 = 96$ cubic units. Since $96 - 80 = 16$, Box B holds 16 more cubic units. The statement that they hold the same amount compares only the base areas, which are both 16 square units.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A crate is packed completely with 160 unit cubes. The bottom of the crate is 8 units long and 4 units wide. How many layers of cubes are in the crate?`,
+      choices: [
+        no(`20`, 'divided-by-one-dimension-only'),
+        no(`128`, 'subtracted-base-area'),
+        ok(`5`),
+        no(`148`, 'subtracted-the-dimensions'),
+      ],
+      solution: `Each layer holds $8 \\times 4 = 32$ cubes. The number of layers is $160 \\div 32 = 5$. The choice 20 is $160 \\div 8$, which forgets that each row is also 4 cubes wide.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A cube-shaped storage bin has edges that are each 7 feet long. What is its volume in cubic feet?`,
+      choices: [
+        no(`49`, 'found-area-of-one-face'),
+        no(`21`, 'multiplied-edge-by-3'),
+        no(`294`, 'found-surface-area'),
+        ok(`343`),
+      ],
+      solution: `For a cube, $V = 7 \\times 7 \\times 7 = 49 \\times 7 = 343$ cubic feet. The choice 21 is $7 \\times 3$, which multiplies the edge by 3 instead of using it as a factor three times.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `A bookshelf is built from two rectangular boxes, one stacked on top of the other. The bottom box is 8 feet long, 3 feet wide, and 2 feet tall. The top box is 4 feet long, 3 feet wide, and 5 feet tall. What is the total volume of the bookshelf in cubic feet?`,
+      choices: [
+        ok(`108`),
+        no(`48`, 'found-only-one-prism'),
+        no(`252`, 'combined-dimensions-into-one-box'),
+        no(`2880`, 'multiplied-the-volumes'),
+      ],
+      solution: `The bottom box is $8 \\times 3 \\times 2 = 48$ cubic feet and the top box is $4 \\times 3 \\times 5 = 60$ cubic feet. Add them: $48 + 60 = 108$ cubic feet. The choice 252 treats the shelf as one box $12 \\times 3 \\times 7$ by adding the lengths and heights, which counts space that is not part of the shelf.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `A cube has a volume of 216 cubic units. How long is each edge of the cube in units?`,
+      choices: [
+        no(`72`, 'divided-volume-by-3'),
+        no(`36`, 'gave-area-of-one-face'),
+        ok(`6`),
+        no(`108`, 'divided-volume-by-2'),
+      ],
+      solution: `Find the number that, used as a factor three times, makes 216. Since $6 \\times 6 \\times 6 = 36 \\times 6 = 216$, each edge is 6 units. The choice 72 is $216 \\div 3$, but the volume of a cube is not three times its edge.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `An empty box is 6 units long, 3 units wide, and 7 units tall. Malik puts unit cubes in it until there are 4 full layers on the bottom. How many more unit cubes are needed to fill the box completely?`,
+      choices: [
+        no(`72`, 'gave-cubes-already-in-box'),
+        ok(`54`),
+        no(`126`, 'gave-volume-of-whole-box'),
+        no(`18`, 'counted-one-layer-only'),
+      ],
+      solution: `Each layer holds $6 \\times 3 = 18$ cubes. The box has 7 layers, and 4 are full, so $7 - 4 = 3$ layers are left: $18 \\times 3 = 54$ cubes. Check: the whole box holds $18 \\times 7 = 126$ cubes and $126 - 72 = 54$. The choice 72 is the number of cubes already in the box.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A figure is made of two rectangular prisms joined together with no gaps or overlap, and its total volume is 108 cubic units. Prism A is 5 units long, 4 units wide, and 3 units tall. Prism B has a base that is 4 units by 3 units. How tall is Prism B in units?`,
+      choices: [
+        no(`9`, 'divided-total-by-base-area'),
+        no(`48`, 'stopped-at-volume-of-prism-b'),
+        no(`36`, 'subtracted-base-area'),
+        ok(`4`),
+      ],
+      solution: `Prism A is $5 \\times 4 \\times 3 = 60$ cubic units, so Prism B is $108 - 60 = 48$ cubic units. Its base area is $4 \\times 3 = 12$ square units, so its height is $48 \\div 12 = 4$ units. The choice 9 is $108 \\div 12$, which uses the whole figure instead of just Prism B.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A raised garden bed is shaped like a rectangular prism 6 feet long, 3 feet wide, and 2 feet deep. Each bag of soil holds 4 cubic feet. How many bags of soil are needed to fill the bed exactly?`,
+      choices: [
+        ok(`9`),
+        no(`36`, 'gave-volume-not-number-of-bags'),
+        no(`144`, 'multiplied-by-bag-size'),
+        no(`18`, 'used-surface-area'),
+      ],
+      solution: `The bed holds $6 \\times 3 \\times 2 = 36$ cubic feet of soil. Each bag holds 4 cubic feet, so the bed needs $36 \\div 4 = 9$ bags. The choice 36 is the volume of the bed, not the number of bags.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A box is 6 units long, 4 units wide, and 2 units tall. A second box has the same volume, and its base is 3 units long and 2 units wide. How tall is the second box in units?`,
+      choices: [
+        no(`7`, 'matched-sum-of-dimensions'),
+        ok(`8`),
+        no(`16`, 'divided-by-one-dimension-only'),
+        no(`48`, 'gave-volume-not-height'),
+      ],
+      solution: `The first box has volume $6 \\times 4 \\times 2 = 48$ cubic units. The second box has base area $3 \\times 2 = 6$ square units, so its height is $48 \\div 6 = 8$ units. The choice 7 makes the edge lengths add to the same total, $6 + 4 + 2 = 12$, but equal sums do not mean equal volumes.`,
+    },
+  ],
+}
+
+export default skill
