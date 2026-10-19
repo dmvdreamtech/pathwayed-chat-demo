@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g4-area-perimeter-more',
+  extends: 'area-perimeter',
+  subject: 'math',
+  grade: 4,
+  group: 'Measurement and Data',
+  name: 'Area & Perimeter',
+  standards: ['4.MD.A.3'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `A square vegetable bed has a perimeter of $36$ meters. What is the length of one side in meters?`,
+      choices: [
+        ok(`$9$`),
+        no(`$18$`, 'divided-perimeter-by-2'),
+        no(`$6$`, 'found-number-times-itself'),
+        no(`$32$`, 'subtracted-4-instead-of-dividing'),
+      ],
+      solution: `A square has $4$ equal sides, so divide the perimeter by $4$: $36 \\div 4 = 9$ meters. The choice $18$ divides by $2$, but a square has four sides, not two.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A rectangular desk top is $7$ feet long and $4$ feet wide. Which equation can be used to find its area $A$ in square feet?`,
+      choices: [
+        no(`$A = 7 + 4$`, 'added-length-and-width'),
+        ok(`$A = 7 \\times 4$`),
+        no(`$A = 2 \\times 7 + 2 \\times 4$`, 'used-perimeter-formula'),
+        no(`$A = 7 \\times 4 \\times 2$`, 'doubled-the-product'),
+      ],
+      solution: `The area of a rectangle is length times width, so $A = 7 \\times 4$. The equation $A = 2 \\times 7 + 2 \\times 4$ finds the perimeter, the distance around, not the area.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `The top of a bookshelf is a rectangle $11$ inches long and $3$ inches wide. What is its area in square inches?`,
+      choices: [
+        no(`$14$`, 'added-length-and-width'),
+        no(`$28$`, 'found-perimeter-instead-of-area'),
+        ok(`$33$`),
+        no(`$22$`, 'doubled-the-length'),
+      ],
+      solution: `Area is length times width: $11 \\times 3 = 33$ square inches. The choice $28$ is the perimeter, $11 + 3 + 11 + 3$, which measures the edge instead of the surface.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A square sandbox has an area of $64$ square feet. What is the length of one side in feet?`,
+      choices: [
+        no(`$16$`, 'divided-area-by-4'),
+        no(`$32$`, 'divided-area-by-2'),
+        no(`$60$`, 'subtracted-4-from-area'),
+        ok(`$8$`),
+      ],
+      solution: `The sides of a square are equal, so look for the number that times itself makes $64$: $8 \\times 8 = 64$. The side is $8$ feet. The choice $16$ divides the area by $4$, which is how to find a side from the perimeter, not the area.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A rectangular bookmark is $13$ centimeters long and $2$ centimeters wide. What is its perimeter in centimeters?`,
+      choices: [
+        ok(`$30$`),
+        no(`$26$`, 'found-area-instead-of-perimeter'),
+        no(`$15$`, 'added-each-side-once'),
+        no(`$17$`, 'added-only-three-sides'),
+      ],
+      solution: `Add all four sides: $13 + 2 + 13 + 2 = 30$ centimeters. The choice $15$ adds only one length and one width, which is half of the way around.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A rectangular patio has an area of $54$ square feet and a width of $9$ feet. What number goes in the box to make $9 \\times \\square = 54$ true?`,
+      choices: [
+        no(`$63$`, 'added-instead-of-dividing'),
+        no(`$45$`, 'subtracted-instead-of-dividing'),
+        ok(`$6$`),
+        no(`$486$`, 'multiplied-instead-of-dividing'),
+      ],
+      solution: `The missing factor is $54 \\div 9 = 6$, because $9 \\times 6 = 54$. So the patio is $6$ feet long. The choice $45$ comes from $54 - 9$, but a missing factor is found by dividing.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `A rectangular bedroom is $10$ feet by $11$ feet. Its closet is a separate rectangle $4$ feet by $3$ feet. What is the total floor area of the bedroom and closet in square feet?`,
+      choices: [
+        no(`$196$`, 'added-dimensions-before-multiplying'),
+        ok(`$122$`),
+        no(`$56$`, 'found-perimeters-instead-of-areas'),
+        no(`$110$`, 'left-out-the-closet'),
+      ],
+      solution: `Find each area and add: $10 \\times 11 = 110$ and $4 \\times 3 = 12$, so the total is $110 + 12 = 122$ square feet. The choice $196$ adds the lengths and the widths first, $14 \\times 14$, which does not match either room.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A rectangle is $14$ inches long and $6$ inches wide. A square has the same perimeter as the rectangle. What is the side length of the square in inches?`,
+      choices: [
+        no(`$20$`, 'divided-perimeter-by-2'),
+        no(`$40$`, 'gave-perimeter-not-side'),
+        no(`$21$`, 'used-area-instead-of-perimeter'),
+        ok(`$10$`),
+      ],
+      solution: `The rectangle's perimeter is $14 + 6 + 14 + 6 = 40$ inches. The square's four equal sides share that, so each side is $40 \\div 4 = 10$ inches. The choice $21$ divides the rectangle's area, $84$, by $4$, but the problem matches perimeters, not areas.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Lena is planning a rectangular flower bed with an area of $36$ square feet and a perimeter of $26$ feet. Which dimensions work for both?`,
+      choices: [
+        no(`$6$ feet by $6$ feet`, 'checked-area-only-square'),
+        ok(`$9$ feet by $4$ feet`),
+        no(`$12$ feet by $3$ feet`, 'checked-area-only-not-perimeter'),
+        no(`$10$ feet by $3$ feet`, 'checked-perimeter-only'),
+      ],
+      solution: `Check both measures. For $9$ by $4$: area $9 \\times 4 = 36$ and perimeter $9 + 4 + 9 + 4 = 26$. The choice $6$ feet by $6$ feet has area $36$ but perimeter $24$, and $10$ feet by $3$ feet has perimeter $26$ but area only $30$.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A rectangular placemat is $8$ inches long and $5$ inches wide. If the length is doubled and the width stays the same, what is the new area in square inches?`,
+      choices: [
+        no(`$40$`, 'did-not-change-the-length'),
+        no(`$160$`, 'doubled-both-sides'),
+        ok(`$80$`),
+        no(`$42$`, 'found-perimeter-instead-of-area'),
+      ],
+      solution: `The new length is $8 \\times 2 = 16$ inches, so the new area is $16 \\times 5 = 80$ square inches. The choice $160$ doubles the width too, but only the length changed.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A rectangular banner is $5$ feet wide, and its length is $3$ times its width. What is the perimeter of the banner in feet?`,
+      choices: [
+        ok(`$40$`),
+        no(`$75$`, 'found-area-instead-of-perimeter'),
+        no(`$20$`, 'added-each-side-once'),
+        no(`$30$`, 'left-out-the-widths'),
+      ],
+      solution: `The length is $3 \\times 5 = 15$ feet. The perimeter is $15 + 5 + 15 + 5 = 40$ feet. The choice $20$ adds one length and one width, which only goes halfway around.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A square greeting card has a perimeter of $28$ inches. What is the area of the card in square inches?`,
+      choices: [
+        no(`$784$`, 'squared-the-perimeter'),
+        no(`$14$`, 'divided-perimeter-by-2'),
+        no(`$196$`, 'used-half-perimeter-as-side'),
+        ok(`$49$`),
+      ],
+      solution: `First find the side: $28 \\div 4 = 7$ inches. Then the area is $7 \\times 7 = 49$ square inches. The choice $196$ uses $14$ as the side, but $14$ is half the perimeter, which is two sides.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A rectangular dog run is $11$ meters long and has a perimeter of $36$ meters. The equation $2 \\times 11 + 2 \\times w = 36$ describes it. What is the width $w$ in meters?`,
+      choices: [
+        no(`$14$`, 'forgot-to-divide-by-2'),
+        no(`$25$`, 'subtracted-length-once'),
+        ok(`$7$`),
+        no(`$18$`, 'halved-perimeter-only'),
+      ],
+      solution: `Two lengths make $2 \\times 11 = 22$ meters, leaving $36 - 22 = 14$ meters for the two widths. Each width is $14 \\div 2 = 7$ meters. The choice $14$ stops before splitting that between the two widths.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Garden A is a rectangle $9$ meters by $6$ meters. Garden B is a rectangle $7$ meters by $8$ meters. How many more square meters of area does Garden B have than Garden A?`,
+      choices: [
+        no(`$0$`, 'assumed-equal-perimeters-mean-equal-areas'),
+        ok(`$2$`),
+        no(`$30$`, 'gave-the-perimeter'),
+        no(`$110$`, 'added-the-areas'),
+      ],
+      solution: `Garden A has area $9 \\times 6 = 54$ and Garden B has area $7 \\times 8 = 56$, so B has $56 - 54 = 2$ more square meters. Both gardens have a perimeter of $30$ meters, which is why $0$ is tempting, but equal perimeters do not mean equal areas.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `A rectangular garden is $10$ feet long and $6$ feet wide. One $10$ foot side is against a house, so it needs no fence. How many feet of fence are needed for the other sides?`,
+      choices: [
+        no(`$32$`, 'fenced-all-four-sides'),
+        no(`$26$`, 'left-out-a-short-side'),
+        no(`$60$`, 'found-area-instead-of-perimeter'),
+        ok(`$22$`),
+      ],
+      solution: `Fence goes on one long side and both short sides: $10 + 6 + 6 = 22$ feet. The choice $32$ is the full perimeter, which includes the side along the house.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Mr. Okafor's rectangular bulletin board is $9$ feet long and $4$ feet tall. Border trim comes in strips that are $6$ feet long. What is the fewest number of strips he needs to go all the way around the board?`,
+      choices: [
+        no(`$4$`, 'dropped-the-remainder'),
+        ok(`$5$`),
+        no(`$6$`, 'used-area-instead-of-perimeter'),
+        no(`$3$`, 'used-half-perimeter'),
+      ],
+      solution: `The perimeter is $9 + 4 + 9 + 4 = 26$ feet. Four strips cover only $4 \\times 6 = 24$ feet, so he needs a fifth strip for the last $2$ feet: $5$ strips. The choice $4$ ignores the leftover $2$ feet.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A rectangular wall is $12$ feet wide and $9$ feet tall. It has a rectangular window $3$ feet wide and $2$ feet tall that will not be painted. How many square feet of wall will be painted?`,
+      choices: [
+        no(`$114$`, 'added-the-window-area'),
+        no(`$108$`, 'forgot-to-subtract-the-window'),
+        ok(`$102$`),
+        no(`$32$`, 'subtracted-perimeters'),
+      ],
+      solution: `The whole wall is $12 \\times 9 = 108$ square feet and the window is $3 \\times 2 = 6$ square feet. The painted part is $108 - 6 = 102$ square feet. The choice $114$ adds the window instead of taking it away.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A rectangular floor is $6$ feet wide and $8$ feet long. It will be covered with square tiles that are $2$ feet on each side. How many tiles are needed?`,
+      choices: [
+        no(`$48$`, 'counted-square-feet-not-tiles'),
+        no(`$24$`, 'divided-area-by-side-length'),
+        no(`$7$`, 'used-perimeter-instead-of-area'),
+        ok(`$12$`),
+      ],
+      solution: `Along the $6$ foot side fit $6 \\div 2 = 3$ tiles and along the $8$ foot side fit $8 \\div 2 = 4$ tiles, so $3 \\times 4 = 12$ tiles. Check: each tile covers $2 \\times 2 = 4$ square feet and $48 \\div 4 = 12$. The choice $48$ counts square feet, but each tile covers $4$ square feet.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A rectangular picture frame has a perimeter of $48$ centimeters. Its length is $4$ centimeters more than its width. What is the width in centimeters?`,
+      choices: [
+        no(`$12$`, 'ignored-the-difference'),
+        ok(`$10$`),
+        no(`$14$`, 'gave-the-length'),
+        no(`$11$`, 'subtracted-difference-from-whole-perimeter'),
+      ],
+      solution: `One length plus one width is half the perimeter: $48 \\div 2 = 24$. Take away the extra $4$: $24 - 4 = 20$, and split it evenly, $20 \\div 2 = 10$. The width is $10$ centimeters and the length is $14$. Check: $14 + 10 + 14 + 10 = 48$. The choice $14$ is the length, not the width.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A rectangular play area is $6$ meters wide and has an area of $84$ square meters. Fencing costs $5$ dollars per meter. How much will it cost to fence all the way around the play area?`,
+      choices: [
+        ok(`200 dollars`),
+        no(`420 dollars`, 'used-area-instead-of-perimeter'),
+        no(`100 dollars`, 'used-half-perimeter'),
+        no(`140 dollars`, 'left-out-the-widths'),
+      ],
+      solution: `The length is $84 \\div 6 = 14$ meters. The perimeter is $14 + 6 + 14 + 6 = 40$ meters, and the cost is $40 \\times 5 = 200$ dollars. The choice 420 dollars multiplies the area by $5$, but fencing goes around the edge.`,
+    },
+  ],
+}
+
+export default skill
