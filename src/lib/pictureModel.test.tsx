@@ -60,3 +60,14 @@ describe('picture tiles and prompts', () => {
     expect(parsePicturePrompt({ kind: 'object_group', image: 'cat', count: 1 })).toEqual({ kind: 'object_group', image: 'cat', count: 1 })
   })
 })
+
+describe('what the app says for a picture item', () => {
+  it('names single pictures, and keeps symbols, counts and drawings silent', async () => {
+    const { spokenPictureItem } = await import('./pictureModel')
+    const pic = (t: string) => ({ text: t, tile: { kind: 'object_group' as const, image: t, count: 1 } })
+    expect(spokenPictureItem('Which one barks?', [pic('dog'), pic('cat')])).toBe('Which one barks? Your choices are: dog, cat.')
+    expect(spokenPictureItem('Tap the word the.', [{ text: 'the', tile: { kind: 'word', value: 'the' } }, { text: 'and', tile: { kind: 'word', value: 'and' } }])).toBe('Tap the word the.')
+    expect(spokenPictureItem('Tap the group of 3.', [{ text: '3', tile: { kind: 'object_group', image: 'apple', count: 3 } }, { text: '4', tile: { kind: 'object_group', image: 'apple', count: 4 } }])).toBe('Tap the group of 3.')
+    expect(spokenPictureItem('Tap 25.', [{ text: 'two tens and five ones', tile: { kind: 'base_ten', tens: 2, ones: 5 } }])).toBe('Tap 25.')
+  })
+})

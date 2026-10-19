@@ -116,13 +116,14 @@ export function tileLabel(t: PictureTile): string | undefined {
 
 /**
  * What the app SAYS for a K-2 picture item: the stem, then "Your choices are: ..."
- * with each tile's label so a child who cannot read hears what the pictures are.
- * Numbers, letters and words are NOT read out: recognizing that symbol is usually
- * the skill ("Tap the word the"), and hearing the labels in tile order would give
- * the answer away. The child sees those symbols; the stem says what to find.
+ * ONLY when every tile is a single named picture (dog, cat, ball), so a child who
+ * cannot read hears what the pictures are. Every other tile is the thing being
+ * read: a numeral, a letter, a word, a counted group, blocks, a clock. Saying its
+ * label in tile order would give the answer away ("Tap the word the" then "the,
+ * and, to"; "How many?" then "3, 4, 5"), so those labels stay silent.
  */
 export function spokenPictureItem(stem: string, choices: { text: string; tile?: PictureTile }[]): string {
-  const symbols = choices.some((c) => c.tile && (c.tile.kind === 'number' || c.tile.kind === 'letter' || c.tile.kind === 'word'))
+  const named = choices.length > 0 && choices.every((c) => c.tile?.kind === 'object_group' && c.tile.count === 1)
   const labels = choices.map((c) => c.text).filter(Boolean)
-  return symbols || !labels.length ? stem : `${stem} Your choices are: ${labels.join(', ')}.`
+  return named && labels.length ? `${stem} Your choices are: ${labels.join(', ')}.` : stem
 }
