@@ -1,3 +1,4 @@
+import { pictureIssues, tileLabel } from '../src/lib/pictureModel'
 import type { ContentItem, ContentSkill } from './types'
 
 /**
@@ -12,7 +13,7 @@ import type { ContentItem, ContentSkill } from './types'
 export const TARGET_ITEMS = 40
 /** A top-up adds to a live skill that already has 20 questions, bringing it to 40. */
 export const TOPUP_ITEMS = 20
-export const requiredItems = (skill: ContentSkill) => (skill.extends ? TOPUP_ITEMS : TARGET_ITEMS)
+export const requiredItems = (skill: ContentSkill) => skill.topUpItems ?? (skill.extends ? TOPUP_ITEMS : TARGET_ITEMS)
 
 /** Passage length (words) and longest allowed average sentence (words), by grade. */
 export function passageLimits(grade: number): { min: number; max: number; avgSentence: number } {
@@ -79,6 +80,57 @@ function itemIssues(where: string, item: ContentItem, math = false): string[] {
   return out
 }
 
+// The seed shuffles picture tiles too, so a spoken stem cannot point at a place on the screen.
+const BY_PLACE = /\b(?:left|right|top|bottom|first|second|third|fourth|last|middle) (?:one|tile|picture|box|answer|choice)\b/i
+const spokenWords = (s: string) => s.split(/\s+/).filter(Boolean).length
+
+/**
+ * A K-2 picture item: the stem is SPOKEN, each choice is a tile the child taps.
+ * 2 to 4 tiles, exactly one right, each a picture the app can draw, and no
+ * misconception tokens (a wrong tap gets the warm spoken solution, never a hint).
+ */
+function pictureItemIssues(where: string, item: ContentItem): string[] {
+  const out: string[] = []
+  const at = `${where} slot ${item.slot}`
+  if (!Number.isInteger(item.slot) || item.slot < 1) out.push(`${at}: slot must be a positive whole number`)
+  const stem = item.stem.trim()
+  if (!stem) out.push(`${at}: the spoken stem is empty`)
+  if (!/[.?!]["')]*$/.test(stem)) out.push(`${at}: the spoken stem must end with a full stop, question mark or exclamation mark`)
+  if (spokenWords(stem) > 90) out.push(`${at}: the spoken stem is ${spokenWords(stem)} words, keep it to 90`)
+  if (item.choices.length < 2 || item.choices.length > 4) out.push(`${at}: needs 2 to 4 tiles, has ${item.choices.length}`)
+  const correct = item.choices.filter((c) => c.is_correct)
+  if (correct.length !== 1) out.push(`${at}: needs exactly one correct tile, has ${correct.length}`)
+  const texts = item.choices.map((c) => c.text.trim())
+  if (new Set(texts).size !== texts.length) out.push(`${at}: two tiles have the same spoken label`)
+  if (texts.some((t) => !t)) out.push(`${at}: a tile has no spoken label`)
+  const tiles = item.choices.map((c) => JSON.stringify(c.tile ?? null))
+  if (new Set(tiles).size !== tiles.length) out.push(`${at}: two tiles show the same picture`)
+  for (const c of item.choices) {
+    if (!c.tile) {
+      out.push(`${at}: tile "${c.text}" has no picture`)
+      continue
+    }
+    for (const p of pictureIssues(c.tile, 'tile')) out.push(`${at}: tile "${c.text}": ${p}`)
+    const label = tileLabel(c.tile)
+    if (label !== undefined && label !== c.text) out.push(`${at}: tile "${c.text}" shows "${label}", so its spoken label must be "${label}"`)
+    if (c.misconception_token) out.push(`${at}: picture items carry no misconception_token (tile "${c.text}")`)
+  }
+  if (item.prompt) for (const p of pictureIssues(item.prompt, 'prompt')) out.push(`${at}: ${p}`)
+  const sol = item.solution.trim()
+  if (sol.length < 10) out.push(`${at}: the spoken solution is missing or too short`)
+  if (spokenWords(sol) > 40) out.push(`${at}: the spoken solution is ${spokenWords(sol)} words, keep it to 40`)
+  const spoken: [string, string][] = [['stem', stem], ['solution', sol], ...item.choices.map((c) => ['tile', c.text] as [string, string])]
+  for (const [label, text] of spoken) {
+    if (DASHES.test(text)) out.push(`${at}: ${label} has a dash (em dash, en dash, or spaced hyphen)`)
+    if (text.includes('$')) out.push(`${at}: ${label} has a $ (spoken text has no math markup; say "plus", "dollars")`)
+  }
+  for (const [label, text] of [['stem', stem], ['solution', sol]]) {
+    if (BY_PLACE.test(text) || BY_POSITION.test(text)) out.push(`${at}: ${label} points at a tile by its place (tiles are shuffled)`)
+  }
+  if (!['easy', 'medium', 'hard'].includes(item.difficulty)) out.push(`${at}: difficulty must be easy, medium or hard`)
+  return out
+}
+
 /** Every problem with one skill, in plain words. Empty when it can be seeded. */
 export function skillIssues(skill: ContentSkill): string[] {
   const out: string[] = []
@@ -94,7 +146,14 @@ export function skillIssues(skill: ContentSkill): string[] {
 
   const items: ContentItem[] = [...(skill.items ?? []), ...(skill.passages ?? []).flatMap((p) => p.items)]
   const math = skill.subject === 'math'
-  for (const item of skill.items ?? []) out.push(...itemIssues(where, item, math))
+  const picture = skill.renderMode === 'audio_picture'
+  if (skill.renderMode !== undefined && !picture) out.push(`${where}: renderMode must be 'audio_picture' or left out`)
+  if (picture && skill.grade > 2) out.push(`${where}: picture skills are for grades K to 2`)
+  if (picture && skill.passages?.length) out.push(`${where}: picture skills have no passages (the story goes in the spoken stem)`)
+  if (skill.topUpItems !== undefined && (!skill.extends || !Number.isInteger(skill.topUpItems) || skill.topUpItems < 1)) {
+    out.push(`${where}: topUpItems is a positive whole number, on a top-up (extends) only`)
+  }
+  for (const item of skill.items ?? []) out.push(...(picture ? pictureItemIssues(where, item) : itemIssues(where, item, math)))
 
   const limits = passageLimits(skill.grade)
   const codes = new Set<string>()

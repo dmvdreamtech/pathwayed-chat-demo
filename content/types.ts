@@ -11,6 +11,10 @@
  * All passages and items are original, written for the grade.
  */
 
+import type { PicturePrompt, PictureTile } from '../src/lib/pictureModel'
+
+export type { PicturePrompt, PictureTile }
+
 export type Subject = 'reading' | 'writing' | 'math'
 export type Difficulty = 'easy' | 'medium' | 'hard'
 
@@ -18,10 +22,16 @@ export type ReadingGroup = 'Literature' | 'Informational text' | 'Vocabulary and
 export type WritingGroup = 'Conventions' | 'Sentence and paragraph' | 'Composition'
 
 export interface ContentChoice {
+  /** The answer as spoken and scored. On a picture tile, its spoken label ("3", "cat", "the"). */
   text: string
   is_correct: boolean
-  /** Required on every wrong choice: the mistake it represents, kebab-case. */
+  /**
+   * Required on every wrong choice of a TEXT item: the mistake it represents, kebab-case.
+   * Never on a picture item: a K-2 wrong tap gets warm spoken feedback, not a hint.
+   */
   misconception_token?: string
+  /** Picture items only: what the child sees and taps (src/lib/pictureModel.ts). */
+  tile?: PictureTile
 }
 
 export interface ContentItem {
@@ -32,8 +42,14 @@ export interface ContentItem {
   stem: string
   /** Exactly four: one correct, three wrong, all different. */
   choices: ContentChoice[]
-  /** Why the answer is right, and why the tempting wrong answer is not. */
+  /**
+   * Why the answer is right, and why the tempting wrong answer is not. On a
+   * picture item this is SPOKEN after a tap: short and warm ("Let's count
+   * together: one, two, three. Three apples!").
+   */
   solution: string
+  /** Picture items only: the picture shown above the tiles, or null for audio only. */
+  prompt?: PicturePrompt | null
 }
 
 export interface ContentPassage {
@@ -71,4 +87,12 @@ export interface ContentSkill {
    * and never creates or edits a skill row. A top-up needs TOPUP_ITEMS items.
    */
   extends?: string
+  /**
+   * 'audio_picture' for K-2 picture-tap skills: each stem is SPOKEN (never read
+   * by the child), each choice is a tile, 2 to 4 tiles, no passages and no
+   * misconception tokens. Omit for text skills.
+   */
+  renderMode?: 'audio_picture'
+  /** A top-up of a live skill that already has some questions: how many this adds to reach 40. */
+  topUpItems?: number
 }
