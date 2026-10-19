@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g7-probability-models-more',
+  extends: 'probability-models',
+  subject: 'math',
+  grade: 7,
+  group: 'Statistics and Probability',
+  name: 'Probability',
+  standards: ['7.SP.C'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `The probability that the school bus arrives on time tomorrow is $0.95$. How would you describe this event?`,
+      choices: [
+        ok(`Likely`),
+        no(`Unlikely`, 'reversed-likelihood-scale'),
+        no(`Impossible`, 'confused-near-one-with-impossible'),
+        no(`Neither likely nor unlikely`, 'treated-any-uncertain-event-as-even-chance'),
+      ],
+      solution: `Probabilities run from $0$ (impossible) to $1$ (certain), with $\\frac{1}{2}$ in the middle. Since $0.95$ is close to $1$, the event is likely. The answer "Unlikely" reads the scale backward.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Which of these numbers can NOT be the probability of an event?`,
+      choices: [
+        ok(`$\\frac{5}{4}$`),
+        no(`$0$`, 'thought-zero-is-not-a-probability'),
+        no(`$1$`, 'thought-one-is-not-a-probability'),
+        no(`$\\frac{4}{5}$`, 'confused-proper-and-improper-fractions'),
+      ],
+      solution: `A probability must be between $0$ and $1$, including $0$ and $1$. The value $\\frac{5}{4}$ is greater than $1$, so it can not be a probability. The value $\\frac{4}{5}$ is less than $1$, so it is allowed.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A spinner has 8 equal sections numbered 1 through 8. What is the probability of landing on a number less than 3?`,
+      choices: [
+        no(`$\\frac{3}{8}$`, 'included-the-boundary-value'),
+        ok(`$\\frac{1}{4}$`),
+        no(`$\\frac{1}{8}$`, 'counted-only-one-favorable-outcome'),
+        no(`$\\frac{3}{4}$`, 'found-the-complement'),
+      ],
+      solution: `The equal sections make each number equally likely. Only 1 and 2 are less than 3, so the probability is $\\frac{2}{8} = \\frac{1}{4}$. The value $\\frac{3}{8}$ wrongly counts 3 as less than 3.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Ravi shoots 25 free throws and makes 18 of them. What is the experimental probability that Ravi makes a free throw?`,
+      choices: [
+        no(`$\\frac{7}{25}$`, 'found-probability-of-a-miss'),
+        no(`$\\frac{18}{7}$`, 'compared-makes-to-misses'),
+        ok(`$\\frac{18}{25}$`),
+        no(`$\\frac{7}{18}$`, 'compared-misses-to-makes'),
+      ],
+      solution: `Experimental probability is the number of times the event happened divided by the number of trials: $\\frac{18}{25}$. The value $\\frac{18}{7}$ compares makes to misses instead of makes to all shots.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A bag holds 4 yellow tiles, 5 purple tiles and 1 white tile. One tile is picked at random. What is the probability that it is purple?`,
+      choices: [
+        no(`$\\frac{1}{3}$`, 'assumed-each-color-equally-likely'),
+        no(`$\\frac{1}{10}$`, 'used-count-of-white-tiles'),
+        no(`$\\frac{2}{5}$`, 'used-count-of-yellow-tiles'),
+        ok(`$\\frac{1}{2}$`),
+      ],
+      solution: `The colors are not equally likely, because there are different numbers of each. There are $4 + 5 + 1 = 10$ tiles and 5 are purple, so the probability is $\\frac{5}{10} = \\frac{1}{2}$. The value $\\frac{1}{3}$ treats the three colors as equally likely.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Which event has a probability of exactly $\\frac{1}{2}$, so it is just as likely to happen as not?`,
+      choices: [
+        ok(`Flipping a fair coin and getting tails`),
+        no(`Rolling a 7 on a standard number cube`, 'confused-impossible-with-even-chance'),
+        no(`Rolling a number less than 7 on a standard number cube`, 'confused-certain-with-even-chance'),
+        no(`Rolling a 1 on a standard number cube`, 'confused-unlikely-with-even-chance'),
+      ],
+      solution: `A fair coin has 2 equally likely sides, so tails has probability $\\frac{1}{2}$. Rolling a 7 is impossible (probability $0$), rolling less than 7 is certain (probability $1$), and rolling a 1 is unlikely (probability $\\frac{1}{6}$).`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `In a random survey of 50 students at Lakeview Middle School, 12 said they walk to school. The school has 600 students. Based on the survey, about how many students at the school walk to school?`,
+      choices: [
+        no(`12`, 'used-the-sample-count'),
+        ok(`144`),
+        no(`456`, 'found-students-who-do-not-walk'),
+        no(`2500`, 'inverted-the-ratio'),
+      ],
+      solution: `The experimental probability that a student walks is $\\frac{12}{50}$. Multiply by the whole school: $600 \\times \\frac{12}{50} = 144$. The value 456 is $600 - 144$, the students who do not walk.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Priya rolls a fair number cube 30 times and gets a 4 on 9 of the rolls. How much greater is the experimental probability of rolling a 4 than the theoretical probability?`,
+      choices: [
+        no(`$\\frac{1}{2}$`, 'subtracted-numerators-and-denominators'),
+        no(`$\\frac{3}{10}$`, 'gave-the-experimental-probability-only'),
+        no(`$\\frac{7}{15}$`, 'added-instead-of-subtracted'),
+        ok(`$\\frac{2}{15}$`),
+      ],
+      solution: `The experimental probability is $\\frac{9}{30} = \\frac{3}{10}$ and the theoretical probability is $\\frac{1}{6}$. Using a common denominator, $\\frac{9}{30} - \\frac{5}{30} = \\frac{4}{30} = \\frac{2}{15}$. The value $\\frac{1}{2}$ comes from subtracting tops and bottoms separately, $\\frac{3 - 1}{10 - 6}$, which is not how fractions subtract.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Desmond flips a fair coin and records the experimental probability of heads. Which number of flips is most likely to give an experimental probability closest to $\\frac{1}{2}$?`,
+      choices: [
+        no(`10 flips`, 'thought-small-samples-are-more-accurate'),
+        no(`50 flips`, 'thought-a-middle-sized-sample-is-best'),
+        no(`200 flips`, 'did-not-choose-the-most-trials'),
+        ok(`1000 flips`),
+      ],
+      solution: `As the number of trials grows, the experimental probability tends to get closer to the theoretical probability. Of these choices, 1000 flips is the most trials, so it is most likely to be close to $\\frac{1}{2}$. With only 10 flips, results such as 7 heads are common.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A bag has 2 red cubes and 3 green cubes. Mateo draws a cube, puts it back (with replacement), and then draws again. What is the probability that both cubes are green?`,
+      choices: [
+        ok(`$\\frac{9}{25}$`),
+        no(`$\\frac{3}{10}$`, 'used-without-replacement'),
+        no(`$\\frac{6}{5}$`, 'added-probabilities-instead-of-multiplying'),
+        no(`$\\frac{3}{5}$`, 'found-probability-for-one-draw'),
+      ],
+      solution: `Because the cube is replaced, each draw has probability $\\frac{3}{5}$ of green. Multiply: $\\frac{3}{5} \\times \\frac{3}{5} = \\frac{9}{25}$. The value $\\frac{3}{10}$ would be correct only without replacement, $\\frac{3}{5} \\times \\frac{2}{4}$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A deli makes a random lunch special by choosing one bread (wheat, rye or white) and one filling (turkey, ham, cheese or egg), each equally likely. An organized list of every bread and filling pair shows all the outcomes. What is the probability that the special is rye with cheese?`,
+      choices: [
+        no(`$\\frac{1}{7}$`, 'added-choices-for-sample-space'),
+        ok(`$\\frac{1}{12}$`),
+        no(`$\\frac{1}{3}$`, 'used-only-the-bread-choices'),
+        no(`$\\frac{7}{12}$`, 'added-the-two-probabilities'),
+      ],
+      solution: `Each of the 3 breads pairs with each of the 4 fillings, so the list has $3 \\times 4 = 12$ equally likely outcomes. Exactly one is rye with cheese, so the probability is $\\frac{1}{12}$. The value $\\frac{1}{7}$ adds $3 + 4$ instead of multiplying.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A spinner has 3 equal sections labeled A, B and C. Lena spins it and flips a fair coin. A table has the three letters as rows and heads and tails as columns, with one cell for each outcome. What is the probability of landing on B or C and flipping tails?`,
+      choices: [
+        no(`$\\frac{1}{6}$`, 'counted-only-one-favorable-outcome'),
+        no(`$\\frac{2}{5}$`, 'added-outcome-counts-for-sample-space'),
+        ok(`$\\frac{1}{3}$`),
+        no(`$\\frac{7}{6}$`, 'added-probabilities-instead-of-multiplying'),
+      ],
+      solution: `The table has $3 \\times 2 = 6$ equally likely cells. The favorable cells are B with tails and C with tails, so the probability is $\\frac{2}{6} = \\frac{1}{3}$. The value $\\frac{2}{5}$ uses $3 + 2 = 5$ outcomes, but the table has 6 cells.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A spinner with unequal sections was spun 200 times. It landed on red 90 times, blue 60 times and yellow 50 times. Based on these results, what is the probability that the next spin does NOT land on red?`,
+      choices: [
+        no(`$\\frac{9}{20}$`, 'found-probability-of-red'),
+        ok(`$\\frac{11}{20}$`),
+        no(`$\\frac{2}{3}$`, 'assumed-equally-likely-colors'),
+        no(`$\\frac{11}{9}$`, 'compared-not-red-to-red'),
+      ],
+      solution: `The spinner landed on blue or yellow $60 + 50 = 110$ times out of 200, so the experimental probability of not red is $\\frac{110}{200} = \\frac{11}{20}$. The value $\\frac{2}{3}$ assumes the three colors are equally likely, but the data show they are not.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `About 30% of customers at a juice stand order mango. Which simulation correctly models whether the next customer orders mango?`,
+      choices: [
+        no(`Flip a coin; heads means mango.`, 'used-equally-likely-model-for-unequal-chances'),
+        no(`Roll a number cube; 1, 2 or 3 means mango.`, 'did-not-match-the-30-percent-chance'),
+        ok(`Pick a random digit from 0 to 9; the digits 0, 1 and 2 mean mango.`),
+        no(`Pick a random digit from 0 to 9; the digits 0, 1, 2 and 3 mean mango.`, 'included-an-extra-digit'),
+      ],
+      solution: `There are 10 equally likely digits, and 3 of them is $\\frac{3}{10}$, or 30%. The coin and the number cube plan both give a 50% chance, and using four digits gives 40%.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Carla's drawer has 4 black socks and 2 white socks. Carla pulls out two socks at random, one after the other, without replacement. What is the probability that both socks are white?`,
+      choices: [
+        no(`$\\frac{1}{9}$`, 'used-with-replacement'),
+        ok(`$\\frac{1}{15}$`),
+        no(`$\\frac{8}{15}$`, 'added-probabilities-instead-of-multiplying'),
+        no(`$\\frac{1}{3}$`, 'found-probability-for-one-draw'),
+      ],
+      solution: `The first sock is white with probability $\\frac{2}{6}$. Then 1 white sock is left among 5 socks, so the second is white with probability $\\frac{1}{5}$. Multiply: $\\frac{2}{6} \\times \\frac{1}{5} = \\frac{2}{30} = \\frac{1}{15}$. The value $\\frac{1}{9}$ forgets that the first sock is not put back.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Two fair number cubes are rolled. What is the probability that the sum is 10 or more?`,
+      choices: [
+        ok(`$\\frac{1}{6}$`),
+        no(`$\\frac{1}{9}$`, 'treated-ordered-pairs-as-the-same'),
+        no(`$\\frac{3}{11}$`, 'treated-the-sums-as-equally-likely'),
+        no(`$\\frac{1}{12}$`, 'left-out-the-sum-of-10'),
+      ],
+      solution: `A 6 by 6 table of the two cubes has 36 equally likely outcomes. The sums of 10 or more are (4, 6), (5, 5), (6, 4), (5, 6), (6, 5) and (6, 6), which is 6 outcomes, so the probability is $\\frac{6}{36} = \\frac{1}{6}$. The value $\\frac{3}{11}$ treats the 11 possible sums from 2 to 12 as equally likely, but they are not.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A fair coin is flipped three times. A tree diagram branches into heads or tails at each flip, ending in 8 equally likely outcomes. What is the probability of getting exactly two heads?`,
+      choices: [
+        no(`$\\frac{1}{8}$`, 'counted-only-one-arrangement'),
+        no(`$\\frac{1}{4}$`, 'treated-head-counts-as-equally-likely'),
+        ok(`$\\frac{3}{8}$`),
+        no(`$\\frac{1}{2}$`, 'included-three-heads'),
+      ],
+      solution: `The outcomes with exactly two heads are HHT, HTH and THH, which is 3 of the 8 outcomes, so the probability is $\\frac{3}{8}$. The value $\\frac{1}{2}$ also counts HHH, which has three heads, not exactly two.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A cup holds 4 red counters and 3 yellow counters. Jonah draws two counters at random, one after the other, without replacement. What is the probability of getting one red counter and one yellow counter, in either order?`,
+      choices: [
+        no(`$\\frac{2}{7}$`, 'counted-only-one-order'),
+        no(`$\\frac{24}{49}$`, 'used-with-replacement'),
+        no(`$\\frac{1}{2}$`, 'assumed-the-colors-are-equally-likely'),
+        ok(`$\\frac{4}{7}$`),
+      ],
+      solution: `Red then yellow: $\\frac{4}{7} \\times \\frac{3}{6} = \\frac{12}{42}$. Yellow then red: $\\frac{3}{7} \\times \\frac{4}{6} = \\frac{12}{42}$. Add the two orders: $\\frac{24}{42} = \\frac{4}{7}$. The value $\\frac{2}{7}$ counts only the red then yellow order.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Each box of a cereal holds one of 5 different toys, and each toy is equally likely. Ana wants to design a simulation to estimate how many boxes a family must buy to collect all 5 toys. Which plan works best?`,
+      choices: [
+        no(`Spin a spinner with 5 equal sections exactly 5 times and count how many different numbers appear.`, 'stopped-after-a-fixed-number-of-trials'),
+        ok(`Spin a spinner with 5 equal sections until every number has appeared, record the number of spins, and repeat this many times.`),
+        no(`Spin a spinner where section 1 covers half the circle until every number has appeared, and record the number of spins.`, 'used-non-uniform-model-for-equal-chances'),
+        no(`Spin a spinner with 5 equal sections until every number has appeared one time, and use that single count as the answer.`, 'used-only-one-trial'),
+      ],
+      solution: `Equal sections match toys that are equally likely, and spinning until all 5 numbers appear matches buying boxes until the set is complete. Repeating many times and looking at the results gives a reliable estimate. A single run can be far from typical, and a spinner with one large section does not model equal chances.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A bag holds 6 green marbles and some blue marbles. The probability of drawing a green marble at random is $\\frac{2}{5}$. How many blue marbles are in the bag?`,
+      choices: [
+        no(`15`, 'found-the-total-number-of-marbles'),
+        no(`3`, 'used-the-fraction-numbers-without-scaling'),
+        no(`6`, 'assumed-equal-numbers-of-each-color'),
+        ok(`9`),
+      ],
+      solution: `Green is $\\frac{2}{5}$ of the marbles, so $6$ is $\\frac{2}{5}$ of the total. Each fifth is $6 \\div 2 = 3$ marbles, so the total is $5 \\times 3 = 15$. The blue marbles are $15 - 6 = 9$. The value 15 is the total, not the number of blue marbles.`,
+    },
+  ],
+}
+
+export default skill
