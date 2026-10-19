@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g8-algebra-1-concepts-more',
+  extends: 'algebra-1-concepts',
+  subject: 'math',
+  grade: 8,
+  group: 'Expressions and Equations',
+  name: 'Algebra 1 Concepts',
+  standards: ['8.EE.C.7'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What value of $x$ solves $4x + 9 = 37$?`,
+      choices: [
+        ok(`$x = 7$`),
+        no(`$x = \\frac{23}{2}$`, 'added-constant-instead-of-subtracting'),
+        no(`$x = 28$`, 'forgot-to-divide-by-coefficient'),
+        no(`$x = 112$`, 'multiplied-instead-of-dividing'),
+      ],
+      solution: `Subtract $9$ from both sides to get $4x = 28$, then divide by $4$: $x = 7$. Check: $4(7) + 9 = 37$. The choice $x = 28$ stops before dividing by the coefficient $4$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What value of $x$ solves $\\frac{x}{5} - 3 = 4$?`,
+      choices: [
+        no(`$x = 5$`, 'subtracted-constant-instead-of-adding'),
+        no(`$x = \\frac{7}{5}$`, 'divided-instead-of-multiplying'),
+        ok(`$x = 35$`),
+        no(`$x = 7$`, 'forgot-to-undo-division'),
+      ],
+      solution: `Add $3$ to both sides: $\\frac{x}{5} = 7$. Multiply both sides by $5$: $x = 35$. Check: $35 \\div 5 - 3 = 4$. The choice $x = 7$ forgets that $x$ is still being divided by $5$.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `What value of $x$ solves $6x - 4 = 2x + 20$?`,
+      choices: [
+        no(`$x = 3$`, 'added-variable-terms-across-equals'),
+        no(`$x = 4$`, 'subtracted-constant-instead-of-adding'),
+        no(`$x = 24$`, 'forgot-to-divide-by-coefficient'),
+        ok(`$x = 6$`),
+      ],
+      solution: `Subtract $2x$ from both sides: $4x - 4 = 20$. Add $4$: $4x = 24$. Divide by $4$: $x = 6$. Check: $6(6) - 4 = 32$ and $2(6) + 20 = 32$. The choice $x = 3$ adds $2x$ to $6x$ instead of subtracting it.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `How many solutions does the equation $2x + 5 = 2x + 9$ have?`,
+      choices: [
+        ok(`No solution`),
+        no(`Exactly one solution`, 'assumed-every-equation-has-one-solution'),
+        no(`Infinitely many solutions`, 'same-coefficients-means-infinitely-many'),
+        no(`$x = 4$`, 'used-difference-of-constants-as-solution'),
+      ],
+      solution: `Subtract $2x$ from both sides and you get $5 = 9$, which is never true. No value of $x$ works, so there is no solution. Matching $x$ coefficients alone does not mean infinitely many solutions; the constants must match too.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `What value of $x$ solves $3(x + 2) = 27$?`,
+      choices: [
+        no(`$x = \\frac{25}{3}$`, 'distributed-to-first-term-only'),
+        ok(`$x = 7$`),
+        no(`$x = 9$`, 'forgot-to-subtract-inside-term'),
+        no(`$x = 11$`, 'added-constant-instead-of-subtracting'),
+      ],
+      solution: `Divide both sides by $3$: $x + 2 = 9$. Subtract $2$: $x = 7$. Check: $3(7 + 2) = 27$. The choice $x = 9$ finds the value of $x + 2$, not of $x$.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `What value of $x$ solves $5x = 2x + 18$?`,
+      choices: [
+        no(`$x = \\frac{18}{7}$`, 'added-variable-terms-across-equals'),
+        no(`$x = 54$`, 'multiplied-instead-of-dividing'),
+        ok(`$x = 6$`),
+        no(`$x = \\frac{18}{5}$`, 'ignored-variable-on-other-side'),
+      ],
+      solution: `Subtract $2x$ from both sides: $3x = 18$, so $x = 6$. Check: $5(6) = 30$ and $2(6) + 18 = 30$. The choice $\\frac{18}{7}$ adds $2x$ to $5x$ instead of subtracting it.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $4(x - 3) = 2x + 10$?`,
+      choices: [
+        no(`$x = \\frac{13}{2}$`, 'distributed-to-first-term-only'),
+        no(`$x = -1$`, 'subtracted-constant-instead-of-adding'),
+        ok(`$x = 11$`),
+        no(`$x = \\frac{11}{3}$`, 'added-variable-terms-across-equals'),
+      ],
+      solution: `Distribute: $4x - 12 = 2x + 10$. Subtract $2x$: $2x - 12 = 10$. Add $12$: $2x = 22$, so $x = 11$. Check: $4(8) = 32$ and $2(11) + 10 = 32$. The choice $\\frac{13}{2}$ comes from writing $4x - 3$, multiplying only the $x$ by $4$.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $7 - 2x = 15$?`,
+      choices: [
+        ok(`$x = -4$`),
+        no(`$x = 4$`, 'dropped-negative-sign'),
+        no(`$x = -11$`, 'added-constant-instead-of-subtracting'),
+        no(`$x = 8$`, 'forgot-to-divide-by-coefficient'),
+      ],
+      solution: `Subtract $7$ from both sides: $-2x = 8$. Divide by $-2$: $x = -4$. Check: $7 - 2(-4) = 7 + 8 = 15$. The choice $x = 4$ ignores the negative sign on $-2x$; testing it gives $7 - 8 = -1$, not $15$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Which equation has infinitely many solutions?`,
+      choices: [
+        no(`$3(x + 4) = 3x + 4$`, 'distributed-to-first-term-only'),
+        ok(`$3(x + 4) = 3x + 12$`),
+        no(`$3(x + 4) = 4x + 12$`, 'same-constants-means-infinitely-many'),
+        no(`$3(x + 4) = 3x + 7$`, 'same-coefficients-means-infinitely-many'),
+      ],
+      solution: `Distributing gives $3(x + 4) = 3x + 12$. When the right side is also $3x + 12$, both sides are the same expression, so every value of $x$ works. The equation $3(x + 4) = 4x + 12$ has matching constants but different $x$ coefficients, so it has exactly one solution, $x = 0$.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $\\frac{2}{3}x + 4 = 10$?`,
+      choices: [
+        no(`$x = 4$`, 'multiplied-by-fraction-instead-of-reciprocal'),
+        no(`$x = 21$`, 'added-constant-instead-of-subtracting'),
+        no(`$x = 6$`, 'forgot-to-undo-fraction-coefficient'),
+        ok(`$x = 9$`),
+      ],
+      solution: `Subtract $4$: $\\frac{2}{3}x = 6$. Multiply both sides by the reciprocal $\\frac{3}{2}$: $x = 9$. Check: $\\frac{2}{3}(9) + 4 = 6 + 4 = 10$. The choice $x = 4$ multiplies $6$ by $\\frac{2}{3}$ instead of by $\\frac{3}{2}$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $0.5x + 1.2 = 0.3x + 2$?`,
+      choices: [
+        ok(`$x = 4$`),
+        no(`$x = 1$`, 'added-variable-terms-across-equals'),
+        no(`$x = 16$`, 'added-constant-instead-of-subtracting'),
+        no(`$x = 0.8$`, 'forgot-to-divide-by-coefficient'),
+      ],
+      solution: `Subtract $0.3x$: $0.2x + 1.2 = 2$. Subtract $1.2$: $0.2x = 0.8$. Divide by $0.2$: $x = 4$. Check: $0.5(4) + 1.2 = 3.2$ and $0.3(4) + 2 = 3.2$. The choice $x = 0.8$ stops at $0.2x = 0.8$ without dividing.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $5x - 2(x + 4) = 13$?`,
+      choices: [
+        no(`$x = \\frac{5}{3}$`, 'did-not-distribute-negative'),
+        ok(`$x = 7$`),
+        no(`$x = \\frac{17}{3}$`, 'distributed-to-first-term-only'),
+        no(`$x = 21$`, 'forgot-to-divide-by-coefficient'),
+      ],
+      solution: `Distribute the $-2$: $5x - 2x - 8 = 13$. Combine like terms: $3x - 8 = 13$. Add $8$: $3x = 21$, so $x = 7$. Check: $35 - 2(11) = 13$. The choice $\\frac{5}{3}$ comes from writing $+8$ instead of $-8$, forgetting that the $-2$ multiplies the $4$ too.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `How many solutions does the equation $4(2x - 1) = 8x - 4$ have?`,
+      choices: [
+        no(`No solution`, 'same-coefficients-means-no-solution'),
+        no(`Exactly one solution`, 'assumed-every-equation-has-one-solution'),
+        ok(`Infinitely many solutions`),
+        no(`Only $x = 0$`, 'read-identity-as-x-equals-zero'),
+      ],
+      solution: `Distribute: $8x - 4 = 8x - 4$. Subtracting $8x$ from both sides leaves $-4 = -4$, which is always true, so every value of $x$ is a solution. A true statement like $-4 = -4$ does not mean $x = 0$; it means any $x$ works.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Tavi has 45 dollars and saves 6 dollars each week. Rena has 81 dollars and saves 3 dollars each week. After how many weeks will they have the same amount of money?`,
+      choices: [
+        no(`4 weeks`, 'added-variable-terms-across-equals'),
+        ok(`12 weeks`),
+        no(`36 weeks`, 'forgot-to-divide-by-coefficient'),
+        no(`42 weeks`, 'added-constant-instead-of-subtracting'),
+      ],
+      solution: `Write $45 + 6w = 81 + 3w$. Subtract $3w$: $45 + 3w = 81$. Subtract $45$: $3w = 36$, so $w = 12$. Check: $45 + 72 = 117$ and $81 + 36 = 117$. The answer 36 weeks is the value of $3w$, not $w$.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $3(2x + 1) - 4 = 5x + 6$?`,
+      choices: [
+        no(`$x = 9$`, 'distributed-to-first-term-only'),
+        no(`$x = 5$`, 'subtracted-constant-instead-of-adding'),
+        no(`$x = \\frac{7}{11}$`, 'added-variable-terms-across-equals'),
+        ok(`$x = 7$`),
+      ],
+      solution: `Distribute: $6x + 3 - 4 = 5x + 6$, so $6x - 1 = 5x + 6$. Subtract $5x$: $x - 1 = 6$, so $x = 7$. Check: $3(15) - 4 = 41$ and $5(7) + 6 = 41$. The choice $x = 9$ comes from writing $6x + 1$, forgetting to multiply the $1$ by $3$.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `What value of $k$ makes the equation $2(3x - k) = 6x - 10$ true for every value of $x$?`,
+      choices: [
+        no(`$k = 10$`, 'distributed-to-first-term-only'),
+        ok(`$k = 5$`),
+        no(`$k = 20$`, 'multiplied-instead-of-dividing'),
+        no(`$k = -5$`, 'sign-error-on-distribution'),
+      ],
+      solution: `Distribute: $6x - 2k = 6x - 10$. For both sides to be the same expression, $-2k = -10$, so $k = 5$. Check: $2(3x - 5) = 6x - 10$. The choice $k = 10$ treats the left side as $6x - k$, forgetting that the $2$ multiplies $k$ too.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Which equation has no solution?`,
+      choices: [
+        no(`$2(x - 3) + x = 3x - 6$`, 'distributed-to-first-term-only'),
+        no(`$2(x - 3) + x = 2x - 7$`, 'dropped-a-variable-term'),
+        ok(`$2(x - 3) + x = 3x + 1$`),
+        no(`$2(x - 3) + x = 4x - 6$`, 'same-constants-means-no-solution'),
+      ],
+      solution: `The left side simplifies to $2x - 6 + x = 3x - 6$. Against $3x + 1$, subtracting $3x$ leaves $-6 = 1$, which is never true, so there is no solution. The equation with $3x - 6$ on the right is true for every $x$, and the ones with $2x - 7$ and $4x - 6$ each have exactly one solution ($x = -1$ and $x = 0$).`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `What value of $x$ solves $\\frac{x + 4}{3} = \\frac{x - 2}{2}$?`,
+      choices: [
+        ok(`$x = 14$`),
+        no(`$x = 6$`, 'multiplied-only-first-term'),
+        no(`$x = 2$`, 'subtracted-constant-instead-of-adding'),
+        no(`$x = -16$`, 'cross-multiplied-wrong-pair'),
+      ],
+      solution: `Multiply both sides by $6$: $2(x + 4) = 3(x - 2)$, so $2x + 8 = 3x - 6$. Subtract $2x$ and add $6$: $x = 14$. Check: $\\frac{18}{3} = 6$ and $\\frac{12}{2} = 6$. The choice $x = 6$ comes from $2x + 4 = 3x - 2$, multiplying only the $x$ terms.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `What value of $x$ solves $0.4(5x - 10) = 1.5x + 3$?`,
+      choices: [
+        no(`$x = 26$`, 'distributed-to-first-term-only'),
+        no(`$x = 2$`, 'added-variable-terms-across-equals'),
+        ok(`$x = 14$`),
+        no(`$x = -2$`, 'subtracted-constant-instead-of-adding'),
+      ],
+      solution: `Distribute: $2x - 4 = 1.5x + 3$. Subtract $1.5x$: $0.5x - 4 = 3$. Add $4$: $0.5x = 7$, so $x = 14$. Check: $0.4(60) = 24$ and $1.5(14) + 3 = 24$. The choice $x = 26$ comes from writing $2x - 10$, multiplying only the $5x$ by $0.4$.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Gym A charges 30 dollars to join plus 12 dollars each month. Gym B charges 75 dollars to join plus 9 dollars each month. After some number of months, the total cost at the two gyms is the same. What is that total cost?`,
+      choices: [
+        no(`15 dollars`, 'gave-months-instead-of-total'),
+        no(`180 dollars`, 'forgot-joining-fee'),
+        no(`450 dollars`, 'added-constant-instead-of-subtracting'),
+        ok(`210 dollars`),
+      ],
+      solution: `Write $30 + 12m = 75 + 9m$. Subtract $9m$ and $30$: $3m = 45$, so $m = 15$ months. The total is $30 + 12(15) = 210$ dollars, and Gym B agrees: $75 + 9(15) = 210$. The answer 15 is the number of months, not the cost, and 180 leaves out the joining fee.`,
+    },
+  ],
+}
+
+export default skill
