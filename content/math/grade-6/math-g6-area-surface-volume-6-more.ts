@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g6-area-surface-volume-6-more',
+  extends: 'area-surface-volume-6',
+  subject: 'math',
+  grade: 6,
+  group: 'Geometry',
+  name: 'Area, Surface Area & Volume',
+  standards: ['6.G.A.1'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `A right triangle has legs that are $7$ cm and $10$ cm long. What is its area in square centimeters?`,
+      choices: [
+        ok(`$35$`),
+        no(`$70$`, 'forgot-to-halve-triangle-area'),
+        no(`$17$`, 'added-the-legs'),
+        no(`$34$`, 'found-rectangle-perimeter'),
+      ],
+      solution: `The two legs of a right triangle are a base and its height, so the area is $\\frac{1}{2} \\times 7 \\times 10 = 35$ square centimeters. The choice $70$ is the area of the whole $7$ by $10$ rectangle; the triangle is only half of it.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A trapezoid has parallel bases of $6$ in and $10$ in and a height of $4$ in. What is its area in square inches?`,
+      choices: [
+        no(`$64$`, 'forgot-to-halve-trapezoid-area'),
+        ok(`$32$`),
+        no(`$240$`, 'multiplied-all-three-measures'),
+        no(`$20$`, 'added-all-three-measures'),
+      ],
+      solution: `Add the bases, take half, and multiply by the height: $\\frac{1}{2} \\times (6 + 10) \\times 4 = 32$ square inches. The choice $64$ uses $(6 + 10) \\times 4$, which is two copies of the trapezoid put together into a parallelogram.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A rhombus is split along one diagonal into two identical triangles. Each triangle has a base of $8$ cm and a height of $3$ cm. What is the area of the rhombus in square centimeters?`,
+      choices: [
+        no(`$12$`, 'counted-one-triangle'),
+        no(`$48$`, 'forgot-to-halve-triangle-area'),
+        ok(`$24$`),
+        no(`$22$`, 'added-dimensions-instead-of-multiplying'),
+      ],
+      solution: `Each triangle has area $\\frac{1}{2} \\times 8 \\times 3 = 12$ square centimeters, and there are two of them, so the rhombus has area $24$ square centimeters. The choice $12$ is only one of the two triangles.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A parallelogram has a base of $11$ m and a height of $6$ m. Its slanted sides are each $8$ m long. What is its area in square meters?`,
+      choices: [
+        ok(`$66$`),
+        no(`$88$`, 'used-slanted-side-as-height'),
+        no(`$48$`, 'multiplied-slanted-side-by-height'),
+        no(`$33$`, 'halved-like-a-triangle'),
+      ],
+      solution: `The area of a parallelogram is base times height, where the height is measured straight across at a right angle: $11 \\times 6 = 66$ square meters. The choice $88$ multiplies by the slanted side, which is longer than the true height.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A triangular pennant has a base of $9$ in and a height of $12$ in. What is its area in square inches?`,
+      choices: [
+        no(`$108$`, 'forgot-to-halve-triangle-area'),
+        no(`$21$`, 'added-base-and-height'),
+        no(`$27$`, 'halved-both-dimensions'),
+        ok(`$54$`),
+      ],
+      solution: `Multiply base by height and take half: $\\frac{1}{2} \\times 9 \\times 12 = 54$ square inches. The choice $27$ halves both the base and the height, which divides the rectangle by $4$ instead of $2$.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A rectangle that is $8$ ft long and $5$ ft wide is cut corner to corner into two identical right triangles. What is the area of one triangle in square feet?`,
+      choices: [
+        no(`$40$`, 'gave-whole-rectangle-area'),
+        ok(`$20$`),
+        no(`$13$`, 'added-length-and-width'),
+        no(`$26$`, 'found-rectangle-perimeter'),
+      ],
+      solution: `The rectangle has area $8 \\times 5 = 40$ square feet, and cutting it corner to corner makes two equal halves, so each triangle has area $40 \\div 2 = 20$ square feet. The choice $40$ is the whole rectangle, not one triangle.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `A ramp's side is shaped like a trapezoid with parallel bases of $5.5$ ft and $8.5$ ft and a height of $3$ ft. What is the area of the side in square feet?`,
+      choices: [
+        ok(`$21$`),
+        no(`$42$`, 'forgot-to-halve-trapezoid-area'),
+        no(`$16.5$`, 'used-only-the-shorter-base'),
+        no(`$25.5$`, 'used-only-the-longer-base'),
+      ],
+      solution: `Add the bases, $5.5 + 8.5 = 14$, take half to get $7$, and multiply by the height: $7 \\times 3 = 21$ square feet. The choice $42$ forgets the half, and $16.5$ or $25.5$ uses only one base as if the shape were a rectangle.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A kite has diagonals that are $12$ in and $7$ in long, and they cross at right angles. The long diagonal splits the kite into two triangles, each with base $12$ in and height $3.5$ in. What is the area of the kite in square inches?`,
+      choices: [
+        no(`$84$`, 'multiplied-diagonals-without-halving'),
+        ok(`$42$`),
+        no(`$21$`, 'counted-one-triangle'),
+        no(`$19$`, 'added-the-diagonals'),
+      ],
+      solution: `Each triangle has area $\\frac{1}{2} \\times 12 \\times 3.5 = 21$ square inches, and two triangles give $42$ square inches. The choice $84$ is $12 \\times 7$, the rectangle that would surround the kite, which is twice the kite's area.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `An obtuse triangle has a base of $6$ cm. Its height, measured from the top corner straight down to the line the base sits on, is $5$ cm and falls outside the triangle. The longest side is $9$ cm. What is the area in square centimeters?`,
+      choices: [
+        no(`$27$`, 'used-slanted-side-as-height'),
+        no(`$30$`, 'forgot-to-halve-triangle-area'),
+        no(`$45$`, 'multiplied-wrong-pair-of-measures'),
+        ok(`$15$`),
+      ],
+      solution: `The height of a triangle is always the perpendicular distance to the base line, even when it lands outside the triangle, so the area is $\\frac{1}{2} \\times 6 \\times 5 = 15$ square centimeters. The choice $27$ uses the $9$ cm side as the height, but that side is slanted.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A triangular flower bed has a base of $4\\frac{1}{2}$ m and a height of $2$ m. What is its area in square meters?`,
+      choices: [
+        ok(`$4\\frac{1}{2}$`),
+        no(`$9$`, 'forgot-to-halve-triangle-area'),
+        no(`$6\\frac{1}{2}$`, 'added-base-and-height'),
+        no(`$2\\frac{1}{4}$`, 'halved-twice'),
+      ],
+      solution: `Multiply and take half: $\\frac{1}{2} \\times 4\\frac{1}{2} \\times 2 = 4\\frac{1}{2}$ square meters. The choice $9$ is $4\\frac{1}{2} \\times 2$ without the half, which is the area of a rectangle.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A sign is shaped like a pentagon made from a rectangle $10$ in long and $6$ in tall with a right triangle attached to its right end. The triangle's vertical leg is the rectangle's $6$ in side and its other leg sticks out $4$ in. What is the area of the sign in square inches?`,
+      choices: [
+        no(`$84$`, 'forgot-to-halve-triangle-area'),
+        no(`$60$`, 'ignored-the-triangle'),
+        ok(`$72$`),
+        no(`$48$`, 'subtracted-the-triangle'),
+      ],
+      solution: `Split the pentagon into its two parts. The rectangle has area $10 \\times 6 = 60$ and the triangle has area $\\frac{1}{2} \\times 6 \\times 4 = 12$, so the sign has area $60 + 12 = 72$ square inches. The choice $84$ counts the triangle as $24$, forgetting to halve it.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A parallelogram has an area of $72$ square feet and a height of $8$ ft. What is the length of its base in feet?`,
+      choices: [
+        ok(`$9$`),
+        no(`$18$`, 'used-triangle-formula'),
+        no(`$576$`, 'multiplied-instead-of-divided'),
+        no(`$64$`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `Area equals base times height, so the base is $72 \\div 8 = 9$ feet. The choice $18$ doubles the area first, which is the step for a triangle, not a parallelogram.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A triangular window has an area of $30$ square feet and a height of $5$ ft. What is the length of its base in feet?`,
+      choices: [
+        no(`$6$`, 'forgot-to-double-the-area'),
+        ok(`$12$`),
+        no(`$150$`, 'multiplied-instead-of-divided'),
+        no(`$25$`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `Since area $= \\frac{1}{2} \\times b \\times h$, we have $30 = \\frac{1}{2} \\times b \\times 5$, so $b \\times 5 = 60$ and $b = 12$ feet. The choice $6$ divides $30$ by $5$ without undoing the half.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A right triangle cut from a sheet of felt has legs of $3.2$ cm and $5$ cm. What is its area in square centimeters?`,
+      choices: [
+        no(`$16$`, 'forgot-to-halve-triangle-area'),
+        no(`$8.2$`, 'added-the-legs'),
+        ok(`$8$`),
+        no(`$4$`, 'halved-twice'),
+      ],
+      solution: `The legs are the base and height, so the area is $\\frac{1}{2} \\times 3.2 \\times 5 = 8$ square centimeters. The choice $16$ is $3.2 \\times 5$ without taking half.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `A hexagonal coaster is made of six identical triangles that meet at its center. Each triangle has a base of $4$ cm and a height of $3.5$ cm. What is the area of the coaster in square centimeters?`,
+      choices: [
+        no(`$84$`, 'forgot-to-halve-triangle-area'),
+        no(`$7$`, 'counted-one-triangle'),
+        no(`$24$`, 'found-the-perimeter'),
+        ok(`$42$`),
+      ],
+      solution: `One triangle has area $\\frac{1}{2} \\times 4 \\times 3.5 = 7$ square centimeters, and six of them give $6 \\times 7 = 42$ square centimeters. The choice $84$ uses $4 \\times 3.5 = 14$ for each triangle, which is a rectangle, not a triangle.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `A trapezoid has parallel bases of $7$ m and $11$ m and an area of $54$ square meters. What is its height in meters?`,
+      choices: [
+        ok(`$6$`),
+        no(`$3$`, 'forgot-to-halve-sum-of-bases'),
+        no(`$12$`, 'doubled-area-and-halved-bases'),
+        no(`$36$`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `Half the sum of the bases is $\\frac{1}{2} \\times (7 + 11) = 9$, and $9 \\times h = 54$, so $h = 6$ meters. The choice $3$ divides $54$ by the full sum $18$, forgetting that the trapezoid formula takes half of that sum.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A rectangular piece of plywood is $14$ in by $10$ in. A right triangle with legs of $4$ in and $6$ in is cut off one corner, leaving a pentagon. What is the area of the pentagon in square inches?`,
+      choices: [
+        no(`$116$`, 'forgot-to-halve-triangle-area'),
+        ok(`$128$`),
+        no(`$152$`, 'added-the-cut-out-piece'),
+        no(`$140$`, 'ignored-the-cut-out-piece'),
+      ],
+      solution: `Start with the rectangle, $14 \\times 10 = 140$, and subtract the triangle, $\\frac{1}{2} \\times 4 \\times 6 = 12$, to get $140 - 12 = 128$ square inches. The choice $116$ subtracts $24$, the triangle's area without the half.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A community garden is shaped like a trapezoid with parallel sides of $20$ m and $12$ m that are $8$ m apart. A square shed that is $3$ m on each side sits inside the garden. How many square meters of the garden are left for planting?`,
+      choices: [
+        no(`$247$`, 'forgot-to-halve-trapezoid-area'),
+        no(`$128$`, 'ignored-the-shed'),
+        ok(`$119$`),
+        no(`$116$`, 'subtracted-shed-perimeter'),
+      ],
+      solution: `The trapezoid has area $\\frac{1}{2} \\times (20 + 12) \\times 8 = 128$ square meters, and the shed covers $3 \\times 3 = 9$, so $128 - 9 = 119$ square meters are left. The choice $116$ subtracts $12$, which is the shed's perimeter, not its area.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A parallelogram has a base of $10$ cm and a height of $6$ cm. A straight cut along a height line splits it into a right triangle with a base of $3$ cm and a trapezoid. What is the area of the trapezoid in square centimeters?`,
+      choices: [
+        no(`$42$`, 'forgot-to-halve-triangle-area'),
+        no(`$60$`, 'gave-whole-parallelogram-area'),
+        no(`$9$`, 'gave-the-triangle-area'),
+        ok(`$51$`),
+      ],
+      solution: `The whole parallelogram has area $10 \\times 6 = 60$, and the triangle has area $\\frac{1}{2} \\times 3 \\times 6 = 9$, so the trapezoid has area $60 - 9 = 51$ square centimeters. As a check, its bases are $7$ and $10$: $\\frac{1}{2} \\times 17 \\times 6 = 51$. The choice $42$ subtracts $18$, the triangle without the half.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A triangular tile has a base of $2\\frac{1}{2}$ ft and a height of $1\\frac{3}{5}$ ft. What is its area in square feet?`,
+      choices: [
+        ok(`$2$`),
+        no(`$4$`, 'forgot-to-halve-triangle-area'),
+        no(`$4\\frac{1}{10}$`, 'added-base-and-height'),
+        no(`$1\\frac{3}{20}$`, 'multiplied-whole-and-fraction-parts-separately'),
+      ],
+      solution: `Write the mixed numbers as fractions: $\\frac{5}{2} \\times \\frac{8}{5} = \\frac{40}{10} = 4$, and half of that is $2$ square feet. The choice $1\\frac{3}{20}$ multiplies $2 \\times 1$ and $\\frac{1}{2} \\times \\frac{3}{5}$ separately, getting $2\\frac{3}{10}$, then halves it; mixed numbers cannot be multiplied part by part.`,
+    },
+  ],
+}
+
+export default skill
