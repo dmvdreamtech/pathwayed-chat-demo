@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g9-graphing-linear-functions-more',
+  extends: 'graphing-linear-functions',
+  subject: 'math',
+  grade: 9,
+  group: 'Interpreting Functions',
+  name: 'Graphing Linear Functions',
+  standards: ['HSF.IF.C.7'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Which point lies on the graph of $y = 4x - 1$?`,
+      choices: [
+        ok(`$(2, 7)$`),
+        no(`$(2, 9)$`, 'used-wrong-sign-on-intercept'),
+        no(`$(7, 2)$`, 'swapped-coordinates'),
+        no(`$(2, 8)$`, 'ignored-the-intercept'),
+      ],
+      solution: `Substitute $x = 2$: $y = 4(2) - 1 = 8 - 1 = 7$, so $(2, 7)$ is on the line. The point $(2, 9)$ adds the $1$ instead of subtracting it.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `As you move from left to right, what does the graph of $y = -2x + 6$ do?`,
+      choices: [
+        ok(`It falls, because the slope is $-2$`),
+        no(`It rises, because the $y$-intercept $6$ is positive`, 'judged-direction-by-intercept'),
+        no(`It rises, because the slope is $2$`, 'dropped-negative-sign-of-slope'),
+        no(`It stays level, because it is a horizontal line`, 'confused-linear-with-constant'),
+      ],
+      solution: `The slope is the coefficient of $x$, which is $-2$. A negative slope means the line falls as $x$ increases. The sign of the $y$-intercept tells where the line crosses the $y$-axis, not which way it goes.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Which description matches the graph of $y = 5$?`,
+      choices: [
+        ok(`A horizontal line through $(0, 5)$`),
+        no(`A vertical line through $(5, 0)$`, 'confused-horizontal-and-vertical'),
+        no(`A line through the origin with slope $5$`, 'read-constant-as-slope'),
+        no(`A horizontal line through $(5, 0)$`, 'treated-constant-as-x-intercept'),
+      ],
+      solution: `Every point on the graph has $y = 5$ no matter what $x$ is, so the graph is a horizontal line crossing the $y$-axis at $(0, 5)$. A vertical line through $(5, 0)$ would be the graph of $x = 5$.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `To graph $y = \\frac{2}{3}x + 1$, Dariela plots $(0, 1)$ first. Which move from that point lands on another point of the line?`,
+      choices: [
+        ok(`Right 3, up 2`),
+        no(`Right 2, up 3`, 'inverted-rise-and-run'),
+        no(`Right 3, down 2`, 'reversed-sign-of-slope'),
+        no(`Right 3, up 1`, 'used-intercept-as-rise'),
+      ],
+      solution: `Slope is rise over run, so $\\frac{2}{3}$ means up 2 for every 3 to the right. From $(0, 1)$, moving right 3 and up 2 reaches $(3, 3)$, and indeed $\\frac{2}{3}(3) + 1 = 3$. Moving right 2, up 3 uses the slope $\\frac{3}{2}$ instead.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `What is the slope of the graph of $y = -3$?`,
+      choices: [
+        ok(`$0$`),
+        no(`$-3$`, 'read-constant-as-slope'),
+        no(`Undefined`, 'confused-horizontal-and-vertical'),
+        no(`$1$`, 'assumed-default-slope-of-one'),
+      ],
+      solution: `The graph of $y = -3$ is a horizontal line: $y$ never changes, so the rise is always $0$ and the slope is $0$. The $-3$ is where the line crosses the $y$-axis. An undefined slope belongs to a vertical line.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A table shows points on a line: when $x$ is $0, 1, 2, 3$, the values of $y$ are $7, 4, 1, -2$. Which equation does the line graph?`,
+      choices: [
+        ok(`$y = -3x + 7$`),
+        no(`$y = 3x + 7$`, 'dropped-negative-sign-of-slope'),
+        no(`$y = 7x - 3$`, 'swapped-slope-and-intercept'),
+        no(`$y = -3x - 2$`, 'used-last-y-as-intercept'),
+      ],
+      solution: `Each time $x$ goes up by $1$, $y$ goes down by $3$, so the slope is $-3$. At $x = 0$, $y = 7$, so the $y$-intercept is $7$. The equation is $y = -3x + 7$. The equation $y = 3x + 7$ would rise instead of fall.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Where does the graph of $3x + 4y = 12$ cross the two axes?`,
+      choices: [
+        ok(`$(4, 0)$ and $(0, 3)$`),
+        no(`$(3, 0)$ and $(0, 4)$`, 'swapped-intercepts'),
+        no(`$(12, 0)$ and $(0, 12)$`, 'ignored-coefficients'),
+        no(`$(-4, 0)$ and $(0, -3)$`, 'sign-error-solving-intercepts'),
+      ],
+      solution: `Set $y = 0$: $3x = 12$, so $x = 4$, giving $(4, 0)$. Set $x = 0$: $4y = 12$, so $y = 3$, giving $(0, 3)$. The pair $(3, 0)$ and $(0, 4)$ divides by the wrong coefficient for each axis.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What is the slope of the graph of $2x - 5y = 10$?`,
+      choices: [
+        ok(`$\\frac{2}{5}$`),
+        no(`$2$`, 'read-x-coefficient-as-slope'),
+        no(`$-\\frac{2}{5}$`, 'sign-error-isolating-y'),
+        no(`$\\frac{5}{2}$`, 'inverted-ratio-of-coefficients'),
+      ],
+      solution: `Solve for $y$: $-5y = -2x + 10$, so $y = \\frac{2}{5}x - 2$. The slope is $\\frac{2}{5}$. The choice $-\\frac{2}{5}$ comes from dividing $-2x$ by $5$ instead of by $-5$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `The point $(k, 11)$ is on the graph of $y = 3x - 4$. What is the value of $k$?`,
+      choices: [
+        ok(`$5$`),
+        no(`$29$`, 'substituted-y-value-for-x'),
+        no(`$\\frac{7}{3}$`, 'subtracted-instead-of-adding-intercept'),
+        no(`$15$`, 'forgot-to-divide-by-slope'),
+      ],
+      solution: `Substitute $y = 11$: $11 = 3k - 4$, so $3k = 15$ and $k = 5$. Check: $3(5) - 4 = 11$. The value $29$ comes from putting $11$ in for $x$, which is $3(11) - 4$.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A line crosses the $y$-axis at $(0, -2)$ and rises 4 units for every 1 unit it moves to the right. Which equation does it graph?`,
+      choices: [
+        ok(`$y = 4x - 2$`),
+        no(`$y = -2x + 4$`, 'swapped-slope-and-intercept'),
+        no(`$y = \\frac{1}{4}x - 2$`, 'inverted-rise-and-run'),
+        no(`$y = 4x + 2$`, 'dropped-sign-of-intercept'),
+      ],
+      solution: `Rising 4 for each 1 to the right is a slope of $\\frac{4}{1} = 4$, and the $y$-intercept is $-2$. In slope-intercept form that is $y = 4x - 2$. The equation $y = -2x + 4$ puts the intercept where the slope belongs.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Which of these lines has the steepest graph?`,
+      choices: [
+        ok(`$y = -5x + 1$`),
+        no(`$y = 4x$`, 'ignored-negative-slopes-for-steepness'),
+        no(`$y = 3x + 8$`, 'judged-steepness-by-intercept'),
+        no(`$y = \\frac{1}{2}x - 9$`, 'judged-steepness-by-largest-number'),
+      ],
+      solution: `Steepness depends on the size of the slope, ignoring its sign. The slopes have sizes $5$, $4$, $3$ and $\\frac{1}{2}$, so $y = -5x + 1$ is steepest; it just falls instead of rising. The line $y = 4x$ has the greatest slope as a signed number, but $4$ is smaller in size than $5$.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A phone battery starts at 100 percent and drops 8 percent each hour, so $b = 100 - 8t$, where $t$ is hours. Which describes the key features of the graph?`,
+      choices: [
+        ok(`Starts at $100$ on the $b$-axis, slope $-8$, reaches $0$ at $t = 12.5$`),
+        no(`Starts at $100$ on the $b$-axis, slope $8$, reaches $0$ at $t = 12.5$`, 'dropped-negative-sign-of-slope'),
+        no(`Starts at $-8$ on the $b$-axis, slope $100$, reaches $0$ at $t = 0.08$`, 'swapped-slope-and-intercept'),
+        no(`Starts at $100$ on the $b$-axis, slope $-8$, reaches $0$ at $t = 92$`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `When $t = 0$, $b = 100$, so the graph starts at $100$. The battery loses $8$ each hour, so the slope is $-8$. It reaches $0$ when $100 - 8t = 0$, so $t = \\frac{100}{8} = 12.5$ hours. The value $t = 92$ comes from $100 - 8$, which is not how to solve the equation.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A club sells raffle tickets for 2 dollars each and has at most 50 tickets. The money raised is $E = 2n$, where $n$ is the number of tickets sold. Which best describes the graph for this situation?`,
+      choices: [
+        ok(`Separate points from $(0, 0)$ to $(50, 100)$`),
+        no(`A line through $(0, 0)$ and $(50, 100)$ that keeps going in both directions`, 'ignored-context-domain'),
+        no(`A solid segment from $(0, 0)$ to $(50, 100)$`, 'treated-discrete-count-as-continuous'),
+        no(`Separate points from $(0, 0)$ to $(100, 50)$`, 'swapped-coordinates'),
+      ],
+      solution: `The club can only sell whole tickets from $0$ to $50$, so $n$ takes the values $0, 1, 2, \\ldots, 50$. Each gives one point, ending at $(50, 2 \\cdot 50) = (50, 100)$. A solid segment would include values like $n = 2.5$, which cannot happen.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Where does the graph of $y = \\frac{1}{2}x + 3$ cross the $x$-axis?`,
+      choices: [
+        ok(`$x = -6$`),
+        no(`$x = 6$`, 'sign-error-solving-intercept'),
+        no(`$x = -\\frac{3}{2}$`, 'multiplied-instead-of-divided'),
+        no(`$x = 3$`, 'gave-y-intercept'),
+      ],
+      solution: `Set $y = 0$: $\\frac{1}{2}x + 3 = 0$, so $\\frac{1}{2}x = -3$ and $x = -3 \\div \\frac{1}{2} = -6$. The value $-\\frac{3}{2}$ multiplies $-3$ by $\\frac{1}{2}$ instead of dividing.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Which equation has a graph that passes through $(0, 3)$ and $(6, 0)$?`,
+      choices: [
+        ok(`$y = -\\frac{1}{2}x + 3$`),
+        no(`$y = \\frac{1}{2}x + 3$`, 'dropped-negative-sign-of-slope'),
+        no(`$y = -2x + 3$`, 'inverted-rise-and-run'),
+        no(`$y = -\\frac{1}{2}x + 6$`, 'used-x-intercept-as-y-intercept'),
+      ],
+      solution: `The slope is $\\frac{0 - 3}{6 - 0} = -\\frac{1}{2}$ and the line crosses the $y$-axis at $3$, so $y = -\\frac{1}{2}x + 3$. Check: $-\\frac{1}{2}(6) + 3 = 0$. The equation $y = -2x + 3$ divides the run by the rise.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `For which values of $x$ is the graph of $f(x) = -3x + 9$ above the $x$-axis?`,
+      choices: [
+        ok(`$x < 3$`),
+        no(`$x > 3$`, 'reversed-inequality-direction'),
+        no(`$x < 9$`, 'used-y-intercept-as-boundary'),
+        no(`$x > -3$`, 'used-slope-as-boundary'),
+      ],
+      solution: `The graph crosses the $x$-axis where $-3x + 9 = 0$, at $x = 3$. The slope is negative, so the line is above the axis to the left of that point: $x < 3$. Check: $f(0) = 9 > 0$ while $f(4) = -3 < 0$. The answer $x > 3$ forgets that dividing by $-3$ flips the inequality.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `The function $f(x) = 4x - 6$ is graphed only for $-1 \\le x \\le 3$. What is the range of this graph?`,
+      choices: [
+        ok(`$-10 \\le y \\le 6$`),
+        no(`$-1 \\le y \\le 3$`, 'gave-domain-as-range'),
+        no(`$-2 \\le y \\le 6$`, 'sign-error-evaluating-negative-input'),
+        no(`$2 \\le y \\le 18$`, 'added-intercept-instead-of-subtracting'),
+      ],
+      solution: `The graph is a segment with endpoints at $x = -1$ and $x = 3$. $f(-1) = 4(-1) - 6 = -10$ and $f(3) = 4(3) - 6 = 6$. Since the line rises, the $y$-values run from $-10$ to $6$. The range $-2 \\le y \\le 6$ treats $4(-1)$ as $4$.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A line passes through $(-3, 8)$ and $(6, 2)$. Where does it cross the $y$-axis?`,
+      choices: [
+        ok(`$y = 6$`),
+        no(`$y = 10$`, 'sign-error-in-slope'),
+        no(`$y = \\frac{7}{2}$`, 'inverted-slope'),
+        no(`$y = 9$`, 'gave-x-intercept'),
+      ],
+      solution: `The slope is $\\frac{2 - 8}{6 - (-3)} = \\frac{-6}{9} = -\\frac{2}{3}$. Using $(-3, 8)$: $8 = -\\frac{2}{3}(-3) + b = 2 + b$, so $b = 6$. The value $9$ is where the line crosses the $x$-axis, not the $y$-axis.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `At a bowling alley, the total cost is a linear function of the number of games. Two games cost 13 dollars and five games cost 26.5 dollars. What is the $y$-intercept of the graph, and what does it mean?`,
+      choices: [
+        ok(`4 dollars, the shoe rental fee paid before any games`),
+        no(`4.5 dollars, the shoe rental fee paid before any games`, 'confused-slope-with-intercept'),
+        no(`13 dollars, the shoe rental fee paid before any games`, 'used-first-point-as-intercept'),
+        no(`4 dollars, the cost of each game`, 'misinterpreted-intercept-meaning'),
+      ],
+      solution: `The rate is $\\frac{26.5 - 13}{5 - 2} = \\frac{13.5}{3} = 4.5$ dollars per game. Then $13 = 4.5(2) + b$, so $b = 13 - 9 = 4$. The $y$-intercept is the cost for $0$ games, a fixed 4 dollar fee. The value 4.5 dollars is the slope, the cost of each game.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `The graph of $f(x) = -\\frac{3}{4}x + b$ passes through $(8, -1)$. Where does the graph cross the $x$-axis?`,
+      choices: [
+        ok(`$x = \\frac{20}{3}$`),
+        no(`$x = 5$`, 'gave-y-intercept'),
+        no(`$x = \\frac{15}{4}$`, 'multiplied-instead-of-divided'),
+        no(`$x = -\\frac{28}{3}$`, 'sign-error-solving-for-b'),
+      ],
+      solution: `First find $b$: $-1 = -\\frac{3}{4}(8) + b = -6 + b$, so $b = 5$. Then set $f(x) = 0$: $-\\frac{3}{4}x + 5 = 0$, so $x = 5 \\div \\frac{3}{4} = \\frac{20}{3}$. The value $5$ is the $y$-intercept, where the graph crosses the $y$-axis.`,
+    },
+  ],
+}
+
+export default skill
