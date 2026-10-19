@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g11-quadratic-functions-more',
+  extends: 'quadratic-functions',
+  subject: 'math',
+  grade: 11,
+  group: 'Functions',
+  name: 'Quadratic Functions',
+  standards: ['HSF.IF.C.7'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is the vertex of the graph of $y = 4(x - 7)^2 - 2$?`,
+      choices: [
+        ok(`$(7, -2)$`),
+        no(`$(-7, -2)$`, 'flipped-sign-of-h'),
+        no(`$(-2, 7)$`, 'swapped-coordinates'),
+        no(`$(7, 2)$`, 'flipped-sign-of-k'),
+      ],
+      solution: `In vertex form $y = a(x - h)^2 + k$ the vertex is $(h, k)$. Here $x - 7$ means $h = 7$ and the added $-2$ means $k = -2$, so the vertex is $(7, -2)$. The choice $(-7, -2)$ reads the $-7$ inside the parentheses as $h$, but the form subtracts $h$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is the axis of symmetry of the graph of $y = -(x + 5)^2 + 1$?`,
+      choices: [
+        no(`$x = 5$`, 'flipped-sign-of-h'),
+        ok(`$x = -5$`),
+        no(`$x = 1$`, 'used-k-for-axis'),
+        no(`$y = 1$`, 'axis-as-horizontal-line'),
+      ],
+      solution: `Write $x + 5$ as $x - (-5)$, so $h = -5$ and the vertex is $(-5, 1)$. The axis of symmetry is the vertical line through the vertex, $x = -5$. The choice $y = 1$ is a horizontal line through the vertex, but a parabola of this form is symmetric about a vertical line.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `What are the x-intercepts of the graph of $y = 2(x - 1)(x + 6)$?`,
+      choices: [
+        no(`$x = -1$ and $x = 6$`, 'negated-both-zeros'),
+        no(`$x = 1$ and $x = 6$`, 'dropped-sign-on-one-zero'),
+        ok(`$x = 1$ and $x = -6$`),
+        no(`$x = 2$ and $x = -12$`, 'multiplied-zeros-by-leading-coefficient'),
+      ],
+      solution: `The graph meets the x-axis where $y = 0$. A product is zero when a factor is zero: $x - 1 = 0$ gives $x = 1$ and $x + 6 = 0$ gives $x = -6$. The factor $2$ stretches the graph but never equals zero, so it does not change the intercepts; the choice $x = 2$ and $x = -12$ wrongly multiplies the zeros by it.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What is the y-intercept of the graph of $y = (x - 3)(x + 5)$?`,
+      choices: [
+        no(`$(0, 15)$`, 'dropped-sign-of-product'),
+        no(`$(0, 2)$`, 'added-constants-instead-of-multiplying'),
+        no(`$(-15, 0)$`, 'swapped-coordinates'),
+        ok(`$(0, -15)$`),
+      ],
+      solution: `The y-intercept is where $x = 0$: $y = (0 - 3)(0 + 5) = (-3)(5) = -15$, so the point is $(0, -15)$. The choice $(0, 15)$ loses the negative sign from $-3$.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `What is the minimum value of the function $y = 5(x + 2)^2 - 9$?`,
+      choices: [
+        ok(`$-9$`),
+        no(`$-2$`, 'gave-x-coordinate-of-vertex'),
+        no(`$9$`, 'flipped-sign-of-k'),
+        no(`$5$`, 'used-leading-coefficient'),
+      ],
+      solution: `Since $a = 5$ is positive, the parabola opens upward and its lowest point is the vertex $(-2, -9)$. The minimum value is the y-coordinate, $-9$. The choice $-2$ is where the minimum happens, not the minimum value itself.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Which describes the graph of $y = 3 + 4x - x^2$?`,
+      choices: [
+        no(`It opens upward and has a minimum.`, 'read-first-term-as-leading'),
+        ok(`It opens downward and has a maximum.`),
+        no(`It opens upward and has a maximum.`, 'paired-upward-with-maximum'),
+        no(`It opens downward and has a minimum.`, 'paired-downward-with-minimum'),
+      ],
+      solution: `The leading coefficient is the coefficient of $x^2$, which is $-1$, even though that term is written last. A negative leading coefficient makes the parabola open downward, so its vertex is a highest point: "It opens downward and has a maximum." Reading the positive $3$ at the front as the leading term gives the wrong direction.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `What is the vertex of the graph of $y = 2x^2 - 12x + 7$?`,
+      choices: [
+        no(`$(-3, 61)$`, 'dropped-negative-in-negative-b-over-2a'),
+        no(`$(6, 7)$`, 'forgot-2-in-denominator'),
+        no(`$(3, 7)$`, 'used-c-as-k'),
+        ok(`$(3, -11)$`),
+      ],
+      solution: `The x-coordinate of the vertex is $-\\frac{b}{2a} = -\\frac{-12}{2 \\cdot 2} = 3$. Substitute: $y = 2(9) - 12(3) + 7 = 18 - 36 + 7 = -11$. The vertex is $(3, -11)$. The choice $(3, 7)$ uses the constant $7$ as the y-coordinate, but $7$ is the y-intercept, not the vertex height.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A parabola crosses the x-axis at $x = -7$ and $x = 3$. What is its axis of symmetry?`,
+      choices: [
+        ok(`$x = -2$`),
+        no(`$x = 5$`, 'halved-distance-instead-of-averaging'),
+        no(`$x = -4$`, 'added-zeros-without-halving'),
+        no(`$x = 2$`, 'sign-error-when-averaging'),
+      ],
+      solution: `The axis of symmetry lies halfway between the two x-intercepts, at their average: $\\frac{-7 + 3}{2} = \\frac{-4}{2} = -2$, so it is $x = -2$. The choice $x = 5$ is half the distance between the intercepts, which tells how far each one is from the axis, not where the axis is.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `On which interval is the function $y = (x - 4)^2 + 1$ increasing?`,
+      choices: [
+        no(`$x < 4$`, 'reversed-increasing-and-decreasing'),
+        ok(`$x > 4$`),
+        no(`$x > 1$`, 'used-k-for-interval'),
+        no(`$x > -4$`, 'flipped-sign-of-h'),
+      ],
+      solution: `The vertex is $(4, 1)$ and $a = 1$ is positive, so the parabola opens upward. It falls until it reaches the vertex and rises after it, so it is increasing for $x > 4$. The choice $x < 4$ is where the graph is decreasing.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `On which interval is the function $y = -2(x + 1)^2 + 6$ decreasing?`,
+      choices: [
+        ok(`$x > -1$`),
+        no(`$x < -1$`, 'reversed-intervals-for-downward-parabola'),
+        no(`$x > 1$`, 'flipped-sign-of-h'),
+        no(`$x > 6$`, 'used-k-for-interval'),
+      ],
+      solution: `The vertex is $(-1, 6)$ and $a = -2$ is negative, so the parabola opens downward. It rises up to the vertex and falls after it, so it is decreasing for $x > -1$. The choice $x < -1$ would be right for an upward parabola, but this one opens downward.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `What is the range of the function $y = -3(x - 2)^2 + 5$?`,
+      choices: [
+        no(`$y \\ge 5$`, 'ignored-negative-leading-coefficient'),
+        no(`$y \\le 2$`, 'used-h-for-range'),
+        ok(`$y \\le 5$`),
+        no(`all real numbers`, 'confused-range-with-domain'),
+      ],
+      solution: `The vertex is $(2, 5)$ and $a = -3$ is negative, so the parabola opens downward and $5$ is its highest output. Every output is $5$ or less, so the range is $y \\le 5$. The choice "all real numbers" is the domain; the outputs of a parabola are cut off at the vertex.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A ball is tossed upward, and its height in feet after $t$ seconds is $h(t) = -16t^2 + 64t + 5$. What is the greatest height the ball reaches, in feet?`,
+      choices: [
+        no(`$2$`, 'gave-time-instead-of-height'),
+        ok(`$69$`),
+        no(`$5$`, 'used-initial-height'),
+        no(`$133$`, 'dropped-squared-term'),
+      ],
+      solution: `The greatest height is at the vertex. Its t-coordinate is $-\\frac{64}{2(-16)} = 2$ seconds, and $h(2) = -16(4) + 64(2) + 5 = -64 + 128 + 5 = 69$ feet. The choice $2$ is when the ball is highest, not how high it is.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `What is the vertex of the graph of $y = (x - 2)(x - 8)$?`,
+      choices: [
+        no(`$(5, 9)$`, 'dropped-sign-of-k'),
+        no(`$(-5, 91)$`, 'negated-average-of-zeros'),
+        ok(`$(5, -9)$`),
+        no(`$(5, 16)$`, 'used-product-of-zeros-as-k'),
+      ],
+      solution: `The zeros are $x = 2$ and $x = 8$, so the vertex lies on the axis halfway between them, $x = \\frac{2 + 8}{2} = 5$. Then $y = (5 - 2)(5 - 8) = (3)(-3) = -9$, so the vertex is $(5, -9)$. The choice $(5, 16)$ uses the y-intercept $16$, which is the value at $x = 0$, not at the vertex.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Which function has a graph that opens downward and has its vertex at $(-1, 4)$?`,
+      choices: [
+        no(`$y = -(x - 1)^2 + 4$`, 'flipped-sign-of-h'),
+        no(`$y = (x + 1)^2 + 4$`, 'ignored-direction'),
+        no(`$y = -(x + 4)^2 - 1$`, 'swapped-h-and-k'),
+        ok(`$y = -(x + 1)^2 + 4$`),
+      ],
+      solution: `Vertex form $y = a(x - h)^2 + k$ with $h = -1$ and $k = 4$ gives $(x - (-1))^2 = (x + 1)^2$ and $+4$. A negative $a$ makes it open downward, so $y = -(x + 1)^2 + 4$ fits. The choice $y = -(x - 1)^2 + 4$ has its vertex at $(1, 4)$ instead.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `What is the minimum value of the function $y = x^2 - 10x + 31$?`,
+      choices: [
+        ok(`$6$`),
+        no(`$5$`, 'gave-x-coordinate-of-vertex'),
+        no(`$31$`, 'used-c-as-minimum'),
+        no(`$106$`, 'sign-error-in-h'),
+      ],
+      solution: `The vertex is at $x = -\\frac{-10}{2 \\cdot 1} = 5$, and $y = 25 - 50 + 31 = 6$. The parabola opens upward, so the minimum value is $6$. The choice $5$ is the input where the minimum occurs, not the minimum output.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Which is the vertex form of $y = -2x^2 - 8x + 3$?`,
+      choices: [
+        no(`$y = -2(x - 2)^2 + 11$`, 'flipped-sign-of-h'),
+        ok(`$y = -2(x + 2)^2 + 11$`),
+        no(`$y = -2(x + 2)^2 + 7$`, 'compensated-without-multiplying-by-a'),
+        no(`$y = -2(x + 2)^2 + 3$`, 'forgot-to-compensate'),
+      ],
+      solution: `Factor $-2$ from the $x$ terms: $y = -2(x^2 + 4x) + 3$. Add $4$ inside the parentheses and compensate outside:$y = -2(x^2 + 4x + 4) + 8 + 3$, because the added $4$ is really $-2 \\cdot 4 = -8$, which must be undone with $+8$. So $y = -2(x + 2)^2 + 11$. Check: at $x = -2$, $-2(4) + 16 + 3 = 11$. The choice ending in $+ 7$ undoes only $4$ instead of $8$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A parabola has x-intercepts at $x = 1$ and $x = 5$ and crosses the y-axis at $(0, 10)$. Which equation describes it?`,
+      choices: [
+        no(`$y = (x - 1)(x - 5)$`, 'forgot-to-solve-for-a'),
+        no(`$y = 2(x + 1)(x + 5)$`, 'flipped-signs-of-zeros'),
+        ok(`$y = 2(x - 1)(x - 5)$`),
+        no(`$y = 10(x - 1)(x - 5)$`, 'used-y-intercept-as-a'),
+      ],
+      solution: `Zeros at $1$ and $5$ give $y = a(x - 1)(x - 5)$. At $x = 0$ this is $a(-1)(-5) = 5a$, and $5a = 10$ means $a = 2$. So $y = 2(x - 1)(x - 5)$. The choice $y = (x - 1)(x - 5)$ has the right zeros but crosses the y-axis at $(0, 5)$.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A parabola has axis of symmetry $x = 3$, and one of its x-intercepts is $x = -1$. What is the other x-intercept?`,
+      choices: [
+        no(`$x = 1$`, 'reflected-across-y-axis'),
+        no(`$x = 2$`, 'added-axis-to-intercept'),
+        no(`$x = 4$`, 'gave-distance-instead-of-point'),
+        ok(`$x = 7$`),
+      ],
+      solution: `The intercepts are mirror images across the axis. From $x = -1$ to $x = 3$ is $4$ units, so the other intercept is $4$ units past the axis: $3 + 4 = 7$. The choice $x = 4$ is that distance, not the location of the intercept.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `On which interval is $f(x) = -x^2 + 6x - 5$ increasing?`,
+      choices: [
+        ok(`$x < 3$`),
+        no(`$x > 3$`, 'reversed-intervals-for-downward-parabola'),
+        no(`$x < -3$`, 'sign-error-in-h'),
+        no(`$1 < x < 5$`, 'used-interval-between-zeros'),
+      ],
+      solution: `The vertex is at $x = -\\frac{6}{2(-1)} = 3$, and $a = -1$ means the parabola opens downward. It rises until the vertex, so it is increasing for $x < 3$. The choice $1 < x < 5$ is where the graph is above the x-axis (the zeros are $1$ and $5$), which is a different question.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `What is the range of the function $y = 3x^2 + 12x + 7$?`,
+      choices: [
+        no(`$y \\le -5$`, 'reversed-inequality-for-upward-parabola'),
+        ok(`$y \\ge -5$`),
+        no(`$y \\ge 7$`, 'used-c-as-minimum'),
+        no(`$y \\ge -2$`, 'used-x-coordinate-for-range'),
+      ],
+      solution: `The vertex is at $x = -\\frac{12}{2 \\cdot 3} = -2$, and $y = 3(4) + 12(-2) + 7 = 12 - 24 + 7 = -5$. Since $a = 3$ is positive, the parabola opens upward, so $-5$ is the lowest output and the range is $y \\ge -5$. The choice $y \\ge 7$ uses the y-intercept, which is not the lowest point.`,
+    },
+  ],
+}
+
+export default skill
