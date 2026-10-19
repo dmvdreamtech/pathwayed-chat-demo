@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g10-geometry-proofs-more',
+  extends: 'geometry-proofs',
+  subject: 'math',
+  grade: 10,
+  group: 'Geometry',
+  name: 'Geometry Proofs',
+  standards: ['HSG.CO.C.9'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Point $P$ lies on the perpendicular bisector of segment $AB$. The distance $PA$ is $7$ cm. What is the distance $PB$?`,
+      choices: [
+        ok(`$7$ cm`),
+        no(`$14$ cm`, 'doubled-the-distance'),
+        no(`$3.5$ cm`, 'halved-the-distance'),
+        no(`It cannot be found without the length of $AB$`, 'missed-equidistance-of-bisector-points'),
+      ],
+      solution: `Every point on the perpendicular bisector of a segment is the same distance from both endpoints, so $PB = PA = 7$ cm. The length of $AB$ is not needed, and $14$ cm doubles the distance for no reason.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `In a proof, $\\angle 1$ and $\\angle 2$ are adjacent angles whose outer sides form a straight line. The proof states $m\\angle 1 + m\\angle 2 = 180^\\circ$. Which reason justifies this step?`,
+      choices: [
+        no(`Vertical Angles Theorem`, 'confused-adjacent-with-vertical'),
+        ok(`Linear Pair Postulate (angles that form a linear pair are supplementary)`),
+        no(`Alternate Interior Angles Theorem`, 'used-parallel-line-theorem-without-parallel-lines'),
+        no(`Corresponding Angles Postulate`, 'used-parallel-line-theorem-without-parallel-lines'),
+      ],
+      solution: `Two adjacent angles whose outer sides form a line are a linear pair, and the Linear Pair Postulate says their measures add to $180^\\circ$. No parallel lines are involved, and the Vertical Angles Theorem is about congruent angles that are not adjacent.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A proof reaches the line $m\\angle 1 + m\\angle 2 = m\\angle 3 + m\\angle 2$. The next line is $m\\angle 1 = m\\angle 3$. Which reason justifies the next line?`,
+      choices: [
+        no(`Addition Property of Equality`, 'confused-addition-and-subtraction-properties'),
+        no(`Reflexive Property of Equality`, 'confused-reflexive-with-subtraction'),
+        no(`Distributive Property`, 'named-an-unrelated-property'),
+        ok(`Subtraction Property of Equality`),
+      ],
+      solution: `The step removes $m\\angle 2$ from both sides, which is the Subtraction Property of Equality. The Reflexive Property only says a quantity equals itself, such as $m\\angle 2 = m\\angle 2$.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Point $Q$ is $9$ units from point $A$ and $9$ units from point $B$. Where must point $Q$ lie?`,
+      choices: [
+        ok(`On the perpendicular bisector of $AB$`),
+        no(`At the midpoint of $AB$`, 'thought-equidistant-point-must-be-midpoint'),
+        no(`On line $AB$`, 'thought-equidistant-point-is-on-the-segment'),
+        no(`On the line perpendicular to $AB$ through $A$`, 'placed-perpendicular-at-an-endpoint'),
+      ],
+      solution: `The converse of the Perpendicular Bisector Theorem says any point equidistant from $A$ and $B$ lies on the perpendicular bisector of $AB$. The midpoint is only one point on that line, and $Q$ can be off the segment entirely.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Given: lines $p$ and $q$ are parallel and are cut by transversal $t$. $\\angle 1$ and $\\angle 5$ are corresponding angles. Which conclusion follows?`,
+      choices: [
+        no(`$m\\angle 1 + m\\angle 5 = 180^\\circ$`, 'treated-corresponding-as-supplementary'),
+        ok(`$\\angle 1 \\cong \\angle 5$`),
+        no(`$\\angle 1$ is a right angle`, 'assumed-perpendicular-transversal'),
+        no(`$\\angle 1 \\cong \\angle 5$ only if $t$ is perpendicular to $p$`, 'added-an-unneeded-condition'),
+      ],
+      solution: `When parallel lines are cut by a transversal, corresponding angles are congruent, so $\\angle 1 \\cong \\angle 5$ for any transversal. Supplementary pairs come from same-side interior angles, not corresponding angles.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Line $\\ell$ is the perpendicular bisector of segment $AB$. Point $P$ is on $\\ell$, with $PA = 2x + 3$ and $PB = 15$. What is the value of $x$?`,
+      choices: [
+        no(`$9$`, 'added-the-constant-instead-of-subtracting'),
+        no(`$7.5$`, 'divided-without-subtracting-the-constant'),
+        ok(`$6$`),
+        no(`$13.5$`, 'doubled-the-distance'),
+      ],
+      solution: `$P$ is on the perpendicular bisector, so $PA = PB$: $2x + 3 = 15$, so $2x = 12$ and $x = 6$. The value $9$ comes from adding $3$ to $15$ instead of subtracting it.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `A proof of the Vertical Angles Theorem uses two intersecting lines. $\\angle 1$ and $\\angle 2$ form a linear pair, and $\\angle 2$ and $\\angle 3$ form a linear pair, so $\\angle 1$ and $\\angle 3$ are vertical angles. Step 1: $m\\angle 1 + m\\angle 2 = 180^\\circ$. Step 2: $m\\angle 2 + m\\angle 3 = 180^\\circ$. Step 3: $m\\angle 1 + m\\angle 2 = m\\angle 2 + m\\angle 3$. Step 4 uses the Subtraction Property of Equality. Which statement completes Step 4?`,
+      choices: [
+        no(`$m\\angle 1 = m\\angle 2$`, 'confused-adjacent-with-vertical'),
+        no(`$m\\angle 1 + m\\angle 3 = 180^\\circ$`, 'assumed-vertical-angles-supplementary'),
+        ok(`$m\\angle 1 = m\\angle 3$`),
+        no(`$m\\angle 2 = 90^\\circ$`, 'assumed-the-lines-are-perpendicular'),
+      ],
+      solution: `Subtracting $m\\angle 2$ from both sides of Step 3 leaves $m\\angle 1 = m\\angle 3$, which is what the theorem claims. Nothing in the proof says the lines are perpendicular, so $m\\angle 2 = 90^\\circ$ is not justified, and $\\angle 1$ and $\\angle 2$ are adjacent, not vertical.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A proof shows that alternate interior angles are congruent. Given: lines $p$ and $q$ are parallel, cut by transversal $t$. $\\angle 1$ and $\\angle 5$ are corresponding angles, $\\angle 5$ and $\\angle 4$ are vertical angles, and $\\angle 1$ and $\\angle 4$ are alternate interior angles. Step 1: $\\angle 1 \\cong \\angle 5$. Step 2: $\\angle 5 \\cong \\angle 4$ (Vertical Angles Theorem). Step 3: $\\angle 1 \\cong \\angle 4$ (Transitive Property). Which reason justifies Step 1?`,
+      choices: [
+        ok(`Corresponding Angles Postulate`),
+        no(`Converse of the Corresponding Angles Postulate`, 'used-the-converse-instead-of-the-postulate'),
+        no(`Vertical Angles Theorem`, 'called-corresponding-angles-vertical'),
+        no(`Linear Pair Postulate`, 'called-corresponding-angles-a-linear-pair'),
+      ],
+      solution: `The lines are given as parallel and the conclusion is that two corresponding angles are congruent, which is the Corresponding Angles Postulate. Its converse goes the other way: it starts with congruent corresponding angles and concludes the lines are parallel.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Lines $a$ and $b$ are cut by transversal $t$. Alternate interior angles $\\angle 3$ and $\\angle 6$ are both $64^\\circ$. Nothing else is given. Which conclusion and reason are correct?`,
+      choices: [
+        no(`$a \\parallel b$, by the Alternate Interior Angles Theorem`, 'used-the-theorem-instead-of-its-converse'),
+        no(`$a \\perp t$, because the angles are congruent`, 'confused-congruent-with-perpendicular'),
+        ok(`$a \\parallel b$, by the Converse of the Alternate Interior Angles Theorem`),
+        no(`$\\angle 3$ and $\\angle 6$ are supplementary, by the Linear Pair Postulate`, 'called-alternate-interior-a-linear-pair'),
+      ],
+      solution: `Here the congruent angles are known and parallel lines are the conclusion, so the converse is the reason. The Alternate Interior Angles Theorem itself assumes the lines are already parallel, so it cannot be used to prove that they are.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Lines $a$ and $b$ are cut by a transversal. A pair of same-side interior angles measure $72^\\circ$ and $106^\\circ$. Which statement is true?`,
+      choices: [
+        no(`The lines are parallel, because $72 + 106$ is close to $180$`, 'accepted-an-approximate-sum'),
+        no(`The lines are not parallel, because same-side interior angles of parallel lines are congruent`, 'thought-same-side-interior-are-congruent'),
+        no(`The lines are parallel, because same-side interior angles do not need to be equal`, 'ignored-the-supplementary-requirement'),
+        ok(`The lines are not parallel, because $72 + 106 \\neq 180$`),
+      ],
+      solution: `Lines are parallel exactly when same-side interior angles are supplementary. Here $72 + 106 = 178$, not $180$, so the lines are not parallel. Same-side interior angles of parallel lines add to $180^\\circ$; they are not congruent unless both are right angles.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Point $P$ lies on the perpendicular bisector of segment $AB$. $PA = 3x - 4$ and $PB = x + 10$. What is $PA$?`,
+      choices: [
+        no(`$7$`, 'gave-x-instead-of-the-length'),
+        ok(`$17$`),
+        no(`$5$`, 'subtracted-the-constant-instead-of-adding'),
+        no(`$34$`, 'added-both-distances'),
+      ],
+      solution: `Points on the perpendicular bisector are equidistant from $A$ and $B$, so $3x - 4 = x + 10$. Then $2x = 14$, $x = 7$, and $PA = 3(7) - 4 = 17$. The value $7$ is $x$, not the length.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Two different points $C$ and $D$ are each equidistant from points $A$ and $B$, so $CA = CB$ and $DA = DB$. Which conclusion is justified?`,
+      choices: [
+        no(`Line $CD$ is parallel to $AB$`, 'confused-perpendicular-with-parallel'),
+        ok(`Line $CD$ is the perpendicular bisector of $AB$`),
+        no(`$C$ is the midpoint of $AB$`, 'thought-equidistant-point-must-be-midpoint'),
+        no(`$CD = AB$`, 'assumed-equal-segment-lengths'),
+      ],
+      solution: `By the converse of the Perpendicular Bisector Theorem, both $C$ and $D$ lie on the perpendicular bisector of $AB$. Two different points determine a line, so line $CD$ is that perpendicular bisector. Neither point has to be the midpoint, and the length of $CD$ is not determined.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Given: line $\\ell$ is perpendicular to $AB$ at its midpoint $M$, and $P$ is on $\\ell$. Prove: $PA = PB$. Step 1: $AM = MB$. Step 2: $\\angle PMA \\cong \\angle PMB$. Step 3: $PM = PM$. Step 4: by SAS. Step 5: $PA = PB$ (corresponding parts of congruent triangles). Which statement completes Step 4?`,
+      choices: [
+        no(`$PA = PB$`, 'stated-the-conclusion-early'),
+        no(`$\\triangle PMA \\cong \\triangle BMP$`, 'mismatched-corresponding-vertices'),
+        no(`$\\angle PAM \\cong \\angle PBM$`, 'used-a-consequence-as-the-sas-step'),
+        ok(`$\\triangle PMA \\cong \\triangle PMB$`),
+      ],
+      solution: `SAS proves two triangles congruent, matching $P$ to $P$, $M$ to $M$ and $A$ to $B$, so Step 4 is $\\triangle PMA \\cong \\triangle PMB$. Writing $\\triangle BMP$ pairs $P$ with $B$, which does not match the sides used. The angle statement and $PA = PB$ both come after the triangles are known to be congruent.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `In a proof that $PA = PB$, line $\\ell$ is perpendicular to $AB$ at its midpoint $M$ and point $P$ is on $\\ell$, so $\\angle PMA$ and $\\angle PMB$ are both right angles. Which reason justifies Step 2, $\\angle PMA \\cong \\angle PMB$?`,
+      choices: [
+        no(`Vertical Angles Theorem`, 'confused-adjacent-with-vertical'),
+        no(`Definition of midpoint`, 'used-a-segment-fact-for-an-angle'),
+        ok(`All right angles are congruent`),
+        no(`Alternate Interior Angles Theorem`, 'used-parallel-line-theorem-without-parallel-lines'),
+      ],
+      solution: `Because $\\ell \\perp AB$, both angles measure $90^\\circ$, and all right angles are congruent. The two angles share side $PM$ and are adjacent, so they are not vertical angles, and the midpoint definition is about the segments $AM$ and $MB$.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Two parallel lines are cut by a transversal. A pair of alternate exterior angles measure $(5x - 12)^\\circ$ and $(3x + 20)^\\circ$. What is the measure of each angle?`,
+      choices: [
+        no(`$16^\\circ$`, 'gave-x-instead-of-the-angle'),
+        no(`$112^\\circ$`, 'gave-the-supplement'),
+        no(`$95.5^\\circ$`, 'treated-alternate-exterior-as-supplementary'),
+        ok(`$68^\\circ$`),
+      ],
+      solution: `Alternate exterior angles formed by parallel lines are congruent: $5x - 12 = 3x + 20$, so $2x = 32$ and $x = 16$. Each angle is $5(16) - 12 = 68^\\circ$. Setting the sum to $180$ gives $x = 21.5$ and $95.5^\\circ$, but these angles are equal, not supplementary.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Lines $a$ and $b$ are cut by transversal $t$. Same-side interior angles measure $(4x + 8)^\\circ$ and $(2x + 22)^\\circ$. For what value of $x$ are lines $a$ and $b$ parallel?`,
+      choices: [
+        no(`$7$`, 'set-same-side-interior-angles-equal'),
+        ok(`$25$`),
+        no(`$35$`, 'added-the-constant-instead-of-subtracting'),
+        no(`$30$`, 'ignored-the-constants'),
+      ],
+      solution: `By the converse of the Same-Side Interior Angles Theorem, the lines are parallel when the angles are supplementary: $(4x + 8) + (2x + 22) = 180$, so $6x + 30 = 180$, $6x = 150$, and $x = 25$. Setting the angles equal gives $x = 7$, but same-side interior angles must add to $180^\\circ$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Given: $\\angle 1$ and $\\angle 2$ are supplementary. $\\angle 2$ and $\\angle 3$ form a linear pair. For lines $a$ and $b$ cut by transversal $t$, $\\angle 1$ and $\\angle 3$ are corresponding angles. Prove: $a \\parallel b$. Step 1: $\\angle 1$ and $\\angle 2$ are supplementary (Given). Step 2: $\\angle 2$ and $\\angle 3$ are supplementary (Linear Pair Postulate). Step 3: $\\angle 1 \\cong \\angle 3$ (Congruent Supplements Theorem). Step 4: $a \\parallel b$. Which reason justifies Step 4?`,
+      choices: [
+        no(`Corresponding Angles Postulate`, 'used-the-postulate-instead-of-its-converse'),
+        ok(`Converse of the Corresponding Angles Postulate`),
+        no(`Converse of the Alternate Interior Angles Theorem`, 'misidentified-the-angle-pair'),
+        no(`Vertical Angles Theorem`, 'called-corresponding-angles-vertical'),
+      ],
+      solution: `Step 3 shows a pair of corresponding angles are congruent, and the converse of the Corresponding Angles Postulate turns that into $a \\parallel b$. The postulate itself assumes parallel lines, and the alternate interior converse does not apply because $\\angle 1$ and $\\angle 3$ are corresponding, not alternate interior.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Points $A(2, 1)$ and $B(8, 1)$ are endpoints of a segment. Point $P$ lies on the perpendicular bisector of $AB$ and has a $y$-coordinate of $5$. What is $PA$?`,
+      choices: [
+        no(`$4$`, 'used-distance-to-the-midpoint'),
+        no(`$3$`, 'used-half-the-segment'),
+        ok(`$5$`),
+        no(`$25$`, 'forgot-the-square-root'),
+      ],
+      solution: `The midpoint of $AB$ is $(5, 1)$ and $AB$ is horizontal, so the perpendicular bisector is $x = 5$ and $P = (5, 5)$. Then $PA = \\sqrt{(5 - 2)^2 + (5 - 1)^2} = \\sqrt{9 + 16} = 5$, and $PB$ is also $5$. The value $4$ is only the distance from $P$ down to the midpoint.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `In triangle $ABC$, point $P$ lies on the perpendicular bisector of $AB$ and on the perpendicular bisector of $BC$. $PA = 2y + 1$ and $PC = 5y - 11$. What is $PB$?`,
+      choices: [
+        no(`$4$`, 'gave-y-instead-of-the-length'),
+        no(`$18$`, 'added-both-distances'),
+        no(`It cannot be found because $PB$ is not given`, 'missed-transitive-equidistance'),
+        ok(`$9$`),
+      ],
+      solution: `$P$ on the bisector of $AB$ gives $PA = PB$, and $P$ on the bisector of $BC$ gives $PB = PC$, so $PA = PC$: $2y + 1 = 5y - 11$, $3y = 12$, $y = 4$. Then $PA = 9$, so $PB = 9$. The value $4$ is $y$, not a distance.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Lines $p$ and $q$ are parallel, and point $X$ lies between them. Point $A$ is on $p$ and point $B$ is on $q$. A line through $X$ parallel to $p$ splits $\\angle AXB$ into two parts. The angle between line $p$ and segment $AX$ at $A$ is $35^\\circ$, and it is an alternate interior angle with the upper part of $\\angle AXB$. The angle between line $q$ and segment $XB$ at $B$ is $50^\\circ$, and it is an alternate interior angle with the lower part. What is $m\\angle AXB$?`,
+      choices: [
+        ok(`$85^\\circ$`),
+        no(`$95^\\circ$`, 'gave-the-supplement'),
+        no(`$15^\\circ$`, 'subtracted-the-parts'),
+        no(`$50^\\circ$`, 'counted-only-one-part'),
+      ],
+      solution: `The line through $X$ is parallel to both $p$ and $q$, so each part of $\\angle AXB$ equals its alternate interior angle: the upper part is $35^\\circ$ and the lower part is $50^\\circ$. Adding the parts gives $35 + 50 = 85^\\circ$. Subtracting them gives $15^\\circ$, but the two parts sit side by side and make up the whole angle.`,
+    },
+  ],
+}
+
+export default skill
