@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g3-multi-digit-add-subtract-more',
+  extends: 'multi-digit-add-subtract',
+  subject: 'math',
+  grade: 3,
+  group: 'Number and Operations in Base Ten',
+  name: 'Adding & Subtracting Within 1,000',
+  standards: ['3.NBT.A.2'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is $326 + 148$?`,
+      choices: [
+        ok(`$474$`),
+        no(`$464$`, 'forgot-to-add-regrouped-ten'),
+        no(`$178$`, 'subtracted-instead-of-added'),
+        no(`$564$`, 'carried-to-wrong-place'),
+      ],
+      solution: `Add the ones: $6 + 8 = 14$, so write $4$ and regroup $1$ ten. Add the tens: $2 + 4 + 1 = 7$. Add the hundreds: $3 + 1 = 4$. The sum is $474$. The choice $464$ forgets to add the regrouped ten to the tens column.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is $562 - 135$?`,
+      choices: [
+        no(`$433$`, 'subtracted-smaller-digit-from-larger'),
+        ok(`$427$`),
+        no(`$437$`, 'did-not-reduce-tens-after-borrowing'),
+        no(`$697$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `There are not enough ones to take $5$ from $2$, so regroup $1$ ten: $12 - 5 = 7$. That leaves $5$ tens, and $5 - 3 = 2$. Then $5 - 1 = 4$ hundreds. The difference is $427$. The choice $433$ subtracts $2$ from $5$ in the ones column instead of regrouping.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `What number goes in the box to make $\\square + 200 = 650$ true?`,
+      choices: [
+        no(`$850$`, 'added-instead-of-subtracted'),
+        no(`$630$`, 'treated-hundreds-as-tens'),
+        ok(`$450$`),
+        no(`$650$`, 'gave-the-total'),
+      ],
+      solution: `The missing number plus $200$ makes $650$, so subtract: $650 - 200 = 450$. Check: $450 + 200 = 650$. The choice $850$ adds $200$ to $650$ instead of taking it away.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What is $400 + 370$?`,
+      choices: [
+        no(`$700$`, 'dropped-the-tens'),
+        no(`$437$`, 'treated-tens-as-ones'),
+        no(`$30$`, 'subtracted-instead-of-added'),
+        ok(`$770$`),
+      ],
+      solution: `$370$ is $3$ hundreds and $7$ tens. Add the hundreds: $4 + 3 = 7$ hundreds, and keep the $7$ tens. The sum is $770$. The choice $700$ adds only the hundreds and leaves out the $7$ tens.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A bus drove $245$ miles on Monday and $138$ miles on Tuesday. How many miles did the bus drive in all?`,
+      choices: [
+        ok(`$383$`),
+        no(`$373$`, 'forgot-to-add-regrouped-ten'),
+        no(`$107$`, 'subtracted-instead-of-added'),
+        no(`$473$`, 'carried-to-wrong-place'),
+      ],
+      solution: `Add $245 + 138$. Ones: $5 + 8 = 13$, write $3$ and regroup $1$ ten. Tens: $4 + 3 + 1 = 8$. Hundreds: $2 + 1 = 3$. The bus drove $383$ miles. The choice $373$ leaves out the regrouped ten.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `What is $860 - 40$?`,
+      choices: [
+        no(`$460$`, 'subtracted-from-hundreds'),
+        ok(`$820$`),
+        no(`$900$`, 'added-instead-of-subtracted'),
+        no(`$856$`, 'subtracted-from-ones'),
+      ],
+      solution: `$40$ is $4$ tens. $860$ has $6$ tens, and $6 - 4 = 2$ tens, so the answer is $820$. The choice $460$ takes $4$ hundreds away instead of $4$ tens.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `What number goes in the box to make $\\square - 168 = 254$ true?`,
+      choices: [
+        no(`$86$`, 'subtracted-instead-of-added'),
+        no(`$312$`, 'did-not-regroup'),
+        ok(`$422$`),
+        no(`$412$`, 'forgot-to-add-regrouped-ten'),
+      ],
+      solution: `Taking $168$ from the missing number leaves $254$, so the missing number is $254 + 168$. Ones: $4 + 8 = 12$, write $2$ and regroup. Tens: $5 + 6 + 1 = 12$, write $2$ and regroup. Hundreds: $2 + 1 + 1 = 4$. The answer is $422$. Check: $422 - 168 = 254$. The choice $86$ comes from $254 - 168$, but the missing number must be larger than $254$.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What is $700 - 263$?`,
+      choices: [
+        no(`$563$`, 'subtracted-smaller-digit-from-larger'),
+        no(`$447$`, 'did-not-reduce-tens-after-borrowing'),
+        ok(`$437$`),
+        no(`$963$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `There are no ones or tens to subtract from, so regroup $700$ as $6$ hundreds, $9$ tens and $10$ ones. Then $10 - 3 = 7$, $9 - 6 = 3$ and $6 - 2 = 4$. The difference is $437$. The choice $447$ regroups a hundred into tens but forgets that one of those tens was then used for the ones.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `A farm stand had $912$ apples. It sold $385$ of them. How many apples are left?`,
+      choices: [
+        ok(`$527$`),
+        no(`$673$`, 'subtracted-smaller-digit-from-larger'),
+        no(`$537$`, 'did-not-reduce-tens-after-borrowing'),
+        no(`$627$`, 'did-not-reduce-hundreds-after-borrowing'),
+      ],
+      solution: `Find $912 - 385$. Regroup a ten for the ones: $12 - 5 = 7$, leaving $0$ tens. Regroup a hundred for the tens: $10 - 8 = 2$, leaving $8$ hundreds. Then $8 - 3 = 5$. There are $527$ apples left. The choice $673$ subtracts the smaller digit from the larger in each column instead of regrouping.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Jordan adds $458 + 236$ by place value and writes $600 + 80 + 14$. What is the sum?`,
+      choices: [
+        no(`$684$`, 'dropped-the-regrouped-ten'),
+        ok(`$694$`),
+        no(`$622$`, 'treated-tens-as-ones'),
+        no(`$222$`, 'subtracted-instead-of-added'),
+      ],
+      solution: `The hundreds make $600$, the tens make $80$ and the ones make $14$. Since $14$ is $1$ ten and $4$ ones, $80 + 14 = 94$, so the sum is $600 + 94 = 694$. The choice $684$ keeps only the $4$ ones from $14$ and loses the extra ten.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `What is $125 + 240 + 315$?`,
+      choices: [
+        no(`$670$`, 'forgot-to-add-regrouped-ten'),
+        no(`$365$`, 'left-out-the-last-addend'),
+        no(`$440$`, 'left-out-the-middle-addend'),
+        ok(`$680$`),
+      ],
+      solution: `Add the ones: $5 + 0 + 5 = 10$, write $0$ and regroup $1$ ten. Tens: $2 + 4 + 1 + 1 = 8$. Hundreds: $1 + 2 + 3 = 6$. The sum is $680$. The choice $670$ forgets the ten made by the ones.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `What number goes in the box to make $830 - \\square = 475$ true?`,
+      choices: [
+        ok(`$355$`),
+        no(`$445$`, 'subtracted-smaller-digit-from-larger'),
+        no(`$365$`, 'did-not-reduce-tens-after-borrowing'),
+        no(`$475$`, 'gave-the-known-part'),
+      ],
+      solution: `Taking the missing number from $830$ leaves $475$, so the missing number is $830 - 475$. Regroup for the ones: $10 - 5 = 5$, leaving $2$ tens. Regroup for the tens: $12 - 7 = 5$, leaving $7$ hundreds. Then $7 - 4 = 3$. The answer is $355$. Check: $475 + 355 = 830$.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A school collected $276$ cans in the first week and $349$ cans in the second week. How many more cans were collected in the second week?`,
+      choices: [
+        no(`$625$`, 'added-instead-of-subtracted'),
+        ok(`$73$`),
+        no(`$133$`, 'subtracted-smaller-digit-from-larger'),
+        no(`$173$`, 'did-not-reduce-hundreds-after-borrowing'),
+      ],
+      solution: `"How many more" means compare by subtracting: $349 - 276$. Ones: $9 - 6 = 3$. Tens: regroup a hundred, $14 - 7 = 7$, leaving $2$ hundreds. Hundreds: $2 - 2 = 0$. The answer is $73$. The choice $625$ adds the two weeks, which gives the total, not the difference.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Priya found that $642 - 278 = 364$. Which addition can Priya use to check the answer?`,
+      choices: [
+        no(`$642 + 278$`, 'added-the-two-given-numbers'),
+        no(`$364 + 364$`, 'doubled-the-difference'),
+        ok(`$364 + 278$`),
+        no(`$364 - 278$`, 'subtracted-again-to-check'),
+      ],
+      solution: `Subtraction and addition undo each other. If $642 - 278 = 364$, then the difference plus the part taken away gives back the whole: $364 + 278 = 642$. So $364 + 278$ checks the answer. The choice $642 + 278$ adds the two starting numbers, which does not check the difference.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `What is $504 - 168$?`,
+      choices: [
+        no(`$464$`, 'subtracted-smaller-digit-from-larger'),
+        no(`$346$`, 'did-not-reduce-tens-after-borrowing'),
+        no(`$672$`, 'added-instead-of-subtracted'),
+        ok(`$336$`),
+      ],
+      solution: `There are no tens, so regroup $504$ as $4$ hundreds, $9$ tens and $14$ ones. Then $14 - 8 = 6$, $9 - 6 = 3$ and $4 - 1 = 3$. The difference is $336$. The choice $464$ subtracts $4$ from $8$ and $0$ from $6$ instead of regrouping.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `A school play has $845$ tickets. On Friday $267$ tickets were sold, and on Saturday $318$ tickets were sold. How many tickets are still unsold?`,
+      choices: [
+        no(`$578$`, 'subtracted-only-one-day'),
+        no(`$585$`, 'gave-the-total-sold'),
+        ok(`$260$`),
+        no(`$340$`, 'subtracted-smaller-digit-from-larger'),
+      ],
+      solution: `First find the tickets sold: $267 + 318 = 585$. Then subtract from the total: $845 - 585 = 260$. So $260$ tickets are unsold. The choice $578$ subtracts only Friday's tickets, and $585$ is the number sold, not the number left.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `What number goes in the box to make $\\square + 387 = 905$ true?`,
+      choices: [
+        ok(`$518$`),
+        no(`$682$`, 'subtracted-smaller-digit-from-larger'),
+        no(`$528$`, 'did-not-reduce-tens-after-borrowing'),
+        no(`$618$`, 'did-not-reduce-hundreds-when-regrouping-across-zero'),
+      ],
+      solution: `The missing number is $905 - 387$. There are no tens, so regroup $905$ as $8$ hundreds, $9$ tens and $15$ ones. Then $15 - 7 = 8$, $9 - 8 = 1$ and $8 - 3 = 5$, giving $518$. Check: $518 + 387 = 905$. The choice $528$ forgets that one of the regrouped tens went to the ones.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A parking garage has $950$ spaces on three floors. Floor 1 has $312$ spaces and floor 2 has $345$ spaces. How many spaces are on floor 3?`,
+      choices: [
+        no(`$657$`, 'stopped-after-adding'),
+        no(`$638$`, 'subtracted-only-one-floor'),
+        no(`$307$`, 'subtracted-smaller-digit-from-larger'),
+        ok(`$293$`),
+      ],
+      solution: `Floors 1 and 2 have $312 + 345 = 657$ spaces. Floor 3 has the rest: $950 - 657 = 293$. Check: $657 + 293 = 950$. The choice $657$ stops after adding the first two floors.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Sam worked out $613 - 247$ and got $434$. How far off was Sam's answer from the correct difference?`,
+      choices: [
+        no(`$366$`, 'gave-the-correct-difference'),
+        ok(`$68$`),
+        no(`$800$`, 'added-instead-of-subtracted'),
+        no(`$78$`, 'did-not-reduce-tens-after-borrowing'),
+      ],
+      solution: `The correct difference is $613 - 247 = 366$. Sam's answer was $434$, and $434 - 366 = 68$, so it was off by $68$. The choice $366$ is the correct difference, not how far off Sam's answer was.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `What number goes in the box to make $600 - \\square = 284 + 100$ true?`,
+      choices: [
+        no(`$316$`, 'ignored-the-plus-100'),
+        no(`$384$`, 'gave-the-right-side-value'),
+        ok(`$216$`),
+        no(`$226$`, 'did-not-reduce-tens-after-borrowing'),
+      ],
+      solution: `First find the right side: $284 + 100 = 384$. Now $600 - \\square = 384$, so the missing number is $600 - 384 = 216$. Check: $600 - 216 = 384$. The choice $316$ comes from $600 - 284$, which leaves out the $100$.`,
+    },
+  ],
+}
+
+export default skill
