@@ -14,7 +14,7 @@ const skill: ContentSkill = {
     {
       code: 'wg9-writing-with-evidence-p01',
       title: 'Draft: Catching Water from the Air',
-      body: `(1) In his article "Nets That Drink the Fog," water scientist Tomas Arriaga describes how the hillside village of Las Brisas began collecting drinking water from fog. (2) Fog is a cloud that forms close to the ground. (3) Arriaga explains that villagers stretched fine plastic mesh between tall poles on a ridge where fog drifts in from the ocean almost every morning. (4) Tiny droplets cling to the mesh, join together, and run down into a gutter that feeds a storage tank. (5) According to Arriaga, the twelve nets on the ridge collected an average of 2,400 liters of water on foggy days during their first year. (6) This shows that fog nets can turn an ordinary weather pattern into a steady supply of water.
+      body: `(1) In the article "Nets That Drink the Fog," water scientist Tomas Arriaga describes how the hillside village of Las Brisas began collecting drinking water from fog. (2) Fog is a cloud that forms close to the ground. (3) Arriaga explains that villagers stretched fine plastic mesh between tall poles on a ridge where fog drifts in from the ocean almost every morning. (4) Tiny droplets cling to the mesh, join together, and run down into a gutter that feeds a storage tank. (5) According to Arriaga, the twelve nets on the ridge collected an average of 2,400 liters of water on foggy days during their first year. (6) This shows that fog nets can turn an ordinary weather pattern into a steady supply of water.
 
 (7) Arriaga also describes how the water changed daily life in Las Brisas. (8) Before the nets were built, students at the village school spent nearly two hours each morning carrying water up from a stream in the valley. (9) ____, many of those students now arrive at class on time and stay for the full school day. (10) Arriaga mentions that the poles were painted bright blue so that pilots could see them. (11) These details suggest that the real value of the nets is not only the water itself but also the time it gives back to families.
 
@@ -85,7 +85,7 @@ const skill: ContentSkill = {
     {
       code: 'wg9-writing-with-evidence-p02',
       title: 'Draft: A Library on Rails',
-      body: `(1) Historian Ines Kowalczyk's article "The Reading Car" tells the story of a railroad car that worked as a traveling library in the farm towns of the Calder Valley from 1921 to 1934. (2) Kowalczyk shows that the reading car did more than lend books, because it connected isolated towns to the wider world. (3) She explains that most of the valley's towns had no library, and the nearest bookstore was a full day's ride away. (4) ____ (5) This detail shows how eager families were for reading material that their own towns could not provide.
+      body: `(1) Historian Ines Kowalczyk's article "The Reading Car" tells the story of a railroad car that worked as a traveling library in the farm towns of the Calder Valley from 1921 to 1934. (2) Kowalczyk shows that the reading car did more than lend books, because it connected isolated towns to the wider world. (3) Kowalczyk explains that most of the valley's towns had no library, and the nearest bookstore was a full day's ride away. (4) ____ (5) This detail shows how eager families were for reading material that their own towns could not provide.
 
 (6) The car also brought news and ideas. (7) Kowalczyk notes that the librarian, a former teacher named Ruth Okonkwo, pinned newspapers from three different cities to a board inside the car. (8) Farmers who came in for seed catalogs often stayed to read about new inventions and events in distant places. (9) The railroad company later replaced its wooden cars with steel ones. (10) Kowalczyk adds that several towns started their own reading clubs after the car's visits, and two of them eventually built permanent libraries. (11) ____, the reading car left behind something that lasted longer than any single visit.
 
@@ -134,7 +134,7 @@ const skill: ContentSkill = {
           choices: [
             ok(`These farmers show that the car gave people a view of the world beyond their own fields, not only the books they came for.`),
             no(`Seed catalogs were popular because farmers needed to order supplies for planting each spring.`, 'off-topic-detail'),
-            no(`Ruth Okonkwo had taught school for many years before she began working as a librarian.`, 'irrelevant-detail'),
+            no(`Ruth Okonkwo had taught school for many years before becoming a librarian.`, 'irrelevant-detail'),
             no(`Every farmer in the valley read every newspaper on the board during every single visit.`, 'overgeneralization'),
           ],
           solution: `The best explanation connects the farmers reading city newspapers to the claim that the car brought news and ideas. The choice about every farmer reading every newspaper claims far more than Kowalczyk's evidence shows.`,
@@ -158,7 +158,7 @@ const skill: ContentSkill = {
       title: 'Draft: Warming Up the Right Way',
       body: `(1) In "Move Before You Move," sports scientist Keiko Brandt describes a study of how warm-up routines affect young soccer players. (2) Brandt's team followed sixty high school players for one season and split them into two groups. (3) One group warmed up by holding still stretches, such as reaching for their toes for thirty seconds. (4) The other group used moving exercises like high knees, side shuffles and short sprints. (5) At the end of the season, players in the moving group sprinted an average of four percent faster and missed fewer practices because of sore or strained muscles. (6) ____
 
-(7) Brandt also explains why moving warm-ups may work better. (8) She writes that these exercises raise body temperature and heart rate, which prepares muscles for the quick starts and stops that soccer requires. (9) Still stretches, she notes, relax the muscles instead of waking them up. (10) Soccer is the most widely played sport in the world. (11) ____, a warm-up that copies the motions of the game seems to prepare players more completely than one that keeps them standing still.
+(7) Brandt also explains why moving warm-ups may work better. (8) Brandt writes that these exercises raise body temperature and heart rate, which prepares muscles for the quick starts and stops that soccer requires. (9) Still stretches, Brandt notes, relax the muscles instead of waking them up. (10) Soccer is the most widely played sport in the world. (11) ____, a warm-up that copies the motions of the game seems to prepare players more completely than one that keeps them standing still.
 
 (12) In conclusion, Brandt's study suggests that coaches should replace still stretches with moving exercises before games and practices.`,
       items: [
@@ -215,7 +215,7 @@ const skill: ContentSkill = {
           difficulty: 'hard',
           stem: `A reader points out that Brandt studied only sixty players for one season. Which revision of sentence 12 best accounts for this limit while keeping the writer's claim?`,
           choices: [
-            ok(`Although Brandt studied only sixty players for one season, her results give coaches a strong reason to try moving warm-ups.`),
+            ok(`Although Brandt studied only sixty players for one season, the results give coaches a strong reason to try moving warm-ups.`),
             no(`Because Brandt's study was so small, its results are useless, and coaches should ignore them completely.`, 'dismisses-evidence'),
             no(`Brandt's study proves that every athlete in every sport must stop using still stretches forever.`, 'overgeneralization'),
             no(`Brandt's team followed sixty high school soccer players and split them into two equal groups.`, 'evidence-without-conclusion'),
@@ -227,7 +227,7 @@ const skill: ContentSkill = {
     {
       code: 'wg9-writing-with-evidence-p04',
       title: 'Draft: Learning to Share the Spotlight',
-      body: `(1) In Nadia Ferreira's short story "Second Chair," a trumpet player named Mateo learns that being a good musician means more than being the best one in the room. (2) At the start of the story, Mateo has played first chair in his school band for two years. (3) When a new student named Priya wins the first chair audition, Mateo "stared at the list until the letters blurred." (4) ____ (5) For the next week, he refuses to look at Priya during rehearsals and practices his solo loudly in the hallway so that everyone can hear.
+      body: `(1) In Nadia Ferreira's short story "Second Chair," a boy named Mateo who plays trumpet learns that being a good musician means more than being the best one in the room. (2) At the start of the story, Mateo has played first chair in his school band for two years. (3) When a new girl named Priya wins the first chair audition, Mateo "stared at the list until the letters blurred." (4) ____ (5) For the next week, he refuses to look at Priya during rehearsals and practices his solo loudly in the hallway so that everyone can hear.
 
 (6) Mateo begins to change when the band prepares for the spring concert. (7) During one rehearsal, Priya misses her entrance in a difficult passage, and the whole band stops. (8) Instead of smiling, Mateo quietly plays the first two notes of her part so she can find her place. (9) Later, he stays after school to help her practice the hardest measures. (10) The story is set in a small town that hosts a music festival every summer. (11) By the end, Mateo stands beside Priya at the concert, and Ferreira writes that "the two trumpets sounded like one."
 
@@ -298,9 +298,9 @@ const skill: ContentSkill = {
     {
       code: 'wg9-writing-with-evidence-p05',
       title: 'Draft: Reading While Watching',
-      body: `(1) In his article "Words on the Screen," education researcher Samuel Adeyemi reports on a study of students learning a new language through short videos. (2) Videos are a common part of many classes today. (3) Adeyemi's team showed the same ten Spanish cartoons to 120 ninth graders, but only half of the students saw Spanish captions at the bottom of the screen. (4) After each video, every student took a short quiz on new vocabulary words. (5) The students who watched with captions scored an average of 18 percent higher on the quizzes. (6) ____, they remembered more of the words when they were tested again a month later.
+      body: `(1) In the article "Words on the Screen," education researcher Samuel Adeyemi reports on a study of students learning a new language through short videos. (2) Videos are a common part of many classes today. (3) Adeyemi's team showed the same ten Spanish cartoons to 120 ninth graders, but only half of the students saw Spanish captions at the bottom of the screen. (4) After each video, every student took a short quiz on new vocabulary words. (5) The students who watched with captions scored an average of 18 percent higher on the quizzes. (6) ____, they remembered more of the words when they were tested again a month later.
 
-(7) Adeyemi suggests a reason for these results. (8) He explains that captions let students see and hear a word at the same time, which gives the brain two ways to remember it. (9) Some students in the study said the captions also helped them follow fast speakers. (10) My cousin always watches movies with the captions turned on. (11) This shows that captions are not a distraction but a tool that helps learners connect sounds with written words.
+(7) Adeyemi suggests a reason for these results. (8) Adeyemi explains that captions let students see and hear a word at the same time, which gives the brain two ways to remember it. (9) Some students in the study said the captions also helped them follow fast speakers. (10) My cousin always watches movies with the captions turned on. (11) This shows that captions are not a distraction but a tool that helps learners connect sounds with written words.
 
 (12) ____`,
       items: [
@@ -346,7 +346,7 @@ const skill: ContentSkill = {
           stem: `Which sentence would best fill the blank in sentence 12 to conclude the draft?`,
           choices: [
             ok(`Adeyemi's findings show that captions lead to higher quiz scores and longer memory, so they deserve a place in language classes.`),
-            no(`Adeyemi's team showed ten Spanish cartoons to 120 ninth graders in his study.`, 'evidence-without-analysis'),
+            no(`Adeyemi's team showed ten Spanish cartoons to 120 ninth graders in the study.`, 'evidence-without-analysis'),
             no(`Captions are the only thing any student will ever need to learn a new language.`, 'overgeneralization'),
             no(`Cartoons have been popular with young viewers for a very long time.`, 'off-topic-detail'),
           ],
@@ -421,7 +421,7 @@ const skill: ContentSkill = {
             no(`argues against the writer's claim that letters benefit both generations.`, 'false-contradiction'),
             no(`gives numbers and data instead of describing people's experiences.`, 'misreads-text'),
           ],
-          solution: `Sentences 4, 6 and 9 each credit Lindqvist or a person she interviewed, while sentence 10 is the writer's own explanation. Sentence 10 does not argue against the claim; it adds a reason that supports it.`,
+          solution: `Sentences 4, 6 and 9 each credit Lindqvist or a person Lindqvist interviewed, while sentence 10 is the writer's own explanation. Sentence 10 does not argue against the claim; it adds a reason that supports it.`,
         },
         {
           slot: 30,
@@ -440,7 +440,7 @@ const skill: ContentSkill = {
     {
       code: 'wg9-writing-with-evidence-p07',
       title: 'Draft: Pencils in the Gallery',
-      body: `(1) In "Look Longer," museum educator Rafael Tanaka writes about a change at the Harborview Art Museum, which began handing out free sketchbooks and pencils at its entrance. (2) Tanaka argues that sketching helps visitors notice far more than they would by simply walking past the art. (3) He explains that museum staff timed visitors in front of a large painting of a harbor at sunset. (4) Visitors without sketchbooks looked at the painting for an average of nineteen seconds. (5) Visitors who sketched it stayed for an average of eleven minutes. (6) ____
+      body: `(1) In "Look Longer," museum educator Rafael Tanaka writes about a change at the Harborview Art Museum, which began handing out free sketchbooks and pencils at its entrance. (2) Tanaka argues that sketching helps visitors notice far more than they would by simply walking past the art. (3) Tanaka explains that museum staff timed visitors in front of a large painting of a harbor at sunset. (4) Visitors without sketchbooks looked at the painting for an average of nineteen seconds. (5) Visitors who sketched it stayed for an average of eleven minutes. (6) ____
 
 (7) Tanaka also describes what the sketchers noticed. (8) In short interviews after their visits, sketchers mentioned details such as a small dog on the dock and the way the light changed color across the water. (9) Most visitors who did not sketch could describe only the sunset itself. (10) The museum's gift shop sells postcards of the painting for two dollars each. (11) ____, the act of drawing seems to turn a quick glance into careful study.
 
@@ -501,7 +501,7 @@ const skill: ContentSkill = {
           choices: [
             ok(`When shown a photo of the painting later, sketchers could point out about nine details, and non-sketchers about two.`),
             no(`The museum gave away more than three thousand sketchbooks during the first year of the program.`, 'popularity-not-evidence'),
-            no(`Tanaka himself began drawing as a child at his grandmother's kitchen table.`, 'irrelevant-anecdote'),
+            no(`As a child, Tanaka first learned to draw at a grandmother's kitchen table.`, 'irrelevant-anecdote'),
             no(`A few visitors said the museum's pencils were too short and hard to hold.`, 'off-point-detail'),
           ],
           solution: `Sentence 2 claims sketchers notice far more, and a direct count of details remembered measures exactly that. The number of sketchbooks given away shows the program was popular, not that it helped people notice more.`,
