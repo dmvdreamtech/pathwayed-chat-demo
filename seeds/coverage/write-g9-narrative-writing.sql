@@ -114,7 +114,7 @@ values ('7df4e7ef-6ff3-5bbd-b157-131f58bd7411', 'wg9-narrative-writing-p02', (se
 
 (6) By lunch, I was tired of mud. (7) I sat on a flat slab to eat my sandwich, and that was when I noticed the ridges under my hand. (8) They were thin and curved, like the ribs of a tiny fan. (9) I brushed away the dust, and a whole shell appeared, wider than my palm. (10) Lunch in our school cafeteria is usually pizza on Fridays.
 
-(11) "Rafi," I whispered, as if the shell might hear me and disappear. (12) He looked over, and his eyebrows shot up. (13) Ms. Castellano knelt beside the slab with a hand lens. (14) She said it was a brachiopod, an animal that had lived in a shallow sea that once covered the valley. (15) She said it was about four hundred million years old.
+(11) "Rafi," I whispered, as if the shell might hear me and disappear. (12) Rafi looked over, eyebrows shooting up. (13) Ms. Castellano knelt beside the slab with a hand lens. (14) She said it was a brachiopod, an animal that had lived in a shallow sea that once covered the valley. (15) She said it was about four hundred million years old.
 
 (16) We photographed the slab, measured it, and left it where it was, because the site belonged to the state. (17) It was a good field trip.$q$, 'draft')
 on conflict (id) do update set title = excluded.title, body = excluded.body
@@ -348,7 +348,7 @@ values ('19660bd0-348e-5fca-a608-fdacf5119087', 'wg9-narrative-writing-p05', (se
 
 (4) At six fifteen, I opened the app for one last test. (5) Every arrival time was wrong by exactly one hour. (6) My stomach dropped. (7) I scrolled through hundreds of lines of code while the gym filled with folding chairs and the smell of popcorn. (8) My laptop has a sticker of a cartoon octopus on the lid.
 
-(9) My friend Priyanka leaned over my shoulder. (10) "When did the clocks change?" she asked. (11) I stared at her. (12) Daylight saving time had started on Sunday, and my code still used the old setting. (13) I changed one number, saved the file, and refreshed the screen. (14) The 6:42 bus appeared at 6:42.
+(9) My friend Priyanka leaned over my shoulder. (10) "When did the clocks change?" Priyanka asked. (11) I stared back. (12) Daylight saving time had started on Sunday, and my code still used the old setting. (13) I changed one number, saved the file, and refreshed the screen. (14) The 6:42 bus appeared at 6:42.
 
 (15) At seven, I stood at the front of the gym with my laptop connected to the projector. (16) My voice shook at first, but it steadied once the map appeared and the little bus icons began to crawl along the streets.$q$, 'draft')
 on conflict (id) do update set title = excluded.title, body = excluded.body
@@ -584,7 +584,7 @@ values ('0ec56326-5c85-568e-a839-5e4ef83fbb48', 'wg9-narrative-writing-p08', (se
 
 (9) The next Sunday, I tried a different plan. (10) I wrote three steps on an index card in large letters and taped it to the kitchen table. (11) We practiced only the first step until she could do it without looking at the card. (12) Then we added the second step, and later the third. (13) On the fourth Sunday, she called me from her bedroom while I sat in the kitchen, and her laughing face filled my screen.
 
-(14) On graduation day, Lola watched the whole ceremony, and when Marisol crossed the stage, she waved at the tablet as if Marisol could see her. (15) The tablet's battery lasts for about ten hours on a full charge.$q$, 'draft')
+(14) On graduation day, Lola watched the whole ceremony, and when Marisol crossed the stage, Lola waved at the tablet as if Marisol could see her. (15) The tablet's battery lasts for about ten hours on a full charge.$q$, 'draft')
 on conflict (id) do update set title = excluded.title, body = excluded.body
 where public.passages.status = 'draft';
 insert into public.generated_questions
@@ -643,7 +643,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('704f0811-491d-5312-b361-ff688c744d46', null, (select id from public.skills where slug = 'write-g9-narrative-writing'), null, 'hard',
-   $q$Why does the writer contrast sentence 7 with sentences 10 through 12?$q$, $q$[{"text":"To show that breaking the task into small steps is what finally led to Lola's success","is_correct":true},{"text":"To shift the point of view from the narrator to Lola","is_correct":false,"misconception_token":"false-pov-shift"},{"text":"To show that the index card was more expensive than the tablet","is_correct":false,"misconception_token":"literal-reading"},{"text":"To show that Lola learned faster when the narrator explained more information at once","is_correct":false,"misconception_token":"contradicts-text"}]$q$::jsonb, $q$To show that breaking the task into small steps is what finally led to Lola's success$q$, $q$Explaining everything at once in sentence 7 fails, while teaching one step at a time in sentences 10 through 12 leads to the successful call in sentence 13. The first choice reverses what happened.$q$, 'draft', '0ec56326-5c85-568e-a839-5e4ef83fbb48')
+   $q$Why does the writer contrast sentence 7 with sentences 10 through 12?$q$, $q$[{"text":"To show that breaking the task into small steps is what finally led to Lola's success","is_correct":true},{"text":"To shift the point of view from the narrator to Lola","is_correct":false,"misconception_token":"false-pov-shift"},{"text":"To show that the index card was more expensive than the tablet","is_correct":false,"misconception_token":"literal-reading"},{"text":"To show that Lola learned faster when the narrator explained more information at once","is_correct":false,"misconception_token":"contradicts-text"}]$q$::jsonb, $q$To show that breaking the task into small steps is what finally led to Lola's success$q$, $q$Explaining everything at once in sentence 7 fails, while teaching one step at a time in sentences 10 through 12 leads to the successful call in sentence 13. The choice saying Lola learned faster with more information at once reverses what happened.$q$, 'draft', '0ec56326-5c85-568e-a839-5e4ef83fbb48')
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

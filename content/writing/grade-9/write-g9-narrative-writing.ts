@@ -91,7 +91,7 @@ const skill: ContentSkill = {
 
 (6) By lunch, I was tired of mud. (7) I sat on a flat slab to eat my sandwich, and that was when I noticed the ridges under my hand. (8) They were thin and curved, like the ribs of a tiny fan. (9) I brushed away the dust, and a whole shell appeared, wider than my palm. (10) Lunch in our school cafeteria is usually pizza on Fridays.
 
-(11) "Rafi," I whispered, as if the shell might hear me and disappear. (12) He looked over, and his eyebrows shot up. (13) Ms. Castellano knelt beside the slab with a hand lens. (14) She said it was a brachiopod, an animal that had lived in a shallow sea that once covered the valley. (15) She said it was about four hundred million years old.
+(11) "Rafi," I whispered, as if the shell might hear me and disappear. (12) Rafi looked over, eyebrows shooting up. (13) Ms. Castellano knelt beside the slab with a hand lens. (14) She said it was a brachiopod, an animal that had lived in a shallow sea that once covered the valley. (15) She said it was about four hundred million years old.
 
 (16) We photographed the slab, measured it, and left it where it was, because the site belonged to the state. (17) It was a good field trip.`,
       items: [
@@ -310,7 +310,7 @@ const skill: ContentSkill = {
 
 (4) At six fifteen, I opened the app for one last test. (5) Every arrival time was wrong by exactly one hour. (6) My stomach dropped. (7) I scrolled through hundreds of lines of code while the gym filled with folding chairs and the smell of popcorn. (8) My laptop has a sticker of a cartoon octopus on the lid.
 
-(9) My friend Priyanka leaned over my shoulder. (10) "When did the clocks change?" she asked. (11) I stared at her. (12) Daylight saving time had started on Sunday, and my code still used the old setting. (13) I changed one number, saved the file, and refreshed the screen. (14) The 6:42 bus appeared at 6:42.
+(9) My friend Priyanka leaned over my shoulder. (10) "When did the clocks change?" Priyanka asked. (11) I stared back. (12) Daylight saving time had started on Sunday, and my code still used the old setting. (13) I changed one number, saved the file, and refreshed the screen. (14) The 6:42 bus appeared at 6:42.
 
 (15) At seven, I stood at the front of the gym with my laptop connected to the projector. (16) My voice shook at first, but it steadied once the map appeared and the little bus icons began to crawl along the streets.`,
       items: [
@@ -531,7 +531,7 @@ const skill: ContentSkill = {
 
 (9) The next Sunday, I tried a different plan. (10) I wrote three steps on an index card in large letters and taped it to the kitchen table. (11) We practiced only the first step until she could do it without looking at the card. (12) Then we added the second step, and later the third. (13) On the fourth Sunday, she called me from her bedroom while I sat in the kitchen, and her laughing face filled my screen.
 
-(14) On graduation day, Lola watched the whole ceremony, and when Marisol crossed the stage, she waved at the tablet as if Marisol could see her. (15) The tablet's battery lasts for about ten hours on a full charge.`,
+(14) On graduation day, Lola watched the whole ceremony, and when Marisol crossed the stage, Lola waved at the tablet as if Marisol could see her. (15) The tablet's battery lasts for about ten hours on a full charge.`,
       items: [
         {
           slot: 36,
@@ -591,7 +591,7 @@ const skill: ContentSkill = {
             no(`To shift the point of view from the narrator to Lola`, 'false-pov-shift'),
             ok(`To show that breaking the task into small steps is what finally led to Lola's success`),
           ],
-          solution: `Explaining everything at once in sentence 7 fails, while teaching one step at a time in sentences 10 through 12 leads to the successful call in sentence 13. The first choice reverses what happened.`,
+          solution: `Explaining everything at once in sentence 7 fails, while teaching one step at a time in sentences 10 through 12 leads to the successful call in sentence 13. The choice saying Lola learned faster with more information at once reverses what happened.`,
         },
       ],
     },
