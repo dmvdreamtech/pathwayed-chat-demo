@@ -14,7 +14,7 @@ const skill: ContentSkill = {
     {
       slot: 1,
       difficulty: 'easy',
-      stem: `Read the sentence: "The cartographer ___ restored the old ferry charts donated her notes to the county archive." Which choice correctly completes the sentence?`,
+      stem: `Read the sentence: "The cartographer ___ restored the old ferry charts donated a box of field notes to the county archive." Which choice correctly completes the sentence?`,
       choices: [
         ok(`who`),
         no(`whom`, 'object-pronoun-as-subject'),
@@ -98,7 +98,7 @@ const skill: ContentSkill = {
     {
       slot: 8,
       difficulty: 'easy',
-      stem: `Read the sentence: "Neither of the glacier photographs ___ the full extent of the ice loss since 1990." Which choice correctly completes the sentence?`,
+      stem: `Read the sentence: "Neither of the glacier photographs ___ the full extent of the ice loss since 1990." In formal written English, which choice correctly completes the sentence?`,
       choices: [
         ok(`shows`),
         no(`show`, 'agrees-with-object-of-preposition'),
@@ -206,7 +206,7 @@ const skill: ContentSkill = {
     {
       slot: 17,
       difficulty: 'medium',
-      stem: `Read the sentence: "When Dmitri showed the telescope to Kwame, he was amazed by how clearly it revealed the rings of Saturn." Which revision makes the pronoun reference clear?`,
+      stem: `Dmitri and Kwame are brothers. Read the sentence: "When Dmitri showed the telescope to Kwame, he was amazed by how clearly it revealed the rings of Saturn." Which revision makes the pronoun reference clear?`,
       choices: [
         ok(`When Dmitri showed the telescope to Kwame, Kwame was amazed by how clearly it revealed the rings of Saturn.`),
         no(`When Dmitri showed the telescope to Kwame, he was truly amazed by how clearly it revealed the rings of Saturn.`, 'ambiguous-pronoun-unfixed'),
@@ -386,7 +386,7 @@ const skill: ContentSkill = {
     {
       slot: 32,
       difficulty: 'hard',
-      stem: `Read the sentence: "Mariela is one of the volunteers who ___ the shoreline for nesting birds every Saturday morning." Which choice correctly completes the sentence?`,
+      stem: `Read the sentence: "Mariela is one of the volunteers who ___ the shoreline for nesting birds every Saturday morning." In formal written English, which choice correctly completes the sentence?`,
       choices: [
         no(`surveys`, 'agrees-with-one'),
         no(`has surveyed`, 'agrees-with-one'),
@@ -477,7 +477,7 @@ const skill: ContentSkill = {
         ok(`It is acceptable, since most current guides allow a split infinitive that reads naturally.`),
         no(`It is acceptable only because the sentence describes a contest deadline.`, 'irrelevant-reason'),
       ],
-      solution: `The old rule against splitting an infinitive has been dropped by most current usage guides, which accept it when the phrasing sounds natural, as it does here. The first choice states that older rule as if it still applied, which shows how usage conventions change over time.`,
+      solution: `The old rule against splitting an infinitive has been dropped by most current usage guides, which accept it when the phrasing sounds natural, as it does here. The choice claiming an adverb may never come between "to" and its verb states that older rule as if it still applied, which shows how usage conventions change over time.`,
     },
     {
       slot: 40,
@@ -489,7 +489,7 @@ const skill: ContentSkill = {
         no(`They require it to read "Each applicant should bring there portfolio."`, 'homophone-confusion'),
         no(`They accept it only if "Each" is replaced with the word "Every."`, 'irrelevant-change'),
       ],
-      solution: `Many current style guides now accept singular "they" and "their" for one person of unstated gender, a convention that has changed over time. The first choice describes the older rule, which many guides no longer require.`,
+      solution: `Many current style guides now accept singular "they" and "their" for one person of unstated gender, a convention that has changed over time. The choice saying "their" can refer only to two or more people describes the older rule, which many guides no longer require.`,
     },
   ],
 }
