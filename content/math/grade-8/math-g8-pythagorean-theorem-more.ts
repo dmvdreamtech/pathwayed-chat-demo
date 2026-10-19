@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g8-pythagorean-theorem-more',
+  extends: 'pythagorean-theorem',
+  subject: 'math',
+  grade: 8,
+  group: 'Geometry',
+  name: 'Pythagorean Theorem',
+  standards: ['8.G.B.7'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `A right triangle has legs of length $7$ and $24$. What is the length of the hypotenuse?`,
+      choices: [
+        ok(`$25$`),
+        no(`$31$`, 'added-leg-lengths'),
+        no(`$625$`, 'forgot-square-root'),
+        no(`$\\sqrt{527}$`, 'subtracted-squares-for-hypotenuse'),
+      ],
+      solution: `Use $a^2 + b^2 = c^2$: $7^2 + 24^2 = 49 + 576 = 625$, and $\\sqrt{625} = 25$. The choice $625$ is $c^2$, not $c$; the last step is taking the square root.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A right triangle has a hypotenuse of length $26$ and one leg of length $10$. What is the length of the other leg?`,
+      choices: [
+        no(`$36$`, 'added-hypotenuse-and-leg'),
+        ok(`$24$`),
+        no(`$16$`, 'subtracted-lengths-not-squares'),
+        no(`$576$`, 'forgot-square-root'),
+      ],
+      solution: `The missing side is a leg, so subtract: $26^2 - 10^2 = 676 - 100 = 576$, and $\\sqrt{576} = 24$. The choice $16$ comes from $26 - 10$, but the theorem works with the squares of the sides, not the sides themselves.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Which set of side lengths forms a right triangle?`,
+      choices: [
+        no(`$5$, $7$, $12$`, 'added-lengths-not-squares'),
+        no(`$2$, $3$, $13$`, 'used-sum-of-squares-as-side-length'),
+        ok(`$9$, $40$, $41$`),
+        no(`$10$, $24$, $25$`, 'trusted-a-near-miss-triple'),
+      ],
+      solution: `By the converse of the Pythagorean Theorem, check whether the two shorter sides squared add to the longest side squared: $9^2 + 40^2 = 81 + 1600 = 1681 = 41^2$, so $9$, $40$, $41$ is a right triangle. For $10$, $24$, $25$: $100 + 576 = 676$, which is not $625$. For $2$, $3$, $13$: $4 + 9 = 13$, but the third side would need to be $\\sqrt{13}$, not $13$.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A rectangular tablet screen is $12$ inches tall and $16$ inches wide. How long is the diagonal of the screen?`,
+      choices: [
+        no(`$28$ inches`, 'added-leg-lengths'),
+        no(`$400$ inches`, 'forgot-square-root'),
+        no(`$4\\sqrt{7}$ inches`, 'subtracted-squares-for-hypotenuse'),
+        ok(`$20$ inches`),
+      ],
+      solution: `The diagonal is the hypotenuse of a right triangle with legs $12$ and $16$: $12^2 + 16^2 = 144 + 256 = 400$, and $\\sqrt{400} = 20$ inches. The choice $28$ inches adds the sides, but a diagonal is always shorter than going along two sides.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A right triangle has legs $a$ and $b$ and hypotenuse $c$. Which equation is always true?`,
+      choices: [
+        ok(`$a^2 + b^2 = c^2$`),
+        no(`$a + b = c$`, 'dropped-the-squares'),
+        no(`$a^2 + c^2 = b^2$`, 'treated-a-leg-as-hypotenuse'),
+        no(`$(a + b)^2 = c^2$`, 'squared-the-sum-instead-of-summing-squares'),
+      ],
+      solution: `The Pythagorean Theorem says the squares of the two legs add up to the square of the hypotenuse: $a^2 + b^2 = c^2$. The hypotenuse $c$ is the side across from the right angle and is always the one by itself.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A right triangle has legs of length $1$ and $3$. What is the length of the hypotenuse, in square root form?`,
+      choices: [
+        no(`$4$`, 'added-leg-lengths'),
+        no(`$\\sqrt{8}$`, 'subtracted-squares-for-hypotenuse'),
+        ok(`$\\sqrt{10}$`),
+        no(`$10$`, 'forgot-square-root'),
+      ],
+      solution: `Add the squares of the legs: $1^2 + 3^2 = 1 + 9 = 10$, so the hypotenuse is $\\sqrt{10}$. Since $10$ is not a perfect square, the answer stays in square root form. The choice $\\sqrt{8}$ subtracts $9 - 1$, which is only done when finding a leg.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `What is the distance between the points $(2, -1)$ and $(14, 15)$ on the coordinate plane?`,
+      choices: [
+        no(`$28$`, 'added-horizontal-and-vertical-changes'),
+        ok(`$20$`),
+        no(`$2\\sqrt{85}$`, 'sign-error-subtracting-a-negative'),
+        no(`$400$`, 'forgot-square-root'),
+      ],
+      solution: `The horizontal change is $14 - 2 = 12$ and the vertical change is $15 - (-1) = 16$. These are the legs of a right triangle, so the distance is $\\sqrt{12^2 + 16^2} = \\sqrt{400} = 20$. The choice $2\\sqrt{85}$ uses a vertical change of $15 - 1 = 14$, forgetting that subtracting $-1$ adds $1$.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Odessa flies a kite on a $50$-meter string pulled tight. The kite is directly above a spot on the ground $14$ meters away from where Odessa holds the string. Ignoring Odessa's height, how high is the kite?`,
+      choices: [
+        no(`$64$ meters`, 'added-hypotenuse-and-leg'),
+        no(`$36$ meters`, 'subtracted-lengths-not-squares'),
+        ok(`$48$ meters`),
+        no(`$2\\sqrt{674}$ meters`, 'added-squares-for-missing-leg'),
+      ],
+      solution: `The string is the hypotenuse, so the height is a leg: $50^2 - 14^2 = 2500 - 196 = 2304$, and $\\sqrt{2304} = 48$ meters. The choice $2\\sqrt{674}$ meters adds the squares, which would make the height longer than the string itself.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `A triangle has sides of length $15$, $20$, and $25$. Which statement is correct?`,
+      choices: [
+        ok(`It is a right triangle, because $15^2 + 20^2 = 25^2$.`),
+        no(`It is not a right triangle, because $15 + 20 \\neq 25$.`, 'added-lengths-not-squares'),
+        no(`It is not a right triangle, because $20^2 + 25^2 \\neq 15^2$.`, 'tested-wrong-side-as-hypotenuse'),
+        no(`It is a right triangle, because $15 + 20 > 25$.`, 'confused-triangle-inequality-with-right-angle'),
+      ],
+      solution: `By the converse of the Pythagorean Theorem, test the longest side as the hypotenuse: $15^2 + 20^2 = 225 + 400 = 625 = 25^2$, so it is a right triangle. The fact that $15 + 20 > 25$ only shows that a triangle can be made; it does not show that one angle is a right angle.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A shipping box is $12$ inches long, $16$ inches wide, and $15$ inches tall. What is the length of the diagonal from a bottom corner to the opposite top corner?`,
+      choices: [
+        no(`$20$ inches`, 'found-base-diagonal-only'),
+        ok(`$25$ inches`),
+        no(`$43$ inches`, 'added-edge-lengths'),
+        no(`$625$ inches`, 'forgot-square-root'),
+      ],
+      solution: `First find the diagonal of the bottom: $\\sqrt{12^2 + 16^2} = \\sqrt{400} = 20$ inches. That diagonal and the $15$-inch height are the legs of a second right triangle: $\\sqrt{20^2 + 15^2} = \\sqrt{625} = 25$ inches. The choice $20$ inches stops after the bottom diagonal and never goes up the height.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A rectangular garden is $5$ meters wide and $9$ meters long. A path runs straight across it from one corner to the opposite corner. How long is the path, rounded to the nearest tenth of a meter?`,
+      choices: [
+        no(`$14.0$ meters`, 'added-leg-lengths'),
+        no(`$7.5$ meters`, 'subtracted-squares-for-hypotenuse'),
+        no(`$10.2$ meters`, 'truncated-instead-of-rounded'),
+        ok(`$10.3$ meters`),
+      ],
+      solution: `The path is the hypotenuse: $5^2 + 9^2 = 25 + 81 = 106$, so the length is $\\sqrt{106} \\approx 10.296$ meters, which rounds to $10.3$ meters. The choice $10.2$ meters cuts off the digits instead of rounding up from $10.296$.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `In simplest square root form, what is the distance between the points $(-4, 3)$ and $(2, -1)$?`,
+      choices: [
+        ok(`$2\\sqrt{13}$`),
+        no(`$10$`, 'added-horizontal-and-vertical-changes'),
+        no(`$2\\sqrt{5}$`, 'sign-error-subtracting-a-negative'),
+        no(`$52$`, 'forgot-square-root'),
+      ],
+      solution: `The horizontal change is $2 - (-4) = 6$ and the vertical change is $-1 - 3 = -4$, a length of $4$. The distance is $\\sqrt{6^2 + 4^2} = \\sqrt{52} = \\sqrt{4 \\times 13} = 2\\sqrt{13}$. The choice $2\\sqrt{5}$ uses a horizontal change of $2 - 4 = -2$, treating $-4$ as $4$.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A rectangular park is $45$ meters wide and $60$ meters long. Jalen usually walks along two sides from one corner to the opposite corner, but today Jalen cuts straight across on the diagonal. How many meters shorter is the diagonal route?`,
+      choices: [
+        no(`$75$ meters`, 'gave-diagonal-not-the-difference'),
+        no(`$105$ meters`, 'gave-the-path-around'),
+        ok(`$30$ meters`),
+        no(`$45$ meters`, 'assumed-diagonal-equals-longer-side'),
+      ],
+      solution: `Walking along two sides is $45 + 60 = 105$ meters. The diagonal is $\\sqrt{45^2 + 60^2} = \\sqrt{2025 + 3600} = \\sqrt{5625} = 75$ meters. The diagonal route is $105 - 75 = 30$ meters shorter. The choice $75$ meters is the length of the diagonal itself, not how much shorter it is.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A right triangle has a hypotenuse of length $10$ and one leg of length $4$. What is the length of the other leg, rounded to the nearest tenth?`,
+      choices: [
+        no(`$10.8$`, 'added-squares-for-missing-leg'),
+        ok(`$9.2$`),
+        no(`$6.0$`, 'subtracted-lengths-not-squares'),
+        no(`$9.1$`, 'truncated-instead-of-rounded'),
+      ],
+      solution: `The missing side is a leg: $10^2 - 4^2 = 100 - 16 = 84$, so the leg is $\\sqrt{84} \\approx 9.165$, which rounds to $9.2$. The choice $10.8$ comes from $\\sqrt{100 + 16}$, but a leg must be shorter than the hypotenuse.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `A square floor tile has a diagonal of length $10$ centimeters. What is the side length of the tile, in simplest square root form?`,
+      choices: [
+        no(`$5$ centimeters`, 'halved-the-diagonal'),
+        no(`$10\\sqrt{2}$ centimeters`, 'multiplied-diagonal-by-root-2'),
+        no(`$50$ centimeters`, 'forgot-square-root'),
+        ok(`$5\\sqrt{2}$ centimeters`),
+      ],
+      solution: `Call the side $s$. The diagonal splits the square into two right triangles with legs $s$ and $s$, so $s^2 + s^2 = 10^2$, which gives $2s^2 = 100$ and $s^2 = 50$. Then $s = \\sqrt{50} = \\sqrt{25 \\times 2} = 5\\sqrt{2}$ centimeters. The choice $50$ centimeters is $s^2$, not $s$.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `A storage closet is shaped like a rectangular box $3$ feet deep, $4$ feet wide, and $8$ feet tall. To the nearest tenth of a foot, what is the longest straight pole that fits inside, from a bottom corner to the opposite top corner?`,
+      choices: [
+        no(`$8.9$ feet`, 'used-only-two-edges'),
+        ok(`$9.4$ feet`),
+        no(`$15.0$ feet`, 'added-edge-lengths'),
+        no(`$89.0$ feet`, 'forgot-square-root'),
+      ],
+      solution: `The floor diagonal is $\\sqrt{3^2 + 4^2} = 5$ feet. The pole is the hypotenuse of a right triangle with legs $5$ and $8$: $\\sqrt{5^2 + 8^2} = \\sqrt{25 + 64} = \\sqrt{89} \\approx 9.43$, which rounds to $9.4$ feet. The choice $8.9$ feet uses only the $4$-foot width and the $8$-foot height and leaves out the depth.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `On a field trip, Priya walks $3$ km east, then $8$ km north, then $9$ km east, then $8$ km north. How far is Priya from the starting point in a straight line?`,
+      choices: [
+        no(`$28$ km`, 'added-horizontal-and-vertical-changes'),
+        no(`$38$ km`, 'gave-total-walking-distance'),
+        no(`$\\sqrt{265}$ km`, 'ignored-one-leg-of-the-trip'),
+        ok(`$20$ km`),
+      ],
+      solution: `Combine the moves in each direction: $3 + 9 = 12$ km east and $8 + 8 = 16$ km north. These are the legs of a right triangle, so the straight-line distance is $\\sqrt{12^2 + 16^2} = \\sqrt{400} = 20$ km. The choice $\\sqrt{265}$ km uses only the first $3$ km east and leaves out the $9$ km east.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `The point $(x, 7)$ is exactly $10$ units from the point $(2, 1)$, and $x$ is greater than $2$. What is the value of $x$?`,
+      choices: [
+        ok(`$10$`),
+        no(`$8$`, 'gave-horizontal-change-not-coordinate'),
+        no(`$12$`, 'used-distance-as-horizontal-change'),
+        no(`$2 + 2\\sqrt{34}$`, 'added-squares-for-missing-leg'),
+      ],
+      solution: `The vertical change is $7 - 1 = 6$, and the distance $10$ is the hypotenuse. The horizontal change is $\\sqrt{10^2 - 6^2} = \\sqrt{64} = 8$. Since $x > 2$, $x = 2 + 8 = 10$. Check: from $(2, 1)$ to $(10, 7)$ is $\\sqrt{8^2 + 6^2} = 10$. The choice $8$ is the horizontal change, not the $x$-coordinate.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A tent is shaped like a pyramid with a square base $16$ feet on each side. The top of the tent is $6$ feet directly above the center of the base. How far is it from the top of the tent straight down a side face to the midpoint of a bottom edge?`,
+      choices: [
+        no(`$2\\sqrt{73}$ feet`, 'used-full-base-side-not-half'),
+        no(`$14$ feet`, 'added-leg-lengths'),
+        ok(`$10$ feet`),
+        no(`$100$ feet`, 'forgot-square-root'),
+      ],
+      solution: `From the center of the base to the midpoint of an edge is half the side: $16 \\div 2 = 8$ feet. That distance and the $6$-foot height are the legs of a right triangle, so the slant distance is $\\sqrt{8^2 + 6^2} = \\sqrt{100} = 10$ feet. The choice $2\\sqrt{73}$ feet uses the full $16$ feet instead of half of it.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A classroom has a rectangular floor $12$ meters by $9$ meters and a ceiling $8$ meters high. What is the distance from one corner of the floor to the opposite corner of the ceiling?`,
+      choices: [
+        no(`$15$ meters`, 'found-base-diagonal-only'),
+        ok(`$17$ meters`),
+        no(`$29$ meters`, 'added-edge-lengths'),
+        no(`$4\\sqrt{13}$ meters`, 'used-only-two-edges'),
+      ],
+      solution: `The floor diagonal is $\\sqrt{12^2 + 9^2} = \\sqrt{225} = 15$ meters. That diagonal and the $8$-meter height are the legs of a second right triangle: $\\sqrt{15^2 + 8^2} = \\sqrt{289} = 17$ meters. The choice $15$ meters stops at the floor diagonal, and $4\\sqrt{13}$ meters comes from one wall only, $\\sqrt{12^2 + 8^2}$.`,
+    },
+  ],
+}
+
+export default skill
