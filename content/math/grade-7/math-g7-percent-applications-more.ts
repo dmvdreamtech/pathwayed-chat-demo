@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g7-percent-applications-more',
+  extends: 'percent-applications',
+  subject: 'math',
+  grade: 7,
+  group: 'Ratios and Proportional Relationships',
+  name: 'Percent Applications',
+  standards: ['7.RP.A.3'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `A bike helmet costs 36 dollars, and the sales tax rate is 6%. How much is the sales tax?`,
+      choices: [
+        ok(`2.16 dollars`),
+        no(`21.60 dollars`, 'wrote-6-percent-as-six-tenths'),
+        no(`38.16 dollars`, 'gave-total-instead-of-tax'),
+        no(`6 dollars`, 'used-percent-as-dollar-amount'),
+      ],
+      solution: `Write 6% as the decimal $0.06$ and multiply: $36 \\times 0.06 = 2.16$, so the tax is 2.16 dollars. The choice 38.16 dollars is the price plus tax, but the question asks only for the tax.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Rosa and Dev split a lunch bill of 24 dollars and want to leave a 20% tip. How much is the tip?`,
+      choices: [
+        no(`28.80 dollars`, 'gave-total-instead-of-tip'),
+        ok(`4.80 dollars`),
+        no(`2.40 dollars`, 'found-10-percent-only'),
+        no(`48 dollars`, 'wrote-20-percent-as-2'),
+      ],
+      solution: `20% is $0.2$, and $24 \\times 0.2 = 4.8$, so the tip is 4.80 dollars. The choice 2.40 dollars is only 10% of the bill, which is half of the tip they want.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A furniture salesperson earns a 5% commission on each sale. How much commission is earned on a sofa that sells for 900 dollars?`,
+      choices: [
+        no(`450 dollars`, 'wrote-5-percent-as-five-tenths'),
+        no(`4.50 dollars`, 'moved-decimal-too-far'),
+        ok(`45 dollars`),
+        no(`855 dollars`, 'subtracted-commission-from-sale'),
+      ],
+      solution: `5% is $0.05$, and $900 \\times 0.05 = 45$, so the commission is 45 dollars. The choice 450 dollars uses $0.5$, which is 50%, not 5%.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A pair of sneakers costs 70 dollars and is marked down 30%. What is the sale price?`,
+      choices: [
+        no(`21 dollars`, 'gave-discount-instead-of-sale-price'),
+        no(`40 dollars`, 'subtracted-percent-as-dollars'),
+        no(`91 dollars`, 'added-discount-instead-of-subtracting'),
+        ok(`49 dollars`),
+      ],
+      solution: `The discount is $70 \\times 0.3 = 21$ dollars, so the sale price is $70 - 21 = 49$ dollars. The choice 21 dollars is the amount taken off, not the price you pay.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Mateo puts 500 dollars in a savings account that pays 3% simple interest per year. How much interest does the account earn in 4 years?`,
+      choices: [
+        ok(`60 dollars`),
+        no(`15 dollars`, 'forgot-to-multiply-by-time'),
+        no(`560 dollars`, 'gave-balance-instead-of-interest'),
+        no(`600 dollars`, 'wrote-3-percent-as-three-tenths'),
+      ],
+      solution: `Simple interest is principal times rate times time: $500 \\times 0.03 \\times 4 = 60$, so the interest is 60 dollars. The choice 15 dollars is the interest for only 1 year.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `An art club had 25 members last year and has 20 members this year. What is the percent decrease?`,
+      choices: [
+        no(`25%`, 'divided-by-new-value'),
+        ok(`20%`),
+        no(`5%`, 'used-difference-as-percent'),
+        no(`80%`, 'gave-percent-remaining'),
+      ],
+      solution: `The club lost $25 - 20 = 5$ members. Compare the change to the original amount: $\\frac{5}{25} = 0.2$, which is 20%. The choice 25% divides by the new amount, 20, instead of the original amount, 25.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `A store buys a desk lamp for 32 dollars and marks the price up 75%. What is the selling price?`,
+      choices: [
+        no(`24 dollars`, 'gave-markup-instead-of-price'),
+        ok(`56 dollars`),
+        no(`107 dollars`, 'added-percent-as-dollars'),
+        no(`8 dollars`, 'subtracted-markup'),
+      ],
+      solution: `The markup is $32 \\times 0.75 = 24$ dollars, so the selling price is $32 + 24 = 56$ dollars. You can also multiply by $1.75$: $32 \\times 1.75 = 56$. The choice 24 dollars is only the markup.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Jalen estimated that a bus ride would take 45 minutes. The ride actually took 50 minutes. What is the percent error of the estimate?`,
+      choices: [
+        no(`11.1%`, 'divided-by-estimate'),
+        no(`5%`, 'used-difference-as-percent'),
+        no(`90%`, 'gave-ratio-instead-of-error'),
+        ok(`10%`),
+      ],
+      solution: `Percent error compares the size of the error to the actual value. The error is $50 - 45 = 5$ minutes, and $\\frac{5}{50} = 0.1$, which is 10%. The choice 11.1% divides by the estimate, 45, instead of the actual value, 50.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `A concert ticket costs 48 dollars, and the ticket website adds a 12.5% service fee. What is the total cost of the ticket with the fee?`,
+      choices: [
+        no(`6 dollars`, 'gave-fee-instead-of-total'),
+        no(`60.50 dollars`, 'added-percent-as-dollars'),
+        ok(`54 dollars`),
+        no(`42 dollars`, 'subtracted-fee'),
+      ],
+      solution: `The fee is $48 \\times 0.125 = 6$ dollars, so the total is $48 + 6 = 54$ dollars. The choice 60.50 dollars adds 12.5 dollars, but the fee is 12.5% of the price, not 12.5 dollars.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A family's restaurant meal costs 27.40 dollars before tax. The sales tax rate is 8%. What is the total cost with tax, rounded to the nearest cent?`,
+      choices: [
+        ok(`29.59 dollars`),
+        no(`2.19 dollars`, 'gave-tax-instead-of-total'),
+        no(`49.32 dollars`, 'wrote-8-percent-as-eight-tenths'),
+        no(`35.40 dollars`, 'added-percent-as-dollars'),
+      ],
+      solution: `Multiply by $1.08$ to include the tax: $27.40 \\times 1.08 = 29.592$, which rounds to 29.59 dollars. The choice 2.19 dollars is the tax alone, about $27.40 \\times 0.08$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `The monthly price of a gym membership went up from 40 dollars to 46 dollars. What is the percent increase?`,
+      choices: [
+        no(`13%`, 'divided-by-new-value'),
+        no(`6%`, 'used-difference-as-percent'),
+        ok(`15%`),
+        no(`115%`, 'gave-new-price-as-percent-of-old'),
+      ],
+      solution: `The price rose by $46 - 40 = 6$ dollars. Divide by the original price: $\\frac{6}{40} = 0.15$, which is 15%. The choice 13% divides by the new price, 46, instead of the original price, 40.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Ms. Ortiz earns 400 dollars a week plus a 6% commission on everything she sells. One week she sells 3,500 dollars of merchandise. What is her total pay for that week?`,
+      choices: [
+        no(`210 dollars`, 'forgot-base-pay'),
+        no(`2,500 dollars`, 'wrote-6-percent-as-six-tenths'),
+        no(`3,710 dollars`, 'added-commission-to-sales'),
+        ok(`610 dollars`),
+      ],
+      solution: `The commission is $3500 \\times 0.06 = 210$ dollars. Add the weekly base pay: $400 + 210 = 610$ dollars. The choice 210 dollars is only the commission and leaves out the 400 dollars of base pay.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `After a 15% markdown, a tennis racket sells for 51 dollars. What was the original price?`,
+      choices: [
+        ok(`60 dollars`),
+        no(`58.65 dollars`, 'added-15-percent-of-sale-price'),
+        no(`66 dollars`, 'added-percent-as-dollars'),
+        no(`7.65 dollars`, 'found-percent-of-sale-price'),
+      ],
+      solution: `After 15% is taken off, the sale price is 85% of the original, so $0.85p = 51$ and $p = 51 \\div 0.85 = 60$ dollars. The choice 58.65 dollars takes 15% of the sale price and adds it back, but the 15% was taken from the original price.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Amara deposits 800 dollars in an account that pays simple interest. After 3 years the account has earned 96 dollars in interest. What is the yearly interest rate?`,
+      choices: [
+        no(`12%`, 'forgot-to-divide-by-time'),
+        ok(`4%`),
+        no(`0.04%`, 'left-rate-as-decimal'),
+        no(`36%`, 'multiplied-by-time-instead-of-dividing'),
+      ],
+      solution: `Simple interest is $I = Prt$, so $96 = 800 \\times r \\times 3 = 2400r$ and $r = 96 \\div 2400 = 0.04$, which is 4% per year. The choice 12% is the total interest over all 3 years as a percent of 800, not the rate for one year.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `A rain barrel holds 250 gallons and is 36% full. How many more gallons of water are needed to fill it?`,
+      choices: [
+        no(`90 gallons`, 'gave-amount-already-in-barrel'),
+        no(`214 gallons`, 'subtracted-percent-as-gallons'),
+        ok(`160 gallons`),
+        no(`64 gallons`, 'used-percent-remaining-as-gallons'),
+      ],
+      solution: `The barrel is missing $100\\% - 36\\% = 64\\%$ of its water, and $250 \\times 0.64 = 160$ gallons. The choice 90 gallons is the water already in the barrel, $250 \\times 0.36$.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `A backpack costs 80 dollars. It is marked down 25%, and then the store takes an extra 10% off the sale price. What is the final price?`,
+      choices: [
+        no(`52 dollars`, 'added-the-two-percents'),
+        no(`60 dollars`, 'applied-only-first-discount'),
+        ok(`54 dollars`),
+        no(`6 dollars`, 'gave-second-discount-only'),
+      ],
+      solution: `First markdown: $80 \\times 0.75 = 60$ dollars. The extra 10% comes off 60 dollars: $60 \\times 0.9 = 54$ dollars. The choice 52 dollars takes 35% off 80 dollars at once, but the second 10% is taken from the lower sale price.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A store buys a winter coat for 60 dollars and marks it up 50%. Later the coat goes on sale for 20% off the marked price. What is the sale price?`,
+      choices: [
+        ok(`72 dollars`),
+        no(`78 dollars`, 'subtracted-the-percents-first'),
+        no(`90 dollars`, 'forgot-the-markdown'),
+        no(`18 dollars`, 'gave-markdown-amount'),
+      ],
+      solution: `The marked price is $60 \\times 1.5 = 90$ dollars. Taking 20% off leaves 80% of that: $90 \\times 0.8 = 72$ dollars. The choice 78 dollars treats the changes as one 30% markup, but the 20% is taken from 90 dollars, not from 60 dollars.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A kitchen scale shows 2.6 kilograms for a bag of flour that actually weighs 2.4 kilograms. What is the percent error of the scale, rounded to the nearest tenth of a percent?`,
+      choices: [
+        no(`7.7%`, 'divided-by-measured-value'),
+        ok(`8.3%`),
+        no(`0.2%`, 'used-difference-as-percent'),
+        no(`108.3%`, 'gave-ratio-instead-of-error'),
+      ],
+      solution: `The error is $2.6 - 2.4 = 0.2$ kilograms. Divide by the actual weight: $\\frac{0.2}{2.4} \\approx 0.0833$, which rounds to 8.3%. The choice 7.7% divides by the scale reading, 2.6, instead of the actual weight, 2.4.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Tavi borrows 1,200 dollars at 7.5% simple interest per year and pays the loan back after 2 years. What is the total amount Tavi pays back, including interest?`,
+      choices: [
+        no(`180 dollars`, 'gave-interest-instead-of-total'),
+        no(`1,290 dollars`, 'forgot-to-multiply-by-time'),
+        no(`3,000 dollars`, 'wrote-percent-with-decimal-one-place-off'),
+        ok(`1,380 dollars`),
+      ],
+      solution: `The interest is $1200 \\times 0.075 \\times 2 = 180$ dollars. The total paid back is the amount borrowed plus interest: $1200 + 180 = 1380$, or 1,380 dollars. The choice 1,290 dollars counts only 1 year of interest.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Kiri's restaurant bill came to 43.20 dollars after an 8% sales tax was added. Rounding to the nearest cent if needed, what was the bill before tax?`,
+      choices: [
+        no(`39.74 dollars`, 'took-percent-of-total'),
+        ok(`40 dollars`),
+        no(`35.20 dollars`, 'subtracted-percent-as-dollars'),
+        no(`46.66 dollars`, 'added-tax-again'),
+      ],
+      solution: `The total is 108% of the bill before tax, so $1.08b = 43.20$ and $b = 43.20 \\div 1.08 = 40$ dollars. The choice 39.74 dollars subtracts 8% of 43.20 dollars, but the tax was 8% of the smaller amount before tax.`,
+    },
+  ],
+}
+
+export default skill
