@@ -27,12 +27,12 @@ const skill: ContentSkill = {
     {
       slot: 2,
       difficulty: 'easy',
-      stem: `Read the sentence: "Darnell left his muddy boots beside the back door." Which word is a preposition?`,
+      stem: `Read the sentence: "Darnell left the muddy boots beside the back door." Which word is a preposition?`,
       choices: [
         no(`left`, 'verb-as-preposition'),
         no(`muddy`, 'adjective-as-preposition'),
         ok(`beside`),
-        no(`his`, 'pronoun-as-preposition'),
+        no(`the`, 'article-as-preposition'),
       ],
       solution: `"Beside" is a preposition because it shows where the boots are in relation to the door. "Left" is the verb that tells what Darnell did, not a word that shows position.`,
     },
@@ -46,7 +46,7 @@ const skill: ContentSkill = {
         no(`or`, 'choice-for-contrast'),
         no(`because`, 'cause-for-contrast'),
       ],
-      solution: `"But" shows a contrast: Mei wanted to go out, yet the rain stopped her. "So" is wrong because the rain was not a result of Mei wanting to play outside.`,
+      solution: `"But" shows a contrast: Mei wanted to go out, yet the rain kept Mei inside. "So" is wrong because the rain was not a result of Mei wanting to play outside.`,
     },
     {
       slot: 4,
@@ -75,7 +75,7 @@ const skill: ContentSkill = {
     {
       slot: 6,
       difficulty: 'easy',
-      stem: `Read the sentence: "Last Saturday, Omar ____ his grandmother bake flatbread." Which verb correctly completes the sentence?`,
+      stem: `Read the sentence: "Last Saturday, Omar ____ Grandma bake flatbread." Which verb correctly completes the sentence?`,
       choices: [
         no(`helps`, 'present-for-past'),
         no(`will help`, 'future-for-past'),
@@ -87,14 +87,14 @@ const skill: ContentSkill = {
     {
       slot: 7,
       difficulty: 'medium',
-      stem: `Read the sentence: "Siobhan ____ wanted cereal ____ wanted toast, so she ate a banana instead." Which pair of words correctly completes the sentence?`,
+      stem: `Read the sentence: "Siobhan ____ wanted cereal ____ wanted toast, so a banana became breakfast instead." Which pair of words correctly completes the sentence?`,
       choices: [
         ok(`neither ... nor`),
         no(`either ... nor`, 'mismatched-correlative-pair'),
         no(`both ... and`, 'pair-wrong-meaning'),
         no(`neither ... or`, 'or-with-neither'),
       ],
-      solution: `Siobhan ate a banana because she did not want either food, so "neither ... nor" fits the meaning and is a correct pair. "Both ... and" is a correct pair, but it would mean she wanted both foods, which does not make sense with eating a banana instead.`,
+      solution: `Siobhan had a banana because neither food was wanted, so "neither ... nor" fits the meaning and is a correct pair. "Both ... and" is a correct pair, but it would mean Siobhan wanted both foods, which does not make sense with having a banana instead.`,
     },
     {
       slot: 8,
@@ -123,7 +123,7 @@ const skill: ContentSkill = {
     {
       slot: 10,
       difficulty: 'medium',
-      stem: `Read the sentence: "By the time the bus arrived, Tomas ____ his oatmeal." Which verb correctly completes the sentence?`,
+      stem: `Read the sentence: "By the time the bus arrived, Tomas ____ a bowl of oatmeal." Which verb correctly completes the sentence?`,
       choices: [
         no(`has finished`, 'present-perfect-for-past-perfect'),
         no(`will have finished`, 'future-perfect-for-past'),
@@ -147,7 +147,7 @@ const skill: ContentSkill = {
     {
       slot: 12,
       difficulty: 'medium',
-      stem: `Read the sentence: "____ the trail was steep, Nikolai kept hiking until he reached the top." Which word best completes the sentence?`,
+      stem: `Read the sentence: "____ the trail was steep, Nikolai kept hiking all the way to the top." Which word best completes the sentence?`,
       choices: [
         no(`Because`, 'cause-for-contrast'),
         no(`Unless`, 'condition-for-contrast'),
@@ -207,24 +207,24 @@ const skill: ContentSkill = {
     {
       slot: 17,
       difficulty: 'hard',
-      stem: `Read the paragraph: "(1) Every morning, Haruto feeds the birds in his yard. (2) He fills the feeder with seeds. (3) Then he sat on the porch to watch. (4) The sparrows usually arrive first." Which sentence has an incorrect shift in verb tense?`,
+      stem: `Read the paragraph: "(1) Every morning, Grandpa Haruto feeds the birds in his yard. (2) He fills the feeder with seeds. (3) Then he sat on the porch to watch. (4) The sparrows usually arrive first." Which sentence has an incorrect shift in verb tense?`,
       choices: [
         no(`Sentence 1`, 'time-phrase-confused-with-tense'),
         no(`Sentence 2`, 'misses-tense-shift'),
         ok(`Sentence 3`),
         no(`Sentence 4`, 'adverb-confused-with-tense'),
       ],
-      solution: `The paragraph describes something Haruto does every day, so it uses present tense, and "sat" in sentence 3 shifts to past tense; it should be "sits." Sentence 4 is tempting because of the word "usually," but "arrive" is present tense and matches the rest.`,
+      solution: `The paragraph describes something Grandpa Haruto does every day, so it uses present tense, and "sat" in sentence 3 shifts to past tense; it should be "sits." Sentence 4 is tempting because of the word "usually," but "arrive" is present tense and matches the rest.`,
     },
     {
       slot: 18,
       difficulty: 'hard',
       stem: `Which sentence correctly shows that one past action happened before another past action?`,
       choices: [
-        no(`Zainab already packs her lunch when her mom called her to the car.`, 'tense-shift'),
-        no(`Zainab has already packed her lunch when her mom called her to the car.`, 'present-perfect-for-past-perfect'),
-        no(`Zainab will have already packed her lunch when her mom called her to the car.`, 'future-perfect-for-past'),
-        ok(`Zainab had already packed her lunch when her mom called her to the car.`),
+        no(`Zainab already packs lunch when Mom called from the car.`, 'tense-shift'),
+        no(`Zainab has already packed lunch when Mom called from the car.`, 'present-perfect-for-past-perfect'),
+        no(`Zainab will have already packed lunch when Mom called from the car.`, 'future-perfect-for-past'),
+        ok(`Zainab had already packed lunch when Mom called from the car.`),
       ],
       solution: `The past perfect "had packed" shows that packing happened before the past action "called." "Has packed" is present perfect, which does not match the past tense verb "called."`,
     },
@@ -243,7 +243,7 @@ const skill: ContentSkill = {
     {
       slot: 20,
       difficulty: 'hard',
-      stem: `Read the sentence: "Before practice, Mateo stretched his legs, and he jogged slowly after the coach blew the whistle." Which word is used as a preposition?`,
+      stem: `Read the sentence: "Before practice, Mateo stretched both legs, and the team jogged slowly after the coach blew the whistle." Which word is used as a preposition?`,
       choices: [
         no(`after`, 'subordinating-conjunction-as-preposition'),
         ok(`Before`),
