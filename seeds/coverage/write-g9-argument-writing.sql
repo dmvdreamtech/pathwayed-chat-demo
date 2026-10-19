@@ -112,7 +112,7 @@ values ('7b7dcb20-0bef-591b-885d-d40867279794', 'wg9-argument-writing-p02', (sel
 
 (7) Some students argue that typing lessons are unnecessary because they can simply speak into their devices and let software type for them. (8) Voice typing is certainly useful for homework at home. (9) It is not allowed during most school tests, though, and it would not work well in a crowded classroom where thirty students would be talking at once.
 
-(10) A keyboarding unit would not require new equipment, since every classroom already has a laptop cart. (11) Free typing practice programs are available online, and Ms. Okafor has offered to design the lessons herself. (12) My cousin types really fast because she plays a lot of computer games. (13) For these reasons, a short keyboarding unit is a low-cost way to help ninth graders work faster and show what they know.$q$, 'draft')
+(10) A keyboarding unit would not require new equipment, since every classroom already has a laptop cart. (11) Free typing practice programs are available online, and Ms. Okafor has offered to design the lessons herself. (12) My cousin types really fast from playing a lot of computer games. (13) For these reasons, a short keyboarding unit is a low-cost way to help ninth graders work faster and show what they know.$q$, 'draft')
 on conflict (id) do update set title = excluded.title, body = excluded.body
 where public.passages.status = 'draft';
 insert into public.generated_questions
