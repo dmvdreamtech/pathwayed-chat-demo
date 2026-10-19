@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g7-rational-number-operations-more',
+  extends: 'rational-number-operations',
+  subject: 'math',
+  grade: 7,
+  group: 'The Number System',
+  name: 'Operations with Rational Numbers',
+  standards: ['7.NS.A'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is $-\\frac{2}{5} + \\left(-\\frac{1}{5}\\right)$?`,
+      choices: [
+        ok(`$-\\frac{3}{5}$`),
+        no(`$\\frac{3}{5}$`, 'dropped-negative-sign'),
+        no(`$-\\frac{3}{10}$`, 'added-denominators'),
+        no(`$-\\frac{1}{5}$`, 'subtracted-magnitudes-with-same-signs'),
+      ],
+      solution: `Both numbers are negative, so add their sizes and keep the negative sign: $\\frac{2}{5} + \\frac{1}{5} = \\frac{3}{5}$, giving $-\\frac{3}{5}$. The choice $-\\frac{3}{10}$ adds the denominators, but the denominator stays $5$ when the fractions already share it.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is $-1.2 \\times 3$?`,
+      choices: [
+        no(`$3.6$`, 'dropped-negative-sign'),
+        ok(`$-3.6$`),
+        no(`$-0.36$`, 'misplaced-decimal-point'),
+        no(`$1.8$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `A negative times a positive is negative, and $1.2 \\times 3 = 3.6$, so the product is $-3.6$. The choice $1.8$ comes from adding $-1.2 + 3$ instead of multiplying.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `To model $-6 + 4$ on a number line, Tavi starts at $-6$ and moves 4 units to the right. Where does Tavi land?`,
+      choices: [
+        no(`$-10$`, 'moved-left-for-positive-addend'),
+        no(`$2$`, 'reversed-signs-of-both-numbers'),
+        ok(`$-2$`),
+        no(`$10$`, 'ignored-signs-and-added'),
+      ],
+      solution: `Moving 4 units right from $-6$ passes $-5$, $-4$, $-3$ and lands on $-2$, so $-6 + 4 = -2$. The choice $-10$ moves left, but adding a positive number moves right.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What is the distance between $-3$ and $5$ on a number line?`,
+      choices: [
+        no(`$2$`, 'added-the-two-numbers'),
+        no(`$-8$`, 'forgot-absolute-value'),
+        no(`$5$`, 'measured-from-zero-only'),
+        ok(`$8$`),
+      ],
+      solution: `Distance is the absolute value of the difference: $|5 - (-3)| = |8| = 8$. The choice $2$ comes from adding $-3 + 5$, which gives where you land, not how far apart the points are.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which decimal is equal to $\\frac{3}{8}$?`,
+      choices: [
+        ok(`$0.375$`),
+        no(`$0.38$`, 'wrote-numerator-and-denominator-as-digits'),
+        no(`$2.\\overline{6}$`, 'divided-denominator-by-numerator'),
+        no(`$0.0375$`, 'misplaced-decimal-point'),
+      ],
+      solution: `Divide the numerator by the denominator: $3 \\div 8 = 0.375$, and the division ends, so the decimal terminates. The choice $2.\\overline{6}$ comes from dividing $8 \\div 3$ instead.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `What is $-0.6 - 0.3$?`,
+      choices: [
+        no(`$-0.3$`, 'treated-subtraction-as-addition'),
+        ok(`$-0.9$`),
+        no(`$0.9$`, 'dropped-negative-sign'),
+        no(`$0.3$`, 'ignored-signs-and-subtracted'),
+      ],
+      solution: `Subtracting $0.3$ is the same as adding $-0.3$: $-0.6 + (-0.3) = -0.9$. The choice $-0.3$ adds $0.3$ to $-0.6$ instead of subtracting it.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `What is $\\frac{5}{6} - \\left(-\\frac{1}{4}\\right)$?`,
+      choices: [
+        no(`$\\frac{7}{12}$`, 'subtracted-instead-of-adding-the-opposite'),
+        no(`$\\frac{3}{5}$`, 'added-numerators-and-denominators'),
+        no(`$-\\frac{13}{12}$`, 'wrong-sign-on-result'),
+        ok(`$\\frac{13}{12}$`),
+      ],
+      solution: `Subtracting a negative is adding its opposite: $\\frac{5}{6} + \\frac{1}{4} = \\frac{10}{12} + \\frac{3}{12} = \\frac{13}{12}$. The choice $\\frac{7}{12}$ subtracts $\\frac{3}{12}$, which ignores the second negative sign.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What is $-2\\frac{1}{4} + 3\\frac{1}{2}$?`,
+      choices: [
+        ok(`$1\\frac{1}{4}$`),
+        no(`$-1\\frac{1}{4}$`, 'kept-sign-of-smaller-magnitude'),
+        no(`$5\\frac{3}{4}$`, 'ignored-negative-sign'),
+        no(`$-5\\frac{3}{4}$`, 'treated-both-addends-as-negative'),
+      ],
+      solution: `The signs differ, so subtract the sizes: $3\\frac{1}{2} - 2\\frac{1}{4} = 3\\frac{2}{4} - 2\\frac{1}{4} = 1\\frac{1}{4}$. The positive number has the larger size, so the sum is positive, $1\\frac{1}{4}$. The choice $5\\frac{3}{4}$ adds the sizes as if both were positive.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `What is $-\\frac{3}{4} \\div \\left(-\\frac{9}{8}\\right)$?`,
+      choices: [
+        no(`$-\\frac{2}{3}$`, 'wrong-sign-dividing-two-negatives'),
+        ok(`$\\frac{2}{3}$`),
+        no(`$\\frac{27}{32}$`, 'multiplied-without-reciprocal'),
+        no(`$\\frac{3}{2}$`, 'flipped-the-dividend-instead-of-divisor'),
+      ],
+      solution: `Multiply by the reciprocal of the divisor: $\\frac{3}{4} \\times \\frac{8}{9} = \\frac{24}{36} = \\frac{2}{3}$. A negative divided by a negative is positive, so the answer is $\\frac{2}{3}$. The choice $\\frac{27}{32}$ multiplies $\\frac{3}{4} \\times \\frac{9}{8}$ without flipping the divisor.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Which decimal is equal to $\\frac{5}{11}$?`,
+      choices: [
+        no(`$0.45$`, 'treated-repeating-as-terminating'),
+        no(`$0.\\overline{4}$`, 'repeated-only-the-first-digit'),
+        ok(`$0.\\overline{45}$`),
+        no(`$2.2$`, 'divided-denominator-by-numerator'),
+      ],
+      solution: `Long division of $5 \\div 11$ gives $0.454545\\ldots$, where the block $45$ repeats forever, so the decimal is $0.\\overline{45}$. The choice $0.45$ stops after two digits, but the remainder never becomes zero.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Which fraction can be written as a terminating decimal?`,
+      choices: [
+        no(`$\\frac{2}{3}$`, 'assumed-small-denominators-terminate'),
+        no(`$\\frac{5}{12}$`, 'assumed-even-denominators-terminate'),
+        ok(`$\\frac{7}{20}$`),
+        no(`$\\frac{7}{15}$`, 'saw-factor-of-5-and-assumed-terminating'),
+      ],
+      solution: `A fraction in lowest terms terminates when its denominator has no prime factors other than $2$ and $5$. Since $20 = 2 \\times 2 \\times 5$, $\\frac{7}{20} = 0.35$. The choice $\\frac{7}{15}$ has a factor of $5$, but $15$ also has a factor of $3$, so $\\frac{7}{15} = 0.4\\overline{6}$ repeats.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `At 6 a.m. the temperature in a town was $-5.5^\\circ$C. By noon it was $8.25^\\circ$C. How many degrees did the temperature rise?`,
+      choices: [
+        ok(`$13.75^\\circ$C`),
+        no(`$2.75^\\circ$C`, 'added-the-two-temperatures'),
+        no(`$-13.75^\\circ$C`, 'subtracted-in-wrong-order'),
+        no(`$-2.75^\\circ$C`, 'ignored-negative-and-subtracted-backward'),
+      ],
+      solution: `The rise is the later temperature minus the earlier one: $8.25 - (-5.5) = 8.25 + 5.5 = 13.75$, so it rose $13.75^\\circ$C. The choice $2.75^\\circ$C comes from adding $-5.5 + 8.25$, which does not measure the change.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Which expression gives the distance between $-4.5$ and $2$ on a number line?`,
+      choices: [
+        no(`$|2 + (-4.5)|$`, 'added-instead-of-subtracted'),
+        ok(`$|2 - (-4.5)|$`),
+        no(`$2 - 4.5$`, 'dropped-sign-and-absolute-value'),
+        no(`$|-4.5| - |2|$`, 'subtracted-absolute-values'),
+      ],
+      solution: `The distance between two points is the absolute value of their difference, $|2 - (-4.5)| = |6.5| = 6.5$. The expression $|2 + (-4.5)|$ equals $2.5$, which is not how far apart the points are.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `What is $-1.5 \\times (-2.4)$?`,
+      choices: [
+        no(`$-3.6$`, 'wrong-sign-multiplying-two-negatives'),
+        no(`$0.36$`, 'misplaced-decimal-point'),
+        no(`$-3.9$`, 'added-instead-of-multiplied'),
+        ok(`$3.6$`),
+      ],
+      solution: `A negative times a negative is positive, and $1.5 \\times 2.4 = 3.6$, so the product is $3.6$. The choice $-3.6$ uses the wrong sign for a product of two negatives.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `The water level in a rain barrel changes by $-2.4$ centimeters each hour for 3.5 hours. What is the total change in the water level?`,
+      choices: [
+        ok(`$-8.4$ centimeters`),
+        no(`$8.4$ centimeters`, 'dropped-negative-sign'),
+        no(`$-5.9$ centimeters`, 'added-instead-of-multiplied'),
+        no(`$-0.84$ centimeters`, 'misplaced-decimal-point'),
+      ],
+      solution: `Multiply the hourly change by the number of hours: $-2.4 \\times 3.5 = -8.4$, so the level drops 8.4 centimeters, a change of $-8.4$ centimeters. The choice $-5.9$ comes from adding $-2.4$ and $-3.5$.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `What is $\\left(-\\frac{2}{3}\\right)\\left(\\frac{3}{4}\\right) \\div \\left(-\\frac{1}{6}\\right)$?`,
+      choices: [
+        no(`$-3$`, 'wrong-sign-dividing-two-negatives'),
+        no(`$\\frac{1}{12}$`, 'multiplied-instead-of-divided'),
+        ok(`$3$`),
+        no(`$\\frac{1}{3}$`, 'divided-in-reverse-order'),
+      ],
+      solution: `First multiply: $-\\frac{2}{3} \\times \\frac{3}{4} = -\\frac{6}{12} = -\\frac{1}{2}$. Then divide by multiplying by the reciprocal: $-\\frac{1}{2} \\times (-6) = 3$. The choice $\\frac{1}{12}$ multiplies $-\\frac{1}{2}$ by $-\\frac{1}{6}$ instead of dividing.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Rafael has a gift card worth 25 dollars. Rafael buys three snacks that cost 6.75 dollars each, then gets a refund of 4.5 dollars for one returned item. How much is left on the card?`,
+      choices: [
+        no(`0.25 dollars`, 'treated-refund-as-another-charge'),
+        no(`22.75 dollars`, 'subtracted-only-one-purchase'),
+        ok(`9.25 dollars`),
+        no(`4.75 dollars`, 'forgot-the-refund'),
+      ],
+      solution: `Write the changes as signed numbers: $25 + 3 \\times (-6.75) + 4.5 = 25 - 20.25 + 4.5 = 9.25$, so 9.25 dollars is left. The choice 0.25 dollars subtracts the refund, but a refund adds money back.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Which decimal is equal to $-\\frac{7}{6}$?`,
+      choices: [
+        no(`$-1.\\overline{16}$`, 'repeated-the-whole-block'),
+        ok(`$-1.1\\overline{6}$`),
+        no(`$-1.16$`, 'treated-repeating-as-terminating'),
+        no(`$-0.\\overline{857142}$`, 'divided-denominator-by-numerator'),
+      ],
+      solution: `Long division of $7 \\div 6$ gives $1.16666\\ldots$: the $1$ after the decimal point appears once and then only the $6$ repeats, so $-\\frac{7}{6} = -1.1\\overline{6}$. The choice $-1.\\overline{16}$ would mean $1.161616\\ldots$, which repeats the wrong block.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `What is the distance between $-\\frac{5}{6}$ and $-2\\frac{1}{3}$ on a number line?`,
+      choices: [
+        ok(`$1\\frac{1}{2}$`),
+        no(`$3\\frac{1}{6}$`, 'added-absolute-values-for-same-sign'),
+        no(`$-1\\frac{1}{2}$`, 'forgot-absolute-value'),
+        no(`$\\frac{2}{3}$`, 'subtracted-numerators-and-denominators'),
+      ],
+      solution: `Distance is the absolute value of the difference. Write $-2\\frac{1}{3} = -\\frac{14}{6}$, then $\\left|-\\frac{5}{6} - \\left(-\\frac{14}{6}\\right)\\right| = \\left|\\frac{9}{6}\\right| = 1\\frac{1}{2}$. The choice $3\\frac{1}{6}$ adds the two sizes, but both points are on the same side of zero, so their sizes are subtracted.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `On a number line, $p = -3.75$ and $q = -5.2$. The value of $p - q$ tells how far and in which direction $p$ is from $q$. What is $p - q$?`,
+      choices: [
+        no(`$-8.95$`, 'subtracted-the-negative-as-if-positive'),
+        no(`$-1.45$`, 'wrong-sign-on-result'),
+        no(`$8.95$`, 'ignored-signs-and-added'),
+        ok(`$1.45$`),
+      ],
+      solution: `Subtracting a negative is adding its opposite: $-3.75 - (-5.2) = -3.75 + 5.2 = 1.45$. The positive result means $p$ is $1.45$ units to the right of $q$. The choice $-8.95$ treats $-(-5.2)$ as $-5.2$.`,
+    },
+  ],
+}
+
+export default skill
