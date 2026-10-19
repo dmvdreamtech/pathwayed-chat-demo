@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g4-multi-digit-division-more',
+  extends: 'multi-digit-division',
+  subject: 'math',
+  grade: 4,
+  group: 'Number and Operations in Base Ten',
+  name: 'Multi-Digit Division',
+  standards: ['4.NBT.B.6'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is $246 \\div 2$?`,
+      choices: [
+        ok(`$123$`),
+        no(`$248$`, 'added-instead-of-divided'),
+        no(`$492$`, 'multiplied-instead-of-divided'),
+        no(`$244$`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `Divide each place by $2$: $200 \\div 2 = 100$, $40 \\div 2 = 20$, and $6 \\div 2 = 3$. So $246 \\div 2 = 123$. Check: $2 \\times 123 = 246$. The choice $492$ multiplies by $2$ instead of dividing.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is $520 \\div 4$?`,
+      choices: [
+        no(`$13$`, 'dropped-the-zero-in-the-quotient'),
+        ok(`$130$`),
+        no(`$516$`, 'subtracted-instead-of-divided'),
+        no(`$2080$`, 'multiplied-instead-of-divided'),
+      ],
+      solution: `Think of $520$ as $52$ tens. $52 \\div 4 = 13$, so $52$ tens divided by $4$ is $13$ tens, which is $130$. Check: $4 \\times 130 = 520$. The choice $13$ forgets that the answer is tens, not ones.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `What is $3600 \\div 9$?`,
+      choices: [
+        no(`$40$`, 'lost-a-zero'),
+        no(`$4000$`, 'added-an-extra-zero'),
+        ok(`$400$`),
+        no(`$4$`, 'dropped-all-the-zeros'),
+      ],
+      solution: `$3600$ is $36$ hundreds. $36 \\div 9 = 4$, so $36$ hundreds divided by $9$ is $4$ hundreds, or $400$. Check: $9 \\times 400 = 3600$. The choice $40$ would give $9 \\times 40 = 360$, which is too small.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What is $59 \\div 7$? Give the quotient and remainder:`,
+      choices: [
+        ok(`8 R3`),
+        no(`7 R10`, 'remainder-not-less-than-divisor'),
+        no(`3 R8`, 'swapped-quotient-and-remainder'),
+        no(`8 R0`, 'dropped-the-remainder'),
+      ],
+      solution: `The largest multiple of $7$ that fits in $59$ is $7 \\times 8 = 56$. Then $59 - 56 = 3$, so the answer is 8 R3. The choice 7 R10 leaves a remainder of $10$, but $10$ is more than $7$, so another group of $7$ still fits.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `To find $175 \\div 5$, Rowan splits it as $(150 \\div 5) + (25 \\div 5)$. What is $175 \\div 5$?`,
+      choices: [
+        no(`$30$`, 'kept-only-the-first-partial-quotient'),
+        no(`$305$`, 'wrote-partial-quotients-side-by-side'),
+        no(`$875$`, 'multiplied-instead-of-divided'),
+        ok(`$35$`),
+      ],
+      solution: `$150 \\div 5 = 30$ and $25 \\div 5 = 5$. Add the partial quotients: $30 + 5 = 35$. Check: $5 \\times 35 = 175$. The choice $305$ writes $30$ and $5$ next to each other instead of adding them.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Seven friends share $112$ stickers equally. How many stickers does each friend get?`,
+      choices: [
+        ok(`$16$`),
+        no(`$105$`, 'subtracted-instead-of-divided'),
+        no(`$784$`, 'multiplied-instead-of-divided'),
+        no(`$119$`, 'added-instead-of-divided'),
+      ],
+      solution: `Sharing equally means dividing: $112 \\div 7$. Since $7 \\times 10 = 70$ and $7 \\times 6 = 42$, and $70 + 42 = 112$, each friend gets $10 + 6 = 16$ stickers. The choice $105$ only takes away $7$ stickers once.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `What is $1836 \\div 6$?`,
+      choices: [
+        no(`$36$`, 'dropped-the-zero-in-the-quotient'),
+        ok(`$306$`),
+        no(`$360$`, 'placed-the-zero-in-the-wrong-place'),
+        no(`$3006$`, 'wrote-an-extra-zero'),
+      ],
+      solution: `$18$ hundreds $\\div 6 = 3$ hundreds. Next, $3$ tens cannot be split into $6$ groups, so the tens digit is $0$ and the $3$ tens become $30$ ones. Then $36 \\div 6 = 6$. The quotient is $306$. Check: $6 \\times 306 = 1836$. The choice $36$ skips the $0$ in the tens place.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What is $4256 \\div 7$?`,
+      choices: [
+        no(`$68$`, 'dropped-the-zero-in-the-quotient'),
+        no(`$680$`, 'placed-the-zero-in-the-wrong-place'),
+        no(`607 R7`, 'remainder-not-less-than-divisor'),
+        ok(`$608$`),
+      ],
+      solution: `$42$ hundreds $\\div 7 = 6$ hundreds. The $5$ tens are fewer than $7$, so the tens digit is $0$. Then $56 \\div 7 = 8$. The quotient is $608$. Check: $7 \\times 608 = 4256$. The choice 607 R7 has a remainder equal to the divisor, which means one more group of $7$ still fits.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `A school has $147$ students going on a field trip. Each van holds $8$ students. Every student must have a seat. How many vans are needed?`,
+      choices: [
+        no(`$18$`, 'dropped-remainder-when-it-should-round-up'),
+        ok(`$19$`),
+        no(`$3$`, 'gave-the-remainder-as-the-answer'),
+        no(`$155$`, 'added-instead-of-divided'),
+      ],
+      solution: `$147 \\div 8 = 18$ R3, because $8 \\times 18 = 144$ and $147 - 144 = 3$. Eighteen vans carry $144$ students, but $3$ students still need a seat, so one more van is needed: $18 + 1 = 19$ vans. The choice $18$ leaves $3$ students behind.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Jordan has $250$ beads. Each bracelet needs exactly $6$ beads. How many complete bracelets can Jordan make?`,
+      choices: [
+        ok(`$41$`),
+        no(`$42$`, 'rounded-up-when-remainder-should-be-dropped'),
+        no(`$4$`, 'gave-the-remainder-as-the-answer'),
+        no(`$244$`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `$250 \\div 6 = 41$ R4, because $6 \\times 41 = 246$ and $250 - 246 = 4$. The $4$ extra beads are not enough for another bracelet, so Jordan can make $41$ complete bracelets. The choice $42$ would need $6 \\times 42 = 252$ beads.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A baker has $389$ muffins and packs $4$ muffins in each box. After filling as many boxes as possible, the extra muffins go to the staff room. How many muffins go to the staff room?`,
+      choices: [
+        no(`$97$`, 'gave-the-quotient-instead-of-the-remainder'),
+        no(`$98$`, 'rounded-up-the-quotient'),
+        ok(`$1$`),
+        no(`$3$`, 'found-how-many-more-to-fill-a-box'),
+      ],
+      solution: `$389 \\div 4 = 97$ R1, because $4 \\times 97 = 388$ and $389 - 388 = 1$. The question asks for the extra muffins, which is the remainder: $1$ muffin. The choice $97$ is the number of full boxes, not the extra muffins.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `What number goes in the box to make $6 \\times \\square = 1458$ true?`,
+      choices: [
+        ok(`$243$`),
+        no(`$8748$`, 'multiplied-instead-of-divided'),
+        no(`$1452$`, 'subtracted-instead-of-divided'),
+        no(`$2430$`, 'added-an-extra-zero'),
+      ],
+      solution: `The missing factor is $1458 \\div 6$. $14$ hundreds $\\div 6 = 2$ hundreds with $2$ hundreds left, making $25$ tens. $25 \\div 6 = 4$ tens with $1$ ten left, making $18$ ones. $18 \\div 6 = 3$. So the box is $243$. Check: $6 \\times 243 = 1458$. The choice $2430$ is ten times too big.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `To find $672 \\div 4$, Malik writes $600 \\div 4 = 150$ and $72 \\div 4 = 18$. What is $672 \\div 4$?`,
+      choices: [
+        no(`$150$`, 'kept-only-the-first-partial-quotient'),
+        no(`$15018$`, 'wrote-partial-quotients-side-by-side'),
+        ok(`$168$`),
+        no(`$132$`, 'subtracted-the-partial-quotients'),
+      ],
+      solution: `Because $672 = 600 + 72$, the partial quotients are added: $150 + 18 = 168$. Check: $4 \\times 168 = 672$. The choice $132$ subtracts $18$ from $150$, but both parts of $672$ were shared, so their quotients add together.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A rectangular community garden has an area of $1248$ square feet. One side is $8$ feet long. How long is the other side, in feet?`,
+      choices: [
+        no(`$1240$`, 'subtracted-instead-of-divided'),
+        no(`$9984$`, 'multiplied-instead-of-divided'),
+        no(`$616$`, 'used-perimeter-instead-of-area'),
+        ok(`$156$`),
+      ],
+      solution: `Area is length times width, so the missing side is $1248 \\div 8$. $12$ hundreds $\\div 8 = 1$ hundred with $4$ hundreds left, making $44$ tens. $44 \\div 8 = 5$ tens with $4$ tens left, making $48$ ones. $48 \\div 8 = 6$. The other side is $156$ feet. Check: $8 \\times 156 = 1248$. The choice $616$ treats $1248$ as the perimeter.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Using compatible numbers, which is the best estimate of $3215 \\div 8$?`,
+      choices: [
+        no(`$40$`, 'lost-a-zero'),
+        ok(`$400$`),
+        no(`$4000$`, 'added-an-extra-zero'),
+        no(`$25600$`, 'multiplied-instead-of-divided'),
+      ],
+      solution: `$3215$ is close to $3200$, and $32 \\div 8 = 4$, so $3200 \\div 8 = 400$. The estimate is $400$. Check: $8 \\times 400 = 3200$, close to $3215$. The choice $40$ would give $8 \\times 40 = 320$, far too small.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `A school auditorium must seat $1000$ people for a concert. Each row has $9$ seats. Every person needs a seat. What is the fewest number of rows needed?`,
+      choices: [
+        no(`$111$`, 'dropped-remainder-when-it-should-round-up'),
+        ok(`$112$`),
+        no(`$1$`, 'gave-the-remainder-as-the-answer'),
+        no(`$12$`, 'skipped-a-digit-of-the-quotient'),
+      ],
+      solution: `$1000 \\div 9 = 111$ R1, because $9 \\times 111 = 999$ and $1000 - 999 = 1$. Then $111$ full rows seat $999$ people, and $1$ person still needs a seat, so $112$ rows are needed. The choice $111$ leaves one person without a seat.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A school collects $1236$ cans in the first week and $1416$ cans in the second week. All of the cans are split equally among $4$ food banks. How many cans does each food bank get?`,
+      choices: [
+        no(`$309$`, 'divided-only-one-week'),
+        no(`$45$`, 'divided-the-difference-instead-of-the-total'),
+        ok(`$663$`),
+        no(`$2648$`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `First find the total: $1236 + 1416 = 2652$ cans. Then divide: $2652 \\div 4 = 663$. Check: $4 \\times 663 = 2652$. The choice $309$ is $1236 \\div 4$, which shares only the first week's cans.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Ms. Ortiz has $2083$ stickers to share equally among $9$ classrooms. Each classroom gets as many stickers as possible, and the stickers left over stay in her desk. How many stickers does each classroom get, and how many stay in the desk?`,
+      choices: [
+        ok(`231 each, 4 in the desk`),
+        no(`230 each, 13 in the desk`, 'remainder-not-less-than-divisor'),
+        no(`4 each, 231 in the desk`, 'swapped-quotient-and-remainder'),
+        no(`232 each, 0 in the desk`, 'rounded-up-when-remainder-should-be-reported'),
+      ],
+      solution: `$2083 \\div 9 = 231$ R4, because $9 \\times 231 = 2079$ and $2083 - 2079 = 4$. Each classroom gets $231$ stickers and $4$ stay in the desk. The choice 230 each, 13 in the desk leaves $13$ stickers, which is enough to give each of the $9$ classrooms one more.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A warehouse must pack $3050$ jars into crates. Each crate holds $6$ jars, and every jar must be packed. How many crates are needed?`,
+      choices: [
+        no(`$508$`, 'dropped-remainder-when-it-should-round-up'),
+        no(`$59$`, 'dropped-the-zero-in-the-quotient'),
+        no(`$2$`, 'gave-the-remainder-as-the-answer'),
+        ok(`$509$`),
+      ],
+      solution: `$3050 \\div 6 = 508$ R2, because $6 \\times 508 = 3048$ and $3050 - 3048 = 2$. The $2$ extra jars still need a crate, so $508 + 1 = 509$ crates are needed. The choice $508$ leaves $2$ jars unpacked.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A number divided by $7$ has a quotient of $486$ and a remainder of $5$. What is the number?`,
+      choices: [
+        no(`$3402$`, 'forgot-to-add-the-remainder'),
+        ok(`$3407$`),
+        no(`$3397$`, 'subtracted-the-remainder'),
+        no(`$498$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Work backward: the number is $7 \\times 486 + 5$. Since $7 \\times 486 = 3402$, the number is $3402 + 5 = 3407$. Check: $3407 \\div 7 = 486$ R5. The choice $3402$ divides evenly by $7$, so it has no remainder.`,
+    },
+  ],
+}
+
+export default skill
