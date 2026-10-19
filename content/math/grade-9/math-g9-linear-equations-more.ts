@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g9-linear-equations-more',
+  extends: 'linear-equations',
+  subject: 'math',
+  grade: 9,
+  group: 'Reasoning with Equations and Inequalities',
+  name: 'Linear Equations',
+  standards: ['HSA.REI.B.3'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What value of $x$ solves $7 - 3x = 19$?`,
+      choices: [
+        ok(`$x = -4$`),
+        no(`$x = 4$`, 'dropped-negative-coefficient-sign'),
+        no(`$x = -\\frac{26}{3}$`, 'added-constant-instead-of-subtracting'),
+        no(`$x = \\frac{19}{4}$`, 'combined-unlike-terms'),
+      ],
+      solution: `Subtract $7$ from both sides: $-3x = 12$. Divide both sides by $-3$: $x = -4$. Check: $7 - 3(-4) = 7 + 12 = 19$. The choice $x = 4$ divides by $3$ instead of $-3$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What value of $x$ solves $9x + 4 = 5x - 16$?`,
+      choices: [
+        no(`$x = -3$`, 'added-constant-instead-of-subtracting'),
+        ok(`$x = -5$`),
+        no(`$x = 5$`, 'sign-error-moving-constant'),
+        no(`$x = -\\frac{10}{7}$`, 'added-variable-terms-instead-of-subtracting'),
+      ],
+      solution: `Subtract $5x$ from both sides: $4x + 4 = -16$. Subtract $4$: $4x = -20$, so $x = -5$. Check: $9(-5) + 4 = -41$ and $5(-5) - 16 = -41$. The choice $x = -3$ adds $4$ to $-16$ instead of subtracting it.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `What value of $x$ solves $\\frac{x}{5} - 3 = 4$?`,
+      choices: [
+        no(`$x = 5$`, 'subtracted-constant-instead-of-adding'),
+        no(`$x = \\frac{7}{5}$`, 'divided-instead-of-multiplied'),
+        ok(`$x = 35$`),
+        no(`$x = 19$`, 'did-not-multiply-every-term'),
+      ],
+      solution: `Add $3$ to both sides: $\\frac{x}{5} = 7$. Multiply both sides by $5$: $x = 35$. The choice $x = 19$ multiplies the left side by $5$ but leaves the $4$ on the right unchanged.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What value of $x$ solves $0.5x + 2 = 6.5$?`,
+      choices: [
+        no(`$x = 2.25$`, 'multiplied-instead-of-dividing'),
+        no(`$x = 17$`, 'added-constant-instead-of-subtracting'),
+        no(`$x = 4.5$`, 'forgot-to-divide-by-coefficient'),
+        ok(`$x = 9$`),
+      ],
+      solution: `Subtract $2$ from both sides: $0.5x = 4.5$. Divide by $0.5$: $x = 9$. The choice $x = 4.5$ stops before dividing by the coefficient $0.5$.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `How many solutions does the equation $3(x + 2) = 3x + 5$ have?`,
+      choices: [
+        ok(`No solution`),
+        no(`All real numbers`, 'thought-variables-canceling-means-identity'),
+        no(`Exactly one solution, $x = 0$`, 'variables-cancel-means-zero'),
+        no(`Exactly one solution, $x = 1$`, 'reported-leftover-constants-as-solution'),
+      ],
+      solution: `Distribute: $3x + 6 = 3x + 5$. Subtract $3x$ from both sides: $6 = 5$, which is false. No value of $x$ makes it true, so there is no solution. The choice "All real numbers" would need a true statement such as $6 = 6$.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `The area of a rectangle is $A = lw$. Which equation is solved for $w$?`,
+      choices: [
+        no(`$w = Al$`, 'multiplied-instead-of-dividing'),
+        ok(`$w = \\frac{A}{l}$`),
+        no(`$w = A - l$`, 'subtracted-instead-of-dividing'),
+        no(`$w = \\frac{l}{A}$`, 'inverted-the-quotient'),
+      ],
+      solution: `In $A = lw$, $w$ is multiplied by $l$, so divide both sides by $l$: $w = \\frac{A}{l}$. The choice $w = A - l$ subtracts, but undoing multiplication takes division.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $\\frac{3}{4}x - 2 = \\frac{1}{2}x + 1$?`,
+      choices: [
+        no(`$x = 3$`, 'forgot-to-divide-by-coefficient'),
+        ok(`$x = 12$`),
+        no(`$x = -4$`, 'sign-error-moving-constant'),
+        no(`$x = \\frac{12}{5}$`, 'added-variable-terms-instead-of-subtracting'),
+      ],
+      solution: `Subtract $\\frac{1}{2}x$ from both sides: $\\frac{1}{4}x - 2 = 1$. Add $2$: $\\frac{1}{4}x = 3$. Multiply by $4$: $x = 12$. Check: $\\frac{3}{4}(12) - 2 = 7$ and $\\frac{1}{2}(12) + 1 = 7$. The choice $x = 3$ stops at $\\frac{1}{4}x = 3$ without multiplying by $4$.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `How many solutions does the equation $2(3x - 4) + 2 = 6(x - 1)$ have?`,
+      choices: [
+        no(`No solution`, 'thought-variables-canceling-means-no-solution'),
+        no(`Only $x = 0$`, 'variables-cancel-means-zero'),
+        ok(`All real numbers`),
+        no(`Only $x = 1$`, 'checked-one-value-and-stopped'),
+      ],
+      solution: `Simplify the left side: $6x - 8 + 2 = 6x - 6$. The right side is $6x - 6$ too, so the equation becomes $6x - 6 = 6x - 6$, which is true for every $x$. The answer is all real numbers. The choice "No solution" assumes that losing the variable always means no answer, but here what is left, $-6 = -6$, is true.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Solve $ax + b = c$ for $x$, where $a \\neq 0$:`,
+      choices: [
+        ok(`$x = \\frac{c - b}{a}$`),
+        no(`$x = \\frac{c + b}{a}$`, 'sign-error-moving-constant'),
+        no(`$x = \\frac{c}{a} - b$`, 'divided-only-one-term'),
+        no(`$x = a(c - b)$`, 'multiplied-instead-of-dividing'),
+      ],
+      solution: `Subtract $b$ from both sides: $ax = c - b$. Divide both sides by $a$: $x = \\frac{c - b}{a}$. The choice $x = \\frac{c}{a} - b$ divides only $c$ by $a$, but the whole side $c - b$ must be divided.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $1.5(x - 2) = 0.5x + 4$?`,
+      choices: [
+        no(`$x = 6$`, 'distributed-to-first-term-only'),
+        no(`$x = 3.5$`, 'added-variable-terms-instead-of-subtracting'),
+        no(`$x = 1$`, 'sign-error-moving-constant'),
+        ok(`$x = 7$`),
+      ],
+      solution: `Distribute: $1.5x - 3 = 0.5x + 4$. Subtract $0.5x$: $x - 3 = 4$. Add $3$: $x = 7$. Check: $1.5(5) = 7.5$ and $0.5(7) + 4 = 7.5$. The choice $x = 6$ comes from writing $1.5x - 2$, multiplying only the $x$ by $1.5$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Gym A charges a 40 dollar joining fee plus 25 dollars per month. Gym B charges a 10 dollar joining fee plus 31 dollars per month. After how many months will the total cost be the same at both gyms?`,
+      choices: [
+        no(`30`, 'forgot-to-divide-by-rate-difference'),
+        ok(`5`),
+        no(`$\\frac{1}{5}$`, 'inverted-the-quotient'),
+        no(`$\\frac{25}{3}$`, 'added-fees-instead-of-subtracting'),
+      ],
+      solution: `Set the totals equal: $40 + 25m = 10 + 31m$. Subtract $25m$ and $10$ from both sides: $30 = 6m$, so $m = 5$. Check: $40 + 125 = 165$ and $10 + 155 = 165$. The choice 30 is the difference in fees before dividing by the 6 dollar difference in monthly cost.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `The perimeter of a rectangle is $P = 2l + 2w$. Which equation is solved for $l$?`,
+      choices: [
+        no(`$l = \\frac{P}{2} - 2w$`, 'divided-only-one-term'),
+        no(`$l = \\frac{P + 2w}{2}$`, 'sign-error-moving-term'),
+        ok(`$l = \\frac{P - 2w}{2}$`),
+        no(`$l = P - 2w$`, 'forgot-to-divide-by-coefficient'),
+      ],
+      solution: `Subtract $2w$ from both sides: $2l = P - 2w$. Divide both sides by $2$: $l = \\frac{P - 2w}{2}$. The choice $l = P - 2w$ forgets that $P - 2w$ equals $2l$, not $l$.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $\\frac{x - 4}{3} = \\frac{x + 2}{5}$?`,
+      choices: [
+        ok(`$x = 13$`),
+        no(`$x = -11$`, 'cross-multiplied-to-wrong-side'),
+        no(`$x = 3$`, 'distributed-to-first-term-only'),
+        no(`$x = -7$`, 'sign-error-moving-constant'),
+      ],
+      solution: `Multiply both sides by $15$: $5(x - 4) = 3(x + 2)$, so $5x - 20 = 3x + 6$. Subtract $3x$ and add $20$: $2x = 26$, so $x = 13$. Check: $\\frac{9}{3} = 3$ and $\\frac{15}{5} = 3$. The choice $x = -11$ comes from $3(x - 4) = 5(x + 2)$, which pairs each numerator with its own denominator.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Which equation has no solution?`,
+      choices: [
+        no(`$4(x - 1) = 4x - 4$`, 'confused-identity-with-no-solution'),
+        ok(`$4(x - 1) = 4x + 4$`),
+        no(`$4(x - 1) = 2x - 4$`, 'thought-zero-solution-means-no-solution'),
+        no(`$4(x - 1) = 4 - 4x$`, 'thought-opposite-coefficients-cancel'),
+      ],
+      solution: `Every left side is $4x - 4$. In $4x - 4 = 4x + 4$, subtracting $4x$ leaves $-4 = 4$, which is false, so it has no solution. The equation $4x - 4 = 4x - 4$ is true for all real numbers, $4x - 4 = 2x - 4$ has the solution $x = 0$, and $4x - 4 = 4 - 4x$ has the solution $x = 1$.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Rosa spent $\\frac{1}{2}$ of a savings fund on a bike helmet and $\\frac{1}{3}$ of the same fund on a lock. Rosa has 30 dollars left. How many dollars did Rosa have in savings at first?`,
+      choices: [
+        no(`36`, 'used-spent-fraction-instead-of-remaining'),
+        no(`50`, 'added-numerators-and-denominators'),
+        no(`5`, 'multiplied-instead-of-dividing'),
+        ok(`180`),
+      ],
+      solution: `Let $s$ be the savings. Rosa spent $\\frac{1}{2} + \\frac{1}{3} = \\frac{5}{6}$ of it, so $\\frac{1}{6}$ is left: $\\frac{1}{6}s = 30$, giving $s = 180$. Check: $180 - 90 - 60 = 30$. The choice 36 solves $\\frac{5}{6}s = 30$, treating the 30 dollars as the amount spent.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Solve $ax - b = cx + d$ for $x$, where $a \\neq c$:`,
+      choices: [
+        no(`$x = \\frac{d - b}{a - c}$`, 'sign-error-moving-constant'),
+        ok(`$x = \\frac{b + d}{a - c}$`),
+        no(`$x = \\frac{b + d}{a + c}$`, 'added-variable-coefficients'),
+        no(`$x = \\frac{b + d}{a} - c$`, 'divided-only-one-term'),
+      ],
+      solution: `Subtract $cx$ from both sides and add $b$: $ax - cx = b + d$. Factor out $x$: $(a - c)x = b + d$. Divide by $a - c$: $x = \\frac{b + d}{a - c}$. The choice $x = \\frac{b + d}{a + c}$ adds $cx$ to the left side instead of subtracting it.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Solve $y = \\frac{2x + k}{m}$ for $x$, where $m \\neq 0$:`,
+      choices: [
+        ok(`$x = \\frac{my - k}{2}$`),
+        no(`$x = \\frac{my + k}{2}$`, 'sign-error-moving-term'),
+        no(`$x = \\frac{my}{2} - k$`, 'divided-only-one-term'),
+        no(`$x = \\frac{m(y - k)}{2}$`, 'undid-operations-in-wrong-order'),
+      ],
+      solution: `Multiply both sides by $m$: $my = 2x + k$. Subtract $k$: $my - k = 2x$. Divide by $2$: $x = \\frac{my - k}{2}$. The choice $x = \\frac{m(y - k)}{2}$ subtracts $k$ before clearing the fraction, but $k$ is divided by $m$ along with $2x$, so the $m$ must be cleared first.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `What value of $x$ solves $\\frac{x + 5}{4} - \\frac{x - 3}{6} = 3$?`,
+      choices: [
+        no(`$x = 27$`, 'did-not-distribute-negative'),
+        no(`$x = -18$`, 'did-not-multiply-every-term'),
+        ok(`$x = 15$`),
+        no(`$x = -17$`, 'multiplied-numerators-by-wrong-factor'),
+      ],
+      solution: `Multiply every term by $12$: $3(x + 5) - 2(x - 3) = 36$. Distribute: $3x + 15 - 2x + 6 = 36$, so $x + 21 = 36$ and $x = 15$. Check: $\\frac{20}{4} - \\frac{12}{6} = 5 - 2 = 3$. The choice $x = 27$ writes $-2x - 6$, forgetting that $-2$ times $-3$ is $+6$.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `For what value of $k$ does the equation $3(x - 2) + kx = 5x - 6$ have infinitely many solutions?`,
+      choices: [
+        no(`$k = 8$`, 'added-coefficients-instead-of-matching'),
+        no(`$k = -2$`, 'subtracted-in-wrong-order'),
+        no(`$k = 5$`, 'ignored-existing-x-term'),
+        ok(`$k = 2$`),
+      ],
+      solution: `Simplify the left side: $3x - 6 + kx = (3 + k)x - 6$. The constants already match ($-6$ on both sides), so the equation is true for every $x$ when $3 + k = 5$, which gives $k = 2$. The choice $k = 5$ matches $k$ to the right side's coefficient and ignores the $3x$ already on the left.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `The art club has 84 dollars and adds 6.50 dollars each week. The chess club has 120 dollars and spends 2.50 dollars each week. After how many weeks will the two clubs have the same amount of money?`,
+      choices: [
+        no(`9`, 'subtracted-rates-instead-of-adding'),
+        no(`36`, 'forgot-to-divide-by-rate'),
+        ok(`4`),
+        no(`$\\frac{1}{4}$`, 'inverted-the-quotient'),
+      ],
+      solution: `Set the amounts equal: $84 + 6.5w = 120 - 2.5w$. Add $2.5w$ and subtract $84$: $9w = 36$, so $w = 4$. Check: $84 + 26 = 110$ and $120 - 10 = 110$. The choice 9 divides 36 by $6.5 - 2.5 = 4$, but the chess club's money goes down, so the weekly gap closes by $6.5 + 2.5 = 9$ dollars.`,
+    },
+  ],
+}
+
+export default skill
