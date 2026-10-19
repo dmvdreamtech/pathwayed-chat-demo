@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g4-fraction-operations-4-more',
+  extends: 'fraction-operations-4',
+  subject: 'math',
+  grade: 4,
+  group: 'Number and Operations: Fractions',
+  name: 'Fraction Operations',
+  standards: ['4.NF.B.3'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Which sum shows $\\frac{5}{6}$ broken into parts with the same denominator?`,
+      choices: [
+        ok(`$\\frac{1}{6} + \\frac{1}{6} + \\frac{3}{6}$`),
+        no(`$\\frac{2}{6} + \\frac{2}{6}$`, 'parts-do-not-sum-to-numerator'),
+        no(`$\\frac{2}{3} + \\frac{3}{3}$`, 'split-denominator-as-well-as-numerator'),
+        no(`$\\frac{3}{6} + \\frac{3}{6}$`, 'parts-sum-past-numerator'),
+      ],
+      solution: `The numerators of the parts must add to $5$ while every part stays in sixths: $1 + 1 + 3 = 5$, so $\\frac{1}{6} + \\frac{1}{6} + \\frac{3}{6} = \\frac{5}{6}$. The sum $\\frac{2}{6} + \\frac{2}{6}$ is only $\\frac{4}{6}$, and $\\frac{3}{6} + \\frac{3}{6}$ is $\\frac{6}{6}$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is $\\frac{2}{12} + \\frac{7}{12}$?`,
+      choices: [
+        ok(`$\\frac{9}{12}$`),
+        no(`$\\frac{9}{24}$`, 'added-denominators'),
+        no(`$\\frac{5}{12}$`, 'subtracted-instead-of-added'),
+        no(`$\\frac{14}{144}$`, 'multiplied-numerators-and-denominators'),
+      ],
+      solution: `Both fractions count twelfths, so add the numbers of twelfths: $2 + 7 = 9$. The answer is $\\frac{9}{12}$. The choice $\\frac{9}{24}$ adds the denominators too, but the size of each part is still one twelfth.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `What is $\\frac{9}{10} - \\frac{3}{10}$?`,
+      choices: [
+        no(`$\\frac{12}{10}$`, 'added-instead-of-subtracted'),
+        ok(`$\\frac{6}{10}$`),
+        no(`$\\frac{6}{20}$`, 'added-denominators'),
+        no(`$\\frac{27}{100}$`, 'multiplied-numerators-and-denominators'),
+      ],
+      solution: `Take $3$ tenths away from $9$ tenths: $9 - 3 = 6$, so the answer is $\\frac{6}{10}$. The denominator stays $10$ because the parts are still tenths. The choice $\\frac{12}{10}$ adds instead of subtracting.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Which sum is equal to $\\frac{4}{7}$?`,
+      choices: [
+        no(`$\\frac{1}{4} + \\frac{1}{4} + \\frac{1}{4} + \\frac{1}{4} + \\frac{1}{4} + \\frac{1}{4} + \\frac{1}{4}$`, 'swapped-numerator-and-denominator'),
+        no(`$\\frac{1}{7} + \\frac{1}{7} + \\frac{1}{7}$`, 'one-unit-fraction-short'),
+        ok(`$\\frac{1}{7} + \\frac{1}{7} + \\frac{1}{7} + \\frac{1}{7}$`),
+        no(`$\\frac{1}{7} + \\frac{1}{7} + \\frac{1}{7} + \\frac{1}{7} + \\frac{1}{7} + \\frac{1}{7} + \\frac{1}{7}$`, 'counted-all-parts-of-the-whole'),
+      ],
+      solution: `The fraction $\\frac{4}{7}$ means $4$ parts that are each $\\frac{1}{7}$, so it equals $\\frac{1}{7}$ added $4$ times. Seven copies of $\\frac{1}{4}$ make $\\frac{7}{4}$, which swaps the roles of the numerator and denominator.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A number line from $0$ to $1$ is split into $5$ equal parts. A toy frog starts at $\\frac{1}{5}$ and hops forward $\\frac{3}{5}$. Where does the frog land?`,
+      choices: [
+        no(`$\\frac{4}{10}$`, 'added-denominators'),
+        no(`$\\frac{2}{5}$`, 'subtracted-instead-of-added'),
+        no(`$\\frac{3}{5}$`, 'gave-hop-length-not-landing-point'),
+        ok(`$\\frac{4}{5}$`),
+      ],
+      solution: `Hopping forward joins the distances: $\\frac{1}{5} + \\frac{3}{5} = \\frac{4}{5}$. The choice $\\frac{3}{5}$ is only the length of the hop, not the point where the frog lands.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A garden bed has $8$ equal rows, and $\\frac{3}{8}$ of the bed is planted with beans. What fraction of the bed is not planted with beans?`,
+      choices: [
+        ok(`$\\frac{5}{8}$`),
+        no(`$\\frac{3}{8}$`, 'gave-the-part-taken'),
+        no(`$\\frac{11}{8}$`, 'added-instead-of-subtracted'),
+        no(`$\\frac{5}{16}$`, 'added-denominators'),
+      ],
+      solution: `The whole bed is $\\frac{8}{8}$. Take away the bean rows: $\\frac{8}{8} - \\frac{3}{8} = \\frac{5}{8}$. The choice $\\frac{3}{8}$ is the part that does have beans.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Which shows $2\\frac{1}{4}$ written as a sum of fourths?`,
+      choices: [
+        no(`$\\frac{2}{4} + \\frac{1}{4}$`, 'treated-whole-number-as-numerator'),
+        ok(`$\\frac{4}{4} + \\frac{4}{4} + \\frac{1}{4}$`),
+        no(`$\\frac{4}{4} + \\frac{1}{4}$`, 'dropped-one-whole'),
+        no(`$\\frac{4}{4} + \\frac{4}{4} + \\frac{4}{4} + \\frac{1}{4}$`, 'added-an-extra-whole'),
+      ],
+      solution: `Each whole is $\\frac{4}{4}$, so $2$ wholes are $\\frac{4}{4} + \\frac{4}{4}$, and then add the extra $\\frac{1}{4}$. The choice $\\frac{2}{4} + \\frac{1}{4}$ treats the whole number $2$ as $2$ fourths, which is only $\\frac{3}{4}$ in all.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What is $1\\frac{4}{5} + 2\\frac{3}{5}$?`,
+      choices: [
+        no(`$3\\frac{2}{5}$`, 'forgot-to-carry-the-whole'),
+        no(`$3\\frac{7}{10}$`, 'added-denominators'),
+        no(`$\\frac{4}{5}$`, 'subtracted-instead-of-added'),
+        ok(`$4\\frac{2}{5}$`),
+      ],
+      solution: `Add the wholes, $1 + 2 = 3$, and the fifths, $\\frac{4}{5} + \\frac{3}{5} = \\frac{7}{5}$. Since $\\frac{7}{5} = 1\\frac{2}{5}$, the total is $3 + 1\\frac{2}{5} = 4\\frac{2}{5}$. The choice $3\\frac{2}{5}$ keeps the $\\frac{2}{5}$ but loses the extra whole made by $\\frac{5}{5}$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `What is $5\\frac{1}{6} - 2\\frac{5}{6}$?`,
+      choices: [
+        ok(`$2\\frac{2}{6}$`),
+        no(`$3\\frac{4}{6}$`, 'subtracted-smaller-numerator-from-larger'),
+        no(`$3\\frac{2}{6}$`, 'did-not-reduce-whole-after-regrouping'),
+        no(`$8$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `There are not enough sixths to take away $\\frac{5}{6}$ from $\\frac{1}{6}$, so trade one whole for $\\frac{6}{6}$: $5\\frac{1}{6} = 4\\frac{7}{6}$. Then $4\\frac{7}{6} - 2\\frac{5}{6} = 2\\frac{2}{6}$. The choice $3\\frac{4}{6}$ subtracts $1$ from $5$ in the numerators instead of regrouping.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Ava is walking a trail that is $\\frac{7}{8}$ mile long. Ava has walked $\\frac{3}{8}$ mile so far. How much farther does Ava need to walk?`,
+      choices: [
+        no(`$\\frac{10}{8}$ mile`, 'added-instead-of-subtracted'),
+        ok(`$\\frac{4}{8}$ mile`),
+        no(`$\\frac{4}{16}$ mile`, 'added-denominators'),
+        no(`$\\frac{7}{8}$ mile`, 'gave-the-total-distance'),
+      ],
+      solution: `The distance left is the total minus the part already walked: $\\frac{7}{8} - \\frac{3}{8} = \\frac{4}{8}$ mile. You can check by adding: $\\frac{3}{8} + \\frac{4}{8} = \\frac{7}{8}$. The choice $\\frac{10}{8}$ mile adds the two distances instead.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A jug holds $2\\frac{3}{4}$ liters of juice. Omar pours out $1\\frac{1}{4}$ liters. How much juice is left in the jug?`,
+      choices: [
+        no(`$4$ liters`, 'added-instead-of-subtracted'),
+        no(`$2\\frac{2}{4}$ liters`, 'subtracted-only-the-fraction-part'),
+        ok(`$1\\frac{2}{4}$ liters`),
+        no(`$1\\frac{2}{8}$ liters`, 'added-denominators'),
+      ],
+      solution: `Subtract the wholes, $2 - 1 = 1$, and the fourths, $\\frac{3}{4} - \\frac{1}{4} = \\frac{2}{4}$, to get $1\\frac{2}{4}$ liters. The choice $2\\frac{2}{4}$ liters takes away only the $\\frac{1}{4}$ and forgets the $1$ whole liter.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Kai wrote $\\frac{7}{12} = \\frac{3}{12} + \\frac{\\square}{12}$. What number goes in the box?`,
+      choices: [
+        no(`$10$`, 'added-instead-of-subtracted'),
+        no(`$7$`, 'copied-the-total-numerator'),
+        no(`$9$`, 'subtracted-from-the-denominator'),
+        ok(`$4$`),
+      ],
+      solution: `The two parts must add to $7$ twelfths, and $3 + 4 = 7$, so the box holds $4$. The choice $9$ comes from $12 - 3$, but the parts must add to the numerator $7$, not to the denominator.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Rosa practiced piano for $\\frac{3}{4}$ hour on Monday and $\\frac{3}{4}$ hour on Tuesday. How many hours did Rosa practice in all?`,
+      choices: [
+        ok(`$1\\frac{2}{4}$ hours`),
+        no(`$\\frac{6}{8}$ hour`, 'added-denominators'),
+        no(`$\\frac{9}{16}$ hour`, 'multiplied-numerators-and-denominators'),
+        no(`$1\\frac{6}{4}$ hours`, 'carried-a-whole-without-removing-fourths'),
+      ],
+      solution: `Join the two times: $\\frac{3}{4} + \\frac{3}{4} = \\frac{6}{4}$. Four of those fourths make $1$ whole hour, leaving $\\frac{2}{4}$, so the total is $1\\frac{2}{4}$ hours. The choice $1\\frac{6}{4}$ hours adds a whole but keeps all $6$ fourths, which counts $4$ of them twice.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `What is $4 - 1\\frac{2}{5}$?`,
+      choices: [
+        no(`$3\\frac{2}{5}$`, 'subtracted-wholes-and-kept-fraction'),
+        ok(`$2\\frac{3}{5}$`),
+        no(`$3\\frac{3}{5}$`, 'did-not-reduce-whole-after-regrouping'),
+        no(`$5\\frac{2}{5}$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `Write $4$ as $3\\frac{5}{5}$. Then $3\\frac{5}{5} - 1\\frac{2}{5} = 2\\frac{3}{5}$. The choice $3\\frac{2}{5}$ subtracts the wholes, $4 - 1 = 3$, but then adds on the $\\frac{2}{5}$ instead of taking it away.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Which shows $\\frac{8}{5}$ broken into a whole number and a fraction?`,
+      choices: [
+        no(`$\\frac{5}{5} + \\frac{5}{5}$`, 'parts-sum-past-numerator'),
+        no(`$\\frac{4}{5} + \\frac{3}{5}$`, 'parts-do-not-sum-to-numerator'),
+        no(`$1 + \\frac{8}{5}$`, 'added-whole-without-removing-fifths'),
+        ok(`$1 + \\frac{3}{5}$`),
+      ],
+      solution: `Five of the eight fifths make $1$ whole, since $\\frac{5}{5} = 1$, and $8 - 5 = 3$ fifths are left over. So $\\frac{8}{5} = 1 + \\frac{3}{5}$. The choice $1 + \\frac{8}{5}$ adds a whole but still keeps all $8$ fifths.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `A fish tank has $4\\frac{2}{6}$ gallons of water. Nadia adds $1\\frac{5}{6}$ gallons, and later $2\\frac{3}{6}$ gallons drain out during cleaning. How much water is in the tank now?`,
+      choices: [
+        no(`$8\\frac{4}{6}$ gallons`, 'added-every-amount'),
+        ok(`$3\\frac{4}{6}$ gallons`),
+        no(`$0$ gallons`, 'subtracted-every-amount'),
+        no(`$2\\frac{4}{6}$ gallons`, 'lost-the-carried-whole'),
+      ],
+      solution: `First add: $4\\frac{2}{6} + 1\\frac{5}{6} = 5\\frac{7}{6} = 6\\frac{1}{6}$ gallons. Then subtract the water that drained: $6\\frac{1}{6} = 5\\frac{7}{6}$, and $5\\frac{7}{6} - 2\\frac{3}{6} = 3\\frac{4}{6}$ gallons. The choice $2\\frac{4}{6}$ gallons drops the whole made from $\\frac{6}{6}$ after the first step.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `What number makes this equation true: $6\\frac{1}{8} - \\square = 3\\frac{5}{8}$?`,
+      choices: [
+        no(`$9\\frac{6}{8}$`, 'added-instead-of-subtracted'),
+        no(`$3\\frac{4}{8}$`, 'subtracted-smaller-numerator-from-larger'),
+        ok(`$2\\frac{4}{8}$`),
+        no(`$2\\frac{6}{8}$`, 'regrouped-whole-as-ten-eighths'),
+      ],
+      solution: `The missing number is the difference $6\\frac{1}{8} - 3\\frac{5}{8}$. Trade one whole for $\\frac{8}{8}$: $6\\frac{1}{8} = 5\\frac{9}{8}$, and $5\\frac{9}{8} - 3\\frac{5}{8} = 2\\frac{4}{8}$. Check: $6\\frac{1}{8} - 2\\frac{4}{8} = 3\\frac{5}{8}$. The choice $2\\frac{6}{8}$ trades the whole for $10$ eighths, as if borrowing a ten, but one whole is only $\\frac{8}{8}$.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Jalen ran $2\\frac{3}{10}$ kilometers and Priya ran $1\\frac{7}{10}$ kilometers. How much farther did Jalen run than Priya?`,
+      choices: [
+        ok(`$\\frac{6}{10}$ kilometer`),
+        no(`$1\\frac{4}{10}$ kilometers`, 'subtracted-smaller-numerator-from-larger'),
+        no(`$4$ kilometers`, 'added-instead-of-subtracted'),
+        no(`$1\\frac{6}{10}$ kilometers`, 'did-not-reduce-whole-after-regrouping'),
+      ],
+      solution: `Find the difference $2\\frac{3}{10} - 1\\frac{7}{10}$. Trade one whole for $\\frac{10}{10}$: $2\\frac{3}{10} = 1\\frac{13}{10}$, and $1\\frac{13}{10} - 1\\frac{7}{10} = \\frac{6}{10}$ kilometer. The choice $1\\frac{4}{10}$ kilometers subtracts $3$ from $7$ in the numerators instead of regrouping.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A board is $2$ meters long. It is cut into three pieces. Two of the pieces are $\\frac{5}{8}$ meter and $\\frac{7}{8}$ meter long. How long is the third piece?`,
+      choices: [
+        no(`$1\\frac{3}{8}$ meters`, 'subtracted-only-one-piece'),
+        no(`$3\\frac{4}{8}$ meters`, 'added-all-amounts'),
+        no(`$1\\frac{4}{8}$ meters`, 'gave-the-two-pieces-total'),
+        ok(`$\\frac{4}{8}$ meter`),
+      ],
+      solution: `The two known pieces add to $\\frac{5}{8} + \\frac{7}{8} = \\frac{12}{8}$ meters. The whole board is $2 = \\frac{16}{8}$ meters, so the third piece is $\\frac{16}{8} - \\frac{12}{8} = \\frac{4}{8}$ meter. The choice $1\\frac{4}{8}$ meters is the length of the two known pieces together, not the piece that is left.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Two fractions both have a denominator of $12$. Their sum is $1\\frac{1}{12}$ and their difference is $\\frac{5}{12}$. What are the two fractions?`,
+      choices: [
+        no(`$\\frac{8}{12}$ and $\\frac{5}{12}$`, 'checked-sum-only'),
+        ok(`$\\frac{9}{12}$ and $\\frac{4}{12}$`),
+        no(`$\\frac{10}{12}$ and $\\frac{5}{12}$`, 'checked-difference-only'),
+        no(`$\\frac{13}{12}$ and $\\frac{5}{12}$`, 'used-the-given-sum-and-difference'),
+      ],
+      solution: `The sum $1\\frac{1}{12}$ is $\\frac{13}{12}$, so the numerators add to $13$ and differ by $5$. Trying pairs that add to $13$: $9 + 4 = 13$ and $9 - 4 = 5$. So the fractions are $\\frac{9}{12}$ and $\\frac{4}{12}$. The pair $\\frac{8}{12}$ and $\\frac{5}{12}$ has the right sum, but its difference is only $\\frac{3}{12}$.`,
+    },
+  ],
+}
+
+export default skill
