@@ -148,18 +148,20 @@ function unequalCuts(parts: number): number[] {
   return out
 }
 
+/** Length: a bar exactly `units` cubes long, labelled with its picture, over a
+ *  row of unit cubes on the same 12-cube scale, so the child counts the cubes. */
 function Measure({ image, units }: { image: string; units: number }) {
+  const U = 10
   return (
-    <span className="picq-measure" aria-hidden="true">
-      <span className="picq-measure-object" style={{ width: `${(units / 12) * 100}%` }}>
-        <KidIcon name={image} stretch />
-      </span>
-      <svg className="picq-measure-cubes" viewBox={`0 0 ${12 * 10} 12`} preserveAspectRatio="xMinYMid meet">
-        {Array.from({ length: units }, (_, i) => (
-          <rect key={i} x={i * 10 + 0.5} y="0.5" width="9" height="11" rx="1.5" fill="#7bd389" stroke={NAVY} strokeWidth="1" />
-        ))}
-      </svg>
-    </span>
+    <svg className="picq-svg picq-measure" viewBox={`0 0 ${12 * U + 2} 40`} aria-hidden="true">
+      <rect x="1" y="2" width={units * U} height="16" rx="5" fill="#f6c443" stroke={NAVY} strokeWidth="1.5" />
+      <g transform={`translate(${1 + (units * U) / 2 - 8} 1)`}>
+        <KidIcon name={image} size={18} />
+      </g>
+      {Array.from({ length: units }, (_, i) => (
+        <rect key={i} x={1 + i * U + 0.5} y="24" width={U - 1} height={U - 1} rx="1.5" fill="#7bd389" stroke={NAVY} strokeWidth="1" />
+      ))}
+    </svg>
   )
 }
 
@@ -188,7 +190,7 @@ export function PictureFigure({ figure, place, label }: { figure: PictureTile | 
     case 'letter':
       return <span className="picq-num">{figure.value}</span>
     case 'word':
-      return <span className={`picq-word ${figure.value.length > 14 ? 'picq-word-long' : ''}`}>{figure.value}</span>
+      return <span className={`picq-word ${figure.value.length > 8 ? 'picq-word-long' : ''}`}>{figure.value}</span>
     case 'object_group':
       return <Group image={figure.image} count={figure.count} variant={place === 'tile' ? 'tile' : figure.count === 1 ? 'solo' : 'count'} />
     case 'clock':

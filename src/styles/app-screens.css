@@ -2067,24 +2067,12 @@
 .kid-screen .picq-prompt .picq-array svg {
   width: clamp(32px, 9vw, 56px);
 }
-/* Length: the picture sits over a row of unit cubes, scaled to the same 12-unit ruler. */
-.kid-screen .picq-measure {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  width: clamp(150px, 70vw, 320px);
+/* Length: a bar over a row of unit cubes, on one 12-cube scale. */
+.kid-screen .picq-svg.picq-measure {
+  width: clamp(150px, 60vw, 300px);
 }
-.kid-screen .picq-measure-object {
-  display: flex;
-  justify-content: stretch;
-}
-.kid-screen .picq-measure-object svg {
+.kid-screen .picq-tile .picq-svg.picq-measure {
   width: 100%;
-  height: clamp(28px, 8vw, 48px);
-}
-.kid-screen .picq-measure-cubes {
-  width: 100%;
-  height: auto;
 }
 /* Picture graph: one row per kind, the kind's picture first. */
 .kid-screen .picq-rows {
