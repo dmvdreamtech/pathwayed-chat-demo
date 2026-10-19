@@ -12,6 +12,7 @@
     "test": "vitest run",
     "eval": "bun run eval/run.ts",
     "db:seed": "bun run scripts/db-seed.ts",
+    "db:load-coverage": "bun run scripts/load-coverage-seeds.ts",
     "preview": "vite preview"
   },
   "dependencies": {
