@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g4-factors-multiples-more',
+  extends: 'factors-multiples',
+  subject: 'math',
+  grade: 4,
+  group: 'Operations and Algebraic Thinking',
+  name: 'Factors & Multiples',
+  standards: ['4.OA.B.4'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Which list shows all the factors of $14$?`,
+      choices: [
+        ok(`$1, 2, 7, 14$`),
+        no(`$2, 7$`, 'left-out-1-and-the-number-itself'),
+        no(`$1, 2, 7$`, 'left-out-the-number-itself'),
+        no(`$14, 28, 42, 56$`, 'listed-multiples-instead-of-factors'),
+      ],
+      solution: `The factor pairs of $14$ are $1 \\times 14$ and $2 \\times 7$, so the factors are $1, 2, 7, 14$. The list $14, 28, 42, 56$ shows multiples of $14$, not numbers that divide $14$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Which number is a multiple of $7$?`,
+      choices: [
+        no(`$17$`, 'chose-a-number-containing-the-digit-7'),
+        no(`$1$`, 'chose-a-factor-instead-of-a-multiple'),
+        ok(`$35$`),
+        no(`$22$`, 'off-by-one-from-a-multiple'),
+      ],
+      solution: `Because $7 \\times 5 = 35$, the number $35$ is a multiple of $7$. The number $17$ has a $7$ in it, but $17 \\div 7$ leaves a remainder, so it is not a multiple.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Is the number $2$ prime, composite, neither, or both?`,
+      choices: [
+        ok(`Prime`),
+        no(`Composite`, 'thinks-every-even-number-is-composite'),
+        no(`Neither`, 'confused-2-with-1'),
+        no(`Both`, 'thinks-prime-and-composite-can-overlap'),
+      ],
+      solution: `The only factors of $2$ are $1$ and $2$, so it has exactly two factors and is prime. The answer "Composite" comes from thinking every even number is composite, but $2$ is the one even prime.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Which number is a factor of $27$?`,
+      choices: [
+        no(`$54$`, 'chose-a-multiple-instead-of-a-factor'),
+        no(`$7$`, 'chose-a-digit-of-the-number'),
+        no(`$2$`, 'assumed-2-divides-every-number'),
+        ok(`$3$`),
+      ],
+      solution: `Since $3 \\times 9 = 27$, the number $3$ is a factor of $27$. The number $7$ is a digit in $27$, but $27 \\div 7$ does not come out even.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which list shows the first five multiples of $3$?`,
+      choices: [
+        no(`$3, 5, 7, 9, 11$`, 'counted-by-2-instead-of-3'),
+        ok(`$3, 6, 9, 12, 15$`),
+        no(`$1, 3$`, 'listed-factors-instead-of-multiples'),
+        no(`$3, 6, 9, 13, 16$`, 'skip-counting-error'),
+      ],
+      solution: `Multiply $3$ by $1, 2, 3, 4, 5$ to get $3, 6, 9, 12, 15$. The list $1, 3$ gives the factors of $3$, which divide $3$ instead of being made from it.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Which pair of numbers is a factor pair of $21$?`,
+      choices: [
+        no(`$1$ and $20$`, 'added-instead-of-multiplied'),
+        no(`$7$ and $14$`, 'listed-multiples-of-7'),
+        ok(`$3$ and $7$`),
+        no(`$3$ and $8$`, 'multiplication-fact-error'),
+      ],
+      solution: `A factor pair multiplies to the number: $3 \\times 7 = 21$. The pair $1$ and $20$ adds to $21$, but $1 \\times 20 = 20$.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `How many factors does $28$ have?`,
+      choices: [
+        no(`$3$`, 'counted-factor-pairs-not-factors'),
+        ok(`$6$`),
+        no(`$4$`, 'left-out-1-and-the-number-itself'),
+        no(`$2$`, 'counted-only-prime-factors'),
+      ],
+      solution: `The factor pairs are $1 \\times 28$, $2 \\times 14$ and $4 \\times 7$, so the factors are $1, 2, 4, 7, 14, 28$: six in all. The answer $3$ counts the pairs, but each pair holds two factors.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Which of these numbers is prime?`,
+      choices: [
+        no(`$21$`, 'assumed-odd-numbers-are-prime'),
+        no(`$51$`, 'did-not-check-divisibility-by-3'),
+        no(`$49$`, 'did-not-check-divisibility-by-7'),
+        ok(`$31$`),
+      ],
+      solution: `No whole number other than $1$ and $31$ divides $31$, so it is prime. The number $51$ looks prime, but $3 \\times 17 = 51$, so it is composite.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Which of these numbers is composite?`,
+      choices: [
+        ok(`$57$`),
+        no(`$2$`, 'thinks-every-even-number-is-composite'),
+        no(`$1$`, 'thinks-1-is-composite'),
+        no(`$23$`, 'chose-a-prime-number'),
+      ],
+      solution: `Since $3 \\times 19 = 57$, the number $57$ has factors besides $1$ and itself, so it is composite. The number $2$ is even, but its only factors are $1$ and $2$, so it is prime.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Which statement is true?`,
+      choices: [
+        no(`$12$ is a factor of $4$.`, 'swapped-factor-direction'),
+        ok(`$4$ is a factor of $12$.`),
+        no(`$4$ is a multiple of $12$.`, 'swapped-multiple-direction'),
+        no(`$8$ is a factor of $12$.`, 'thinks-any-smaller-even-number-is-a-factor'),
+      ],
+      solution: `Because $4 \\times 3 = 12$, the statement "$4$ is a factor of $12$." is true, and $12$ is a multiple of $4$. Saying $12$ is a factor of $4$ reverses the relationship: a factor is never larger than the number it divides.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A florist has $42$ roses and wants to make equal bouquets with none left over. Which number of bouquets works?`,
+      choices: [
+        no(`$4$`, 'assumed-even-numbers-divide-even-numbers'),
+        no(`$9$`, 'confused-divisibility-by-3-with-9'),
+        ok(`$6$`),
+        no(`$8$`, 'did-not-check-the-remainder'),
+      ],
+      solution: `Since $6 \\times 7 = 42$, the florist can make $6$ bouquets of $7$ roses. With $4$ bouquets, $42 \\div 4$ is $10$ with $2$ left over, so it does not work even though both numbers are even.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Which number is a multiple of both $3$ and $5$?`,
+      choices: [
+        no(`$35$`, 'checked-only-multiple-of-5'),
+        no(`$33$`, 'checked-only-multiple-of-3'),
+        no(`$8$`, 'added-the-two-numbers'),
+        ok(`$45$`),
+      ],
+      solution: `Since $3 \\times 15 = 45$ and $5 \\times 9 = 45$, the number $45$ is a multiple of both. The number $35$ is a multiple of $5$, but $35 \\div 3$ leaves a remainder.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Which pair of numbers is a factor pair of $32$?`,
+      choices: [
+        ok(`$4$ and $8$`),
+        no(`$2$ and $30$`, 'added-instead-of-multiplied'),
+        no(`$6$ and $5$`, 'multiplication-fact-error'),
+        no(`$16$ and $32$`, 'listed-a-factor-with-the-number-itself'),
+      ],
+      solution: `A factor pair multiplies to the number, and $4 \\times 8 = 32$. The pair $2$ and $30$ adds to $32$, but $2 \\times 30 = 60$.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `What is the smallest multiple of $9$ that is greater than $50$?`,
+      choices: [
+        no(`$45$`, 'chose-the-multiple-below-50'),
+        no(`$51$`, 'added-1-to-50'),
+        ok(`$54$`),
+        no(`$59$`, 'added-9-to-50'),
+      ],
+      solution: `Count by nines: $45$, then $54$. Since $45$ is less than $50$, the answer is $54 = 9 \\times 6$. The number $59$ is $50 + 9$, which is not a multiple of $9$.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Dana lists the factors of $45$ as $1, 3, 5, 15, 45$. Which factor did Dana leave out?`,
+      choices: [
+        no(`$90$`, 'gave-a-multiple-instead-of-a-factor'),
+        ok(`$9$`),
+        no(`$10$`, 'thinks-ending-in-5-means-10-is-a-factor'),
+        no(`$25$`, 'thought-a-multiple-of-5-is-a-factor'),
+      ],
+      solution: `The factor pairs of $45$ are $1 \\times 45$, $3 \\times 15$ and $5 \\times 9$, so Dana left out $9$. The number $90$ is a multiple of $45$, not a factor.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Which number has exactly three factors?`,
+      choices: [
+        no(`$12$`, 'counted-factor-pairs-not-factors'),
+        ok(`$25$`),
+        no(`$3$`, 'confused-the-number-with-its-factor-count'),
+        no(`$21$`, 'missed-a-factor'),
+      ],
+      solution: `The factors of $25$ are $1, 5, 25$, exactly three, because $5 \\times 5$ uses the same factor twice. The number $12$ has three factor pairs, but six factors: $1, 2, 3, 4, 6, 12$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Which list shows all the prime numbers between $30$ and $40$?`,
+      choices: [
+        no(`$31, 33, 37, 39$`, 'assumed-numbers-ending-in-1-3-7-9-are-prime'),
+        no(`$31, 37, 39$`, 'did-not-check-divisibility-by-3'),
+        ok(`$31, 37$`),
+        no(`$31, 33, 35, 37, 39$`, 'assumed-odd-numbers-are-prime'),
+      ],
+      solution: `Check each odd number: $33 = 3 \\times 11$, $35 = 5 \\times 7$ and $39 = 3 \\times 13$ are composite, which leaves only $31, 37$. The list $31, 37, 39$ misses that $39$ is divisible by $3$.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A number is between $10$ and $20$. It is a multiple of $7$ and a factor of $42$. What is the number?`,
+      choices: [
+        no(`$21$`, 'ignored-the-upper-limit'),
+        no(`$7$`, 'ignored-the-lower-limit'),
+        no(`$28$`, 'chose-a-multiple-instead-of-a-factor'),
+        ok(`$14$`),
+      ],
+      solution: `The factors of $42$ are $1, 2, 3, 6, 7, 14, 21, 42$. The ones that are multiples of $7$ are $7, 14, 21, 42$, and only $14$ is between $10$ and $20$. The number $21$ fits the first two clues but is greater than $20$.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A band has $54$ marchers. They march in equal rows, with at least $2$ rows and at least $2$ marchers in each row. How many different numbers of rows are possible?`,
+      choices: [
+        no(`$3$`, 'counted-factor-pairs-not-factors'),
+        no(`$8$`, 'included-1-and-54'),
+        ok(`$6$`),
+        no(`$4$`, 'counted-factor-pairs-including-1'),
+      ],
+      solution: `The factors of $54$ are $1, 2, 3, 6, 9, 18, 27, 54$. Leaving out $1$ row and $54$ rows (which would put $1$ marcher in each row) leaves $2, 3, 6, 9, 18, 27$: six choices. The answer $3$ counts the pairs, but $3$ rows of $18$ and $18$ rows of $3$ are different.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Which number is a multiple of $8$ but NOT a multiple of $16$?`,
+      choices: [
+        no(`$64$`, 'did-not-check-multiple-of-16'),
+        ok(`$72$`),
+        no(`$68$`, 'confused-multiple-of-4-with-8'),
+        no(`$78$`, 'chose-a-number-ending-in-8'),
+      ],
+      solution: `Since $8 \\times 9 = 72$, the number $72$ is a multiple of $8$, and $16 \\times 4 = 64$ and $16 \\times 5 = 80$, so $72$ is not a multiple of $16$. The number $64$ is a multiple of $8$, but it is also $16 \\times 4$.`,
+    },
+  ],
+}
+
+export default skill
