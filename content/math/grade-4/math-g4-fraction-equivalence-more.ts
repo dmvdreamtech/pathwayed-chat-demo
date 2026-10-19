@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g4-fraction-equivalence-more',
+  extends: 'fraction-equivalence',
+  subject: 'math',
+  grade: 4,
+  group: 'Number and Operations: Fractions',
+  name: 'Fraction Equivalence & Comparison',
+  standards: ['4.NF.A.1'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `A rectangle is cut into $4$ equal parts and $3$ of them are shaded. Then each part is cut into $2$ equal pieces. What fraction of the rectangle is shaded now?`,
+      choices: [
+        ok(`$\\frac{6}{8}$`),
+        no(`$\\frac{3}{8}$`, 'changed-denominator-only'),
+        no(`$\\frac{6}{4}$`, 'changed-numerator-only'),
+        no(`$\\frac{5}{6}$`, 'added-same-number-to-both'),
+      ],
+      solution: `Cutting every part in $2$ doubles the number of parts, $4 \\times 2 = 8$, and doubles the number of shaded pieces, $3 \\times 2 = 6$. The shaded amount did not change, so $\\frac{3}{4} = \\frac{6}{8}$. The choice $\\frac{3}{8}$ counts the new total pieces but forgets that each shaded part also became $2$ pieces.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `To make a fraction equivalent to $\\frac{1}{2}$, Pia multiplies the numerator by $4$. What must Pia do to the denominator?`,
+      choices: [
+        ok(`Multiply it by $4$`),
+        no(`Add $4$ to it`, 'added-instead-of-multiplied'),
+        no(`Leave it the same`, 'changed-numerator-only'),
+        no(`Divide it by $4$`, 'used-inverse-operation-on-denominator'),
+      ],
+      solution: `An equivalent fraction multiplies the numerator and the denominator by the same number: $\\frac{1 \\times 4}{2 \\times 4} = \\frac{4}{8}$. The answer "Add $4$ to it" would give $\\frac{4}{6}$, which equals $\\frac{2}{3}$, not $\\frac{1}{2}$.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `What is the missing denominator in $\\frac{1}{4} = \\frac{3}{\\square}$?`,
+      choices: [
+        ok(`$12$`),
+        no(`$6$`, 'added-same-number-to-both'),
+        no(`$4$`, 'kept-denominator-the-same'),
+        no(`$3$`, 'copied-new-numerator'),
+      ],
+      solution: `The numerator went from $1$ to $3$, which is multiplying by $3$. Multiply the denominator by $3$ too: $4 \\times 3 = 12$. The choice $6$ adds $2$ to both numbers, and adding does not keep fractions equal.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A number line from $0$ to $1$ is split into $3$ equal parts, and a point sits at $\\frac{2}{3}$. A second number line from $0$ to $1$ is split into $6$ equal parts. Which fraction names the same point on the second line?`,
+      choices: [
+        ok(`$\\frac{4}{6}$`),
+        no(`$\\frac{2}{6}$`, 'changed-denominator-only'),
+        no(`$\\frac{5}{6}$`, 'added-same-number-to-both'),
+        no(`$\\frac{4}{3}$`, 'changed-numerator-only'),
+      ],
+      solution: `Each third is split into $2$ sixths, so $2$ thirds is $2 \\times 2 = 4$ sixths: $\\frac{2}{3} = \\frac{4}{6}$. The choice $\\frac{2}{6}$ keeps the numerator, but $2$ sixths is only as far as $1$ third.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which fraction is equivalent to $\\frac{2}{5}$?`,
+      choices: [
+        ok(`$\\frac{4}{10}$`),
+        no(`$\\frac{4}{5}$`, 'changed-numerator-only'),
+        no(`$\\frac{3}{6}$`, 'added-same-number-to-both'),
+        no(`$\\frac{2}{10}$`, 'changed-denominator-only'),
+      ],
+      solution: `Multiply the numerator and denominator by $2$: $\\frac{2 \\times 2}{5 \\times 2} = \\frac{4}{10}$. The choice $\\frac{3}{6}$ adds $1$ to both numbers, which gives one half, not two fifths.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `What is the missing numerator in $\\frac{7}{10} = \\frac{\\square}{100}$?`,
+      choices: [
+        ok(`$70$`),
+        no(`$7$`, 'kept-numerator-the-same'),
+        no(`$97$`, 'added-instead-of-multiplied'),
+        no(`$700$`, 'multiplied-numerator-by-new-denominator'),
+      ],
+      solution: `The denominator went from $10$ to $100$, which is multiplying by $10$. Multiply the numerator by $10$ too: $7 \\times 10 = 70$, so $\\frac{7}{10} = \\frac{70}{100}$. The choice $97$ adds $90$ to the numerator just as $90$ was added to the denominator.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Which statement explains why $\\frac{2}{3} = \\frac{8}{12}$?`,
+      choices: [
+        ok(`Both $2$ and $3$ were multiplied by $4$, so each third became $4$ twelfths.`),
+        no(`$6$ was added to $2$ and $9$ was added to $3$.`, 'added-instead-of-multiplied'),
+        no(`Both fractions have even numerators.`, 'used-surface-feature'),
+        no(`$\\frac{8}{12}$ has more pieces, so it is the larger fraction.`, 'more-pieces-means-larger'),
+      ],
+      solution: `Multiplying the numerator and the denominator by the same number, $\\frac{2 \\times 4}{3 \\times 4} = \\frac{8}{12}$, cuts every third into $4$ smaller pieces without changing the amount. Adding different amounts to the top and bottom is not a reason two fractions are equal, and more pieces does not mean a larger amount when the pieces are smaller.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A square is divided into $5$ equal columns and $2$ columns are shaded. Then $1$ line is drawn across the square so every column is cut into $2$ equal pieces. Which fraction of the square is shaded?`,
+      choices: [
+        ok(`$\\frac{4}{10}$`),
+        no(`$\\frac{2}{10}$`, 'changed-denominator-only'),
+        no(`$\\frac{4}{5}$`, 'changed-numerator-only'),
+        no(`$\\frac{3}{6}$`, 'added-same-number-to-both'),
+      ],
+      solution: `There are now $5 \\times 2 = 10$ equal pieces, and each shaded column holds $2$ of them, so $2 \\times 2 = 4$ pieces are shaded: $\\frac{2}{5} = \\frac{4}{10}$. The choice $\\frac{2}{10}$ counts only one piece from each shaded column.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Which list contains only fractions equivalent to $\\frac{1}{2}$?`,
+      choices: [
+        ok(`$\\frac{2}{4}$, $\\frac{3}{6}$, $\\frac{4}{8}$`),
+        no(`$\\frac{2}{3}$, $\\frac{3}{4}$, $\\frac{4}{5}$`, 'added-same-number-to-both'),
+        no(`$\\frac{1}{4}$, $\\frac{1}{6}$, $\\frac{1}{8}$`, 'changed-denominator-only'),
+        no(`$\\frac{2}{2}$, $\\frac{3}{2}$, $\\frac{4}{2}$`, 'changed-numerator-only'),
+      ],
+      solution: `Multiply $1$ and $2$ by $2$, $3$ and $4$: $\\frac{2}{4}$, $\\frac{3}{6}$ and $\\frac{4}{8}$ are all equal to $\\frac{1}{2}$. The list $\\frac{2}{3}$, $\\frac{3}{4}$, $\\frac{4}{5}$ adds $1$, $2$ and $3$ to both numbers, which changes the size of the fraction.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Lena needs $\\frac{3}{4}$ cup of milk, but the only measuring cup is marked in eighths. How many eighths of a cup should Lena measure?`,
+      choices: [
+        ok(`$6$`),
+        no(`$3$`, 'kept-numerator-the-same'),
+        no(`$7$`, 'added-instead-of-multiplied'),
+        no(`$12$`, 'multiplied-numerator-by-denominator'),
+      ],
+      solution: `Fourths become eighths by multiplying the denominator by $2$, so multiply the numerator by $2$ as well: $\\frac{3}{4} = \\frac{6}{8}$. Lena should measure $6$ eighths. The choice $7$ adds $4$ to the numerator because $4$ was added to the denominator.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `What is the missing numerator in $\\frac{3}{5} = \\frac{\\square}{100}$?`,
+      choices: [
+        ok(`$60$`),
+        no(`$3$`, 'kept-numerator-the-same'),
+        no(`$98$`, 'added-instead-of-multiplied'),
+        no(`$20$`, 'gave-the-multiplier'),
+      ],
+      solution: `Since $5 \\times 20 = 100$, multiply the numerator by $20$ too: $3 \\times 20 = 60$, so $\\frac{3}{5} = \\frac{60}{100}$. The choice $20$ is the number to multiply by, not the new numerator.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Which fraction is equivalent to $\\frac{10}{12}$ and has a denominator of $6$?`,
+      choices: [
+        ok(`$\\frac{5}{6}$`),
+        no(`$\\frac{10}{6}$`, 'changed-denominator-only'),
+        no(`$\\frac{4}{6}$`, 'subtracted-same-number-from-both'),
+        no(`$\\frac{5}{12}$`, 'changed-numerator-only'),
+      ],
+      solution: `The denominator $12$ becomes $6$ by dividing by $2$, so divide the numerator by $2$ too: $10 \\div 2 = 5$, giving $\\frac{5}{6}$. The choice $\\frac{4}{6}$ subtracts $6$ from both numbers, which does not keep the fraction the same size.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Which pair shows two equivalent fractions?`,
+      choices: [
+        ok(`$\\frac{4}{5}$ and $\\frac{8}{10}$`),
+        no(`$\\frac{4}{5}$ and $\\frac{5}{6}$`, 'added-same-number-to-both'),
+        no(`$\\frac{3}{8}$ and $\\frac{6}{8}$`, 'changed-numerator-only'),
+        no(`$\\frac{3}{4}$ and $\\frac{4}{3}$`, 'swapped-numerator-and-denominator'),
+      ],
+      solution: `Multiplying $4$ and $5$ by $2$ gives $\\frac{8}{10}$, so $\\frac{4}{5} = \\frac{8}{10}$. In the pair $\\frac{3}{8}$ and $\\frac{6}{8}$ only the numerator was doubled, so the second fraction is twice as large.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A tray holds $12$ muffins in $3$ equal rows of $4$. One row, or $\\frac{1}{3}$ of the tray, is blueberry. Which fraction of the muffins is blueberry?`,
+      choices: [
+        ok(`$\\frac{4}{12}$`),
+        no(`$\\frac{1}{12}$`, 'changed-denominator-only'),
+        no(`$\\frac{3}{12}$`, 'used-number-of-rows-as-numerator'),
+        no(`$\\frac{4}{3}$`, 'changed-numerator-only'),
+      ],
+      solution: `One row holds $4$ of the $12$ muffins, so the blueberry muffins are $\\frac{4}{12}$, and $\\frac{1 \\times 4}{3 \\times 4} = \\frac{4}{12}$ shows it equals $\\frac{1}{3}$. The choice $\\frac{3}{12}$ uses the number of rows instead of the number of muffins in one row.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `What is the missing denominator in $\\frac{3}{5} = \\frac{6}{\\square}$?`,
+      choices: [
+        ok(`$10$`),
+        no(`$8$`, 'added-same-number-to-both'),
+        no(`$5$`, 'kept-denominator-the-same'),
+        no(`$2$`, 'gave-the-multiplier'),
+      ],
+      solution: `The numerator went from $3$ to $6$, which is multiplying by $2$. Multiply the denominator by $2$: $5 \\times 2 = 10$, so $\\frac{3}{5} = \\frac{6}{10}$. The choice $8$ adds $3$ to both numbers instead of multiplying.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Kai says $\\frac{2}{3} = \\frac{4}{5}$ because "you add $2$ to the top and the bottom." Which statement is correct?`,
+      choices: [
+        ok(`Kai is wrong; adding changes the size of the fraction, and $\\frac{2}{3} = \\frac{4}{6}$ instead.`),
+        no(`Kai is right; adding the same number to the top and bottom keeps a fraction the same.`, 'added-same-number-to-both'),
+        no(`Kai is wrong; $\\frac{2}{3} = \\frac{4}{3}$ because only the top doubles.`, 'changed-numerator-only'),
+        no(`Kai is right because both fractions are less than $1$.`, 'less-than-one-means-equal'),
+      ],
+      solution: `Equivalent fractions come from multiplying the top and bottom by the same number: $\\frac{2 \\times 2}{3 \\times 2} = \\frac{4}{6}$. Adding $2$ gives $\\frac{4}{5}$, which is a different amount, because $\\frac{2}{3}$ is $\\frac{1}{3}$ short of a whole while $\\frac{4}{5}$ is only $\\frac{1}{5}$ short.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Ari shaded $\\frac{9}{12}$ of a rectangle. Bea has a rectangle of the same size cut into $4$ equal parts and wants to shade the same amount. How many parts should Bea shade?`,
+      choices: [
+        ok(`$3$`),
+        no(`$9$`, 'kept-numerator-the-same'),
+        no(`$1$`, 'subtracted-same-number-from-both'),
+        no(`$36$`, 'multiplied-instead-of-divided'),
+      ],
+      solution: `Twelfths become fourths by dividing the denominator by $3$, since $12 \\div 3 = 4$. Divide the numerator by $3$ too: $9 \\div 3 = 3$, so $\\frac{9}{12} = \\frac{3}{4}$ and Bea should shade $3$ parts. The choice $1$ subtracts $8$ from both numbers, which does not keep the amount the same.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Which fraction is equivalent to $\\frac{6}{8}$ and has a denominator of $12$?`,
+      choices: [
+        ok(`$\\frac{9}{12}$`),
+        no(`$\\frac{10}{12}$`, 'added-same-number-to-both'),
+        no(`$\\frac{6}{12}$`, 'kept-numerator-the-same'),
+        no(`$\\frac{3}{12}$`, 'simplified-numerator-only'),
+      ],
+      solution: `First rename $\\frac{6}{8}$ as $\\frac{3}{4}$ by dividing both numbers by $2$. Then multiply both numbers by $3$: $\\frac{3 \\times 3}{4 \\times 3} = \\frac{9}{12}$. The choice $\\frac{10}{12}$ adds $4$ to both numbers, which makes a larger fraction.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Which list gives three fractions that all equal $\\frac{3}{4}$, with denominators $8$, $12$ and $100$?`,
+      choices: [
+        ok(`$\\frac{6}{8}$, $\\frac{9}{12}$, $\\frac{75}{100}$`),
+        no(`$\\frac{7}{8}$, $\\frac{11}{12}$, $\\frac{99}{100}$`, 'added-same-number-to-both'),
+        no(`$\\frac{6}{8}$, $\\frac{9}{12}$, $\\frac{30}{100}$`, 'multiplied-numerator-by-wrong-factor'),
+        no(`$\\frac{3}{8}$, $\\frac{3}{12}$, $\\frac{3}{100}$`, 'changed-denominator-only'),
+      ],
+      solution: `Multiply both numbers of $\\frac{3}{4}$ by $2$, $3$ and $25$: $\\frac{6}{8}$, $\\frac{9}{12}$ and $\\frac{75}{100}$. The list ending in $\\frac{30}{100}$ multiplies the numerator by $10$ even though $4$ must be multiplied by $25$ to reach $100$.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Nia and Theo have identical granola bars. Nia's bar is cut into $8$ equal pieces, and Nia eats $2$ of them. Theo's bar is cut into $12$ equal pieces. How many pieces must Theo eat to eat the same amount as Nia?`,
+      choices: [
+        ok(`$3$`),
+        no(`$2$`, 'kept-numerator-the-same'),
+        no(`$6$`, 'added-same-number-to-both'),
+        no(`$1$`, 'used-simplified-numerator'),
+      ],
+      solution: `Nia ate $\\frac{2}{8}$, which equals $\\frac{1}{4}$ after dividing both numbers by $2$. Multiply both numbers of $\\frac{1}{4}$ by $3$ to get twelfths: $\\frac{3}{12}$, so Theo must eat $3$ pieces. The choice $6$ adds $4$ to the numerator because $4$ was added to the denominator.`,
+    },
+  ],
+}
+
+export default skill
