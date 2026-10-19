@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g8-exponents-scientific-notation-more',
+  extends: 'exponents-scientific-notation',
+  subject: 'math',
+  grade: 8,
+  group: 'Expressions and Equations',
+  name: 'Exponents & Scientific Notation',
+  standards: ['8.EE.A'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is the value of $\\sqrt{81}$?`,
+      choices: [
+        ok(`$9$`),
+        no(`$40.5$`, 'divided-by-two-instead-of-square-root'),
+        no(`$6561$`, 'squared-instead-of-square-root'),
+        no(`$3$`, 'took-square-root-twice'),
+      ],
+      solution: `The square root of $81$ is the positive number that multiplies by itself to make $81$. Since $9 \\times 9 = 81$, $\\sqrt{81} = 9$. The choice $40.5$ comes from dividing $81$ by $2$, which is not the same as taking a square root.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is the value of $\\sqrt[3]{64}$?`,
+      choices: [
+        no(`$8$`, 'took-square-root-instead-of-cube-root'),
+        ok(`$4$`),
+        no(`$\\frac{64}{3}$`, 'divided-by-three-instead-of-cube-root'),
+        no(`$262144$`, 'cubed-instead-of-cube-root'),
+      ],
+      solution: `The cube root of $64$ is the number that is used as a factor three times to make $64$. Since $4 \\times 4 \\times 4 = 64$, $\\sqrt[3]{64} = 4$. The choice $8$ is the square root of $64$, because $8 \\times 8 = 64$, but a cube root needs three equal factors.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Which expression is equivalent to $6^2 \\times 6^{-5}$?`,
+      choices: [
+        no(`$6^{-10}$`, 'multiplied-exponents-when-multiplying-powers'),
+        no(`$6^{7}$`, 'ignored-negative-sign-on-exponent'),
+        ok(`$6^{-3}$`),
+        no(`$36^{-3}$`, 'multiplied-the-bases'),
+      ],
+      solution: `When powers with the same base are multiplied, add the exponents: $2 + (-5) = -3$, so the product is $6^{-3}$. The choice $6^{-10}$ multiplies the exponents, and the choice $36^{-3}$ wrongly multiplies the bases too.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A grain of fine sand is about 0.0045 meters wide. Which shows this number in scientific notation?`,
+      choices: [
+        no(`$4.5 \\times 10^{3}$`, 'wrong-sign-on-exponent'),
+        no(`$4.5 \\times 10^{-4}$`, 'counted-every-digit-after-decimal-point'),
+        no(`$45 \\times 10^{-3}$`, 'kept-all-digits-in-coefficient'),
+        ok(`$4.5 \\times 10^{-3}$`),
+      ],
+      solution: `Move the decimal point 3 places to the right to get the coefficient $4.5$, which is between 1 and 10. Because the number is less than 1, the exponent is negative: $4.5 \\times 10^{-3}$. The choice $4.5 \\times 10^{-4}$ counts all four digits after the decimal point, but the decimal point only moves 3 places.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Write $6.08 \\times 10^{-5}$ in standard form:`,
+      choices: [
+        ok(`0.0000608`),
+        no(`608000`, 'moved-decimal-wrong-direction'),
+        no(`0.000608`, 'moved-decimal-one-fewer-place'),
+        no(`0.00000608`, 'wrote-exponent-as-number-of-zeros-after-decimal'),
+      ],
+      solution: `A power of $10^{-5}$ moves the decimal point 5 places to the left: $6.08$ becomes 0.0000608. Check: there are four zeros after the decimal point and then 608. The choice 608000 moves the decimal point to the right, which would be $10^{5}$, not $10^{-5}$.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Which number is the greatest?`,
+      choices: [
+        no(`$9.6 \\times 10^{5}$`, 'compared-coefficients-only'),
+        ok(`$1.3 \\times 10^{6}$`),
+        no(`$4.5 \\times 10^{-7}$`, 'treated-negative-exponent-as-large'),
+        no(`$9.9 \\times 10^{4}$`, 'ignored-power-of-ten'),
+      ],
+      solution: `Compare the powers of 10 first. The number $1.3 \\times 10^{6}$ is 1,300,000, which is more than $9.6 \\times 10^{5}$ (960,000) and $9.9 \\times 10^{4}$ (99,000). The number $4.5 \\times 10^{-7}$ is less than 1. The choice $9.9 \\times 10^{4}$ has the largest coefficient, but its power of 10 is much smaller.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `The population of a state is 3,904,512 people. Which is the best estimate written as a single digit times a power of 10?`,
+      choices: [
+        no(`$4 \\times 10^{5}$`, 'miscounted-place-value'),
+        no(`$3 \\times 10^{6}$`, 'truncated-instead-of-rounded'),
+        ok(`$4 \\times 10^{6}$`),
+        no(`$4 \\times 10^{7}$`, 'used-number-of-digits-as-exponent'),
+      ],
+      solution: `The number 3,904,512 is in the millions, and $10^{6}$ is one million. Rounded to the nearest million it is 4,000,000, which is $4 \\times 10^{6}$. The choice $4 \\times 10^{7}$ uses the count of 7 digits as the exponent, but 4 followed by 6 zeros has 7 digits, so the exponent is 6.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What is $(4.2 \\times 10^{6}) + (3.5 \\times 10^{5})$ in scientific notation?`,
+      choices: [
+        no(`$7.7 \\times 10^{6}$`, 'added-coefficients-without-matching-exponents'),
+        ok(`$4.55 \\times 10^{6}$`),
+        no(`$7.7 \\times 10^{11}$`, 'added-exponents-when-adding'),
+        no(`$7.7 \\times 10^{5}$`, 'added-coefficients-kept-smaller-exponent'),
+      ],
+      solution: `To add, write both numbers with the same power of 10: $3.5 \\times 10^{5} = 0.35 \\times 10^{6}$. Then $4.2 + 0.35 = 4.55$, so the sum is $4.55 \\times 10^{6}$. Check: 4,200,000 + 350,000 = 4,550,000. The choice $7.7 \\times 10^{6}$ adds the coefficients even though the powers of 10 are different.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `What is $(9.1 \\times 10^{-3}) - (6.4 \\times 10^{-3})$?`,
+      choices: [
+        no(`$2.7 \\times 10^{0}$`, 'subtracted-exponents-when-subtracting'),
+        no(`$2.7 \\times 10^{-6}$`, 'added-exponents-when-subtracting'),
+        no(`$15.5 \\times 10^{-3}$`, 'added-instead-of-subtracted'),
+        ok(`$2.7 \\times 10^{-3}$`),
+      ],
+      solution: `Both numbers already have the same power of 10, so subtract the coefficients and keep $10^{-3}$: $9.1 - 6.4 = 2.7$, giving $2.7 \\times 10^{-3}$. The choice $2.7 \\times 10^{0}$ also subtracts the exponents, but when adding or subtracting, the power of 10 stays the same.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Jalen's calculator shows the answer 3.6E-5. What is this number in standard form?`,
+      choices: [
+        ok(`0.000036`),
+        no(`360000`, 'ignored-negative-sign-on-exponent'),
+        no(`0.0000036`, 'moved-decimal-one-extra-place'),
+        no(`$-18$`, 'multiplied-coefficient-by-exponent'),
+      ],
+      solution: `On a calculator, 3.6E-5 means $3.6 \\times 10^{-5}$. Move the decimal point 5 places to the left to get 0.000036. The choice $-18$ multiplies 3.6 by $-5$, but the E stands for "times 10 to the power of."`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `What are all the solutions of $x^2 = 49$?`,
+      choices: [
+        no(`$x = 7$ only`, 'missed-negative-square-root'),
+        ok(`$x = 7$ or $x = -7$`),
+        no(`$x = 24.5$`, 'divided-by-two-instead-of-square-root'),
+        no(`$x = 2401$`, 'squared-instead-of-square-root'),
+      ],
+      solution: `Both $7 \\times 7$ and $(-7) \\times (-7)$ equal $49$, so the solutions are $x = 7$ or $x = -7$. The choice "$x = 7$ only" misses the negative solution, since a negative number times itself is also positive.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $x^3 = \\frac{8}{27}$?`,
+      choices: [
+        no(`$\\frac{2}{27}$`, 'took-cube-root-of-numerator-only'),
+        no(`$\\frac{8}{3}$`, 'took-cube-root-of-denominator-only'),
+        ok(`$\\frac{2}{3}$`),
+        no(`$\\frac{512}{19683}$`, 'cubed-instead-of-cube-root'),
+      ],
+      solution: `Take the cube root of the numerator and of the denominator: $\\sqrt[3]{8} = 2$ and $\\sqrt[3]{27} = 3$, so $x = \\frac{2}{3}$. Check: $\\frac{2}{3} \\times \\frac{2}{3} \\times \\frac{2}{3} = \\frac{8}{27}$. The choice $\\frac{2}{27}$ takes the cube root of the top number only.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `What is the value of $(3^{-2})^{3}$?`,
+      choices: [
+        no(`$\\frac{1}{243}$`, 'added-exponents-for-power-of-power'),
+        ok(`$\\frac{1}{729}$`),
+        no(`$729$`, 'ignored-negative-sign-on-exponent'),
+        no(`$-729$`, 'treated-negative-exponent-as-negative-value'),
+      ],
+      solution: `For a power of a power, multiply the exponents: $(3^{-2})^{3} = 3^{-6} = \\frac{1}{3^6} = \\frac{1}{729}$. The choice $\\frac{1}{243}$ adds the exponents to get $3^{-5}$, and the choice $-729$ treats a negative exponent as if it made the number negative.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Which expression is equivalent to $(2x^{3})^{4}$?`,
+      choices: [
+        no(`$2x^{12}$`, 'did-not-raise-coefficient-to-power'),
+        no(`$8x^{12}$`, 'multiplied-coefficient-by-exponent'),
+        no(`$16x^{7}$`, 'added-exponents-for-power-of-power'),
+        ok(`$16x^{12}$`),
+      ],
+      solution: `Raise each factor to the 4th power: $2^4 = 16$ and $(x^3)^4 = x^{12}$, so the result is $16x^{12}$. The choice $8x^{12}$ multiplies $2$ by $4$ instead of finding $2 \\times 2 \\times 2 \\times 2$.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `One sheet of paper is about $1 \\times 10^{-4}$ meters thick. Mr. Okafor stacks $5 \\times 10^{2}$ sheets. About how tall is the stack, in meters?`,
+      choices: [
+        ok(`$5 \\times 10^{-2}$`),
+        no(`$5 \\times 10^{-8}$`, 'multiplied-exponents'),
+        no(`$5 \\times 10^{-6}$`, 'subtracted-exponents-when-multiplying'),
+        no(`$5 \\times 10^{6}$`, 'ignored-negative-sign-on-exponent'),
+      ],
+      solution: `Multiply the coefficients and add the exponents: $1 \\times 5 = 5$ and $-4 + 2 = -2$, so the stack is about $5 \\times 10^{-2}$ meters, or 0.05 meters (5 centimeters). The choice $5 \\times 10^{-8}$ multiplies the exponents instead of adding them.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `What is $(6 \\times 10^{4})(7 \\times 10^{-9})$ written in scientific notation?`,
+      choices: [
+        no(`$4.2 \\times 10^{-5}$`, 'did-not-adjust-exponent-after-normalizing'),
+        ok(`$4.2 \\times 10^{-4}$`),
+        no(`$4.2 \\times 10^{-6}$`, 'adjusted-exponent-wrong-direction'),
+        no(`$4.2 \\times 10^{13}$`, 'ignored-negative-sign-on-exponent'),
+      ],
+      solution: `Multiply the coefficients and add the exponents: $6 \\times 7 = 42$ and $4 + (-9) = -5$, giving $42 \\times 10^{-5}$. Since 42 is not between 1 and 10, rewrite it as $4.2 \\times 10^{1}$, so the product is $4.2 \\times 10^{-5 + 1} = 4.2 \\times 10^{-4}$. The choice $4.2 \\times 10^{-5}$ moves the decimal point in 42 without changing the exponent.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `What is $\\frac{1.8 \\times 10^{-3}}{6 \\times 10^{5}}$ written in scientific notation?`,
+      choices: [
+        no(`$3 \\times 10^{-8}$`, 'did-not-adjust-exponent-after-normalizing'),
+        no(`$3 \\times 10^{-7}$`, 'adjusted-exponent-wrong-direction'),
+        no(`$3 \\times 10^{1}$`, 'added-exponents-when-dividing'),
+        ok(`$3 \\times 10^{-9}$`),
+      ],
+      solution: `Divide the coefficients and subtract the exponents: $1.8 \\div 6 = 0.3$ and $-3 - 5 = -8$, giving $0.3 \\times 10^{-8}$. Since $0.3 = 3 \\times 10^{-1}$, the quotient is $3 \\times 10^{-8 + (-1)} = 3 \\times 10^{-9}$. The choice $3 \\times 10^{-8}$ changes 0.3 to 3 without lowering the exponent.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `In a science lab, Priya measures two salt samples. One has a mass of $2.5 \\times 10^{-2}$ grams and the other has a mass of $7 \\times 10^{-3}$ grams. What is their total mass, in grams?`,
+      choices: [
+        ok(`$3.2 \\times 10^{-2}$`),
+        no(`$9.5 \\times 10^{-2}$`, 'added-coefficients-without-matching-exponents'),
+        no(`$9.5 \\times 10^{-5}$`, 'added-exponents-when-adding'),
+        no(`$3.2 \\times 10^{-4}$`, 'adjusted-exponent-wrong-direction'),
+      ],
+      solution: `Write both masses with the same power of 10: $2.5 \\times 10^{-2} = 25 \\times 10^{-3}$. Then $25 + 7 = 32$, so the total is $32 \\times 10^{-3} = 3.2 \\times 10^{-2}$ grams. Check: 0.025 + 0.007 = 0.032. The choice $9.5 \\times 10^{-2}$ adds 2.5 and 7 even though the powers of 10 do not match.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Which expression is equivalent to $\\frac{(3x^{2})^{3}}{9x^{-1}}$?`,
+      choices: [
+        no(`$3x^{5}$`, 'subtracted-negative-exponent-incorrectly'),
+        ok(`$3x^{7}$`),
+        no(`$\\frac{1}{3}x^{7}$`, 'did-not-raise-coefficient-to-power'),
+        no(`$3x^{6}$`, 'added-exponents-for-power-of-power'),
+      ],
+      solution: `First, $(3x^2)^3 = 27x^6$. Then divide: $27 \\div 9 = 3$, and $x^6 \\div x^{-1} = x^{6 - (-1)} = x^{7}$. The result is $3x^{7}$. The choice $3x^{5}$ computes $6 - 1$ instead of $6 - (-1)$.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A strand of hair is about $8 \\times 10^{-5}$ meters wide. There are $10^{3}$ millimeters in 1 meter. About how wide is the strand in millimeters?`,
+      choices: [
+        no(`$8 \\times 10^{-8}$`, 'divided-when-converting-to-smaller-unit'),
+        no(`$8 \\times 10^{-15}$`, 'multiplied-exponents'),
+        ok(`$8 \\times 10^{-2}$`),
+        no(`$8 \\times 10^{8}$`, 'ignored-negative-sign-on-exponent'),
+      ],
+      solution: `A millimeter is smaller than a meter, so there are more of them: multiply by $10^{3}$. Then $8 \\times 10^{-5} \\times 10^{3} = 8 \\times 10^{-5 + 3} = 8 \\times 10^{-2}$ millimeters, or 0.08 millimeters. The choice $8 \\times 10^{-8}$ divides by $10^{3}$, which would make the number of millimeters smaller than the number of meters.`,
+    },
+  ],
+}
+
+export default skill
