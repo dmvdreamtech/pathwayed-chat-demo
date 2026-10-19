@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g7-angles-area-volume-more',
+  extends: 'angles-area-volume',
+  subject: 'math',
+  grade: 7,
+  group: 'Geometry',
+  name: 'Angles, Area & Volume',
+  standards: ['7.G.B'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Two adjacent angles together form a right angle. One of them measures $38^\\circ$. What is the measure of the other angle?`,
+      choices: [
+        ok(`$52^\\circ$`),
+        no(`$142^\\circ$`, 'used-180-instead-of-90'),
+        no(`$38^\\circ$`, 'assumed-adjacent-angles-are-equal'),
+        no(`$322^\\circ$`, 'used-360-instead-of-90'),
+      ],
+      solution: `Angles that form a right angle are complementary, so they add to $90^\\circ$: $90 - 38 = 52$. The other angle is $52^\\circ$. The value $142^\\circ$ comes from subtracting from $180^\\circ$, which is for angles that form a straight line.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A parallelogram has a base of 9 cm and a height of 4 cm. What is its area in square centimeters?`,
+      choices: [
+        no(`18`, 'halved-like-a-triangle'),
+        ok(`36`),
+        no(`26`, 'found-perimeter-instead-of-area'),
+        no(`13`, 'added-base-and-height'),
+      ],
+      solution: `The area of a parallelogram is base times height: $9 \\times 4 = 36$ square centimeters. The value 18 takes half of that, but only a triangle uses the factor $\\frac{1}{2}$.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A fish tank shaped like a rectangular prism is 10 inches long, 3 inches wide and 4 inches tall. What is its volume in cubic inches?`,
+      choices: [
+        no(`17`, 'added-dimensions'),
+        no(`164`, 'found-surface-area-instead-of-volume'),
+        no(`40`, 'used-only-two-dimensions'),
+        ok(`120`),
+      ],
+      solution: `Volume is length times width times height: $10 \\times 3 \\times 4 = 120$ cubic inches. The value 164 is the total area of the six faces, which measures the outside, not the space inside.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A circular plate has a diameter of 8 inches. Using $\\pi \\approx 3.14$, what is its circumference in inches?`,
+      choices: [
+        ok(`25.12`),
+        no(`50.24`, 'used-diameter-as-radius'),
+        no(`12.56`, 'multiplied-pi-by-radius'),
+        no(`200.96`, 'used-area-formula-with-diameter'),
+      ],
+      solution: `Circumference is $\\pi$ times the diameter: $3.14 \\times 8 = 25.12$ inches. The value 50.24 uses $2\\pi r$ with 8 as the radius, but 8 is the diameter, so the radius is 4.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Two straight lines intersect, forming four angles. One of the angles measures $125^\\circ$. What is the measure of an angle adjacent to it?`,
+      choices: [
+        no(`$125^\\circ$`, 'confused-adjacent-with-vertical'),
+        ok(`$55^\\circ$`),
+        no(`$235^\\circ$`, 'used-360-instead-of-180'),
+        no(`$35^\\circ$`, 'used-90-instead-of-180'),
+      ],
+      solution: `An adjacent angle shares a side and together the two angles make a straight line, so they add to $180^\\circ$: $180 - 125 = 55$. The value $125^\\circ$ is the vertical angle across from it, not the adjacent one.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A triangular garden bed has a base of 14 feet and a height of 9 feet. What is its area in square feet?`,
+      choices: [
+        no(`126`, 'forgot-to-halve'),
+        no(`23`, 'added-base-and-height'),
+        ok(`63`),
+        no(`11.5`, 'halved-the-sum'),
+      ],
+      solution: `The area of a triangle is $\\frac{1}{2} \\times$ base $\\times$ height: $\\frac{1}{2} \\times 14 \\times 9 = 63$ square feet. The value 126 is base times height without taking half.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Two angles are supplementary. One measures $3x$ degrees and the other measures $(x + 20)$ degrees. What is the value of $x$?`,
+      choices: [
+        no(`17.5`, 'used-90-instead-of-180'),
+        ok(`40`),
+        no(`50`, 'added-constant-instead-of-subtracting'),
+        no(`45`, 'ignored-the-constant'),
+      ],
+      solution: `Supplementary angles add to $180^\\circ$, so $3x + x + 20 = 180$. Then $4x + 20 = 180$, $4x = 160$ and $x = 40$. The value 50 comes from adding 20 to 180 instead of subtracting it.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `An angle measures 4 times as much as its complement. What is the measure of the angle?`,
+      choices: [
+        no(`$18^\\circ$`, 'gave-the-complement'),
+        no(`$144^\\circ$`, 'used-180-instead-of-90'),
+        ok(`$72^\\circ$`),
+        no(`$22.5^\\circ$`, 'divided-90-by-4'),
+      ],
+      solution: `Let the complement be $x$, so the angle is $4x$ and $x + 4x = 90$. Then $5x = 90$ and $x = 18$, so the angle is $4 \\times 18 = 72^\\circ$. The value $18^\\circ$ is the complement, not the angle asked for.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Two lines intersect. A pair of vertical angles measure $(2x + 10)$ degrees and $(3x - 25)$ degrees. What is the value of $x$?`,
+      choices: [
+        ok(`35`),
+        no(`39`, 'treated-vertical-angles-as-supplementary'),
+        no(`21`, 'treated-vertical-angles-as-complementary'),
+        no(`15`, 'subtracted-constants-instead-of-adding'),
+      ],
+      solution: `Vertical angles are equal, so $2x + 10 = 3x - 25$. Subtract $2x$ from both sides: $10 = x - 25$, so $x = 35$. The value 39 comes from setting the two angles to add to $180^\\circ$, but vertical angles are equal, not supplementary.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A trapezoid has parallel bases of 6 m and 10 m and a height of 5 m. What is its area in square meters?`,
+      choices: [
+        no(`80`, 'forgot-to-halve'),
+        no(`30`, 'used-only-one-base'),
+        ok(`40`),
+        no(`21`, 'added-all-dimensions'),
+      ],
+      solution: `The area of a trapezoid is $\\frac{1}{2} \\times (b_1 + b_2) \\times h = \\frac{1}{2} \\times 16 \\times 5 = 40$ square meters. The value 80 adds the bases and multiplies by the height but never takes half.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A tent is shaped like a triangular prism. Each triangular end has a base of 6 ft and a height of 4 ft, and the tent is 10 ft long. What is the volume of the tent in cubic feet?`,
+      choices: [
+        no(`240`, 'forgot-to-halve-the-triangle'),
+        ok(`120`),
+        no(`20`, 'added-dimensions'),
+        no(`12`, 'gave-base-area-only'),
+      ],
+      solution: `The volume of a prism is the area of its base times its length. The triangle has area $\\frac{1}{2} \\times 6 \\times 4 = 12$ square feet, so the volume is $12 \\times 10 = 120$ cubic feet. The value 240 multiplies $6 \\times 4 \\times 10$ without halving the triangle.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A rectangular floor is 10 ft by 6 ft. A 4 ft by 3 ft rectangle is cut out of one corner for a closet, leaving an L-shaped floor. What is the area of the L-shaped floor in square feet?`,
+      choices: [
+        no(`72`, 'added-instead-of-subtracted'),
+        no(`60`, 'forgot-to-remove-the-cutout'),
+        no(`32`, 'found-perimeter-instead-of-area'),
+        ok(`48`),
+      ],
+      solution: `Find the whole rectangle, $10 \\times 6 = 60$ square feet, then subtract the cutout, $4 \\times 3 = 12$ square feet: $60 - 12 = 48$ square feet. The value 72 adds the cutout instead of taking it away.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A ray divides a straight angle into two adjacent angles that measure $x$ degrees and $5x$ degrees. What is the measure of the larger angle?`,
+      choices: [
+        no(`$30^\\circ$`, 'gave-the-smaller-angle'),
+        ok(`$150^\\circ$`),
+        no(`$75^\\circ$`, 'used-90-instead-of-180'),
+        no(`$36^\\circ$`, 'divided-by-5-instead-of-6'),
+      ],
+      solution: `The two angles make a straight angle, so $x + 5x = 180$. Then $6x = 180$ and $x = 30$, so the larger angle is $5 \\times 30 = 150^\\circ$. The value $30^\\circ$ is the smaller angle.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A bicycle wheel has a diameter of 20 inches. Using $\\pi \\approx 3.14$, how many inches does the bicycle travel when the wheel turns 5 full times?`,
+      choices: [
+        no(`628`, 'used-diameter-as-radius'),
+        no(`1570`, 'used-area-instead-of-circumference'),
+        no(`62.8`, 'counted-only-one-turn'),
+        ok(`314`),
+      ],
+      solution: `One turn moves the bicycle one circumference: $3.14 \\times 20 = 62.8$ inches. Five turns cover $62.8 \\times 5 = 314$ inches. The value 62.8 is the distance for a single turn only.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `A sandbox shaped like a rectangular prism is 6 ft long and 4 ft wide. It is filled with sand to a depth of 1.5 ft. What volume of sand is in the sandbox, in cubic feet?`,
+      choices: [
+        ok(`36`),
+        no(`24`, 'ignored-the-depth'),
+        no(`11.5`, 'added-dimensions'),
+        no(`360`, 'misplaced-the-decimal'),
+      ],
+      solution: `Multiply length, width and depth: $6 \\times 4 \\times 1.5 = 24 \\times 1.5 = 36$ cubic feet. The value 24 is only the area of the bottom of the sandbox.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `A circular rug has a circumference of 62.8 feet. Using $\\pi \\approx 3.14$, what is the area of the rug in square feet?`,
+      choices: [
+        no(`31.4`, 'forgot-to-square-the-radius'),
+        ok(`314`),
+        no(`1256`, 'used-diameter-as-radius'),
+        no(`20`, 'gave-the-diameter'),
+      ],
+      solution: `First find the radius from $C = 2\\pi r$: $62.8 = 2 \\times 3.14 \\times r$, so $r = 10$ feet. Then the area is $\\pi r^2 = 3.14 \\times 100 = 314$ square feet. The value 1256 uses the diameter, 20, in place of the radius.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Two angles are complementary. One angle is 6 degrees more than twice the other. What is the measure of the larger angle?`,
+      choices: [
+        no(`$28^\\circ$`, 'gave-the-smaller-angle'),
+        no(`$122^\\circ$`, 'used-180-instead-of-90'),
+        ok(`$62^\\circ$`),
+        no(`$70^\\circ$`, 'added-constant-instead-of-subtracting'),
+      ],
+      solution: `Let the smaller angle be $x$, so the larger is $2x + 6$ and $x + 2x + 6 = 90$. Then $3x = 84$, $x = 28$ and the larger angle is $2 \\times 28 + 6 = 62^\\circ$. The value $28^\\circ$ is the smaller angle.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A triangular prism has right triangle ends with legs 3 cm and 4 cm and a longest side of 5 cm. The prism is 10 cm long. What is its total surface area in square centimeters?`,
+      choices: [
+        no(`60`, 'found-volume-instead-of-surface-area'),
+        no(`126`, 'counted-only-one-triangle'),
+        no(`144`, 'forgot-to-halve-the-triangles'),
+        ok(`132`),
+      ],
+      solution: `Each triangle has area $\\frac{1}{2} \\times 3 \\times 4 = 6$, so the two ends give 12. The three rectangles are $3 \\times 10$, $4 \\times 10$ and $5 \\times 10$, which total 120. The surface area is $12 + 120 = 132$ square centimeters. The value 144 uses $3 \\times 4 = 12$ for each triangle without halving.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A stage is a 12 m by 8 m rectangle with a semicircle attached along one 12 m side, so the 12 m side is the diameter of the semicircle. Using $\\pi \\approx 3.14$, what is the total area of the stage in square meters?`,
+      choices: [
+        ok(`152.52`),
+        no(`209.04`, 'used-full-circle-instead-of-half'),
+        no(`322.08`, 'used-diameter-as-radius'),
+        no(`39.48`, 'subtracted-instead-of-added'),
+      ],
+      solution: `The rectangle is $12 \\times 8 = 96$. The semicircle has radius 6, so its area is $\\frac{1}{2} \\times 3.14 \\times 36 = 56.52$. The total is $96 + 56.52 = 152.52$ square meters. The value 209.04 adds a whole circle instead of half of one.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A box is 10 cm long, 6 cm wide and 4 cm tall. How many cubes with 2 cm edges can be packed into the box with no gaps?`,
+      choices: [
+        no(`240`, 'gave-volume-without-dividing'),
+        no(`120`, 'divided-by-edge-not-cube-volume'),
+        ok(`30`),
+        no(`60`, 'divided-by-face-area-not-volume'),
+      ],
+      solution: `Along each edge the cubes fit $10 \\div 2 = 5$, $6 \\div 2 = 3$ and $4 \\div 2 = 2$ times, so $5 \\times 3 \\times 2 = 30$ cubes fit. This matches the box volume, 240, divided by one cube's volume, $2 \\times 2 \\times 2 = 8$. The value 120 divides 240 by 2 instead of by 8.`,
+    },
+  ],
+}
+
+export default skill
