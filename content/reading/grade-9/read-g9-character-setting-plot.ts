@@ -172,7 +172,7 @@ const skill: ContentSkill = {
             wrong(`She starts out eager and later grows bored with teaching.`, 'opposite-meaning'),
             wrong(`She drives for him at first and later lets him steer a little.`, 'unsupported-inference'),
           ],
-          solution: `On the first morning she looks at the sky in frustration, but by the end she lets him "run the wagon to the bin alone." The poem says she "did not shout," so the first choice is wrong.`,
+          solution: `On the first morning she looks at the sky in frustration, but by the end she lets him "run the wagon to the bin alone." The poem says she "did not shout," so the choice "She shouts at first and later apologizes for being unkind" is wrong.`,
         },
         {
           slot: 13,
@@ -251,7 +251,7 @@ const skill: ContentSkill = {
             wrong(`She becomes more careful and takes fewer pins each time she visits.`, 'opposite-meaning'),
             wrong(`She grows bored with the pins and begins to give them away to other birds.`, 'unsupported-inference'),
           ],
-          solution: `The story says "each time she grew bolder," and she moves from one pin to two in a night. Nothing mentions guilt until she sees the farmers.`,
+          solution: `The story says "each time she grew bolder," and she moves from one pin to two in a night. Nothing mentions guilt while she is taking the pins.`,
         },
         {
           slot: 19,
@@ -303,7 +303,7 @@ const skill: ContentSkill = {
           choices: [
             wrong(`She does not know where the lever that stops the press is located.`, 'unsupported-inference'),
             right(`Mr. Halvorsen hates interruptions, and she has never stopped the press before.`),
-            wrong(`She is friends with Ruth Pellerin and does not want to embarrass her.`, 'unsupported-inference'),
+            wrong(`She is friends with Ruth Pellerin and does not want to embarrass Ruth.`, 'unsupported-inference'),
             wrong(`The building is too loud for anyone to hear her when she speaks.`, 'literal-reading'),
           ],
           solution: `The fourth paragraph says Mr. Halvorsen "hated interruptions more than he hated mistakes" and that she "had never once stopped the press." Mr. Halvorsen clearly hears her, so noise is not the obstacle.`,
@@ -328,9 +328,9 @@ const skill: ContentSkill = {
             wrong(`He is easily frightened by his apprentice and gives in to avoid an argument.`, 'misreads-character'),
             wrong(`He secretly knew about the error all along and was testing Esther's attention.`, 'unsupported-inference'),
             right(`Though stern and proud, he cares more about printing the truth than about his pride.`),
-            wrong(`He cares mostly about saving paper, since stopping early wastes fewer sheets.`, 'contradicts-text'),
+            wrong(`He wants to finish the night's work quickly so he can go home and rest.`, 'contradicts-text'),
           ],
-          solution: `He frowns and is a man who "trusted no one's eyes but his own," yet he stops the press and loses three hundred sheets to fix the name. Stopping actually wastes paper, so saving sheets cannot be his reason.`,
+          solution: `He frowns and is a man who "trusted no one's eyes but his own," yet he stops the press and loses three hundred sheets to fix the name. They work until "nearly two in the morning," so he is not rushing home.`,
         },
         {
           slot: 25,
@@ -495,7 +495,7 @@ const skill: ContentSkill = {
             wrong(`The speaker argues with him about when it is safe to cross.`, 'unsupported-inference'),
             right(`The speaker hardly notices him and passes by without speaking.`),
           ],
-          solution: `The speaker "walked past Mr. Ibarra / without really looking" and "did not say a word." The speaker does cross at his corner, so the second choice is wrong.`,
+          solution: `The speaker "walked past Mr. Ibarra / without really looking" and "did not say a word." The speaker does cross at his corner, so the choice about crossing at a different street is wrong.`,
         },
         {
           slot: 37,
