@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g12-conic-sections-more',
+  extends: 'conic-sections',
+  subject: 'math',
+  grade: 12,
+  group: 'Geometry',
+  name: 'Conic Sections',
+  standards: ['HSG.GPE.A.1'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `A circle has center $(6, -9)$ and radius $3$. Which equation represents this circle?`,
+      choices: [
+        ok(`$(x - 6)^2 + (y + 9)^2 = 9$`),
+        no(`$(x + 6)^2 + (y - 9)^2 = 9$`, 'flipped-center-signs'),
+        no(`$(x - 6)^2 + (y + 9)^2 = 3$`, 'radius-not-squared'),
+        no(`$(x - 6)^2 + (y + 9)^2 = 6$`, 'doubled-radius-instead-of-squaring'),
+      ],
+      solution: `Standard form is $(x - h)^2 + (y - k)^2 = r^2$. With $h = 6$, $k = -9$ and $r^2 = 3^2 = 9$, the equation is $(x - 6)^2 + (y + 9)^2 = 9$. The choice $(x - 6)^2 + (y + 9)^2 = 3$ puts the radius on the right side instead of its square.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is the radius of the circle $x^2 + y^2 = 64$?`,
+      choices: [
+        no(`$64$`, 'gave-r-squared-as-radius'),
+        ok(`$8$`),
+        no(`$32$`, 'halved-instead-of-square-root'),
+        no(`$16$`, 'gave-diameter-instead-of-radius'),
+      ],
+      solution: `The right side equals $r^2$, so $r^2 = 64$ and $r = \\sqrt{64} = 8$. The choice $64$ is $r^2$, not the radius.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `What is the radius of the circle $(x - 2)^2 + (y + 11)^2 = 20$?`,
+      choices: [
+        no(`$20$`, 'gave-r-squared-as-radius'),
+        no(`$10$`, 'halved-instead-of-square-root'),
+        no(`$4\\sqrt{5}$`, 'did-not-take-root-of-perfect-square-factor'),
+        ok(`$2\\sqrt{5}$`),
+      ],
+      solution: `Here $r^2 = 20$, so $r = \\sqrt{20} = \\sqrt{4 \\cdot 5} = 2\\sqrt{5}$. The choice $4\\sqrt{5}$ pulls the $4$ out of the root without taking its square root.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Which equation represents the circle centered at the origin with radius $10$?`,
+      choices: [
+        ok(`$x^2 + y^2 = 100$`),
+        no(`$x^2 + y^2 = 10$`, 'radius-not-squared'),
+        no(`$x^2 + y^2 = 20$`, 'doubled-radius-instead-of-squaring'),
+        no(`$(x - 10)^2 + (y - 10)^2 = 100$`, 'used-radius-as-center'),
+      ],
+      solution: `With center $(0, 0)$ the equation is $x^2 + y^2 = r^2$, and $r^2 = 10^2 = 100$, giving $x^2 + y^2 = 100$. The choice $x^2 + y^2 = 10$ uses the radius where its square belongs.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which point lies on the circle $x^2 + y^2 = 25$?`,
+      choices: [
+        no(`$(5, 5)$`, 'set-each-coordinate-equal-to-radius'),
+        no(`$(2, 3)$`, 'added-coordinates-to-get-radius'),
+        ok(`$(3, -4)$`),
+        no(`$(25, 0)$`, 'used-r-squared-as-coordinate'),
+      ],
+      solution: `Substitute each point: $3^2 + (-4)^2 = 9 + 16 = 25$, so $(3, -4)$ is on the circle. The choice $(2, 3)$ has coordinates that add to $5$, but $2^2 + 3^2 = 13$, not $25$.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `What is the center of the circle $\\left(x - \\frac{1}{2}\\right)^2 + (y + 8)^2 = 7$?`,
+      choices: [
+        no(`$\\left(-\\frac{1}{2}, 8\\right)$`, 'flipped-center-signs'),
+        no(`$\\left(\\frac{1}{2}, 8\\right)$`, 'flipped-sign-of-y-coordinate'),
+        no(`$\\left(-8, \\frac{1}{2}\\right)$`, 'swapped-x-and-y'),
+        ok(`$\\left(\\frac{1}{2}, -8\\right)$`),
+      ],
+      solution: `In $(x - h)^2 + (y - k)^2 = r^2$, the center is $(h, k)$. Here $x - \\frac{1}{2}$ gives $h = \\frac{1}{2}$ and $y + 8 = y - (-8)$ gives $k = -8$, so the center is $\\left(\\frac{1}{2}, -8\\right)$. The choice $\\left(\\frac{1}{2}, 8\\right)$ reads the plus sign as a positive $k$.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `A point $(x, y)$ is exactly $5$ units from the point $(2, 1)$. A right triangle with legs $x - 2$ and $y - 1$ and hypotenuse $5$ is drawn. Which equation does the Pythagorean theorem give for every such point?`,
+      choices: [
+        no(`$(x - 2) + (y - 1) = 5$`, 'dropped-the-squares'),
+        ok(`$(x - 2)^2 + (y - 1)^2 = 25$`),
+        no(`$(x - 2)^2 + (y - 1)^2 = 5$`, 'radius-not-squared'),
+        no(`$(x + 2)^2 + (y + 1)^2 = 25$`, 'flipped-center-signs'),
+      ],
+      solution: `The Pythagorean theorem says leg squared plus leg squared equals hypotenuse squared: $(x - 2)^2 + (y - 1)^2 = 5^2 = 25$. This is exactly the circle with center $(2, 1)$ and radius $5$. The choice $(x - 2)^2 + (y - 1)^2 = 5$ forgets to square the hypotenuse.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A circle has center $(1, -2)$ and passes through the point $(4, 2)$. Which equation represents the circle?`,
+      choices: [
+        no(`$(x - 1)^2 + (y + 2)^2 = 5$`, 'radius-not-squared'),
+        no(`$(x + 1)^2 + (y - 2)^2 = 25$`, 'flipped-center-signs'),
+        ok(`$(x - 1)^2 + (y + 2)^2 = 25$`),
+        no(`$(x - 4)^2 + (y - 2)^2 = 25$`, 'used-point-as-center'),
+      ],
+      solution: `The radius is the distance from the center to the point: $r^2 = (4 - 1)^2 + (2 - (-2))^2 = 9 + 16 = 25$. So the circle is $(x - 1)^2 + (y + 2)^2 = 25$. The choice $(x - 4)^2 + (y - 2)^2 = 25$ centers the circle at the point on the circle instead of at $(1, -2)$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `The endpoints of a diameter of a circle are $(-2, 3)$ and $(6, -3)$. Which equation represents the circle?`,
+      choices: [
+        ok(`$(x - 2)^2 + y^2 = 25$`),
+        no(`$(x - 2)^2 + y^2 = 100$`, 'used-diameter-as-radius'),
+        no(`$(x - 4)^2 + (y + 3)^2 = 25$`, 'subtracted-endpoints-for-midpoint'),
+        no(`$(x + 2)^2 + y^2 = 25$`, 'flipped-center-signs'),
+      ],
+      solution: `The center is the midpoint: $\\left(\\frac{-2 + 6}{2}, \\frac{3 + (-3)}{2}\\right) = (2, 0)$. The diameter is $\\sqrt{8^2 + 6^2} = 10$, so $r = 5$ and $r^2 = 25$. The circle is $(x - 2)^2 + y^2 = 25$. The choice ending in $= 100$ squares the whole diameter instead of the radius.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Complete the square to write $x^2 + y^2 + 10x - 4y + 20 = 0$ in standard form:`,
+      choices: [
+        no(`$(x - 5)^2 + (y + 2)^2 = 9$`, 'flipped-center-signs'),
+        no(`$(x + 10)^2 + (y - 4)^2 = 9$`, 'did-not-halve-linear-coefficients'),
+        ok(`$(x + 5)^2 + (y - 2)^2 = 9$`),
+        no(`$(x + 5)^2 + (y - 2)^2 = 5$`, 'added-only-one-completed-square-to-right-side'),
+      ],
+      solution: `Group and move the constant: $(x^2 + 10x) + (y^2 - 4y) = -20$. Half of $10$ is $5$ and half of $-4$ is $-2$, so add $25$ and $4$ to both sides: $(x + 5)^2 + (y - 2)^2 = -20 + 25 + 4 = 9$. The choice ending in $= 5$ adds $25$ to the right side but forgets the $4$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `What is the center of the circle $x^2 + y^2 - 12y = 0$?`,
+      choices: [
+        no(`$(0, -6)$`, 'flipped-center-signs'),
+        ok(`$(0, 6)$`),
+        no(`$(6, 0)$`, 'placed-shift-on-wrong-axis'),
+        no(`$(0, 12)$`, 'did-not-halve-linear-coefficients'),
+      ],
+      solution: `There is no $x$ term, so $h = 0$. Complete the square in $y$: half of $-12$ is $-6$, so $x^2 + (y - 6)^2 = 36$. The center is $(0, 6)$ and the radius is $6$. The choice $(0, -6)$ copies the sign from $-6$ without reading $y - 6$ as $y - k$.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Which point lies inside the circle $(x - 2)^2 + (y + 3)^2 = 25$?`,
+      choices: [
+        no(`$(7, -3)$`, 'counted-point-on-circle-as-inside'),
+        no(`$(-2, 3)$`, 'flipped-center-signs'),
+        no(`$(8, -3)$`, 'treated-r-squared-as-radius'),
+        ok(`$(4, -1)$`),
+      ],
+      solution: `Compare each squared distance from the center $(2, -3)$ to $r^2 = 25$. For $(4, -1)$: $2^2 + 2^2 = 8 < 25$, so it is inside. The point $(7, -3)$ gives exactly $25$, so it is on the circle, not inside, and $(8, -3)$ gives $36$, which is outside.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A circle has center $(-4, 3)$ and just touches the $x$-axis at one point. Which equation represents the circle?`,
+      choices: [
+        ok(`$(x + 4)^2 + (y - 3)^2 = 9$`),
+        no(`$(x + 4)^2 + (y - 3)^2 = 16$`, 'used-x-coordinate-as-radius'),
+        no(`$(x + 4)^2 + (y - 3)^2 = 3$`, 'radius-not-squared'),
+        no(`$(x - 4)^2 + (y + 3)^2 = 9$`, 'flipped-center-signs'),
+      ],
+      solution: `A circle that touches the $x$-axis has a radius equal to the distance from its center to that axis, which is the $y$-coordinate's size, $3$. So $r^2 = 9$ and the equation is $(x + 4)^2 + (y - 3)^2 = 9$. The choice ending in $= 16$ uses the distance to the $y$-axis instead.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A circle has center $(2, -1)$ and passes through the point $(-3, 11)$. What is its radius?`,
+      choices: [
+        no(`$17$`, 'added-legs-without-squaring'),
+        no(`$169$`, 'gave-r-squared-as-radius'),
+        ok(`$13$`),
+        no(`$\\sqrt{101}$`, 'added-coordinates-instead-of-subtracting'),
+      ],
+      solution: `The legs are $-3 - 2 = -5$ and $11 - (-1) = 12$, so $r = \\sqrt{(-5)^2 + 12^2} = \\sqrt{169} = 13$. The choice $17$ adds the leg lengths $5 + 12$ instead of using the Pythagorean theorem.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Which equation represents the circle with center $(3, 0)$ and radius $\\sqrt{7}$?`,
+      choices: [
+        no(`$(x - 3)^2 + y^2 = 49$`, 'squared-the-radicand'),
+        no(`$(x - 3)^2 + y^2 = \\sqrt{7}$`, 'radius-not-squared'),
+        ok(`$(x - 3)^2 + y^2 = 7$`),
+        no(`$x^2 + (y - 3)^2 = 7$`, 'swapped-x-and-y'),
+      ],
+      solution: `Squaring the radius gives $\\left(\\sqrt{7}\\right)^2 = 7$, and the center $(3, 0)$ gives $(x - 3)^2 + (y - 0)^2$. The equation is $(x - 3)^2 + y^2 = 7$. The choice ending in $= 49$ squares $7$ instead of squaring $\\sqrt{7}$.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `What is the radius of the circle $4x^2 + 4y^2 - 24x - 8y - 24 = 0$?`,
+      choices: [
+        ok(`$4$`),
+        no(`$\\sqrt{34}$`, 'did-not-divide-constant-by-leading-coefficient'),
+        no(`$16$`, 'gave-r-squared-as-radius'),
+        no(`$\\sqrt{46}$`, 'did-not-halve-linear-coefficients'),
+      ],
+      solution: `Divide every term by $4$: $x^2 + y^2 - 6x - 2y - 6 = 0$. Then $(x^2 - 6x + 9) + (y^2 - 2y + 1) = 6 + 9 + 1$, so $(x - 3)^2 + (y - 1)^2 = 16$ and $r = 4$. The choice $\\sqrt{34}$ divides the $x$ and $y$ terms by $4$ but leaves the constant as $-24$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A circle has center $(1, -3)$ and radius $4$. Which equation is the same circle written in the form $x^2 + y^2 + Dx + Ey + F = 0$?`,
+      choices: [
+        no(`$x^2 + y^2 + 2x - 6y - 6 = 0$`, 'flipped-center-signs'),
+        ok(`$x^2 + y^2 - 2x + 6y - 6 = 0$`),
+        no(`$x^2 + y^2 - 2x + 6y - 16 = 0$`, 'dropped-constants-from-expanded-squares'),
+        no(`$x^2 + y^2 - x + 3y - 6 = 0$`, 'did-not-double-middle-term'),
+      ],
+      solution: `Start from $(x - 1)^2 + (y + 3)^2 = 16$. Expanding gives $x^2 - 2x + 1 + y^2 + 6y + 9 = 16$, and moving $16$ to the left gives $x^2 + y^2 - 2x + 6y - 6 = 0$ because $1 + 9 - 16 = -6$. The choice ending in $-16 = 0$ forgets the $1$ and $9$ from the expanded squares.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `On a county map measured in kilometers, a cell tower at $(-6, 2)$ covers every point within $9$ km. A house is at $(0, 8)$. Is the house within range, and why?`,
+      choices: [
+        no(`No, because its squared distance $72$ is greater than the radius $9$`, 'compared-squared-distance-to-radius'),
+        no(`No, because its distance $12$ is greater than $9$`, 'added-legs-without-squaring'),
+        no(`No, because its squared distance $136$ is greater than $81$`, 'flipped-center-signs'),
+        ok(`Yes, because its squared distance $72$ is less than $81$`),
+      ],
+      solution: `The squared distance from the tower is $(0 - (-6))^2 + (8 - 2)^2 = 36 + 36 = 72$. The coverage circle is $(x + 6)^2 + (y - 2)^2 = 81$, and $72 < 81$, so the house is inside. Comparing $72$ with $9$ mixes a squared distance with an unsquared radius.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `The point $(4, k)$ lies on the circle $(x - 1)^2 + (y - 2)^2 = 25$, and $k > 2$. What is the value of $k$?`,
+      choices: [
+        no(`$-2$`, 'ignored-the-given-condition'),
+        no(`$4$`, 'subtracted-legs-without-squaring'),
+        ok(`$6$`),
+        no(`$18$`, 'forgot-to-take-square-root'),
+      ],
+      solution: `Substitute $x = 4$: $3^2 + (k - 2)^2 = 25$, so $(k - 2)^2 = 16$ and $k - 2 = 4$ or $-4$. That gives $k = 6$ or $k = -2$, and only $6$ is greater than $2$. The choice $-2$ is the other solution, which the condition $k > 2$ rules out.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `The equation $x^2 + y^2 - 8x + 2y + c = 0$ is a circle with radius $5$. What is the value of $c$?`,
+      choices: [
+        no(`$8$`, 'sign-error-moving-constant'),
+        ok(`$-8$`),
+        no(`$12$`, 'radius-not-squared'),
+        no(`$43$`, 'did-not-halve-linear-coefficients'),
+      ],
+      solution: `Complete the square: $(x - 4)^2 + (y + 1)^2 = 16 + 1 - c = 17 - c$. The radius is $5$, so $17 - c = 25$ and $c = -8$. The choice $8$ comes from solving $17 + c = 25$, which forgets that $c$ changes sign when it moves across the equals sign.`,
+    },
+  ],
+}
+
+export default skill
