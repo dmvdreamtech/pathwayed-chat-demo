@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g10-similarity-right-triangles-more',
+  extends: 'similarity-right-triangles',
+  subject: 'math',
+  grade: 10,
+  group: 'Similarity and Trigonometry',
+  name: 'Similarity & Right Triangles',
+  standards: ['HSG.SRT.C.8'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Ines stands on level ground $40$ meters from the base of a building. The angle of elevation from the ground at that spot to the top of the building is $35^\\circ$. How tall is the building, to the nearest tenth of a meter?`,
+      choices: [
+        ok(`$28.0$ meters`),
+        no(`$22.9$ meters`, 'used-sine-instead-of-tangent'),
+        no(`$32.8$ meters`, 'used-cosine-instead-of-tangent'),
+        no(`$57.1$ meters`, 'divided-by-tangent'),
+      ],
+      solution: `The building's height is the side opposite the $35^\\circ$ angle and the $40$ meters along the ground is the adjacent side, so use tangent: $h = 40\\tan 35^\\circ \\approx 28.0$ meters. The value $22.9$ meters comes from using sine, which needs the hypotenuse, not the ground distance.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A $16$-foot ladder leans against a vertical wall and makes a $70^\\circ$ angle with the level ground. How high up the wall does the top of the ladder reach, to the nearest tenth of a foot?`,
+      choices: [
+        no(`$5.5$ feet`, 'used-cosine-for-opposite-side'),
+        ok(`$15.0$ feet`),
+        no(`$44.0$ feet`, 'used-tangent-with-hypotenuse'),
+        no(`$17.0$ feet`, 'divided-by-sine'),
+      ],
+      solution: `The ladder is the hypotenuse, and the height on the wall is opposite the $70^\\circ$ angle at the ground, so $h = 16\\sin 70^\\circ \\approx 15.0$ feet. The value $5.5$ feet is $16\\cos 70^\\circ$, which is the distance from the wall to the foot of the ladder.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A rectangular TV screen is $48$ inches wide and $27$ inches tall. What is the length of its diagonal, to the nearest tenth of an inch?`,
+      choices: [
+        no(`$75$ inches`, 'added-legs-instead-of-squares'),
+        no(`$39.7$ inches`, 'subtracted-squares-for-hypotenuse'),
+        ok(`$55.1$ inches`),
+        no(`$3033$ inches`, 'forgot-square-root'),
+      ],
+      solution: `The width, height and diagonal form a right triangle with the diagonal as the hypotenuse: $d = \\sqrt{48^2 + 27^2} = \\sqrt{2304 + 729} = \\sqrt{3033} \\approx 55.1$ inches. The value $3033$ is $d^2$; the square root was never taken.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A right triangle with angles $45^\\circ$, $45^\\circ$ and $90^\\circ$ has a hypotenuse of length $10$. What is the length of each leg?`,
+      choices: [
+        no(`$10\\sqrt{2}$`, 'multiplied-by-root-two-instead-of-dividing'),
+        no(`$5$`, 'used-30-60-90-short-leg-rule'),
+        no(`$5\\sqrt{3}$`, 'used-30-60-90-long-leg-rule'),
+        ok(`$5\\sqrt{2}$`),
+      ],
+      solution: `In a 45, 45, 90 triangle the hypotenuse is $\\sqrt{2}$ times a leg, so a leg is $\\frac{10}{\\sqrt{2}} = 5\\sqrt{2}$. The value $10\\sqrt{2}$ multiplies by $\\sqrt{2}$, which would make the leg longer than the hypotenuse.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A kite string is pulled straight and is $50$ meters long from the hand to the kite. The string makes a $40^\\circ$ angle with the horizontal. Ignoring the height of the hand, which equation gives the height $h$ of the kite in meters?`,
+      choices: [
+        ok(`$h = 50\\sin 40^\\circ$`),
+        no(`$h = 50\\cos 40^\\circ$`, 'used-cosine-for-opposite-side'),
+        no(`$h = 50\\tan 40^\\circ$`, 'used-tangent-with-hypotenuse'),
+        no(`$h = \\frac{50}{\\sin 40^\\circ}$`, 'divided-by-sine'),
+      ],
+      solution: `The string is the hypotenuse and the height is the side opposite the $40^\\circ$ angle, so $\\sin 40^\\circ = \\frac{h}{50}$ and $h = 50\\sin 40^\\circ$. The equation $h = 50\\cos 40^\\circ$ gives the horizontal distance, the side adjacent to the angle.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `In a right triangle with angles $30^\\circ$, $60^\\circ$ and $90^\\circ$, the shorter leg (opposite the $30^\\circ$ angle) has length $9$. What is the length of the longer leg?`,
+      choices: [
+        no(`$9\\sqrt{2}$`, 'used-45-45-90-ratio'),
+        no(`$18$`, 'gave-hypotenuse-instead-of-long-leg'),
+        ok(`$9\\sqrt{3}$`),
+        no(`$3\\sqrt{3}$`, 'divided-by-root-three'),
+      ],
+      solution: `In a 30, 60, 90 triangle the longer leg is $\\sqrt{3}$ times the shorter leg, so it is $9\\sqrt{3}$. The value $18$ is twice the shorter leg, which is the hypotenuse.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `From the top of a cliff $45$ meters above the water, Tomasz sights a boat. The angle of depression from the top of the cliff to the boat is $18^\\circ$. What is the horizontal distance from the base of the cliff to the boat, to the nearest tenth of a meter?`,
+      choices: [
+        no(`$14.6$ meters`, 'used-depression-angle-at-cliff-top-vertex'),
+        ok(`$138.5$ meters`),
+        no(`$145.6$ meters`, 'found-line-of-sight-not-horizontal-distance'),
+        no(`$42.8$ meters`, 'used-cosine-instead-of-tangent'),
+      ],
+      solution: `The angle of depression equals the angle of elevation from the boat up to the cliff top, $18^\\circ$. At the boat, the cliff height $45$ is opposite and the horizontal distance $d$ is adjacent, so $\\tan 18^\\circ = \\frac{45}{d}$ and $d = \\frac{45}{\\tan 18^\\circ} \\approx 138.5$ meters. The value $14.6$ meters treats $18^\\circ$ as the angle at the cliff top, between the cliff and the line of sight.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A straight ramp is $14$ feet long, measured along its sloped surface, and its top end is $3$ feet above the level ground. What angle does the ramp make with the ground, to the nearest tenth of a degree?`,
+      choices: [
+        no(`$12.1^\\circ$`, 'used-tangent-with-hypotenuse'),
+        no(`$77.6^\\circ$`, 'used-cosine-gave-complement'),
+        no(`$0.2^\\circ$`, 'reported-ratio-instead-of-angle'),
+        ok(`$12.4^\\circ$`),
+      ],
+      solution: `The $3$-foot rise is opposite the angle and the $14$-foot ramp is the hypotenuse, so $\\sin\\theta = \\frac{3}{14}$ and $\\theta = \\sin^{-1}\\left(\\frac{3}{14}\\right) \\approx 12.4^\\circ$. The value $12.1^\\circ$ uses inverse tangent, but $14$ is the hypotenuse, not the horizontal run.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `A guy wire runs in a straight line from the top of an $18$-meter vertical pole to a stake in the level ground. The wire makes a $62^\\circ$ angle with the ground. How long is the wire, to the nearest tenth of a meter?`,
+      choices: [
+        ok(`$20.4$ meters`),
+        no(`$15.9$ meters`, 'multiplied-by-sine-instead-of-dividing'),
+        no(`$38.3$ meters`, 'used-cosine-for-opposite-side'),
+        no(`$9.6$ meters`, 'found-ground-distance-instead-of-wire'),
+      ],
+      solution: `The pole height $18$ is opposite the $62^\\circ$ angle and the wire is the hypotenuse, so $\\sin 62^\\circ = \\frac{18}{L}$ and $L = \\frac{18}{\\sin 62^\\circ} \\approx 20.4$ meters. The value $15.9$ meters is shorter than the pole itself, which is impossible for the hypotenuse.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A $20$-foot ladder must reach a window ledge $18$ feet above level ground on a vertical wall. How far from the base of the wall should the foot of the ladder be placed, to the nearest tenth of a foot?`,
+      choices: [
+        no(`$26.9$ feet`, 'added-squares-when-finding-a-leg'),
+        ok(`$8.7$ feet`),
+        no(`$2$ feet`, 'subtracted-lengths-not-squares'),
+        no(`$76$ feet`, 'forgot-square-root'),
+      ],
+      solution: `The ladder is the hypotenuse, so $d = \\sqrt{20^2 - 18^2} = \\sqrt{400 - 324} = \\sqrt{76} \\approx 8.7$ feet. The value $26.9$ feet adds the squares, but a leg is found by subtracting from the square of the hypotenuse.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Right triangle $PQR$ has its right angle at $R$. The altitude from $R$ meets hypotenuse $PQ$ at point $S$, splitting it into $PS = 4$ and $SQ = 9$. The two smaller triangles are similar to each other and to $PQR$. What is the length of $RS$?`,
+      choices: [
+        no(`$6.5$`, 'averaged-the-segments'),
+        no(`$13$`, 'added-the-segments'),
+        ok(`$6$`),
+        no(`$36$`, 'forgot-square-root'),
+      ],
+      solution: `From the similar triangles $PSR$ and $RSQ$, $\\frac{PS}{RS} = \\frac{RS}{SQ}$, so $RS^2 = 4 \\cdot 9 = 36$ and $RS = 6$. The value $6.5$ is the ordinary average of $4$ and $9$, but similarity gives the geometric mean.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Amara's eyes are $1.5$ meters above level ground. Standing $25$ meters from the base of a tree, Amara measures the angle of elevation from eye level to the top of the tree as $32^\\circ$. How tall is the tree, to the nearest tenth of a meter?`,
+      choices: [
+        no(`$15.6$ meters`, 'forgot-to-add-eye-height'),
+        no(`$14.7$ meters`, 'used-sine-instead-of-tangent'),
+        no(`$41.5$ meters`, 'divided-by-tangent'),
+        ok(`$17.1$ meters`),
+      ],
+      solution: `Above eye level, the tree rises $25\\tan 32^\\circ \\approx 15.62$ meters, since that part is opposite the angle and the $25$ meters is adjacent. Add the eye height: $15.62 + 1.5 \\approx 17.1$ meters. The value $15.6$ meters measures only from eye level, not from the ground.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A ladder leans against a vertical wall and makes a $60^\\circ$ angle with the level ground. The foot of the ladder is $5$ feet from the wall. What is the exact length of the ladder?`,
+      choices: [
+        no(`$5\\sqrt{3}$ feet`, 'found-height-on-wall-instead'),
+        ok(`$10$ feet`),
+        no(`$\\frac{10\\sqrt{3}}{3}$ feet`, 'used-sine-for-adjacent-side'),
+        no(`$\\frac{5}{2}$ feet`, 'multiplied-by-cosine-instead-of-dividing'),
+      ],
+      solution: `The $5$ feet along the ground is adjacent to the $60^\\circ$ angle and the ladder is the hypotenuse, so $L = \\frac{5}{\\cos 60^\\circ} = \\frac{5}{\\frac{1}{2}} = 10$ feet. This is a 30, 60, 90 triangle whose shorter leg is $5$. The value $5\\sqrt{3}$ feet is the height the ladder reaches on the wall.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A straight mountain road climbs at a steady $4^\\circ$ angle above the horizontal. A cyclist rides $2.5$ miles along the road. Using $1$ mile $= 5280$ feet, how many feet higher is the cyclist at the end, to the nearest foot?`,
+      choices: [
+        ok(`$921$ feet`),
+        no(`$923$ feet`, 'used-tangent-with-hypotenuse'),
+        no(`$0.17$ feet`, 'forgot-to-convert-miles-to-feet'),
+        no(`$13168$ feet`, 'used-cosine-for-opposite-side'),
+      ],
+      solution: `The road distance is the hypotenuse: $2.5 \\times 5280 = 13200$ feet. The rise is opposite the $4^\\circ$ angle, so it is $13200\\sin 4^\\circ \\approx 921$ feet. The value $923$ feet uses tangent, which would need the horizontal distance rather than the distance along the road.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `A closed box is $12$ inches long, $9$ inches wide and $8$ inches tall. What is the length of the longest straight rod that fits inside, running from one bottom corner to the opposite top corner?`,
+      choices: [
+        no(`$15$ inches`, 'used-only-the-base-diagonal'),
+        no(`$29$ inches`, 'added-the-dimensions'),
+        ok(`$17$ inches`),
+        no(`$289$ inches`, 'forgot-square-root'),
+      ],
+      solution: `First the bottom diagonal: $\\sqrt{12^2 + 9^2} = 15$. That diagonal and the height $8$ are the legs of a second right triangle, so the rod is $\\sqrt{15^2 + 8^2} = \\sqrt{289} = 17$ inches. The value $15$ inches stops at the floor of the box.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `From point $A$ on level ground, the angle of elevation to the top of a tower is $30^\\circ$. Walking $40$ meters straight toward the tower to point $B$, the angle of elevation becomes $45^\\circ$. How tall is the tower, to the nearest tenth of a meter?`,
+      choices: [
+        no(`$40$ meters`, 'assumed-height-equals-walk-distance'),
+        no(`$23.1$ meters`, 'used-only-the-walk-distance'),
+        ok(`$54.6$ meters`),
+        no(`$94.6$ meters`, 'gave-distance-from-point-a-not-height'),
+      ],
+      solution: `Let $h$ be the height. At $B$, $\\tan 45^\\circ = 1$, so $B$ is $h$ meters from the base, and $A$ is $h + 40$ meters away. At $A$, $\\tan 30^\\circ = \\frac{h}{h + 40}$, so $h\\sqrt{3} = h + 40$ and $h = \\frac{40}{\\sqrt{3} - 1} \\approx 54.6$ meters. The value $94.6$ meters is $h + 40$, the distance from $A$ to the base.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `From the top of a $60$-meter lighthouse, a keeper sees two boats due east, both on the same side of the lighthouse and in line with its base. The angles of depression to the boats are $35^\\circ$ and $20^\\circ$. How far apart are the boats, to the nearest tenth of a meter?`,
+      choices: [
+        no(`$223.9$ meters`, 'used-difference-of-angles'),
+        ok(`$79.2$ meters`),
+        no(`$20.2$ meters`, 'multiplied-by-tangent-instead-of-dividing'),
+        no(`$250.5$ meters`, 'added-distances-for-same-side-boats'),
+      ],
+      solution: `Each angle of depression equals the angle of elevation from that boat. The horizontal distances are $\\frac{60}{\\tan 20^\\circ} \\approx 164.85$ meters and $\\frac{60}{\\tan 35^\\circ} \\approx 85.69$ meters. The boats are on the same side, so subtract: $164.85 - 85.69 \\approx 79.2$ meters. The value $250.5$ meters adds the distances, which would only fit boats on opposite sides.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `To find a building's height, Rafael lays a small mirror flat on level ground $15$ meters from the base of the building, then steps back, away from the building, to a spot $3$ meters from the mirror, on the line through the building and the mirror, where the top of the building is seen in the mirror. Rafael's eyes are $1.6$ meters above the ground. The two right triangles formed are similar. How tall is the building?`,
+      choices: [
+        no(`$0.32$ meters`, 'inverted-the-proportion'),
+        ok(`$8$ meters`),
+        no(`$9.6$ meters`, 'used-total-distance-for-building-side'),
+        no(`$28.1$ meters`, 'mismatched-corresponding-sides'),
+      ],
+      solution: `The light reflects at equal angles, so the small triangle (eye height $1.6$, ground $3$) is similar to the large one (building height $h$, ground $15$). Then $\\frac{h}{15} = \\frac{1.6}{3}$, so $h = \\frac{1.6 \\cdot 15}{3} = 8$ meters. The value $9.6$ meters uses $18$, the distance from Rafael to the building, which is not a side of the building's triangle.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A ramp must rise $2.5$ feet, and its angle with the level ground can be at most $4.8^\\circ$. What is the shortest horizontal run (the ground distance under the ramp) that meets this rule, to the nearest tenth of a foot?`,
+      choices: [
+        no(`$29.9$ feet`, 'found-ramp-length-not-horizontal-run'),
+        no(`$0.2$ feet`, 'multiplied-by-tangent-instead-of-dividing'),
+        ok(`$29.8$ feet`),
+        no(`$2.5$ feet`, 'used-cosine-for-opposite-side'),
+      ],
+      solution: `The rise $2.5$ is opposite the angle and the run $x$ is adjacent, so $\\tan 4.8^\\circ = \\frac{2.5}{x}$ and $x = \\frac{2.5}{\\tan 4.8^\\circ} \\approx 29.8$ feet. A steeper angle would allow a shorter run, so $4.8^\\circ$ gives the shortest allowed run. The value $29.9$ feet is $\\frac{2.5}{\\sin 4.8^\\circ}$, the length along the sloped ramp surface.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A symmetric roof spans a house $24$ feet wide. Each side of the roof makes a $30^\\circ$ angle with the horizontal, and the peak is directly above the middle of the house. How long is one sloped side of the roof, from the peak to the edge, as an exact value?`,
+      choices: [
+        ok(`$8\\sqrt{3}$ feet`),
+        no(`$6\\sqrt{3}$ feet`, 'multiplied-by-cosine-instead-of-dividing'),
+        no(`$16\\sqrt{3}$ feet`, 'used-full-span-instead-of-half'),
+        no(`$4\\sqrt{3}$ feet`, 'found-roof-height-instead'),
+      ],
+      solution: `The peak is above the middle, so each half of the span is $12$ feet, the side adjacent to the $30^\\circ$ angle. The sloped side is the hypotenuse: $L = \\frac{12}{\\cos 30^\\circ} = \\frac{12}{\\frac{\\sqrt{3}}{2}} = \\frac{24}{\\sqrt{3}} = 8\\sqrt{3}$ feet. The value $4\\sqrt{3}$ feet is $12\\tan 30^\\circ$, the height of the peak above the walls.`,
+    },
+  ],
+}
+
+export default skill
