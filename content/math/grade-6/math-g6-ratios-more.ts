@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g6-ratios-more',
+  extends: 'ratios',
+  subject: 'math',
+  grade: 6,
+  group: 'Ratios and Proportional Relationships',
+  name: 'Ratios & Proportions',
+  standards: ['6.RP.A.1'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `A class has 12 girls and 15 boys. Which ratio compares boys to girls?`,
+      choices: [
+        ok(`$15 : 12$`),
+        no(`$12 : 15$`, 'reversed-ratio-order'),
+        no(`$15 : 27$`, 'compared-part-to-whole-instead-of-part'),
+        no(`$12 : 27$`, 'compared-other-part-to-whole'),
+      ],
+      solution: `The words "boys to girls" put boys first and girls second, so the ratio is $15 : 12$. The choice $12 : 15$ lists girls first, which is the ratio of girls to boys.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A recipe uses 2 cups of flour for every 1 cup of sugar. Which ratio compares sugar to flour?`,
+      choices: [
+        no(`$2 : 1$`, 'reversed-ratio-order'),
+        no(`$1 : 3$`, 'compared-part-to-whole-instead-of-part'),
+        ok(`$1 : 2$`),
+        no(`$2 : 3$`, 'compared-other-part-to-whole'),
+      ],
+      solution: `Sugar comes first and flour second: 1 cup of sugar for every 2 cups of flour is $1 : 2$. The choice $2 : 1$ is flour to sugar, the reverse order.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A fruit bowl holds 4 pears and 7 plums. What is the ratio of pears to all the fruit in the bowl?`,
+      choices: [
+        no(`$4 : 7$`, 'compared-part-to-part-instead-of-whole'),
+        no(`$7 : 11$`, 'used-the-wrong-part'),
+        no(`$11 : 4$`, 'reversed-ratio-order'),
+        ok(`$4 : 11$`),
+      ],
+      solution: `All the fruit is $4 + 7 = 11$ pieces, so pears to all the fruit is $4 : 11$. The choice $4 : 7$ compares pears to plums, a part to another part, not to the whole.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Which ratio is equivalent to $3 : 5$?`,
+      choices: [
+        ok(`$9 : 15$`),
+        no(`$5 : 7$`, 'added-same-number-to-both-terms'),
+        no(`$5 : 3$`, 'reversed-ratio-order'),
+        no(`$6 : 8$`, 'added-same-number-to-both-terms'),
+      ],
+      solution: `Equivalent ratios multiply both terms by the same number. Multiplying $3$ and $5$ by $3$ gives $9 : 15$. The choice $5 : 7$ adds 2 to each term, and adding does not keep the ratio the same.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Deshawn reads 60 pages in 4 days, reading the same number of pages each day. How many pages does Deshawn read per day?`,
+      choices: [
+        no(`240`, 'multiplied-instead-of-divided'),
+        no(`56`, 'subtracted-instead-of-divided'),
+        ok(`15`),
+        no(`64`, 'added-instead-of-divided'),
+      ],
+      solution: `A unit rate is the amount for 1 day, so divide: $60 \\div 4 = 15$ pages per day. The choice 240 multiplies 60 by 4, which would be the pages for a much longer time.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A ratio table shows cups of rice and cups of water. The rows are 1 cup of rice with 2 cups of water, 2 cups of rice with 4 cups of water, 3 cups of rice with an unknown amount of water, and 4 cups of rice with 8 cups of water. How many cups of water go with 3 cups of rice?`,
+      choices: [
+        no(`5`, 'added-one-like-the-rice-column'),
+        ok(`6`),
+        no(`1.5`, 'divided-by-two-instead-of-multiplying'),
+        no(`9`, 'multiplied-rice-by-itself'),
+      ],
+      solution: `Every row has twice as much water as rice, so 3 cups of rice needs $3 \\times 2 = 6$ cups of water. The choice 5 adds 1 to the water just because the rice went up by 1, but the water goes up by 2 each row.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `An animal shelter has 5 cats for every 3 dogs and no other animals. The shelter has 24 animals in all. How many cats are at the shelter?`,
+      choices: [
+        no(`9`, 'gave-the-other-part'),
+        no(`40`, 'treated-total-as-one-part'),
+        ok(`15`),
+        no(`8`, 'gave-animals-per-group'),
+      ],
+      solution: `Each group of 5 cats and 3 dogs has 8 animals, so 24 animals make $24 \\div 8 = 3$ groups. That is $3 \\times 5 = 15$ cats. The choice 9 is the number of dogs, $3 \\times 3$.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A tape diagram for a drink shows 2 equal boxes for juice and 5 boxes of the same size for water. All 7 boxes together stand for 42 cups of drink. How many cups of water are in the drink?`,
+      choices: [
+        ok(`30`),
+        no(`12`, 'gave-the-other-part'),
+        no(`6`, 'gave-the-value-of-one-box'),
+        no(`210`, 'multiplied-total-by-number-of-boxes'),
+      ],
+      solution: `Seven equal boxes make 42 cups, so one box is $42 \\div 7 = 6$ cups. Water fills 5 boxes, so it is $5 \\times 6 = 30$ cups. The choice 6 is only the value of one box.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `A pack of 8 pens costs 6 dollars. At the same price for each pen, how much do 12 pens cost?`,
+      choices: [
+        no(`10 dollars`, 'added-same-number-to-both-terms'),
+        no(`16 dollars`, 'used-pens-per-dollar-as-price'),
+        no(`4 dollars`, 'scaled-in-the-wrong-direction'),
+        ok(`9 dollars`),
+      ],
+      solution: `One pen costs $6 \\div 8 = 0.75$ dollars, so 12 pens cost $12 \\times 0.75 = 9$ dollars. The choice 10 dollars adds 4 to the cost because 4 more pens were added, but prices grow by multiplying, not by adding the same amount.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Which ratio is equivalent to $12 : 18$?`,
+      choices: [
+        no(`$3 : 2$`, 'reversed-ratio-order'),
+        ok(`$2 : 3$`),
+        no(`$6 : 12$`, 'subtracted-same-number-from-both-terms'),
+        no(`$4 : 9$`, 'divided-terms-by-different-numbers'),
+      ],
+      solution: `Divide both terms by 6: $12 \\div 6 = 2$ and $18 \\div 6 = 3$, giving $2 : 3$. The choice $6 : 12$ subtracts 6 from each term, which changes the ratio.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A ratio table shows miles a cyclist rides and minutes it takes at a steady pace. The rows are 3 miles in 12 minutes, 6 miles in 24 minutes, an unknown number of miles in 40 minutes, and 15 miles in 60 minutes. How many miles does the cyclist ride in 40 minutes?`,
+      choices: [
+        no(`9`, 'continued-the-add-three-pattern'),
+        no(`160`, 'multiplied-by-unit-rate-instead-of-dividing'),
+        ok(`10`),
+        no(`22`, 'added-minute-difference-to-miles'),
+      ],
+      solution: `In every row the minutes are 4 times the miles, so the cyclist takes 4 minutes per mile. In 40 minutes that is $40 \\div 4 = 10$ miles. The choice 9 just adds 3 to the miles, but the minutes jumped from 24 to 40, not by 12.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `In a tile pattern, the ratio of red tiles to white tiles is 2 to 7. There are no other colors. What fraction of the tiles are red?`,
+      choices: [
+        no(`$\\frac{2}{7}$`, 'used-part-to-part-as-fraction-of-whole'),
+        no(`$\\frac{7}{9}$`, 'used-the-wrong-part'),
+        ok(`$\\frac{2}{9}$`),
+        no(`$\\frac{2}{5}$`, 'subtracted-parts-to-find-whole'),
+      ],
+      solution: `For every 2 red tiles there are 7 white tiles, so each group has $2 + 7 = 9$ tiles and 2 of them are red: $\\frac{2}{9}$. The choice $\\frac{2}{7}$ compares red to white, not red to all the tiles.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Store A sells 5 notebooks for 4 dollars. Store B sells 8 notebooks for 6 dollars. Which store has the lower price for one notebook, and what is that price?`,
+      choices: [
+        ok(`Store B, 75 cents per notebook`),
+        no(`Store A, 80 cents per notebook`, 'picked-the-higher-unit-price'),
+        no(`Store A, 1 dollar 25 cents per notebook`, 'divided-notebooks-by-dollars'),
+        no(`Store B, 1 dollar 33 cents per notebook`, 'divided-notebooks-by-dollars'),
+      ],
+      solution: `Find each price for one notebook. Store A: $4 \\div 5 = 0.80$ dollars, or 80 cents. Store B: $6 \\div 8 = 0.75$ dollars, or 75 cents. Store B is lower at 75 cents. The choice "Store A, 80 cents per notebook" is the higher of the two prices.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A car travels 135 miles in 3 hours at a constant speed. At this speed, how far does the car travel in 5 hours?`,
+      choices: [
+        no(`137 miles`, 'added-same-number-to-both-terms'),
+        ok(`225 miles`),
+        no(`81 miles`, 'scaled-in-the-wrong-direction'),
+        no(`675 miles`, 'multiplied-without-finding-unit-rate'),
+      ],
+      solution: `The unit rate is $135 \\div 3 = 45$ miles per hour, so in 5 hours the car goes $45 \\times 5 = 225$ miles. The choice 675 miles multiplies 135 by 5, which would be the distance for 15 hours.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Lemonade is made with 4 cups of sugar for every 6 cups of lemon juice. Which mix of sugar to lemon juice tastes exactly the same?`,
+      choices: [
+        no(`$6 : 8$`, 'added-same-number-to-both-terms'),
+        no(`$8 : 10$`, 'added-same-number-to-both-terms'),
+        no(`$9 : 6$`, 'reversed-ratio-order'),
+        ok(`$6 : 9$`),
+      ],
+      solution: `The ratio $4 : 6$ simplifies to $2 : 3$, and $6 : 9$ is $2 : 3$ times 3, so it tastes the same. The choice $6 : 8$ adds 2 to each amount; it simplifies to $3 : 4$, which has relatively more sugar.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Kiara and Malik share stickers in the ratio 3 to 5. Malik gets 18 more stickers than Kiara. How many stickers do they have in all?`,
+      choices: [
+        no(`27`, 'gave-one-part-instead-of-total'),
+        no(`45`, 'gave-one-part-instead-of-total'),
+        ok(`72`),
+        no(`144`, 'used-difference-as-one-box'),
+      ],
+      solution: `Picture a tape diagram: Kiara has 3 equal boxes and Malik has 5. Malik's extra 2 boxes are 18 stickers, so one box is $18 \\div 2 = 9$. All 8 boxes are $8 \\times 9 = 72$ stickers. The choice 144 treats the 18 extra stickers as one box.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A jar holds 28 beads, with blue beads to green beads in the ratio $4 : 3$. How many green beads must be added so that the jar has the same number of blue and green beads?`,
+      choices: [
+        no(`1`, 'subtracted-ratio-terms-instead-of-counts'),
+        ok(`4`),
+        no(`16`, 'gave-the-blue-count'),
+        no(`12`, 'gave-the-green-count'),
+      ],
+      solution: `There are $4 + 3 = 7$ parts, so each part is $28 \\div 7 = 4$ beads. Blue is $4 \\times 4 = 16$ and green is $3 \\times 4 = 12$. Adding $16 - 12 = 4$ green beads makes the counts equal. The choice 1 subtracts the ratio numbers $4 - 3$ instead of the actual counts.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `There are 12 inches in 1 foot. A ribbon is 78 inches long. How long is the ribbon in feet?`,
+      choices: [
+        no(`936 feet`, 'multiplied-instead-of-divided'),
+        no(`6.6 feet`, 'wrote-remainder-as-decimal-digit'),
+        ok(`6.5 feet`),
+        no(`66 feet`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `Each foot is 12 inches, so divide: $78 \\div 12 = 6.5$ feet. The choice 6.6 feet comes from 6 with a remainder of 6, but a remainder of 6 inches is $\\frac{6}{12} = 0.5$ of a foot, not 0.6.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `In a garden, the ratio of tulips to daisies is $4 : 9$, and there are no other flowers. Which statement is true?`,
+      choices: [
+        no(`Tulips make up $\\frac{4}{9}$ of the flowers.`, 'used-part-to-part-as-fraction-of-whole'),
+        ok(`Tulips make up $\\frac{4}{13}$ of the flowers.`),
+        no(`For every 9 tulips there are 4 daisies.`, 'reversed-ratio-order'),
+        no(`For every 13 daisies there are 4 tulips.`, 'used-total-as-one-part'),
+      ],
+      solution: `For every 4 tulips there are 9 daisies, so each group has $4 + 9 = 13$ flowers and 4 of them are tulips. Tulips are $\\frac{4}{13}$ of the flowers. The statement with $\\frac{4}{9}$ compares tulips to daisies, not to all the flowers.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A pump fills a tank with 15 gallons of water every 4 minutes. At this rate, how many minutes does it take to put 105 gallons in the tank?`,
+      choices: [
+        no(`7 minutes`, 'stopped-at-number-of-groups'),
+        no(`26.25 minutes`, 'divided-gallons-by-minutes'),
+        ok(`28 minutes`),
+        no(`393.75 minutes`, 'multiplied-by-gallons-per-minute'),
+      ],
+      solution: `105 gallons is $105 \\div 15 = 7$ groups of 15 gallons, and each group takes 4 minutes, so it takes $7 \\times 4 = 28$ minutes. The choice 7 minutes is the number of groups, not the time.`,
+    },
+  ],
+}
+
+export default skill
