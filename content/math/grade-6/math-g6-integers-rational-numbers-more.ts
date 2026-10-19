@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g6-integers-rational-numbers-more',
+  extends: 'integers-rational-numbers',
+  subject: 'math',
+  grade: 6,
+  group: 'The Number System',
+  name: 'Integers & Rational Numbers',
+  standards: ['6.NS.C'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `In which quadrant of the coordinate plane is the point $(-3, 5)$?`,
+      choices: [
+        ok(`Quadrant II`),
+        no(`Quadrant I`, 'ignored-negative-sign'),
+        no(`Quadrant III`, 'treated-one-negative-as-both-negative'),
+        no(`Quadrant IV`, 'swapped-x-and-y-coordinates'),
+      ],
+      solution: `The $x$-coordinate $-3$ is negative, so the point is left of the $y$-axis. The $y$-coordinate $5$ is positive, so it is above the $x$-axis. Left and up is Quadrant II. The choice Quadrant IV comes from reading the point as $(5, -3)$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Which number is less than $-5$?`,
+      choices: [
+        no(`$-3$`, 'ordered-negatives-by-absolute-value'),
+        ok(`$-7$`),
+        no(`$0$`, 'thought-zero-is-the-least-number'),
+        no(`$2$`, 'thought-positives-are-less-than-negatives'),
+      ],
+      solution: `On a number line, numbers to the left are less. $-7$ is $2$ units to the left of $-5$, so $-7 < -5$. The choice $-3$ is to the right of $-5$; it only looks smaller because $3$ is less than $5$.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A thermometer reads $-4$ degrees Fahrenheit. What does $-4$ mean here?`,
+      choices: [
+        ok(`The temperature is 4 degrees below zero.`),
+        no(`The temperature is 4 degrees above zero.`, 'ignored-negative-sign'),
+        no(`The temperature is 4 degrees below freezing.`, 'confused-zero-with-freezing-point'),
+        no(`The temperature just dropped by 4 degrees.`, 'read-a-position-as-a-change'),
+      ],
+      solution: `On a thermometer, $0$ is the reference point, and a negative reading is below it, so $-4$ means 4 degrees below zero. It is not "4 degrees below freezing," because water freezes at $32$ degrees Fahrenheit, not at $0$.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What is the opposite of $\\frac{3}{5}$?`,
+      choices: [
+        no(`$\\frac{5}{3}$`, 'confused-opposite-with-reciprocal'),
+        no(`$-\\frac{5}{3}$`, 'confused-opposite-with-negative-reciprocal'),
+        ok(`$-\\frac{3}{5}$`),
+        no(`$\\frac{3}{5}$`, 'thought-positives-have-no-opposite'),
+      ],
+      solution: `Opposites are the same distance from $0$ on opposite sides of $0$. The opposite of $\\frac{3}{5}$ is $-\\frac{3}{5}$. The choice $\\frac{5}{3}$ is the reciprocal, which flips the fraction instead of changing the side of $0$.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which numbers have an absolute value of $6$?`,
+      choices: [
+        no(`$6$ only`, 'forgot-negatives-have-positive-absolute-value'),
+        no(`$-6$ only`, 'thought-absolute-value-makes-a-number-negative'),
+        no(`$3$ and $-3$`, 'split-the-distance-across-zero'),
+        ok(`$6$ and $-6$`),
+      ],
+      solution: `Absolute value is distance from $0$. Both $6$ and $-6$ are $6$ units from $0$, so both have absolute value $6$. The choice "$6$ only" forgets that $-6$ is also $6$ units away from $0$.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Lena starts at the origin of a coordinate plane, moves 3 units left, and then moves 5 units down. Which point does Lena end at?`,
+      choices: [
+        ok(`$(-3, -5)$`),
+        no(`$(-5, -3)$`, 'swapped-x-and-y-coordinates'),
+        no(`$(3, -5)$`, 'treated-left-as-positive'),
+        no(`$(-3, 5)$`, 'treated-down-as-positive'),
+      ],
+      solution: `Moving left makes the $x$-coordinate negative, so $x = -3$. Moving down makes the $y$-coordinate negative, so $y = -5$. The point is $(-3, -5)$. The choice $(-5, -3)$ lists the vertical move first, but the $x$-coordinate always comes first.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `The point $(4, -2)$ is reflected across the $x$-axis. What are the coordinates of the new point?`,
+      choices: [
+        no(`$(-4, -2)$`, 'reflected-across-the-y-axis'),
+        ok(`$(4, 2)$`),
+        no(`$(-4, 2)$`, 'reflected-across-both-axes'),
+        no(`$(-2, 4)$`, 'swapped-x-and-y-coordinates'),
+      ],
+      solution: `Reflecting across the $x$-axis keeps the $x$-coordinate and changes the $y$-coordinate to its opposite. So $(4, -2)$ becomes $(4, 2)$. The choice $(-4, -2)$ changes the $x$-coordinate instead, which is a reflection across the $y$-axis.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `The point $(-6, 1)$ is reflected across the $y$-axis. What are the coordinates of the new point?`,
+      choices: [
+        no(`$(-6, -1)$`, 'reflected-across-the-x-axis'),
+        no(`$(6, -1)$`, 'reflected-across-both-axes'),
+        no(`$(1, -6)$`, 'swapped-x-and-y-coordinates'),
+        ok(`$(6, 1)$`),
+      ],
+      solution: `Reflecting across the $y$-axis changes the $x$-coordinate to its opposite and keeps the $y$-coordinate. So $(-6, 1)$ becomes $(6, 1)$. The choice $(-6, -1)$ changes the $y$-coordinate, which would be a reflection across the $x$-axis.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `What is the distance between the points $(3, -4)$ and $(3, 6)$ on a coordinate plane?`,
+      choices: [
+        ok(`$10$ units`),
+        no(`$2$ units`, 'subtracted-absolute-values-across-zero'),
+        no(`$0$ units`, 'subtracted-the-x-coordinates'),
+        no(`$16$ units`, 'added-every-coordinate'),
+      ],
+      solution: `The points share the $x$-coordinate $3$, so they lie on a vertical line. One point is $|-4| = 4$ units below the $x$-axis and the other is $|6| = 6$ units above it. They are on opposite sides, so add: $4 + 6 = 10$ units. The choice $2$ units subtracts $6 - 4$, which only works when both points are on the same side.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `What is the distance between the points $(-7, 2)$ and $(-1, 2)$ on a coordinate plane?`,
+      choices: [
+        no(`$8$ units`, 'added-absolute-values-on-the-same-side'),
+        ok(`$6$ units`),
+        no(`$0$ units`, 'subtracted-the-y-coordinates'),
+        no(`$-6$ units`, 'gave-a-negative-distance'),
+      ],
+      solution: `The points share the $y$-coordinate $2$, so they lie on a horizontal line. Both $x$-coordinates are negative, so both points are left of the $y$-axis, at $|-7| = 7$ and $|-1| = 1$ units. Same side, so subtract: $7 - 1 = 6$ units. The choice $8$ units adds the distances, which only works when the points are on opposite sides. A distance is never negative, so $-6$ units is not possible.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Which list shows $-1.2$, $\\frac{1}{4}$, $-\\frac{3}{2}$ and $0$ in order from greatest to least?`,
+      choices: [
+        ok(`$\\frac{1}{4}$, $0$, $-1.2$, $-\\frac{3}{2}$`),
+        no(`$\\frac{1}{4}$, $0$, $-\\frac{3}{2}$, $-1.2$`, 'ordered-negatives-by-absolute-value'),
+        no(`$-\\frac{3}{2}$, $-1.2$, $0$, $\\frac{1}{4}$`, 'listed-least-to-greatest'),
+        no(`$-\\frac{3}{2}$, $-1.2$, $\\frac{1}{4}$, $0$`, 'ordered-by-absolute-value'),
+      ],
+      solution: `Write $-\\frac{3}{2}$ as $-1.5$. The only positive number, $\\frac{1}{4}$, is greatest, then $0$. Between the negatives, $-1.2$ is closer to $0$ than $-1.5$, so $-1.2$ is greater. The order is $\\frac{1}{4}$, $0$, $-1.2$, $-\\frac{3}{2}$. The list that puts $-\\frac{3}{2}$ before $-1.2$ treats the bigger distance from $0$ as the bigger number.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Which statement explains why $-3 > -8$?`,
+      choices: [
+        no(`$-3$ is farther from $0$ than $-8$ is.`, 'confused-greater-with-farther-from-zero'),
+        ok(`$-3$ is to the right of $-8$ on a number line.`),
+        no(`$-3$ is to the left of $-8$ on a number line.`, 'reversed-number-line-direction'),
+        no(`$-3$ and $-8$ are equal because both are negative.`, 'thought-all-negatives-are-equal'),
+      ],
+      solution: `On a horizontal number line, values increase to the right. $-3$ is to the right of $-8$, so $-3 > -8$. The statement that $-3$ is farther from $0$ is false: $-3$ is $3$ units from $0$ and $-8$ is $8$ units from $0$.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Four students record their lunch account balances: Ari has 30 dollars, Bea has $-25$ dollars, Cal has $-9$ dollars and Dev has $0$ dollars. A negative balance means money is owed. Who owes the most money?`,
+      choices: [
+        no(`Ari`, 'picked-the-greatest-absolute-value-ignoring-sign'),
+        ok(`Bea`),
+        no(`Cal`, 'picked-the-negative-closest-to-zero'),
+        no(`Dev`, 'thought-zero-is-the-least-number'),
+      ],
+      solution: `Only negative balances are debts, and the size of the debt is the absolute value. Bea owes $|-25| = 25$ dollars and Cal owes $|-9| = 9$ dollars, so Bea owes the most. Ari has the largest number, $30$, but a positive balance means money in the account, not money owed.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Which number has the greatest absolute value: $-\\frac{3}{4}$, $\\frac{2}{3}$, $-\\frac{1}{2}$ or $\\frac{5}{8}$?`,
+      choices: [
+        ok(`$-\\frac{3}{4}$`),
+        no(`$\\frac{2}{3}$`, 'chose-the-greatest-value'),
+        no(`$\\frac{5}{8}$`, 'compared-fraction-digits-as-whole-numbers'),
+        no(`$-\\frac{1}{2}$`, 'chose-the-greatest-negative'),
+      ],
+      solution: `The absolute values are $\\frac{3}{4} = 0.75$, $\\frac{2}{3} \\approx 0.67$, $\\frac{1}{2} = 0.5$ and $\\frac{5}{8} = 0.625$. The greatest is $0.75$, so the answer is $-\\frac{3}{4}$. The choice $\\frac{2}{3}$ is the greatest number in the list, but $-\\frac{3}{4}$ is farther from $0$.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `What is the opposite of the opposite of $-\\frac{5}{6}$?`,
+      choices: [
+        no(`$\\frac{5}{6}$`, 'took-the-opposite-only-once'),
+        no(`$\\frac{6}{5}$`, 'mixed-up-opposite-and-reciprocal'),
+        no(`$-\\frac{6}{5}$`, 'took-the-reciprocal-instead-of-the-opposite'),
+        ok(`$-\\frac{5}{6}$`),
+      ],
+      solution: `The opposite of $-\\frac{5}{6}$ is $\\frac{5}{6}$. The opposite of $\\frac{5}{6}$ is $-\\frac{5}{6}$. Taking the opposite twice returns to the starting number, so the answer is $-\\frac{5}{6}$. The choice $\\frac{5}{6}$ stops after one step.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `The point $(a, b)$ is in Quadrant III. In which quadrant is the point $(-a, b)$?`,
+      choices: [
+        no(`Quadrant II`, 'took-the-opposite-of-the-y-coordinate'),
+        no(`Quadrant I`, 'took-the-opposite-of-both-coordinates'),
+        ok(`Quadrant IV`),
+        no(`Quadrant III`, 'thought-the-sign-of-a-variable-cannot-change'),
+      ],
+      solution: `In Quadrant III both coordinates are negative, so $a < 0$ and $b < 0$. The opposite of a negative number is positive, so $-a > 0$, while $b$ stays negative. A point with positive $x$ and negative $y$ is in Quadrant IV. The choice Quadrant II would be the point $(a, -b)$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `On a town map drawn on a coordinate plane, each unit is 1 block. The library is at $(-5, -3)$ and the school is at $(-5, 8)$. How many blocks apart are they?`,
+      choices: [
+        ok(`$11$ blocks`),
+        no(`$5$ blocks`, 'subtracted-absolute-values-across-zero'),
+        no(`$0$ blocks`, 'subtracted-the-x-coordinates'),
+        no(`$8$ blocks`, 'measured-only-from-the-x-axis'),
+      ],
+      solution: `Both places have $x$-coordinate $-5$, so they are on the same vertical line. The library is $|-3| = 3$ blocks below the $x$-axis and the school is $|8| = 8$ blocks above it. They are on opposite sides, so the distance is $3 + 8 = 11$ blocks. The choice $5$ blocks subtracts $8 - 3$, as if both were on the same side.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A rectangle on a coordinate plane has vertices at $(-4, 3)$, $(2, 3)$, $(2, -1)$ and $(-4, -1)$. What is the perimeter of the rectangle?`,
+      choices: [
+        no(`$8$ units`, 'subtracted-absolute-values-across-zero'),
+        no(`$24$ units`, 'found-area-instead-of-perimeter'),
+        ok(`$20$ units`),
+        no(`$10$ units`, 'added-only-two-sides'),
+      ],
+      solution: `The top side runs from $x = -4$ to $x = 2$. These are on opposite sides of the $y$-axis, so its length is $4 + 2 = 6$ units. The right side runs from $y = 3$ to $y = -1$, so its length is $3 + 1 = 4$ units. The perimeter is $6 + 4 + 6 + 4 = 20$ units. The choice $24$ units multiplies $6 \\times 4$, which is the area.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Which value of $x$ makes both $x < -2$ and $|x| < 4$ true?`,
+      choices: [
+        no(`$-5$`, 'ignored-the-absolute-value-condition'),
+        ok(`$-3$`),
+        no(`$-1$`, 'ordered-negatives-by-absolute-value'),
+        no(`$3$`, 'ignored-the-less-than-negative-2-condition'),
+      ],
+      solution: `Check each condition. For $-3$: $-3$ is left of $-2$, so $-3 < -2$, and $|-3| = 3 < 4$. Both are true. For $-5$: $-5 < -2$ is true, but $|-5| = 5$ is not less than $4$. For $-1$: $-1$ is right of $-2$, so $-1 < -2$ is false. For $3$: $|3| < 4$ is true, but $3 < -2$ is false.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Nadia's account balance is $b$ dollars, where $b < -30$. A negative balance means money is owed. Which statement must be true?`,
+      choices: [
+        no(`Nadia owes less than 30 dollars.`, 'compared-debts-by-value-not-size'),
+        no(`Nadia has more than 30 dollars in the account.`, 'ignored-negative-sign'),
+        ok(`Nadia owes more than 30 dollars.`),
+        no(`Nadia owes exactly 30 dollars.`, 'treated-less-than-as-equal-to'),
+      ],
+      solution: `Since $b < -30$, the balance is to the left of $-30$ on a number line, such as $-35$ or $-50$. Those balances have absolute values greater than $30$, so Nadia owes more than 30 dollars. The statement "owes less than 30 dollars" mixes up a smaller balance with a smaller debt.`,
+    },
+  ],
+}
+
+export default skill
