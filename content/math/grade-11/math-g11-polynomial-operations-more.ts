@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g11-polynomial-operations-more',
+  extends: 'polynomial-operations',
+  subject: 'math',
+  grade: 11,
+  group: 'Algebra',
+  name: 'Polynomial Operations',
+  standards: ['HSA.APR.A.1'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Add: $(4x^2 - 3x + 7) + (-x^2 + 5x - 2)$. Which polynomial is the sum?`,
+      choices: [
+        no(`$5x^2 + 2x + 5$`, 'dropped-negative-sign-on-coefficient'),
+        ok(`$3x^2 + 2x + 5$`),
+        no(`$3x^2 + 2x + 9$`, 'sign-error-on-constant'),
+        no(`$3x^4 + 2x^2 + 5$`, 'added-exponents-when-adding'),
+      ],
+      solution: `Combine like terms: $4x^2 + (-x^2) = 3x^2$, $-3x + 5x = 2x$, and $7 + (-2) = 5$. The sum is $3x^2 + 2x + 5$. The choice $3x^4 + 2x^2 + 5$ adds the exponents, but adding like terms keeps the exponent the same.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Subtract: $(6x^2 + 2x - 4) - (3x^2 - 5x + 1)$. Which polynomial is the difference?`,
+      choices: [
+        no(`$3x^2 - 3x - 3$`, 'subtracted-first-term-only'),
+        no(`$9x^2 - 3x - 3$`, 'added-instead-of-subtracted'),
+        no(`$3x^2 + 7x - 3$`, 'forgot-to-negate-constant'),
+        ok(`$3x^2 + 7x - 5$`),
+      ],
+      solution: `Subtracting a polynomial means subtracting every term, so the second polynomial becomes $-3x^2 + 5x - 1$. Then $6x^2 - 3x^2 = 3x^2$, $2x + 5x = 7x$, and $-4 - 1 = -5$, giving $3x^2 + 7x - 5$. The choice $3x^2 - 3x - 3$ changes the sign of only the first term.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Multiply: $-3x^2(2x^2 - 4x + 1)$. Which polynomial is the product?`,
+      choices: [
+        ok(`$-6x^4 + 12x^3 - 3x^2$`),
+        no(`$-6x^4 - 12x^3 - 3x^2$`, 'sign-error-multiplying-negatives'),
+        no(`$-6x^4 + 12x^3 + 1$`, 'did-not-distribute-to-every-term'),
+        no(`$-6x^2 + 12x - 3$`, 'multiplied-coefficients-only'),
+      ],
+      solution: `Multiply $-3x^2$ by each term: $-3x^2 \\cdot 2x^2 = -6x^4$, $-3x^2 \\cdot (-4x) = 12x^3$, and $-3x^2 \\cdot 1 = -3x^2$. The product is $-6x^4 + 12x^3 - 3x^2$. The choice $-6x^4 - 12x^3 - 3x^2$ forgets that a negative times a negative is positive.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Multiply: $(x + 6)(x - 2)$. Which polynomial is the product?`,
+      choices: [
+        no(`$x^2 - 12$`, 'skipped-outer-and-inner-products'),
+        no(`$x^2 + 4x + 12$`, 'sign-error-on-constant'),
+        ok(`$x^2 + 4x - 12$`),
+        no(`$x^2 - 4x - 12$`, 'sign-error-on-middle-term'),
+      ],
+      solution: `Multiply each term of the first binomial by each term of the second: $x \\cdot x = x^2$, $x \\cdot (-2) = -2x$, $6 \\cdot x = 6x$, and $6 \\cdot (-2) = -12$. Combining $-2x + 6x = 4x$ gives $x^2 + 4x - 12$. The choice $x^2 - 12$ leaves out the two middle products.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Polynomials are closed under addition, subtraction and multiplication. What does this mean about the product of any two polynomials?`,
+      choices: [
+        no(`It is a polynomial only when both polynomials have the same degree.`, 'thinks-closure-needs-equal-degree'),
+        no(`It is a polynomial only when every coefficient is positive.`, 'thinks-closure-needs-positive-coefficients'),
+        ok(`It is always a polynomial.`),
+        no(`It is a polynomial only when one of the factors is a monomial.`, 'thinks-only-monomial-products-stay-polynomials'),
+      ],
+      solution: `Closed means the result of the operation is always the same kind of object. Multiplying two polynomials only multiplies coefficients and adds whole number exponents, so the product is always a polynomial, whatever the degrees or signs.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `What is the degree of the product $(2x^3 + 1)(x^4 - x)$?`,
+      choices: [
+        no(`$12$`, 'multiplied-the-degrees'),
+        no(`$4$`, 'took-the-larger-degree'),
+        no(`$8$`, 'added-every-exponent'),
+        ok(`$7$`),
+      ],
+      solution: `The highest power in the product comes from multiplying the leading terms: $2x^3 \\cdot x^4 = 2x^7$. Exponents add when powers of $x$ are multiplied, so the degree is $7$. The choice $12$ multiplies the degrees $3$ and $4$ instead of adding them.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Expand: $(2x - 5)^2$. Which polynomial is equal to it?`,
+      choices: [
+        no(`$4x^2 + 25$`, 'squared-each-term-separately'),
+        ok(`$4x^2 - 20x + 25$`),
+        no(`$4x^2 - 10x + 25$`, 'forgot-to-double-the-middle-term'),
+        no(`$4x^2 - 20x - 25$`, 'sign-error-on-constant'),
+      ],
+      solution: `Write the square as $(2x - 5)(2x - 5)$ and multiply: $4x^2 - 10x - 10x + 25 = 4x^2 - 20x + 25$. The choice $4x^2 + 25$ squares each term on its own and loses the two middle products.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Multiply: $(2a + 3b)(a - 4b)$. Which polynomial is the product?`,
+      choices: [
+        no(`$2a^2 - 12b^2$`, 'skipped-outer-and-inner-products'),
+        no(`$2a^2 + 11ab - 12b^2$`, 'sign-error-on-middle-term'),
+        ok(`$2a^2 - 5ab - 12b^2$`),
+        no(`$2a^2 - 5ab + 12b^2$`, 'sign-error-on-constant'),
+      ],
+      solution: `Multiply every pair of terms: $2a \\cdot a = 2a^2$, $2a \\cdot (-4b) = -8ab$, $3b \\cdot a = 3ab$, and $3b \\cdot (-4b) = -12b^2$. The $ab$ terms combine to $-8ab + 3ab = -5ab$, so the product is $2a^2 - 5ab - 12b^2$. The choice $2a^2 + 11ab - 12b^2$ treats $-8ab$ as $+8ab$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Subtract: $(x^3 - 2x + 7) - (4x^2 - 2x - 3)$. Which polynomial is the difference?`,
+      choices: [
+        no(`$x^3 - 4x^2 - 4x + 4$`, 'subtracted-first-term-only'),
+        ok(`$x^3 - 4x^2 + 10$`),
+        no(`$-3x^3 + 10$`, 'combined-unlike-terms'),
+        no(`$x^3 - 4x^2 - 4x + 10$`, 'forgot-to-negate-middle-term'),
+      ],
+      solution: `Change the sign of every term being subtracted: $-4x^2 + 2x + 3$. Now combine: $x^3$ has no partner, $-4x^2$ has no partner, $-2x + 2x = 0$, and $7 + 3 = 10$. The difference is $x^3 - 4x^2 + 10$. The choice $-3x^3 + 10$ combines $x^3$ and $-4x^2$, but they are not like terms.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A rectangular poster is $3x + 2$ inches long and $x - 1$ inches wide. Which polynomial gives its perimeter in inches?`,
+      choices: [
+        no(`$4x + 1$`, 'added-only-two-sides'),
+        no(`$3x^2 - x - 2$`, 'found-area-instead-of-perimeter'),
+        ok(`$8x + 2$`),
+        no(`$8x + 6$`, 'sign-error-on-constant'),
+      ],
+      solution: `Perimeter is twice the length plus twice the width: $2(3x + 2) + 2(x - 1) = 6x + 4 + 2x - 2 = 8x + 2$. The choice $4x + 1$ adds one length and one width, which is only half the way around.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A community garden plot is a rectangle that measures $2x + 3$ meters by $x + 5$ meters. Which polynomial gives its area in square meters?`,
+      choices: [
+        ok(`$2x^2 + 13x + 15$`),
+        no(`$2x^2 + 15$`, 'skipped-outer-and-inner-products'),
+        no(`$6x + 16$`, 'found-perimeter-instead-of-area'),
+        no(`$2x^2 + 10x + 15$`, 'used-only-outer-product'),
+      ],
+      solution: `Area is length times width: $(2x + 3)(x + 5) = 2x^2 + 10x + 3x + 15 = 2x^2 + 13x + 15$. The choice $2x^2 + 10x + 15$ keeps the product $2x \\cdot 5$ but forgets $3 \\cdot x$.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `When $(x^2 - 3x + 2)(2x + 5)$ is multiplied out and simplified, what is the coefficient of $x^2$?`,
+      choices: [
+        no(`$5$`, 'used-only-x-squared-times-constant'),
+        no(`$-6$`, 'used-only-x-times-x-product'),
+        no(`$11$`, 'sign-error-combining-terms'),
+        ok(`$-1$`),
+      ],
+      solution: `Two products make an $x^2$ term: $x^2 \\cdot 5 = 5x^2$ and $-3x \\cdot 2x = -6x^2$. Together they give $5x^2 - 6x^2 = -x^2$, so the coefficient is $-1$. The full product is $2x^3 - x^2 - 11x + 10$. The choice $5$ counts only the first of the two products.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Simplify: $2x(x - 4) - 3(x^2 + 1)$. Which polynomial is the result?`,
+      choices: [
+        no(`$-x^2 - 8x + 1$`, 'did-not-distribute-to-every-term'),
+        no(`$5x^2 - 8x + 3$`, 'added-instead-of-subtracted'),
+        ok(`$-x^2 - 8x - 3$`),
+        no(`$-x^2 - 8x + 3$`, 'sign-error-on-constant'),
+      ],
+      solution: `Distribute each part: $2x(x - 4) = 2x^2 - 8x$ and $-3(x^2 + 1) = -3x^2 - 3$. Combine like terms: $2x^2 - 3x^2 = -x^2$, leaving $-x^2 - 8x - 3$. The choice $-x^2 - 8x + 1$ multiplies the $-3$ by $x^2$ but not by the $1$.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Subtract: $(4a^2b - 3ab + 2) - (a^2b + 5ab - 6)$. Which polynomial is the difference?`,
+      choices: [
+        no(`$3a^2b + 2ab - 4$`, 'did-not-distribute-the-negative'),
+        ok(`$3a^2b - 8ab + 8$`),
+        no(`$3a^2b - 8ab - 4$`, 'forgot-to-negate-constant'),
+        no(`$3a^2b + 2ab + 8$`, 'forgot-to-negate-middle-term'),
+      ],
+      solution: `Change the sign of every term being subtracted: $-a^2b - 5ab + 6$. Then combine like terms: $4a^2b - a^2b = 3a^2b$, $-3ab - 5ab = -8ab$, and $2 + 6 = 8$. The difference is $3a^2b - 8ab + 8$. The choice $3a^2b + 2ab - 4$ changes the sign of only the first term being subtracted and adds the other two.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Let $P(x) = x^2 + 1$ and $Q(x) = x$. Which of these results is NOT a polynomial?`,
+      choices: [
+        no(`$P(x) + Q(x)$`, 'thinks-sums-can-leave-polynomials'),
+        no(`$P(x) - Q(x)$`, 'thinks-differences-can-leave-polynomials'),
+        no(`$P(x) \\cdot Q(x)$`, 'thinks-products-can-leave-polynomials'),
+        ok(`$P(x) \\div Q(x)$`),
+      ],
+      solution: `The sum $x^2 + x + 1$, the difference $x^2 - x + 1$ and the product $x^3 + x$ are all polynomials, because polynomials are closed under those operations. The quotient is $\\frac{x^2 + 1}{x} = x + \\frac{1}{x}$, and $\\frac{1}{x}$ is a negative power of $x$, so it is not a polynomial. Polynomials are not closed under division.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Expand: $(x - 1)^3$. Which polynomial is equal to it?`,
+      choices: [
+        no(`$x^3 - 1$`, 'cubed-each-term-separately'),
+        no(`$x^3 - 3x^2 - 3x - 1$`, 'sign-error-on-middle-term'),
+        ok(`$x^3 - 3x^2 + 3x - 1$`),
+        no(`$x^3 - 2x^2 + x - 1$`, 'multiplied-square-by-only-one-term'),
+      ],
+      solution: `First square: $(x - 1)^2 = x^2 - 2x + 1$. Then multiply by $(x - 1)$: $x(x^2 - 2x + 1) = x^3 - 2x^2 + x$ and $-1(x^2 - 2x + 1) = -x^2 + 2x - 1$. Adding gives $x^3 - 3x^2 + 3x - 1$. The choice $x^3 - 1$ cubes each term separately and loses the middle terms.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Multiply: $(2x - 1)(x^2 + 3x - 5)$. Which polynomial is the product?`,
+      choices: [
+        no(`$2x^3 + 6x^2 - 10x + 5$`, 'did-not-distribute-to-every-term'),
+        ok(`$2x^3 + 5x^2 - 13x + 5$`),
+        no(`$2x^3 + 5x^2 - 7x + 5$`, 'sign-error-multiplying-negatives'),
+        no(`$2x^3 + 5x^2 - 13x - 5$`, 'sign-error-on-constant'),
+      ],
+      solution: `Distribute each term of $2x - 1$: $2x(x^2 + 3x - 5) = 2x^3 + 6x^2 - 10x$ and $-1(x^2 + 3x - 5) = -x^2 - 3x + 5$. Combine like terms: $6x^2 - x^2 = 5x^2$ and $-10x - 3x = -13x$, giving $2x^3 + 5x^2 - 13x + 5$. The choice $2x^3 + 6x^2 - 10x + 5$ multiplies the $-1$ by the $-5$ only.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Multiply: $(x^2 + x + 1)(x^2 - x + 1)$. Which polynomial is the product?`,
+      choices: [
+        no(`$x^4 + 3x^2 + 1$`, 'sign-error-multiplying-negatives'),
+        no(`$x^4 + 2x^2 + 1$`, 'ignored-the-x-terms'),
+        no(`$x^4 - x^2 + 1$`, 'multiplied-matching-terms-only'),
+        ok(`$x^4 + x^2 + 1$`),
+      ],
+      solution: `Multiply every pair of terms and group by power. The $x^3$ terms are $-x^3 + x^3 = 0$. The $x^2$ terms are $x^2 - x^2 + x^2 = x^2$. The $x$ terms are $x - x = 0$. With $x^4$ and $1$, the product is $x^4 + x^2 + 1$. The choice $x^4 - x^2 + 1$ multiplies only the terms in matching positions.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Simplify: $(x + 2)(x + 5) - (x - 3)(x + 1)$. Which polynomial is the result?`,
+      choices: [
+        ok(`$9x + 13$`),
+        no(`$5x + 7$`, 'did-not-distribute-the-negative'),
+        no(`$2x^2 + 5x + 7$`, 'added-instead-of-subtracted'),
+        no(`$9x + 7$`, 'forgot-to-negate-constant'),
+      ],
+      solution: `Multiply each pair first: $(x + 2)(x + 5) = x^2 + 7x + 10$ and $(x - 3)(x + 1) = x^2 - 2x - 3$. Subtracting changes every sign of the second product: $x^2 + 7x + 10 - x^2 + 2x + 3 = 9x + 13$. The choice $5x + 7$ subtracts only the $x^2$ and leaves the other signs unchanged.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A storage box has length $x + 2$ feet, width $x - 3$ feet and height $x$ feet. Which polynomial gives its volume in cubic feet?`,
+      choices: [
+        no(`$x^3 - 6x$`, 'skipped-outer-and-inner-products'),
+        ok(`$x^3 - x^2 - 6x$`),
+        no(`$x^3 + x^2 - 6x$`, 'sign-error-on-middle-term'),
+        no(`$3x - 1$`, 'added-dimensions-instead-of-multiplying'),
+      ],
+      solution: `Volume is length times width times height. First $(x + 2)(x - 3) = x^2 - 3x + 2x - 6 = x^2 - x - 6$. Then multiply by $x$: $x^3 - x^2 - 6x$. The choice $3x - 1$ adds the three dimensions, but volume comes from multiplying them.`,
+    },
+  ],
+}
+
+export default skill
