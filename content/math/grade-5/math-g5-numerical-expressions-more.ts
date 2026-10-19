@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g5-numerical-expressions-more',
+  extends: 'numerical-expressions',
+  subject: 'math',
+  grade: 5,
+  group: 'Operations and Algebraic Thinking',
+  name: 'Numerical Expressions',
+  standards: ['5.OA.A.1'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is the value of $(9 + 6) \\div 3$?`,
+      choices: [
+        ok(`$5$`),
+        no(`$11$`, 'ignored-parentheses'),
+        no(`$15$`, 'stopped-after-parentheses'),
+        no(`$45$`, 'multiplied-instead-of-divided'),
+      ],
+      solution: `Work inside the parentheses first: $9 + 6 = 15$. Then divide: $15 \\div 3 = 5$. The choice $11$ divides $6$ by $3$ first and adds $9$, which ignores the parentheses.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is the value of $5 \\times (8 - 3)$?`,
+      choices: [
+        no(`$37$`, 'ignored-parentheses'),
+        ok(`$25$`),
+        no(`$10$`, 'added-instead-of-multiplied'),
+        no(`$40$`, 'dropped-the-subtraction'),
+      ],
+      solution: `First find $8 - 3 = 5$ inside the parentheses. Then $5 \\times 5 = 25$. The choice $37$ multiplies $5 \\times 8 = 40$ first and then subtracts $3$, which ignores the parentheses.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `What is the value of $24 - [4 + 6]$?`,
+      choices: [
+        no(`$26$`, 'ignored-brackets'),
+        no(`$34$`, 'added-instead-of-subtracted'),
+        no(`$10$`, 'stopped-after-brackets'),
+        ok(`$14$`),
+      ],
+      solution: `Brackets group like parentheses, so add first: $4 + 6 = 10$. Then $24 - 10 = 14$. The choice $26$ subtracts $4$ and then adds $6$, which ignores the brackets.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Which expression means: subtract 3 from the product of 7 and 6?`,
+      choices: [
+        ok(`$7 \\times 6 - 3$`),
+        no(`$3 - 7 \\times 6$`, 'reversed-subtraction-order'),
+        no(`$7 \\times (6 - 3)$`, 'subtracted-before-multiplying'),
+        no(`$7 + 6 - 3$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `The product of 7 and 6 is $7 \\times 6$, and subtracting 3 from it gives $7 \\times 6 - 3$. The choice $7 \\times (6 - 3)$ subtracts before multiplying, which gives $21$ instead of $39$.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `What is the value of $36 \\div (2 + 7)$?`,
+      choices: [
+        no(`$25$`, 'ignored-parentheses'),
+        ok(`$4$`),
+        no(`$45$`, 'added-instead-of-divided'),
+        no(`$27$`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `Add inside the parentheses first: $2 + 7 = 9$. Then $36 \\div 9 = 4$. The choice $25$ divides $36 \\div 2 = 18$ first and then adds $7$, which ignores the parentheses.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Without calculating, how does the value of $4 \\times (37 + 15)$ compare with the value of $37 + 15$?`,
+      choices: [
+        no(`It is 4 more.`, 'read-times-as-plus'),
+        no(`It is one fourth as large.`, 'reversed-multiplicative-comparison'),
+        ok(`It is 4 times as large.`),
+        no(`It is the same.`, 'ignored-the-factor'),
+      ],
+      solution: `The expression $4 \\times (37 + 15)$ takes the whole sum $37 + 15$ and multiplies it by 4, so it is 4 times as large. Saying it is 4 more treats multiplying by 4 as adding 4.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Which placement of parentheses makes $20 - 8 \\div 2 + 2$ equal to 3?`,
+      choices: [
+        no(`$(20 - 8) \\div 2 + 2$`, 'grouped-only-the-subtraction'),
+        no(`$20 - 8 \\div (2 + 2)$`, 'grouped-only-the-addition'),
+        ok(`$(20 - 8) \\div (2 + 2)$`),
+        no(`$20 - (8 \\div 2 + 2)$`, 'grouped-the-wrong-terms'),
+      ],
+      solution: `Test each one. $(20 - 8) \\div (2 + 2) = 12 \\div 4 = 3$. The others give $(20 - 8) \\div 2 + 2 = 8$, $20 - 8 \\div (2 + 2) = 18$, and $20 - (8 \\div 2 + 2) = 14$.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What is the value of $50 - [3 \\times (4 + 6)]$?`,
+      choices: [
+        ok(`$20$`),
+        no(`$44$`, 'ignored-grouping-symbols'),
+        no(`$470$`, 'subtracted-before-multiplying'),
+        no(`$80$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `Start with the innermost parentheses: $4 + 6 = 10$. Then the brackets: $3 \\times 10 = 30$. Last, $50 - 30 = 20$. The choice $44$ ignores the grouping and computes $50 - 12 + 6$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `What is the value of $\\{4 + [12 \\div (7 - 4)]\\} \\times 2$?`,
+      choices: [
+        no(`$12$`, 'dropped-the-braces'),
+        no(`$8$`, 'forgot-final-multiplication'),
+        ok(`$16$`),
+        no(`$38$`, 'added-instead-of-divided'),
+      ],
+      solution: `Work from the inside out. $7 - 4 = 3$, then $12 \\div 3 = 4$, then $4 + 4 = 8$ inside the braces, and $8 \\times 2 = 16$. The choice $12$ drops the braces and computes $4 + 4 \\times 2$, multiplying only the bracket value by $2$.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Kenji has 45 stickers and gives 5 stickers to each of 6 friends. Which expression shows how many stickers Kenji has left?`,
+      choices: [
+        no(`$(45 - 6) \\times 5$`, 'subtracted-before-multiplying'),
+        ok(`$45 - 6 \\times 5$`),
+        no(`$45 - 6 + 5$`, 'added-instead-of-multiplied'),
+        no(`$45 + 6 \\times 5$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `Kenji gives away $6 \\times 5 = 30$ stickers, and subtracting that from 45 gives $45 - 6 \\times 5 = 15$. The choice $(45 - 6) \\times 5$ subtracts 6 stickers first, which is not what happened.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Which statement describes $(18 + 6) \\div 2$ without evaluating it?`,
+      choices: [
+        no(`The sum of 18 and half of 6`, 'ignored-parentheses'),
+        no(`Twice the sum of 18 and 6`, 'confused-division-with-multiplication'),
+        no(`The sum of 18 and 6, minus 2`, 'confused-division-with-subtraction'),
+        ok(`Half of the sum of 18 and 6`),
+      ],
+      solution: `The parentheses make $18 + 6$ one sum, and dividing by 2 takes half of it. The phrase "the sum of 18 and half of 6" describes $18 + 6 \\div 2$, which leaves out the parentheses.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Which expression means: divide 48 by the difference of 10 and 4?`,
+      choices: [
+        ok(`$48 \\div (10 - 4)$`),
+        no(`$48 \\div 10 - 4$`, 'missing-parentheses'),
+        no(`$(10 - 4) \\div 48$`, 'reversed-division-order'),
+        no(`$48 - 10 \\div 4$`, 'swapped-the-operations'),
+      ],
+      solution: `The difference of 10 and 4 must be found first, so it goes in parentheses: $48 \\div (10 - 4) = 8$. The choice $48 \\div 10 - 4$ has no parentheses, so it divides 48 by 10 before subtracting.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Which expression is 5 times as large as $847 + 396$?`,
+      choices: [
+        no(`$5 \\times 847 + 396$`, 'missing-parentheses'),
+        no(`$847 + 396 + 5$`, 'read-times-as-plus'),
+        ok(`$5 \\times (847 + 396)$`),
+        no(`$(847 + 396) \\div 5$`, 'reversed-multiplicative-comparison'),
+      ],
+      solution: `To make the whole sum 5 times as large, multiply the whole sum by 5: $5 \\times (847 + 396)$. The choice $5 \\times 847 + 396$ multiplies only 847 by 5, because it has no parentheses.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `What is the value of $72 \\div [2 \\times (5 - 2)]$?`,
+      choices: [
+        no(`$108$`, 'dropped-the-brackets'),
+        ok(`$12$`),
+        no(`$9$`, 'ignored-inner-parentheses'),
+        no(`$6$`, 'stopped-after-brackets'),
+      ],
+      solution: `Inside out: $5 - 2 = 3$, then $2 \\times 3 = 6$, then $72 \\div 6 = 12$. The choice $108$ drops the brackets and works left to right: $72 \\div 2 = 36$ and $36 \\times 3 = 108$.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Ines says $30 - 2 \\times (4 + 3) = 196$. What is the correct value of the expression?`,
+      choices: [
+        no(`$196$`, 'subtracted-before-multiplying'),
+        no(`$25$`, 'ignored-parentheses'),
+        no(`$44$`, 'added-instead-of-subtracted'),
+        ok(`$16$`),
+      ],
+      solution: `First $4 + 3 = 7$, then $2 \\times 7 = 14$, then $30 - 14 = 16$. Ines got $196$ by subtracting $30 - 2 = 28$ first and then multiplying by 7, but multiplication comes before subtraction.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `What is the value of $3 \\times \\{[40 \\div (6 + 2)] + 7\\} - 9$?`,
+      choices: [
+        no(`$13$`, 'dropped-the-braces'),
+        ok(`$27$`),
+        no(`$9$`, 'subtracted-inside-the-braces'),
+        no(`$36$`, 'forgot-to-subtract'),
+      ],
+      solution: `Inside out: $6 + 2 = 8$, $40 \\div 8 = 5$, and $5 + 7 = 12$ in the braces. Then $3 \\times 12 = 36$ and $36 - 9 = 27$. The choice $13$ drops the braces and computes $3 \\times 5 + 7 - 9$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Which placement of parentheses makes $8 + 4 \\times 6 - 2$ equal to 70?`,
+      choices: [
+        no(`$8 + 4 \\times (6 - 2)$`, 'grouped-the-subtraction'),
+        ok(`$(8 + 4) \\times 6 - 2$`),
+        no(`$(8 + 4) \\times (6 - 2)$`, 'grouped-both-sides'),
+        no(`$8 + (4 \\times 6) - 2$`, 'grouped-the-product'),
+      ],
+      solution: `$(8 + 4) \\times 6 - 2 = 12 \\times 6 - 2 = 72 - 2 = 70$. The others give $8 + 4 \\times (6 - 2) = 24$, $(8 + 4) \\times (6 - 2) = 48$, and $8 + (4 \\times 6) - 2 = 30$, which is the same as using no parentheses.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Lucia buys 3 notebooks that cost 4 dollars each and 2 pens that cost 1 dollar each. Lucia pays with a 20 dollar bill. Which expression shows the change Lucia gets, in dollars?`,
+      choices: [
+        no(`$20 - 3 \\times 4 + 2 \\times 1$`, 'missing-parentheses'),
+        ok(`$20 - (3 \\times 4 + 2 \\times 1)$`),
+        no(`$(20 - 3) \\times 4 + 2 \\times 1$`, 'grouped-the-wrong-numbers'),
+        no(`$(3 \\times 4 + 2 \\times 1) - 20$`, 'reversed-subtraction-order'),
+      ],
+      solution: `The total cost is $3 \\times 4 + 2 \\times 1 = 14$, and the whole cost is subtracted from 20, so the change is $20 - (3 \\times 4 + 2 \\times 1) = 6$. The choice $20 - 3 \\times 4 + 2 \\times 1$ subtracts only the notebooks and then adds the pens, giving 10.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Let $A = 6 \\times (125 + 49)$ and $B = 3 \\times (125 + 49)$. Without calculating, which statement is true?`,
+      choices: [
+        no(`A is 3 more than B.`, 'subtracted-the-factors'),
+        no(`B is twice as large as A.`, 'reversed-multiplicative-comparison'),
+        no(`A and B are equal because both use $125 + 49$.`, 'ignored-the-factors'),
+        ok(`A is twice as large as B.`),
+      ],
+      solution: `Both expressions multiply the same sum, $125 + 49$. A uses 6 groups of it and B uses 3 groups, and 6 is twice 3, so A is twice as large as B. Saying A is 3 more subtracts the factors $6 - 3$ instead of comparing them by multiplying.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A teacher packs 96 crayons into boxes of 8 crayons each, then gives 2 boxes to each of 4 tables. How many boxes are left?`,
+      choices: [
+        ok(`$4$`),
+        no(`$40$`, 'subtracted-before-multiplying'),
+        no(`$10$`, 'forgot-to-multiply-by-tables'),
+        no(`$88$`, 'mixed-crayons-and-boxes'),
+      ],
+      solution: `The number of boxes is $96 \\div 8 = 12$, and the tables get $2 \\times 4 = 8$ boxes. So $96 \\div 8 - 2 \\times 4 = 12 - 8 = 4$ boxes are left. The choice $40$ comes from $(12 - 2) \\times 4$, which subtracts before multiplying.`,
+    },
+  ],
+}
+
+export default skill
