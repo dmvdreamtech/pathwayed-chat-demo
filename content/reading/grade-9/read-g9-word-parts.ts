@@ -512,7 +512,7 @@ const skill: ContentSkill = {
         {
           slot: 38,
           difficulty: 'medium',
-          stem: `The Latin root nav means "ship." What did sailors need the knots for when they had to "navigate safely"?`,
+          stem: `The Latin root nav means "ship." What does "navigate" mean in the phrase "navigate safely"?`,
           choices: [
             right(`To guide and steer their ships from place to place`),
             wrong(`To build new ships in a long building on the shore`, 'confuses-nearby-details'),
