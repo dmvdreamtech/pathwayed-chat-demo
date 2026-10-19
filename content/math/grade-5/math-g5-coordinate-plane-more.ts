@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g5-coordinate-plane-more',
+  extends: 'coordinate-plane',
+  subject: 'math',
+  grade: 5,
+  group: 'Geometry',
+  name: 'Coordinate Plane',
+  standards: ['5.G.A.2'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Jordan wants to plot the point $(3, 6)$, starting at the origin. What should Jordan do first?`,
+      choices: [
+        ok(`Move 3 units right`),
+        no(`Move 6 units right`, 'swapped-coordinates'),
+        no(`Move 3 units up`, 'thought-x-means-up'),
+        no(`Move 9 units right`, 'added-the-coordinates'),
+      ],
+      solution: `The first number in an ordered pair is the x-coordinate, which tells how far to move right from the origin. So Jordan moves 3 units right, then 6 units up. The choice "Move 6 units right" uses the second number first.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A point lies on the x-axis, 9 units to the right of the origin. What are its coordinates?`,
+      choices: [
+        ok(`$(9, 0)$`),
+        no(`$(0, 9)$`, 'swapped-coordinates'),
+        no(`$(9, 9)$`, 'copied-distance-to-both-coordinates'),
+        no(`$(9, 1)$`, 'counted-axis-as-one-unit-up'),
+      ],
+      solution: `A point on the x-axis has not moved up at all, so its y-coordinate is 0. Moving 9 right gives $(9, 0)$. The choice $(0, 9)$ is 9 units up on the y-axis instead.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `On a graph, the x-axis shows hours worked and the y-axis shows dollars earned. The point $(4, 40)$ is plotted. What does the 40 tell you?`,
+      choices: [
+        ok(`The dollars earned after 4 hours`),
+        no(`The number of hours worked`, 'read-wrong-coordinate'),
+        no(`The dollars earned each hour`, 'confused-total-with-rate'),
+        no(`The hours worked after earning 4 dollars`, 'swapped-quantities'),
+      ],
+      solution: `The second number is the y-coordinate, and the y-axis shows dollars earned. So 40 is the total dollars earned when the hours worked is 4. It is a total, not the amount earned each hour.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Ana graphs the growth of a plant. The x-axis shows days and the y-axis shows height in centimeters. After 5 days the plant is 3 centimeters tall. Which point should Ana plot?`,
+      choices: [
+        ok(`$(5, 3)$`),
+        no(`$(3, 5)$`, 'swapped-coordinates'),
+        no(`$(5, 5)$`, 'repeated-first-coordinate'),
+        no(`$(0, 3)$`, 'left-out-x-coordinate'),
+      ],
+      solution: `Days go on the x-axis, so the x-coordinate is 5. Height goes on the y-axis, so the y-coordinate is 3. The point is $(5, 3)$. The choice $(3, 5)$ would mean 3 days and 5 centimeters.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which of these points is highest on the grid: $(3, 8)$, $(9, 2)$, $(7, 6)$, or $(8, 3)$?`,
+      choices: [
+        ok(`$(3, 8)$`),
+        no(`$(9, 2)$`, 'used-x-for-height'),
+        no(`$(7, 6)$`, 'added-the-coordinates'),
+        no(`$(8, 3)$`, 'swapped-coordinates'),
+      ],
+      solution: `Height is shown by the y-coordinate, the second number. The y-coordinates are 8, 2, 6 and 3, and the greatest is 8, so $(3, 8)$ is highest. The choice $(9, 2)$ is farthest right, not highest.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `The point $(6, 4)$ is plotted on a grid. How many units is it from the y-axis?`,
+      choices: [
+        ok(`6`),
+        no(`4`, 'confused-the-axes'),
+        no(`10`, 'added-the-coordinates'),
+        no(`2`, 'subtracted-the-coordinates'),
+      ],
+      solution: `The y-axis is the vertical line where x is 0. The x-coordinate tells how far right of that line the point is, so the distance is 6 units. The value 4 is the distance from the x-axis.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Three corners of a rectangle are at $(2, 3)$, $(8, 3)$ and $(8, 7)$. What are the coordinates of the fourth corner?`,
+      choices: [
+        ok(`$(2, 7)$`),
+        no(`$(7, 2)$`, 'swapped-coordinates'),
+        no(`$(2, 8)$`, 'used-two-x-values'),
+        no(`$(8, 3)$`, 'repeated-a-given-corner'),
+      ],
+      solution: `The corner $(2, 3)$ is directly below the missing corner, so the missing corner has x-coordinate 2. The corner $(8, 7)$ is directly right of it, so it has y-coordinate 7. The fourth corner is $(2, 7)$. The choice $(7, 2)$ has the numbers in the wrong order.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Rosa graphs laps swum, with minutes on the x-axis and laps on the y-axis. The points $(2, 1)$, $(4, 2)$ and $(6, 3)$ are plotted. If the pattern continues, what is the next point?`,
+      choices: [
+        ok(`$(8, 4)$`),
+        no(`$(7, 4)$`, 'added-one-to-x'),
+        no(`$(8, 3)$`, 'changed-only-x'),
+        no(`$(4, 8)$`, 'swapped-coordinates'),
+      ],
+      solution: `Each time, the minutes go up by 2 and the laps go up by 1. From $(6, 3)$ that gives $6 + 2 = 8$ minutes and $3 + 1 = 4$ laps, so the next point is $(8, 4)$. The choice $(7, 4)$ adds only 1 to the minutes.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `A graph shows hiking, with hours on the x-axis and miles on the y-axis. Lee's point is $(3, 9)$ and Kai's point is $(3, 6)$. Which statement is true?`,
+      choices: [
+        ok(`Lee hiked 3 more miles than Kai in the same time.`),
+        no(`Lee hiked 3 more hours than Kai.`, 'confused-the-axes'),
+        no(`Kai hiked 3 more miles than Lee.`, 'reversed-the-comparison'),
+        no(`They hiked the same number of miles.`, 'compared-only-x-coordinates'),
+      ],
+      solution: `Both x-coordinates are 3, so both hiked for 3 hours. The y-coordinates show miles: Lee hiked 9 and Kai hiked 6, and $9 - 6 = 3$. So Lee hiked 3 more miles in the same time.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A game piece starts at $(7, 8)$. It moves 3 units left and then 5 units down. Where does it end?`,
+      choices: [
+        ok(`$(4, 3)$`),
+        no(`$(10, 3)$`, 'moved-right-instead-of-left'),
+        no(`$(4, 13)$`, 'moved-up-instead-of-down'),
+        no(`$(2, 5)$`, 'applied-moves-to-wrong-coordinates'),
+      ],
+      solution: `Moving left lowers the x-coordinate: $7 - 3 = 4$. Moving down lowers the y-coordinate: $8 - 5 = 3$. The piece ends at $(4, 3)$. The choice $(2, 5)$ takes the 5 from x and the 3 from y.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `On a town map grid, each unit stands for 100 meters. The school is at $(2, 5)$ and the pool is at $(11, 5)$. How far apart are they?`,
+      choices: [
+        ok(`900 meters`),
+        no(`9 meters`, 'forgot-the-scale'),
+        no(`1,300 meters`, 'added-x-coordinates'),
+        no(`1,100 meters`, 'used-larger-x-coordinate'),
+      ],
+      solution: `The y-coordinates match, so count the change in x: $11 - 2 = 9$ units. Each unit is 100 meters, so $9 \\times 100 = 900$ meters. The answer "9 meters" forgets that each unit stands for 100 meters.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A table pairs each x value with the y value below it. The x values are 1, 2, 3 and the y values are 5, 10, 15. Which point comes from the third pair?`,
+      choices: [
+        ok(`$(3, 15)$`),
+        no(`$(15, 3)$`, 'swapped-coordinates'),
+        no(`$(3, 5)$`, 'paired-with-wrong-y-value'),
+        no(`$(3, 20)$`, 'went-one-step-too-far-in-pattern'),
+      ],
+      solution: `The third x value is 3 and the y value below it is 15, so the point is $(3, 15)$. The choice $(3, 5)$ pairs 3 with the first y value instead of its own.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A graph shows a tossed ball, with seconds on the x-axis and height in feet on the y-axis. What does the point $(5, 0)$ mean?`,
+      choices: [
+        ok(`After 5 seconds, the ball is on the ground.`),
+        no(`The ball is 5 feet high.`, 'read-x-as-height'),
+        no(`The ball has been in the air for 0 seconds.`, 'read-y-as-time'),
+        no(`After 5 seconds, the ball is 5 feet high.`, 'copied-x-into-y'),
+      ],
+      solution: `The x-coordinate 5 is the time, 5 seconds. The y-coordinate 0 is the height, 0 feet, which means the ball is on the ground. The choice "The ball is 5 feet high." reads the time as a height.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Which point is exactly halfway between $(2, 6)$ and $(10, 6)$?`,
+      choices: [
+        ok(`$(6, 6)$`),
+        no(`$(8, 6)$`, 'used-distance-as-coordinate'),
+        no(`$(4, 6)$`, 'used-half-distance-as-coordinate'),
+        no(`$(12, 6)$`, 'added-x-coordinates'),
+      ],
+      solution: `The points are $10 - 2 = 8$ units apart. Half of 8 is 4, and $2 + 4 = 6$, so the halfway point is $(6, 6)$. The choice $(4, 6)$ uses half the distance but forgets to start counting from 2.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Point A is at $(4, 7)$. Point B is 3 units directly below point A. What are the coordinates of point B?`,
+      choices: [
+        ok(`$(4, 4)$`),
+        no(`$(4, 10)$`, 'moved-up-instead-of-down'),
+        no(`$(1, 7)$`, 'changed-x-instead-of-y'),
+        no(`$(7, 7)$`, 'added-to-x-coordinate'),
+      ],
+      solution: `Moving straight down keeps the x-coordinate at 4 and lowers the y-coordinate: $7 - 3 = 4$. Point B is $(4, 4)$. The choice $(1, 7)$ moves left instead of down.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `A rectangle has corners at $(1, 2)$, $(6, 2)$, $(6, 5)$ and $(1, 5)$. What is the area of the rectangle, in square units?`,
+      choices: [
+        ok(`15`),
+        no(`16`, 'found-perimeter-instead-of-area'),
+        no(`8`, 'added-side-lengths'),
+        no(`30`, 'multiplied-coordinates-not-lengths'),
+      ],
+      solution: `The bottom side runs from x = 1 to x = 6, so it is $6 - 1 = 5$ units long. The left side runs from y = 2 to y = 5, so it is $5 - 2 = 3$ units long. The area is $5 \\times 3 = 15$ square units. The value 16 is the perimeter, $5 + 3 + 5 + 3$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Three corners of a square are at $(3, 1)$, $(3, 6)$ and $(8, 6)$. What is the perimeter of the square, in units?`,
+      choices: [
+        ok(`20`),
+        no(`25`, 'found-area-instead-of-perimeter'),
+        no(`10`, 'added-only-two-sides'),
+        no(`15`, 'added-only-three-sides'),
+      ],
+      solution: `From $(3, 1)$ up to $(3, 6)$ is $6 - 1 = 5$ units, so each side is 5 units. A square has 4 equal sides, so the perimeter is $4 \\times 5 = 20$ units. The value 25 is the area, $5 \\times 5$.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `On a neighborhood grid, Mia walks from home at $(1, 2)$ straight to the library at $(1, 8)$, then straight to the store at $(6, 8)$. Each unit is 1 block. How many blocks does Mia walk in all?`,
+      choices: [
+        ok(`11`),
+        no(`6`, 'counted-only-first-leg'),
+        no(`5`, 'counted-only-second-leg'),
+        no(`14`, 'added-final-coordinates'),
+      ],
+      solution: `Home to library changes only y: $8 - 2 = 6$ blocks. Library to store changes only x: $6 - 1 = 5$ blocks. In all, $6 + 5 = 11$ blocks. The value 14 adds the store's coordinates, $6 + 8$, which are not distances walked.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `The points $(0, 2)$, $(1, 5)$ and $(2, 8)$ follow a pattern: each time x goes up by 1, y goes up by 3. Which point also follows the pattern?`,
+      choices: [
+        ok(`$(4, 14)$`),
+        no(`$(4, 11)$`, 'skipped-a-step-in-pattern'),
+        no(`$(4, 16)$`, 'doubled-y-when-x-doubled'),
+        no(`$(14, 4)$`, 'swapped-coordinates'),
+      ],
+      solution: `Continue the pattern: $(3, 11)$, then $(4, 14)$. Another way: start at y = 2 and add 3 four times, $2 + 4 \\times 3 = 14$. The choice $(4, 16)$ doubles the y value of $(2, 8)$, but the pattern adds 3 each step instead of doubling.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Two stores sell apples. On a graph with pounds on the x-axis and cost in dollars on the y-axis, Store A has the point $(5, 20)$ and Store B has the point $(4, 20)$. Which store charges less for each pound?`,
+      choices: [
+        ok(`Store A`),
+        no(`Store B`, 'thought-fewer-pounds-means-cheaper'),
+        no(`They charge the same`, 'compared-only-y-coordinates'),
+        no(`You cannot tell from the points`, 'thought-points-do-not-show-rate'),
+      ],
+      solution: `Both points show a cost of 20 dollars. Store A gives 5 pounds for that, which is $20 \\div 5 = 4$ dollars a pound. Store B gives 4 pounds, which is $20 \\div 4 = 5$ dollars a pound. So Store A charges less for each pound.`,
+    },
+  ],
+}
+
+export default skill
