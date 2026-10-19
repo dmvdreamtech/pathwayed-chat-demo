@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g10-triangle-congruence-more',
+  extends: 'triangle-congruence',
+  subject: 'math',
+  grade: 10,
+  group: 'Geometry',
+  name: 'Triangle Congruence',
+  standards: ['HSG.CO.B.8'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Triangle $JKL$ has $JK = 4$, $KL = 6$, and $LJ = 8$. Triangle $MNP$ has $MN = 4$, $NP = 6$, and $PM = 8$. No angle measures are given. Which criterion proves the triangles congruent?`,
+      choices: [
+        ok(`SSS`),
+        no(`SAS`, 'assumed-an-angle-was-given'),
+        no(`AAA`, 'confused-angles-with-sides'),
+        no(`HL`, 'used-right-triangle-rule-without-right-angle'),
+      ],
+      solution: `All three pairs of corresponding sides match: $4$ and $4$, $6$ and $6$, $8$ and $8$. Three pairs of congruent sides is SSS. SAS would need a known angle, and none is given.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Triangle $RST$ is congruent to triangle $UVW$, with the vertices listed in matching order. Which pair of parts must be congruent?`,
+      choices: [
+        no(`$\\angle S$ and $\\angle W$`, 'mismatched-vertex-order'),
+        ok(`$\\angle S$ and $\\angle V$`),
+        no(`$RS$ and $VW$`, 'matched-side-to-wrong-vertices'),
+        no(`$\\angle R$ and $\\angle V$`, 'shifted-correspondence-by-one'),
+      ],
+      solution: `The order of the letters gives the correspondence: $R$ matches $U$, $S$ matches $V$, and $T$ matches $W$. So $\\angle S$ and $\\angle V$ are corresponding parts and must be congruent. Side $RS$ matches $UV$, not $VW$.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A triangle is moved by one transformation. Which transformation does NOT always produce an image congruent to the original triangle?`,
+      choices: [
+        no(`A translation 5 units to the right`, 'thought-translation-changes-size'),
+        no(`A rotation of $90^\\circ$ about the origin`, 'thought-rotation-changes-size'),
+        ok(`A dilation with scale factor $2$`),
+        no(`A reflection across the $x$-axis`, 'thought-reflection-changes-size'),
+      ],
+      solution: `Translations, rotations and reflections are rigid motions: they keep every length and angle the same, so the image is congruent. A dilation with scale factor $2$ doubles every side length, so the image is the same shape but not the same size.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Ana proves that triangle $ABC$ is congruent to triangle $DEF$ by SAS. In the next step of the proof, Ana writes $AC = DF$. Which reason justifies that step?`,
+      choices: [
+        no(`SAS`, 'reused-the-criterion-for-parts'),
+        no(`Reflexive property`, 'cited-reflexive-for-different-segments'),
+        no(`Definition of midpoint`, 'cited-unrelated-definition'),
+        ok(`CPCTC (corresponding parts of congruent triangles are congruent)`),
+      ],
+      solution: `Once two triangles are proved congruent, every pair of corresponding parts is congruent. Since $AC$ and $DF$ are corresponding sides, the reason is CPCTC. SAS was the reason the triangles are congruent, not the reason for this new statement.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Triangle $ABC$ is rotated $90^\\circ$ counterclockwise about the origin to form triangle $A'B'C'$. In triangle $ABC$, $\\angle A = 35^\\circ$. What is the measure of $\\angle A'$?`,
+      choices: [
+        no(`$125^\\circ$`, 'added-rotation-angle-to-angle'),
+        no(`$55^\\circ$`, 'used-complement-of-angle'),
+        no(`$145^\\circ$`, 'used-supplement-of-angle'),
+        ok(`$35^\\circ$`),
+      ],
+      solution: `A rotation is a rigid motion, so it keeps every angle measure. $\\angle A'$ is the image of $\\angle A$, so it measures $35^\\circ$. The amount of the rotation, $90^\\circ$, tells how far the triangle turns, not how its angles change.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Triangle $GHI$ is congruent to triangle $JKL$. In triangle $GHI$, $GH = 11$, $HI = 9$, and $IG = 14$. What is the perimeter of triangle $JKL$?`,
+      choices: [
+        ok(`$34$`),
+        no(`$25$`, 'left-out-a-side'),
+        no(`$17$`, 'halved-the-perimeter'),
+        no(`$68$`, 'doubled-the-perimeter'),
+      ],
+      solution: `Congruent triangles have the same three side lengths, so triangle $JKL$ has sides $11$, $9$ and $14$. Its perimeter is $11 + 9 + 14 = 34$. The value $25$ adds only two of the sides.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Triangles $ABC$ and $DEF$ have right angles at $C$ and $F$. The hypotenuses are $AB = DE = 13$, and the legs $AC = DF = 5$. Using only these given parts, with no calculation, which criterion proves the triangles congruent?`,
+      choices: [
+        ok(`HL`),
+        no(`SAS`, 'treated-non-included-angle-as-included'),
+        no(`ASA`, 'counted-sides-as-angles'),
+        no(`None; this is SSA, which never works`, 'thought-ssa-never-works-for-right-triangles'),
+      ],
+      solution: `The given parts are a hypotenuse and a leg of two right triangles, which is exactly HL. The right angle is not between $AB$ and $AC$, so SAS does not fit. SSA fails in general, but when the angle is a right angle the triangle is fixed, which is why HL is a valid criterion.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `In triangles $ABC$ and $DEF$, it is given that $AB = DE$, $BC = EF$, and $\\angle A = \\angle D$. Neither triangle is a right triangle. Which statement is correct?`,
+      choices: [
+        no(`The triangles are congruent by SAS`, 'treated-non-included-angle-as-included'),
+        ok(`Congruence is not proved; the angle is not between the two sides, and SSA can fit two different triangles`),
+        no(`The triangles are congruent by SSS`, 'counted-angle-as-a-side'),
+        no(`The triangles are congruent by HL`, 'used-right-triangle-rule-without-right-angle'),
+      ],
+      solution: `$\\angle A$ is formed by sides $AB$ and $AC$, so it is not between $AB$ and $BC$. Two sides and a non-included angle (SSA) can sometimes be built into two different triangles, so this information does not prove congruence. SAS needs the angle between the two given sides.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Triangle $PQR$ has angles of $40^\\circ$, $60^\\circ$, and $80^\\circ$. Triangle $XYZ$ has the same three angle measures, but each of its sides is twice as long as the matching side of triangle $PQR$. What does this example show?`,
+      choices: [
+        no(`The triangles are congruent by AAA`, 'believed-aaa-proves-congruence'),
+        no(`The triangles are congruent because a dilation is a rigid motion`, 'thought-dilation-is-rigid'),
+        ok(`Matching all three angles does not prove congruence, because the triangles can differ in size`),
+        no(`Such a triangle $XYZ$ cannot exist, because the angles fix the side lengths`, 'thought-angles-determine-side-lengths'),
+      ],
+      solution: `The two triangles have the same shape but different sizes, so they are not congruent even though all three pairs of angles match. That is why AAA is not a congruence criterion. A dilation changes lengths, so it is not a rigid motion.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `In triangles $ABC$ and $DEF$, it is given that $\\angle A = \\angle D$ and $AB = DE$. Which additional fact would NOT be enough to prove the triangles congruent?`,
+      choices: [
+        no(`$\\angle B = \\angle E$`, 'rejected-valid-asa'),
+        no(`$AC = DF$`, 'rejected-valid-sas'),
+        no(`$\\angle C = \\angle F$`, 'rejected-valid-aas'),
+        ok(`$BC = EF$`),
+      ],
+      solution: `Adding $\\angle B = \\angle E$ gives ASA, since $AB$ lies between angles $A$ and $B$. Adding $AC = DF$ gives SAS, since $\\angle A$ lies between $AB$ and $AC$. Adding $\\angle C = \\angle F$ gives AAS. Adding $BC = EF$ gives two sides and an angle that is not between them (SSA), which does not prove congruence.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Triangle $ABC$ is congruent to triangle $XYZ$. The measure of $\\angle B$ is $(3x + 10)^\\circ$ and the measure of $\\angle Y$ is $(5x - 20)^\\circ$. What is the measure of $\\angle B$?`,
+      choices: [
+        no(`$15^\\circ$`, 'gave-x-instead-of-angle'),
+        no(`$25^\\circ$`, 'subtracted-instead-of-added-when-solving'),
+        ok(`$55^\\circ$`),
+        no(`$125^\\circ$`, 'used-supplement-of-angle'),
+      ],
+      solution: `$\\angle B$ and $\\angle Y$ are corresponding angles, so $3x + 10 = 5x - 20$. Then $30 = 2x$ and $x = 15$. So $\\angle B = 3(15) + 10 = 55^\\circ$. The value $15^\\circ$ is $x$, not the angle.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Triangle $ABC$ has vertices $A(1, 2)$, $B(4, 2)$, and $C(1, 6)$. It is reflected across the $y$-axis to form triangle $A'B'C'$. What is the length of $B'C'$?`,
+      choices: [
+        no(`$3$`, 'found-a-different-side'),
+        no(`$7$`, 'added-leg-lengths'),
+        no(`$10$`, 'thought-reflection-doubles-length'),
+        ok(`$5$`),
+      ],
+      solution: `A reflection is a rigid motion, so $B'C' = BC$. From $B(4, 2)$ to $C(1, 6)$ the horizontal change is $3$ and the vertical change is $4$, so $BC = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$. The value $7$ adds the changes instead of using the Pythagorean theorem.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A translation maps triangle $PQR$ onto triangle $STU$, with $P$ going to $S$, $Q$ to $T$, and $R$ to $U$. In triangle $PQR$, $PQ = 6$ and $\\angle Q = 48^\\circ$. Which statement must be true?`,
+      choices: [
+        ok(`$ST = 6$ and $\\angle T = 48^\\circ$`),
+        no(`$ST = 6$ and $\\angle U = 48^\\circ$`, 'matched-angle-to-wrong-vertex'),
+        no(`$TU = 6$ and $\\angle T = 48^\\circ$`, 'matched-side-to-wrong-vertices'),
+        no(`$ST = 12$ and $\\angle T = 48^\\circ$`, 'thought-translation-stretches-lengths'),
+      ],
+      solution: `A translation keeps lengths and angles. Side $PQ$ maps to side $ST$, so $ST = 6$, and $\\angle Q$ maps to $\\angle T$, so $\\angle T = 48^\\circ$. Side $TU$ is the image of $QR$, not $PQ$.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Quadrilateral $ABCD$ is a kite with $AB = AD$ and $CB = CD$. Diagonal $AC$ splits it into triangles $ABC$ and $ADC$. No angle measures are given. Which criterion proves triangle $ABC$ congruent to triangle $ADC$?`,
+      choices: [
+        no(`SAS`, 'assumed-an-angle-was-given'),
+        ok(`SSS`),
+        no(`HL`, 'assumed-diagonal-makes-right-angles'),
+        no(`Not enough information`, 'ignored-shared-side'),
+      ],
+      solution: `Two pairs of sides are given: $AB = AD$ and $CB = CD$. The diagonal $AC$ is a side of both triangles, so $AC = AC$ by the reflexive property. Three pairs of congruent sides is SSS. No angle or right angle is given, so SAS and HL do not apply.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Segments $AE$ and $BD$ cross at point $C$. It is given that $AC = EC$ and $\\angle A = \\angle E$. Also, $\\angle ACB = \\angle ECD$ because they are vertical angles. In triangles $ABC$ and $EDC$, side $AC$ lies between the angle at $A$ and the angle at $C$. Which criterion proves the triangles congruent?`,
+      choices: [
+        no(`SAS`, 'counted-angles-as-sides'),
+        no(`SSS`, 'assumed-all-sides-given'),
+        ok(`ASA`),
+        no(`HL`, 'used-right-triangle-rule-without-right-angle'),
+      ],
+      solution: `The congruent parts are $\\angle A = \\angle E$, side $AC = EC$, and the vertical angles $\\angle ACB = \\angle ECD$. The side lies between the two angles, so the criterion is ASA. Only one pair of sides is known, so SAS and SSS cannot be used.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Lena tries to build triangle $ABC$ with $\\angle A = 30^\\circ$, $AB = 10$, and $BC = 6$. The distance from $B$ to the line through $A$ and $C$ is $10 \\cdot \\sin 30^\\circ = 5$. How many non-congruent triangles fit these measurements?`,
+      choices: [
+        no(`$1$`, 'thought-ssa-determines-a-triangle'),
+        ok(`$2$`),
+        no(`$0$`, 'thought-side-too-short-to-reach'),
+        no(`Infinitely many`, 'ignored-fixed-side-lengths'),
+      ],
+      solution: `Side $BC = 6$ swings from $B$ and must land on the line through $A$ and $C$. Since $6$ is longer than the distance $5$ but shorter than $AB = 10$, it meets that line at two points on the same side of $A$, giving two different triangles. This is why SSA does not prove congruence.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Triangles $ABC$ and $DEF$ have right angles at $C$ and $F$. In triangle $ABC$, hypotenuse $AB = 13$ and leg $AC = 5$. In triangle $DEF$, hypotenuse $DE = 2x + 3$ and leg $DF = 5$. For what value of $x$ can the triangles be proved congruent by HL?`,
+      choices: [
+        no(`$x = 1$`, 'matched-hypotenuse-to-leg'),
+        no(`$x = 4.5$`, 'matched-hypotenuse-to-other-leg'),
+        no(`$x = 8$`, 'added-instead-of-subtracted-when-solving'),
+        ok(`$x = 5$`),
+      ],
+      solution: `HL needs the hypotenuses equal and one pair of legs equal. The legs already match, $AC = DF = 5$, so set $2x + 3 = 13$. Then $2x = 10$ and $x = 5$. The value $x = 1$ sets the hypotenuse equal to the leg length $5$, which matches the wrong parts.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Triangle $ABC$ has vertices $A(0, 0)$, $B(3, 0)$, and $C(0, 4)$. Triangle $DEF$ has vertices $D(5, 1)$, $E(5, 4)$, and $F(1, 1)$. Which sequence of rigid motions maps $A$ to $D$, $B$ to $E$, and $C$ to $F$?`,
+      choices: [
+        ok(`Rotate $90^\\circ$ counterclockwise about the origin, then translate 5 units right and 1 unit up`),
+        no(`Rotate $90^\\circ$ clockwise about the origin, then translate 5 units right and 1 unit up`, 'rotated-in-wrong-direction'),
+        no(`Translate 5 units right and 1 unit up only`, 'ignored-change-in-orientation'),
+        no(`Reflect across the $y$-axis, then translate 5 units right and 1 unit up`, 'used-reflection-instead-of-rotation'),
+      ],
+      solution: `A $90^\\circ$ counterclockwise rotation about the origin sends $(x, y)$ to $(-y, x)$: $A(0, 0)$ stays at $(0, 0)$, $B(3, 0)$ goes to $(0, 3)$, and $C(0, 4)$ goes to $(-4, 0)$. Translating 5 right and 1 up gives $(5, 1)$, $(5, 4)$, and $(1, 1)$, which are $D$, $E$, and $F$. A clockwise turn would send $B$ to $(0, -3)$ and then to $(5, -2)$, not $E$.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Triangle $ABC$ is congruent to triangle $DEF$. The side lengths are $AB = 2x + y$, $BC = x + 3y$, $DE = 11$, $EF = 13$, and $DF = 8$. What are the values of $x$ and $y$?`,
+      choices: [
+        no(`$x = 5$ and $y = 1$`, 'matched-to-wrong-side'),
+        ok(`$x = 4$ and $y = 3$`),
+        no(`$x = 3$ and $y = 4$`, 'swapped-the-values'),
+        no(`$x = 1$ and $y = 9$`, 'satisfied-only-one-equation'),
+      ],
+      solution: `By CPCTC, $AB = DE$ and $BC = EF$, so $2x + y = 11$ and $x + 3y = 13$. From the first equation, $y = 11 - 2x$. Substituting gives $x + 33 - 6x = 13$, so $x = 4$ and $y = 3$. Check: $2(4) + 3 = 11$ and $4 + 3(3) = 13$. The pair $x = 5$ and $y = 1$ sets $BC$ equal to $DF = 8$, but $BC$ corresponds to $EF$.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Two right triangles are being compared, and the right angles are known to match. Which additional given information is NOT enough to prove the right triangles congruent?`,
+      choices: [
+        no(`The hypotenuses and one pair of corresponding acute angles are congruent`, 'rejected-valid-aas'),
+        no(`Both pairs of corresponding legs are congruent`, 'rejected-valid-sas'),
+        ok(`Both pairs of corresponding acute angles are congruent`),
+        no(`The hypotenuses and one pair of corresponding legs are congruent`, 'rejected-valid-hl'),
+      ],
+      solution: `Hypotenuse and acute angle, together with the right angle, give AAS. Two legs with the right angle between them give SAS. Hypotenuse and leg give HL. Matching only the angles makes all three angles equal, which is AAA: the triangles have the same shape but could be different sizes.`,
+    },
+  ],
+}
+
+export default skill
