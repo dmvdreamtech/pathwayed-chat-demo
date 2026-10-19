@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g7-proportional-reasoning-more',
+  extends: 'proportional-reasoning',
+  subject: 'math',
+  grade: 7,
+  group: 'Ratios and Proportional Relationships',
+  name: 'Proportional Reasoning',
+  standards: ['7.RP.A.2'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `A table shows a proportional relationship. When $x = 2$, $y = 10$; when $x = 4$, $y = 20$; when $x = 6$, $y = 30$. What is the constant of proportionality $k$ in $y = kx$?`,
+      choices: [
+        ok(`$5$`),
+        no(`$\\frac{1}{5}$`, 'divided-x-by-y'),
+        no(`$10$`, 'used-change-in-y-only'),
+        no(`$2$`, 'used-change-in-x-only'),
+      ],
+      solution: `The constant of proportionality is $\\frac{y}{x}$ for any pair: $\\frac{10}{2} = \\frac{20}{4} = \\frac{30}{6} = 5$. The choice $\\frac{1}{5}$ divides $x$ by $y$, which flips the ratio.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A printer prints $18$ pages in $3$ minutes at a constant rate. Which equation relates the number of pages $p$ to the number of minutes $m$?`,
+      choices: [
+        no(`$m = 6p$`, 'swapped-variables'),
+        no(`$p = 18m$`, 'used-total-as-rate'),
+        ok(`$p = 6m$`),
+        no(`$p = m + 15$`, 'used-difference-as-additive-rule'),
+      ],
+      solution: `The unit rate is $18 \\div 3 = 6$ pages per minute, so $p = 6m$. The choice $p = 18m$ uses the total pages as if they were printed every minute.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Which equation shows a proportional relationship between $x$ and $y$?`,
+      choices: [
+        no(`$y = 4x + 1$`, 'added-constant-still-proportional'),
+        ok(`$y = 4x$`),
+        no(`$y = x + 4$`, 'additive-rule-is-proportional'),
+        no(`$y = 4 - x$`, 'any-line-is-proportional'),
+      ],
+      solution: `A proportional relationship has the form $y = kx$, with no number added or subtracted, so $y = 4x$ is proportional. The choice $y = 4x + 1$ gives $y = 1$ when $x = 0$, so its graph misses the origin.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A graph shows the cost $y$, in dollars, of $x$ pounds of grapes. It is a straight line through the origin and the point $(1, 4)$. What does the point $(1, 4)$ mean?`,
+      choices: [
+        no(`4 pounds of grapes cost 1 dollar.`, 'reversed-coordinates'),
+        no(`Buying 0 pounds of grapes costs 4 dollars.`, 'read-point-as-starting-value'),
+        no(`Any amount of grapes costs 4 dollars in total.`, 'read-point-as-fixed-total'),
+        ok(`1 pound of grapes costs 4 dollars.`),
+      ],
+      solution: `The first coordinate is pounds and the second is dollars, so $(1, 4)$ means 1 pound costs 4 dollars; this is the unit rate. The choice "4 pounds of grapes cost 1 dollar." reads the coordinates in the wrong order.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A graph shows the distance $y$, in meters, that a student has walked after $x$ minutes. The relationship is proportional. What does the point $(0, 0)$ mean in this situation?`,
+      choices: [
+        ok(`After 0 minutes, the student has walked 0 meters.`),
+        no(`The student walks 0 meters per minute.`, 'read-origin-as-unit-rate'),
+        no(`The walk ends at 0 minutes.`, 'read-origin-as-end-point'),
+        no(`The student is 0 meters from the finish line.`, 'misread-what-y-measures'),
+      ],
+      solution: `The point $(0, 0)$ pairs $x = 0$ minutes with $y = 0$ meters: at the start, no distance has been walked yet. The unit rate is shown by the point where $x = 1$, not by the origin.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Which table shows a proportional relationship between $x$ and $y$?`,
+      choices: [
+        no(`$x$: 1, 2, 3 and $y$: 4, 5, 6`, 'constant-difference-not-ratio'),
+        no(`$x$: 2, 4, 6 and $y$: 5, 9, 13`, 'equal-steps-means-proportional'),
+        ok(`$x$: 1, 2, 3 and $y$: 3, 6, 9`),
+        no(`$x$: 1, 2, 4 and $y$: 2, 4, 6`, 'checked-only-first-two-pairs'),
+      ],
+      solution: `In the table with $y$: 3, 6, 9, every ratio is $\\frac{3}{1} = \\frac{6}{2} = \\frac{9}{3} = 3$, so it is proportional. The table with $y$: 2, 4, 6 has ratios $2$, $2$ and $\\frac{6}{4} = 1.5$, so it fails at the last pair.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `A table shows what a dog walker earns. For $3$ hours the pay is 36 dollars, for $5$ hours it is 60 dollars, and for $8$ hours it is 96 dollars. Which equation gives the pay $y$, in dollars, for $x$ hours?`,
+      choices: [
+        no(`$x = 12y$`, 'swapped-variables'),
+        no(`$y = x + 33$`, 'additive-rule-from-first-pair'),
+        ok(`$y = 12x$`),
+        no(`$y = 36x$`, 'used-first-y-as-rate'),
+      ],
+      solution: `Each ratio of pay to hours is the same: $\\frac{36}{3} = \\frac{60}{5} = \\frac{96}{8} = 12$, so $y = 12x$. The choice $y = x + 33$ fits only the first pair, since $5 + 33 = 38$, not $60$.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Jordan walks $\\frac{2}{3}$ of a mile every $\\frac{1}{4}$ of an hour at a constant speed. What is the constant of proportionality, in miles per hour?`,
+      choices: [
+        no(`$\\frac{1}{6}$`, 'multiplied-instead-of-divided'),
+        no(`$\\frac{3}{8}$`, 'divided-time-by-distance'),
+        no(`$\\frac{2}{3}$`, 'used-distance-as-rate'),
+        ok(`$\\frac{8}{3}$`),
+      ],
+      solution: `Miles per hour is distance divided by time: $\\frac{2}{3} \\div \\frac{1}{4} = \\frac{2}{3} \\times 4 = \\frac{8}{3}$. The choice $\\frac{1}{6}$ multiplies the two fractions instead of dividing.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Each choice describes a graph of $y$ against $x$. Which graph shows a proportional relationship?`,
+      choices: [
+        ok(`A straight line that passes through the origin and rises to the right`),
+        no(`A straight line that rises to the right and crosses the $y$-axis at $2$`, 'ignored-starting-value'),
+        no(`A curve that passes through the origin and bends upward`, 'any-graph-through-origin'),
+        no(`A horizontal line at $y = 5$`, 'constant-y-is-constant-ratio'),
+      ],
+      solution: `A proportional graph must be a straight line and must pass through the origin, because $y = kx$ gives $y = 0$ when $x = 0$. A line crossing the $y$-axis at $2$ is straight but misses the origin, and a curve does not have a constant ratio.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `The cost $c$, in dollars, of $p$ pounds of bananas is given by $c = 2.5p$. Which point on its graph tells the cost of exactly 1 pound?`,
+      choices: [
+        no(`$(2.5, 1)$`, 'reversed-coordinates'),
+        no(`$(0, 2.5)$`, 'unit-rate-at-x-zero'),
+        ok(`$(1, 2.5)$`),
+        no(`$(10, 25)$`, 'any-point-shows-unit-rate'),
+      ],
+      solution: `Put $p = 1$ into the equation: $c = 2.5 \\times 1 = 2.5$, so the point is $(1, 2.5)$, which shows the unit rate. The point $(10, 25)$ is on the line, but it gives the cost of 10 pounds.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A table shows a proportional relationship. When $x = 4$, $y = 14$; when $x = 6$, $y = 21$; when $x = 10$, $y$ is missing. What is the missing value of $y$?`,
+      choices: [
+        no(`$28$`, 'repeated-last-y-change'),
+        ok(`$35$`),
+        no(`$25$`, 'added-x-change-to-y'),
+        no(`$30$`, 'dropped-the-half-from-k'),
+      ],
+      solution: `The constant of proportionality is $\\frac{14}{4} = \\frac{21}{6} = 3.5$, so $y = 3.5 \\times 10 = 35$. The choice $28$ adds $7$ again, but $x$ grows by $4$ this time, not by $2$.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `The graph of a camp counselor's earnings $y$, in dollars, for $x$ hours of work is a straight line through the origin and the point $(6, 81)$. What is the constant of proportionality?`,
+      choices: [
+        no(`$\\frac{2}{27}$`, 'divided-x-by-y'),
+        ok(`$13.5$`),
+        no(`$75$`, 'subtracted-coordinates'),
+        no(`$486$`, 'multiplied-coordinates'),
+      ],
+      solution: `The point $(6, 81)$ means 6 hours earns 81 dollars, so $k = \\frac{81}{6} = 13.5$ dollars per hour. The choice $\\frac{2}{27}$ is $\\frac{6}{81}$, hours per dollar, which flips the ratio.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A student records four tables of $x$ and $y$ values, some with decimals. Only one of them is proportional. Which one is it?`,
+      choices: [
+        no(`$x$: 2, 5, 8 and $y$: 3, 6, 9`, 'constant-y-steps-means-proportional'),
+        no(`$x$: 2, 5, 8 and $y$: 4, 10, 18`, 'checked-only-first-two-pairs'),
+        no(`$x$: 0, 5, 8 and $y$: 1, 7.5, 12`, 'ignored-nonzero-start'),
+        ok(`$x$: 2, 5, 8 and $y$: 3, 7.5, 12`),
+      ],
+      solution: `In the table with $y$: 3, 7.5, 12, the ratios are $\\frac{3}{2} = \\frac{7.5}{5} = \\frac{12}{8} = 1.5$, so it is proportional. The table starting at $x = 0$, $y = 1$ fails because a proportional relationship must have $y = 0$ when $x = 0$.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A gym charges a 20 dollar joining fee plus 15 dollars per month. Which statement about the total cost and the number of months is true?`,
+      choices: [
+        no(`It is proportional, because the cost goes up 15 dollars every month.`, 'constant-rate-means-proportional'),
+        no(`It is proportional, with a constant of proportionality of 35.`, 'added-fee-to-rate'),
+        ok(`It is not proportional, because the cost for 0 months would be 20 dollars, not 0.`),
+        no(`It is not proportional, because the cost keeps increasing.`, 'increasing-means-not-proportional'),
+      ],
+      solution: `The cost is $c = 15m + 20$. For 1 month the ratio is $\\frac{35}{1} = 35$ and for 2 months it is $\\frac{50}{2} = 25$, so the ratio is not constant, and at 0 months the cost is 20 dollars. Rising by the same amount each month is not enough when there is a starting fee.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `A proportional relationship has a graph that is a straight line through the origin and the point $(8, 6)$. Which equation represents it?`,
+      choices: [
+        no(`$y = \\frac{4}{3}x$`, 'divided-x-by-y'),
+        ok(`$y = \\frac{3}{4}x$`),
+        no(`$y = x - 2$`, 'additive-rule-from-one-point'),
+        no(`$y = 6x$`, 'used-y-coordinate-as-k'),
+      ],
+      solution: `The constant is $k = \\frac{y}{x} = \\frac{6}{8} = \\frac{3}{4}$, so $y = \\frac{3}{4}x$. The choice $y = \\frac{4}{3}x$ uses $\\frac{8}{6}$, which divides $x$ by $y$.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Pump A moves water according to $y = 7.5x$, where $y$ is gallons and $x$ is minutes. A table for Pump B shows $34$ gallons in $4$ minutes and $85$ gallons in $10$ minutes, and it is also proportional. How many more gallons does Pump B move than Pump A in $12$ minutes?`,
+      choices: [
+        ok(`$12$`),
+        no(`$1$`, 'gave-difference-in-unit-rates'),
+        no(`$102$`, 'gave-pump-b-total-only'),
+        no(`$90$`, 'gave-pump-a-total-only'),
+      ],
+      solution: `Pump B's constant is $\\frac{34}{4} = \\frac{85}{10} = 8.5$ gallons per minute. In 12 minutes, Pump B moves $8.5 \\times 12 = 102$ gallons and Pump A moves $7.5 \\times 12 = 90$ gallons, so the difference is $102 - 90 = 12$. The choice $1$ is the difference per minute, not over 12 minutes.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A painter covers $\\frac{3}{8}$ of a wall in $\\frac{1}{6}$ of an hour at a constant rate. Which equation gives the part of a wall $y$ painted in $x$ hours?`,
+      choices: [
+        no(`$y = \\frac{4}{9}x$`, 'divided-time-by-amount'),
+        no(`$y = \\frac{1}{16}x$`, 'multiplied-instead-of-divided'),
+        ok(`$y = \\frac{9}{4}x$`),
+        no(`$y = \\frac{3}{8}x$`, 'used-amount-as-rate'),
+      ],
+      solution: `The constant of proportionality is walls per hour: $\\frac{3}{8} \\div \\frac{1}{6} = \\frac{3}{8} \\times 6 = \\frac{18}{8} = \\frac{9}{4}$, so $y = \\frac{9}{4}x$. The choice $y = \\frac{1}{16}x$ multiplies $\\frac{3}{8}$ by $\\frac{1}{6}$ instead of dividing.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `The graph of a proportional relationship is a straight line through $(0, 0)$ and $(2.5, 9)$. The point $(1, r)$ is also on the line. What is $r$?`,
+      choices: [
+        no(`$\\frac{5}{18}$`, 'divided-x-by-y'),
+        no(`$6.5$`, 'subtracted-coordinates'),
+        no(`$9$`, 'used-y-coordinate-as-r'),
+        ok(`$3.6$`),
+      ],
+      solution: `On a proportional graph, $r$ is the unit rate, which equals $\\frac{y}{x}$ for any point: $r = \\frac{9}{2.5} = 3.6$. The choice $\\frac{5}{18}$ is $\\frac{2.5}{9}$, which divides $x$ by $y$.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Each table below uses the same fractional $x$ values. In which table is $y$ proportional to $x$?`,
+      choices: [
+        no(`$x$: $\\frac{1}{2}$, $\\frac{3}{2}$, $\\frac{5}{2}$ and $y$: $1$, $2$, $3$`, 'constant-difference-not-ratio'),
+        ok(`$x$: $\\frac{1}{2}$, $\\frac{3}{2}$, $\\frac{5}{2}$ and $y$: $\\frac{1}{3}$, $1$, $\\frac{5}{3}$`),
+        no(`$x$: $\\frac{1}{2}$, $\\frac{3}{2}$, $\\frac{5}{2}$ and $y$: $\\frac{1}{4}$, $\\frac{3}{4}$, $\\frac{3}{2}$`, 'checked-only-first-two-pairs'),
+        no(`$x$: $\\frac{1}{2}$, $\\frac{3}{2}$, $\\frac{5}{2}$ and $y$: $2$, $\\frac{2}{3}$, $\\frac{2}{5}$`, 'constant-product-is-proportional'),
+      ],
+      solution: `For the table with $y$: $\\frac{1}{3}$, $1$, $\\frac{5}{3}$, each ratio $\\frac{y}{x}$ is $\\frac{2}{3}$, so it is proportional. The table with $y$: $\\frac{1}{4}$, $\\frac{3}{4}$, $\\frac{3}{2}$ has ratios $\\frac{1}{2}$, $\\frac{1}{2}$ and $\\frac{3}{5}$, so it breaks at the last pair. The table with $y$: $2$, $\\frac{2}{3}$, $\\frac{2}{5}$ has a constant product $xy = 1$, not a constant ratio.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `The cost of fabric is proportional to its length. A table shows that $4$ yards cost 30 dollars. How many yards cost 52.50 dollars?`,
+      choices: [
+        no(`$7.5$`, 'gave-constant-instead-of-length'),
+        no(`$26.5$`, 'used-additive-change'),
+        ok(`$7$`),
+        no(`$393.75$`, 'multiplied-by-k-instead-of-dividing'),
+      ],
+      solution: `The constant of proportionality is $\\frac{30}{4} = 7.5$ dollars per yard, so the length is $52.5 \\div 7.5 = 7$ yards. The choice $7.5$ is the cost of one yard, not the number of yards.`,
+    },
+  ],
+}
+
+export default skill
