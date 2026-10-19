@@ -134,7 +134,7 @@ const skill: ContentSkill = {
         {
           slot: 10,
           difficulty: 'hard',
-          stem: `"Euphoria" begins with the same prefix as "euphonious." Based on that prefix, what was the reporter asking Marisol when he mentioned "euphoria"?`,
+          stem: `"Euphoria" begins with the same prefix as "euphonious." Based on that prefix, what was the reporter asking Marisol by mentioning "euphoria"?`,
           choices: [
             right(`Whether she had felt an intense rush of happiness`),
             wrong(`Whether she had felt relief that the work was over`, 'confuses-answer-with-question'),
@@ -452,7 +452,7 @@ const skill: ContentSkill = {
             wrong(`Creatures that come from inside the valley`, 'misreads-prefix'),
             wrong(`Creatures that are very rare or endangered`, 'context-only-guess'),
           ],
-          solution: `In plus anim means without life, and the passage confirms the animals "were perfectly still." They only seemed lifelike because of skillful posing, which is why the moving choice is tempting but wrong; reading in- as "inside" is also a mistake here.`,
+          solution: `In plus anim means without life, and the passage confirms the animals "were perfectly still." They only seemed lifelike because of skillful posing, which is why the choice "Creatures that move in a lifelike way" is tempting but wrong; reading in- as "inside" is also a mistake here.`,
         },
         {
           slot: 34,
