@@ -38,6 +38,7 @@ import { useVoiceMuted } from '@/hooks/useVoiceMuted'
 import { useAutoRead } from '@/hooks/useAutoRead'
 import { stopNikkiSpeech } from '@/lib/voice'
 import '@/styles/app-screens.css'
+import { spokenPictureItem } from '@/lib/pictureModel'
 
 /**
  * Read-aloud text for a question. For audio-picture (K-2) items, Nikki reads the
@@ -47,10 +48,7 @@ import '@/styles/app-screens.css'
  */
 function readableText(q: PracticeQuestion | undefined): string {
   if (!q) return ''
-  if (q.render_mode === 'audio_picture') {
-    const labels = q.choices.map((c) => c.text).filter(Boolean)
-    return labels.length ? `${q.stem} Your choices are: ${labels.join(', ')}.` : q.stem
-  }
+  if (q.render_mode === 'audio_picture') return spokenPictureItem(q.stem, q.choices)
   return [q.passage, q.stem].filter(Boolean).join('\n\n')
 }
 

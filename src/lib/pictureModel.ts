@@ -13,7 +13,9 @@
  *   array             rows x cols of one picture
  *   fraction          a circle, square or rectangle cut into parts, some shaded
  *   measure           a picture with a row of unit cubes under it (length)
- *   object_rows       rows of pictures, one row per kind (picture graphs, sorting)
+ *   object_rows       rows of pictures, one row per kind: a picture graph (each row
+ *                     starts with a faded label), or with labels: false just the
+ *                     groups ("3 apples and 5 pears")
  */
 import { KID_IMAGES, type KidImage } from './kidImages'
 
@@ -30,7 +32,7 @@ export type PictureTile =
 
 export type PicturePrompt =
   | Exclude<PictureTile, { kind: 'number' | 'letter' }>
-  | { kind: 'object_rows'; rows: { image: string; count: number }[] }
+  | { kind: 'object_rows'; rows: { image: string; count: number }[]; labels?: boolean }
 
 const isInt = (v: unknown, lo: number, hi: number): v is number => typeof v === 'number' && Number.isInteger(v) && v >= lo && v <= hi
 const isImage = (v: unknown): v is KidImage => typeof v === 'string' && (KID_IMAGES as readonly string[]).includes(v)
@@ -75,7 +77,7 @@ export function parsePicturePrompt(raw: unknown): PicturePrompt | null {
     if (!Array.isArray(p.rows) || p.rows.length < 1 || p.rows.length > 4) return null
     const rows = p.rows.map((r) => (r && typeof r === 'object' ? (r as Record<string, unknown>) : {}))
     return rows.every((r) => isImage(r.image) && isInt(r.count, 0, 10))
-      ? { kind: 'object_rows', rows: rows.map((r) => ({ image: r.image as string, count: r.count as number })) }
+      ? { kind: 'object_rows', rows: rows.map((r) => ({ image: r.image as string, count: r.count as number })), ...(p.labels === false ? { labels: false } : {}) }
       : null
   }
   if (p.kind === 'number' || p.kind === 'letter') return null
@@ -110,4 +112,17 @@ export function tileLabel(t: PictureTile): string | undefined {
     default:
       return undefined
   }
+}
+
+/**
+ * What the app SAYS for a K-2 picture item: the stem, then "Your choices are: ..."
+ * with each tile's label so a child who cannot read hears what the pictures are.
+ * Numbers, letters and words are NOT read out: recognizing that symbol is usually
+ * the skill ("Tap the word the"), and hearing the labels in tile order would give
+ * the answer away. The child sees those symbols; the stem says what to find.
+ */
+export function spokenPictureItem(stem: string, choices: { text: string; tile?: PictureTile }[]): string {
+  const symbols = choices.some((c) => c.tile && (c.tile.kind === 'number' || c.tile.kind === 'letter' || c.tile.kind === 'word'))
+  const labels = choices.map((c) => c.text).filter(Boolean)
+  return symbols || !labels.length ? stem : `${stem} Your choices are: ${labels.join(', ')}.`
 }

@@ -2088,8 +2088,12 @@
 }
 .kid-screen .picq-row-key {
   flex: none;
-  padding-right: 8px;
-  border-right: 2px solid var(--line);
+  padding: 3px;
+  margin-right: 4px;
+  border-radius: 10px;
+  background: #e3e7ee;
+  border-right: 3px solid var(--navy);
+  opacity: 0.6;
 }
 .kid-screen .picq-row-key svg,
 .kid-screen .picq-row-items svg {

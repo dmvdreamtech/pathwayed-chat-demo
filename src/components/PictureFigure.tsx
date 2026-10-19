@@ -165,14 +165,16 @@ function Measure({ image, units }: { image: string; units: number }) {
   )
 }
 
-function Rows({ rows }: { rows: { image: string; count: number }[] }) {
+function Rows({ rows, labels = true }: { rows: { image: string; count: number }[]; labels?: boolean }) {
   return (
     <span className="picq-rows" aria-hidden="true">
       {rows.map((r, i) => (
         <span key={i} className="picq-row">
-          <span className="picq-row-key">
-            <KidIcon name={r.image} />
-          </span>
+          {labels && (
+            <span className="picq-row-key">
+              <KidIcon name={r.image} />
+            </span>
+          )}
           <span className="picq-row-items">
             {Array.from({ length: r.count }, (_, k) => (
               <KidIcon key={k} name={r.image} />
@@ -204,7 +206,7 @@ export function PictureFigure({ figure, place, label }: { figure: PictureTile | 
     case 'measure':
       return <Measure image={figure.image} units={figure.units} />
     case 'object_rows':
-      return <Rows rows={figure.rows} />
+      return <Rows rows={figure.rows} labels={figure.labels !== false} />
     default:
       return <span className="picq-num">{label ?? ''}</span>
   }

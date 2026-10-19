@@ -4,6 +4,7 @@ import { StaffShell } from '@/components/staff/StaffShell'
 import { MathText } from '@/components/MathText'
 import { PictureFigure } from '@/components/PictureFigure'
 import { speakWithNikki } from '@/lib/voice'
+import { spokenPictureItem } from '@/lib/pictureModel'
 import { useAuth } from '@/context/AuthContext'
 import {
   buildFlags,
@@ -71,7 +72,7 @@ function Choices({ choices }: { choices: Choice[] }) {
  * its spoken label and the key.
  */
 function PictureItem({ item }: { item: ReviewItem }) {
-  const spoken = `${item.stem} Your choices are: ${item.choices.map((c) => c.text).join(', ')}.`
+  const spoken = spokenPictureItem(item.stem, item.choices)
   return (
     <div className="kid-screen review-picture">
       <p>

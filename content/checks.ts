@@ -89,7 +89,7 @@ const spokenWords = (s: string) => s.split(/\s+/).filter(Boolean).length
  * 2 to 4 tiles, exactly one right, each a picture the app can draw, and no
  * misconception tokens (a wrong tap gets the warm spoken solution, never a hint).
  */
-function pictureItemIssues(where: string, item: ContentItem): string[] {
+function pictureItemIssues(where: string, item: ContentItem, math = false): string[] {
   const out: string[] = []
   const at = `${where} slot ${item.slot}`
   if (!Number.isInteger(item.slot) || item.slot < 1) out.push(`${at}: slot must be a positive whole number`)
@@ -120,7 +120,10 @@ function pictureItemIssues(where: string, item: ContentItem): string[] {
   if (sol.length < 10) out.push(`${at}: the spoken solution is missing or too short`)
   if (spokenWords(sol) > 40) out.push(`${at}: the spoken solution is ${spokenWords(sol)} words, keep it to 40`)
   const spoken: [string, string][] = [['stem', stem], ['solution', sol], ...item.choices.map((c) => ['tile', c.text] as [string, string])]
-  for (const [label, text] of spoken) {
+  // In math, a minus sign between two numbers is math, not a dash (0044 accepts the same).
+  const MINUS = /(?<=[0-9])\s-\s(?=[0-9])/g
+  for (const [label, raw] of spoken) {
+    const text = math ? raw.replace(MINUS, ' ') : raw
     if (DASHES.test(text)) out.push(`${at}: ${label} has a dash (em dash, en dash, or spaced hyphen)`)
     if (text.includes('$')) out.push(`${at}: ${label} has a $ (spoken text has no math markup; say "plus", "dollars")`)
   }
@@ -153,7 +156,7 @@ export function skillIssues(skill: ContentSkill): string[] {
   if (skill.topUpItems !== undefined && (!skill.extends || !Number.isInteger(skill.topUpItems) || skill.topUpItems < 1)) {
     out.push(`${where}: topUpItems is a positive whole number, on a top-up (extends) only`)
   }
-  for (const item of skill.items ?? []) out.push(...(picture ? pictureItemIssues(where, item) : itemIssues(where, item, math)))
+  for (const item of skill.items ?? []) out.push(...(picture ? pictureItemIssues(where, item, math) : itemIssues(where, item, math)))
 
   const limits = passageLimits(skill.grade)
   const codes = new Set<string>()
