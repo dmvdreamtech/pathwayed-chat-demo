@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g5-add-subtract-fractions-unlike-more',
+  extends: 'add-subtract-fractions-unlike',
+  subject: 'math',
+  grade: 5,
+  group: 'Number and Operations: Fractions',
+  name: 'Add & Subtract Fractions',
+  standards: ['5.NF.A.1'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is $\\frac{2}{5} + \\frac{1}{3}$?`,
+      choices: [
+        ok(`$\\frac{11}{15}$`),
+        no(`$\\frac{3}{8}$`, 'added-numerators-and-denominators'),
+        no(`$\\frac{3}{15}$`, 'did-not-rename-numerators'),
+        no(`$\\frac{2}{15}$`, 'multiplied-numerators'),
+      ],
+      solution: `Use 15 as the common denominator: $\\frac{2}{5} = \\frac{6}{15}$ and $\\frac{1}{3} = \\frac{5}{15}$. Then $\\frac{6}{15} + \\frac{5}{15} = \\frac{11}{15}$. The choice $\\frac{3}{8}$ adds the tops and the bottoms, which does not make equal-size parts.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is $\\frac{5}{6} - \\frac{1}{4}$?`,
+      choices: [
+        no(`$2$`, 'subtracted-numerators-and-denominators'),
+        ok(`$\\frac{7}{12}$`),
+        no(`$\\frac{4}{12}$`, 'did-not-rename-numerators'),
+        no(`$\\frac{13}{12}$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `Use 12 as the common denominator: $\\frac{5}{6} = \\frac{10}{12}$ and $\\frac{1}{4} = \\frac{3}{12}$. Then $\\frac{10}{12} - \\frac{3}{12} = \\frac{7}{12}$. The choice $\\frac{4}{12}$ changes the denominators to 12 but keeps the old numerators 5 and 1.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Which shows $\\frac{3}{4} + \\frac{1}{6}$ correctly rewritten with a common denominator?`,
+      choices: [
+        no(`$\\frac{3}{12} + \\frac{1}{12}$`, 'changed-denominators-only'),
+        no(`$\\frac{3}{10} + \\frac{1}{10}$`, 'added-denominators-for-common-denominator'),
+        ok(`$\\frac{9}{12} + \\frac{2}{12}$`),
+        no(`$\\frac{9}{12} + \\frac{1}{12}$`, 'renamed-only-one-numerator'),
+      ],
+      solution: `Twelfths work for both fractions. Multiply the top and bottom of $\\frac{3}{4}$ by 3 to get $\\frac{9}{12}$, and the top and bottom of $\\frac{1}{6}$ by 2 to get $\\frac{2}{12}$. So the sum is $\\frac{9}{12} + \\frac{2}{12}$. The choice $\\frac{3}{12} + \\frac{1}{12}$ changes the bottoms without changing the tops, so the fractions get smaller.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What is $\\frac{1}{2} + \\frac{2}{5}$?`,
+      choices: [
+        no(`$\\frac{3}{7}$`, 'added-numerators-and-denominators'),
+        no(`$\\frac{3}{10}$`, 'did-not-rename-numerators'),
+        no(`$\\frac{2}{10}$`, 'multiplied-numerators'),
+        ok(`$\\frac{9}{10}$`),
+      ],
+      solution: `Use 10 as the common denominator: $\\frac{1}{2} = \\frac{5}{10}$ and $\\frac{2}{5} = \\frac{4}{10}$. Then $\\frac{5}{10} + \\frac{4}{10} = \\frac{9}{10}$. The choice $\\frac{3}{7}$ is less than $\\frac{1}{2}$, so it cannot be the sum of $\\frac{1}{2}$ and another positive amount.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `What is $\\frac{3}{5} - \\frac{1}{2}$?`,
+      choices: [
+        ok(`$\\frac{1}{10}$`),
+        no(`$\\frac{2}{3}$`, 'subtracted-numerators-and-denominators'),
+        no(`$\\frac{2}{10}$`, 'did-not-rename-numerators'),
+        no(`$\\frac{11}{10}$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `Use 10 as the common denominator: $\\frac{3}{5} = \\frac{6}{10}$ and $\\frac{1}{2} = \\frac{5}{10}$. Then $\\frac{6}{10} - \\frac{5}{10} = \\frac{1}{10}$. The choice $\\frac{2}{3}$ subtracts the tops and the bottoms separately, which is not how fractions are subtracted.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Leon walked $\\frac{1}{3}$ mile to the library and then $\\frac{1}{2}$ mile to the park. How far did Leon walk in all?`,
+      choices: [
+        no(`$\\frac{2}{5}$ mile`, 'added-numerators-and-denominators'),
+        ok(`$\\frac{5}{6}$ mile`),
+        no(`$\\frac{2}{6}$ mile`, 'did-not-rename-numerators'),
+        no(`$\\frac{1}{6}$ mile`, 'subtracted-instead-of-added'),
+      ],
+      solution: `Add the two distances using sixths: $\\frac{1}{3} = \\frac{2}{6}$ and $\\frac{1}{2} = \\frac{3}{6}$, so $\\frac{2}{6} + \\frac{3}{6} = \\frac{5}{6}$ mile. The choice $\\frac{1}{6}$ mile is the difference between the two walks, not the total.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `What is $3 - 1\\frac{2}{5}$?`,
+      choices: [
+        no(`$2\\frac{2}{5}$`, 'subtracted-wholes-and-kept-fraction'),
+        no(`$2\\frac{3}{5}$`, 'forgot-to-decrease-whole-when-regrouping'),
+        ok(`$1\\frac{3}{5}$`),
+        no(`$4\\frac{2}{5}$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `Rename 3 as $2\\frac{5}{5}$. Then $2\\frac{5}{5} - 1\\frac{2}{5} = 1\\frac{3}{5}$. The choice $2\\frac{3}{5}$ breaks a whole into fifths but forgets that 3 becomes 2 when one whole is used.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What is $2\\frac{3}{4} + 1\\frac{2}{3}$?`,
+      choices: [
+        no(`$3\\frac{5}{12}$`, 'forgot-to-carry-the-whole'),
+        no(`$3\\frac{5}{7}$`, 'added-numerators-and-denominators'),
+        no(`$1\\frac{1}{12}$`, 'subtracted-instead-of-added'),
+        ok(`$4\\frac{5}{12}$`),
+      ],
+      solution: `Rename the fractions as twelfths: $2\\frac{9}{12} + 1\\frac{8}{12} = 3\\frac{17}{12}$. Since $\\frac{17}{12} = 1\\frac{5}{12}$, the sum is $4\\frac{5}{12}$. The choice $3\\frac{5}{12}$ drops the extra whole made by $\\frac{17}{12}$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `What number makes this equation true: $\\frac{1}{4} + \\square = \\frac{5}{6}$?`,
+      choices: [
+        ok(`$\\frac{7}{12}$`),
+        no(`$\\frac{13}{12}$`, 'added-instead-of-subtracted'),
+        no(`$\\frac{4}{6}$`, 'ignored-different-denominators'),
+        no(`$2$`, 'subtracted-numerators-and-denominators'),
+      ],
+      solution: `The missing number is $\\frac{5}{6} - \\frac{1}{4}$. In twelfths that is $\\frac{10}{12} - \\frac{3}{12} = \\frac{7}{12}$. Check: $\\frac{3}{12} + \\frac{7}{12} = \\frac{10}{12} = \\frac{5}{6}$. The choice $\\frac{4}{6}$ subtracts the tops as if both fractions were sixths.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Kenji found $\\frac{1}{6} + \\frac{3}{4}$ by using 24 as the common denominator and got $\\frac{22}{24}$. What is the sum in simplest form?`,
+      choices: [
+        no(`$\\frac{11}{24}$`, 'divided-only-the-numerator'),
+        ok(`$\\frac{11}{12}$`),
+        no(`$\\frac{22}{12}$`, 'divided-only-the-denominator'),
+        no(`$\\frac{4}{10}$`, 'added-numerators-and-denominators'),
+      ],
+      solution: `Kenji's work is right: $\\frac{4}{24} + \\frac{18}{24} = \\frac{22}{24}$. Both 22 and 24 can be divided by 2, so $\\frac{22}{24} = \\frac{11}{12}$. Any common denominator works, and the answer is the same once it is simplified. The choice $\\frac{11}{24}$ divides the top by 2 but not the bottom, which changes the value.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A water bottle held $\\frac{9}{10}$ liter of water. Priya poured $\\frac{3}{8}$ liter into a plant pot. How much water is left in the bottle?`,
+      choices: [
+        no(`$\\frac{6}{40}$ liter`, 'did-not-rename-numerators'),
+        no(`$1\\frac{11}{40}$ liters`, 'added-instead-of-subtracted'),
+        ok(`$\\frac{21}{40}$ liter`),
+        no(`$3$ liters`, 'subtracted-numerators-and-denominators'),
+      ],
+      solution: `Use 40 as the common denominator: $\\frac{9}{10} = \\frac{36}{40}$ and $\\frac{3}{8} = \\frac{15}{40}$. Then $\\frac{36}{40} - \\frac{15}{40} = \\frac{21}{40}$ liter. The choice $3$ liters is more than the bottle ever held, so it cannot be what is left.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `What is $1\\frac{5}{6} + 2\\frac{3}{8}$?`,
+      choices: [
+        no(`$3\\frac{5}{24}$`, 'forgot-to-carry-the-whole'),
+        ok(`$4\\frac{5}{24}$`),
+        no(`$3\\frac{8}{14}$`, 'added-numerators-and-denominators'),
+        no(`$\\frac{13}{24}$`, 'subtracted-instead-of-added'),
+      ],
+      solution: `Use 24 as the common denominator: $1\\frac{20}{24} + 2\\frac{9}{24} = 3\\frac{29}{24}$. Since $\\frac{29}{24} = 1\\frac{5}{24}$, the sum is $4\\frac{5}{24}$. The choice $3\\frac{5}{24}$ forgets to add the whole made by $\\frac{29}{24}$.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A hiking trail is $5\\frac{1}{6}$ kilometers long. Dev has hiked $2\\frac{3}{4}$ kilometers so far. How many more kilometers does Dev need to hike to finish the trail?`,
+      choices: [
+        no(`$3\\frac{7}{12}$ kilometers`, 'subtracted-smaller-fraction-from-larger'),
+        no(`$3\\frac{5}{12}$ kilometers`, 'forgot-to-decrease-whole-when-regrouping'),
+        no(`$7\\frac{11}{12}$ kilometers`, 'added-instead-of-subtracted'),
+        ok(`$2\\frac{5}{12}$ kilometers`),
+      ],
+      solution: `Rename as twelfths: $5\\frac{2}{12} - 2\\frac{9}{12}$. Since $\\frac{2}{12}$ is less than $\\frac{9}{12}$, regroup to $4\\frac{14}{12}$. Then $4\\frac{14}{12} - 2\\frac{9}{12} = 2\\frac{5}{12}$ kilometers. The choice $3\\frac{7}{12}$ kilometers takes $\\frac{2}{12}$ away from $\\frac{9}{12}$, which reverses the subtraction for the fraction parts.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `What is $\\frac{2}{3} + \\frac{1}{2} - \\frac{3}{4}$?`,
+      choices: [
+        ok(`$\\frac{5}{12}$`),
+        no(`$0$`, 'operated-on-numerators-and-denominators'),
+        no(`$1\\frac{11}{12}$`, 'added-all-three'),
+        no(`$\\frac{11}{12}$`, 'swapped-the-operations'),
+      ],
+      solution: `Rename each fraction as twelfths: $\\frac{8}{12} + \\frac{6}{12} - \\frac{9}{12}$. Then $8 + 6 - 9 = 5$, so the answer is $\\frac{5}{12}$. The choice $1\\frac{11}{12}$ adds $\\frac{3}{4}$ instead of subtracting it.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `What number makes this equation true: $\\frac{4}{5} - \\square = \\frac{1}{3}$?`,
+      choices: [
+        no(`$1\\frac{2}{15}$`, 'added-instead-of-subtracted'),
+        ok(`$\\frac{7}{15}$`),
+        no(`$\\frac{3}{2}$`, 'subtracted-numerators-and-denominators'),
+        no(`$\\frac{3}{15}$`, 'did-not-rename-numerators'),
+      ],
+      solution: `The missing number is $\\frac{4}{5} - \\frac{1}{3}$. In fifteenths that is $\\frac{12}{15} - \\frac{5}{15} = \\frac{7}{15}$. Check: $\\frac{12}{15} - \\frac{7}{15} = \\frac{5}{15} = \\frac{1}{3}$. The choice $1\\frac{2}{15}$ adds the two fractions, but the missing number must be less than $\\frac{4}{5}$.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Lena planted tomatoes in $\\frac{1}{4}$ of a garden and peppers in $\\frac{2}{5}$ of the same garden. The rest of the garden is not planted yet. What fraction of the garden is not planted?`,
+      choices: [
+        no(`$\\frac{13}{20}$`, 'found-planted-part-not-unplanted'),
+        ok(`$\\frac{7}{20}$`),
+        no(`$\\frac{6}{9}$`, 'added-numerators-and-denominators'),
+        no(`$\\frac{17}{20}$`, 'did-not-rename-numerators'),
+      ],
+      solution: `First find the planted part: $\\frac{5}{20} + \\frac{8}{20} = \\frac{13}{20}$. The whole garden is $\\frac{20}{20}$, so the part not planted is $\\frac{20}{20} - \\frac{13}{20} = \\frac{7}{20}$. The choice $\\frac{13}{20}$ is the planted part, which is only the first step.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Omar had $4\\frac{1}{2}$ cups of flour. Omar used $1\\frac{2}{3}$ cups for bread and $\\frac{3}{4}$ cup for muffins. How many cups of flour are left?`,
+      choices: [
+        no(`$2\\frac{5}{6}$ cups`, 'forgot-the-second-step'),
+        no(`$6\\frac{11}{12}$ cups`, 'added-instead-of-subtracted'),
+        no(`$3\\frac{1}{12}$ cups`, 'forgot-to-decrease-whole-when-regrouping'),
+        ok(`$2\\frac{1}{12}$ cups`),
+      ],
+      solution: `Rename everything as twelfths: $4\\frac{6}{12} - 1\\frac{8}{12} = 2\\frac{10}{12}$ after regrouping $4\\frac{6}{12}$ as $3\\frac{18}{12}$. Then $2\\frac{10}{12} - \\frac{9}{12} = 2\\frac{1}{12}$ cups. The choice $2\\frac{5}{6}$ cups subtracts the bread flour but not the muffin flour.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A red rope is $3\\frac{2}{5}$ meters long and a blue rope is $1\\frac{7}{8}$ meters long. How much longer is the red rope than the blue rope?`,
+      choices: [
+        ok(`$1\\frac{21}{40}$ meters`),
+        no(`$2\\frac{19}{40}$ meters`, 'subtracted-smaller-fraction-from-larger'),
+        no(`$2\\frac{21}{40}$ meters`, 'forgot-to-decrease-whole-when-regrouping'),
+        no(`$5\\frac{11}{40}$ meters`, 'added-instead-of-subtracted'),
+      ],
+      solution: `Use 40 as the common denominator: $3\\frac{16}{40} - 1\\frac{35}{40}$. Regroup $3\\frac{16}{40}$ as $2\\frac{56}{40}$. Then $2\\frac{56}{40} - 1\\frac{35}{40} = 1\\frac{21}{40}$ meters. The choice $2\\frac{19}{40}$ meters takes $\\frac{16}{40}$ away from $\\frac{35}{40}$ instead of regrouping.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A ribbon was cut into three pieces that are $1\\frac{1}{3}$ feet, $2\\frac{1}{4}$ feet and $\\frac{5}{6}$ foot long. How long was the ribbon before it was cut?`,
+      choices: [
+        no(`$3\\frac{5}{12}$ feet`, 'forgot-to-carry-the-whole'),
+        ok(`$4\\frac{5}{12}$ feet`),
+        no(`$3\\frac{7}{13}$ feet`, 'added-numerators-and-denominators'),
+        no(`$2\\frac{3}{4}$ feet`, 'subtracted-instead-of-added'),
+      ],
+      solution: `Rename the fractions as twelfths: $1\\frac{4}{12} + 2\\frac{3}{12} + \\frac{10}{12}$. The wholes add to 3 and the fractions add to $\\frac{17}{12} = 1\\frac{5}{12}$, so the ribbon was $4\\frac{5}{12}$ feet. The choice $3\\frac{5}{12}$ feet forgets the whole made by $\\frac{17}{12}$.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `What number makes this equation true: $2\\frac{5}{8} + \\square = 5\\frac{1}{6}$?`,
+      choices: [
+        no(`$3\\frac{11}{24}$`, 'subtracted-smaller-fraction-from-larger'),
+        no(`$3\\frac{13}{24}$`, 'forgot-to-decrease-whole-when-regrouping'),
+        ok(`$2\\frac{13}{24}$`),
+        no(`$7\\frac{19}{24}$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `The missing number is $5\\frac{1}{6} - 2\\frac{5}{8}$. In twenty-fourths that is $5\\frac{4}{24} - 2\\frac{15}{24}$. Regroup to $4\\frac{28}{24}$, then $4\\frac{28}{24} - 2\\frac{15}{24} = 2\\frac{13}{24}$. Check: $2\\frac{15}{24} + 2\\frac{13}{24} = 4\\frac{28}{24} = 5\\frac{4}{24}$. The choice $3\\frac{11}{24}$ takes $\\frac{4}{24}$ away from $\\frac{15}{24}$ instead of regrouping.`,
+    },
+  ],
+}
+
+export default skill
