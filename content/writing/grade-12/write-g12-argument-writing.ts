@@ -184,7 +184,7 @@ const skill: ContentSkill = {
             no(`Honestly, worrying about a few typos seems kind of silly to me.`, 'keeps-informal-tone'),
             no(`Archivists have many opinions, and all of them are worth hearing.`, 'vague-wording'),
           ],
-          solution: `The correct revision grants that accuracy matters and leads into the review process in sentences (9) and (10). The first choice is more formal than the original but still attacks the archivists' motives instead of their reasoning.`,
+          solution: `The correct revision grants that accuracy matters and leads into the review process in sentences (9) and (10). The choice claiming archivists "want to keep history locked away" is more formal than the original but still attacks the archivists' motives instead of their reasoning.`,
         },
         {
           slot: 13,
@@ -218,7 +218,7 @@ const skill: ContentSkill = {
             no(`History is important, and everyone should take time to visit their local museum.`, 'too-general'),
             no(`If the grant is denied again, the society should sell the ledgers to a university.`, 'introduces-new-topic'),
             no(`Volunteers are always better than professionals at every kind of archive work.`, 'overgeneralizes'),
-            ok(`A checked volunteer project could make the mill ledgers searchable within two years, with accuracy close to a professional's and no grant required.`),
+            ok(`A checked volunteer project could make the mill ledgers searchable far sooner than one professional working alone, with accuracy close to a professional's and no grant required.`),
           ],
           solution: `The correct conclusion ties the claim to the speed and accuracy evidence from Dorsey County. The claim that volunteers are always better overreaches, since the essay only shows their accuracy was close to a professional's.`,
         },
