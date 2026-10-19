@@ -28,7 +28,7 @@ const skill: ContentSkill = {
           right(`Before refrigerators, Merrow Falls harvested and stored pond ice each winter, which kept food cold and gave people work.`),
           wrong(`Electric refrigerators were invented because ice harvesting was too dangerous for workers.`, 'unsupported-inference'),
           wrong(`The old icehouse in Merrow Falls is now one of the most popular museums in the region.`, 'overgeneralization'),
-        ], `The passage explains how the town cut, stored and used pond ice and why it mattered, which the second choice sums up. The plow is just one step in the harvest described in paragraph 2.`),
+        ], `The passage explains how the town cut, stored and used pond ice and why it mattered, which the choice about harvesting and storing pond ice for food and work sums up. The plow is just one step in the harvest described in paragraph 2.`),
         q(2, 'easy', `What is the main idea of the second paragraph?`, [
           wrong(`Horses were the most important workers during the ice harvest.`, 'too-narrow'),
           wrong(`The ice on Fenwick Pond had to be more than a foot thick.`, 'misreads-detail'),
@@ -46,7 +46,7 @@ const skill: ContentSkill = {
           wrong(`Workers cleared snow, scored the ice, sawed blocks and floated them to a ramp. Then they hauled the blocks into the icehouse.`, 'too-narrow'),
           wrong(`Merrow Falls became famous for selling its pond ice to cities around the world until factories took over the business.`, 'unsupported-inference'),
           right(`Each winter, Merrow Falls cut ice from a pond and stored it in an insulated icehouse. The ice kept food cold through summer and created jobs until refrigerators replaced it.`),
-        ], `The last choice covers the harvest, the storage, its uses and its end without adding opinions. The first choice adds judgments such as "terrible" and "lucky" that the passage never states.`),
+        ], `The summary beginning "Each winter, Merrow Falls cut ice" covers the harvest, the storage, its uses and its end without adding opinions. The summary calling the job "terrible" adds judgments such as "terrible" and "lucky" that the passage never states.`),
         q(5, 'hard', `How does the final paragraph contribute to the development of the central idea?`, [
           right(`It explains why the harvest ended and shows that the practice is now remembered as part of the town's history.`),
           wrong(`It shifts the focus to the invention of electric refrigerators and how they work.`, 'misreads-structure'),
@@ -77,13 +77,13 @@ const skill: ContentSkill = {
           wrong(`It proves that fungi can make their own food from sunlight without help from trees.`, 'contradicts-text'),
           wrong(`It shows that dry summers are the main reason young trees fail to grow in forests.`, 'overgeneralization'),
           wrong(`It explains how fungal threads carry messages from one tree to another tree.`, 'unsupported-inference'),
-        ], `The seedlings with fungi were "almost twice as tall" and "survived a dry summer far better," which shows the partnership matters. The passage states that fungi "cannot make their own food," so the second choice contradicts it.`),
+        ], `The seedlings with fungi were "almost twice as tall" and "survived a dry summer far better," which shows the partnership matters. The passage states that fungi "cannot make their own food," so the choice saying fungi make their own food from sunlight contradicts it.`),
         q(9, 'medium', `Which is the best objective summary of the passage?`, [
           wrong(`Forests are full of amazing hidden secrets, and everyone should learn to respect the fungi that make all life on Earth possible.`, 'includes-opinion'),
           right(`Many trees trade sugar with soil fungi for water and minerals. A study found seedlings grew better with fungi, and although some claims are debated, crews now add fungi when replanting.`),
           wrong(`Amara Kovacs and her students planted seedlings in two soils, measured them after two seasons and found differences in their height.`, 'too-narrow'),
           wrong(`Trees warn one another through fungal threads, so crews now add forest soil to help seedlings hear these warnings.`, 'unsupported-inference'),
-        ], `The second choice covers the trade, the study, the caution and the replanting practice in neutral words. The first choice adds praise and claims that do not appear in the passage.`),
+        ], `The summary beginning "Many trees trade sugar with soil fungi" covers the trade, the study, the caution and the replanting practice in neutral words. The summary about "amazing hidden secrets" adds praise and claims that do not appear in the passage.`),
         q(10, 'hard', `What is the purpose of the fourth paragraph in developing the central idea?`, [
           wrong(`It argues that the Larchmont Valley study was flawed and should not be trusted.`, 'overstates-limits'),
           wrong(`It introduces a new main idea about how trees communicate with each other.`, 'misreads-structure'),
@@ -120,7 +120,7 @@ const skill: ContentSkill = {
           wrong(`Runners check their watches at each half-mile marker and learn what an even effort feels like over several weeks.`, 'too-narrow'),
           right(`Many runners start too fast and fade. A coach teaches a negative split, running the second half faster, and her runners improved, though hills and heat can upset the plan.`),
           wrong(`Runners who start fast always lose, so the coach forbids her team from passing anyone until the final mile.`, 'overgeneralization'),
-        ], `The third choice covers the problem, the plan, the results and the limits without adding judgments. The first choice gives opinions, such as "best coach," that the passage never states.`),
+        ], `The summary beginning "Many runners start too fast and fade" covers the problem, the plan, the results and the limits without adding judgments. The summary calling Achterberg the best coach gives opinions, such as "best coach," that the passage never states.`),
         q(15, 'hard', `How do the last two paragraphs work together to refine the central idea?`, [
           wrong(`The fourth paragraph praises the plan, and the fifth shows that it was a failure.`, 'overstates-limits'),
           wrong(`Both paragraphs repeat that the plan works perfectly in every kind of race.`, 'contradicts-text'),
@@ -139,7 +139,7 @@ const skill: ContentSkill = {
           wrong(`Small towns should stop printing newspapers and publish only online.`, 'unsupported-inference'),
           right(`A library saved a town's crumbling newspaper archive by scanning it, which made local history easy for everyone to use.`),
           wrong(`The Kessler Gazette was the most widely read weekly newspaper in its region.`, 'outside-knowledge'),
-        ], `The passage moves from the danger to the old pages, to the scanning project, to its many uses, which the third choice sums up. The fact about cheap paper only explains why the pages were in danger.`),
+        ], `The passage moves from the danger to the old pages, to the scanning project, to its many uses, which the choice about scanning the crumbling archive sums up. The fact about cheap paper only explains why the pages were in danger.`),
         q(17, 'easy', `What is the main idea of the second paragraph?`, [
           wrong(`Librarians are responsible for fixing leaking pipes in library basements.`, 'misreads-purpose'),
           right(`The old newspapers were falling apart and at risk of being lost.`),
@@ -157,13 +157,13 @@ const skill: ContentSkill = {
           wrong(`Thanks to the heroic librarian, Kessler now has the finest history archive of any small town, and other towns should be jealous.`, 'includes-opinion'),
           wrong(`After a pipe leak destroyed all of the old newspapers, the library rebuilt the collection from family scrapbooks.`, 'contradicts-text'),
           right(`A town's old newspapers were decaying in a library basement. A librarian and volunteers scanned the pages over four years, creating a searchable archive that many people now use.`),
-        ], `The last choice includes the problem, the solution and the result in neutral language. The leak ruined only two years of issues, so the third choice contradicts the passage.`),
+        ], `The summary about decaying newspapers scanned over four years includes the problem, the solution and the result in neutral language. The leak ruined only two years of issues, so the choice saying it destroyed all of the old newspapers contradicts the passage.`),
         q(20, 'hard', `How does the final paragraph refine the central idea of the passage?`, [
           wrong(`It suggests the original papers were thrown away once they were scanned.`, 'contradicts-text'),
           wrong(`It shifts the focus to the cost of buying acid-free storage boxes.`, 'misreads-structure'),
           right(`It contrasts the hidden basement with open access today, showing that the project both protected and shared the history.`),
           wrong(`It argues that every library should spend four years scanning its collections.`, 'overgeneralization'),
-        ], `The last sentence contrasts history "once hidden in a damp basement" with history anyone "can now read," and the originals are kept in a dry room. Nothing says the papers were thrown away.`),
+        ], `The last sentence contrasts history "once hidden in a damp basement" with history that "can now be read by anyone," and the originals are kept in a dry room. Nothing says the papers were thrown away.`),
       ],
     },
     {
@@ -176,7 +176,7 @@ const skill: ContentSkill = {
           right(`Hand-painted signs nearly vanished but are returning in Port Alder because owners value them and new painters are learning the craft.`),
           wrong(`Printed vinyl signs are poorly made and should be banned from city streets.`, 'unsupported-inference'),
           wrong(`Every shop in Port Alder has now replaced its printed sign with a painted one.`, 'overgeneralization'),
-        ], `The passage traces the decline of hand-painted signs and the two reasons for their return. The classes are one of those reasons, so the first choice is too narrow.`),
+        ], `The passage traces the decline of hand-painted signs and the two reasons for their return. The classes are one of those reasons, so the choice about Matsuda teaching evening classes is too narrow.`),
         q(22, 'medium', `What is the main idea of the second paragraph?`, [
           wrong(`Sign painters retired because they no longer enjoyed climbing ladders.`, 'unsupported-inference'),
           wrong(`Vinyl signs looked better than painted signs to most customers.`, 'unsupported-inference'),
@@ -194,7 +194,7 @@ const skill: ContentSkill = {
           wrong(`Port Alder is a beautiful city whose painted signs are far more charming than the boring printed signs found in other places.`, 'includes-opinion'),
           wrong(`Students in Ingrid Matsuda's class practice basic strokes for weeks and learn to mix paint and space letters properly.`, 'too-narrow'),
           wrong(`Machines made sign painting impossible, so Port Alder passed a law requiring every new sign to be painted by hand.`, 'unsupported-inference'),
-        ], `The first choice covers the past, the decline, the two causes of the return and the limit. The fourth choice invents a law that the passage never mentions.`),
+        ], `The summary beginning "Hand-painted signs once filled Port Alder" covers the past, the decline, the two causes of the return and the limit. The choice about a law requiring painted signs invents a law that the passage never mentions.`),
         q(25, 'hard', `How does the final paragraph shape the reader's understanding of the central idea?`, [
           wrong(`It shows that the revival has failed because painted signs are too expensive.`, 'overstates-limits'),
           right(`It balances the revival with its limits, then explains why the signs still matter to residents.`),
@@ -213,7 +213,7 @@ const skill: ContentSkill = {
           wrong(`Students at Halvorsen Middle School baked loaves at different temperatures.`, 'too-narrow'),
           right(`Bread rises because yeast makes gas that a stretchy gluten network traps, and warmth controls how well this works.`),
           wrong(`Yeast is a harmful fungus that must be removed from flour before baking.`, 'contradicts-text'),
-        ], `The passage explains the yeast, the gluten and the role of temperature, which the third choice combines. Kneading and the student study are supporting details, not the whole idea.`),
+        ], `The passage explains the yeast, the gluten and the role of temperature, which the choice about yeast gas, gluten and warmth combines. Kneading and the student study are supporting details, not the whole idea.`),
         q(27, 'medium', `What is the main purpose of the third paragraph?`, [
           wrong(`To explain where the sugars that yeast feeds on come from.`, 'misreads-structure'),
           right(`To explain how gluten traps the gas so the dough can expand.`),
@@ -231,7 +231,7 @@ const skill: ContentSkill = {
           wrong(`Gluten forms when two proteins join during kneading, and it stretches like the rubber of a balloon.`, 'too-narrow'),
           right(`Yeast feeds on sugars in dough and gives off gas, which stretchy gluten traps so the dough rises. Warmth speeds the yeast, and a student test showed warm dough rose highest.`),
           wrong(`Bread rises in the oven because heat creates gas bubbles from the starch in the flour.`, 'confuses-cause-effect'),
-        ], `The third choice covers yeast, gluten, temperature and the study without opinions. The fourth choice wrongly says starch makes the gas in the oven, when the passage says yeast makes it as it feeds.`),
+        ], `The summary beginning "Yeast feeds on sugars in dough" covers yeast, gluten, temperature and the study without opinions. The choice saying bread rises in the oven because of the starch wrongly says starch makes the gas in the oven, when the passage says yeast makes it as it feeds.`),
         q(30, 'hard', `How does the student study in the last paragraph contribute to the passage as a whole?`, [
           right(`It gives evidence that confirms the earlier explanation of how temperature affects yeast.`),
           wrong(`It introduces a new idea that gluten matters more than yeast in bread.`, 'misreads-structure'),
@@ -268,7 +268,7 @@ const skill: ContentSkill = {
           wrong(`Ferreira raised salmon in scented water, added the same scent to a side stream and found that many adults later swam into it.`, 'too-narrow'),
           right(`Most salmon return to the streams where they hatched. They likely use magnetism at sea and a memorized stream scent near home, as an experiment supports, so protecting stream scents may help them.`),
           wrong(`Salmon smell their home stream from the open ocean and follow it all the way back, so dams do not affect them.`, 'contradicts-text'),
-        ], `The third choice covers the homing behavior, both guiding senses, the experiment and the conservation point. The second choice is accurate but describes only the experiment.`),
+        ], `The summary beginning "Most salmon return to the streams where they hatched" covers the homing behavior, both guiding senses, the experiment and the conservation point. The summary about Ferreira raising salmon in scented water is accurate but describes only the experiment.`),
         q(35, 'hard', `Why does the author end the passage with a paragraph about dams and pollution?`, [
           wrong(`To argue that all dams on salmon rivers should be removed immediately.`, 'overgeneralization'),
           wrong(`To change the topic from salmon to the problem of river pollution in general.`, 'misreads-structure'),
@@ -287,13 +287,13 @@ const skill: ContentSkill = {
           right(`High schools should require a public speaking course because the skill is widely needed and can be taught.`),
           wrong(`Students should stop giving presentations in their regular classes.`, 'contradicts-text'),
           wrong(`Good speakers are born confident, so schools cannot really teach speaking.`, 'contradicts-text'),
-        ], `The writer states the claim in paragraph 1 and supports it with two reasons, which the second choice combines. The workshop is evidence for one reason, so it is too narrow.`),
+        ], `The writer states the claim in paragraph 1 and supports it with two reasons, which the choice about requiring a course because the skill is needed and can be taught combines. The workshop is evidence for one reason, so it is too narrow.`),
         q(37, 'medium', `What is the main idea of the third paragraph?`, [
           wrong(`Most ninth graders at Thornbury already feel comfortable speaking to a class.`, 'misreads-detail'),
           wrong(`Making eye contact is the most important part of public speaking.`, 'too-narrow'),
           right(`Speaking well is a set of skills that students can improve with practice.`),
           wrong(`The debate club should replace regular classes with speaking workshops.`, 'unsupported-inference'),
-        ], `The paragraph opens "Second, public speaking can be taught" and supports it with skills and survey results. Only nine of thirty felt comfortable before the workshop, so the first choice misreads the data.`),
+        ], `The paragraph opens "Second, public speaking can be taught" and supports it with skills and survey results. Only nine of thirty felt comfortable before the workshop, so the choice saying most ninth graders already feel comfortable misreads the data.`),
         q(38, 'medium', `How does the fourth paragraph help develop the writer's central idea?`, [
           wrong(`It admits that regular presentations are enough, which weakens the main claim.`, 'misreads-relationship'),
           wrong(`It introduces a new argument that class schedules should be made shorter.`, 'misreads-structure'),
@@ -305,7 +305,7 @@ const skill: ContentSkill = {
           right(`The writer argues that schools should require public speaking because the skill is widely needed and can be taught, citing a workshop survey and replying that regular presentations are not enough.`),
           wrong(`Public speaking is the most important subject in school, and anyone who disagrees has never had to give a presentation at work.`, 'includes-opinion'),
           wrong(`A debate club workshop raised the number of comfortable speakers from nine to twenty-two out of thirty ninth graders.`, 'too-narrow'),
-        ], `The second choice reports the writer's claim, reasons, evidence and counterargument without judging them. The first choice adds the idea that algebra and chemistry are boring, which the writer never says.`),
+        ], `The summary citing the workshop survey and the reply about regular presentations reports the writer's claim, reasons, evidence and counterargument without judging them. The summary about nervous students wasting their time adds the idea that algebra and chemistry are boring, which the writer never says.`),
         q(40, 'hard', `How does the final paragraph refine the writer's central claim?`, [
           right(`It narrows the course's goal to helping every student feel ready to speak, not making everyone a star.`),
           wrong(`It admits that the course would probably fail to help most students speak better.`, 'overstates-limits'),
