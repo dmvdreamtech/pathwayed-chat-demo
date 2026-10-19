@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g12-combinatorics-probability-more',
+  extends: 'combinatorics-probability',
+  subject: 'math',
+  grade: 12,
+  group: 'Statistics and Probability',
+  name: 'Combinatorics & Probability',
+  standards: ['HSS.CP.B.9'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is the value of $_7C_3$?`,
+      choices: [
+        ok(`$35$`),
+        no(`$210$`, 'used-permutation-instead-of-combination'),
+        no(`$21$`, 'multiplied-n-by-r'),
+        no(`$840$`, 'divided-by-r-factorial-only'),
+      ],
+      solution: `Use $_nC_r = \\frac{n!}{r!(n - r)!}$: $\\frac{7!}{3! \\cdot 4!} = \\frac{7 \\times 6 \\times 5}{3 \\times 2 \\times 1} = 35$. The value $210$ is $_7P_3$, which counts ordered choices and never divides by $3!$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is the value of $_6P_3$?`,
+      choices: [
+        no(`$20$`, 'used-combination-instead-of-permutation'),
+        no(`$18$`, 'multiplied-n-by-r'),
+        ok(`$120$`),
+        no(`$216$`, 'allowed-repetition'),
+      ],
+      solution: `A permutation multiplies $3$ decreasing factors starting at $6$: $6 \\times 5 \\times 4 = 120$. The value $216$ is $6^3$, which would let the same item be used more than once.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A locker code is made of $3$ digits, each from $0$ to $9$, and digits may repeat. How many different codes are possible?`,
+      choices: [
+        no(`$720$`, 'assumed-no-repetition'),
+        ok(`$1000$`),
+        no(`$30$`, 'multiplied-n-by-r'),
+        no(`$120$`, 'treated-order-as-irrelevant'),
+      ],
+      solution: `Each of the $3$ positions has $10$ choices, so there are $10 \\times 10 \\times 10 = 1000$ codes. The value $720$ is $10 \\times 9 \\times 8$, which wrongly forbids repeated digits.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `In how many different orders can $6$ different books be placed in a row on a shelf?`,
+      choices: [
+        no(`$36$`, 'squared-instead-of-factorial'),
+        no(`$21$`, 'added-instead-of-multiplied'),
+        no(`$120$`, 'used-n-minus-one-factorial'),
+        ok(`$720$`),
+      ],
+      solution: `There are $6$ choices for the first spot, $5$ for the next, and so on: $6! = 6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1 = 720$. The value $21$ adds $1 + 2 + 3 + 4 + 5 + 6$ instead of multiplying.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Rosalind must sign up for $2$ of the $5$ elective courses offered at Rosalind's school. The order of the picks does not matter. How many different pairs of courses can Rosalind choose?`,
+      choices: [
+        ok(`$10$`),
+        no(`$20$`, 'used-permutation-instead-of-combination'),
+        no(`$25$`, 'allowed-repetition'),
+        no(`$7$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Order does not matter, so count combinations: $_5C_2 = \\frac{5 \\times 4}{2 \\times 1} = 10$. The value $20$ counts each pair twice, once in each order.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A box holds $5$ tickets numbered $1$ through $5$. Two tickets are drawn at the same time. What is the probability that the two tickets are $1$ and $2$?`,
+      choices: [
+        no(`$\\frac{1}{20}$`, 'used-permutations-in-denominator-only'),
+        ok(`$\\frac{1}{10}$`),
+        no(`$\\frac{1}{25}$`, 'assumed-replacement'),
+        no(`$\\frac{2}{5}$`, 'added-individual-probabilities'),
+      ],
+      solution: `There are $_5C_2 = 10$ equally likely pairs, and only one of them is the pair $1$ and $2$, so the probability is $\\frac{1}{10}$. The value $\\frac{1}{20}$ counts ordered draws in the denominator but counts only one order as favorable.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `A teacher randomly chooses $3$ of the $12$ students in a class for a project team. What is the probability that the team is exactly Dana, Eli, and Fran?`,
+      choices: [
+        no(`$\\frac{1}{1320}$`, 'used-permutation-instead-of-combination'),
+        no(`$\\frac{1}{4}$`, 'used-group-size-over-class-size'),
+        ok(`$\\frac{1}{220}$`),
+        no(`$\\frac{1}{1728}$`, 'assumed-replacement'),
+      ],
+      solution: `The team is an unordered group, so there are $_{12}C_3 = \\frac{12 \\times 11 \\times 10}{6} = 220$ possible teams, and exactly one of them is Dana, Eli, and Fran. The probability is $\\frac{1}{220}$. The value $\\frac{1}{1320}$ uses $_{12}P_3$, which treats the same three students in a different order as a different team.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Eight runners, including Gia and Hal, run a race and every finishing order is equally likely. What is the probability that Gia finishes first and Hal finishes second?`,
+      choices: [
+        no(`$\\frac{1}{28}$`, 'used-combination-instead-of-permutation'),
+        ok(`$\\frac{1}{56}$`),
+        no(`$\\frac{1}{64}$`, 'assumed-replacement'),
+        no(`$\\frac{1}{4}$`, 'added-individual-probabilities'),
+      ],
+      solution: `First and second place form an ordered pair, so there are $_8P_2 = 8 \\times 7 = 56$ equally likely outcomes, and only one has Gia first and Hal second. The probability is $\\frac{1}{56}$. The value $\\frac{1}{28}$ uses $_8C_2$, which ignores which runner is first.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `A bag holds $6$ red marbles and $4$ blue marbles. Two marbles are drawn at random without replacement. What is the probability that both are red?`,
+      choices: [
+        ok(`$\\frac{1}{3}$`),
+        no(`$\\frac{9}{25}$`, 'assumed-replacement'),
+        no(`$\\frac{3}{5}$`, 'ignored-second-draw'),
+        no(`$\\frac{2}{15}$`, 'computed-both-blue'),
+      ],
+      solution: `Count unordered pairs: there are $_{10}C_2 = 45$ pairs in all and $_6C_2 = 15$ pairs of red marbles, so the probability is $\\frac{15}{45} = \\frac{1}{3}$. The value $\\frac{9}{25}$ is $\\frac{6}{10} \\times \\frac{6}{10}$, which puts the first marble back before the second draw.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A jar holds $5$ lemon candies and $3$ cherry candies. Two candies are taken at random without replacement. What is the probability of getting one lemon candy and one cherry candy?`,
+      choices: [
+        no(`$\\frac{15}{56}$`, 'used-permutations-in-denominator-only'),
+        no(`$\\frac{15}{64}$`, 'assumed-replacement-and-one-order'),
+        no(`$\\frac{15}{32}$`, 'assumed-replacement'),
+        ok(`$\\frac{15}{28}$`),
+      ],
+      solution: `There are $_8C_2 = 28$ unordered pairs. A mixed pair uses $1$ of $5$ lemon and $1$ of $3$ cherry, so there are $5 \\times 3 = 15$ favorable pairs and the probability is $\\frac{15}{28}$. The value $\\frac{15}{56}$ divides by the $56$ ordered draws but counts the favorable outcomes without order.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A club password uses $4$ different letters chosen from A, B, C, D, E, and F, and the order of the letters matters. How many passwords are possible?`,
+      choices: [
+        no(`$15$`, 'treated-order-as-irrelevant'),
+        ok(`$360$`),
+        no(`$1296$`, 'allowed-repetition'),
+        no(`$24$`, 'arranged-only-the-chosen-letters'),
+      ],
+      solution: `Choose and order $4$ of $6$ letters: $_6P_4 = 6 \\times 5 \\times 4 \\times 3 = 360$. The value $15$ is $_6C_4$, which counts sets of letters and ignores their order.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Five friends, including Ivy and Jo, line up in a random order. What is the probability that Ivy is first in line and Jo is last in line?`,
+      choices: [
+        no(`$\\frac{1}{25}$`, 'assumed-independent-positions'),
+        no(`$\\frac{2}{5}$`, 'added-individual-probabilities'),
+        ok(`$\\frac{1}{20}$`),
+        no(`$\\frac{1}{120}$`, 'treated-favorable-as-one-arrangement'),
+      ],
+      solution: `There are $5! = 120$ lineups. With Ivy first and Jo last, the other $3$ friends fill the middle in $3! = 6$ ways, so the probability is $\\frac{6}{120} = \\frac{1}{20}$. The value $\\frac{1}{120}$ forgets that the middle three friends can be arranged in several ways.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Theo guesses randomly on a quiz of $4$ true or false questions. What is the probability that Theo gets exactly $2$ questions right?`,
+      choices: [
+        no(`$\\frac{1}{16}$`, 'forgot-to-count-arrangements'),
+        ok(`$\\frac{3}{8}$`),
+        no(`$\\frac{1}{2}$`, 'used-fraction-of-questions'),
+        no(`$\\frac{1}{4}$`, 'used-n-instead-of-combination'),
+      ],
+      solution: `There are $2^4 = 16$ equally likely answer patterns. The $2$ correct questions can be any $_4C_2 = 6$ of the four, so the probability is $\\frac{6}{16} = \\frac{3}{8}$. The value $\\frac{1}{16}$ counts only one pattern of right and wrong answers.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A photographer chooses $4$ of $10$ students and lines them up in a row for a photo. How many different photos are possible?`,
+      choices: [
+        no(`$210$`, 'used-combination-instead-of-permutation'),
+        no(`$10000$`, 'allowed-repetition'),
+        no(`$24$`, 'arranged-only-the-chosen-students'),
+        ok(`$5040$`),
+      ],
+      solution: `Order in the row matters, so use $_{10}P_4 = 10 \\times 9 \\times 8 \\times 7 = 5040$. The value $210$ is $_{10}C_4$, which counts which students appear but not their order in the row.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `A club of $10$ members chooses a president and then a $2$-person planning committee from the other members. How many different selections are possible?`,
+      choices: [
+        ok(`$360$`),
+        no(`$120$`, 'ignored-the-distinct-role'),
+        no(`$720$`, 'treated-committee-as-ordered'),
+        no(`$450$`, 'did-not-remove-the-president'),
+      ],
+      solution: `There are $10$ choices for president, then $_9C_2 = 36$ committees from the remaining $9$ members, for $10 \\times 36 = 360$. The value $450$ uses $_{10}C_2 = 45$, which lets the president also sit on the committee.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `A committee of $4$ is chosen at random from $7$ seniors and $5$ juniors. What is the probability that the committee has exactly $2$ seniors?`,
+      choices: [
+        no(`$\\frac{7}{165}$`, 'ignored-choosing-the-juniors'),
+        no(`$\\frac{31}{495}$`, 'added-group-counts'),
+        no(`$\\frac{1}{2}$`, 'used-fraction-of-seats'),
+        ok(`$\\frac{14}{33}$`),
+      ],
+      solution: `There are $_{12}C_4 = 495$ committees. Exactly $2$ seniors means $_7C_2 = 21$ ways for the seniors and $_5C_2 = 10$ ways for the juniors, so $21 \\times 10 = 210$ favorable committees. The probability is $\\frac{210}{495} = \\frac{14}{33}$. The value $\\frac{31}{495}$ adds $21 + 10$ instead of multiplying.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A $4$-digit PIN is formed at random, with each digit from $0$ to $9$ and repeats allowed. What is the probability that all $4$ digits are different?`,
+      choices: [
+        ok(`$\\frac{63}{125}$`),
+        no(`$\\frac{21}{1000}$`, 'used-combination-for-favorable'),
+        no(`$\\frac{62}{125}$`, 'computed-the-complement'),
+        no(`$\\frac{729}{1000}$`, 'avoided-only-the-first-digit'),
+      ],
+      solution: `There are $10^4 = 10000$ PINs, and $_{10}P_4 = 10 \\times 9 \\times 8 \\times 7 = 5040$ of them have all different digits. The probability is $\\frac{5040}{10000} = \\frac{63}{125}$. The value $\\frac{62}{125}$ is the probability that at least one digit repeats.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Three students are chosen at random from a group of $6$ boys and $4$ girls. What is the probability that at least one girl is chosen?`,
+      choices: [
+        no(`$\\frac{1}{6}$`, 'stopped-at-the-complement'),
+        ok(`$\\frac{5}{6}$`),
+        no(`$\\frac{1}{2}$`, 'computed-exactly-one-girl'),
+        no(`$\\frac{2}{5}$`, 'used-a-single-draw'),
+      ],
+      solution: `Use the complement. There are $_{10}C_3 = 120$ groups, and $_6C_3 = 20$ of them are all boys, so the probability of no girl is $\\frac{20}{120} = \\frac{1}{6}$. Then the probability of at least one girl is $1 - \\frac{1}{6} = \\frac{5}{6}$. The value $\\frac{1}{6}$ is the all-boys probability, not the answer.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Five people, including Kai and Lee, sit in a row of $5$ chairs in a random order. What is the probability that Kai and Lee do NOT sit next to each other?`,
+      choices: [
+        no(`$\\frac{2}{5}$`, 'found-probability-of-sitting-together'),
+        no(`$\\frac{4}{5}$`, 'forgot-the-pair-can-swap'),
+        ok(`$\\frac{3}{5}$`),
+        no(`$\\frac{1}{2}$`, 'assumed-two-equally-likely-outcomes'),
+      ],
+      solution: `Treat Kai and Lee as one block: $4!$ arrangements of the block and the other $3$ people, times $2$ orders inside the block, gives $48$ seating orders with them together. Out of $5! = 120$ orders, the probability they sit together is $\\frac{48}{120} = \\frac{2}{5}$, so the probability they do not is $1 - \\frac{2}{5} = \\frac{3}{5}$. The value $\\frac{4}{5}$ counts only $24$ together orders, forgetting that Kai and Lee can switch seats.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A committee of $3$ is chosen at random from $8$ students, including Mia and Noor. What is the probability that both Mia and Noor are on the committee?`,
+      choices: [
+        no(`$\\frac{1}{56}$`, 'treated-favorable-as-one-committee'),
+        no(`$\\frac{9}{64}$`, 'assumed-independent-selections'),
+        no(`$\\frac{5}{14}$`, 'found-probability-of-neither'),
+        ok(`$\\frac{3}{28}$`),
+      ],
+      solution: `There are $_8C_3 = 56$ committees. If Mia and Noor are both on it, the third seat goes to one of the other $6$ students, so there are $6$ favorable committees and the probability is $\\frac{6}{56} = \\frac{3}{28}$. The value $\\frac{1}{56}$ forgets that the third member can be any of $6$ students.`,
+    },
+  ],
+}
+
+export default skill
