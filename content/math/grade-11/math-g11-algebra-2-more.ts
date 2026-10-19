@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g11-algebra-2-more',
+  extends: 'algebra-2',
+  subject: 'math',
+  grade: 11,
+  group: 'Algebra',
+  name: 'Algebra 2',
+  standards: ['HSA.REI.B.4'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What are the solutions to $(x - 3)^2 = 16$?`,
+      choices: [
+        ok(`$x = 7$ or $x = -1$`),
+        no(`$x = 7$ only`, 'forgot-negative-root'),
+        no(`$x = -7$ or $x = 1$`, 'sign-error-undoing-the-shift'),
+        no(`$x = 4$ or $x = -4$`, 'ignored-the-shift'),
+      ],
+      solution: `Take the square root of both sides: $x - 3 = 4$ or $x - 3 = -4$. Adding $3$ gives $x = 7$ or $x = -1$. The answer "$x = 7$ only" keeps just the positive square root, but $(-4)^2 = 16$ too.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What are the solutions to $x^2 - 5x + 6 = 0$?`,
+      choices: [
+        no(`$x = -2$ or $x = -3$`, 'kept-the-signs-of-the-factors'),
+        ok(`$x = 2$ or $x = 3$`),
+        no(`$x = 6$ or $x = -1$`, 'factored-with-wrong-constant-sign'),
+        no(`$x = 5$ or $x = 6$`, 'read-roots-from-coefficients'),
+      ],
+      solution: `Find two numbers that multiply to $6$ and add to $-5$: they are $-2$ and $-3$. So $(x - 2)(x - 3) = 0$, giving $x = 2$ or $x = 3$. The answer "$x = -2$ or $x = -3$" copies the numbers in the factors instead of setting each factor equal to zero.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `To complete the square for $x^2 + 10x$, what number should be added?`,
+      choices: [
+        no(`$10$`, 'added-b-itself'),
+        no(`$5$`, 'halved-but-did-not-square'),
+        ok(`$25$`),
+        no(`$100$`, 'squared-b-without-halving'),
+      ],
+      solution: `Take half of the $x$ coefficient and square it: half of $10$ is $5$, and $5^2 = 25$. Then $x^2 + 10x + 25 = (x + 5)^2$. The value $5$ is halved but never squared.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What are the solutions to $3x^2 = 48$?`,
+      choices: [
+        no(`$x = \\pm 16$`, 'forgot-square-root'),
+        no(`$x = 4$ only`, 'forgot-negative-root'),
+        no(`$x = \\pm 3\\sqrt{5}$`, 'subtracted-instead-of-dividing'),
+        ok(`$x = \\pm 4$`),
+      ],
+      solution: `Divide both sides by $3$ to get $x^2 = 16$, then take square roots: $x = \\pm 4$. The answer $x = \\pm 16$ stops at $x^2 = 16$ without taking the square root.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `What are the solutions to $x^2 = -9$?`,
+      choices: [
+        ok(`$x = \\pm 3i$`),
+        no(`$x = \\pm 3$`, 'ignored-negative-sign'),
+        no(`$x = -3$ only`, 'took-root-of-negative-as-negative'),
+        no(`There are no solutions of any kind`, 'no-real-means-no-solution'),
+      ],
+      solution: `No real number squares to $-9$, but $\\sqrt{-9} = \\sqrt{9} \\cdot \\sqrt{-1} = 3i$. So $x = \\pm 3i$, and indeed $(3i)^2 = 9i^2 = -9$. The answer $x = \\pm 3$ fails because $3^2 = 9$, not $-9$.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `What is the discriminant of $x^2 + 2x + 5 = 0$?`,
+      choices: [
+        no(`$24$`, 'added-4ac-instead-of-subtracting'),
+        ok(`$-16$`),
+        no(`$-18$`, 'did-not-square-b'),
+        no(`$-1$`, 'forgot-the-4a-factor'),
+      ],
+      solution: `The discriminant is $b^2 - 4ac = 2^2 - 4(1)(5) = 4 - 20 = -16$. The value $24$ comes from adding $4ac$ instead of subtracting it.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Which equation shows $x^2 - 6x + 2 = 0$ rewritten in the form $(x - p)^2 = q$ by completing the square?`,
+      choices: [
+        no(`$(x - 3)^2 = -2$`, 'added-square-to-one-side-only'),
+        no(`$(x + 3)^2 = 7$`, 'wrong-sign-in-binomial'),
+        ok(`$(x - 3)^2 = 7$`),
+        no(`$(x - 6)^2 = 34$`, 'used-b-instead-of-half-b'),
+      ],
+      solution: `Move the constant: $x^2 - 6x = -2$. Half of $-6$ is $-3$, and $(-3)^2 = 9$, so add $9$ to both sides: $x^2 - 6x + 9 = 7$, which is $(x - 3)^2 = 7$. The equation $(x - 3)^2 = -2$ adds $9$ on the left but not on the right.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Use the quadratic formula. What are the solutions to $x^2 - 4x - 1 = 0$?`,
+      choices: [
+        ok(`$x = 2 \\pm \\sqrt{5}$`),
+        no(`$x = -2 \\pm \\sqrt{5}$`, 'used-b-instead-of-negative-b'),
+        no(`$x = 2 \\pm \\sqrt{3}$`, 'sign-error-on-c'),
+        no(`$x = 4 \\pm 2\\sqrt{5}$`, 'forgot-to-divide-by-2a'),
+      ],
+      solution: `Here $a = 1$, $b = -4$, $c = -1$, so $b^2 - 4ac = 16 + 4 = 20$. Then $x = \\frac{4 \\pm \\sqrt{20}}{2} = \\frac{4 \\pm 2\\sqrt{5}}{2} = 2 \\pm \\sqrt{5}$. The answer $2 \\pm \\sqrt{3}$ treats $c$ as $+1$, giving $16 - 4 = 12$ under the root.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `What are the solutions to $x^2 + 6x + 13 = 0$?`,
+      choices: [
+        no(`$x = 3 \\pm 2i$`, 'used-b-instead-of-negative-b'),
+        no(`$x = -3 \\pm 4i$`, 'forgot-to-halve-the-root'),
+        no(`$x = -3 \\pm 2$`, 'dropped-the-i'),
+        ok(`$x = -3 \\pm 2i$`),
+      ],
+      solution: `The discriminant is $36 - 52 = -16$, and $\\sqrt{-16} = 4i$. So $x = \\frac{-6 \\pm 4i}{2} = -3 \\pm 2i$. The answer $-3 \\pm 4i$ divides the $-6$ by $2$ but not the $4i$.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `What are the solutions to $2x^2 - 7x + 3 = 0$?`,
+      choices: [
+        ok(`$x = \\frac{1}{2}$ or $x = 3$`),
+        no(`$x = 2$ or $x = 3$`, 'inverted-fraction-root'),
+        no(`$x = -\\frac{1}{2}$ or $x = -3$`, 'kept-the-signs-of-the-factors'),
+        no(`$x = 1$ or $x = \\frac{3}{2}$`, 'factor-pair-wrong-middle-term'),
+      ],
+      solution: `Factor: $2x^2 - 7x + 3 = (2x - 1)(x - 3)$, since $-6x - x = -7x$. Setting $2x - 1 = 0$ gives $x = \\frac{1}{2}$, and $x - 3 = 0$ gives $x = 3$. The answer "$x = 2$ or $x = 3$" solves $2x - 1 = 0$ as $x = 2$, but $2 \\cdot 2 - 1 = 3$, not $0$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Which statement describes the solutions of $3x^2 - 2x + 4 = 0$?`,
+      choices: [
+        no(`Two different real solutions`, 'added-4ac-instead-of-subtracting'),
+        no(`Exactly one real solution`, 'confused-negative-discriminant-with-zero'),
+        ok(`Two non-real complex solutions`),
+        no(`No solutions of any kind`, 'no-real-means-no-solution'),
+      ],
+      solution: `The discriminant is $b^2 - 4ac = (-2)^2 - 4(3)(4) = 4 - 48 = -44$. A negative discriminant means the square root is imaginary, so there are two non-real complex solutions, $a \\pm bi$ with $b \\ne 0$. Adding $4ac$ instead would give $52$ and wrongly suggest two real solutions.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A stone is dropped from a bridge, and its height above the water after $t$ seconds is $h = 144 - 16t^2$ feet. After how many seconds does the stone reach the water?`,
+      choices: [
+        no(`$9$ seconds`, 'forgot-square-root'),
+        ok(`$3$ seconds`),
+        no(`$4.5$ seconds`, 'divided-by-2-instead-of-square-root'),
+        no(`$12$ seconds`, 'took-root-before-dividing'),
+      ],
+      solution: `The stone reaches the water when $h = 0$: $16t^2 = 144$, so $t^2 = 9$ and $t = 3$ (time cannot be negative, so $t = -3$ is rejected). The answer $9$ seconds is $t^2$, not $t$.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Solve $x^2 + 8x = 9$ by completing the square. What are the solutions?`,
+      choices: [
+        no(`$x = -1$ or $x = 9$`, 'sign-error-undoing-the-shift'),
+        no(`$x = -1$ or $x = -7$`, 'added-square-to-one-side-only'),
+        ok(`$x = 1$ or $x = -9$`),
+        no(`$x = 1$ only`, 'forgot-negative-root'),
+      ],
+      solution: `Half of $8$ is $4$, and $4^2 = 16$. Add $16$ to both sides: $(x + 4)^2 = 25$. Then $x + 4 = \\pm 5$, so $x = 1$ or $x = -9$. The answer "$x = -1$ or $x = -7$" comes from $(x + 4)^2 = 9$, which adds $16$ only on the left.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `What are the solutions to $(2x + 1)^2 = 12$?`,
+      choices: [
+        no(`$x = \\frac{1 \\pm 2\\sqrt{3}}{2}$`, 'sign-error-undoing-the-shift'),
+        no(`$x = -1 \\pm 2\\sqrt{3}$`, 'forgot-to-divide-by-the-coefficient'),
+        no(`$x = \\frac{-1 \\pm 6}{2}$`, 'halved-instead-of-square-root'),
+        ok(`$x = \\frac{-1 \\pm 2\\sqrt{3}}{2}$`),
+      ],
+      solution: `Take square roots: $2x + 1 = \\pm\\sqrt{12} = \\pm 2\\sqrt{3}$. Subtract $1$ and divide by $2$: $x = \\frac{-1 \\pm 2\\sqrt{3}}{2}$. The answer $-1 \\pm 2\\sqrt{3}$ solves for $2x$ but never divides by $2$.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Tomasz solves $x^2 + 4x + 1 = 0$ in five steps. Step 1: $x^2 + 4x = -1$. Step 2: $x^2 + 4x + 4 = 3$. Step 3: $(x + 2)^2 = 3$. Step 4: $x + 2 = \\sqrt{3}$. Step 5: $x = -2 + \\sqrt{3}$. Which statement about the work is true?`,
+      choices: [
+        no(`Step 2 should add $16$ to both sides`, 'squared-b-without-halving'),
+        ok(`Step 4 leaves out the negative square root, so the solution $x = -2 - \\sqrt{3}$ is missing`),
+        no(`Step 3 should be $(x - 2)^2 = 3$`, 'wrong-sign-in-binomial'),
+        no(`The work is correct and complete`, 'accepted-only-the-positive-root'),
+      ],
+      solution: `Steps 1 to 3 are correct: half of $4$ is $2$, and adding $2^2 = 4$ to both sides gives $(x + 2)^2 = 3$. But both $\\sqrt{3}$ and $-\\sqrt{3}$ square to $3$, so Step 4 should be $x + 2 = \\pm\\sqrt{3}$, giving $x = -2 \\pm \\sqrt{3}$. Adding $16$ in Step 2 would square $4$ without halving it first.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `For what positive value of $k$ does $x^2 + kx + 9 = 0$ have exactly one real solution?`,
+      choices: [
+        no(`$3$`, 'set-k-squared-equal-to-c'),
+        no(`$36$`, 'forgot-square-root'),
+        no(`$-6$`, 'ignored-the-positive-condition'),
+        ok(`$6$`),
+      ],
+      solution: `Exactly one real solution means the discriminant is zero: $k^2 - 4(1)(9) = 0$, so $k^2 = 36$ and $k = \\pm 6$. The positive value is $6$, and then $x^2 + 6x + 9 = (x + 3)^2$. The value $36$ is $k^2$, not $k$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Completing the square on $ax^2 + bx + c = 0$ (with $a \\ne 0$) leads to $\\left(x + \\frac{b}{2a}\\right)^2 = $ which expression?`,
+      choices: [
+        ok(`$\\frac{b^2 - 4ac}{4a^2}$`),
+        no(`$\\frac{b^2 - 4ac}{2a}$`, 'did-not-square-the-denominator'),
+        no(`$\\frac{b^2 + 4ac}{4a^2}$`, 'wrong-sign-moving-constant'),
+        no(`$\\frac{b^2}{4a^2}$`, 'dropped-the-constant-term'),
+      ],
+      solution: `Divide by $a$: $x^2 + \\frac{b}{a}x = -\\frac{c}{a}$. Add $\\left(\\frac{b}{2a}\\right)^2 = \\frac{b^2}{4a^2}$ to both sides. The right side becomes $\\frac{b^2}{4a^2} - \\frac{4ac}{4a^2} = \\frac{b^2 - 4ac}{4a^2}$. Taking square roots then gives the quadratic formula. The expression with $+4ac$ forgets that $c$ changes sign when it moves across the equals sign.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A rectangular poster is $3$ centimeters longer than it is wide, and its area is $40$ square centimeters. What is its width?`,
+      choices: [
+        no(`$8$ centimeters`, 'sign-error-in-factors'),
+        ok(`$5$ centimeters`),
+        no(`$-8$ centimeters`, 'kept-negative-root'),
+        no(`$8.5$ centimeters`, 'treated-area-as-perimeter'),
+      ],
+      solution: `Let $w$ be the width. Then $w(w + 3) = 40$, so $w^2 + 3w - 40 = 0$, which factors as $(w + 8)(w - 5) = 0$. A width cannot be negative, so $w = 5$ centimeters, and the length is $8$ centimeters: $5 \\cdot 8 = 40$. The value $8$ centimeters comes from writing the factors as $(w - 8)(w + 5)$, which multiplies to $w^2 - 3w - 40$.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `What are the solutions to $2x^2 + 4x + 5 = 0$?`,
+      choices: [
+        no(`$x = -2 \\pm i\\sqrt{6}$`, 'divided-by-a-instead-of-2a'),
+        no(`$x = 1 \\pm \\frac{\\sqrt{6}}{2}i$`, 'used-b-instead-of-negative-b'),
+        ok(`$x = -1 \\pm \\frac{\\sqrt{6}}{2}i$`),
+        no(`$x = -1 \\pm \\frac{\\sqrt{6}}{2}$`, 'dropped-the-i'),
+      ],
+      solution: `The discriminant is $16 - 4(2)(5) = -24$, and $\\sqrt{-24} = 2i\\sqrt{6}$. So $x = \\frac{-4 \\pm 2i\\sqrt{6}}{4} = -1 \\pm \\frac{\\sqrt{6}}{2}i$. The answer $-2 \\pm i\\sqrt{6}$ divides by $2$ instead of $2a = 4$.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `What are the solutions to $x^2 = 6x - 4$?`,
+      choices: [
+        no(`$x = -3 \\pm \\sqrt{5}$`, 'sign-error-moving-terms'),
+        no(`$x = 3 \\pm \\sqrt{13}$`, 'sign-error-moving-constant'),
+        no(`$x = 3 \\pm 2\\sqrt{5}$`, 'divided-only-first-term-by-2a'),
+        ok(`$x = 3 \\pm \\sqrt{5}$`),
+      ],
+      solution: `First set the equation equal to zero: $x^2 - 6x + 4 = 0$. Then $b^2 - 4ac = 36 - 16 = 20$, so $x = \\frac{6 \\pm \\sqrt{20}}{2} = \\frac{6 \\pm 2\\sqrt{5}}{2} = 3 \\pm \\sqrt{5}$. The answer $3 \\pm 2\\sqrt{5}$ divides the $6$ by $2$ but leaves $\\sqrt{20}$ undivided.`,
+    },
+  ],
+}
+
+export default skill
