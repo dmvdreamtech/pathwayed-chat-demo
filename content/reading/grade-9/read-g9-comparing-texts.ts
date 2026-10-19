@@ -21,7 +21,7 @@ const skill: ContentSkill = {
           difficulty: 'easy',
           stem: `Which situation from Text 1 does the author of Text 2 borrow and change?`,
           choices: [
-            right(`A seller who could profit by hiding a flaw in what she offers to a customer.`),
+            right(`A seller who could profit by hiding a flaw in the goods offered to a customer.`),
             wrong(`A seller who loses her stall because a rival spreads false rumors about her.`, 'unsupported-inference'),
             wrong(`A seller who travels to a distant market to find customers who will pay more.`, 'unsupported-inference'),
             wrong(`A seller who lowers her prices every week until she can no longer earn money.`, 'misreads-plot'),
@@ -404,7 +404,7 @@ const skill: ContentSkill = {
           difficulty: 'hard',
           stem: `Which statement best explains how Text 2 transforms the folk tale's ending?`,
           choices: [
-            right(`Brannoch relearns his skill alone over a week, but the club recovers in one night by working together and then records what they learned.`),
+            right(`Brannoch, the only one who forgot, relearns his skill over a week, but the club recovers in one night by working together and then records what they learned.`),
             wrong(`Brannoch never repairs his mill and leaves town, but the club fixes the script easily and goes home early.`, 'contradicts-text'),
             wrong(`Both endings show the characters punished for laziness, with no chance to make up for their mistakes.`, 'misreads-tone'),
             wrong(`Both endings show that hand methods are always faster than machines, even for large jobs.`, 'unsupported-inference'),
@@ -469,7 +469,7 @@ const skill: ContentSkill = {
         {
           slot: 35,
           difficulty: 'hard',
-          stem: `Why might the author of Text 2 have kept Mateo out of sight at the end, instead of moving him to the front as Text 1 does with Suri?`,
+          stem: `Why might the author of Text 2 have left Mateo in his hidden role at the end, instead of moving him to the front as Text 1 does with Suri?`,
           choices: [
             right(`To suggest that some roles matter precisely because they stay hidden, so recognition need not mean a change of place.`),
             wrong(`To suggest that Mateo did not truly help the show, since the actors fixed the problem by themselves.`, 'contradicts-text'),
