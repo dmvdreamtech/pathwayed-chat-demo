@@ -34,6 +34,7 @@ describe('picture tiles and prompts', () => {
     { kind: 'fraction', shape: 'circle', parts: 4, shaded: 1 },
     { kind: 'fraction', shape: 'rectangle', parts: 2, shaded: 1, equal: false },
     { kind: 'measure', image: 'pencil', units: 6 },
+    { kind: 'grid', rows: 3, cols: 4 },
   ]
   it('parses back every kind the app draws, and each one renders', () => {
     for (const t of tiles) {

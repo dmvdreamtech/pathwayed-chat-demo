@@ -173,6 +173,19 @@ function Measure({ image, units }: { image: string; units: number }) {
   )
 }
 
+/** A rectangle cut into rows and columns of same-size squares (2.G.A.2). */
+function Grid({ rows, cols }: { rows: number; cols: number }) {
+  const S = 14
+  return (
+    <svg className="picq-svg" viewBox={`0 0 ${cols * S + 4} ${rows * S + 4}`} aria-hidden="true">
+      {Array.from({ length: rows * cols }, (_, i) => (
+        <rect key={i} x={2 + (i % cols) * S} y={2 + Math.floor(i / cols) * S} width={S} height={S} fill="#cfe3fa" stroke={NAVY} strokeWidth="1.2" />
+      ))}
+      <rect x="2" y="2" width={cols * S} height={rows * S} fill="none" stroke={NAVY} strokeWidth="2.4" />
+    </svg>
+  )
+}
+
 function Rows({ rows, labels = true }: { rows: { image: string; count: number }[]; labels?: boolean }) {
   return (
     <span className="picq-rows" aria-hidden="true">
@@ -213,6 +226,8 @@ export function PictureFigure({ figure, place, label }: { figure: PictureTile | 
       return <Fraction shape={figure.shape} parts={figure.parts} shaded={figure.shaded} equal={figure.equal !== false} />
     case 'measure':
       return <Measure image={figure.image} units={figure.units} />
+    case 'grid':
+      return <Grid rows={figure.rows} cols={figure.cols} />
     case 'object_rows':
       return <Rows rows={figure.rows} labels={figure.labels !== false} />
     default:

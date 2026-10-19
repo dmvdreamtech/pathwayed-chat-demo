@@ -13,6 +13,7 @@
  *   array             rows x cols of one picture
  *   fraction          a circle, square or rectangle cut into parts, some shaded
  *   measure           a picture with a row of unit cubes under it (length)
+ *   grid              a rectangle cut into rows and columns of same-size squares
  *   object_rows       rows of pictures, one row per kind: a picture graph (each row
  *                     starts with a faded label), or with labels: false just the
  *                     groups ("3 apples and 5 pears")
@@ -29,6 +30,7 @@ export type PictureTile =
   | { kind: 'array'; image: string; rows: number; cols: number }
   | { kind: 'fraction'; shape: FractionShape; parts: number; shaded: number; equal?: boolean }
   | { kind: 'measure'; image: string; units: number }
+  | { kind: 'grid'; rows: number; cols: number }
 
 export type PicturePrompt =
   | Exclude<PictureTile, { kind: 'number' | 'letter' }>
@@ -65,6 +67,8 @@ export function parsePictureTile(raw: unknown): PictureTile | undefined {
         : undefined
     case 'measure':
       return isImage(t.image) && isInt(t.units, 1, 12) ? { kind: 'measure', image: t.image, units: t.units } : undefined
+    case 'grid':
+      return isInt(t.rows, 1, 6) && isInt(t.cols, 1, 6) ? { kind: 'grid', rows: t.rows, cols: t.cols } : undefined
     default:
       return undefined
   }
