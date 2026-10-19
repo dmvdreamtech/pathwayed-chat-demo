@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g10-coordinate-geometry-more',
+  extends: 'coordinate-geometry',
+  subject: 'math',
+  grade: 10,
+  group: 'Expressing Geometric Properties with Equations',
+  name: 'Coordinate Geometry',
+  standards: ['HSG.GPE.B.7'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `A rectangle has vertices $(-3,2)$, $(5,2)$, $(5,-4)$ and $(-3,-4)$. What is its area?`,
+      choices: [
+        no(`$28$`, 'found-perimeter-instead-of-area'),
+        ok(`$48$`),
+        no(`$24$`, 'used-triangle-area-formula'),
+        no(`$14$`, 'added-length-and-width'),
+      ],
+      solution: `The length is $5 - (-3) = 8$ and the width is $2 - (-4) = 6$, so the area is $8 \\times 6 = 48$. The value $28$ is the perimeter, $2(8 + 6)$, not the area.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is the length of the segment joining $(-7,3)$ and $(4,3)$?`,
+      choices: [
+        no(`$3$`, 'added-coordinates-instead-of-subtracting'),
+        no(`$0$`, 'subtracted-the-y-coordinates'),
+        ok(`$11$`),
+        no(`$121$`, 'forgot-the-square-root'),
+      ],
+      solution: `The points share the $y$-coordinate $3$, so the segment is horizontal and its length is $4 - (-7) = 11$. The value $3$ comes from adding $4 + (-7)$ instead of subtracting.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A square has vertices $(1,1)$, $(1,6)$, $(6,6)$ and $(6,1)$. What is its perimeter?`,
+      choices: [
+        no(`$25$`, 'found-area-instead-of-perimeter'),
+        no(`$10$`, 'added-only-two-sides'),
+        no(`$24$`, 'counted-grid-points-not-units'),
+        ok(`$20$`),
+      ],
+      solution: `Each side has length $6 - 1 = 5$, and a square has four sides, so the perimeter is $4 \\times 5 = 20$. The value $24$ counts the six grid points from $1$ to $6$ along a side instead of the five units between them.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A right triangle has vertices $(2,-1)$, $(2,7)$ and $(9,-1)$. What is its area?`,
+      choices: [
+        ok(`$28$`),
+        no(`$56$`, 'forgot-to-halve'),
+        no(`$15$`, 'added-the-legs'),
+        no(`$7.5$`, 'halved-the-sum-of-legs'),
+      ],
+      solution: `The vertical leg runs from $y = -1$ to $y = 7$, a length of $8$. The horizontal leg runs from $x = 2$ to $x = 9$, a length of $7$. The area is $\\frac{1}{2} \\times 8 \\times 7 = 28$. The value $56$ forgets the $\\frac{1}{2}$ in the triangle area formula.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `What is the distance between $(-1,-2)$ and $(5,6)$?`,
+      choices: [
+        no(`$14$`, 'added-legs-instead-of-pythagorean'),
+        ok(`$10$`),
+        no(`$100$`, 'forgot-the-square-root'),
+        no(`$4\\sqrt{2}$`, 'added-coordinates-instead-of-subtracting'),
+      ],
+      solution: `The horizontal change is $5 - (-1) = 6$ and the vertical change is $6 - (-2) = 8$. The distance is $\\sqrt{6^2 + 8^2} = \\sqrt{100} = 10$. The value $14$ just adds $6 + 8$, but the distance is the hypotenuse of the right triangle.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A rectangle has vertices $(-4,-1)$, $(3,-1)$, $(3,5)$ and $(-4,5)$. What is its perimeter?`,
+      choices: [
+        no(`$42$`, 'found-area-instead-of-perimeter'),
+        no(`$13$`, 'added-only-two-sides'),
+        ok(`$26$`),
+        no(`$14$`, 'mishandled-negative-coordinate'),
+      ],
+      solution: `The length is $3 - (-4) = 7$ and the width is $5 - (-1) = 6$, so the perimeter is $2(7 + 6) = 26$. The value $14$ comes from computing the length as $3 - 4 = 1$, dropping the negative sign.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `A triangle has vertices $(1,2)$, $(7,2)$ and $(4,9)$. What is its area?`,
+      choices: [
+        no(`$42$`, 'forgot-to-halve'),
+        ok(`$21$`),
+        no(`$27$`, 'used-y-coordinate-as-height'),
+        no(`$13$`, 'added-base-and-height'),
+      ],
+      solution: `The base from $(1,2)$ to $(7,2)$ is horizontal with length $6$. The height is the vertical distance from $y = 2$ up to the third vertex at $y = 9$, which is $7$. The area is $\\frac{1}{2} \\times 6 \\times 7 = 21$. The value $27$ uses $9$ as the height, but the base sits at $y = 2$, not on the $x$-axis.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A triangle has vertices $(2,1)$, $(11,1)$ and $(11,13)$. What is its perimeter?`,
+      choices: [
+        no(`$21$`, 'left-out-the-hypotenuse'),
+        no(`$54$`, 'found-area-instead-of-perimeter'),
+        ok(`$36$`),
+        no(`$42$`, 'added-legs-for-hypotenuse'),
+      ],
+      solution: `The legs are $11 - 2 = 9$ and $13 - 1 = 12$. The third side is $\\sqrt{9^2 + 12^2} = \\sqrt{225} = 15$. The perimeter is $9 + 12 + 15 = 36$. The value $42$ uses $9 + 12 = 21$ for the slanted side instead of the distance formula.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'hard',
+      stem: `A triangle has vertices $(1,1)$, $(5,2)$ and $(3,6)$. What is its area?`,
+      choices: [
+        no(`$18$`, 'forgot-to-halve'),
+        no(`$20$`, 'used-bounding-rectangle-only'),
+        no(`$11$`, 'reported-the-cut-off-area'),
+        ok(`$9$`),
+      ],
+      solution: `Draw the rectangle around the triangle from $x = 1$ to $x = 5$ and $y = 1$ to $y = 6$; its area is $4 \\times 5 = 20$. Cut off the three right triangles outside the shape: $\\frac{1}{2}(4)(1) = 2$, $\\frac{1}{2}(2)(4) = 4$ and $\\frac{1}{2}(2)(5) = 5$, a total of $11$. The triangle's area is $20 - 11 = 9$. The value $11$ is the area removed, not the area left.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'hard',
+      stem: `A square has vertices $(0,3)$, $(4,0)$, $(7,4)$ and $(3,7)$. None of its sides is horizontal or vertical. What is its area?`,
+      choices: [
+        ok(`$25$`),
+        no(`$20$`, 'found-perimeter-instead-of-area'),
+        no(`$49$`, 'used-bounding-rectangle-only'),
+        no(`$24$`, 'reported-the-cut-off-area'),
+      ],
+      solution: `The side from $(0,3)$ to $(4,0)$ has length $\\sqrt{4^2 + 3^2} = 5$, so the area is $5^2 = 25$. As a check, the surrounding $7$ by $7$ square has area $49$, and the four corner triangles each have area $\\frac{1}{2}(4)(3) = 6$, so $49 - 24 = 25$. The value $20$ is the perimeter, $4 \\times 5$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A rectangle has vertices $(-2,1)$, $(4,1)$, $(4,y)$ and $(-2,y)$, where $y > 1$. Its area is $30$ square units. What is $y$?`,
+      choices: [
+        no(`$5$`, 'gave-height-instead-of-coordinate'),
+        ok(`$6$`),
+        no(`$10$`, 'used-perimeter-formula'),
+        no(`$-4$`, 'subtracted-height-from-coordinate'),
+      ],
+      solution: `The width is $4 - (-2) = 6$, so the height is $30 \\div 6 = 5$. The top side is $5$ units above $y = 1$, so $y = 1 + 5 = 6$. The value $5$ is the height of the rectangle, not the $y$-coordinate of the top side.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A parallelogram has vertices $(0,0)$, $(3,4)$, $(9,4)$ and $(6,0)$. What is its perimeter?`,
+      choices: [
+        no(`$18$`, 'used-horizontal-change-for-slanted-sides'),
+        no(`$24$`, 'found-area-instead-of-perimeter'),
+        no(`$20$`, 'used-vertical-change-for-slanted-sides'),
+        ok(`$22$`),
+      ],
+      solution: `The horizontal sides each have length $6$. Each slanted side, such as $(0,0)$ to $(3,4)$, has length $\\sqrt{3^2 + 4^2} = 5$. The perimeter is $6 + 5 + 6 + 5 = 22$. The value $18$ counts each slanted side as only its horizontal change of $3$.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `On a park map, each grid unit stands for $2$ meters. A rectangular garden has corners at $(1,2)$, $(6,2)$, $(6,5)$ and $(1,5)$. What is the garden's actual area in square meters?`,
+      choices: [
+        no(`$30$`, 'scaled-area-by-factor-not-squared'),
+        ok(`$60$`),
+        no(`$15$`, 'forgot-the-map-scale'),
+        no(`$32$`, 'found-perimeter-instead-of-area'),
+      ],
+      solution: `On the map the garden is $5$ by $3$ units, which is $10$ by $6$ meters. The actual area is $10 \\times 6 = 60$ square meters. The value $30$ multiplies the map area of $15$ by $2$, but both the length and the width are scaled, so the area is multiplied by $4$.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A triangle has vertices $(-3,-2)$, $(5,-2)$ and $(1,4)$. What is its area?`,
+      choices: [
+        no(`$16$`, 'used-y-coordinate-as-height'),
+        no(`$48$`, 'forgot-to-halve'),
+        ok(`$24$`),
+        no(`$14$`, 'added-base-and-height'),
+      ],
+      solution: `The base from $(-3,-2)$ to $(5,-2)$ has length $5 - (-3) = 8$. The height is the vertical distance from $y = -2$ to $y = 4$, which is $6$. The area is $\\frac{1}{2} \\times 8 \\times 6 = 24$. The value $16$ uses $4$ as the height, measuring from the $x$-axis instead of from the base.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `A triangle has vertices $(0,-1)$, $(6,-1)$ and $(3,3)$. What is its perimeter?`,
+      choices: [
+        ok(`$16$`),
+        no(`$11$`, 'counted-one-slanted-side'),
+        no(`$20$`, 'added-run-and-rise'),
+        no(`$12$`, 'found-area-instead-of-perimeter'),
+      ],
+      solution: `The base is $6 - 0 = 6$. Each slanted side, such as $(0,-1)$ to $(3,3)$, has length $\\sqrt{3^2 + 4^2} = 5$. The perimeter is $6 + 5 + 5 = 16$. The value $20$ treats each slanted side as $3 + 4 = 7$ instead of using the distance formula.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'medium',
+      stem: `A rectangle has horizontal and vertical sides, and two of its opposite corners are $(-5,-3)$ and $(2,4)$. What is its area?`,
+      choices: [
+        no(`$28$`, 'found-perimeter-instead-of-area'),
+        no(`$7\\sqrt{2}$`, 'found-diagonal-length'),
+        ok(`$49$`),
+        no(`$3$`, 'added-coordinates-instead-of-subtracting'),
+      ],
+      solution: `The width is $2 - (-5) = 7$ and the height is $4 - (-3) = 7$, so the area is $7 \\times 7 = 49$. The value $7\\sqrt{2}$ is the distance between the two corners, which is the length of the diagonal, not the area.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A triangle has vertices $(1,1)$, $(3,5)$ and $(7,3)$. The sides meeting at $(3,5)$ are perpendicular. What is the area of the triangle?`,
+      choices: [
+        no(`$20$`, 'forgot-to-halve'),
+        no(`$24$`, 'used-bounding-rectangle-only'),
+        no(`$4\\sqrt{5}$`, 'added-the-legs'),
+        ok(`$10$`),
+      ],
+      solution: `The legs meet at the right angle at $(3,5)$. The leg to $(1,1)$ has length $\\sqrt{2^2 + 4^2} = \\sqrt{20}$, and the leg to $(7,3)$ has length $\\sqrt{4^2 + 2^2} = \\sqrt{20}$. The area is $\\frac{1}{2} \\times \\sqrt{20} \\times \\sqrt{20} = \\frac{1}{2} \\times 20 = 10$. The value $20$ multiplies the legs but forgets the $\\frac{1}{2}$.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'medium',
+      stem: `A trapezoid has vertices $(-1,0)$, $(7,0)$, $(5,4)$ and $(2,4)$. What is its area?`,
+      choices: [
+        ok(`$22$`),
+        no(`$44$`, 'forgot-to-halve'),
+        no(`$32$`, 'used-longer-base-times-height'),
+        no(`$16 + 2\\sqrt{5}$`, 'found-perimeter-instead-of-area'),
+      ],
+      solution: `The bottom base is $7 - (-1) = 8$, the top base is $5 - 2 = 3$, and the height is $4$. The area is $\\frac{1}{2}(8 + 3)(4) = 22$. The value $32$ multiplies only the longer base by the height, which would be a rectangle covering more than the trapezoid.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A triangular plot has corners at $(-2,-1)$, $(4,3)$ and $(6,-3)$. What is its area?`,
+      choices: [
+        no(`$44$`, 'forgot-to-halve'),
+        ok(`$22$`),
+        no(`$48$`, 'used-bounding-rectangle-only'),
+        no(`$26$`, 'reported-the-cut-off-area'),
+      ],
+      solution: `The rectangle around the plot runs from $x = -2$ to $x = 6$ and $y = -3$ to $y = 3$, so its area is $8 \\times 6 = 48$. The three corner triangles have areas $\\frac{1}{2}(6)(4) = 12$, $\\frac{1}{2}(2)(6) = 6$ and $\\frac{1}{2}(8)(2) = 8$, a total of $26$. The plot's area is $48 - 26 = 22$. The value $26$ is the area cut away, not the plot.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A rectangle has vertices $(-1,2)$, $(3,-2)$, $(6,1)$ and $(2,5)$. What is its area?`,
+      choices: [
+        no(`$14\\sqrt{2}$`, 'found-perimeter-instead-of-area'),
+        no(`$12$`, 'multiplied-horizontal-changes-only'),
+        ok(`$24$`),
+        no(`$49$`, 'used-bounding-rectangle-only'),
+      ],
+      solution: `One side, from $(-1,2)$ to $(3,-2)$, has length $\\sqrt{4^2 + 4^2} = 4\\sqrt{2}$. The next side, from $(3,-2)$ to $(6,1)$, has length $\\sqrt{3^2 + 3^2} = 3\\sqrt{2}$. The area is $4\\sqrt{2} \\times 3\\sqrt{2} = 12 \\times 2 = 24$. The value $12$ multiplies the horizontal changes $4$ and $3$ and leaves out the factor of $\\sqrt{2}$ in each side.`,
+    },
+  ],
+}
+
+export default skill
