@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g4-multi-digit-multiplication-more',
+  extends: 'multi-digit-multiplication',
+  subject: 'math',
+  grade: 4,
+  group: 'Number and Operations in Base Ten',
+  name: 'Multi-Digit Multiplication',
+  standards: ['4.NBT.B.5'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is $4 \\times 57$?`,
+      choices: [
+        ok(`$228$`),
+        no(`$208$`, 'forgot-to-add-regrouped-tens'),
+        no(`$2{,}028$`, 'wrote-partial-products-side-by-side'),
+        no(`$61$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Split $57$ into $50 + 7$. Then $4 \\times 50 = 200$ and $4 \\times 7 = 28$, and $200 + 28 = 228$. The choice $208$ writes the $8$ from $28$ but forgets to add the $2$ regrouped tens.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `To find $3 \\times 46$, Dara splits $46$ into $40$ and $6$. Which expression shows how to use partial products?`,
+      choices: [
+        ok(`$3 \\times 40 + 3 \\times 6$`),
+        no(`$3 \\times 40 + 6$`, 'multiplied-only-one-part'),
+        no(`$3 \\times 4 + 3 \\times 6$`, 'used-digit-value-not-place-value'),
+        no(`$3 \\times 40 \\times 3 \\times 6$`, 'multiplied-the-partial-products'),
+      ],
+      solution: `Both parts of $46$ must be multiplied by $3$, and then the partial products are added: $3 \\times 40 + 3 \\times 6 = 120 + 18 = 138$. The expression $3 \\times 40 + 6$ forgets to multiply the $6$ by $3$.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `What is $5 \\times 800$?`,
+      choices: [
+        no(`$400$`, 'dropped-a-zero'),
+        ok(`$4{,}000$`),
+        no(`$40{,}000$`, 'added-an-extra-zero'),
+        no(`$805$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `$800$ is $8$ hundreds, and $5 \\times 8$ hundreds $= 40$ hundreds, which is $4{,}000$. The choice $400$ keeps only one zero, so it shows $40$ tens instead of $40$ hundreds.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `An area model for $7 \\times 39$ is a rectangle split into two smaller rectangles. One part is $7$ by $30$ and the other part is $7$ by $9$. What is the total area of the rectangle?`,
+      choices: [
+        no(`$219$`, 'did-not-multiply-the-ones-part'),
+        no(`$46$`, 'added-side-lengths'),
+        no(`$210$`, 'found-only-one-part'),
+        ok(`$273$`),
+      ],
+      solution: `The two parts have areas $7 \\times 30 = 210$ and $7 \\times 9 = 63$, so the total area is $210 + 63 = 273$. The choice $219$ adds $9$ instead of the area $7 \\times 9 = 63$.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A bakery packs $6$ muffins in each box. How many muffins are in $125$ boxes?`,
+      choices: [
+        ok(`$750$`),
+        no(`$720$`, 'left-out-a-partial-product'),
+        no(`$642$`, 'used-digit-value-not-place-value'),
+        no(`$131$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Split $125$ into $100 + 20 + 5$. The partial products are $6 \\times 100 = 600$, $6 \\times 20 = 120$ and $6 \\times 5 = 30$, and $600 + 120 + 30 = 750$. The choice $720$ leaves out the partial product $30$.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `What is $2 \\times 3{,}140$?`,
+      choices: [
+        no(`$628$`, 'dropped-a-zero'),
+        no(`$3{,}142$`, 'added-instead-of-multiplied'),
+        ok(`$6{,}280$`),
+        no(`$6{,}140$`, 'multiplied-only-the-thousands'),
+      ],
+      solution: `Double each place: $2 \\times 3{,}000 = 6{,}000$, $2 \\times 100 = 200$ and $2 \\times 40 = 80$, so the product is $6{,}280$. The choice $6{,}140$ doubles only the thousands and leaves $140$ unchanged.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `What is $4 \\times 2{,}163$?`,
+      choices: [
+        no(`$8{,}442$`, 'forgot-to-add-regrouped-digits'),
+        ok(`$8{,}652$`),
+        no(`$8{,}436$`, 'used-digit-value-not-place-value'),
+        no(`$2{,}167$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Use partial products: $4 \\times 2{,}000 = 8{,}000$, $4 \\times 100 = 400$, $4 \\times 60 = 240$ and $4 \\times 3 = 12$. Adding gives $8{,}000 + 400 + 240 + 12 = 8{,}652$. The choice $8{,}442$ writes only the ones digit of each step and never adds the regrouped digits.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What is $31 \\times 22$?`,
+      choices: [
+        no(`$602$`, 'multiplied-only-matching-places'),
+        no(`$662$`, 'left-out-a-partial-product'),
+        no(`$53$`, 'added-instead-of-multiplied'),
+        ok(`$682$`),
+      ],
+      solution: `Split both numbers by place value: $30 \\times 20 = 600$, $30 \\times 2 = 60$, $1 \\times 20 = 20$ and $1 \\times 2 = 2$. Then $600 + 60 + 20 + 2 = 682$. The choice $602$ multiplies only tens by tens and ones by ones, so it misses $60$ and $20$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `What is $6 \\times 4{,}050$?`,
+      choices: [
+        ok(`$24{,}300$`),
+        no(`$2{,}430$`, 'dropped-a-zero'),
+        no(`$24{,}050$`, 'multiplied-only-the-thousands'),
+        no(`$4{,}056$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Multiply each part: $6 \\times 4{,}000 = 24{,}000$ and $6 \\times 50 = 300$, so the product is $24{,}000 + 300 = 24{,}300$. The choice $24{,}050$ multiplies the thousands but leaves the $50$ unchanged.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A library has $18$ shelves, and each shelf holds $45$ books. How many books can the shelves hold in all?`,
+      choices: [
+        no(`$405$`, 'forgot-to-shift-tens-partial-product'),
+        ok(`$810$`),
+        no(`$440$`, 'multiplied-only-matching-places'),
+        no(`$63$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Split $18$ into $10 + 8$. Then $10 \\times 45 = 450$ and $8 \\times 45 = 360$, so $450 + 360 = 810$ books. The choice $405$ treats the tens part as $1 \\times 45 = 45$ instead of $10 \\times 45 = 450$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `What is $27 \\times 40$?`,
+      choices: [
+        no(`$108$`, 'dropped-a-zero'),
+        no(`$280$`, 'multiplied-only-the-ones-digit'),
+        ok(`$1{,}080$`),
+        no(`$67$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `$27 \\times 40$ is $27 \\times 4$ tens. Since $27 \\times 4 = 108$, the product is $108$ tens, or $1{,}080$. The choice $108$ forgets that $40$ is $4$ tens.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Rosa finds $53 \\times 16$ by splitting $53$ into $50 + 3$ and $16$ into $10 + 6$. Which list shows all of Rosa's partial products?`,
+      choices: [
+        no(`$500, 18$`, 'multiplied-only-matching-places'),
+        ok(`$500, 300, 30, 18$`),
+        no(`$5, 30, 3, 18$`, 'used-digit-value-not-place-value'),
+        no(`$500, 30, 18$`, 'left-out-a-partial-product'),
+      ],
+      solution: `Each part of one number multiplies each part of the other: $50 \\times 10 = 500$, $50 \\times 6 = 300$, $3 \\times 10 = 30$ and $3 \\times 6 = 18$. Their sum is $848$. The list $500, 18$ only multiplies tens by tens and ones by ones.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `An area model for $3 \\times 2{,}514$ is a rectangle with a height of $3$, split into four parts with widths $2{,}000$, $500$, $10$ and $4$. What is the total area?`,
+      choices: [
+        no(`$7{,}515$`, 'used-digit-value-not-place-value'),
+        no(`$1{,}542$`, 'left-out-a-partial-product'),
+        no(`$2{,}517$`, 'added-instead-of-multiplied'),
+        ok(`$7{,}542$`),
+      ],
+      solution: `The four parts have areas $3 \\times 2{,}000 = 6{,}000$, $3 \\times 500 = 1{,}500$, $3 \\times 10 = 30$ and $3 \\times 4 = 12$. The total is $6{,}000 + 1{,}500 + 30 + 12 = 7{,}542$. The choice $7{,}515$ uses $3 \\times 1 = 3$ for the tens part instead of $3 \\times 10 = 30$.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A delivery truck drives $1{,}476$ miles each week. How many miles does it drive in $5$ weeks?`,
+      choices: [
+        ok(`$7{,}380$`),
+        no(`$5{,}050$`, 'forgot-to-add-regrouped-digits'),
+        no(`$7{,}350$`, 'left-out-a-partial-product'),
+        no(`$1{,}481$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Use partial products: $5 \\times 1{,}000 = 5{,}000$, $5 \\times 400 = 2{,}000$, $5 \\times 70 = 350$ and $5 \\times 6 = 30$. The sum is $7{,}380$ miles. The choice $7{,}350$ leaves out the partial product $5 \\times 6 = 30$.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Which expression has the same value as $25 \\times 36$?`,
+      choices: [
+        no(`$25 \\times 30 + 6$`, 'multiplied-only-one-part'),
+        ok(`$25 \\times 30 + 25 \\times 6$`),
+        no(`$20 \\times 30 + 5 \\times 6$`, 'multiplied-only-matching-places'),
+        no(`$25 \\times 3 + 25 \\times 6$`, 'used-digit-value-not-place-value'),
+      ],
+      solution: `Split $36$ into $30 + 6$ and multiply each part by $25$: $25 \\times 30 + 25 \\times 6 = 750 + 150 = 900$, which equals $25 \\times 36$. The expression $25 \\times 3 + 25 \\times 6$ uses $3$ for the tens digit instead of its value, $30$.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `What is $74 \\times 63$?`,
+      choices: [
+        no(`$666$`, 'forgot-to-shift-tens-partial-product'),
+        no(`$4{,}212$`, 'multiplied-only-matching-places'),
+        ok(`$4{,}662$`),
+        no(`$4{,}422$`, 'left-out-a-partial-product'),
+      ],
+      solution: `The four partial products are $70 \\times 60 = 4{,}200$, $70 \\times 3 = 210$, $4 \\times 60 = 240$ and $4 \\times 3 = 12$. Their sum is $4{,}662$. The choice $666$ adds $74 \\times 3 = 222$ and $74 \\times 6 = 444$, treating the $6$ tens as $6$ ones.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A rectangular mural is $38$ feet long and $27$ feet tall. An area model splits it into four parts: $30$ by $20$, $30$ by $7$, $8$ by $20$ and $8$ by $7$. What is the area of the whole mural in square feet?`,
+      choices: [
+        ok(`$1{,}026$`),
+        no(`$656$`, 'multiplied-only-matching-places'),
+        no(`$342$`, 'forgot-to-shift-tens-partial-product'),
+        no(`$866$`, 'left-out-a-partial-product'),
+      ],
+      solution: `The four parts have areas $600$, $210$, $160$ and $56$ square feet, and $600 + 210 + 160 + 56 = 1{,}026$. The choice $866$ leaves out the $8$ by $20$ part, which has an area of $160$.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Bryn finds $4 \\times 1{,}857$ by splitting $1{,}857$ into $1{,}000 + 800 + 50 + 7$. What is the product?`,
+      choices: [
+        no(`$4{,}208$`, 'forgot-to-add-regrouped-digits'),
+        ok(`$7{,}428$`),
+        no(`$7{,}228$`, 'left-out-a-partial-product'),
+        no(`$1{,}861$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `The partial products are $4 \\times 1{,}000 = 4{,}000$, $4 \\times 800 = 3{,}200$, $4 \\times 50 = 200$ and $4 \\times 7 = 28$. Their sum is $7{,}428$. The choice $7{,}228$ leaves out the partial product $4 \\times 50 = 200$.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Lucia knows that $45 \\times 32 = 1{,}440$. Using that fact, what is $45 \\times 33$?`,
+      choices: [
+        no(`$1{,}441$`, 'added-one-instead-of-one-group'),
+        no(`$1{,}472$`, 'added-the-wrong-factor'),
+        ok(`$1{,}485$`),
+        no(`$1{,}395$`, 'subtracted-a-group-instead-of-adding'),
+      ],
+      solution: `$45 \\times 33$ is one more group of $45$ than $45 \\times 32$, so $1{,}440 + 45 = 1{,}485$. The choice $1{,}441$ adds only $1$, but the extra group is worth $45$.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Kenji finds $64 \\times 58$ by adding the partial products $3{,}000 + 480 + 20 + 32$. One of Kenji's partial products is wrong. What is the correct product?`,
+      choices: [
+        no(`$3{,}532$`, 'used-digit-value-not-place-value'),
+        no(`$3{,}032$`, 'multiplied-only-matching-places'),
+        no(`$832$`, 'forgot-to-shift-tens-partial-product'),
+        ok(`$3{,}712$`),
+      ],
+      solution: `The partial products should be $60 \\times 50 = 3{,}000$, $60 \\times 8 = 480$, $4 \\times 50 = 200$ and $4 \\times 8 = 32$. Kenji wrote $20$ instead of $200$. The correct sum is $3{,}000 + 480 + 200 + 32 = 3{,}712$. The choice $3{,}532$ is Kenji's sum with the wrong partial product.`,
+    },
+  ],
+}
+
+export default skill
