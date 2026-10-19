@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g3-geometry-more',
+  extends: 'geometry',
+  subject: 'math',
+  grade: 3,
+  group: 'Measurement and Data',
+  name: 'Geometry',
+  standards: ['3.MD.C.7'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Rina covers a tabletop with square tiles that are each $1$ square unit. There are $5$ rows with $6$ tiles in each row and no gaps. What is the area of the tabletop, in square units?`,
+      choices: [
+        ok(`$30$`),
+        no(`$11$`, 'added-instead-of-multiplied'),
+        no(`$25$`, 'squared-one-side'),
+        no(`$36$`, 'squared-other-side'),
+      ],
+      solution: `The tiles form $5$ rows of $6$, so count them by multiplying: $5 \\times 6 = 30$ square units. The choice $11$ adds the rows and the tiles in a row, but area counts every tile.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A garden bed is a rectangle $7$ feet long and $5$ feet wide. What is its area, in square feet?`,
+      choices: [
+        no(`$12$`, 'added-instead-of-multiplied'),
+        ok(`$35$`),
+        no(`$24$`, 'found-perimeter-instead-of-area'),
+        no(`$30$`, 'recalled-neighbor-fact'),
+      ],
+      solution: `Area of a rectangle is length times width: $7 \\times 5 = 35$ square feet. The choice $24$ is the distance around the bed, $7 + 5 + 7 + 5$, not the space inside it.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A square sticky note has sides that are each $8$ centimeters long. What is its area, in square centimeters?`,
+      choices: [
+        no(`$16$`, 'added-two-sides'),
+        no(`$32$`, 'found-perimeter-instead-of-area'),
+        ok(`$64$`),
+        no(`$56$`, 'recalled-neighbor-fact'),
+      ],
+      solution: `A square has the same length and width, so its area is $8 \\times 8 = 64$ square centimeters. The choice $32$ adds all four sides, which measures the edge, not the area.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A rug is a rectangle $8$ meters long and $6$ meters wide. What is its area, in square meters?`,
+      choices: [
+        no(`$14$`, 'added-instead-of-multiplied'),
+        no(`$28$`, 'found-perimeter-instead-of-area'),
+        no(`$42$`, 'recalled-neighbor-fact'),
+        ok(`$48$`),
+      ],
+      solution: `Multiply the length by the width: $8 \\times 6 = 48$ square meters. The choice $42$ is $7 \\times 6$, a nearby fact, not $8 \\times 6$.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A bathroom wall is covered with $1$ inch square tiles in $6$ rows. Each row has $7$ tiles, with no gaps or overlaps. What is the area covered, in square inches?`,
+      choices: [
+        ok(`$42$`),
+        no(`$13$`, 'added-instead-of-multiplied'),
+        no(`$36$`, 'squared-one-side'),
+        no(`$48$`, 'recalled-neighbor-fact'),
+      ],
+      solution: `There are $6$ rows of $7$ tiles, so the area is $6 \\times 7 = 42$ square inches. The choice $13$ comes from adding $6 + 7$ instead of counting all the tiles.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Which expression gives the area, in square units, of a rectangle that is $9$ units long and $4$ units wide?`,
+      choices: [
+        no(`$9 + 4$`, 'added-instead-of-multiplied'),
+        ok(`$9 \\times 4$`),
+        no(`$9 + 4 + 9 + 4$`, 'found-perimeter-instead-of-area'),
+        no(`$9 \\times 9$`, 'squared-one-side'),
+      ],
+      solution: `The area of a rectangle is its length times its width, so the expression is $9 \\times 4$. The expression $9 + 4 + 9 + 4$ adds the sides, which gives the distance around, not the area.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `A rectangular play mat has an area of $42$ square feet. One side is $6$ feet long. How long is the other side, in feet?`,
+      choices: [
+        no(`$36$`, 'subtracted-side-from-area'),
+        no(`$48$`, 'added-side-to-area'),
+        ok(`$7$`),
+        no(`$8$`, 'recalled-neighbor-fact'),
+      ],
+      solution: `Area is length times width, so think $6 \\times \\square = 42$. Since $6 \\times 7 = 42$, the other side is $7$ feet. The choice $36$ comes from $42 - 6$, but the area is found by multiplying, so you divide to undo it.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A rectangle is $7$ units wide and $13$ units long. Jules splits the long side into $10$ and $3$, making a $7$ by $10$ rectangle and a $7$ by $3$ rectangle. What is the area of the whole rectangle, in square units?`,
+      choices: [
+        no(`$73$`, 'did-not-multiply-second-part'),
+        no(`$70$`, 'used-only-one-part'),
+        no(`$21$`, 'used-only-smaller-part'),
+        ok(`$91$`),
+      ],
+      solution: `Find each part: $7 \\times 10 = 70$ and $7 \\times 3 = 21$. Add them: $70 + 21 = 91$ square units. The choice $73$ adds just $3$ instead of the area $7 \\times 3$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `A $6$ by $8$ rectangle is split into a $6$ by $5$ rectangle and a $6$ by $3$ rectangle. Which expression shows the area of the whole rectangle, in square units?`,
+      choices: [
+        ok(`$6 \\times 5 + 6 \\times 3$`),
+        no(`$6 \\times 5 + 3$`, 'distributed-to-one-part-only'),
+        no(`$6 \\times 5 \\times 3$`, 'multiplied-lengths-instead-of-adding'),
+        no(`$6 + 5 + 6 + 3$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Each smaller rectangle has an area of width times length, and the whole area is the sum of the parts: $6 \\times 5 + 6 \\times 3 = 30 + 18 = 48$, the same as $6 \\times 8$. The expression $6 \\times 5 + 3$ forgets to multiply the $3$ by $6$.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `An L-shaped figure is made of two rectangles that do not overlap. One rectangle is $5$ units by $4$ units. The other is $3$ units by $2$ units. What is the area of the figure, in square units?`,
+      choices: [
+        no(`$20$`, 'used-only-one-part'),
+        ok(`$26$`),
+        no(`$14$`, 'added-all-side-lengths'),
+        no(`$25$`, 'did-not-multiply-second-part'),
+      ],
+      solution: `Find the area of each rectangle and add: $5 \\times 4 = 20$ and $3 \\times 2 = 6$, so $20 + 6 = 26$ square units. The choice $25$ adds $3$ and $2$ instead of multiplying them, but the small rectangle also needs its area, $3 \\times 2$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Ms. Lee's garden is a rectangle $6$ meters by $9$ meters. She plants tomatoes in a $6$ meter by $4$ meter part at one end. What is the area of the rest of the garden, in square meters?`,
+      choices: [
+        no(`$24$`, 'found-the-tomato-part'),
+        no(`$54$`, 'found-the-whole-garden'),
+        no(`$5$`, 'subtracted-lengths-only'),
+        ok(`$30$`),
+      ],
+      solution: `The whole garden is $6 \\times 9 = 54$ square meters and the tomato part is $6 \\times 4 = 24$ square meters, so the rest is $54 - 24 = 30$. You can check it: the rest is a $6$ by $5$ rectangle, and $6 \\times 5 = 30$. The choice $5$ is only the leftover length, $9 - 4$, not an area.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A patio is covered with $56$ square tiles arranged in $8$ equal rows with no gaps. How many tiles are in each row?`,
+      choices: [
+        ok(`$7$`),
+        no(`$48$`, 'subtracted-instead-of-divided'),
+        no(`$64$`, 'added-instead-of-divided'),
+        no(`$6$`, 'recalled-neighbor-fact'),
+      ],
+      solution: `The tiles make a rectangle with $8$ rows, so $8 \\times \\square = 56$. Since $8 \\times 7 = 56$, there are $7$ tiles in each row. The choice $48$ comes from $56 - 8$, which does not undo multiplication.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `One rectangle is $5$ units by $8$ units. Another rectangle is $6$ units by $6$ units. How many more square units of area does the larger rectangle have?`,
+      choices: [
+        no(`$1$`, 'compared-side-sums'),
+        no(`$76$`, 'added-the-areas'),
+        ok(`$4$`),
+        no(`$2$`, 'compared-longest-sides'),
+      ],
+      solution: `Find both areas: $5 \\times 8 = 40$ and $6 \\times 6 = 36$. The larger is $40$, and $40 - 36 = 4$ square units more. The choice $1$ compares $5 + 8 = 13$ with $6 + 6 = 12$, which are side sums, not areas.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `The expression $4 \\times 6 + 4 \\times 3$ shows the area of a rectangle split into two parts. What are the length and width of the whole rectangle?`,
+      choices: [
+        no(`$4$ units by $18$ units`, 'multiplied-the-second-sides'),
+        ok(`$4$ units by $9$ units`),
+        no(`$8$ units by $9$ units`, 'added-both-factors'),
+        no(`$4$ units by $3$ units`, 'used-only-one-part'),
+      ],
+      solution: `Both parts share a side of $4$. Their other sides, $6$ and $3$, join to make $6 + 3 = 9$. So the whole rectangle is $4$ units by $9$ units, and $4 \\times 9 = 36 = 24 + 12$. The choice $8$ units by $9$ units adds the two $4$s, but the parts share that one side.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `A room is shaped like a $10$ foot by $7$ foot rectangle with a $3$ foot by $2$ foot rectangular corner cut out of it for a closet. What is the area of the room, in square feet?`,
+      choices: [
+        no(`$70$`, 'ignored-the-missing-corner'),
+        no(`$76$`, 'added-the-cut-out-piece'),
+        ok(`$64$`),
+        no(`$12$`, 'added-and-subtracted-side-lengths'),
+      ],
+      solution: `The full rectangle is $10 \\times 7 = 70$ square feet. The cut out corner is $3 \\times 2 = 6$ square feet. Take it away: $70 - 6 = 64$ square feet. The choice $76$ adds the corner, but that space is not part of the room.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `An L-shaped garden has a bottom edge that is $9$ meters long. It is split into two rectangles: a rectangle on the left that is $4$ meters wide along the bottom edge and $8$ meters tall, and a rectangle $3$ meters tall that fills the rest of the bottom edge to the right. What is the area of the garden, in square meters?`,
+      choices: [
+        no(`$72$`, 'multiplied-outer-sides-only'),
+        no(`$44$`, 'used-wrong-width-for-second-part'),
+        ok(`$47$`),
+        no(`$59$`, 'counted-overlap-twice'),
+      ],
+      solution: `The left rectangle is $4 \\times 8 = 32$ square meters. The right rectangle covers the rest of the $9$ meter edge, so it is $9 - 4 = 5$ meters long and $3$ meters tall: $5 \\times 3 = 15$. Add the parts: $32 + 15 = 47$ square meters. The choice $59$ uses the whole $9$ meters for the right part, $9 \\times 3 = 27$, which counts the space under the left rectangle twice.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A rectangle $6$ units wide is split into two smaller rectangles. One part is $6$ units by $4$ units. The whole rectangle has an area of $66$ square units. How long is the other part, in units?`,
+      choices: [
+        no(`$42$`, 'forgot-to-divide-by-the-width'),
+        no(`$11$`, 'found-whole-length-not-part'),
+        no(`$60$`, 'subtracted-the-width'),
+        ok(`$7$`),
+      ],
+      solution: `The known part has area $6 \\times 4 = 24$, so the other part has area $66 - 24 = 42$. It is $6$ units wide, and $6 \\times 7 = 42$, so it is $7$ units long. The choice $11$ is the length of the whole rectangle, since $6 \\times 11 = 66$, not the length of the other part.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A $4$ unit by $9$ unit rectangle has the same area as a rectangle that is $6$ units wide. How long is the second rectangle, in units?`,
+      choices: [
+        ok(`$6$`),
+        no(`$7$`, 'kept-sum-of-sides-same'),
+        no(`$36$`, 'gave-the-area'),
+        no(`$54$`, 'multiplied-new-side-by-old-side'),
+      ],
+      solution: `The first rectangle has area $4 \\times 9 = 36$ square units. The second one needs $6 \\times \\square = 36$, and $6 \\times 6 = 36$, so it is $6$ units long. The choice $7$ keeps the sides adding to $13$, but equal side sums do not mean equal areas.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A U-shaped figure is made of three rectangles that do not overlap: a left post that is $2$ units by $6$ units, a right post that is $2$ units by $6$ units, and a bottom bar between the posts that is $3$ units by $2$ units. What is the area of the figure, in square units?`,
+      choices: [
+        no(`$18$`, 'counted-one-post-only'),
+        ok(`$30$`),
+        no(`$24$`, 'left-out-the-bottom-bar'),
+        no(`$21$`, 'added-all-side-lengths'),
+      ],
+      solution: `Each post is $2 \\times 6 = 12$ square units and the bar is $3 \\times 2 = 6$ square units. Add all three parts: $12 + 12 + 6 = 30$ square units. The choice $24$ adds only the two posts and leaves out the bar.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Toby's rectangle has an area of $48$ square units and a width of $6$ units. Ana's rectangle has the same width but is $3$ units longer than Toby's. What is the area of Ana's rectangle, in square units?`,
+      choices: [
+        no(`$51$`, 'added-extra-length-to-area'),
+        no(`$18$`, 'found-only-the-added-strip'),
+        ok(`$66$`),
+        no(`$48$`, 'ignored-the-added-length'),
+      ],
+      solution: `Toby's rectangle is $8$ units long, because $6 \\times 8 = 48$. Ana's is $8 + 3 = 11$ units long, so its area is $6 \\times 11 = 66$. Another way: the extra $6$ by $3$ strip adds $18$, and $48 + 18 = 66$. The choice $51$ adds the $3$ units of length straight to the area.`,
+    },
+  ],
+}
+
+export default skill
