@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g8-transformations-8-more',
+  extends: 'transformations-8',
+  subject: 'math',
+  grade: 8,
+  group: 'Geometry',
+  name: 'Transformations',
+  standards: ['8.G.A'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `The point $(7, -2)$ is moved by the rule $(x, y) \\to (x - 3, y + 6)$. What are the coordinates of its image?`,
+      choices: [
+        ok(`$(4, 4)$`),
+        no(`$(10, 4)$`, 'added-instead-of-subtracted-x'),
+        no(`$(4, -8)$`, 'subtracted-instead-of-added-y'),
+        no(`$(-5, 13)$`, 'swapped-coordinates-before-translating'),
+      ],
+      solution: `Subtract $3$ from the x-coordinate and add $6$ to the y-coordinate: $7 - 3 = 4$ and $-2 + 6 = 4$, so the image is $(4, 4)$. The choice $(10, 4)$ adds $3$ to x even though the rule says $x - 3$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A triangle is dilated from the origin by a scale factor of $3$. Which of these changes?`,
+      choices: [
+        ok(`The lengths of its sides`),
+        no(`The measures of its angles`, 'thinks-dilation-changes-angle-measures'),
+        no(`Which pairs of its sides are parallel`, 'thinks-dilation-breaks-parallel-lines'),
+        no(`Nothing changes, because a dilation is a rigid motion`, 'thinks-dilation-is-rigid-motion'),
+      ],
+      solution: `A dilation by scale factor $3$ multiplies every side length by $3$, so the lengths change. Angle measures stay the same and parallel sides stay parallel, which is why the image is similar to the original. A dilation is not a rigid motion, so "Nothing changes" is wrong.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Angle $PQR$ measures $62^\\circ$. It is reflected over the x-axis to form angle $P'Q'R'$. What is the measure of angle $P'Q'R'$?`,
+      choices: [
+        no(`$118^\\circ$`, 'thinks-reflection-gives-supplement'),
+        ok(`$62^\\circ$`),
+        no(`$28^\\circ$`, 'thinks-reflection-gives-complement'),
+        no(`$124^\\circ$`, 'doubled-angle-under-reflection'),
+      ],
+      solution: `A reflection is a rigid motion, so it keeps every angle measure the same. Angle $P'Q'R'$ is still $62^\\circ$. The choice $118^\\circ$ is the supplement, $180 - 62$, but reflecting an angle does not change its size.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A translation moves point $A(1, 1)$ to $A'(4, -1)$. The same translation is applied to point $B(3, 5)$. What are the coordinates of $B'$?`,
+      choices: [
+        no(`$(0, 7)$`, 'applied-translation-in-reverse'),
+        no(`$(6, 7)$`, 'used-wrong-sign-for-vertical-shift'),
+        ok(`$(6, 3)$`),
+        no(`$(4, -1)$`, 'copied-image-of-a'),
+      ],
+      solution: `From $A$ to $A'$ the point moves right $3$ (from $1$ to $4$) and down $2$ (from $1$ to $-1$). Apply the same moves to $B$: $3 + 3 = 6$ and $5 - 2 = 3$, so $B'$ is $(6, 3)$. The choice $(6, 7)$ moves up $2$ instead of down $2$.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `The point $(4, 1)$ is rotated $90^\\circ$ clockwise about the origin. What are the coordinates of its image?`,
+      choices: [
+        ok(`$(1, -4)$`),
+        no(`$(-1, 4)$`, 'rotated-counterclockwise-instead'),
+        no(`$(-4, -1)$`, 'rotated-180-instead-of-90'),
+        no(`$(1, 4)$`, 'swapped-without-changing-sign'),
+      ],
+      solution: `A $90^\\circ$ clockwise rotation about the origin follows the rule $(x, y) \\to (y, -x)$. So $(4, 1)$ becomes $(1, -4)$. The choice $(-1, 4)$ uses the counterclockwise rule $(x, y) \\to (-y, x)$.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `The point $(9, -6)$ is dilated with center at the origin by a scale factor of $\\frac{1}{3}$. What are the coordinates of its image?`,
+      choices: [
+        no(`$(27, -18)$`, 'multiplied-by-reciprocal-of-scale-factor'),
+        no(`$(6, -9)$`, 'subtracted-3-from-each-coordinate'),
+        no(`$(3, -6)$`, 'scaled-only-x-coordinate'),
+        ok(`$(3, -2)$`),
+      ],
+      solution: `For a dilation centered at the origin, multiply both coordinates by the scale factor: $9 \\times \\frac{1}{3} = 3$ and $-6 \\times \\frac{1}{3} = -2$. The image is $(3, -2)$. The choice $(27, -18)$ multiplies by $3$, which would enlarge the figure instead of shrinking it.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Two parallel lines are cut by a transversal. One interior angle measures $47^\\circ$. What is the measure of the other interior angle on the same side of the transversal?`,
+      choices: [
+        no(`$47^\\circ$`, 'thinks-same-side-interior-angles-are-congruent'),
+        ok(`$133^\\circ$`),
+        no(`$43^\\circ$`, 'used-complement-instead-of-supplement'),
+        no(`$313^\\circ$`, 'subtracted-from-360'),
+      ],
+      solution: `When parallel lines are cut by a transversal, same-side interior angles are supplementary, so they add to $180^\\circ$: $180 - 47 = 133$. The angle is $133^\\circ$. The choice $47^\\circ$ would be right for alternate interior angles, not same-side interior angles.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A triangle has angles that measure $54^\\circ$, $x^\\circ$, and $2x^\\circ$. What is the value of $x$?`,
+      choices: [
+        no(`$63$`, 'dropped-the-x-term'),
+        no(`$102$`, 'used-360-as-angle-sum'),
+        no(`$84$`, 'gave-2x-instead-of-x'),
+        ok(`$42$`),
+      ],
+      solution: `The angles of a triangle add to $180^\\circ$: $54 + x + 2x = 180$, so $3x = 126$ and $x = 42$. The choice $84$ is the value of $2x$, the largest angle, not $x$ itself.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `In a triangle, two angles measure $41^\\circ$ and $67^\\circ$. The side at the third vertex is extended to form an exterior angle there. What is the measure of that exterior angle?`,
+      choices: [
+        ok(`$108^\\circ$`),
+        no(`$72^\\circ$`, 'gave-the-interior-angle'),
+        no(`$26^\\circ$`, 'subtracted-remote-interior-angles'),
+        no(`$252^\\circ$`, 'subtracted-sum-from-360'),
+      ],
+      solution: `An exterior angle of a triangle equals the sum of the two interior angles that are not next to it: $41 + 67 = 108$, so the exterior angle is $108^\\circ$. The choice $72^\\circ$ is the interior angle at the third vertex, $180 - 108$, which forms a straight line with the exterior angle.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Triangle $ABC$ has vertices $A(2, 5)$, $B(4, 1)$, and $C(-1, 3)$. Its image has vertices $A'(5, -2)$, $B'(1, -4)$, and $C'(3, 1)$. Which transformation was applied?`,
+      choices: [
+        no(`A rotation of $90^\\circ$ counterclockwise about the origin`, 'confused-clockwise-and-counterclockwise'),
+        ok(`A rotation of $90^\\circ$ clockwise about the origin`),
+        no(`A reflection over the x-axis`, 'checked-only-sign-change'),
+        no(`A rotation of $180^\\circ$ about the origin`, 'thinks-swapped-coordinates-mean-180'),
+      ],
+      solution: `Each image point is $(y, -x)$: $A(2, 5)$ goes to $(5, -2)$, $B(4, 1)$ goes to $(1, -4)$, and $C(-1, 3)$ goes to $(3, 1)$. The rule $(x, y) \\to (y, -x)$ is a rotation of $90^\\circ$ clockwise about the origin. A counterclockwise turn would send $A$ to $(-5, 2)$ instead.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Triangle $JKL$ has vertices $J(1, 2)$, $K(4, 2)$, and $L(1, 6)$. Its image has vertices $J'(-1, -1)$, $K'(-4, -1)$, and $L'(-1, 3)$. Which sequence of transformations maps triangle $JKL$ onto its image?`,
+      choices: [
+        no(`Reflect over the x-axis, then translate down 3 units`, 'confused-x-axis-and-y-axis-reflection'),
+        no(`Translate left 2 units and down 3 units`, 'matched-only-one-vertex'),
+        ok(`Reflect over the y-axis, then translate down 3 units`),
+        no(`Rotate $180^\\circ$ about the origin, then translate up 3 units`, 'treated-one-sign-change-as-rotation'),
+      ],
+      solution: `Reflecting over the y-axis changes the sign of each x-coordinate: $J(-1, 2)$, $K(-4, 2)$, $L(-1, 6)$. Translating down 3 units then gives $(-1, -1)$, $(-4, -1)$, and $(-1, 3)$, which match the image. The choice "Translate left 2 units and down 3 units" works for $J$ but sends $K$ to $(2, -1)$, not $(-4, -1)$.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A rectangle that is $4$ units by $6$ units is dilated from the origin by a scale factor of $2.5$. What is the perimeter of the image?`,
+      choices: [
+        no(`$20$ units`, 'thinks-dilation-preserves-length'),
+        ok(`$50$ units`),
+        no(`$125$ units`, 'scaled-perimeter-by-square-of-factor'),
+        no(`$150$ units`, 'found-area-instead-of-perimeter'),
+      ],
+      solution: `The image sides are $4 \\times 2.5 = 10$ and $6 \\times 2.5 = 15$, so the perimeter is $2(10 + 15) = 50$ units. The choice $20$ units is the perimeter of the original rectangle; a dilation changes lengths, so the perimeter changes too.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A triangle with side lengths $6$, $8$, and $10$ is dilated from the origin to form a triangle with side lengths $9$, $12$, and $15$. What is the scale factor of the dilation?`,
+      choices: [
+        no(`$\\frac{2}{3}$`, 'divided-original-by-image'),
+        no(`$3$`, 'subtracted-matching-lengths'),
+        no(`$\\frac{1}{2}$`, 'used-relative-change-instead-of-ratio'),
+        ok(`$\\frac{3}{2}$`),
+      ],
+      solution: `The scale factor is image length divided by original length: $\\frac{9}{6} = \\frac{12}{8} = \\frac{15}{10} = \\frac{3}{2}$. The choice $\\frac{2}{3}$ divides the original by the image, which would describe shrinking the larger triangle back to the smaller one.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `The point $(6, 4)$ is dilated by a scale factor of $2$ with center $(2, 0)$. What are the coordinates of its image?`,
+      choices: [
+        ok(`$(10, 8)$`),
+        no(`$(12, 8)$`, 'dilated-from-origin-instead-of-given-center'),
+        no(`$(8, 8)$`, 'forgot-to-add-center-back'),
+        no(`$(14, 8)$`, 'added-center-after-scaling-from-origin'),
+      ],
+      solution: `Find how far the point is from the center: $6 - 2 = 4$ right and $4 - 0 = 4$ up. Double those distances to get $8$ right and $8$ up, then start from the center: $(2 + 8, 0 + 8) = (10, 8)$. The choice $(12, 8)$ dilates from the origin, but the center here is $(2, 0)$.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `The point $(-4, 1)$ is rotated $90^\\circ$ counterclockwise about the origin and then translated right 5 units. What are the coordinates of the final image?`,
+      choices: [
+        no(`$(6, 4)$`, 'rotated-clockwise-instead'),
+        no(`$(-1, 1)$`, 'performed-steps-in-reverse-order'),
+        ok(`$(4, -4)$`),
+        no(`$(-1, -4)$`, 'forgot-the-translation'),
+      ],
+      solution: `A $90^\\circ$ counterclockwise rotation uses $(x, y) \\to (-y, x)$, so $(-4, 1)$ becomes $(-1, -4)$. Translating right 5 adds $5$ to x: $(-1 + 5, -4) = (4, -4)$. The choice $(-1, -4)$ stops after the rotation and leaves out the translation.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `The point $(5, 3)$ is rotated $180^\\circ$ about the point $(2, 1)$. What are the coordinates of its image?`,
+      choices: [
+        no(`$(-5, -3)$`, 'rotated-about-origin-instead-of-given-center'),
+        no(`$(-3, -2)$`, 'forgot-to-add-center-back'),
+        ok(`$(-1, -1)$`),
+        no(`$(-1, 3)$`, 'reversed-only-x-offset'),
+      ],
+      solution: `The point is $3$ right and $2$ up from the center $(2, 1)$. A $180^\\circ$ turn about the center sends it $3$ left and $2$ down from the center instead: $(2 - 3, 1 - 2) = (-1, -1)$. The choice $(-5, -3)$ turns the point about the origin, not about $(2, 1)$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Triangle 1 has two angles that measure $48^\\circ$ and $71^\\circ$. Triangle 2 has two angles that measure $71^\\circ$ and $61^\\circ$. Which statement is true?`,
+      choices: [
+        no(`The triangles are not similar, because only one of the listed angles matches`, 'did-not-find-third-angle'),
+        no(`The triangles are congruent, because their angles match`, 'thinks-equal-angles-mean-congruent'),
+        no(`There is not enough information, because side lengths are needed to decide`, 'thinks-similarity-needs-side-lengths'),
+        ok(`The triangles are similar, because all three pairs of angles match`),
+      ],
+      solution: `The third angle of Triangle 1 is $180 - 48 - 71 = 61$ degrees, and the third angle of Triangle 2 is $180 - 71 - 61 = 48$ degrees. Both triangles have angles $48^\\circ$, $61^\\circ$, and $71^\\circ$, so they are similar. Matching angles alone do not show the triangles are the same size, so they need not be congruent.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `The point $(3, -2)$ is reflected over the y-axis, then rotated $90^\\circ$ clockwise about the origin, then dilated from the origin by a scale factor of $2$. What are the coordinates of the final image?`,
+      choices: [
+        ok(`$(-4, 6)$`),
+        no(`$(4, -6)$`, 'rotated-counterclockwise-instead'),
+        no(`$(-4, -6)$`, 'skipped-the-reflection'),
+        no(`$(0, 5)$`, 'added-scale-factor-instead-of-multiplying'),
+      ],
+      solution: `Reflecting over the y-axis gives $(-3, -2)$. A $90^\\circ$ clockwise rotation uses $(x, y) \\to (y, -x)$, giving $(-2, 3)$. Dilating by $2$ doubles both coordinates: $(-4, 6)$. The choice $(4, -6)$ uses the counterclockwise rule for the rotation step.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A pentagon is translated 4 units left and then dilated from the origin by a scale factor of $\\frac{1}{2}$. Which statement about the final image and the original pentagon must be true?`,
+      choices: [
+        no(`They are congruent`, 'treated-dilation-as-rigid-motion'),
+        ok(`They are similar but not congruent`),
+        no(`They are neither similar nor congruent`, 'thinks-translation-breaks-similarity'),
+        no(`They are similar only if the dilation is done before the translation`, 'thinks-order-affects-similarity'),
+      ],
+      solution: `The translation keeps the pentagon the same size and shape. The dilation by $\\frac{1}{2}$ keeps the shape but halves every length. A sequence of rigid motions and dilations always produces a similar figure, and because the size changed, the figures are similar but not congruent. The order of the steps does not affect this.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Two parallel lines are cut by a transversal. A pair of alternate interior angles measure $(3x + 10)^\\circ$ and $(5x - 30)^\\circ$. What is the measure of each of these angles?`,
+      choices: [
+        no(`$20^\\circ$`, 'gave-x-instead-of-angle'),
+        no(`$110^\\circ$`, 'gave-the-supplement'),
+        ok(`$70^\\circ$`),
+        no(`$85^\\circ$`, 'treated-alternate-interior-as-supplementary'),
+      ],
+      solution: `Alternate interior angles formed by parallel lines are congruent, so $3x + 10 = 5x - 30$. Then $40 = 2x$ and $x = 20$. Each angle is $3(20) + 10 = 70$ degrees. The choice $20^\\circ$ is the value of $x$, not the angle measure.`,
+    },
+  ],
+}
+
+export default skill
