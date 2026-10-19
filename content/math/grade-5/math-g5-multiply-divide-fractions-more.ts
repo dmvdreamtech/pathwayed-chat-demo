@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g5-multiply-divide-fractions-more',
+  extends: 'multiply-divide-fractions',
+  subject: 'math',
+  grade: 5,
+  group: 'Number and Operations: Fractions',
+  name: 'Multiply & Divide Fractions',
+  standards: ['5.NF.B.4'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is $\\frac{2}{5}\\times 10$?`,
+      choices: [
+        ok(`$4$`),
+        no(`$\\frac{2}{50}$`, 'multiplied-denominator-by-whole'),
+        no(`$25$`, 'swapped-numerator-and-denominator'),
+        no(`$2$`, 'divided-by-denominator-only'),
+      ],
+      solution: `Multiply the numerator by the whole number and keep the denominator: $\\frac{2 \\times 10}{5} = \\frac{20}{5} = 4$. The choice $2$ finds $\\frac{1}{5}$ of $10$ but forgets to take $2$ of those fifths.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is $\\frac{1}{6}\\times\\frac{1}{4}$?`,
+      choices: [
+        no(`$\\frac{2}{10}$`, 'added-numerators-and-denominators'),
+        ok(`$\\frac{1}{24}$`),
+        no(`$\\frac{1}{10}$`, 'added-denominators'),
+        no(`$\\frac{4}{6}$`, 'multiplied-diagonally'),
+      ],
+      solution: `Multiply numerators and multiply denominators: $\\frac{1 \\times 1}{6 \\times 4} = \\frac{1}{24}$. Taking a fourth of a sixth makes a smaller piece. The choice $\\frac{1}{10}$ adds the denominators instead of multiplying them.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `What is $\\frac{3}{8}\\times 4$?`,
+      choices: [
+        no(`$\\frac{3}{32}$`, 'multiplied-denominator-by-whole'),
+        no(`$\\frac{12}{32}$`, 'multiplied-both-parts-by-whole'),
+        ok(`$1\\frac{1}{2}$`),
+        no(`$\\frac{7}{8}$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Four groups of $\\frac{3}{8}$ is $\\frac{3 \\times 4}{8} = \\frac{12}{8} = 1\\frac{4}{8} = 1\\frac{1}{2}$. The choice $\\frac{12}{32}$ multiplies the denominator by $4$ too, which leaves the value unchanged instead of making four times as much.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A water bottle holds $\\frac{3}{4}$ liter of water. Jalen drinks $\\frac{1}{3}$ of the water in the bottle. How many liters does Jalen drink?`,
+      choices: [
+        ok(`$\\frac{1}{4}$`),
+        no(`$\\frac{4}{7}$`, 'added-numerators-and-denominators'),
+        no(`$\\frac{5}{12}$`, 'subtracted-instead-of-multiplied'),
+        no(`$\\frac{9}{4}$`, 'divided-instead-of-multiplied'),
+      ],
+      solution: `"$\\frac{1}{3}$ of $\\frac{3}{4}$" means $\\frac{1}{3} \\times \\frac{3}{4} = \\frac{3}{12} = \\frac{1}{4}$ liter. The choice $\\frac{5}{12}$ is what is left after subtracting $\\frac{1}{3}$ from $\\frac{3}{4}$, but the problem asks for a part of the water, which is a product.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Without multiplying, which statement about $\\frac{4}{5}\\times 9$ is true?`,
+      choices: [
+        no(`It is greater than $9$.`, 'thinks-multiplying-always-makes-bigger'),
+        ok(`It is less than $9$.`),
+        no(`It is equal to $9$.`, 'thinks-fraction-factor-leaves-unchanged'),
+        no(`It is less than $\\frac{4}{5}$.`, 'compared-to-the-wrong-factor'),
+      ],
+      solution: `Multiplying $9$ by a fraction less than $1$ gives only part of $9$, so the product is less than $9$ (it is $7\\frac{1}{5}$). The statement "It is greater than $9$" assumes multiplying always makes a number bigger, which is only true for factors greater than $1$.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `There are 24 students in a class, and $\\frac{3}{8}$ of them ride the bus to school. How many students ride the bus?`,
+      choices: [
+        no(`$64$`, 'swapped-numerator-and-denominator'),
+        no(`$3$`, 'divided-by-denominator-only'),
+        no(`$72$`, 'multiplied-by-numerator-only'),
+        ok(`$9$`),
+      ],
+      solution: `Find $\\frac{3}{8}$ of $24$: $24 \\div 8 = 3$ students in each eighth, and $3 \\times 3 = 9$ students. The choice $3$ is only one eighth of the class, not three eighths.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Which expression has the same value as $\\frac{3}{5}\\times 7$?`,
+      choices: [
+        no(`$3\\div(5\\times 7)$`, 'multiplied-denominator-by-whole'),
+        ok(`$(3\\times 7)\\div 5$`),
+        no(`$(5\\times 7)\\div 3$`, 'swapped-numerator-and-denominator'),
+        no(`$(3+7)\\div 5$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `$\\frac{3}{5}\\times 7$ means $3$ groups of $\\frac{1}{5}$ of $7$, which is the same as $3 \\times 7 = 21$ divided into $5$ equal parts: $(3\\times 7)\\div 5 = \\frac{21}{5}$. The expression $3\\div(5\\times 7)$ multiplies the denominator by $7$, which gives $\\frac{3}{35}$, a much smaller number.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A rectangle is $\\frac{2}{3}$ foot long and $\\frac{4}{5}$ foot wide. It is covered exactly, with no gaps or overlaps, by small tiles that are each $\\frac{1}{3}$ foot long and $\\frac{1}{5}$ foot wide. How many tiles cover the rectangle?`,
+      choices: [
+        no(`$15$`, 'counted-tiles-in-a-whole-square-foot'),
+        no(`$6$`, 'added-instead-of-multiplied'),
+        ok(`$8$`),
+        no(`$12$`, 'used-denominator-for-one-side'),
+      ],
+      solution: `Along the $\\frac{2}{3}$ foot side there are $2$ tiles, and along the $\\frac{4}{5}$ foot side there are $4$ tiles, so $2 \\times 4 = 8$ tiles. Each tile is $\\frac{1}{15}$ square foot, so the area is $\\frac{8}{15}$ square foot, matching $\\frac{2}{3}\\times\\frac{4}{5}$. The choice $15$ is the number of tiles that would fill a whole square foot, not this smaller rectangle.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `A rectangular poster is $\\frac{5}{8}$ yard long and $\\frac{4}{5}$ yard wide. What is its area in square yards?`,
+      choices: [
+        ok(`$\\frac{1}{2}$`),
+        no(`$\\frac{9}{13}$`, 'added-numerators-and-denominators'),
+        no(`$\\frac{25}{32}$`, 'multiplied-diagonally'),
+        no(`$\\frac{57}{20}$`, 'found-perimeter-instead-of-area'),
+      ],
+      solution: `Area is length times width: $\\frac{5}{8}\\times\\frac{4}{5} = \\frac{20}{40} = \\frac{1}{2}$ square yard. The choice $\\frac{57}{20}$ adds all four sides, which is the perimeter in yards, not the area.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `What is $\\frac{5}{4}\\times\\frac{2}{3}$ in simplest form?`,
+      choices: [
+        no(`$1$`, 'added-numerators-and-denominators'),
+        no(`$\\frac{15}{8}$`, 'divided-instead-of-multiplied'),
+        no(`$\\frac{8}{15}$`, 'multiplied-diagonally'),
+        ok(`$\\frac{5}{6}$`),
+      ],
+      solution: `Multiply across: $\\frac{5 \\times 2}{4 \\times 3} = \\frac{10}{12}$, which simplifies to $\\frac{5}{6}$. The choice $1$ comes from adding tops and bottoms, $\\frac{5+2}{4+3} = \\frac{7}{7}$, which is not how fractions multiply.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `One lap around a school track is $\\frac{3}{8}$ mile. Priya runs 6 laps. How many miles does Priya run?`,
+      choices: [
+        no(`$\\frac{3}{48}$`, 'multiplied-denominator-by-whole'),
+        ok(`$2\\frac{1}{4}$`),
+        no(`$\\frac{9}{8}$`, 'added-whole-to-numerator'),
+        no(`$16$`, 'swapped-numerator-and-denominator'),
+      ],
+      solution: `Six laps of $\\frac{3}{8}$ mile is $6 \\times \\frac{3}{8} = \\frac{18}{8} = 2\\frac{2}{8} = 2\\frac{1}{4}$ miles. The choice $\\frac{3}{48}$ multiplies the denominator by $6$, which makes each lap smaller instead of adding up six laps.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Dara has a ribbon that is $\\frac{9}{10}$ meter long and uses $\\frac{2}{3}$ of it for a craft. How many meters of ribbon does Dara use?`,
+      choices: [
+        no(`$\\frac{7}{30}$`, 'subtracted-instead-of-multiplied'),
+        no(`$\\frac{11}{13}$`, 'added-numerators-and-denominators'),
+        ok(`$\\frac{3}{5}$`),
+        no(`$\\frac{27}{20}$`, 'divided-instead-of-multiplied'),
+      ],
+      solution: `$\\frac{2}{3}$ of $\\frac{9}{10}$ is $\\frac{2}{3}\\times\\frac{9}{10} = \\frac{18}{30} = \\frac{3}{5}$ meter. The choice $\\frac{27}{20}$ is longer than the whole ribbon, so it cannot be a part of it; it comes from dividing instead of multiplying.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Which product is greater than $\\frac{5}{6}$?`,
+      choices: [
+        no(`$\\frac{5}{6}\\times\\frac{3}{4}$`, 'thinks-multiplying-always-makes-bigger'),
+        ok(`$\\frac{5}{6}\\times\\frac{7}{4}$`),
+        no(`$\\frac{5}{6}\\times 1$`, 'thinks-multiplying-by-one-increases'),
+        no(`$\\frac{5}{6}\\times\\frac{9}{10}$`, 'judged-by-the-larger-denominator'),
+      ],
+      solution: `Multiplying by a number greater than $1$ makes the product greater than $\\frac{5}{6}$. Only $\\frac{7}{4}$ is greater than $1$, so $\\frac{5}{6}\\times\\frac{7}{4}$ is the greater product. Multiplying by $\\frac{3}{4}$ or $\\frac{9}{10}$ gives less than $\\frac{5}{6}$, and multiplying by $1$ leaves it the same.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Ms. Ortiz has 20 pencils. She gives away $\\frac{3}{4}$ of them. How many pencils does she keep?`,
+      choices: [
+        no(`$15$`, 'answered-the-amount-given-away'),
+        no(`$17$`, 'subtracted-the-numerator'),
+        no(`$16$`, 'subtracted-the-denominator'),
+        ok(`$5$`),
+      ],
+      solution: `She gives away $\\frac{3}{4}\\times 20 = 15$ pencils, so she keeps $20 - 15 = 5$. Another way: she keeps $\\frac{1}{4}$ of $20$, which is $5$. The choice $15$ is the number given away, not the number kept.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `A square garden tile has sides that are each $\\frac{3}{4}$ meter long. What is the area of the tile in square meters?`,
+      choices: [
+        ok(`$\\frac{9}{16}$`),
+        no(`$3$`, 'found-perimeter-instead-of-area'),
+        no(`$\\frac{3}{2}$`, 'multiplied-side-by-two'),
+        no(`$\\frac{9}{4}$`, 'squared-numerator-only'),
+      ],
+      solution: `The area of a square is side times side: $\\frac{3}{4}\\times\\frac{3}{4} = \\frac{9}{16}$ square meter. The choice $3$ adds the four sides, which is the perimeter in meters.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Each rectangular patio stone is $\\frac{5}{6}$ meter long and $\\frac{3}{5}$ meter wide. Theo lays 4 of these stones side by side with no gaps. What is the total area covered, in square meters?`,
+      choices: [
+        no(`$\\frac{1}{2}$`, 'found-area-of-one-stone-only'),
+        ok(`$2$`),
+        no(`$\\frac{43}{15}$`, 'found-perimeter-instead-of-area'),
+        no(`$\\frac{1}{8}$`, 'divided-by-the-count-instead-of-multiplying'),
+      ],
+      solution: `One stone covers $\\frac{5}{6}\\times\\frac{3}{5} = \\frac{15}{30} = \\frac{1}{2}$ square meter. Four stones cover $4 \\times \\frac{1}{2} = 2$ square meters. The choice $\\frac{1}{2}$ is the area of only one stone.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `In a class of 30 students, $\\frac{2}{5}$ of the students walk to school. Of the students who walk, $\\frac{1}{2}$ walk with an older sibling. How many students walk to school with an older sibling?`,
+      choices: [
+        no(`$12$`, 'stopped-after-first-step'),
+        no(`$18$`, 'used-the-students-who-do-not-walk'),
+        no(`$15$`, 'took-half-of-the-whole-class'),
+        ok(`$6$`),
+      ],
+      solution: `First, $\\frac{2}{5}$ of $30$ is $12$ walkers. Then $\\frac{1}{2}$ of $12$ is $6$. This is the same as $\\frac{1}{2}\\times\\frac{2}{5}\\times 30 = \\frac{1}{5}\\times 30 = 6$. The choice $12$ is all the walkers, before taking half of them.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Let $A = 12\\times\\frac{5}{3}$, $B = 12\\times\\frac{3}{5}$, and $C = 12\\times 1$. Without multiplying, which list orders them from least to greatest?`,
+      choices: [
+        ok(`$B, C, A$`),
+        no(`$A, C, B$`, 'thinks-fraction-factors-reverse-size'),
+        no(`$C, B, A$`, 'thinks-multiplying-always-makes-bigger'),
+        no(`$B, A, C$`, 'treated-improper-fraction-as-less-than-one'),
+      ],
+      solution: `$\\frac{3}{5}$ is less than $1$, so $B$ is less than $12$. $C$ equals $12$. $\\frac{5}{3}$ is greater than $1$, so $A$ is greater than $12$. The order is $B, C, A$ (the values are $7\\frac{1}{5}$, $12$ and $20$). The list $B, A, C$ treats $\\frac{5}{3}$ as if it were less than $1$.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Lena has 18 stickers. Lena gives $\\frac{1}{3}$ of them to a friend, then puts $\\frac{3}{4}$ of the stickers that are left into an album. How many stickers go into the album?`,
+      choices: [
+        no(`$4\\frac{1}{2}$`, 'took-fraction-of-the-given-away-part'),
+        no(`$12$`, 'stopped-after-first-step'),
+        ok(`$9$`),
+        no(`$13\\frac{1}{2}$`, 'used-the-original-total'),
+      ],
+      solution: `Lena gives away $\\frac{1}{3}\\times 18 = 6$ stickers, leaving $12$. Then $\\frac{3}{4}\\times 12 = 9$ stickers go into the album. The choice $13\\frac{1}{2}$ takes $\\frac{3}{4}$ of all $18$ stickers instead of the $12$ that are left.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A rectangular rug is $\\frac{5}{2}$ meters long and $\\frac{4}{3}$ meters wide. What is its area in square meters?`,
+      choices: [
+        no(`$\\frac{9}{5}$`, 'added-numerators-and-denominators'),
+        no(`$\\frac{23}{3}$`, 'found-perimeter-instead-of-area'),
+        ok(`$3\\frac{1}{3}$`),
+        no(`$\\frac{15}{8}$`, 'divided-instead-of-multiplied'),
+      ],
+      solution: `Multiply length by width: $\\frac{5}{2}\\times\\frac{4}{3} = \\frac{20}{6} = \\frac{10}{3} = 3\\frac{1}{3}$ square meters. The choice $\\frac{23}{3}$ adds all four sides, which is the perimeter.`,
+    },
+  ],
+}
+
+export default skill
