@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g6-one-step-equations-more',
+  extends: 'one-step-equations',
+  subject: 'math',
+  grade: 6,
+  group: 'Expressions and Equations',
+  name: 'One-Step Equations',
+  standards: ['6.EE.B.7'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What value of $x$ solves $x + 23 = 51$?`,
+      choices: [
+        ok(`$28$`),
+        no(`$74$`, 'added-instead-of-subtracted'),
+        no(`$32$`, 'subtracted-smaller-digit-from-larger'),
+        no(`$51$`, 'gave-the-total-as-the-answer'),
+      ],
+      solution: `To undo adding 23, subtract 23 from both sides: $x = 51 - 23 = 28$. Check: $28 + 23 = 51$. The choice $74$ adds 23 instead of subtracting it.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What value of $x$ solves $7x = 63$?`,
+      choices: [
+        no(`$56$`, 'subtracted-instead-of-divided'),
+        ok(`$9$`),
+        no(`$70$`, 'added-instead-of-divided'),
+        no(`$441$`, 'multiplied-instead-of-divided'),
+      ],
+      solution: `$7x$ means 7 times $x$, so undo the multiplication by dividing both sides by 7: $x = 63 \\div 7 = 9$. Check: $7 \\times 9 = 63$. The choice $56$ subtracts 7 instead of dividing by it.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Which equation represents "4 times a number $m$ is 36"?`,
+      choices: [
+        no(`$m + 4 = 36$`, 'wrote-sum-for-product'),
+        no(`$\\frac{m}{4} = 36$`, 'wrote-quotient-for-product'),
+        ok(`$4m = 36$`),
+        no(`$36m = 4$`, 'reversed-factor-and-product'),
+      ],
+      solution: `"4 times a number $m$" is the product $4m$, and "is 36" means it equals 36, so the equation is $4m = 36$. The choice $m + 4 = 36$ uses addition, but "times" means multiplication.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What value of $x$ solves $x + 0.5 = 3$?`,
+      choices: [
+        no(`$3.5$`, 'added-instead-of-subtracted'),
+        no(`$6$`, 'divided-instead-of-subtracted'),
+        no(`$1.5$`, 'multiplied-instead-of-subtracted'),
+        ok(`$2.5$`),
+      ],
+      solution: `Subtract 0.5 from both sides: $x = 3 - 0.5 = 2.5$. Check: $2.5 + 0.5 = 3$. The choice $6$ comes from dividing 3 by 0.5, but the equation adds 0.5, so subtraction undoes it.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Lena had some stickers. After a friend gave Lena 14 more, Lena had 40 stickers. If $s$ is the starting number, then $s + 14 = 40$. How many stickers did Lena start with?`,
+      choices: [
+        ok(`26`),
+        no(`54`, 'added-instead-of-subtracted'),
+        no(`14`, 'gave-the-added-amount'),
+        no(`34`, 'subtracted-smaller-digit-from-larger'),
+      ],
+      solution: `Subtract 14 from both sides: $s = 40 - 14 = 26$. Check: $26 + 14 = 40$. The choice 54 adds the 14 stickers again instead of taking them away.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `What value of $x$ solves $12x = 48$?`,
+      choices: [
+        no(`$36$`, 'subtracted-instead-of-divided'),
+        no(`$60$`, 'added-instead-of-divided'),
+        ok(`$4$`),
+        no(`$576$`, 'multiplied-instead-of-divided'),
+      ],
+      solution: `Divide both sides by 12: $x = 48 \\div 12 = 4$. Check: $12 \\times 4 = 48$. The choice $36$ subtracts 12 instead of dividing by it.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $x + 2.35 = 5.1$?`,
+      choices: [
+        no(`$7.45$`, 'added-instead-of-subtracted'),
+        no(`$3.25$`, 'subtracted-smaller-digit-from-larger'),
+        ok(`$2.75$`),
+        no(`$3.85$`, 'forgot-to-reduce-after-borrowing'),
+      ],
+      solution: `Subtract 2.35 from both sides. Write 5.1 as 5.10 so the place values line up: $5.10 - 2.35 = 2.75$. Check: $2.75 + 2.35 = 5.1$. The choice $3.25$ comes from subtracting the smaller digit from the larger in each column instead of regrouping.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $0.4x = 2$?`,
+      choices: [
+        no(`$0.8$`, 'multiplied-instead-of-divided'),
+        no(`$0.2$`, 'divided-coefficient-by-total'),
+        no(`$50$`, 'misplaced-decimal-point'),
+        ok(`$5$`),
+      ],
+      solution: `Divide both sides by 0.4: $x = 2 \\div 0.4 = 20 \\div 4 = 5$. Check: $0.4 \\times 5 = 2$. The choice $0.8$ multiplies 2 by 0.4 instead of dividing.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $x + \\frac{1}{4} = \\frac{5}{6}$?`,
+      choices: [
+        ok(`$\\frac{7}{12}$`),
+        no(`$\\frac{13}{12}$`, 'added-instead-of-subtracted'),
+        no(`$\\frac{10}{3}$`, 'divided-instead-of-subtracted'),
+        no(`$2$`, 'subtracted-numerators-and-denominators'),
+      ],
+      solution: `Subtract $\\frac{1}{4}$ from both sides using the common denominator 12: $\\frac{5}{6} - \\frac{1}{4} = \\frac{10}{12} - \\frac{3}{12} = \\frac{7}{12}$. The choice $2$ comes from subtracting across, $\\frac{5 - 1}{6 - 4} = \\frac{4}{2}$, which is not how fractions are subtracted.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A printer prints 15 pages per minute. It printed 315 pages in $m$ minutes, so $15m = 315$. How many minutes did it run?`,
+      choices: [
+        no(`300`, 'subtracted-instead-of-divided'),
+        ok(`21`),
+        no(`4725`, 'multiplied-instead-of-divided'),
+        no(`330`, 'added-instead-of-divided'),
+      ],
+      solution: `Divide both sides by 15: $m = 315 \\div 15 = 21$. Check: $15 \\times 21 = 315$. The choice 300 subtracts 15 from 315, but the equation multiplies $m$ by 15.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Movie tickets cost 8.50 dollars each. Jordan spent 34 dollars on $t$ tickets. Which equation represents this situation?`,
+      choices: [
+        no(`$t + 8.5 = 34$`, 'wrote-sum-for-product'),
+        no(`$34t = 8.5$`, 'reversed-factor-and-product'),
+        ok(`$8.5t = 34$`),
+        no(`$\\frac{t}{8.5} = 34$`, 'wrote-quotient-for-product'),
+      ],
+      solution: `Each ticket costs 8.50 dollars, so $t$ tickets cost $8.5 \\times t$ dollars. That total is 34 dollars, giving $8.5t = 34$. The choice $t + 8.5 = 34$ adds the price once instead of multiplying it by the number of tickets.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A bean plant grew 1.6 centimeters this week and is now 9.2 centimeters tall. If $h$ is its height last week, then $h + 1.6 = 9.2$. How tall was it last week?`,
+      choices: [
+        no(`10.8 centimeters`, 'added-instead-of-subtracted'),
+        no(`5.75 centimeters`, 'divided-instead-of-subtracted'),
+        ok(`7.6 centimeters`),
+        no(`8.4 centimeters`, 'subtracted-smaller-digit-from-larger'),
+      ],
+      solution: `Subtract 1.6 from both sides: $h = 9.2 - 1.6 = 7.6$. Check: $7.6 + 1.6 = 9.2$. The choice 8.4 centimeters comes from doing $6 - 2$ in the tenths column instead of regrouping.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $\\frac{5}{6}x = 10$?`,
+      choices: [
+        no(`$\\frac{25}{3}$`, 'multiplied-instead-of-divided'),
+        ok(`$12$`),
+        no(`$\\frac{55}{6}$`, 'subtracted-instead-of-divided'),
+        no(`$\\frac{1}{12}$`, 'divided-coefficient-by-total'),
+      ],
+      solution: `Divide both sides by $\\frac{5}{6}$, which is the same as multiplying by $\\frac{6}{5}$: $x = 10 \\times \\frac{6}{5} = 12$. Check: $\\frac{5}{6} \\times 12 = 10$. The choice $\\frac{25}{3}$ multiplies 10 by $\\frac{5}{6}$ instead of dividing.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Which equation represents "a number $n$ increased by $\\frac{3}{4}$ equals 5"?`,
+      choices: [
+        no(`$\\frac{3}{4}n = 5$`, 'wrote-product-for-sum'),
+        no(`$n - \\frac{3}{4} = 5$`, 'wrote-difference-for-sum'),
+        no(`$n + 5 = \\frac{3}{4}$`, 'swapped-addend-and-total'),
+        ok(`$n + \\frac{3}{4} = 5$`),
+      ],
+      solution: `"Increased by" means add, so $n$ increased by $\\frac{3}{4}$ is $n + \\frac{3}{4}$, and it equals 5: $n + \\frac{3}{4} = 5$. The choice $\\frac{3}{4}n = 5$ multiplies, which would mean "$\\frac{3}{4}$ of a number."`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Which value of $x$ makes $9x = 4.5$ true?`,
+      choices: [
+        ok(`$0.5$`),
+        no(`$2$`, 'divided-coefficient-by-total'),
+        no(`$40.5$`, 'multiplied-instead-of-divided'),
+        no(`$5$`, 'misplaced-decimal-point'),
+      ],
+      solution: `Divide both sides by 9: $x = 4.5 \\div 9 = 0.5$. Check: $9 \\times 0.5 = 4.5$. The choice $2$ divides 9 by 4.5, which reverses the division.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Ravi cuts a ribbon that is $4\\frac{1}{2}$ feet long into pieces that are each $\\frac{3}{8}$ foot long. If $p$ is the number of pieces, then $\\frac{3}{8}p = 4\\frac{1}{2}$. How many pieces does Ravi get?`,
+      choices: [
+        no(`$\\frac{27}{16}$`, 'multiplied-instead-of-divided'),
+        no(`$\\frac{1}{12}$`, 'divided-coefficient-by-total'),
+        ok(`$12$`),
+        no(`$\\frac{33}{8}$`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `Write $4\\frac{1}{2}$ as $\\frac{9}{2}$ and divide both sides by $\\frac{3}{8}$: $p = \\frac{9}{2} \\div \\frac{3}{8} = \\frac{9}{2} \\times \\frac{8}{3} = \\frac{72}{6} = 12$. Check: $\\frac{3}{8} \\times 12 = \\frac{36}{8} = 4\\frac{1}{2}$. The choice $\\frac{27}{16}$ multiplies the two lengths instead of dividing.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `What value of $x$ solves $x + 2\\frac{1}{3} = 5\\frac{1}{6}$?`,
+      choices: [
+        no(`$3\\frac{1}{6}$`, 'subtracted-smaller-fraction-from-larger'),
+        no(`$7\\frac{1}{2}$`, 'added-instead-of-subtracted'),
+        no(`$3\\frac{5}{6}$`, 'forgot-to-reduce-whole-after-regrouping'),
+        ok(`$2\\frac{5}{6}$`),
+      ],
+      solution: `Subtract $2\\frac{1}{3}$ from both sides. Rewrite with sixths: $5\\frac{1}{6} - 2\\frac{2}{6}$. Since $\\frac{1}{6}$ is less than $\\frac{2}{6}$, regroup $5\\frac{1}{6}$ as $4\\frac{7}{6}$. Then $4\\frac{7}{6} - 2\\frac{2}{6} = 2\\frac{5}{6}$. The choice $3\\frac{1}{6}$ subtracts the wholes and then takes $\\frac{1}{3} - \\frac{1}{6}$, flipping the fraction subtraction.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A deli sells cheese for 3.20 dollars per pound. Noor paid 12 dollars for $w$ pounds of cheese, so $3.2w = 12$. How many pounds did Noor buy?`,
+      choices: [
+        ok(`3.75 pounds`),
+        no(`38.4 pounds`, 'multiplied-instead-of-divided'),
+        no(`8.8 pounds`, 'subtracted-instead-of-divided'),
+        no(`0.375 pounds`, 'misplaced-decimal-point'),
+      ],
+      solution: `Divide both sides by 3.2: $w = 12 \\div 3.2 = 120 \\div 32 = 3.75$. Check: $3.2 \\times 3.75 = 12$. The choice 38.4 pounds multiplies 12 by 3.2 instead of dividing.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Theo is reading a 240-page book. After reading 48 more pages today, Theo has read $\\frac{3}{4}$ of the book. If $x$ is the number of pages Theo had read before today, then $x + 48 = \\frac{3}{4} \\times 240$. What is $x$?`,
+      choices: [
+        no(`228`, 'added-instead-of-subtracted'),
+        no(`192`, 'used-whole-book-instead-of-fraction'),
+        ok(`132`),
+        no(`144`, 'took-fraction-after-subtracting'),
+      ],
+      solution: `First find the right side: $\\frac{3}{4} \\times 240 = 180$, so $x + 48 = 180$. Subtract 48 from both sides: $x = 180 - 48 = 132$. The choice 192 subtracts 48 from the whole 240 pages, but Theo has read only $\\frac{3}{4}$ of the book.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A rectangular rug has an area of 13.5 square feet and a width of 3 feet. If $l$ is its length, which equation and solution are correct?`,
+      choices: [
+        no(`$l + 3 = 13.5$, so $l = 10.5$ feet`, 'wrote-sum-for-product'),
+        ok(`$3l = 13.5$, so $l = 4.5$ feet`),
+        no(`$3l = 13.5$, so $l = 40.5$ feet`, 'multiplied-instead-of-divided'),
+        no(`$13.5l = 3$, so $l = \\frac{2}{9}$ foot`, 'reversed-factor-and-product'),
+      ],
+      solution: `The area of a rectangle is width times length, so $3l = 13.5$. Divide both sides by 3: $l = 13.5 \\div 3 = 4.5$ feet. Check: $3 \\times 4.5 = 13.5$. The choice with $l + 3 = 13.5$ adds the width, but area comes from multiplying.`,
+    },
+  ],
+}
+
+export default skill
