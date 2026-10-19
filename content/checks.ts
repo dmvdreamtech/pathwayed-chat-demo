@@ -82,6 +82,8 @@ function itemIssues(where: string, item: ContentItem, math = false): string[] {
 
 // The seed shuffles picture tiles too, so a spoken stem cannot point at a place on the screen.
 const BY_PLACE = /\b(?:left|right|top|bottom|first|second|third|fourth|last|middle) (?:one|tile|picture|box|answer|choice)\b/i
+// The solution is spoken after a wrong tap too, so it may not praise the tap.
+const PRAISE = /\b(?:great|good|nice|awesome|super|excellent|amazing) (?:job|work|listening|counting|thinking|reading|try)\b|\b(?:you got it|well done|way to go|that'?s right|you did it|correct)\b/i
 const spokenWords = (s: string) => s.split(/\s+/).filter(Boolean).length
 
 /**
@@ -118,6 +120,7 @@ function pictureItemIssues(where: string, item: ContentItem, math = false): stri
   if (item.prompt) for (const p of pictureIssues(item.prompt, 'prompt')) out.push(`${at}: ${p}`)
   const sol = item.solution.trim()
   if (sol.length < 10) out.push(`${at}: the spoken solution is missing or too short`)
+  if (PRAISE.test(sol)) out.push(`${at}: the spoken solution praises the tap (it is also spoken after a wrong tap)`)
   if (spokenWords(sol) > 40) out.push(`${at}: the spoken solution is ${spokenWords(sol)} words, keep it to 40`)
   const spoken: [string, string][] = [['stem', stem], ['solution', sol], ...item.choices.map((c) => ['tile', c.text] as [string, string])]
   // In math, a minus sign between two numbers is math, not a dash (0044 accepts the same).
