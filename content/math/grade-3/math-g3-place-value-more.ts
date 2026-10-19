@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g3-place-value-more',
+  extends: 'place-value',
+  subject: 'math',
+  grade: 3,
+  group: 'Number and Operations in Base Ten',
+  name: 'Place Value',
+  standards: ['3.NBT.A'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is $47$ rounded to the nearest 10?`,
+      choices: [
+        ok(`$50$`),
+        no(`$40$`, 'rounded-down-instead-of-up'),
+        no(`$100$`, 'rounded-to-nearest-hundred'),
+        no(`$47$`, 'did-not-round'),
+      ],
+      solution: `$47$ is between $40$ and $50$. The ones digit is $7$, which is $5$ or more, so round up to $50$. The choice $40$ rounds down, but $47$ is closer to $50$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is $362$ rounded to the nearest 100?`,
+      choices: [
+        no(`$300$`, 'rounded-down-instead-of-up'),
+        no(`$360$`, 'rounded-to-nearest-ten'),
+        ok(`$400$`),
+        no(`$362$`, 'did-not-round'),
+      ],
+      solution: `$362$ is between $300$ and $400$. Look at the tens digit: it is $6$, which is $5$ or more, so round up to $400$. The choice $360$ is $362$ rounded to the nearest 10, not the nearest 100.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `What is $6 \\times 30$?`,
+      choices: [
+        no(`$18$`, 'forgot-the-zero'),
+        ok(`$180$`),
+        no(`$1{,}800$`, 'added-an-extra-zero'),
+        no(`$36$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `$30$ is $3$ tens, so $6 \\times 30$ is $6 \\times 3 = 18$ tens, which is $180$. The choice $18$ forgets that the answer is 18 tens, not 18 ones.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What is $4 \\times 70$?`,
+      choices: [
+        no(`$74$`, 'added-instead-of-multiplied'),
+        no(`$28$`, 'forgot-the-zero'),
+        no(`$2{,}800$`, 'added-an-extra-zero'),
+        ok(`$280$`),
+      ],
+      solution: `$70$ is $7$ tens, so $4 \\times 70$ is $4 \\times 7 = 28$ tens, which is $280$. The choice $74$ comes from adding $4 + 70$ instead of multiplying.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `What is $85$ rounded to the nearest 10?`,
+      choices: [
+        ok(`$90$`),
+        no(`$80$`, 'rounded-halfway-down'),
+        no(`$100$`, 'rounded-to-nearest-hundred'),
+        no(`$85$`, 'did-not-round'),
+      ],
+      solution: `$85$ is exactly halfway between $80$ and $90$. When a number is exactly halfway, round up, so $85$ rounds to $90$. The choice $80$ rounds a halfway number down.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A library has $714$ books. What is $714$ rounded to the nearest 10?`,
+      choices: [
+        no(`$720$`, 'rounded-up-instead-of-down'),
+        ok(`$710$`),
+        no(`$700$`, 'rounded-to-nearest-hundred'),
+        no(`$715$`, 'rounded-to-nearest-five'),
+      ],
+      solution: `$714$ is between $710$ and $720$. The ones digit is $4$, which is less than $5$, so round down to $710$. The choice $720$ rounds up, but $714$ is closer to $710$.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `What is $250$ rounded to the nearest 100?`,
+      choices: [
+        no(`$200$`, 'rounded-halfway-down'),
+        ok(`$300$`),
+        no(`$250$`, 'did-not-round'),
+        no(`$3$`, 'gave-number-of-hundreds-only'),
+      ],
+      solution: `$250$ is exactly halfway between $200$ and $300$. A number that is exactly halfway rounds up, so $250$ rounds to $300$. The choice $200$ rounds the halfway number down.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What is $596$ rounded to the nearest 10?`,
+      choices: [
+        no(`$590$`, 'rounded-down-instead-of-up'),
+        no(`$500$`, 'did-not-regroup-when-rounding-up'),
+        ok(`$600$`),
+        no(`$596$`, 'did-not-round'),
+      ],
+      solution: `$596$ is between $590$ and $600$. The ones digit is $6$, so round up to the next ten. The next ten after $590$ is $600$, because $59$ tens plus $1$ ten is $60$ tens. The choice $500$ changes the tens digit to $0$ but forgets to add one to the hundreds.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `A store has $9$ boxes of pencils. Each box holds $40$ pencils. How many pencils are there in all?`,
+      choices: [
+        no(`$36$`, 'forgot-the-zero'),
+        no(`$49$`, 'added-instead-of-multiplied'),
+        ok(`$360$`),
+        no(`$3{,}600$`, 'added-an-extra-zero'),
+      ],
+      solution: `Multiply $9 \\times 40$. Since $40$ is $4$ tens, $9 \\times 4 = 36$ tens, which is $360$ pencils. The choice $49$ adds $9 + 40$ instead of multiplying.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Which expression has the same value as $7 \\times 60$?`,
+      choices: [
+        ok(`$(7 \\times 6) \\times 10$`),
+        no(`$(7 \\times 6) + 10$`, 'added-ten-instead-of-multiplied'),
+        no(`$(7 \\times 6) \\times 100$`, 'used-wrong-power-of-ten'),
+        no(`$7 + 60$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `$60 = 6 \\times 10$, so $7 \\times 60 = 7 \\times 6 \\times 10 = (7 \\times 6) \\times 10 = 42 \\times 10 = 420$. The choice $(7 \\times 6) + 10$ adds $10$, which gives $52$, not $420$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A school has $538$ students. What is $538$ rounded to the nearest 100?`,
+      choices: [
+        no(`$600$`, 'rounded-up-instead-of-down'),
+        no(`$540$`, 'rounded-to-nearest-ten'),
+        no(`$530$`, 'cut-off-ones-instead-of-rounding'),
+        ok(`$500$`),
+      ],
+      solution: `$538$ is between $500$ and $600$. The tens digit is $3$, which is less than $5$, so round down to $500$. The choice $540$ is $538$ rounded to the nearest 10, not the nearest 100.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A gym has $5$ rows of seats with $90$ seats in each row. How many seats are there in all?`,
+      choices: [
+        ok(`$450$`),
+        no(`$45$`, 'forgot-the-zero'),
+        no(`$95$`, 'added-instead-of-multiplied'),
+        no(`$4{,}500$`, 'added-an-extra-zero'),
+      ],
+      solution: `Multiply $5 \\times 90$. Since $90$ is $9$ tens, $5 \\times 9 = 45$ tens, which is $450$ seats. The choice $45$ gives the number of tens instead of the number of seats.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Which number rounds to $70$ when it is rounded to the nearest 10?`,
+      choices: [
+        no(`$75$`, 'thought-halfway-rounds-down'),
+        ok(`$74$`),
+        no(`$63$`, 'rounded-up-any-nonzero-ones-digit'),
+        no(`$79$`, 'cut-off-ones-instead-of-rounding'),
+      ],
+      solution: `$74$ has a ones digit of $4$, which is less than $5$, so it rounds down to $70$. The choice $75$ is exactly halfway between $70$ and $80$, so it rounds up to $80$. The choice $79$ rounds to $80$, not $70$.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Each of $6$ tables gets $50$ sheets of paper. How many sheets of paper is that in all?`,
+      choices: [
+        no(`$30$`, 'forgot-the-zero'),
+        no(`$56$`, 'added-instead-of-multiplied'),
+        no(`$3{,}000$`, 'added-an-extra-zero'),
+        ok(`$300$`),
+      ],
+      solution: `Multiply $6 \\times 50$. Since $50$ is $5$ tens, $6 \\times 5 = 30$ tens, which is $300$ sheets. The fact $6 \\times 5 = 30$ already ends in a zero, so the answer $300$ has two zeros. The choice $30$ forgets that the answer is 30 tens.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `What is $905$ rounded to the nearest 100?`,
+      choices: [
+        no(`$1{,}000$`, 'used-ones-digit-to-decide'),
+        ok(`$900$`),
+        no(`$910$`, 'rounded-to-nearest-ten'),
+        no(`$9$`, 'gave-number-of-hundreds-only'),
+      ],
+      solution: `$905$ is between $900$ and $1{,}000$. To round to the nearest 100, look at the tens digit. It is $0$, so round down to $900$. The choice $1{,}000$ looks at the ones digit $5$ instead of the tens digit.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `What is $449$ rounded to the nearest 100?`,
+      choices: [
+        no(`$500$`, 'rounded-in-steps'),
+        no(`$450$`, 'rounded-to-nearest-ten'),
+        ok(`$400$`),
+        no(`$440$`, 'cut-off-ones-instead-of-rounding'),
+      ],
+      solution: `$449$ is between $400$ and $500$. The tens digit is $4$, which is less than $5$, so round down to $400$. The choice $500$ comes from rounding to $450$ first and then rounding $450$ up, but you must round the original number in one step.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `What is the greatest whole number that rounds to $380$ when it is rounded to the nearest 10?`,
+      choices: [
+        no(`$385$`, 'thought-halfway-rounds-down'),
+        ok(`$384$`),
+        no(`$389$`, 'cut-off-ones-instead-of-rounding'),
+        no(`$375$`, 'gave-least-number-instead-of-greatest'),
+      ],
+      solution: `Numbers from $375$ to $384$ round to $380$. The number $385$ is exactly halfway between $380$ and $390$, so it rounds up to $390$. The greatest number that rounds to $380$ is $384$. The choice $375$ is the least such number, not the greatest.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A baker fills $4$ trays with $30$ muffins each and $2$ trays with $40$ muffins each. How many muffins is that in all?`,
+      choices: [
+        no(`$20$`, 'forgot-the-zeros'),
+        no(`$120$`, 'used-only-first-group'),
+        no(`$420$`, 'added-factors-before-multiplying'),
+        ok(`$200$`),
+      ],
+      solution: `First find each group: $4 \\times 30 = 120$ and $2 \\times 40 = 80$. Then add: $120 + 80 = 200$ muffins. The choice $420$ adds the trays ($4 + 2 = 6$) and the muffins ($30 + 40 = 70$) and then multiplies $6 \\times 70$, which is not how the trays were filled.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Which product is the greatest?`,
+      choices: [
+        no(`$5 \\times 90$`, 'picked-largest-multiple-of-ten'),
+        no(`$9 \\times 50$`, 'picked-largest-one-digit-factor'),
+        ok(`$7 \\times 70$`),
+        no(`$6 \\times 80$`, 'did-not-compute-each-product'),
+      ],
+      solution: `Find each product: $5 \\times 90 = 450$, $9 \\times 50 = 450$, $7 \\times 70 = 490$ and $6 \\times 80 = 480$. The greatest is $490$, so the answer is $7 \\times 70$. The choice $5 \\times 90$ has the biggest multiple of ten, but its product is only $450$.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Jada rounds $246$ to the nearest 10 and also rounds $246$ to the nearest 100. What is the difference between the two rounded numbers?`,
+      choices: [
+        ok(`$50$`),
+        no(`$46$`, 'subtracted-from-original-number'),
+        no(`$4$`, 'compared-original-to-nearest-ten'),
+        no(`$40$`, 'cut-off-ones-instead-of-rounding'),
+      ],
+      solution: `To the nearest 10, $246$ rounds up to $250$ because the ones digit is $6$. To the nearest 100, $246$ rounds down to $200$ because the tens digit is $4$. The difference is $250 - 200 = 50$. The choice $40$ comes from cutting $246$ to $240$ instead of rounding it to $250$.`,
+    },
+  ],
+}
+
+export default skill
