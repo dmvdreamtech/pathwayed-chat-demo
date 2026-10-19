@@ -60,16 +60,24 @@ function BaseTen({ hundreds = 0, tens, ones }: { hundreds?: number; tens: number
   const U = 6
   const parts: React.ReactNode[] = []
   let x = 2
+  // Up to 3 hundreds draw as full-size flats in a row. More would make the
+  // picture too wide to read, so 4 to 9 hundreds draw as half-size flats in two
+  // rows (still 10 by 10 squares each, so they can be counted).
+  const small = hundreds > 3
+  const HU = small ? U / 2 - 0.15 : U
+  const perRow = small ? Math.ceil(hundreds / 2) : hundreds
   for (let h = 0; h < hundreds; h++) {
+    const hx = x + (h % perRow) * (10 * HU + 3)
+    const hy = 2 + (small ? Math.floor(h / perRow) * (5 * U + 2) : 0)
     parts.push(
       <g key={`h${h}`}>
         {Array.from({ length: 100 }, (_, k) => (
-          <rect key={k} x={x + (k % 10) * U} y={2 + Math.floor(k / 10) * U} width={U} height={U} fill="#7cb5f0" stroke={NAVY} strokeWidth="0.6" />
+          <rect key={k} x={hx + (k % 10) * HU} y={hy + Math.floor(k / 10) * HU} width={HU} height={HU} fill="#7cb5f0" stroke={NAVY} strokeWidth={small ? 0.35 : 0.6} />
         ))}
       </g>,
     )
-    x += 10 * U + 5
   }
+  if (hundreds) x += perRow * (10 * HU + 3) + 2
   for (let t = 0; t < tens; t++) {
     parts.push(
       <g key={`t${t}`}>
@@ -192,7 +200,7 @@ export function PictureFigure({ figure, place, label }: { figure: PictureTile | 
     case 'letter':
       return <span className="picq-num">{figure.value}</span>
     case 'word':
-      return <span className={`picq-word ${figure.value.length > 8 ? 'picq-word-long' : ''}`}>{figure.value}</span>
+      return <span className={`picq-word ${figure.value.length > 5 ? 'picq-word-long' : ''}`}>{figure.value}</span>
     case 'object_group':
       return <Group image={figure.image} count={figure.count} variant={place === 'tile' ? 'tile' : figure.count === 1 ? 'solo' : 'count'} />
     case 'clock':
