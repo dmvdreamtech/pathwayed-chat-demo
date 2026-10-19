@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g3-early-geometry-more',
+  extends: 'early-geometry',
+  subject: 'math',
+  grade: 3,
+  group: 'Geometry',
+  name: 'Shapes & Their Attributes',
+  standards: ['3.G.A'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `How many sides does a pentagon have?`,
+      choices: [
+        ok(`5`),
+        no(`6`, 'confused-pentagon-with-hexagon'),
+        no(`4`, 'confused-pentagon-with-quadrilateral'),
+        no(`8`, 'confused-pentagon-with-octagon'),
+      ],
+      solution: `A pentagon is a shape with 5 straight sides and 5 vertices. The choice 6 is the number of sides of a hexagon, not a pentagon.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Which attribute does every rhombus have?`,
+      choices: [
+        ok(`4 sides that are all the same length`),
+        no(`4 right angles`, 'thinks-every-rhombus-is-a-square'),
+        no(`Exactly one pair of parallel sides`, 'confused-rhombus-with-trapezoid'),
+        no(`3 sides that are all the same length`, 'confused-rhombus-with-triangle'),
+      ],
+      solution: `A rhombus is a quadrilateral whose 4 sides are all the same length. It does not need right angles; a rhombus with 4 right angles is a special rhombus called a square.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A garden bed is split into 3 equal parts. What fraction of the garden bed is each part?`,
+      choices: [
+        ok(`$\\frac{1}{3}$`),
+        no(`$\\frac{3}{1}$`, 'flipped-numerator-and-denominator'),
+        no(`$\\frac{1}{2}$`, 'thinks-any-part-is-a-half'),
+        no(`$\\frac{3}{3}$`, 'named-the-whole-instead-of-one-part'),
+      ],
+      solution: `There are 3 equal parts, and one part is 1 of those 3, so it is $\\frac{1}{3}$ of the bed. The choice $\\frac{3}{3}$ names all 3 parts, which is the whole bed.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `How many angles does every quadrilateral have?`,
+      choices: [
+        no(`3`, 'confused-quadrilateral-with-triangle'),
+        ok(`4`),
+        no(`5`, 'confused-quadrilateral-with-pentagon'),
+        no(`8`, 'added-sides-and-angles'),
+      ],
+      solution: `A quadrilateral has 4 sides, and where each pair of sides meets there is an angle, so it has 4 angles. The choice 8 adds the 4 sides and the 4 angles together.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which of these shapes is a rhombus?`,
+      choices: [
+        no(`A shape with 3 sides that are each 5 cm long`, 'counted-triangle-as-rhombus'),
+        no(`A shape with 4 sides that are 5 cm, 3 cm, 5 cm and 3 cm long`, 'thinks-two-pairs-of-equal-sides-make-a-rhombus'),
+        ok(`A shape with 4 sides that are each 5 cm long`),
+        no(`A shape with 5 sides that are each 5 cm long`, 'thinks-any-equal-sided-shape-is-a-rhombus'),
+      ],
+      solution: `A rhombus has exactly 4 sides, and all 4 are the same length, so the shape with four 5 cm sides fits. The shape with sides 5, 3, 5 and 3 cm has 4 sides, but they are not all equal.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A floor tile is divided into 8 equal parts. What fraction of the tile is one part?`,
+      choices: [
+        no(`$\\frac{8}{1}$`, 'flipped-numerator-and-denominator'),
+        no(`$\\frac{1}{7}$`, 'compared-part-to-the-other-parts'),
+        no(`$\\frac{8}{8}$`, 'named-the-whole-instead-of-one-part'),
+        ok(`$\\frac{1}{8}$`),
+      ],
+      solution: `The tile has 8 equal parts, so one part is $\\frac{1}{8}$ of the tile. The choice $\\frac{1}{7}$ compares one part with the 7 other parts instead of with the whole tile.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Which attribute do every square, every rectangle and every rhombus share?`,
+      choices: [
+        no(`4 right angles`, 'thinks-rhombus-has-right-angles'),
+        no(`4 sides that are all the same length`, 'thinks-rectangle-sides-are-all-equal'),
+        ok(`2 pairs of parallel sides`),
+        no(`Exactly 3 vertices`, 'confused-quadrilateral-with-triangle'),
+      ],
+      solution: `In a square, a rectangle and a rhombus, each side is parallel to the side across from it, so all three have 2 pairs of parallel sides. The choice "4 right angles" fails because a rhombus does not need right angles.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A shape has 4 sides that are all the same length, but none of its angles is a right angle. What is the best name for the shape?`,
+      choices: [
+        no(`A square`, 'ignored-the-angle-condition'),
+        no(`A rectangle`, 'thinks-rectangle-needs-no-right-angles'),
+        no(`A pentagon`, 'miscounted-the-sides'),
+        ok(`A rhombus`),
+      ],
+      solution: `Four equal sides make the shape a rhombus. It cannot be a square or a rectangle, because both of those need 4 right angles, and this shape has none.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Tavi draws a kite shape. It has 4 sides: two sides next to each other are 3 cm long, and the other two sides are 5 cm long. It has no right angles and no parallel sides. Which statement about the kite is true?`,
+      choices: [
+        ok(`It is a quadrilateral, but not a rhombus, rectangle or square`),
+        no(`It is a rhombus`, 'thinks-two-pairs-of-equal-sides-make-a-rhombus'),
+        no(`It is a rectangle`, 'thinks-two-pairs-of-equal-sides-make-a-rectangle'),
+        no(`It is a square`, 'thinks-any-four-sided-shape-is-a-square'),
+      ],
+      solution: `The kite has 4 sides, so it is a quadrilateral. Its sides are not all equal, so it is not a rhombus or a square, and it has no right angles, so it is not a rectangle.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A rectangle is cut into 4 parts that all have the same area. Two parts are triangles and two parts are small rectangles. What fraction of the whole rectangle's area is each part?`,
+      choices: [
+        no(`It cannot be named, because the parts are different shapes`, 'thinks-equal-parts-must-be-the-same-shape'),
+        ok(`$\\frac{1}{4}$`),
+        no(`$\\frac{1}{2}$`, 'counted-the-kinds-of-shapes'),
+        no(`$\\frac{2}{4}$`, 'counted-the-matching-pair-as-one-part'),
+      ],
+      solution: `The 4 parts have equal area, so each one is $\\frac{1}{4}$ of the whole, even though they are different shapes. Equal parts only need the same area, not the same shape.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A banner is divided into equal pieces, and each piece is $\\frac{1}{6}$ of the banner. How many pieces does the banner have?`,
+      choices: [
+        no(`1`, 'read-the-numerator-as-the-count'),
+        no(`5`, 'confused-cut-lines-with-parts'),
+        ok(`6`),
+        no(`7`, 'added-numerator-and-denominator'),
+      ],
+      solution: `When each equal piece is $\\frac{1}{6}$, it takes 6 pieces to make the whole banner. The choice 5 is the number of cut lines needed to make 6 pieces in a row, not the number of pieces.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Jordan makes 3 straight cuts across a strip of paper and gets pieces that are all the same size. What fraction of the strip is each piece?`,
+      choices: [
+        no(`$\\frac{1}{3}$`, 'used-number-of-cuts-as-number-of-parts'),
+        ok(`$\\frac{1}{4}$`),
+        no(`$\\frac{3}{4}$`, 'used-number-of-cuts-as-numerator'),
+        no(`$\\frac{4}{1}$`, 'flipped-numerator-and-denominator'),
+      ],
+      solution: `Three cuts across a strip make 4 pieces, so each equal piece is $\\frac{1}{4}$ of the strip. The choice $\\frac{1}{3}$ counts the cuts instead of the pieces.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Two rectangles are the same size. The first is cut into 3 equal parts and the second is cut into 6 equal parts. Which statement is true?`,
+      choices: [
+        no(`Each part of the second rectangle is bigger`, 'thinks-more-parts-means-bigger-parts'),
+        no(`The parts of both rectangles are the same size`, 'ignored-the-number-of-parts'),
+        no(`You cannot tell without measuring`, 'thinks-equal-parts-cannot-be-compared'),
+        ok(`Each part of the first rectangle is bigger`),
+      ],
+      solution: `Both wholes are the same size, so cutting into fewer parts makes each part bigger: $\\frac{1}{3}$ of a rectangle is larger than $\\frac{1}{6}$ of the same size rectangle. More parts means smaller parts, not bigger ones.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `How many sides do 2 triangles and 1 pentagon have altogether?`,
+      choices: [
+        no(`8`, 'counted-only-one-triangle'),
+        no(`10`, 'thought-pentagon-has-4-sides'),
+        ok(`11`),
+        no(`12`, 'confused-pentagon-with-hexagon'),
+      ],
+      solution: `Each triangle has 3 sides and a pentagon has 5, so the total is $3 + 3 + 5 = 11$. The choice 8 counts only one triangle: $3 + 5 = 8$.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Which statement is true?`,
+      choices: [
+        no(`Every rhombus is a square`, 'reversed-the-category-relationship'),
+        ok(`Every square is a rhombus`),
+        no(`Every rectangle is a rhombus`, 'thinks-rectangle-sides-are-all-equal'),
+        no(`Every quadrilateral is a rectangle`, 'overgeneralized-the-quadrilateral-category'),
+      ],
+      solution: `A square has 4 equal sides, which is what a rhombus needs, so every square is a rhombus. The reverse is false: a rhombus without right angles is not a square.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `A square game board has sides 6 inches long, so its area is 36 square inches. It is cut into 4 parts with equal area. Which describes each part?`,
+      choices: [
+        ok(`9 square inches, which is $\\frac{1}{4}$ of the board`),
+        no(`9 square inches, which is $\\frac{1}{9}$ of the board`, 'used-part-area-as-denominator'),
+        no(`32 square inches, which is $\\frac{1}{4}$ of the board`, 'subtracted-instead-of-divided'),
+        no(`6 square inches, which is $\\frac{1}{6}$ of the board`, 'used-side-length-instead-of-area'),
+      ],
+      solution: `Share 36 square inches equally among 4 parts: $36 \\div 4 = 9$, so each part is 9 square inches and is $\\frac{1}{4}$ of the board. The choice with $\\frac{1}{9}$ has the right area but names the fraction by the area instead of by the 4 equal parts.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A square is split into 4 equal parts. Then each of those parts is split into 2 equal smaller parts. What fraction of the square is one small part?`,
+      choices: [
+        no(`$\\frac{1}{6}$`, 'added-the-numbers-of-parts'),
+        no(`$\\frac{1}{4}$`, 'ignored-the-second-split'),
+        no(`$\\frac{1}{2}$`, 'used-only-the-second-split'),
+        ok(`$\\frac{1}{8}$`),
+      ],
+      solution: `Each of the 4 parts becomes 2 small parts, so there are $4 \\times 2 = 8$ equal small parts, and one is $\\frac{1}{8}$ of the square. The choice $\\frac{1}{6}$ adds $4 + 2$ instead of multiplying.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Ms. Ortiz describes a shape: it has 4 sides, 4 right angles, and all 4 sides are the same length. Which list gives every name that fits the shape?`,
+      choices: [
+        no(`Square only`, 'thinks-a-shape-has-only-one-name'),
+        no(`Rectangle and square only`, 'left-out-rhombus-and-quadrilateral'),
+        ok(`Quadrilateral, rectangle, rhombus and square`),
+        no(`Rhombus and square only`, 'left-out-rectangle-and-quadrilateral'),
+      ],
+      solution: `The shape has 4 sides (quadrilateral), 4 right angles (rectangle) and 4 equal sides (rhombus), and having both makes it a square. So all four names fit; "Square only" misses that a square also belongs to the larger groups.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A rectangle is 4 units long and 2 units wide. One straight line splits it into a left part that is 3 units long and a right part that is 1 unit long, both 2 units wide. What fraction of the rectangle's area is the right part?`,
+      choices: [
+        no(`$\\frac{1}{2}$`, 'thinks-two-parts-are-always-halves'),
+        no(`$\\frac{1}{3}$`, 'compared-part-to-the-other-part'),
+        ok(`$\\frac{1}{4}$`),
+        no(`$\\frac{3}{4}$`, 'named-the-larger-part'),
+      ],
+      solution: `The whole rectangle has area $4 \\times 2 = 8$ square units and the right part has area $1 \\times 2 = 2$ square units. Since $4$ parts of 2 square units fill the 8, the right part is $\\frac{1}{4}$ of the area. The two parts are not equal, so the right part is not $\\frac{1}{2}$.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Which quadrilateral is NOT a rhombus, NOT a rectangle and NOT a square?`,
+      choices: [
+        no(`A shape with 4 sides that are each 3 cm long and no right angles`, 'missed-that-equal-sides-make-a-rhombus'),
+        no(`A shape with sides of 2 cm, 5 cm, 2 cm and 5 cm and 4 right angles`, 'missed-that-right-angles-make-a-rectangle'),
+        no(`A shape with 4 sides that are each 4 cm long and 4 right angles`, 'missed-the-attributes-of-a-square'),
+        ok(`A shape with sides of 2 cm, 3 cm, 4 cm and 5 cm and no right angles`),
+      ],
+      solution: `The shape with sides 2, 3, 4 and 5 cm has unequal sides, so it is not a rhombus or a square, and it has no right angles, so it is not a rectangle. The shape with four 3 cm sides is a rhombus, even without right angles.`,
+    },
+  ],
+}
+
+export default skill
