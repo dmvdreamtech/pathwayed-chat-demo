@@ -147,7 +147,7 @@ const skill: ContentSkill = {
           difficulty: 'hard',
           stem: `Which sentence, added after sentence 12, would most strengthen the claim that the restoration caused the rise in water levels?`,
           choices: [
-            no(`One farmer said that his well seemed fuller than it had been in years.`, 'anecdote-as-evidence'),
+            no(`One farmer said that the family well seemed fuller than it had been in years.`, 'anecdote-as-evidence'),
             no(`Rainfall during those three seasons was the heaviest recorded in two decades.`, 'undermines-claim'),
             ok(`Over the same period, wells in a similar district with no restored stepwells showed no measurable change.`),
             no(`The restoration project became popular with visitors from many nearby towns.`, 'irrelevant-detail'),
@@ -163,7 +163,7 @@ const skill: ContentSkill = {
         `(1) Goalball is a team sport designed for athletes with visual impairments, and it is played almost entirely by sound. (2) Two teams of three players face each other on a court about the size of a volleyball court, with a goal stretching across the full width of each end line. (3) Players take turns rolling a heavy rubber ball toward the opposing goal, while defenders dive sideways to block it with their bodies.`,
         `(4) The ball is the key to the game. (5) It contains small bells that jingle as it rolls, allowing defenders to track its path without seeing it. (6) To keep the competition fair, every player wears blackout eyeshades, so athletes with some vision gain no advantage over those with none. (7) Tactile lines, strips of tape laid over string, mark the court so players can feel their positions with their hands and feet.`,
         `(8) Because the players depend on hearing, spectators must stay silent while the ball is in play. (9) Fans may cheer only after a goal is scored or the referee stops play. (10) This rule surprises many first-time visitors, who are used to loud crowds at other sporting events.`,
-        `(11) The sport has grown steadily. (12) At the 2024 Northgate Regional Championships, thirty-two teams competed, compared with nine teams at the first event in 2010. (13) My cousin went to a game once and said it was really quiet. (14) Coach Imani Lindqvist reported that her club's youth program had doubled in size in five years.`,
+        `(11) The sport has grown steadily. (12) At the 2024 Northgate Regional Championships, thirty-two teams competed, compared with nine teams at the first event in 2010. (13) My cousin went to a game once and said it was really quiet. (14) Coach Imani Lindqvist reported that the youth program at Lindqvist's club had doubled in size in five years.`,
       ),
       items: [
         {
@@ -210,7 +210,7 @@ const skill: ContentSkill = {
             no(`Goalball is getting way more popular these days.`, 'informal-vocabulary'),
             no(`Lots of people know about goalball now.`, 'vague-wording'),
             no(`The rules of goalball have changed many times.`, 'shifts-focus'),
-            ok(`Participation in goalball has grown steadily over the past fifteen years, at both competitive and youth levels.`),
+            ok(`Participation in goalball has grown steadily since 2010, at both competitive and youth levels.`),
           ],
           solution: `The correct revision names the time span and the two levels that sentences 12 (championship teams) and 14 (youth program) support. "Getting way more popular" points in the right direction but is informal and gives no frame for the evidence.`,
         },
@@ -220,8 +220,8 @@ const skill: ContentSkill = {
           stem: `The writer plans to add one graphic to the report. Which graphic would best help readers understand the information in paragraphs 1 and 2?`,
           choices: [
             ok(`A labeled overhead diagram of the court showing both goals, the tactile lines and where each team's three players stand.`),
-            no(`A photograph of a large crowd cheering loudly in the stands during a goalball match.`, 'contradicts-text'),
-            no(`A timeline of Coach Lindqvist's career, from her first season to the present day.`, 'off-focus-graphic'),
+            no(`A photograph of a large crowd cheering loudly in the stands while the ball is in play.`, 'contradicts-text'),
+            no(`A timeline of Coach Lindqvist's career, from the first season to the present day.`, 'off-focus-graphic'),
             no(`A map showing the city where the Northgate Regional Championships took place.`, 'irrelevant-graphic'),
           ],
           solution: `Paragraphs 1 and 2 describe the court layout, the goals, the players and the tactile lines, all of which a labeled diagram makes easier to picture. The cheering crowd photo is tempting because it shows a match, but it contradicts the silence rule in sentence 8.`,
@@ -305,10 +305,10 @@ const skill: ContentSkill = {
       code: 'wg12-informative-writing-p05',
       title: 'The Cables on the Ocean Floor',
       body: body(
-        `(1) When a student in one country joins a video call with a classmate overseas, the data rarely travels by satellite. (2) More than 95 percent of international internet traffic instead moves through submarine cables, bundles of glass fiber laid across the ocean floor. (3) Each fiber, thinner than a human hair, carries information as pulses of laser light.`,
+        `(1) When a student in one country joins a video call with a classmate overseas, the data rarely travels by satellite. (2) More than 95 percent of international internet traffic instead moves through submarine cables, bundles of glass fiber laid across the ocean floor. (3) Each fiber, about as thin as a human hair, carries information as pulses of laser light.`,
         `(4) A typical deep-sea cable is surprisingly slender, about the width of a garden hose. (5) Near the shore, where anchors and fishing gear pose risks, cables are wrapped in layers of steel wire and buried in trenches beneath the seabed. (6) In deep water, where few hazards exist, they simply rest on the bottom.`,
         `(7) Light weakens as it travels through glass, so the signal cannot cross an ocean unaided. (8) Every 60 to 80 kilometers, a device called a repeater amplifies the light pulses before they fade too much to read. (9) Repeaters require electricity, which reaches them through a copper layer inside the cable from power stations on each coast.`,
-        `(10) Cables do break, most often when ship anchors drag across them. (11) When this happens, a specialized repair ship locates the damaged section, raises the cable to the surface with a grappling hook, splices in a new segment and lowers it back down. (12) In 2022, the repair ship Kestrel Dawn fixed a break off the coast of the Marisol Islands in eleven days. (13) Traffic was moved to other cables.`,
+        `(10) Cables do break, most often when fishing gear or ship anchors drag across them. (11) When this happens, a specialized repair ship locates the damaged section, raises the cable to the surface with a grappling hook, splices in a new segment and lowers it back down. (12) In 2022, the repair ship Kestrel Dawn fixed a break off the coast of the Marisol Islands in eleven days. (13) Traffic was moved to other cables.`,
       ),
       items: [
         {
@@ -425,7 +425,7 @@ const skill: ContentSkill = {
           stem: `Which sentence, added at the end of paragraph 1, would best state the focus of the whole report?`,
           choices: [
             no(`Painting has been an important art form in nearly every culture throughout history.`, 'too-broad'),
-            no(`Odile Marchetti painted many harbor scenes during her long career.`, 'too-narrow'),
+            no(`Odile Marchetti painted many harbor scenes during a long career.`, 'too-narrow'),
             ok(`Conservators can reverse this darkening by carefully removing old varnish, revealing the colors that artists actually chose.`),
             no(`Old paintings with yellow varnish are honestly not very nice to look at.`, 'opinion-not-focus'),
           ],
@@ -451,7 +451,7 @@ const skill: ContentSkill = {
       body: body(
         `(1) A healthy coral reef is a noisy place. (2) Snapping shrimp crackle like frying oil, parrotfish crunch on coral, and many fish grunt, pop and whistle to communicate. (3) Together these sounds form a reef's soundscape, the combined acoustic signature of everything living in and around it.`,
         `(4) Because so many animals contribute to it, a soundscape reflects a reef's health. (5) When reefs are damaged by warming water, many of the animals that produce these sounds disappear, and the reef grows quiet. (6) Young fish, which drift in open water for weeks after hatching, appear to use reef sounds to find a place to settle.`,
-        `(7) In 2022, marine ecologist Priya Okonkwo-Hale tested whether sound could help damaged reefs recover. (8) Her team placed underwater speakers on twenty patches of degraded reef near Calloway Atoll and played recordings of healthy reefs each night for six weeks. (9) Twenty other degraded patches received speakers that stayed silent. (10) At the end of the study, the patches with playback had attracted about twice as many young fish as the silent patches. (11) I think this is the coolest experiment ever.`,
+        `(7) In 2022, marine ecologist Priya Okonkwo-Hale tested whether sound could help damaged reefs recover. (8) The team placed underwater speakers on twenty patches of degraded reef near Calloway Atoll and played recordings of healthy reefs each night for six weeks. (9) Twenty other degraded patches received speakers that stayed silent. (10) At the end of the study, the patches with playback had attracted about twice as many young fish as the silent patches. (11) I think this is the coolest experiment ever.`,
         `(12) The results are promising but limited. (13) Attracting fish does not by itself repair coral, and researchers do not yet know whether the newly settled fish will survive and reproduce over many years.`,
       ),
       items: [
