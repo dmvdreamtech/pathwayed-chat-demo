@@ -83,7 +83,7 @@ function itemIssues(where: string, item: ContentItem, math = false): string[] {
 // The seed shuffles picture tiles too, so a spoken stem cannot point at a place on the screen.
 const BY_PLACE = /\b(?:left|right|top|bottom|first|second|third|fourth|last|middle) (?:one|tile|picture|box|answer|choice)\b/i
 // The solution is spoken after a wrong tap too, so it may not praise the tap.
-const PRAISE = /\b(?:great|good|nice|awesome|super|excellent|amazing) (?:job|work|listening|counting|thinking|reading|try)\b|\b(?:you got it|well done|way to go|that'?s right|you did it|correct)\b/i
+const PRAISE = /\b(?:great|good|nice|awesome|super|excellent|amazing|wonderful|fantastic|terrific)\b[^.!?]{0,24}!|\b(?:great|good|nice) (?:job|work|try)\b|\b(?:you got it|well done|way to go|that'?s right|you did it|correct)\b/i
 const spokenWords = (s: string) => s.split(/\s+/).filter(Boolean).length
 
 /**
