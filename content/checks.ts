@@ -24,6 +24,13 @@ export function passageLimits(grade: number): { min: number; max: number; avgSen
 
 const DASHES = /[‒–—―−]|\s-\s|--/
 const TOKEN = /^[a-z][a-z0-9-]*$/
+const BY_POSITION = {
+  test: (s: string) =>
+    /\b(?:first|second|third|fourth|last|final) (?:choice|option|answer)s?\b/i.test(s) ||
+    /\b(?:[Cc]hoice|[Oo]ption|[Aa]nswer) [A-D]\b/.test(s) ||
+    // A capital letter in parentheses, not math like f(x) or 4(2)(c).
+    /(?<![A-Za-z0-9)$\\])\([A-D]\)/.test(s),
+}
 const SLUG = /^(read|write|math)-g(k|[0-9]|1[0-2])-[a-z0-9-]+$/
 
 // Math skills write expressions as $...$ (rendered by MathText), where a spaced
@@ -32,6 +39,10 @@ const MATH_SPAN = /\$[^$]*\$/g
 // '\frac' or '\times' written with one backslash in a TypeScript string becomes
 // a form feed or a tab, and KaTeX then shows garbage.
 const CONTROL = { test: (s: string) => [...s].some((ch) => ch.charCodeAt(0) < 0x20 && ch !== '\n' && ch !== '\r') }
+// '\square' or '\sqrt' with one backslash loses it silently ('\s' is just 's'),
+// so a bare command name inside $...$ means the backslash was dropped.
+const BARE_COMMAND = /(?<![\\A-Za-z])(?:square|sqrt|frac|dfrac|times|div|cdot|circ|text|left|right|approx|infty|angle|triangle|overline)(?![A-Za-z])/
+const bareCommand = (text: string) => (text.match(MATH_SPAN) ?? []).some((span) => BARE_COMMAND.test(span))
 const prose = (text: string, math: boolean) => (math ? text.replace(MATH_SPAN, ' ') : text)
 
 export const words = (s: string) => s.trim().split(/\s+/).filter(Boolean).length
@@ -56,9 +67,12 @@ function itemIssues(where: string, item: ContentItem, math = false): string[] {
     if (c.is_correct && c.misconception_token) out.push(`${at}: the correct choice must not carry a misconception_token`)
   }
   if (item.solution.trim().length < 20) out.push(`${at}: solution is missing or too short`)
+  // The seed shuffles the choices, so "the first choice" or "choice B" would point at the wrong one.
+  if (BY_POSITION.test(item.solution)) out.push(`${at}: solution names a choice by its position (quote the choice instead)`)
   for (const [label, text] of [['stem', item.stem], ['solution', item.solution], ...item.choices.map((c) => ['choice', c.text])]) {
     if (DASHES.test(prose(text, math))) out.push(`${at}: ${label} has a dash (em dash, en dash, or spaced hyphen)`)
     if (math && CONTROL.test(text)) out.push(`${at}: ${label} has a control character (a single backslash, like '\\frac', in the source?)`)
+    if (math && bareCommand(text)) out.push(`${at}: ${label} has a LaTeX command with no backslash inside $...$ (a single backslash in the source?)`)
     if (math && (text.match(/\$/g) ?? []).length % 2) out.push(`${at}: ${label} has an unpaired $ (math goes in $...$; write money as dollars)`)
   }
   if (!['easy', 'medium', 'hard'].includes(item.difficulty)) out.push(`${at}: difficulty must be easy, medium or hard`)
