@@ -26,7 +26,7 @@ const skill: ContentSkill = {
     {
       slot: 2,
       difficulty: 'easy',
-      stem: `Read the sentence: "On weekends Jalen enjoys reading mystery novels and ___ chess with his grandfather." Which choice completes the sentence with parallel structure?`,
+      stem: `Read the sentence: "On weekends Jalen enjoys reading mystery novels and ___ chess with an older cousin." Which choice completes the sentence with parallel structure?`,
       choices: [
         no(`to play`, 'infinitive-breaks-parallel'),
         ok(`playing`),
@@ -158,7 +158,7 @@ const skill: ContentSkill = {
     {
       slot: 13,
       difficulty: 'medium',
-      stem: `Read the sentence: "Her backpack slung over one shoulder, Amara jogged toward the library." What kind of phrase is "Her backpack slung over one shoulder"?`,
+      stem: `Read the sentence: "Her backpack slung over one shoulder, my sister jogged toward the library." What kind of phrase is "Her backpack slung over one shoulder"?`,
       choices: [
         ok(`an absolute phrase`),
         no(`a participial phrase`, 'confuses-absolute-participial'),
@@ -386,14 +386,14 @@ const skill: ContentSkill = {
     {
       slot: 32,
       difficulty: 'hard',
-      stem: `Read the sentence: "The volleyball team either will practice indoors or in the gym across town." Which revision places "either" and "or" so that the sentence is parallel?`,
+      stem: `Read the sentence: "The volleyball team either will practice outdoors or in the gym across town." Which revision places "either" and "or" so that the sentence is parallel?`,
       choices: [
-        no(`Either the volleyball team will practice indoors or in the gym across town.`, 'correlative-misplaced'),
-        no(`The volleyball team will either practice indoors or in the gym across town.`, 'correlative-misplaced'),
-        ok(`The volleyball team will practice either indoors or in the gym across town.`),
-        no(`The volleyball team either will practice indoors or will in the gym across town.`, 'correlative-misplaced'),
+        no(`Either the volleyball team will practice outdoors or in the gym across town.`, 'correlative-misplaced'),
+        no(`The volleyball team will either practice outdoors or in the gym across town.`, 'correlative-misplaced'),
+        ok(`The volleyball team will practice either outdoors or in the gym across town.`),
+        no(`The volleyball team either will practice outdoors or will in the gym across town.`, 'correlative-misplaced'),
       ],
-      solution: `The two options are places, "indoors" and "in the gym across town," so "either" belongs right before "indoors." Placing "either" before "practice" pairs a verb with a prepositional phrase, which is not parallel.`,
+      solution: `The two options are places, "outdoors" and "in the gym across town," so "either" belongs right before "outdoors." Placing "either" before "practice" pairs a verb with a prepositional phrase, which is not parallel.`,
     },
     {
       slot: 33,
@@ -489,7 +489,7 @@ const skill: ContentSkill = {
         ok(`how to organize data, how to meet deadlines, and how to speak clearly in meetings`),
         no(`how to organize data, meeting deadlines, and to speak clearly in meetings`, 'mixed-forms-remain'),
       ],
-      solution: `Each item now uses the same "how to" pattern, so the three skills match in form. The first choice fixes only the last item and still leaves the noun phrase "the importance of deadlines" in the middle.`,
+      solution: `Each item now uses the same "how to" pattern, so the three skills match in form. The choice "how to organize data, the importance of deadlines, and how to speak clearly in meetings" fixes only the last item and still leaves the noun phrase "the importance of deadlines" in the middle.`,
     },
   ],
 }
