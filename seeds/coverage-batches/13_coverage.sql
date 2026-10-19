@@ -6011,7 +6011,7 @@ insert into public.passages (id, code, skill_id, sat_alignment, grade_band, titl
 values ('9be07505-54df-5fa1-bc21-6c0b71e550d3', 'rg9-context-clues-p05', (select id from public.skills where slug = 'read-g9-context-clues'), null,
         '9-12', $q$Hiding in Plain Sight$q$, $q$An octopus has no shell, no sharp spines and no armor, yet it survives in oceans full of hungry fish, seals and sharks. Its main defense is camouflage, the ability to blend into its surroundings so that enemies cannot see it. Within a fraction of a second, an octopus can change the color, pattern and even the texture of its skin.
 
-The secret lies in thousands of tiny sacs just beneath the skin. Each sac holds pigment, a natural substance that gives color, such as the reds, browns and yellows found in an octopus. Muscles around each sac can stretch it open to show more color or squeeze it shut to hide it. Working together, these sacs let the animal paint itself almost any shade it needs.
+The secret lies in thousands of tiny sacs just beneath the skin. Each sac holds pigment, a natural substance that gives color, such as the reds, browns and yellows found in an octopus. Muscles around each sac can stretch it open to show more color, and when they relax, the sac shrinks back to hide it. Working together, these sacs let the animal paint itself almost any shade it needs.
 
 Some octopuses go further. They mimic other animals, copying their shapes and movements so closely that a hunter is fooled. One kind can flatten itself and swim like a striped flatfish, then a moment later wave its arms to look like a venomous sea snake.
 
@@ -6037,7 +6037,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('85c87a9e-a097-5c90-a31d-69754d544456', null, (select id from public.skills where slug = 'read-g9-context-clues'), null, 'medium',
-   $q$Paragraph 2 explains the word "pigment." Based on the paragraph, pigment is:$q$, $q$[{"text":"a kind of fabric that changes color","is_correct":false,"misconception_token":"surface-association"},{"text":"a natural substance that gives something its color","is_correct":true},{"text":"a muscle that opens and closes a sac","is_correct":false,"misconception_token":"confuses-part-whole"},{"text":"a pattern of stripes on an animal's skin","is_correct":false,"misconception_token":"too-narrow"}]$q$::jsonb, $q$a natural substance that gives something its color$q$, $q$The appositive right after the word defines pigment as "a natural substance that gives color." The muscles are separate parts that stretch or squeeze the sacs holding the pigment.$q$, 'draft', '9be07505-54df-5fa1-bc21-6c0b71e550d3')
+   $q$Paragraph 2 explains the word "pigment." Based on the paragraph, pigment is:$q$, $q$[{"text":"a kind of fabric that changes color","is_correct":false,"misconception_token":"surface-association"},{"text":"a natural substance that gives something its color","is_correct":true},{"text":"a muscle that opens and closes a sac","is_correct":false,"misconception_token":"confuses-part-whole"},{"text":"a pattern of stripes on an animal's skin","is_correct":false,"misconception_token":"too-narrow"}]$q$::jsonb, $q$a natural substance that gives something its color$q$, $q$The appositive right after the word defines pigment as "a natural substance that gives color." The muscles are separate parts that stretch open the sacs holding the pigment.$q$, 'draft', '9be07505-54df-5fa1-bc21-6c0b71e550d3')
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -6175,7 +6175,7 @@ insert into public.passages (id, code, skill_id, sat_alignment, grade_band, titl
 values ('9e11bf80-ff75-501a-aecf-1443ffd0a4a5', 'rg9-context-clues-p07', (select id from public.skills where slug = 'read-g9-context-clues'), null,
         '9-12', $q$Why a Curveball Curves$q$, $q$To a batter, a good curveball seems almost unfair. The pitch leaves the pitcher's hand looking like an easy strike, then swerves sideways or drops sharply just before it reaches the plate. For many years, some people insisted that the curve was only a trick of the eye. Today, scientists know the curve is real, and they can explain it.
 
-The explanation begins with spin. As a pitcher releases a curveball, a sharp snap of the wrist gives the ball a fast rotation, so that it turns over and over on its way to the plate, sometimes more than thirty times before it arrives.
+The explanation begins with spin. As a pitcher releases a curveball, a sharp snap of the wrist gives the ball a fast rotation, so that it turns over and over on its way to the plate, often close to twenty times before it arrives.
 
 As the spinning ball moves forward, it drags a thin layer of air around with it. On one side of the ball, this layer moves in the same direction as the oncoming air, and on the other side, it moves against it. The difference in air pressure pushes the ball toward one side, so it is deflected, turned away from the straight line it would otherwise follow.
 
