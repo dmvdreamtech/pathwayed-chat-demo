@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g10-hs-geometry-more',
+  extends: 'hs-geometry',
+  subject: 'math',
+  grade: 10,
+  group: 'Geometric Measurement and Dimension',
+  name: 'Geometry (HS)',
+  standards: ['HSG.GMD.A.1'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `A cylinder has radius $3$ cm and height $5$ cm. What is its volume, in cubic centimeters?`,
+      choices: [
+        ok(`$45\\pi$`),
+        no(`$15\\pi$`, 'forgot-to-square-radius'),
+        no(`$30\\pi$`, 'used-lateral-area-formula'),
+        no(`$180\\pi$`, 'used-diameter-as-radius'),
+      ],
+      solution: `A cylinder is a stack of circular layers, so its volume is base area times height: $\\pi \\cdot 3^2 \\cdot 5 = 45\\pi$. The value $30\\pi$ is $2\\pi r h$, the area of the curved side, not the volume.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A cone has radius $3$ in and height $8$ in. What is its volume, in cubic inches?`,
+      choices: [
+        no(`$72\\pi$`, 'forgot-one-third'),
+        ok(`$24\\pi$`),
+        no(`$8\\pi$`, 'forgot-to-square-radius'),
+        no(`$36\\pi$`, 'used-one-half'),
+      ],
+      solution: `A cone holds one third of the cylinder with the same base and height: $\\frac{1}{3} \\cdot \\pi \\cdot 3^2 \\cdot 8 = \\frac{72\\pi}{3} = 24\\pi$. The value $72\\pi$ is the volume of the matching cylinder.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A pyramid has a square base with side length $6$ m and a height of $10$ m. What is its volume, in cubic meters?`,
+      choices: [
+        no(`$360$`, 'forgot-one-third'),
+        no(`$20$`, 'did-not-square-base-side'),
+        ok(`$120$`),
+        no(`$180$`, 'used-one-half'),
+      ],
+      solution: `The base area is $6^2 = 36$, and a pyramid is one third of the prism with the same base and height: $\\frac{1}{3} \\cdot 36 \\cdot 10 = 120$. The value $360$ is the volume of that prism.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A round table top has a diameter of $10$ feet. What is its circumference, in feet?`,
+      choices: [
+        no(`$25\\pi$`, 'used-area-formula'),
+        no(`$5\\pi$`, 'used-radius-in-place-of-diameter'),
+        no(`$100\\pi$`, 'squared-the-diameter'),
+        ok(`$10\\pi$`),
+      ],
+      solution: `By the definition of $\\pi$, circumference divided by diameter is $\\pi$, so the circumference is $\\pi \\cdot 10 = 10\\pi$ feet. The value $25\\pi$ is $\\pi r^2$, which is the area, not the distance around.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Two identical stacks of 30 coins are on a desk. One stack is perfectly straight. The other is pushed so it leans, with every coin still lying flat on the one below it. Which statement about their volumes is true?`,
+      choices: [
+        ok(`The two stacks have equal volumes.`),
+        no(`The leaning stack has the greater volume.`, 'thought-slant-adds-volume'),
+        no(`The straight stack has the greater volume.`, 'thought-slant-removes-volume'),
+        no(`The volumes cannot be compared without knowing the lean angle.`, 'thought-slant-angle-matters'),
+      ],
+      solution: `Both stacks have the same height, and at every height the cross section is one coin of the same area. By Cavalieri's principle, solids with equal cross-sectional areas at every height have equal volumes, so the stacks have equal volumes. Leaning the stack moves the coins but does not change how much space each one fills.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A cone and a cylinder have the same base and the same height. The cylinder holds $54$ cubic centimeters of water when full. How many cubic centimeters does the cone hold when full?`,
+      choices: [
+        no(`$27$`, 'used-one-half'),
+        no(`$162$`, 'multiplied-by-three'),
+        ok(`$18$`),
+        no(`$54$`, 'assumed-equal-volumes'),
+      ],
+      solution: `It takes three full cones to fill a cylinder with the same base and height, so the cone holds $\\frac{54}{3} = 18$ cubic centimeters. The value $162$ multiplies by $3$ instead of dividing, which would make the cone larger than the cylinder.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `A circle of radius $r$ is cut into many thin, equal sectors. The sectors are placed point up and point down, alternating, to form a shape that is close to a parallelogram. What are the approximate base and height of that parallelogram?`,
+      choices: [
+        no(`base $2\\pi r$, height $r$`, 'used-full-circumference-as-base'),
+        ok(`base $\\pi r$, height $r$`),
+        no(`base $\\pi r$, height $2r$`, 'used-diameter-as-height'),
+        no(`base $2\\pi r$, height $2r$`, 'used-circumference-and-diameter'),
+      ],
+      solution: `Half the arcs point down and half point up, so each long side of the shape uses half the circumference, $\\frac{2\\pi r}{2} = \\pi r$. The height of each sector is the radius $r$. So the base is $\\pi r$ and the height is $r$, giving area $\\pi r \\cdot r = \\pi r^2$. A base of $2\\pi r$ would use the whole circumference along one side.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A paper circle of radius $6$ cm is cut into $32$ equal sectors, which are rearranged, alternating point up and point down, into a shape close to a parallelogram. About how long is the base of that parallelogram, in centimeters?`,
+      choices: [
+        no(`$12\\pi$`, 'used-full-circumference'),
+        no(`$6$`, 'used-radius-as-base'),
+        ok(`$6\\pi$`),
+        no(`$36\\pi$`, 'gave-area-instead-of-base'),
+      ],
+      solution: `The circumference is $2\\pi \\cdot 6 = 12\\pi$, and half of the arcs lie along the base, so the base is about $\\frac{12\\pi}{2} = 6\\pi$ cm. With height $6$, the area is about $6\\pi \\cdot 6 = 36\\pi$, which is the area, not the base length.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `For every circle, the circumference divided by the diameter is the same number, $\\pi$. Which fact explains why this ratio never changes?`,
+      choices: [
+        no(`All circles have the same area.`, 'thought-all-circles-congruent'),
+        no(`The circumference of a circle is always equal to its diameter.`, 'thought-circumference-equals-diameter'),
+        ok(`All circles are similar, so scaling a circle multiplies its circumference and its diameter by the same factor.`),
+        no(`Larger circles curve more sharply than smaller circles.`, 'confused-curvature-with-scale'),
+      ],
+      solution: `Any circle can be dilated onto any other circle, so all circles are similar. A dilation by factor $k$ multiplies every length, including both the circumference and the diameter, by $k$, so their ratio stays the same. Circles of different sizes have different areas, so they are not all the same.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Regular polygons with more and more sides are drawn inside a circle of radius $5$, with every vertex on the circle. As the number of sides grows, what number does the polygon's perimeter get closer and closer to?`,
+      choices: [
+        ok(`$10\\pi$`),
+        no(`$25\\pi$`, 'confused-perimeter-with-area'),
+        no(`$5\\pi$`, 'used-radius-not-diameter'),
+        no(`$40$`, 'used-circumscribed-square-perimeter'),
+      ],
+      solution: `As the sides get shorter, the polygon hugs the circle more tightly, so its perimeter approaches the circumference, $2\\pi \\cdot 5 = 10\\pi$. The value $40$ is the perimeter of the square drawn around the circle, which is larger than the circumference and is not the limit.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Solid A is a cylinder with radius $2$ and height $12$. Solid B also has height $12$, and at every height its horizontal cross section has the same area as the cross section of Solid A at that height. What is the volume of Solid B?`,
+      choices: [
+        no(`$16\\pi$`, 'used-cone-formula'),
+        ok(`$48\\pi$`),
+        no(`$24\\pi$`, 'forgot-to-square-radius'),
+        no(`$192\\pi$`, 'used-diameter-as-radius'),
+      ],
+      solution: `By Cavalieri's principle, two solids with the same height and equal cross-sectional areas at every level have equal volumes. Solid A has volume $\\pi \\cdot 2^2 \\cdot 12 = 48\\pi$, so Solid B also has volume $48\\pi$. The value $16\\pi$ uses the one third factor, but nothing says Solid B is a cone.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `The radius of a cone is tripled and its height stays the same. By what factor does the volume of the cone change?`,
+      choices: [
+        no(`$3$`, 'scaled-linearly'),
+        no(`$27$`, 'cubed-scale-factor'),
+        no(`$6$`, 'doubled-scale-factor'),
+        ok(`$9$`),
+      ],
+      solution: `The volume is $\\frac{1}{3}\\pi r^2 h$, and only $r$ changes. Replacing $r$ with $3r$ makes $r^2$ become $9r^2$, so the volume is multiplied by $9$. The factor $27$ would apply only if the height were tripled too.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A cube with edge length $6$ cm can be cut into three congruent pyramids. All three pyramids share one corner of the cube as their apex, and each has as its base one of the three cube faces that do not touch that corner. What is the volume of one pyramid, in cubic centimeters?`,
+      choices: [
+        no(`$216$`, 'gave-cube-volume'),
+        ok(`$72$`),
+        no(`$108$`, 'split-into-two'),
+        no(`$36$`, 'divided-by-six'),
+      ],
+      solution: `The cube's volume is $6^3 = 216$, and three congruent pyramids fill it exactly, so each has volume $\\frac{216}{3} = 72$. This matches $\\frac{1}{3} \\cdot 36 \\cdot 6 = 72$ and shows where the one third in the pyramid formula comes from. The value $36$ divides by the six faces, but only three pyramids are made.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `An oblique cylinder leans to one side. Its circular bases have radius $4$ cm, its slanted side is $13$ cm long, and the perpendicular distance between the two bases is $12$ cm. What is its volume, in cubic centimeters?`,
+      choices: [
+        no(`$208\\pi$`, 'used-slant-length-as-height'),
+        no(`$64\\pi$`, 'used-cone-formula'),
+        ok(`$192\\pi$`),
+        no(`$48\\pi$`, 'forgot-to-square-radius'),
+      ],
+      solution: `By Cavalieri's principle, the oblique cylinder has the same volume as a right cylinder with the same base and the same perpendicular height. So the volume is $\\pi \\cdot 4^2 \\cdot 12 = 192\\pi$. The value $208\\pi$ uses the slanted length $13$, which is longer than the true height.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `A cone with radius $3$ cm and height $10$ cm is full of water. All the water is poured into an empty cylinder that also has radius $3$ cm. How deep is the water in the cylinder, in centimeters?`,
+      choices: [
+        no(`$10$`, 'assumed-equal-volumes'),
+        ok(`$\\frac{10}{3}$`),
+        no(`$30$`, 'multiplied-by-three'),
+        no(`$5$`, 'used-one-half'),
+      ],
+      solution: `The cone holds $\\frac{1}{3} \\cdot \\pi \\cdot 9 \\cdot 10 = 30\\pi$. In the cylinder, $9\\pi h = 30\\pi$, so $h = \\frac{30}{9} = \\frac{10}{3}$ cm. This makes sense because a cone holds one third of the cylinder with the same base and height. The value $10$ treats the cone as if it held as much as the cylinder.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `The area of a regular polygon is $\\frac{1}{2} \\cdot \\text{perimeter} \\cdot \\text{apothem}$. Regular polygons with more and more sides are inscribed in a circle of radius $r$. As the number of sides grows, the perimeter approaches $2\\pi r$ and the apothem approaches $r$. What does the area of the polygons approach?`,
+      choices: [
+        no(`$2\\pi r^2$`, 'forgot-one-half'),
+        no(`$\\pi r$`, 'dropped-the-apothem'),
+        ok(`$\\pi r^2$`),
+        no(`$\\frac{1}{2}\\pi r^2$`, 'used-half-circumference-as-perimeter'),
+      ],
+      solution: `Substitute the limits into the polygon formula: $\\frac{1}{2} \\cdot 2\\pi r \\cdot r = \\pi r^2$. This limit argument is why the area of a circle is $\\pi r^2$. The value $2\\pi r^2$ multiplies perimeter by apothem without the factor $\\frac{1}{2}$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A pyramid and a prism have the same base area, $20$ square inches, and the same height, $9$ inches. How many more cubic inches does the prism hold than the pyramid?`,
+      choices: [
+        no(`$60$`, 'gave-pyramid-volume'),
+        no(`$90$`, 'used-one-half'),
+        no(`$180$`, 'gave-prism-volume'),
+        ok(`$120$`),
+      ],
+      solution: `The prism holds $20 \\cdot 9 = 180$ and the pyramid holds one third of that, $60$. The difference is $180 - 60 = 120$, which is two thirds of the prism. The value $60$ is the pyramid's own volume, not the difference.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A circle has radius $1$, so its circumference is $2\\pi$. A regular hexagon inscribed in the circle has perimeter $6$, and a square drawn around the circle, touching it on all four sides, has perimeter $8$. Since the circumference lies between these two perimeters, which bounds on $\\pi$ follow?`,
+      choices: [
+        ok(`$3 < \\pi < 4$`),
+        no(`$6 < \\pi < 8$`, 'forgot-to-divide-by-diameter'),
+        no(`$1.5 < \\pi < 2$`, 'divided-by-twice-the-diameter'),
+        no(`$12 < \\pi < 16$`, 'multiplied-by-diameter'),
+      ],
+      solution: `From $6 < 2\\pi < 8$, divide every part by $2$, the diameter, to get $3 < \\pi < 4$. The bounds $6 < \\pi < 8$ compare the perimeters to $\\pi$ itself instead of to the circumference $2\\pi$.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A cone is cut by a plane parallel to its base, exactly halfway up its height. What fraction of the original cone's volume is in the small cone on top?`,
+      choices: [
+        no(`$\\frac{1}{2}$`, 'scaled-linearly'),
+        ok(`$\\frac{1}{8}$`),
+        no(`$\\frac{1}{4}$`, 'squared-instead-of-cubed'),
+        no(`$\\frac{1}{3}$`, 'used-one-third-cone-factor'),
+      ],
+      solution: `The small cone is similar to the original with scale factor $\\frac{1}{2}$, so its radius and height are both halved. Its volume is $\\frac{1}{3}\\pi \\left(\\frac{r}{2}\\right)^2 \\frac{h}{2} = \\frac{1}{8} \\cdot \\frac{1}{3}\\pi r^2 h$. The fraction $\\frac{1}{4}$ halves only the radius and forgets that the height is halved too.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A deck of index cards, each $3$ in by $5$ in, is stacked $4$ in high. The deck is then pushed so the top card slides $3$ in sideways, and the slanted edge of the deck becomes $5$ in long. The cards still lie flat and the deck is still $4$ in high. What is the volume of the pushed deck, in cubic inches?`,
+      choices: [
+        no(`$75$`, 'used-slant-length-as-height'),
+        no(`$105$`, 'added-shift-to-height'),
+        ok(`$60$`),
+        no(`$20$`, 'used-pyramid-formula'),
+      ],
+      solution: `Every card has area $3 \\cdot 5 = 15$ and the deck is still $4$ in high, so by Cavalieri's principle the volume is unchanged: $15 \\cdot 4 = 60$. The value $75$ multiplies by the slanted edge $5$, but volume depends on the perpendicular height.`,
+    },
+  ],
+}
+
+export default skill
