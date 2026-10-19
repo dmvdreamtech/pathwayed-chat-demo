@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g3-measurement-and-data-more',
+  extends: 'measurement-and-data',
+  subject: 'math',
+  grade: 3,
+  group: 'Measurement and Data',
+  name: 'Measurement & Data',
+  standards: ['3.MD.A'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `On a clock, the short hour hand is between the 7 and the 8. The long minute hand points straight at the 4. What time does the clock show?`,
+      choices: [
+        ok(`7:20`),
+        no(`4:35`, 'swapped-hour-and-minute-hands'),
+        no(`7:04`, 'read-clock-number-as-minutes'),
+        no(`8:20`, 'read-the-next-hour'),
+      ],
+      solution: `The hour hand has passed the 7 but not the 8, so the hour is 7. Each number on the clock is 5 minutes for the minute hand, so the 4 means $4 \\times 5 = 20$ minutes. The time is 7:20. The choice 7:04 reads the 4 as 4 minutes instead of counting by fives.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Which is the best estimate for the mass of one paper clip?`,
+      choices: [
+        ok(`1 gram`),
+        no(`1 kilogram`, 'confused-gram-and-kilogram'),
+        no(`1 liter`, 'used-volume-unit-for-mass'),
+        no(`1 meter`, 'used-length-unit-for-mass'),
+      ],
+      solution: `A paper clip is very light, and a gram is a very small unit of mass, so 1 gram is the best estimate. A kilogram is 1,000 grams, about the mass of a big book, so 1 kilogram is far too heavy. Liters measure liquid volume and meters measure length.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A fish tank has 18 liters of water in it. Dev pours in 7 more liters. How many liters of water are in the tank now?`,
+      choices: [
+        ok(`25 liters`),
+        no(`11 liters`, 'subtracted-instead-of-added'),
+        no(`15 liters`, 'forgot-to-regroup'),
+        no(`24 liters`, 'counted-start-number-as-one'),
+      ],
+      solution: `Water is being added, so add: $18 + 7 = 25$ liters. The choice 15 liters comes from adding $8 + 7 = 15$ and writing only the 5 without carrying the ten. The choice 11 liters subtracts, but pouring water in makes more.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `On a clock, the hour hand is between the 3 and the 4, close to the 4 but not there yet. The minute hand points 2 small marks past the 9. What time does the clock show?`,
+      choices: [
+        ok(`3:47`),
+        no(`3:11`, 'added-marks-to-clock-number'),
+        no(`3:43`, 'counted-marks-backward-from-number'),
+        no(`4:47`, 'read-the-next-hour'),
+      ],
+      solution: `The hour hand has not reached the 4, so the hour is 3. The 9 stands for $9 \\times 5 = 45$ minutes, and each small mark is 1 minute, so 2 marks past the 9 is $45 + 2 = 47$ minutes. The time is 3:47. The choice 3:11 adds 2 to the clock number 9 instead of to 45 minutes.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A bag of apples has a mass of 4 kilograms. A bag of oranges has a mass of 3 kilograms. What is the total mass of the two bags?`,
+      choices: [
+        ok(`7 kilograms`),
+        no(`1 kilogram`, 'subtracted-instead-of-added'),
+        no(`12 kilograms`, 'multiplied-instead-of-added'),
+        no(`7 grams`, 'changed-the-unit'),
+      ],
+      solution: `Total means add: $4 + 3 = 7$ kilograms. Both masses are in kilograms, so the answer stays in kilograms. The choice 7 grams has the right number but the wrong unit.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Lunch starts at 11:50 a.m. and lasts 25 minutes. What time does lunch end?`,
+      choices: [
+        ok(`12:15 p.m.`),
+        no(`11:75 a.m.`, 'did-not-regroup-60-minutes'),
+        no(`12:15 a.m.`, 'wrong-am-pm-after-noon'),
+        no(`11:25 a.m.`, 'subtracted-instead-of-added'),
+      ],
+      solution: `From 11:50 a.m., 10 minutes gets to 12:00 noon. That leaves $25 - 10 = 15$ more minutes, so lunch ends at 12:15 p.m. Times after noon are p.m. The choice 11:75 a.m. adds $50 + 25 = 75$ but forgets that 60 minutes make a new hour.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Keisha's class visited the library from 10:35 a.m. to 1:10 p.m. How long was the visit?`,
+      choices: [
+        ok(`2 hours 35 minutes`),
+        no(`3 hours 25 minutes`, 'subtracted-smaller-minutes-from-larger'),
+        no(`9 hours 25 minutes`, 'subtracted-end-time-from-start-time'),
+        no(`3 hours 35 minutes`, 'counted-to-wrong-end-minutes'),
+      ],
+      solution: `Count on from 10:35 a.m. Two hours later is 12:35 p.m. From 12:35 p.m. to 1:00 p.m. is 25 minutes, and from 1:00 p.m. to 1:10 p.m. is 10 more, so $25 + 10 = 35$ minutes. The visit was 2 hours 35 minutes. The choice 3 hours 25 minutes subtracts $35 - 10$ in the minutes, which goes the wrong way.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A movie ended at 4:20 p.m. It lasted 1 hour 45 minutes. What time did the movie start?`,
+      choices: [
+        ok(`2:35 p.m.`),
+        no(`6:05 p.m.`, 'added-instead-of-subtracted'),
+        no(`3:35 p.m.`, 'forgot-to-reduce-hour-after-borrowing'),
+        no(`3:25 p.m.`, 'subtracted-smaller-minutes-from-larger'),
+      ],
+      solution: `Count back from 4:20 p.m. One hour earlier is 3:20 p.m. Then 20 minutes back is 3:00 p.m., and $45 - 20 = 25$ more minutes back is 2:35 p.m. The choice 6:05 p.m. adds the movie length, but the start must come before the end.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Mr. Banks fills 7 buckets with water. Each bucket holds 4 liters. How many liters of water is that in all?`,
+      choices: [
+        ok(`28 liters`),
+        no(`11 liters`, 'added-instead-of-multiplied'),
+        no(`3 liters`, 'subtracted-instead-of-multiplied'),
+        no(`32 liters`, 'multiplied-one-extra-group'),
+      ],
+      solution: `There are 7 equal groups of 4 liters, so multiply: $7 \\times 4 = 28$ liters. The choice 11 liters adds $7 + 4$, which counts the buckets and the liters together instead of finding 7 groups of 4.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A cooler holds 24 liters of lemonade. The lemonade is poured equally into 4 jugs. How many liters go in each jug?`,
+      choices: [
+        ok(`6 liters`),
+        no(`20 liters`, 'subtracted-instead-of-divided'),
+        no(`28 liters`, 'added-instead-of-divided'),
+        no(`96 liters`, 'multiplied-instead-of-divided'),
+      ],
+      solution: `Sharing 24 liters equally into 4 jugs means divide: $24 \\div 4 = 6$ liters, because $4 \\times 6 = 24$. The choice 96 liters multiplies, but each jug must get less than the whole cooler.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A dog has a mass of 13 kilograms. A puppy has a mass of 5 kilograms. How many more kilograms is the dog's mass than the puppy's?`,
+      choices: [
+        ok(`8 kilograms`),
+        no(`18 kilograms`, 'added-instead-of-subtracted'),
+        no(`12 kilograms`, 'subtracted-smaller-digit-from-larger'),
+        no(`8 grams`, 'changed-the-unit'),
+      ],
+      solution: `How many more means subtract: $13 - 5 = 8$ kilograms. The choice 12 kilograms comes from doing $5 - 3 = 2$ in the ones place instead of regrouping to find $13 - 5$.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `On a clock, the hour hand is almost at the 6 but has not reached it. The minute hand points 4 small marks past the 11. What time does the clock show?`,
+      choices: [
+        ok(`5:59`),
+        no(`6:59`, 'read-the-next-hour'),
+        no(`5:15`, 'added-marks-to-clock-number'),
+        no(`5:51`, 'counted-marks-backward-from-number'),
+      ],
+      solution: `The hour hand has not reached the 6, so the hour is still 5. The 11 stands for $11 \\times 5 = 55$ minutes, and 4 small marks more makes $55 + 4 = 59$ minutes. The time is 5:59. The choice 6:59 uses the number the hour hand is close to, but it has not passed the 6 yet.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A bus ride starts at 9:48 a.m. and ends at 10:13 a.m. How long is the ride?`,
+      choices: [
+        ok(`25 minutes`),
+        no(`35 minutes`, 'subtracted-smaller-minutes-from-larger'),
+        no(`65 minutes`, 'subtracted-times-like-whole-numbers'),
+        no(`1 hour 25 minutes`, 'counted-hour-change-as-full-hour'),
+      ],
+      solution: `From 9:48 a.m. to 10:00 a.m. is 12 minutes. From 10:00 a.m. to 10:13 a.m. is 13 minutes. The ride is $12 + 13 = 25$ minutes. The choice 65 minutes comes from $1013 - 948$, but an hour has 60 minutes, not 100.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `An empty basket has a mass of 300 grams. Tomas puts 5 apples in it. Each apple has a mass of 100 grams. What is the total mass of the basket and apples?`,
+      choices: [
+        ok(`800 grams`),
+        no(`500 grams`, 'forgot-the-basket'),
+        no(`405 grams`, 'added-instead-of-multiplied'),
+        no(`1,500 grams`, 'multiplied-the-basket-mass'),
+      ],
+      solution: `The apples have a mass of $5 \\times 100 = 500$ grams. Add the basket: $500 + 300 = 800$ grams. The choice 500 grams finds the apples but leaves out the 300-gram basket.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Which is the best estimate for the amount of water in a full kitchen sink?`,
+      choices: [
+        ok(`20 liters`),
+        no(`1 liter`, 'chose-amount-for-a-water-bottle'),
+        no(`20 kilograms`, 'used-mass-unit-for-volume'),
+        no(`2,000 liters`, 'chose-amount-for-a-pool'),
+      ],
+      solution: `A liter is about one large water bottle. A full sink holds many bottles of water, but far less than a swimming pool, so 20 liters is the best estimate. Kilograms measure mass, not liquid volume.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Day camp starts at 8:45 a.m. Morning activities last 3 hours 20 minutes. Then lunch lasts 35 minutes. What time does lunch end?`,
+      choices: [
+        ok(`12:40 p.m.`),
+        no(`12:40 a.m.`, 'wrong-am-pm-after-noon'),
+        no(`12:05 p.m.`, 'forgot-the-second-step'),
+        no(`12:00 p.m.`, 'regrouped-100-minutes-as-an-hour'),
+      ],
+      solution: `Add the activities: 3 hours after 8:45 a.m. is 11:45 a.m., and 20 minutes more is 12:05 p.m. Then add lunch: 35 minutes after 12:05 p.m. is 12:40 p.m. Times after noon are p.m., so 12:40 a.m. would be just after midnight. The choice 12:05 p.m. is when lunch starts, not when it ends.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Ms. Ortiz's bread finished baking at 1:15 p.m. First the dough rose for 1 hour 50 minutes, and then it baked for 35 minutes. What time did the dough start rising?`,
+      choices: [
+        ok(`10:50 a.m.`),
+        no(`10:50 p.m.`, 'wrong-am-pm-before-noon'),
+        no(`11:25 a.m.`, 'subtracted-only-one-step'),
+        no(`3:40 p.m.`, 'added-instead-of-subtracted'),
+      ],
+      solution: `The total time is 1 hour 50 minutes plus 35 minutes, which is 1 hour 85 minutes, or 2 hours 25 minutes. Count back from 1:15 p.m.: 2 hours earlier is 11:15 a.m., and 25 minutes earlier is 10:50 a.m. The choice 11:25 a.m. counts back only the rising time and forgets the 35 minutes of baking.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A water cooler holds 40 liters. In the morning, students drink 6 liters. In the afternoon, they drink 3 times as much as in the morning. How many liters are left in the cooler?`,
+      choices: [
+        ok(`16 liters`),
+        no(`22 liters`, 'forgot-the-morning-amount'),
+        no(`31 liters`, 'added-3-instead-of-multiplying'),
+        no(`24 liters`, 'found-amount-used-not-left'),
+      ],
+      solution: `The afternoon amount is $3 \\times 6 = 18$ liters. In all, $6 + 18 = 24$ liters were used, so $40 - 24 = 16$ liters are left. The choice 24 liters is the amount used, not the amount left.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A shelf can hold at most 50 kilograms. It already has 14 kilograms of books on it. How many more 4-kilogram boxes can be put on the shelf without going over 50 kilograms?`,
+      choices: [
+        ok(`9`),
+        no(`12`, 'divided-total-without-subtracting'),
+        no(`36`, 'found-kilograms-left-not-boxes'),
+        no(`16`, 'added-instead-of-subtracted'),
+      ],
+      solution: `The shelf has room for $50 - 14 = 36$ more kilograms. Each box is 4 kilograms, so $36 \\div 4 = 9$ boxes fit, using exactly 36 kilograms. The choice 36 is the number of kilograms left, not the number of boxes.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `In the afternoon, a clock's hour hand is between the 2 and the 3, and its minute hand points 3 small marks past the 8. Swim practice starts at that time and lasts 1 hour 25 minutes. What time does practice end?`,
+      choices: [
+        ok(`4:08 p.m.`),
+        no(`3:08 p.m.`, 'forgot-to-carry-the-extra-hour'),
+        no(`4:08 a.m.`, 'wrong-am-pm'),
+        no(`3:36 p.m.`, 'added-marks-to-clock-number'),
+      ],
+      solution: `The clock shows 2 hours and $8 \\times 5 + 3 = 43$ minutes, so practice starts at 2:43 p.m. One hour later is 3:43 p.m. Then 17 minutes gets to 4:00 p.m., and $25 - 17 = 8$ more minutes makes 4:08 p.m. The choice 3:08 p.m. adds $43 + 25 = 68$ minutes but forgets that 60 of those minutes make another hour.`,
+    },
+  ],
+}
+
+export default skill
