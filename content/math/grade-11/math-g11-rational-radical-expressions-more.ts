@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g11-rational-radical-expressions-more',
+  extends: 'rational-radical-expressions',
+  subject: 'math',
+  grade: 11,
+  group: 'Algebra',
+  name: 'Rational & Radical Expressions',
+  standards: ['HSA.APR.D.6'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Which is $\\sqrt{48}$ written in simplest radical form?`,
+      choices: [
+        ok(`$4\\sqrt{3}$`),
+        no(`$16\\sqrt{3}$`, 'left-perfect-square-unrooted'),
+        no(`$3\\sqrt{4}$`, 'swapped-coefficient-and-radicand'),
+        no(`$4\\sqrt{12}$`, 'rooted-factor-but-kept-it-in-radicand'),
+      ],
+      solution: `Find the largest perfect square factor: $48 = 16 \\cdot 3$. Then $\\sqrt{48} = \\sqrt{16} \\cdot \\sqrt{3} = 4\\sqrt{3}$. The choice $16\\sqrt{3}$ moves the $16$ outside without taking its square root.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Evaluate $32^{1/5}$:`,
+      choices: [
+        no(`$6.4$`, 'multiplied-base-by-exponent'),
+        no(`$16$`, 'halved-instead-of-fifth-root'),
+        ok(`$2$`),
+        no(`$\\dfrac{1}{2}$`, 'treated-exponent-as-negative'),
+      ],
+      solution: `An exponent of $\\frac{1}{5}$ means the fifth root. Since $2^5 = 32$, $32^{1/5} = 2$. The choice $6.4$ multiplies $32$ by $\\frac{1}{5}$, but a fractional exponent is a root, not a product.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `For $x > 0$, which radical expression is equal to $x^{3/4}$?`,
+      choices: [
+        no(`$\\sqrt[3]{x^4}$`, 'swapped-index-and-power'),
+        ok(`$\\sqrt[4]{x^3}$`),
+        no(`$\\dfrac{3}{4}x$`, 'used-exponent-as-coefficient'),
+        no(`$\\dfrac{x^3}{4}$`, 'divided-instead-of-taking-root'),
+      ],
+      solution: `In $x^{m/n}$ the denominator $n$ is the index of the root and the numerator $m$ is the power, so $x^{3/4} = \\sqrt[4]{x^3}$. The choice $\\sqrt[3]{x^4}$ swaps the two, which is $x^{4/3}$.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Multiply and simplify (for $x \\neq 0$): $\\dfrac{x}{4} \\cdot \\dfrac{8}{x^2}$. Which expression is the result?`,
+      choices: [
+        no(`$2x$`, 'inverted-power-when-canceling'),
+        no(`$\\dfrac{x^3}{32}$`, 'cross-multiplied-like-division'),
+        no(`$\\dfrac{2}{x^2}$`, 'forgot-to-cancel-common-factor'),
+        ok(`$\\dfrac{2}{x}$`),
+      ],
+      solution: `Multiply across: $\\dfrac{8x}{4x^2}$. Cancel $4$ from $8$ and $4$ to get $2$, and cancel one $x$ from top and bottom, leaving $\\dfrac{2}{x}$. The choice $2x$ cancels the wrong way; the extra $x$ is in the denominator.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Subtract (for $x \\neq 3$): $\\dfrac{7x}{x - 3} - \\dfrac{2x + 1}{x - 3}$. Which expression is the result?`,
+      choices: [
+        ok(`$\\dfrac{5x - 1}{x - 3}$`),
+        no(`$\\dfrac{5x + 1}{x - 3}$`, 'did-not-distribute-subtraction'),
+        no(`$\\dfrac{5x - 1}{2x - 6}$`, 'subtracted-and-added-denominators'),
+        no(`$\\dfrac{9x + 1}{x - 3}$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `The denominators match, so subtract the whole second numerator: $7x - (2x + 1) = 7x - 2x - 1 = 5x - 1$. The result is $\\dfrac{5x - 1}{x - 3}$. The choice $\\dfrac{5x + 1}{x - 3}$ forgets to subtract the $1$ as well as the $2x$.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Divide (for $x \\neq 0$): $\\dfrac{6x^3 + 9x^2 - 3x}{3x}$. Which expression is the result?`,
+      choices: [
+        no(`$2x^2 + 3x$`, 'treated-last-quotient-as-zero'),
+        no(`$2x^3 + 3x^2 - x$`, 'divided-coefficients-only'),
+        ok(`$2x^2 + 3x - 1$`),
+        no(`$2x^2 + 9x - 3$`, 'divided-only-the-first-term'),
+      ],
+      solution: `Divide each term by $3x$: $\\frac{6x^3}{3x} = 2x^2$, $\\frac{9x^2}{3x} = 3x$, and $\\frac{-3x}{3x} = -1$. The quotient is $2x^2 + 3x - 1$. The choice $2x^2 + 3x$ drops the last term, but $\\frac{-3x}{3x}$ is $-1$, not $0$.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `For $x \\neq -1$, which shows $\\dfrac{x + 4}{x + 1}$ written in the form $q + \\dfrac{r}{x + 1}$, where $q$ and $r$ are numbers?`,
+      choices: [
+        no(`$1 + \\dfrac{4}{x + 1}$`, 'did-not-subtract-from-numerator'),
+        ok(`$1 + \\dfrac{3}{x + 1}$`),
+        no(`$1 - \\dfrac{3}{x + 1}$`, 'sign-error-on-remainder'),
+        no(`$4$`, 'canceled-x-terms'),
+      ],
+      solution: `By inspection, $x + 4 = (x + 1) + 3$. So $\\dfrac{x + 4}{x + 1} = \\dfrac{x + 1}{x + 1} + \\dfrac{3}{x + 1} = 1 + \\dfrac{3}{x + 1}$. The choice $4$ cancels the $x$ terms, but you can only cancel common factors, not terms that are added.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Use long division to write $\\dfrac{x^2 + 3x + 5}{x + 1}$ (for $x \\neq -1$) in the form $q(x) + \\dfrac{r}{x + 1}$. Which is it?`,
+      choices: [
+        no(`$x + 2$`, 'dropped-the-remainder'),
+        no(`$x + 4 + \\dfrac{9}{x + 1}$`, 'used-wrong-sign-in-synthetic-division'),
+        no(`$x + 2 + \\dfrac{3}{x}$`, 'put-remainder-over-wrong-divisor'),
+        ok(`$x + 2 + \\dfrac{3}{x + 1}$`),
+      ],
+      solution: `First $x^2 \\div x = x$; subtract $x(x + 1) = x^2 + x$ to leave $2x + 5$. Next $2x \\div x = 2$; subtract $2(x + 1) = 2x + 2$ to leave $3$. So the quotient is $x + 2$ with remainder $3$: $x + 2 + \\dfrac{3}{x + 1}$. The choice $x + 2$ leaves out the remainder, so it is not equal to the original expression.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `For $x \\neq 3$, which is $\\dfrac{2x^2 - 5x + 1}{x - 3}$ written as a quotient plus a remainder over the divisor?`,
+      choices: [
+        ok(`$2x + 1 + \\dfrac{4}{x - 3}$`),
+        no(`$2x - 11 + \\dfrac{34}{x - 3}$`, 'used-wrong-sign-in-synthetic-division'),
+        no(`$2x + 1 - \\dfrac{4}{x - 3}$`, 'sign-error-on-remainder'),
+        no(`$2x + 1$`, 'dropped-the-remainder'),
+      ],
+      solution: `Use synthetic division with $3$ (the zero of $x - 3$) on the coefficients $2, -5, 1$. Bring down $2$; $2 \\cdot 3 = 6$ and $-5 + 6 = 1$; $1 \\cdot 3 = 3$ and $1 + 3 = 4$. The quotient is $2x + 1$ and the remainder is $4$, giving $2x + 1 + \\dfrac{4}{x - 3}$. The choice $2x - 11 + \\dfrac{34}{x - 3}$ divides by $-3$ instead of $3$.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `What is the remainder when $x^3 - 2x + 7$ is divided by $x - 2$?`,
+      choices: [
+        no(`$3$`, 'evaluated-at-opposite-sign'),
+        no(`$7$`, 'omitted-zero-placeholder'),
+        ok(`$11$`),
+        no(`$19$`, 'sign-error-on-linear-term'),
+      ],
+      solution: `By the remainder theorem, the remainder is the value at $x = 2$: $2^3 - 2(2) + 7 = 8 - 4 + 7 = 11$. The choice $7$ comes from synthetic division without a $0$ for the missing $x^2$ term.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Simplify (for $x \\neq 3$ and $x \\neq -3$): $\\dfrac{x^2 - x - 6}{x^2 - 9}$. Which expression is the result?`,
+      choices: [
+        no(`$\\dfrac{x + 2}{x - 3}$`, 'canceled-wrong-factor'),
+        no(`$\\dfrac{x + 6}{9}$`, 'canceled-x-squared-terms'),
+        ok(`$\\dfrac{x + 2}{x + 3}$`),
+        no(`$\\dfrac{x - 2}{x + 3}$`, 'factoring-sign-error'),
+      ],
+      solution: `Factor both parts: $x^2 - x - 6 = (x - 3)(x + 2)$ and $x^2 - 9 = (x - 3)(x + 3)$. Cancel the common factor $x - 3$ to get $\\dfrac{x + 2}{x + 3}$. The choice $\\dfrac{x + 6}{9}$ crosses out the $x^2$ terms, but only common factors can be canceled.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Multiply and simplify (for $x \\neq -3$ and $x \\neq 2$): $\\dfrac{x^2 - 4}{x + 3} \\cdot \\dfrac{x + 3}{x - 2}$. Which expression is the result?`,
+      choices: [
+        ok(`$x + 2$`),
+        no(`$x - 2$`, 'factored-as-square-of-difference'),
+        no(`$\\dfrac{(x + 2)^2}{x - 2}$`, 'factored-as-square-of-sum'),
+        no(`$\\dfrac{(x + 2)(x - 2)^2}{(x + 3)^2}$`, 'divided-instead-of-multiplied'),
+      ],
+      solution: `Factor $x^2 - 4 = (x - 2)(x + 2)$. The product is $\\dfrac{(x - 2)(x + 2)(x + 3)}{(x + 3)(x - 2)}$. Cancel $x + 3$ and $x - 2$ to leave $x + 2$. The choice $x - 2$ treats $x^2 - 4$ as $(x - 2)^2$, but a difference of squares factors as $(x - 2)(x + 2)$.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Add (for $x \\neq 0$ and $x \\neq -1$): $\\dfrac{2}{x} + \\dfrac{3}{x + 1}$. Which expression is the result?`,
+      choices: [
+        no(`$\\dfrac{5}{2x + 1}$`, 'added-numerators-and-denominators'),
+        no(`$\\dfrac{5}{x(x + 1)}$`, 'did-not-rescale-numerators'),
+        no(`$\\dfrac{5x + 3}{x(x + 1)}$`, 'scaled-numerators-by-wrong-factor'),
+        ok(`$\\dfrac{5x + 2}{x(x + 1)}$`),
+      ],
+      solution: `The common denominator is $x(x + 1)$. Rewrite: $\\dfrac{2(x + 1)}{x(x + 1)} + \\dfrac{3x}{x(x + 1)}$. Add the numerators: $2x + 2 + 3x = 5x + 2$, so the sum is $\\dfrac{5x + 2}{x(x + 1)}$. The choice $\\dfrac{5}{2x + 1}$ adds tops and bottoms separately, which does not add fractions.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `For $x > 0$, which is equal to $x^{1/2} \\cdot x^{1/3}$?`,
+      choices: [
+        no(`$x^{1/6}$`, 'multiplied-exponents'),
+        ok(`$x^{5/6}$`),
+        no(`$x^{2/5}$`, 'added-numerators-and-denominators'),
+        no(`$x^{1/5}$`, 'added-denominators-only'),
+      ],
+      solution: `When multiplying powers with the same base, add the exponents: $\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$. So the product is $x^{5/6}$. The choice $x^{1/6}$ multiplies the exponents, which is the rule for a power of a power.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Simplify (for $x \\geq 0$): $\\sqrt{12x^3}$. Which expression is the result?`,
+      choices: [
+        no(`$2x\\sqrt{3}$`, 'dropped-leftover-variable-factor'),
+        no(`$4x\\sqrt{3x}$`, 'left-perfect-square-unrooted'),
+        ok(`$2x\\sqrt{3x}$`),
+        no(`$3x\\sqrt{2x}$`, 'swapped-coefficient-and-radicand'),
+      ],
+      solution: `Write $12x^3 = 4x^2 \\cdot 3x$, where $4x^2$ is a perfect square. Then $\\sqrt{12x^3} = \\sqrt{4x^2} \\cdot \\sqrt{3x} = 2x\\sqrt{3x}$. The choice $2x\\sqrt{3}$ loses the leftover factor of $x$ that stays under the root.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Divide $x^3 + 2x^2 - 5$ by $x^2 + 1$. Which shows the result in the form $q(x) + \\dfrac{r(x)}{x^2 + 1}$, where $r(x)$ has degree less than 2?`,
+      choices: [
+        no(`$x + 2 + \\dfrac{x - 7}{x^2 + 1}$`, 'sign-error-subtracting-product'),
+        no(`$x + 2 - \\dfrac{7}{x^2 + 1}$`, 'omitted-zero-placeholder'),
+        ok(`$x + 2 - \\dfrac{x + 7}{x^2 + 1}$`),
+        no(`$x + 2 + \\dfrac{x + 7}{x^2 + 1}$`, 'sign-error-on-remainder'),
+      ],
+      solution: `Write the dividend as $x^3 + 2x^2 + 0x - 5$. First $x^3 \\div x^2 = x$; subtract $x(x^2 + 1) = x^3 + x$ to leave $2x^2 - x - 5$. Next $2x^2 \\div x^2 = 2$; subtract $2(x^2 + 1) = 2x^2 + 2$ to leave $-x - 7$. So the result is $x + 2 + \\dfrac{-x - 7}{x^2 + 1} = x + 2 - \\dfrac{x + 7}{x^2 + 1}$. The choice $x + 2 + \\dfrac{x - 7}{x^2 + 1}$ adds $x$ instead of subtracting it in the first step. Since $x^2 + 1$ is never $0$, there is no domain restriction.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `For $x \\neq -2$, rewrite $\\dfrac{3x - 1}{x + 2}$ in the form $q + \\dfrac{r}{x + 2}$, where $q$ and $r$ are numbers. Which is it?`,
+      choices: [
+        no(`$3 - \\dfrac{1}{x + 2}$`, 'did-not-adjust-constant'),
+        no(`$3 + \\dfrac{5}{x + 2}$`, 'added-instead-of-subtracted'),
+        no(`$3 - \\dfrac{3}{x + 2}$`, 'did-not-multiply-constant-by-quotient'),
+        ok(`$3 - \\dfrac{7}{x + 2}$`),
+      ],
+      solution: `Make the numerator look like a multiple of $x + 2$: $3(x + 2) = 3x + 6$, so $3x - 1 = 3(x + 2) - 7$. Then $\\dfrac{3x - 1}{x + 2} = 3 - \\dfrac{7}{x + 2}$. Check at $x = 0$: the original is $-\\frac{1}{2}$ and $3 - \\frac{7}{2} = -\\frac{1}{2}$. The choice $3 + \\dfrac{5}{x + 2}$ computes $-1 + 6$ instead of $-1 - 6$.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Simplify the complex fraction (for $x \\neq 0$, $x \\neq 1$ and $x \\neq -1$): $\\dfrac{1 + \\frac{1}{x}}{1 - \\frac{1}{x^2}}$. Which expression is the result?`,
+      choices: [
+        ok(`$\\dfrac{x}{x - 1}$`),
+        no(`$\\dfrac{x}{x + 1}$`, 'canceled-wrong-factor'),
+        no(`$\\dfrac{1}{x - 1}$`, 'used-x-instead-of-x-squared-denominator'),
+        no(`$\\dfrac{(x + 1)^2(x - 1)}{x^3}$`, 'multiplied-instead-of-dividing'),
+      ],
+      solution: `Write the top as $\\dfrac{x + 1}{x}$ and the bottom as $\\dfrac{x^2 - 1}{x^2} = \\dfrac{(x - 1)(x + 1)}{x^2}$. Dividing means multiplying by the reciprocal: $\\dfrac{x + 1}{x} \\cdot \\dfrac{x^2}{(x - 1)(x + 1)} = \\dfrac{x}{x - 1}$. The choice $\\dfrac{(x + 1)^2(x - 1)}{x^3}$ multiplies the two fractions instead of dividing.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Evaluate $\\left(\\dfrac{16}{81}\\right)^{-3/4}$:`,
+      choices: [
+        no(`$\\dfrac{8}{27}$`, 'ignored-negative-exponent'),
+        ok(`$\\dfrac{27}{8}$`),
+        no(`$-\\dfrac{8}{27}$`, 'treated-negative-exponent-as-negative-value'),
+        no(`$-\\dfrac{4}{27}$`, 'multiplied-base-by-exponent'),
+      ],
+      solution: `A negative exponent flips the fraction: $\\left(\\dfrac{16}{81}\\right)^{-3/4} = \\left(\\dfrac{81}{16}\\right)^{3/4}$. The fourth roots are $\\sqrt[4]{81} = 3$ and $\\sqrt[4]{16} = 2$; cubing gives $\\dfrac{27}{8}$. The choice $-\\dfrac{8}{27}$ makes the value negative, but a negative exponent means a reciprocal, not a negative number.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Subtract (for $x \\neq 2$ and $x \\neq -2$): $\\dfrac{x}{x^2 - 4} - \\dfrac{1}{x - 2}$. Which expression is the result?`,
+      choices: [
+        no(`$\\dfrac{2}{x^2 - 4}$`, 'did-not-distribute-subtraction'),
+        no(`$\\dfrac{x - 1}{x^2 - 4}$`, 'did-not-rescale-numerators'),
+        ok(`$-\\dfrac{2}{x^2 - 4}$`),
+        no(`$\\dfrac{x - 1}{x^2 - x - 2}$`, 'subtracted-denominators'),
+      ],
+      solution: `Since $x^2 - 4 = (x - 2)(x + 2)$, rewrite the second fraction as $\\dfrac{x + 2}{x^2 - 4}$. Then subtract numerators: $x - (x + 2) = -2$, giving $-\\dfrac{2}{x^2 - 4}$. The choice $\\dfrac{2}{x^2 - 4}$ computes $x - x + 2$, forgetting that the minus sign applies to the whole $x + 2$.`,
+    },
+  ],
+}
+
+export default skill
