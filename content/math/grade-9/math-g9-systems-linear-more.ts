@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g9-systems-linear-more',
+  extends: 'systems-linear',
+  subject: 'math',
+  grade: 9,
+  group: 'Reasoning with Equations and Inequalities',
+  name: 'Systems of Linear Equations',
+  standards: ['HSA.REI.C.6'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Substituting $y = 2x - 1$ into $3x - y = 14$ gives which equation in $x$?`,
+      choices: [
+        ok(`$3x - 2x + 1 = 14$`),
+        no(`$3x - 2x - 1 = 14$`, 'did-not-distribute-negative'),
+        no(`$3x - 2x = 14$`, 'dropped-constant'),
+        no(`$3(2x - 1) - y = 14$`, 'substituted-for-wrong-variable'),
+      ],
+      solution: `Replace $y$ with the whole expression in parentheses: $3x - (2x - 1) = 14$. The minus sign applies to both terms, so this is $3x - 2x + 1 = 14$. The choice $3x - 2x - 1 = 14$ subtracts only the $2x$ and forgets that subtracting $-1$ means adding $1$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `To solve the system $3x + 2y = 11$ and $5x - 2y = 13$ by elimination, you add the two equations. Which equation results?`,
+      choices: [
+        no(`$8x + 4y = 24$`, 'ignored-sign-on-y-term'),
+        ok(`$8x = 24$`),
+        no(`$-2x + 4y = -2$`, 'subtracted-instead-of-added'),
+        no(`$8x = -2$`, 'subtracted-constants'),
+      ],
+      solution: `Add term by term: $3x + 5x = 8x$, $2y + (-2y) = 0$, and $11 + 13 = 24$. The $y$ terms cancel, leaving $8x = 24$. The choice $8x + 4y = 24$ treats $-2y$ as $+2y$, so the $y$ terms never cancel.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Which ordered pair is a solution of both $x + y = 1$ and $3x - y = 7$?`,
+      choices: [
+        no(`$(1, 0)$`, 'checked-only-first-equation'),
+        no(`$(3, 2)$`, 'checked-only-second-equation'),
+        ok(`$(2, -1)$`),
+        no(`$(-1, 2)$`, 'swapped-coordinates'),
+      ],
+      solution: `Test $(2, -1)$: $2 + (-1) = 1$ and $3(2) - (-1) = 6 + 1 = 7$, so it works in both equations. The pair $(1, 0)$ works in the first equation but gives $3(1) - 0 = 3$ in the second, and a solution of a system must satisfy every equation.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `How many solutions does the system $x + 2y = 6$ and $x + 2y = 10$ have?`,
+      choices: [
+        no(`Exactly one solution`, 'assumed-every-system-has-one-solution'),
+        no(`Infinitely many solutions`, 'matched-left-sides-only'),
+        no(`Exactly two solutions`, 'counted-equations-as-solutions'),
+        ok(`No solution`),
+      ],
+      solution: `The same expression $x + 2y$ cannot equal both $6$ and $10$ at once. The lines are parallel (same slope, different intercepts), so there is no solution. Matching left sides alone would suggest infinitely many solutions, but the right sides differ.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Jalen is 3 times as old as a cousin named Theo, and the sum of their ages is 28 years. How old is Theo?`,
+      choices: [
+        no(`21`, 'gave-the-other-unknown'),
+        ok(`7`),
+        no(`14`, 'split-total-evenly'),
+        no(`25`, 'subtracted-multiplier-from-total'),
+      ],
+      solution: `Let $t$ be Theo's age and $j$ be Jalen's age: $j = 3t$ and $j + t = 28$. Substitute: $3t + t = 28$, so $4t = 28$ and $t = 7$. The value 21 is Jalen's age, not Theo's.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `One line crosses the $y$-axis at $(0, 2)$ and has slope $1$. A second line crosses the $y$-axis at $(0, 8)$ and has slope $-2$. At what point do the lines intersect?`,
+      choices: [
+        ok(`$(2, 4)$`),
+        no(`$(4, 2)$`, 'swapped-coordinates'),
+        no(`$(0, 2)$`, 'gave-y-intercept-as-solution'),
+        no(`$(-6, -4)$`, 'moved-term-without-changing-sign'),
+      ],
+      solution: `The lines are $y = x + 2$ and $y = -2x + 8$. Set them equal: $x + 2 = -2x + 8$, so $3x = 6$ and $x = 2$. Then $y = 2 + 2 = 4$, giving $(2, 4)$. The pair $(-6, -4)$ comes from moving $-2x$ across as $-2x$ instead of $+2x$.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `On a coordinate plane, Line A passes through $(0, -3)$ and $(1, -1)$. Line B passes through $(0, 9)$ and $(9, 0)$. At what point do the two lines intersect?`,
+      choices: [
+        no(`$(5, 4)$`, 'swapped-coordinates'),
+        no(`$(12, 21)$`, 'moved-term-without-changing-sign'),
+        ok(`$(4, 5)$`),
+        no(`$(8, 1)$`, 'slope-as-run-over-rise'),
+      ],
+      solution: `Line A rises $2$ for each $1$ to the right, so $y = 2x - 3$. Line B falls $9$ over a run of $9$, so $y = -x + 9$. Set equal: $2x - 3 = -x + 9$, so $3x = 12$ and $x = 4$. Then $y = 2(4) - 3 = 5$, giving $(4, 5)$. The pair $(8, 1)$ uses a slope of $\\frac{1}{2}$ for Line A, which is run over rise.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Solve the system $2x + 3y = 1$ and $4x - y = 23$:`,
+      choices: [
+        ok(`$(5, -3)$`),
+        no(`$(-3, 5)$`, 'swapped-coordinates'),
+        no(`$(5, 3)$`, 'sign-error-solving-for-y'),
+        no(`$(5, -9)$`, 'forgot-to-divide-by-coefficient'),
+      ],
+      solution: `Multiply the second equation by $3$: $12x - 3y = 69$. Add it to the first: $14x = 70$, so $x = 5$. Then $2(5) + 3y = 1$ gives $3y = -9$ and $y = -3$. Check: $4(5) - (-3) = 23$. The pair $(5, -9)$ stops at $3y = -9$ without dividing by $3$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Solve the system $x = 2y + 1$ and $3x - 5y = 8$ by substitution:`,
+      choices: [
+        no(`$(5, 11)$`, 'swapped-coordinates'),
+        no(`$(15, 7)$`, 'distributed-to-first-term-only'),
+        no(`$(10, 5)$`, 'dropped-constant-when-back-substituting'),
+        ok(`$(11, 5)$`),
+      ],
+      solution: `Substitute: $3(2y + 1) - 5y = 8$, so $6y + 3 - 5y = 8$, which gives $y + 3 = 8$ and $y = 5$. Then $x = 2(5) + 1 = 11$, so the solution is $(11, 5)$. The pair $(15, 7)$ comes from writing $3(2y + 1)$ as $6y + 1$.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Bike shop A charges 10 dollars plus 4 dollars per hour. Bike shop B charges 22 dollars plus 2 dollars per hour. After how many hours do the two shops charge the same amount?`,
+      choices: [
+        no(`2 hours`, 'added-rates-instead-of-subtracting'),
+        ok(`6 hours`),
+        no(`16 hours`, 'added-flat-fees'),
+        no(`34 hours`, 'gave-the-cost-not-the-hours'),
+      ],
+      solution: `Let $c$ be the cost after $h$ hours: $c = 10 + 4h$ and $c = 22 + 2h$. Set them equal: $10 + 4h = 22 + 2h$, so $2h = 12$ and $h = 6$. At 6 hours both shops charge 34 dollars, which is a cost, not a number of hours.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `For what value of $k$ does the system $3x - 2y = 5$ and $6x - 4y = k$ have infinitely many solutions?`,
+      choices: [
+        no(`$k = 5$`, 'did-not-scale-constant'),
+        no(`$k = -10$`, 'sign-error-when-scaling'),
+        ok(`$k = 10$`),
+        no(`$k = \\frac{5}{2}$`, 'divided-instead-of-multiplied'),
+      ],
+      solution: `The left side $6x - 4y$ is exactly $2$ times $3x - 2y$. For the equations to describe the same line, the right side must also be doubled: $k = 2 \\times 5 = 10$. The choice $k = 5$ doubles the left side but not the constant, which gives parallel lines and no solution.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `For what value of $a$ does the system $y = ax + 3$ and $4x - 2y = 7$ have no solution?`,
+      choices: [
+        ok(`$a = 2$`),
+        no(`$a = -2$`, 'sign-error-solving-for-y'),
+        no(`$a = 4$`, 'used-x-coefficient-as-slope'),
+        no(`$a = -\\frac{1}{2}$`, 'used-negative-reciprocal'),
+      ],
+      solution: `Solve the second equation for $y$: $-2y = -4x + 7$, so $y = 2x - \\frac{7}{2}$. Its slope is $2$. Lines with equal slopes and different $y$-intercepts ($3$ and $-\\frac{7}{2}$) are parallel, so $a = 2$. The value $-\\frac{1}{2}$ is the slope of a perpendicular line, which would cross at one point.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A barn holds only chickens and goats. Altogether the animals have 30 heads and 84 legs. How many goats are in the barn?`,
+      choices: [
+        no(`18`, 'gave-the-other-unknown'),
+        no(`21`, 'divided-legs-by-four'),
+        no(`15`, 'assumed-equal-split'),
+        ok(`12`),
+      ],
+      solution: `Let $c$ be chickens and $g$ be goats: $c + g = 30$ and $2c + 4g = 84$. Multiply the first equation by $2$: $2c + 2g = 60$. Subtract it from the second: $2g = 24$, so $g = 12$. The value 18 is the number of chickens.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Ana buys 3 bagels and 2 muffins for 11 dollars. Ben buys 1 bagel and 4 muffins for 12 dollars. If $b$ is the cost of one bagel and $m$ is the cost of one muffin, in dollars, which system models the situation?`,
+      choices: [
+        no(`$3b + 2m = 12$ and $b + 4m = 11$`, 'swapped-totals'),
+        ok(`$3b + 2m = 11$ and $b + 4m = 12$`),
+        no(`$2b + 3m = 11$ and $4b + m = 12$`, 'paired-counts-with-wrong-items'),
+        no(`$b + m = 11$ and $b + m = 12$`, 'ignored-quantities'),
+      ],
+      solution: `Ana's purchase costs $3b + 2m$, which equals 11 dollars, and Ben's costs $1b + 4m$, which equals 12 dollars. So the system is $3b + 2m = 11$ and $b + 4m = 12$. The system with $2b + 3m$ attaches the number of muffins to the bagel price.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Line P passes through $(-2, 0)$ and $(0, 4)$. Line Q passes through $(0, -2)$ and $(3, 4)$. How many solutions does the system formed by these two lines have?`,
+      choices: [
+        no(`Exactly one solution`, 'assumed-different-lines-intersect'),
+        no(`Infinitely many solutions`, 'compared-slopes-only'),
+        ok(`No solution`),
+        no(`Exactly two solutions`, 'counted-lines-as-solutions'),
+      ],
+      solution: `Line P has slope $\\frac{4 - 0}{0 - (-2)} = 2$ and $y$-intercept $4$, so $y = 2x + 4$. Line Q has slope $\\frac{4 - (-2)}{3 - 0} = 2$ and $y$-intercept $-2$, so $y = 2x - 2$. Equal slopes with different intercepts mean parallel lines, so there is no solution. Matching slopes alone does not mean the lines are the same; the intercepts must match too.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `If $3x + 2y = 4$ and $5x - 3y = 13$, what is the value of $x + y$?`,
+      choices: [
+        no(`$2$`, 'reported-x-only'),
+        ok(`$1$`),
+        no(`$-1$`, 'reported-y-only'),
+        no(`$3$`, 'sign-error-solving-for-y'),
+      ],
+      solution: `Multiply the first equation by $3$ and the second by $2$: $9x + 6y = 12$ and $10x - 6y = 26$. Adding gives $19x = 38$, so $x = 2$. Then $3(2) + 2y = 4$ gives $2y = -2$ and $y = -1$. So $x + y = 2 + (-1) = 1$. The value $3$ comes from taking $y = 1$ instead of $-1$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A boat travels 36 kilometers downstream in 2 hours and returns the same 36 kilometers upstream in 3 hours. The current speeds the boat up going downstream and slows it down going upstream by the same amount. What is the speed of the current, in kilometers per hour?`,
+      choices: [
+        no(`15`, 'gave-the-other-unknown'),
+        no(`6`, 'forgot-to-halve-difference'),
+        ok(`3`),
+        no(`18`, 'used-downstream-speed'),
+      ],
+      solution: `Downstream speed is $36 \\div 2 = 18$ and upstream speed is $36 \\div 3 = 12$. With boat speed $b$ and current $c$: $b + c = 18$ and $b - c = 12$. Subtracting gives $2c = 6$, so $c = 3$. The value 15 is the boat's speed in still water, and 6 is $2c$ before dividing by $2$.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `For what value of $k$ does the system $kx + 6y = 4$ and $2x + 3y = 5$ have no solution?`,
+      choices: [
+        ok(`$k = 4$`),
+        no(`$k = 2$`, 'matched-x-coefficients-without-scaling'),
+        no(`$k = 1$`, 'inverted-scale-factor'),
+        no(`$k = -4$`, 'sign-error-on-slope'),
+      ],
+      solution: `Multiply the second equation by $2$: $4x + 6y = 10$. If $k = 4$, the first equation is $4x + 6y = 4$, and the same expression cannot equal both $4$ and $10$, so the lines are parallel with no solution. The choice $k = 2$ copies the $x$ coefficient without scaling it by the same factor of $2$ that turns $3y$ into $6y$.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Gym P charges 50 dollars to join plus 25 dollars per month. Gym Q charges 20 dollars to join plus 35 dollars per month. Which statement is true?`,
+      choices: [
+        no(`The total costs are equal after 3 months, and Gym Q costs less for a full year.`, 'reversed-after-intersection'),
+        no(`The total costs are equal after 7 months, and Gym P costs less for a full year.`, 'added-flat-fees'),
+        ok(`The total costs are equal after 3 months, and Gym P costs less for a full year.`),
+        no(`The total costs are equal after 3 months and stay equal every month after that.`, 'thought-lines-coincide'),
+      ],
+      solution: `Set the totals equal: $50 + 25m = 20 + 35m$, so $30 = 10m$ and $m = 3$. For 12 months, Gym P costs $50 + 25(12) = 350$ dollars and Gym Q costs $20 + 35(12) = 440$ dollars, so Gym P is cheaper for a full year. Gym Q is cheaper only before month 3, because its monthly rate is higher. The 7 months comes from adding the join fees, $(50 + 20) \\div 10$.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `The system $2x - 5y = 3$ and $ax + 10y = b$ has infinitely many solutions. What are the values of $a$ and $b$?`,
+      choices: [
+        no(`$a = 4$ and $b = 6$`, 'dropped-negative-scale-factor'),
+        ok(`$a = -4$ and $b = -6$`),
+        no(`$a = -4$ and $b = 3$`, 'did-not-scale-constant'),
+        no(`$a = 4$ and $b = -6$`, 'scaled-only-some-terms'),
+      ],
+      solution: `For infinitely many solutions the second equation must be a multiple of the first. Since $-5y$ becomes $10y$, the factor is $-2$: $-2(2x - 5y) = -2(3)$ gives $-4x + 10y = -6$. So $a = -4$ and $b = -6$. The pair $a = 4$ and $b = 6$ multiplies by $2$, which would give $-10y$, not $10y$.`,
+    },
+  ],
+}
+
+export default skill
