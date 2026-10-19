@@ -14,6 +14,7 @@ import {
 import { readStatus, type ReadStatus } from '@/lib/readStatus'
 import type { GrowthAttempt, MilestoneSkill } from '@/lib/growth'
 import type { Json } from '@/lib/database.types'
+import { parsePicturePrompt, parsePictureTile, type PicturePrompt, type PictureTile } from '@/lib/pictureModel'
 
 /** The student fields the grade ladder needs, plus the id used for the reads. */
 export type LadderStudentRow = LadderStudent & { id: string }
@@ -25,21 +26,10 @@ export type LadderStudentRow = LadderStudent & { id: string }
  * scoring/aggregation helpers are unit-tested; the DB calls are best-effort.
  */
 
-/** A K–2 pre-reader answer tile: a big numeral, or a group of N picture icons
- *  (rendered by the picture UI instead of a text label). */
-/** A DISCRIMINATED union: narrowing on `kind` gives the fields that kind has.
- *  It was previously one shape with every field optional, which meant the renderer
- *  had to trust that an object_group tile really carried an image and a count. */
-export type PictureTile =
-  | { kind: 'number' | 'letter'; value: string }
-  | { kind: 'object_group'; image: string; count: number }
-
-/** The optional visual prompt for an audio-picture item (the group to count). */
-export interface PicturePrompt {
-  kind: 'object_group'
-  image: string
-  count: number
-}
+/** K-2 picture-tap tiles and prompts (numerals, words, picture groups, clocks,
+ *  base-ten blocks, ...). One definition shared with the content checker: see
+ *  src/lib/pictureModel.ts. */
+export type { PicturePrompt, PictureTile }
 
 /**
  * A choice as the browser sees it: the text (and a tile for K-2 picture items),
@@ -87,26 +77,8 @@ export function summarizeAttempts(results: { isCorrect: boolean }[]): {
 
 // --- Read path: fetch published questions for a skill ------------------------
 
-function parseTile(raw: unknown): PictureTile | undefined {
-  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return undefined
-  const t = raw as Record<string, unknown>
-  if ((t.kind === 'number' || t.kind === 'letter') && typeof t.value === 'string') {
-    return { kind: t.kind, value: t.value }
-  }
-  if (t.kind === 'object_group' && typeof t.image === 'string' && typeof t.count === 'number') {
-    return { kind: 'object_group', image: t.image, count: t.count }
-  }
-  return undefined
-}
-
-function parsePrompt(raw: Json): PicturePrompt | null {
-  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null
-  const p = raw as Record<string, unknown>
-  if (p.kind === 'object_group' && typeof p.image === 'string' && typeof p.count === 'number') {
-    return { kind: 'object_group', image: p.image, count: p.count }
-  }
-  return null
-}
+const parseTile = parsePictureTile
+const parsePrompt = (raw: Json) => parsePicturePrompt(raw)
 
 function parseChoices(raw: Json): PracticeChoice[] {
   if (!Array.isArray(raw)) return []

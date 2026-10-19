@@ -1,9 +1,11 @@
 /**
  * KidIcon — the curated, controlled illustration set for K–2 pre-reader items.
  * Hand-drawn inline SVGs (no external files, no generation): safe, consistent,
- * offline, CSP-friendly, and crisp at any size. Add a new object by adding one
- * entry here and its key to KID_IMAGES in preReaderTemplates.ts.
+ * offline, CSP-friendly, and crisp at any size. The first set lives here; the
+ * rest are in src/components/kidIcons/, one file per group. Add a picture by
+ * drawing it in a group file and adding its name to src/lib/kidImages.ts.
  */
+import { EXTRA_ICONS } from './kidIcons'
 
 type IconName =
   | 'apple' | 'star' | 'ball' | 'flower' | 'duck' | 'fish'
@@ -131,7 +133,7 @@ const PATHS: Record<IconName, { fill: string; svg: React.ReactNode }> = {
   },
   moon: {
     fill: '#f4c84b',
-    svg: <path d="M42 8a24 24 0 1 0 0 48A20 20 0 0 1 42 8z" />,
+    svg: <path d="M42 8a24 24 0 1 0 0 48A36 36 0 0 1 42 8z" />,
   },
   pig: {
     fill: '#e58aa0',
@@ -377,15 +379,17 @@ const PATHS: Record<IconName, { fill: string; svg: React.ReactNode }> = {
  * `size` fixes the icon at an exact px square, for callers that need one.
  * Omit it (the question surfaces do) to emit a viewBox-only SVG that CSS sizes
  * against its container, which is what lets picture items scale with the
- * question card instead of sitting at a fixed small size.
+ * question card instead of sitting at a fixed small size. `stretch` lets the
+ * picture fill a wider box (a length item stretches it over N unit cubes).
  */
-export function KidIcon({ name, size }: { name: string; size?: number }) {
-  const icon = PATHS[name as IconName]
+export function KidIcon({ name, size, stretch }: { name: string; size?: number; stretch?: boolean }) {
+  const icon = PATHS[name as IconName] ?? EXTRA_ICONS[name]
   if (!icon) return null
   return (
     <svg
       {...(size === undefined ? {} : { width: size, height: size })}
       viewBox="0 0 64 64"
+      {...(stretch ? { preserveAspectRatio: 'none' } : {})}
       fill={icon.fill}
       aria-hidden="true"
       focusable="false"

@@ -1,4 +1,4 @@
-import { KidIcon } from '@/components/KidIcon'
+import { PictureFigure } from '@/components/PictureFigure'
 import type { PracticeChoice, PicturePrompt } from '@/lib/questions'
 
 interface PictureQuestionProps {
@@ -17,22 +17,6 @@ interface PictureQuestionProps {
 }
 
 /**
- * A row of picture icons. `variant` selects the CSS sizing band rather than a
- * pixel size: the icons are viewBox-only SVGs, so `.picq-group svg` scales them
- * against the question card and they stay crisp at any size. Sizing lives in
- * app-screens.css so the evaluation and lesson flows cannot drift apart.
- */
-function group(image: string, count: number, variant: 'solo' | 'count' | 'tile') {
-  return (
-    <span className={`picq-group picq-group-${variant}`} aria-hidden="true">
-      {Array.from({ length: count }, (_, i) => (
-        <KidIcon key={i} name={image} />
-      ))}
-    </span>
-  )
-}
-
-/**
  * The K–2 pre-reader answer UI: a big picture prompt (optional) and large
  * tap-target tiles (a giant numeral, or a group of picture icons). No text the
  * child must read — the prompt is spoken by Nikki (auto-read). Scoring is by the
@@ -41,10 +25,10 @@ function group(image: string, count: number, variant: 'solo' | 'count' | 'tile')
 export function PictureQuestion({ prompt, choices, answered, selected, correctIndex, onPick, showState }: PictureQuestionProps) {
   return (
     <div className="picq">
-      {/* A single word-picture (phonics) shows large; a counting group shows smaller. */}
+      {/* The picture above the tiles: a word-picture, a group to count, a clock, ... */}
       {prompt && (
         <div className="picq-prompt">
-          {group(prompt.image, prompt.count, prompt.count === 1 ? 'solo' : 'count')}
+          <PictureFigure figure={prompt} place="prompt" />
         </div>
       )}
       <div className="picq-tiles" data-count={choices.length}>
@@ -60,13 +44,7 @@ export function PictureQuestion({ prompt, choices, answered, selected, correctIn
               aria-label={c.text}
               onClick={() => onPick(i)}
             >
-              {tile?.kind === 'number' || tile?.kind === 'letter' ? (
-                <span className="picq-num">{tile.value}</span>
-              ) : tile?.kind === 'object_group' ? (
-                group(tile.image, tile.count, 'tile')
-              ) : (
-                <span className="picq-num">{c.text}</span>
-              )}
+              {tile ? <PictureFigure figure={tile} place="tile" label={c.text} /> : <span className="picq-num">{c.text}</span>}
             </button>
           )
         })}

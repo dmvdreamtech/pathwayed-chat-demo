@@ -18,22 +18,13 @@
  * curated, safe inline-SVG set (see KID_IMAGES / the KidIcon component).
  */
 
+import { KID_IMAGES, type KidImage } from './kidImages'
+
 export type Difficulty = 'easy' | 'medium' | 'hard'
 
-/** The curated, controlled illustration set. Each key maps to one hand-drawn
- *  inline SVG in the KidIcon component — safe, offline, CSP-friendly, scalable. */
-export const KID_IMAGES = [
-  'apple', 'star', 'ball', 'flower', 'duck', 'fish',
-  // Phonics word pictures (beginning-sound proof).
-  'cat', 'gift', 'hat', 'key', 'leaf', 'moon', 'pig', 'ring', 'sun', 'tree', 'van',
-  // Deepening set — more familiar K words (clean single-consonant onsets).
-  'house', 'cap', 'bus', 'door', 'jet', 'net', 'web', 'yoyo', 'sock', 'mug', 'pot', 'kite', 'tent',
-  // 2-D shapes (K.G) — 'star' above doubles as a shape.
-  'circle', 'square', 'triangle', 'rectangle', 'oval', 'diamond', 'hexagon', 'heart',
-  // Coins (2.MD money).
-  'penny', 'nickel', 'dime', 'quarter',
-] as const
-export type KidImage = (typeof KID_IMAGES)[number]
+/** The curated, controlled illustration set: every picture the app can draw
+ *  (src/lib/kidImages.ts; each name is one inline SVG in KidIcon). */
+export { KID_IMAGES, type KidImage }
 
 /** A tappable answer tile: a big numeral, a big LETTER, or a group of N icons. */
 export type Tile =
