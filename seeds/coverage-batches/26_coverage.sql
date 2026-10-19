@@ -2799,7 +2799,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('ab548fc1-8b70-554f-8b89-1404f286809c', null, (select id from public.skills where slug = 'possessives-and-apostrophes'), null, 'medium',
-   $q$Read the sentence: "Rafael left ____ backpack under the bleachers after the game." Which word correctly completes the sentence?$q$, $q$[{"text":"he's","is_correct":false,"misconception_token":"contraction-for-possessive"},{"text":"his","is_correct":true},{"text":"hiss","is_correct":false,"misconception_token":"wrong-word-homophone"},{"text":"his'","is_correct":false,"misconception_token":"apostrophe-in-possessive-pronoun"}]$q$::jsonb, $q$his$q$, $q$"His" is a possessive pronoun, and possessive pronouns never use apostrophes. "He's" means "he is" or "he has," which does not make sense before "backpack."$q$, 'draft', null)
+   $q$Read the sentence: "Rafael left ____ backpack under the bleachers after the game." Rafael is a boy. Which word correctly completes the sentence?$q$, $q$[{"text":"he's","is_correct":false,"misconception_token":"contraction-for-possessive"},{"text":"his","is_correct":true},{"text":"hes","is_correct":false,"misconception_token":"contraction-missing-apostrophe"},{"text":"his'","is_correct":false,"misconception_token":"apostrophe-in-possessive-pronoun"}]$q$::jsonb, $q$his$q$, $q$"His" is a possessive pronoun, and possessive pronouns never use apostrophes. "He's" means "he is" or "he has," which does not make sense before "backpack."$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,
@@ -2838,7 +2838,7 @@ insert into public.generated_questions
   (id, template_id, skill_id, sat_alignment, difficulty, stem, choices, correct_answer, solution, status, passage_id)
 values
   ('db908ab8-2443-5375-b00e-47c842d3068a', null, (select id from public.skills where slug = 'possessives-and-apostrophes'), null, 'medium',
-   $q$Read the sentence: "My cousin ____ finished her book report yet, so she will stay home." Which word correctly completes the sentence?$q$, $q$[{"text":"hasnt","is_correct":false,"misconception_token":"contraction-missing-apostrophe"},{"text":"hasn't","is_correct":true},{"text":"has'nt","is_correct":false,"misconception_token":"apostrophe-in-wrong-place"},{"text":"hasn't'","is_correct":false,"misconception_token":"extra-apostrophe"}]$q$::jsonb, $q$hasn't$q$, $q$In a contraction, the apostrophe takes the place of the missing letter. "Has not" drops the o, so the apostrophe goes between n and t: "hasn't."$q$, 'draft', null)
+   $q$Read the sentence: "My cousin ____ finished the book report yet, so the movie will have to wait." Which word correctly completes the sentence?$q$, $q$[{"text":"hasnt","is_correct":false,"misconception_token":"contraction-missing-apostrophe"},{"text":"hasn't","is_correct":true},{"text":"has'nt","is_correct":false,"misconception_token":"apostrophe-in-wrong-place"},{"text":"hasn't'","is_correct":false,"misconception_token":"extra-apostrophe"}]$q$::jsonb, $q$hasn't$q$, $q$In a contraction, the apostrophe takes the place of the missing letter. "Has not" drops the o, so the apostrophe goes between n and t: "hasn't."$q$, 'draft', null)
 on conflict (id) do update set
   difficulty     = excluded.difficulty,
   stem           = excluded.stem,

@@ -123,12 +123,12 @@ const skill: ContentSkill = {
     {
       slot: 10,
       difficulty: 'medium',
-      stem: `Read the sentence: "Rafael left ____ backpack under the bleachers after the game." Which word correctly completes the sentence?`,
+      stem: `Read the sentence: "Rafael left ____ backpack under the bleachers after the game." Rafael is a boy. Which word correctly completes the sentence?`,
       choices: [
         no(`he's`, 'contraction-for-possessive'),
         no(`his'`, 'apostrophe-in-possessive-pronoun'),
         ok(`his`),
-        no(`hiss`, 'wrong-word-homophone'),
+        no(`hes`, 'contraction-missing-apostrophe'),
       ],
       solution: `"His" is a possessive pronoun, and possessive pronouns never use apostrophes. "He's" means "he is" or "he has," which does not make sense before "backpack."`,
     },
@@ -159,7 +159,7 @@ const skill: ContentSkill = {
     {
       slot: 13,
       difficulty: 'medium',
-      stem: `Read the sentence: "My cousin ____ finished her book report yet, so she will stay home." Which word correctly completes the sentence?`,
+      stem: `Read the sentence: "My cousin ____ finished the book report yet, so the movie will have to wait." Which word correctly completes the sentence?`,
       choices: [
         no(`hasnt`, 'contraction-missing-apostrophe'),
         ok(`hasn't`),
