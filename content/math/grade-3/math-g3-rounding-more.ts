@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g3-rounding-more',
+  extends: 'rounding',
+  subject: 'math',
+  grade: 3,
+  group: 'Number and Operations in Base Ten',
+  name: 'Rounding',
+  standards: ['3.NBT.A.1'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `A number line shows the tens $60$ and $70$. The number $63$ is marked between them. What is $63$ rounded to the nearest 10?`,
+      choices: [
+        ok(`$60$`),
+        no(`$70$`, 'rounded-up-instead-of-down'),
+        no(`$100$`, 'rounded-to-nearest-hundred'),
+        no(`$63$`, 'did-not-round'),
+      ],
+      solution: `On the number line, $63$ is $3$ away from $60$ and $7$ away from $70$. It is closer to $60$, so $63$ rounds to $60$. The choice $70$ rounds up, but $63$ is closer to $60$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A number line shows the hundreds $200$ and $300$. The number $281$ is marked between them. What is $281$ rounded to the nearest 100?`,
+      choices: [
+        no(`$200$`, 'rounded-down-instead-of-up'),
+        no(`$280$`, 'rounded-to-nearest-ten'),
+        ok(`$300$`),
+        no(`$281$`, 'did-not-round'),
+      ],
+      solution: `The middle of $200$ and $300$ is $250$. The number $281$ is past $250$, so it is closer to $300$. The tens digit is $8$, which is $5$ or more, so $281$ rounds up to $300$. The choice $280$ is $281$ rounded to the nearest 10, not the nearest 100.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A box has $38$ crackers. About how many crackers is that, rounded to the nearest 10?`,
+      choices: [
+        no(`$30$`, 'rounded-down-instead-of-up'),
+        ok(`$40$`),
+        no(`$100$`, 'rounded-to-nearest-hundred'),
+        no(`$38$`, 'did-not-round'),
+      ],
+      solution: `$38$ is between $30$ and $40$. The ones digit is $8$, which is $5$ or more, so round up to $40$ crackers. The choice $30$ rounds down, but $38$ is only $2$ away from $40$.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `A class trip to a museum is $125$ miles. What is $125$ rounded to the nearest 10?`,
+      choices: [
+        no(`$120$`, 'rounded-halfway-down'),
+        no(`$100$`, 'rounded-to-nearest-hundred'),
+        no(`$125$`, 'did-not-round'),
+        ok(`$130$`),
+      ],
+      solution: `$125$ is between $120$ and $130$. The ones digit is $5$, so $125$ is exactly halfway. A number that is exactly halfway rounds up, so $125$ rounds to $130$ miles. The choice $120$ rounds the halfway number down.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A number line goes from $500$ to $600$. The number $550$ is exactly in the middle. What is $550$ rounded to the nearest 100?`,
+      choices: [
+        ok(`$600$`),
+        no(`$500$`, 'rounded-halfway-down'),
+        no(`$550$`, 'did-not-round'),
+        no(`$6$`, 'gave-number-of-hundreds-only'),
+      ],
+      solution: `$550$ is the same distance from $500$ and from $600$. When a number is exactly halfway, round up, so $550$ rounds to $600$. The choice $500$ rounds the halfway number down.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A farm stand sold $432$ apples. What is $432$ rounded to the nearest 10?`,
+      choices: [
+        no(`$440$`, 'rounded-up-instead-of-down'),
+        ok(`$430$`),
+        no(`$400$`, 'rounded-to-nearest-hundred'),
+        no(`$432$`, 'did-not-round'),
+      ],
+      solution: `$432$ is between $430$ and $440$. The ones digit is $2$, which is less than $5$, so round down to $430$. The choice $400$ is $432$ rounded to the nearest 100, not the nearest 10.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Rosa read $46$ pages on Monday and $33$ pages on Tuesday. Round each number to the nearest 10, then add. What is the estimate of the total pages?`,
+      choices: [
+        no(`$79$`, 'found-exact-sum-instead-of-estimate'),
+        ok(`$80$`),
+        no(`$70$`, 'rounded-down-instead-of-up'),
+        no(`$90$`, 'rounded-both-numbers-up'),
+      ],
+      solution: `$46$ rounds up to $50$ and $33$ rounds down to $30$. The estimate is $50 + 30 = 80$ pages. The choice $79$ is the exact sum $46 + 33$, not the estimate. The choice $70$ rounds $46$ down to $40$.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A theater has $712$ seats. There are $289$ people at the show. Round each number to the nearest 100 to estimate how many seats are empty:`,
+      choices: [
+        ok(`$400$`),
+        no(`$423$`, 'found-exact-difference-instead-of-estimate'),
+        no(`$500$`, 'rounded-down-instead-of-up'),
+        no(`$1{,}000$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `$712$ rounds down to $700$ and $289$ rounds up to $300$. The estimate is $700 - 300 = 400$ empty seats. The choice $500$ rounds $289$ down to $200$, but its tens digit is $8$, so it rounds up. The choice $1{,}000$ adds $700 + 300$ instead of subtracting.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Which number rounds to $400$ when it is rounded to the nearest 100?`,
+      choices: [
+        no(`$451$`, 'cut-off-instead-of-rounding'),
+        no(`$349$`, 'rounded-in-steps'),
+        ok(`$368$`),
+        no(`$330$`, 'rounded-up-any-nonzero-tens-digit'),
+      ],
+      solution: `$368$ has a tens digit of $6$, which is $5$ or more, so it rounds up to $400$. The choice $451$ starts with $4$ hundreds, but its tens digit is $5$, so it rounds up to $500$. The choice $349$ rounds to $300$; rounding it to $350$ first and then to $400$ is rounding in steps, which is not allowed.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A class collected $168$ cans in the first week and $224$ cans in the second week. Round each number to the nearest 10, then add to estimate the total:`,
+      choices: [
+        no(`$392$`, 'found-exact-sum-instead-of-estimate'),
+        no(`$400$`, 'rounded-to-nearest-hundred'),
+        ok(`$390$`),
+        no(`$380$`, 'rounded-down-instead-of-up'),
+      ],
+      solution: `$168$ rounds up to $170$ and $224$ rounds down to $220$. The estimate is $170 + 220 = 390$ cans. The choice $400$ rounds each number to the nearest 100 ($200 + 200$) instead of the nearest 10. The choice $380$ rounds $168$ down to $160$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A music store sold $645$ songs in one day. What is $645$ rounded to the nearest 100?`,
+      choices: [
+        no(`$700$`, 'rounded-in-steps'),
+        no(`$650$`, 'rounded-to-nearest-ten'),
+        no(`$640$`, 'cut-off-ones-instead-of-rounding'),
+        ok(`$600$`),
+      ],
+      solution: `$645$ is between $600$ and $700$. Look at the tens digit: it is $4$, which is less than $5$, so round down to $600$. The choice $700$ comes from rounding $645$ to $650$ first and then rounding up, but you must round the original number in one step.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A bike costs $187$ dollars. About how much does the bike cost, rounded to the nearest 10 dollars?`,
+      choices: [
+        ok(`$190$ dollars`),
+        no(`$180$ dollars`, 'rounded-down-instead-of-up'),
+        no(`$200$ dollars`, 'rounded-to-nearest-hundred'),
+        no(`$187$ dollars`, 'did-not-round'),
+      ],
+      solution: `$187$ is between $180$ and $190$. The ones digit is $7$, which is $5$ or more, so round up to $190$ dollars. The choice $200$ dollars is $187$ rounded to the nearest 100, not the nearest 10.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Nia has $83$ stickers and gives away $27$ of them. Round each number to the nearest 10 to estimate how many stickers Nia has left:`,
+      choices: [
+        no(`$56$`, 'found-exact-difference-instead-of-estimate'),
+        ok(`$50$`),
+        no(`$60$`, 'rounded-down-instead-of-up'),
+        no(`$110$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `$83$ rounds down to $80$ and $27$ rounds up to $30$. The estimate is $80 - 30 = 50$ stickers. The choice $60$ rounds $27$ down to $20$, but its ones digit is $7$, so it rounds up. The choice $110$ adds $80 + 30$ instead of subtracting.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Ana works out $71 - 28$. Round each number to the nearest 10 to estimate. Which answer is closest to the estimate?`,
+      choices: [
+        no(`$57$`, 'subtracted-smaller-digit-from-larger'),
+        no(`$53$`, 'forgot-to-regroup-tens'),
+        ok(`$43$`),
+        no(`$99$`, 'added-instead-of-subtracted'),
+      ],
+      solution: `$71$ rounds to $70$ and $28$ rounds to $30$, so the estimate is $70 - 30 = 40$. The answer $43$ is closest to $40$, and in fact $71 - 28 = 43$. The choice $57$ subtracts $1$ from $8$ in the ones place instead of regrouping, so it is far from the estimate.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `A number line runs from $760$ to $770$ with a tick mark for each whole number. A point sits $6$ tick marks to the right of $760$. What is the point's number rounded to the nearest 10?`,
+      choices: [
+        no(`$760$`, 'rounded-down-instead-of-up'),
+        ok(`$770$`),
+        no(`$800$`, 'rounded-to-nearest-hundred'),
+        no(`$766$`, 'did-not-round'),
+      ],
+      solution: `Six tick marks to the right of $760$ is $766$. It is $6$ away from $760$ and $4$ away from $770$, so it is closer to $770$. The choice $766$ is the point's number before rounding.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Mateo adds $398 + 207$ and gets $905$. Mateo rounds each number to the nearest 100 to check. Which statement is true?`,
+      choices: [
+        ok(`The estimate is $600$, so $905$ is not reasonable.`),
+        no(`The estimate is $600$, so $905$ is reasonable.`, 'did-not-compare-answer-to-estimate'),
+        no(`The estimate is $500$, so $905$ is not reasonable.`, 'rounded-down-instead-of-up'),
+        no(`The estimate is $700$, so $905$ is not reasonable.`, 'rounded-up-instead-of-down'),
+      ],
+      solution: `$398$ rounds up to $400$ and $207$ rounds down to $200$, so the estimate is $400 + 200 = 600$. Mateo's answer $905$ is about $300$ more than $600$, so it is not reasonable. The exact sum is $605$. The estimate $500$ comes from rounding $398$ down to $300$, and the estimate $700$ comes from rounding $207$ up to $300$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `What is the least whole number that rounds to $600$ when it is rounded to the nearest 100?`,
+      choices: [
+        no(`$551$`, 'thought-halfway-rounds-down'),
+        no(`$649$`, 'gave-greatest-number-instead-of-least'),
+        ok(`$550$`),
+        no(`$500$`, 'started-at-lower-hundred'),
+      ],
+      solution: `Numbers from $550$ to $649$ round to $600$. The number $550$ is exactly halfway between $500$ and $600$, and halfway rounds up, so $550$ rounds to $600$. Any number less than $550$ rounds down to $500$. The choice $649$ is the greatest number that rounds to $600$, not the least.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Sam estimates $348 + 276$ by rounding each number to the nearest 10. Jo estimates the same sum by rounding each number to the nearest 100. How much greater is Sam's estimate than Jo's estimate?`,
+      choices: [
+        no(`$24$`, 'used-exact-sum-instead-of-estimate'),
+        ok(`$30$`),
+        no(`$130$`, 'rounded-down-instead-of-up'),
+        no(`$1{,}230$`, 'added-estimates-instead-of-subtracting'),
+      ],
+      solution: `Sam: $348$ rounds to $350$ and $276$ rounds to $280$, so $350 + 280 = 630$. Jo: $348$ rounds to $300$ and $276$ rounds to $300$, so $300 + 300 = 600$. Sam's estimate is $630 - 600 = 30$ greater. The choice $24$ uses the exact sum $624$ instead of Sam's estimate. The choice $130$ rounds $276$ down to $200$ for Jo.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A school has $186$ students in grade 1, $214$ in grade 2 and $197$ in grade 3. Lin says there are $497$ students in all. Lin rounds each number to the nearest 100 to check. Which statement is true?`,
+      choices: [
+        no(`The estimate is $500$, so $497$ is reasonable.`, 'rounded-down-instead-of-up'),
+        ok(`The estimate is $600$, so $497$ is not reasonable.`),
+        no(`The estimate is $600$, so $497$ is reasonable.`, 'did-not-compare-answer-to-estimate'),
+        no(`The estimate is $400$, so $497$ is reasonable.`, 'left-out-one-number'),
+      ],
+      solution: `$186$ rounds up to $200$, $214$ rounds down to $200$ and $197$ rounds up to $200$. The estimate is $200 + 200 + 200 = 600$. Lin's answer $497$ is about $100$ less than $600$, so it is not reasonable. The exact total is $597$. The estimate $500$ comes from rounding $186$ down to $100$, and the estimate $400$ adds only two of the numbers.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A mystery number rounds to $250$ when rounded to the nearest 10. It rounds to $300$ when rounded to the nearest 100. Which number could it be?`,
+      choices: [
+        no(`$246$`, 'checked-only-nearest-ten'),
+        ok(`$252$`),
+        no(`$255$`, 'thought-halfway-rounds-down'),
+        no(`$304$`, 'checked-only-nearest-hundred'),
+      ],
+      solution: `$252$ rounds to $250$ to the nearest 10 because its ones digit is $2$. It rounds to $300$ to the nearest 100 because its tens digit is $5$. The choice $246$ rounds to $250$ but to $200$ to the nearest 100. The choice $255$ is halfway between $250$ and $260$, so it rounds up to $260$. The choice $304$ rounds to $300$ both ways, not $250$.`,
+    },
+  ],
+}
+
+export default skill
