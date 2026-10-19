@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g7-two-step-equations-more',
+  extends: 'two-step-equations',
+  subject: 'math',
+  grade: 7,
+  group: 'Expressions and Equations',
+  name: 'Two-Step Equations & Inequalities',
+  standards: ['7.EE.B.4'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What value of $x$ solves $0.5x + 3 = 7$?`,
+      choices: [
+        ok(`$x = 8$`),
+        no(`$x = 20$`, 'added-instead-of-subtracted-constant'),
+        no(`$x = 2$`, 'multiplied-by-coefficient-instead-of-dividing'),
+        no(`$x = 4$`, 'skipped-dividing-by-coefficient'),
+      ],
+      solution: `Subtract $3$ from both sides to get $0.5x = 4$. Then divide by $0.5$: $x = 4 \\div 0.5 = 8$. The choice $x = 4$ stops after the first step and never divides by $0.5$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What value of $x$ solves $5(x - 1) = 35$?`,
+      choices: [
+        no(`$x = 6$`, 'subtracted-instead-of-adding-back'),
+        ok(`$x = 8$`),
+        no(`$x = 7.2$`, 'distributed-to-first-term-only'),
+        no(`$x = 31$`, 'subtracted-coefficient-instead-of-dividing'),
+      ],
+      solution: `Divide both sides by $5$ to get $x - 1 = 7$, then add $1$: $x = 8$. Check: $5(8 - 1) = 5 \\times 7 = 35$. The choice $x = 6$ subtracts $1$ from $7$ instead of adding it back.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Priya pays a 6 dollar entry fee at a county fair plus 1.50 dollars for each ride. Priya spends 15 dollars in all. How many rides, a whole number, did Priya go on?`,
+      choices: [
+        no(`14 rides`, 'added-entry-fee'),
+        no(`10 rides`, 'ignored-entry-fee'),
+        no(`4 rides`, 'divided-fee-by-rate'),
+        ok(`6 rides`),
+      ],
+      solution: `Let $r$ be the number of rides: $6 + 1.5r = 15$. Subtract $6$ to get $1.5r = 9$, then divide: $r = 6$. The choice 10 rides divides the whole 15 dollars by the ride price and forgets that 6 dollars went to the entry fee.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What is the solution of the inequality $\\frac{x}{4} + 2 \\geq 5$?`,
+      choices: [
+        ok(`$x \\geq 12$`),
+        no(`$x \\geq 28$`, 'added-instead-of-subtracted-constant'),
+        no(`$x \\leq 12$`, 'flipped-sign-without-negative'),
+        no(`$x \\geq \\frac{3}{4}$`, 'divided-instead-of-multiplied'),
+      ],
+      solution: `Subtract $2$: $\\frac{x}{4} \\geq 3$. Multiply both sides by $4$, a positive number, so the sign stays the same: $x \\geq 12$. The choice $x \\leq 12$ flips the sign, but the sign only flips when you multiply or divide by a negative number.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `What value of $x$ solves $2x - 1.5 = 6.5$?`,
+      choices: [
+        no(`$x = 2.5$`, 'subtracted-instead-of-adding-constant'),
+        no(`$x = 8$`, 'skipped-dividing-by-coefficient'),
+        ok(`$x = 4$`),
+        no(`$x = 16$`, 'multiplied-by-coefficient-instead-of-dividing'),
+      ],
+      solution: `Add $1.5$ to both sides: $2x = 8$. Divide by $2$: $x = 4$. Check: $2(4) - 1.5 = 6.5$. The choice $x = 2.5$ subtracts $1.5$ instead of adding it, which does not undo the subtraction.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `Ms. Okafor has 50 dollars saved and adds 25 dollars each week. She wants to have at least 200 dollars. Which inequality describes the number of weeks $w$ that meet her goal?`,
+      choices: [
+        no(`$50 + 25w \\leq 200$`, 'reversed-at-least'),
+        no(`$25 + 50w \\geq 200$`, 'swapped-start-and-rate'),
+        ok(`$50 + 25w \\geq 200$`),
+        no(`$25w \\geq 200$`, 'ignored-starting-amount'),
+      ],
+      solution: `Her savings after $w$ weeks are $50 + 25w$, and "at least 200" means greater than or equal to 200, so $50 + 25w \\geq 200$. The choice $25w \\geq 200$ leaves out the 50 dollars she already has.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $\\frac{2}{3}x - 4 = 6$?`,
+      choices: [
+        no(`$x = 3$`, 'subtracted-instead-of-adding-constant'),
+        ok(`$x = 15$`),
+        no(`$x = \\frac{20}{3}$`, 'multiplied-by-fraction-instead-of-dividing'),
+        no(`$x = 10$`, 'skipped-dividing-by-coefficient'),
+      ],
+      solution: `Add $4$ to both sides: $\\frac{2}{3}x = 10$. Divide by $\\frac{2}{3}$, which is the same as multiplying by $\\frac{3}{2}$: $x = 10 \\times \\frac{3}{2} = 15$. The choice $x = \\frac{20}{3}$ multiplies $10$ by $\\frac{2}{3}$ instead of dividing by it.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $-4(x + 1.5) = 10$?`,
+      choices: [
+        no(`$x = 1$`, 'dropped-negative-when-dividing'),
+        no(`$x = -1$`, 'added-instead-of-subtracted-constant'),
+        ok(`$x = -4$`),
+        no(`$x = -2.125$`, 'distributed-to-first-term-only'),
+      ],
+      solution: `Divide both sides by $-4$: $x + 1.5 = -2.5$. Subtract $1.5$: $x = -4$. Check: $-4(-4 + 1.5) = -4(-2.5) = 10$. The choice $x = 1$ divides $10$ by $4$ and loses the negative sign, giving $x + 1.5 = 2.5$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `What is the solution of the inequality $-3x + 7 > 22$?`,
+      choices: [
+        no(`$x > -5$`, 'did-not-flip-sign-dividing-by-negative'),
+        ok(`$x < -5$`),
+        no(`$x < 5$`, 'dropped-negative-when-dividing'),
+        no(`$x < -\\frac{29}{3}$`, 'added-instead-of-subtracted-constant'),
+      ],
+      solution: `Subtract $7$: $-3x > 15$. Divide both sides by $-3$; dividing by a negative number reverses the inequality sign, so $x < -5$. The choice $x > -5$ divides correctly but forgets to flip the sign.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A teacher buys 4 identical art kits. Each kit costs $x$ dollars plus a shipping charge of 2.25 dollars per kit, so $4(x + 2.25) = 39$. What is the cost of one kit before shipping?`,
+      choices: [
+        no(`12 dollars`, 'added-shipping-instead-of-subtracting'),
+        no(`9.75 dollars`, 'forgot-to-subtract-shipping'),
+        no(`0.75 dollars`, 'subtracted-total-shipping-from-one-kit'),
+        ok(`7.50 dollars`),
+      ],
+      solution: `Divide both sides by $4$: $x + 2.25 = 9.75$, so each kit with shipping costs 9.75 dollars. Subtract the shipping: $x = 9.75 - 2.25 = 7.5$, so a kit costs 7.50 dollars. The choice 9.75 dollars still includes the shipping charge.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `A phone plan costs 20 dollars a month plus 0.10 dollars per text message. Aiko wants the monthly bill to be at most 35 dollars. Which describes the number of texts $t$ Aiko can send?`,
+      choices: [
+        ok(`$t \\leq 150$`),
+        no(`$t \\geq 150$`, 'reversed-at-most'),
+        no(`$t \\leq 550$`, 'added-instead-of-subtracted-constant'),
+        no(`$t \\leq 15$`, 'skipped-dividing-by-rate'),
+      ],
+      solution: `Write $20 + 0.1t \\leq 35$. Subtract $20$: $0.1t \\leq 15$. Divide by $0.1$: $t \\leq 150$, so Aiko can send at most 150 texts. The choice $t \\leq 15$ stops at $0.1t \\leq 15$ and never divides by the price per text.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `What is the solution of the inequality $\\frac{x}{-2} + 3 \\leq 8$?`,
+      choices: [
+        no(`$x \\leq -10$`, 'did-not-flip-sign-multiplying-by-negative'),
+        no(`$x \\geq -22$`, 'added-instead-of-subtracted-constant'),
+        ok(`$x \\geq -10$`),
+        no(`$x \\geq -2.5$`, 'divided-instead-of-multiplied'),
+      ],
+      solution: `Subtract $3$: $\\frac{x}{-2} \\leq 5$. Multiply both sides by $-2$; multiplying by a negative number reverses the sign, so $x \\geq -10$. The choice $x \\leq -10$ multiplies correctly but keeps the original sign.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `What value of $x$ solves $\\frac{1}{2}(x - 6) = 9$?`,
+      choices: [
+        no(`$x = 12$`, 'subtracted-instead-of-adding-back'),
+        ok(`$x = 24$`),
+        no(`$x = 10.5$`, 'multiplied-by-fraction-instead-of-dividing'),
+        no(`$x = 30$`, 'distributed-to-first-term-only'),
+      ],
+      solution: `Multiply both sides by $2$ to undo the $\\frac{1}{2}$: $x - 6 = 18$. Add $6$: $x = 24$. Check: $\\frac{1}{2}(24 - 6) = 9$. The choice $x = 30$ comes from writing $\\frac{1}{2}x - 6 = 9$, which forgets to multiply the $6$ by $\\frac{1}{2}$.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Which number is a solution of $9 - 4x > 21$?`,
+      choices: [
+        no(`$-1$`, 'did-not-flip-sign-dividing-by-negative'),
+        no(`$5$`, 'dropped-negative-when-dividing'),
+        ok(`$-5$`),
+        no(`$8$`, 'added-instead-of-subtracted-constant'),
+      ],
+      solution: `Subtract $9$: $-4x > 12$. Divide by $-4$ and flip the sign: $x < -3$. Only $-5$ is less than $-3$. Check: $9 - 4(-5) = 29$, and $29 > 21$. The choice $-1$ fits $x > -3$, which forgets to flip the sign; it gives $9 - 4(-1) = 13$, which is not greater than 21.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `At 6 a.m. the temperature is $-4.5$ degrees Celsius, and it rises 1.5 degrees each hour. After how many hours will the temperature be 3 degrees Celsius?`,
+      choices: [
+        no(`2 hours`, 'ignored-starting-temperature'),
+        ok(`5 hours`),
+        no(`1 hour`, 'treated-start-as-positive'),
+        no(`11.25 hours`, 'multiplied-by-rate-instead-of-dividing'),
+      ],
+      solution: `Let $h$ be the hours: $-4.5 + 1.5h = 3$. Add $4.5$: $1.5h = 7.5$. Divide by $1.5$: $h = 5$. The choice 2 hours divides $3$ by $1.5$ as if the temperature started at 0 degrees.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `What value of $x$ solves $-\\frac{3}{4}(x - 8) = 12$?`,
+      choices: [
+        no(`$x = 24$`, 'dropped-negative-when-dividing'),
+        ok(`$x = -8$`),
+        no(`$x = -24$`, 'subtracted-instead-of-adding-back'),
+        no(`$x = -\\frac{80}{3}$`, 'distributed-to-first-term-only'),
+      ],
+      solution: `Multiply both sides by $-\\frac{4}{3}$: $x - 8 = 12 \\times (-\\frac{4}{3}) = -16$. Add $8$: $x = -8$. Check: $-\\frac{3}{4}(-8 - 8) = -\\frac{3}{4}(-16) = 12$. The choice $x = 24$ uses $x - 8 = 16$, losing the negative sign of the coefficient.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `What is the solution of the inequality $-2(x - 3.5) < 9$?`,
+      choices: [
+        ok(`$x > -1$`),
+        no(`$x < -1$`, 'did-not-flip-sign-dividing-by-negative'),
+        no(`$x > -8$`, 'subtracted-instead-of-adding-back'),
+        no(`$x > -6.25$`, 'distributed-to-first-term-only'),
+      ],
+      solution: `Divide both sides by $-2$ and reverse the sign: $x - 3.5 > -4.5$. Add $3.5$: $x > -1$. A quick test: $x = 0$ gives $-2(-3.5) = 7$, and $7 < 9$ is true, while $0 > -1$ agrees. The choice $x < -1$ divides by $-2$ without flipping the sign.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A water tank holds 120 liters and drains at 7.5 liters per minute. Which inequality gives the number of minutes $m$ for which the tank still holds at least 45 liters?`,
+      choices: [
+        no(`$m \\geq 10$`, 'did-not-flip-sign-dividing-by-negative'),
+        no(`$m \\leq 22$`, 'added-instead-of-subtracted-constant'),
+        ok(`$m \\leq 10$`),
+        no(`$m \\leq 6$`, 'ignored-starting-amount'),
+      ],
+      solution: `The amount left is $120 - 7.5m$, so $120 - 7.5m \\geq 45$. Subtract $120$: $-7.5m \\geq -75$. Divide by $-7.5$ and flip the sign: $m \\leq 10$. This makes sense because the water level only goes down, so the tank has at least 45 liters for the first 10 minutes. The choice $m \\geq 10$ forgets to flip the sign.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Ravi has 62 dollars for a field trip. The ticket costs 18 dollars, and snack packs cost 3.50 dollars each. The number of snack packs $s$ must satisfy $18 + 3.5s \\leq 62$. Ravi can buy only whole snack packs. Which statement describes how many snack packs Ravi can buy?`,
+      choices: [
+        no(`At most 13 snack packs`, 'rounded-up-past-budget'),
+        no(`At least 13 snack packs`, 'reversed-inequality-direction'),
+        no(`At most 17 snack packs`, 'ignored-ticket-cost'),
+        ok(`At most 12 snack packs`),
+      ],
+      solution: `From $18 + 3.5s \\leq 62$, subtract $18$ to get $3.5s \\leq 44$, so $s \\leq 44 \\div 3.5$, which is about $12.57$. Snack packs come in whole numbers, so Ravi can buy at most 12. Check: 12 packs plus the ticket cost $18 + 42 = 60$ dollars, but 13 packs would cost $18 + 45.5 = 63.5$ dollars, which is over 62. The choice "At most 13 snack packs" rounds up and goes over the budget.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A rectangle has a perimeter of 31.4 centimeters and a length of 9.2 centimeters. Using $2(w + 9.2) = 31.4$, what is the width $w$?`,
+      choices: [
+        no(`22.2 centimeters`, 'skipped-dividing-by-2'),
+        ok(`6.5 centimeters`),
+        no(`11.1 centimeters`, 'distributed-to-first-term-only'),
+        no(`24.9 centimeters`, 'added-instead-of-subtracted-constant'),
+      ],
+      solution: `Divide both sides by $2$: $w + 9.2 = 15.7$. Subtract $9.2$: $w = 6.5$, so the width is 6.5 centimeters. Check: $2(6.5 + 9.2) = 2(15.7) = 31.4$. The choice 22.2 centimeters subtracts the length from the whole perimeter without dividing by 2 first.`,
+    },
+  ],
+}
+
+export default skill
