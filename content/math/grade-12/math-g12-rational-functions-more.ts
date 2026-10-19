@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g12-rational-functions-more',
+  extends: 'rational-functions',
+  subject: 'math',
+  grade: 12,
+  group: 'Functions',
+  name: 'Rational Functions',
+  standards: ['HSF.IF.C.7'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is the vertical asymptote of $f(x) = \\frac{x+4}{2x-6}$?`,
+      choices: [
+        ok(`$x = 3$`),
+        no(`$x = 6$`, 'did-not-divide-by-coefficient'),
+        no(`$x = -4$`, 'used-numerator-zero'),
+        no(`$x = -3$`, 'sign-error-solving'),
+      ],
+      solution: `Set the denominator equal to zero: $2x - 6 = 0$, so $2x = 6$ and $x = 3$. The numerator is $7$ at $x = 3$, not zero, so nothing cancels and $x = 3$ is a vertical asymptote. The choice $x = -4$ makes the numerator zero, which gives an $x$-intercept, not an asymptote.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is the horizontal asymptote of $f(x) = \\frac{4x-1}{2x+5}$?`,
+      choices: [
+        no(`$y = \\frac{1}{2}$`, 'inverted-leading-coefficient-ratio'),
+        ok(`$y = 2$`),
+        no(`$y = 4$`, 'ignored-denominator-coefficient'),
+        no(`$y = -\\frac{1}{5}$`, 'used-constant-terms'),
+      ],
+      solution: `The numerator and denominator both have degree $1$, so the horizontal asymptote is the ratio of the leading coefficients: $y = \\frac{4}{2} = 2$. The choice $y = \\frac{1}{2}$ divides the coefficients in the wrong order.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `What is the $y$-intercept of the graph of $f(x) = \\frac{x-8}{x+4}$?`,
+      choices: [
+        no(`$(8, 0)$`, 'gave-x-intercept'),
+        no(`$(0, 2)$`, 'dropped-negative-sign'),
+        ok(`$(0, -2)$`),
+        no(`$(0, -\\frac{1}{2})$`, 'inverted-the-fraction'),
+      ],
+      solution: `The $y$-intercept is where $x = 0$: $f(0) = \\frac{0 - 8}{0 + 4} = \\frac{-8}{4} = -2$, so the point is $(0, -2)$. The point $(8, 0)$ is the $x$-intercept, where the numerator is zero.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What is the domain of $f(x) = \\frac{7}{x^2-25}$?`,
+      choices: [
+        no(`All real numbers except $x = 5$`, 'missed-negative-root'),
+        no(`All real numbers except $x = 25$`, 'did-not-take-square-root'),
+        no(`All real numbers`, 'assumed-domain-unrestricted'),
+        ok(`All real numbers except $x = 5$ and $x = -5$`),
+      ],
+      solution: `The function is undefined where the denominator is zero: $x^2 - 25 = (x - 5)(x + 5) = 0$, so $x = 5$ or $x = -5$. Both values must be excluded, so the domain is all real numbers except $x = 5$ and $x = -5$.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `What is the horizontal asymptote of $f(x) = \\frac{6x}{x^2+1}$?`,
+      choices: [
+        ok(`$y = 0$`),
+        no(`$y = 6$`, 'ignored-degrees'),
+        no(`There is no horizontal asymptote.`, 'reversed-degree-rule'),
+        no(`$x = 0$`, 'gave-x-intercept'),
+      ],
+      solution: `The numerator has degree $1$ and the denominator has degree $2$. When the denominator has the higher degree, the fraction shrinks toward zero for large $|x|$, so the horizontal asymptote is $y = 0$. The choice $y = 6$ divides coefficients as if the degrees were equal.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `What are the $x$-intercepts of $f(x) = \\frac{x^2-16}{x+1}$?`,
+      choices: [
+        no(`$x = -1$`, 'used-denominator-zero'),
+        ok(`$x = 4$ and $x = -4$`),
+        no(`$x = 16$`, 'did-not-take-square-root'),
+        no(`$x = 4$ only`, 'missed-negative-root'),
+      ],
+      solution: `An $x$-intercept occurs where the numerator is zero and the denominator is not. $x^2 - 16 = (x - 4)(x + 4) = 0$ gives $x = 4$ or $x = -4$, and the denominator is $5$ and $-3$ there, not zero. So both $x = 4$ and $x = -4$ are intercepts. The value $x = -1$ makes the denominator zero, which is a vertical asymptote.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `The graph of $f(x) = \\frac{x^2+2x-15}{x-3}$ has a hole. What are the coordinates of the hole?`,
+      choices: [
+        no(`$(3, 0)$`, 'assumed-hole-on-x-axis'),
+        no(`$(-5, 0)$`, 'gave-x-intercept'),
+        ok(`$(3, 8)$`),
+        no(`$(-3, 2)$`, 'used-opposite-of-excluded-value'),
+      ],
+      solution: `Factor the numerator: $x^2 + 2x - 15 = (x + 5)(x - 3)$. The factor $(x - 3)$ cancels, leaving $f(x) = x + 5$ for $x \\neq 3$. The hole is at $x = 3$, and its height is $3 + 5 = 8$, so the hole is $(3, 8)$. The choice $(3, 0)$ assumes a hole always sits on the $x$-axis, but its height comes from the simplified expression.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `What is the slant (oblique) asymptote of $f(x) = \\frac{x^2+3x+5}{x+1}$?`,
+      choices: [
+        ok(`$y = x + 2$`),
+        no(`$y = x + 3$`, 'divided-by-leading-term-only'),
+        no(`$y = x + 4$`, 'used-wrong-sign-in-synthetic-division'),
+        no(`$y = 1$`, 'used-leading-coefficient-ratio'),
+      ],
+      solution: `Divide: $x^2 + 3x + 5 = (x + 1)(x + 2) + 3$, so $f(x) = x + 2 + \\frac{3}{x + 1}$. As $|x|$ grows, $\\frac{3}{x+1}$ goes to $0$, so the slant asymptote is $y = x + 2$. The choice $y = x + 3$ divides each term by $x$ alone and ignores the $+1$ in the divisor.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `What are all the vertical asymptotes of $f(x) = \\frac{x+2}{x^2+5x+6}$?`,
+      choices: [
+        no(`$x = -2$ and $x = -3$`, 'counted-hole-as-asymptote'),
+        no(`$x = 2$ and $x = 3$`, 'sign-error-on-roots'),
+        no(`$x = -2$ only`, 'swapped-hole-and-asymptote'),
+        ok(`$x = -3$ only`),
+      ],
+      solution: `Factor the denominator: $x^2 + 5x + 6 = (x + 2)(x + 3)$. The factor $(x + 2)$ cancels with the numerator, so $x = -2$ is a hole, not an asymptote. The remaining factor $(x + 3)$ gives the only vertical asymptote, $x = -3$. The choice "$x = -2$ and $x = -3$" treats the canceled factor as an asymptote.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Describe the end behavior of $f(x) = \\frac{2x^3-x}{x^2+4}$ as $x \\to -\\infty$:`,
+      choices: [
+        no(`$f(x) \\to \\infty$`, 'ignored-sign-of-x'),
+        ok(`$f(x) \\to -\\infty$`),
+        no(`$f(x) \\to 2$`, 'used-leading-coefficient-ratio'),
+        no(`$f(x) \\to 0$`, 'reversed-degree-rule'),
+      ],
+      solution: `For large $|x|$, the function behaves like the ratio of leading terms: $\\frac{2x^3}{x^2} = 2x$. As $x \\to -\\infty$, $2x \\to -\\infty$, so $f(x) \\to -\\infty$. The choice $f(x) \\to \\infty$ is the behavior as $x \\to \\infty$, not as $x \\to -\\infty$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Which function has a vertical asymptote at $x = 2$ and a horizontal asymptote at $y = 3$?`,
+      choices: [
+        no(`$f(x) = \\frac{3x+1}{x+2}$`, 'sign-of-vertical-asymptote-reversed'),
+        no(`$f(x) = \\frac{x+3}{x-2}$`, 'put-asymptote-value-as-constant'),
+        ok(`$f(x) = \\frac{3x+1}{x-2}$`),
+        no(`$f(x) = \\frac{3x^2+1}{x-2}$`, 'numerator-degree-too-high'),
+      ],
+      solution: `For $f(x) = \\frac{3x+1}{x-2}$, the denominator is zero at $x = 2$ and the numerator there is $7$, so $x = 2$ is a vertical asymptote. Both parts have degree $1$, so the horizontal asymptote is $y = \\frac{3}{1} = 3$. The function $\\frac{x+3}{x-2}$ has horizontal asymptote $y = 1$, because the $3$ is a constant, not the leading coefficient.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `What is the domain of $f(x) = \\frac{x-1}{x^2+4}$?`,
+      choices: [
+        ok(`All real numbers`),
+        no(`All real numbers except $x = 2$ and $x = -2$`, 'treated-sum-of-squares-as-difference'),
+        no(`All real numbers except $x = 1$`, 'excluded-numerator-zero'),
+        no(`All real numbers except $x = -4$`, 'solved-x-squared-plus-4-as-linear'),
+      ],
+      solution: `The denominator $x^2 + 4$ is at least $4$ for every real $x$, because $x^2 \\geq 0$. It is never zero, so no value is excluded and the domain is all real numbers. The choice that excludes $x = 2$ and $x = -2$ treats $x^2 + 4$ as if it were $x^2 - 4$.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `What is the slant (oblique) asymptote of $f(x) = \\frac{2x^2-x+3}{x}$?`,
+      choices: [
+        no(`$y = 2x$`, 'dropped-linear-term'),
+        no(`$y = 2$`, 'used-leading-coefficient-ratio'),
+        ok(`$y = 2x - 1$`),
+        no(`$y = 2x + 3$`, 'kept-remainder-in-quotient'),
+      ],
+      solution: `Divide each term by $x$: $f(x) = 2x - 1 + \\frac{3}{x}$. As $|x|$ grows, $\\frac{3}{x}$ goes to $0$, so the slant asymptote is $y = 2x - 1$. The choice $y = 2x + 3$ keeps the constant $3$ in the line, but $\\frac{3}{x}$ is the remainder part that vanishes.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `What is the horizontal asymptote of $f(x) = \\frac{5-3x^2}{2x^2+x}$?`,
+      choices: [
+        no(`$y = \\frac{3}{2}$`, 'dropped-negative-sign'),
+        ok(`$y = -\\frac{3}{2}$`),
+        no(`$y = -3$`, 'ignored-denominator-coefficient'),
+        no(`$y = \\frac{5}{2}$`, 'used-first-written-terms'),
+      ],
+      solution: `Both numerator and denominator have degree $2$. The leading term of the numerator is $-3x^2$ (it is written second), and the leading term of the denominator is $2x^2$. The horizontal asymptote is $y = \\frac{-3}{2} = -\\frac{3}{2}$. The choice $y = \\frac{5}{2}$ uses the first number written instead of the coefficient of the highest power.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `What is the $y$-coordinate of the $y$-intercept of $f(x) = \\frac{3x^2-12}{x^2+x-6}$?`,
+      choices: [
+        no(`$-2$`, 'sign-error-dividing-negatives'),
+        no(`$3$`, 'used-horizontal-asymptote'),
+        ok(`$2$`),
+        no(`$\\frac{1}{2}$`, 'inverted-the-fraction'),
+      ],
+      solution: `Substitute $x = 0$: $f(0) = \\frac{0 - 12}{0 + 0 - 6} = \\frac{-12}{-6} = 2$. The denominator is not zero at $x = 0$, so the intercept exists. The value $3$ is the horizontal asymptote, which describes end behavior, not the value at $x = 0$.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `For $f(x) = \\frac{x^2-1}{x^2+2x+1}$, which statement correctly describes the graph at $x = -1$?`,
+      choices: [
+        no(`It has a hole, because $(x + 1)$ is a factor of both the numerator and the denominator.`, 'assumed-common-factor-always-hole'),
+        ok(`It has a vertical asymptote, because a factor of $(x + 1)$ is left in the denominator after canceling.`),
+        no(`It has an $x$-intercept, because the numerator is zero there.`, 'ignored-zero-denominator'),
+        no(`It has no break, because canceling removes the factor $(x + 1)$ completely.`, 'canceled-all-copies-of-factor'),
+      ],
+      solution: `Factor: $\\frac{(x - 1)(x + 1)}{(x + 1)^2}$. Only one factor of $(x + 1)$ cancels, leaving $\\frac{x - 1}{x + 1}$ for $x \\neq -1$. The denominator is still zero at $x = -1$ while the numerator is $-2$, so the graph has a vertical asymptote there. A shared factor makes a hole only when it cancels completely from the denominator.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `What are all the zeros of $f(x) = \\frac{x^2-4x}{x^2-16}$?`,
+      choices: [
+        ok(`$x = 0$ only`),
+        no(`$x = 0$ and $x = 4$`, 'counted-hole-as-zero'),
+        no(`$x = 4$ only`, 'used-canceled-factor'),
+        no(`$x = -4$`, 'used-denominator-zero'),
+      ],
+      solution: `Factor: $\\frac{x(x - 4)}{(x - 4)(x + 4)}$. The factor $(x - 4)$ cancels, so $x = 4$ is a hole and not in the domain. The simplified form is $\\frac{x}{x + 4}$, which is zero only at $x = 0$. The choice "$x = 0$ and $x = 4$" counts the hole as a zero, but $f(4)$ is undefined.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `The graph of $f(x) = \\frac{2x^2+5x-3}{x^2+3x}$ has a hole. What are the coordinates of the hole?`,
+      choices: [
+        no(`$(-3, 0)$`, 'assumed-hole-on-x-axis'),
+        no(`$(3, \\frac{5}{3})$`, 'used-opposite-of-excluded-value'),
+        no(`$(-3, -\\frac{7}{3})$`, 'sign-error-dividing-negatives'),
+        ok(`$(-3, \\frac{7}{3})$`),
+      ],
+      solution: `Factor: $2x^2 + 5x - 3 = (2x - 1)(x + 3)$ and $x^2 + 3x = x(x + 3)$. The factor $(x + 3)$ cancels, leaving $\\frac{2x - 1}{x}$ with a hole at $x = -3$. Its height is $\\frac{2(-3) - 1}{-3} = \\frac{-7}{-3} = \\frac{7}{3}$, so the hole is $(-3, \\frac{7}{3})$. The factor $x$ does not cancel, so $x = 0$ is a vertical asymptote, not a hole.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `The graph of $f(x) = \\frac{x^2+x}{x^2-4}$ crosses its horizontal asymptote at one point. At what $x$-value does this happen?`,
+      choices: [
+        no(`$x = 4$`, 'sign-error-solving'),
+        ok(`$x = -4$`),
+        no(`$x = -1$`, 'gave-x-intercept'),
+        no(`$x = 2$`, 'used-vertical-asymptote'),
+      ],
+      solution: `The degrees are equal, so the horizontal asymptote is $y = \\frac{1}{1} = 1$. Set $f(x) = 1$: $x^2 + x = x^2 - 4$, so $x = -4$. Check: $f(-4) = \\frac{16 - 4}{16 - 4} = 1$. The choice $x = -1$ is an $x$-intercept, where $f(x) = 0$, not where it equals $1$.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `What is the slant (oblique) asymptote of $f(x) = \\frac{x^3-2x^2+x-1}{x^2+1}$?`,
+      choices: [
+        no(`$y = x$`, 'divided-leading-terms-only'),
+        no(`$y = x + 2$`, 'sign-error-in-division'),
+        ok(`$y = x - 2$`),
+        no(`$y = 1$`, 'used-leading-coefficient-ratio'),
+      ],
+      solution: `Use long division. $x^3 \\div x^2 = x$, and $x(x^2 + 1) = x^3 + x$; subtracting leaves $-2x^2 - 1$. Then $-2x^2 \\div x^2 = -2$, and $-2(x^2 + 1) = -2x^2 - 2$; subtracting leaves $1$. So $f(x) = x - 2 + \\frac{1}{x^2 + 1}$, and the slant asymptote is $y = x - 2$. The choice $y = x$ stops after the first step of the division.`,
+    },
+  ],
+}
+
+export default skill
