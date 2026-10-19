@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g5-decimal-place-value-more',
+  extends: 'decimal-place-value',
+  subject: 'math',
+  grade: 5,
+  group: 'Number and Operations in Base Ten',
+  name: 'Decimal Place Value',
+  standards: ['5.NBT.A.3'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `In the number $5.928$, which digit is in the hundredths place?`,
+      choices: [
+        ok(`$2$`),
+        no(`$9$`, 'confused-tenths-with-hundredths'),
+        no(`$8$`, 'confused-thousandths-with-hundredths'),
+        no(`$5$`, 'chose-the-ones-digit'),
+      ],
+      solution: `After the decimal point the places are tenths, hundredths, then thousandths. In $5.928$ the tenths digit is $9$, the hundredths digit is $2$, and the thousandths digit is $8$, so the answer is $2$. The choice $9$ is the tenths digit, the first place after the point.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Which decimal is fourteen thousandths?`,
+      choices: [
+        no(`$0.14$`, 'wrote-hundredths-instead-of-thousandths'),
+        ok(`$0.014$`),
+        no(`$14000$`, 'read-thousandths-as-thousands'),
+        no(`$0.0014$`, 'added-an-extra-zero'),
+      ],
+      solution: `Thousandths use three places after the decimal point, so fourteen thousandths is $\\frac{14}{1000} = 0.014$. The choice $0.14$ is fourteen hundredths, and $14000$ is fourteen thousand, a whole number.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Which comparison is true?`,
+      choices: [
+        no(`$0.7 < 0.69$`, 'thought-more-digits-is-greater'),
+        no(`$0.07 > 0.7$`, 'ignored-the-zero-in-the-tenths-place'),
+        ok(`$0.7 > 0.69$`),
+        no(`$0.5 = 0.05$`, 'thought-a-zero-after-the-point-does-not-matter'),
+      ],
+      solution: `Compare from the left. $0.7$ has $7$ tenths and $0.69$ has only $6$ tenths, so $0.7 > 0.69$. The choice $0.7 < 0.69$ treats $69$ as bigger than $7$, but $0.7$ is the same as $0.70$, which is more than $0.69$.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Which fraction is equal to $0.09$?`,
+      choices: [
+        no(`$\\frac{9}{10}$`, 'used-tenths-for-hundredths'),
+        no(`$\\frac{9}{1000}$`, 'used-thousandths-for-hundredths'),
+        no(`$\\frac{1}{9}$`, 'reversed-numerator-and-denominator'),
+        ok(`$\\frac{9}{100}$`),
+      ],
+      solution: `The $9$ in $0.09$ is in the hundredths place, so $0.09$ means nine hundredths, or $\\frac{9}{100}$. The choice $\\frac{9}{10}$ would be $0.9$, nine tenths.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which number name matches $4.06$?`,
+      choices: [
+        ok(`four and six hundredths`),
+        no(`four and six tenths`, 'ignored-the-placeholder-zero'),
+        no(`four hundred six`, 'ignored-the-decimal-point'),
+        no(`four and sixty hundredths`, 'switched-the-zero-and-the-six'),
+      ],
+      solution: `The $4$ is the whole number part, read as "four and." The $6$ sits in the hundredths place, so the decimal part is six hundredths: four and six hundredths. The choice four and six tenths would be $4.6$, which skips the zero holding the tenths place.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `The decimal $0.3$ is equal to how many hundredths?`,
+      choices: [
+        no(`$3$`, 'did-not-regroup-tenths'),
+        ok(`$30$`),
+        no(`$300$`, 'regrouped-into-thousandths'),
+        no(`$0.03$`, 'shifted-the-digit-to-the-hundredths-place'),
+      ],
+      solution: `One tenth equals $10$ hundredths, so $3$ tenths equal $3 \\times 10 = 30$ hundredths. You can also write $0.3 = 0.30$. The choice $300$ is the number of thousandths in $0.3$.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Which number is equal to $6 \\times 10 + 2 \\times 1 + 5 \\times \\frac{1}{10} + 8 \\times \\frac{1}{1000}$?`,
+      choices: [
+        no(`$62.58$`, 'skipped-the-empty-hundredths-place'),
+        no(`$6.2508$`, 'treated-tens-as-ones'),
+        ok(`$62.508$`),
+        no(`$26.508$`, 'switched-tens-and-ones'),
+      ],
+      solution: `Find each place: $6$ tens, $2$ ones, $5$ tenths, $0$ hundredths, and $8$ thousandths. Since there are no hundredths, a $0$ holds that place, giving $62.508$. The choice $62.58$ leaves out the zero, which moves the $8$ into the hundredths place.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Which expanded form is equal to $30.704$?`,
+      choices: [
+        no(`$3 \\times 10 + 7 \\times \\frac{1}{10} + 4 \\times \\frac{1}{100}$`, 'read-thousandths-as-hundredths'),
+        no(`$3 \\times 1 + 7 \\times \\frac{1}{10} + 4 \\times \\frac{1}{1000}$`, 'dropped-the-tens-place'),
+        no(`$3 \\times 10 + 7 \\times \\frac{1}{100} + 4 \\times \\frac{1}{1000}$`, 'moved-the-tenths-digit-to-hundredths'),
+        ok(`$3 \\times 10 + 7 \\times \\frac{1}{10} + 4 \\times \\frac{1}{1000}$`),
+      ],
+      solution: `In $30.704$ the $3$ is in the tens place, the $7$ is in the tenths place, and the $4$ is in the thousandths place. The zeros add nothing, so $30.704 = 3 \\times 10 + 7 \\times \\frac{1}{10} + 4 \\times \\frac{1}{1000}$. The form ending in $4 \\times \\frac{1}{100}$ equals $30.74$, not $30.704$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Which list shows $0.62$, $0.602$, $0.6$, and $0.26$ in order from least to greatest?`,
+      choices: [
+        ok(`$0.26, 0.6, 0.602, 0.62$`),
+        no(`$0.6, 0.26, 0.62, 0.602$`, 'ordered-by-number-of-digits'),
+        no(`$0.26, 0.6, 0.62, 0.602$`, 'compared-digits-as-whole-numbers'),
+        no(`$0.62, 0.602, 0.6, 0.26$`, 'ordered-greatest-to-least'),
+      ],
+      solution: `Write each number with three decimal places: $0.620$, $0.602$, $0.600$, and $0.260$. Now compare: $0.260 < 0.600 < 0.602 < 0.620$, so the order is $0.26, 0.6, 0.602, 0.62$. The list that puts $0.62$ before $0.602$ treats $602$ as bigger than $62$, but $0.62$ is $620$ thousandths.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `A digit is missing from the number $8.4\\square7$. The comparison $8.4\\square7 < 8.427$ is true. Which digit could go in the box?`,
+      choices: [
+        no(`$2$`, 'made-the-numbers-equal'),
+        no(`$4$`, 'copied-the-tenths-digit'),
+        ok(`$1$`),
+        no(`$7$`, 'reversed-the-inequality'),
+      ],
+      solution: `The ones and tenths digits match, so compare the hundredths. The number is less than $8.427$ only if the missing hundredths digit is less than $2$. With $1$, the number is $8.417$, and $8.417 < 8.427$. The digit $2$ makes the numbers equal, which is not less than.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Kenji built a number with $7$ in the tens place, $0$ in the ones place, $2$ in the tenths place, $0$ in the hundredths place, and $9$ in the thousandths place. What number did Kenji build?`,
+      choices: [
+        no(`$70.29$`, 'skipped-the-zero-placeholder'),
+        no(`$70.902$`, 'reversed-the-decimal-digits'),
+        no(`$7.209$`, 'put-the-tens-digit-in-the-ones-place'),
+        ok(`$70.209$`),
+      ],
+      solution: `Write the digits in place order: tens $7$, ones $0$, then the decimal point, tenths $2$, hundredths $0$, thousandths $9$. That gives $70.209$. The choice $70.29$ drops the hundredths zero, which moves the $9$ into the hundredths place.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `Which number is NOT equal to $0.4$?`,
+      choices: [
+        no(`$0.40$`, 'thought-a-trailing-zero-changes-the-value'),
+        ok(`$0.04$`),
+        no(`$0.400$`, 'thought-trailing-zeros-change-the-value'),
+        no(`$\\frac{40}{100}$`, 'thought-hundredths-fractions-cannot-equal-tenths'),
+      ],
+      solution: `Zeros added at the end of a decimal do not change its value, so $0.40$ and $0.400$ both equal $0.4$. Also $\\frac{40}{100} = 0.40 = 0.4$. But $0.04$ is four hundredths, which is ten times smaller than four tenths, so $0.04$ is the number that is not equal.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `Which number name matches $0.508$?`,
+      choices: [
+        no(`five hundred eight hundredths`, 'used-the-wrong-place-name'),
+        no(`fifty-eight thousandths`, 'dropped-the-zero'),
+        ok(`five hundred eight thousandths`),
+        no(`five and eight thousandths`, 'read-the-tenths-digit-as-a-whole-number'),
+      ],
+      solution: `The last digit of $0.508$ is in the thousandths place, so read the digits after the point as a whole number, $508$, and say the last place name: five hundred eight thousandths. The choice fifty-eight thousandths would be $0.058$.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `In a long jump contest, Rosa jumped $3.08$ meters and Theo jumped $3.8$ meters. Which statement is correct?`,
+      choices: [
+        no(`$3.08 > 3.8$, so Rosa jumped farther.`, 'thought-more-digits-is-greater'),
+        ok(`$3.8 > 3.08$, so Theo jumped farther.`),
+        no(`$3.08 = 3.8$, so they tied.`, 'ignored-the-placeholder-zero'),
+        no(`$3.8 > 3.08$, so Rosa jumped farther.`, 'matched-the-distance-to-the-wrong-jumper'),
+      ],
+      solution: `Both jumps have $3$ ones. Compare the tenths: $3.8$ has $8$ tenths and $3.08$ has $0$ tenths, so $3.8 > 3.08$. The $3.8$ meter jump is Theo's, so Theo jumped farther. The statement $3.08 > 3.8$ treats $08$ as bigger than $8$ because it has more digits.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `The decimal $0.26$ is the same as how many thousandths?`,
+      choices: [
+        ok(`$260$`),
+        no(`$26$`, 'did-not-regroup-hundredths'),
+        no(`$2600$`, 'added-too-many-zeros'),
+        no(`$2.6$`, 'divided-instead-of-multiplied'),
+      ],
+      solution: `One hundredth equals $10$ thousandths, so $26$ hundredths equal $26 \\times 10 = 260$ thousandths. You can check by writing $0.26 = 0.260$, which is read as two hundred sixty thousandths. The choice $26$ counts hundredths, not thousandths.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `A number has a $6$ in the tenths place. Another $6$ in the same number has $\\frac{1}{100}$ of the value of that first $6$. Which place is the second $6$ in?`,
+      choices: [
+        no(`the hundredths place`, 'moved-only-one-place'),
+        no(`the tens place`, 'multiplied-instead-of-divided'),
+        ok(`the thousandths place`),
+        no(`the ones place`, 'moved-the-wrong-direction'),
+      ],
+      solution: `Each place to the right is $\\frac{1}{10}$ of the place to its left. Taking $\\frac{1}{100}$ means moving two places to the right: tenths, then hundredths, then thousandths. So the second $6$ is in the thousandths place, worth $0.006$, and $0.006$ is $\\frac{1}{100}$ of $0.6$. The hundredths place only gives $\\frac{1}{10}$ of the value.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Which number is equal to $5$ tenths $+ 12$ hundredths $+ 3$ thousandths?`,
+      choices: [
+        no(`$0.5123$`, 'wrote-the-digits-side-by-side'),
+        no(`$0.515$`, 'placed-12-hundredths-as-thousandths'),
+        no(`$0.523$`, 'dropped-the-regrouped-tenth'),
+        ok(`$0.623$`),
+      ],
+      solution: `Write each part as a decimal: $0.5 + 0.12 + 0.003$. Twelve hundredths is $1$ tenth and $2$ hundredths, so there are $6$ tenths, $2$ hundredths, and $3$ thousandths in all: $0.623$. The choice $0.523$ keeps the $2$ hundredths but forgets the extra tenth inside $12$ hundredths.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Which number is greater than $4.06$ and less than $4.6$?`,
+      choices: [
+        ok(`$4.506$`),
+        no(`$4.059$`, 'compared-digits-as-whole-numbers'),
+        no(`$4.65$`, 'compared-only-the-tenths-digit'),
+        no(`$4.6$`, 'included-the-endpoint'),
+      ],
+      solution: `Write the bounds with three places: $4.060$ and $4.600$. The number $4.506$ has $5$ tenths, which is more than $0$ tenths and less than $6$ tenths, so $4.060 < 4.506 < 4.600$. The choice $4.059$ looks bigger because $059$ has more digits, but $4.059 < 4.060$.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Amara wrote a number as $0.3 + 0.05 + 0.008$. Luis wants to write the same number as a fraction with a denominator of $1000$. Which fraction should Luis write?`,
+      choices: [
+        no(`$\\frac{358}{100}$`, 'used-a-hundredths-denominator'),
+        ok(`$\\frac{358}{1000}$`),
+        no(`$\\frac{16}{1000}$`, 'added-the-digits'),
+        no(`$\\frac{853}{1000}$`, 'reversed-the-digit-order'),
+      ],
+      solution: `Add the parts: $0.3 + 0.05 + 0.008 = 0.358$. The last digit is in the thousandths place, so $0.358 = \\frac{358}{1000}$. The choice $\\frac{358}{100}$ equals $3.58$, which is ten times too large.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `Which statement about $0.7$ and $0.007$ is true?`,
+      choices: [
+        no(`$0.7$ is $10$ times as much as $0.007$.`, 'moved-only-one-place'),
+        ok(`$0.7$ is $100$ times as much as $0.007$.`),
+        no(`$0.7$ is $1000$ times as much as $0.007$.`, 'counted-all-three-decimal-places'),
+        no(`$0.007$ is $100$ times as much as $0.7$.`, 'reversed-the-relationship'),
+      ],
+      solution: `The $7$ in $0.7$ is in the tenths place and the $7$ in $0.007$ is in the thousandths place. Moving from thousandths to tenths is two places to the left, and each place is $10$ times the one to its right, so $10 \\times 10 = 100$. Check: $0.007 \\times 100 = 0.7$. The choice saying $1000$ times counts the three decimal places of $0.007$ instead of the places between the two digits.`,
+    },
+  ],
+}
+
+export default skill
