@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g6-expressions-more',
+  extends: 'expressions',
+  subject: 'math',
+  grade: 6,
+  group: 'Expressions and Equations',
+  name: 'Expressions',
+  standards: ['6.EE.A.2'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Which expression means "the sum of a number $n$ and 9"?`,
+      choices: [
+        ok(`$n + 9$`),
+        no(`$9n$`, 'wrote-product-for-sum'),
+        no(`$n - 9$`, 'wrote-difference-for-sum'),
+        no(`$\\frac{n}{9}$`, 'wrote-quotient-for-sum'),
+      ],
+      solution: `A sum is the result of adding, so "the sum of $n$ and 9" is $n + 9$. The choice $9n$ is a product, which means multiplying.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `Which expression means "5 less than $y$"?`,
+      choices: [
+        no(`$5 - y$`, 'reversed-order-for-less-than'),
+        ok(`$y - 5$`),
+        no(`$y + 5$`, 'added-instead-of-subtracted'),
+        no(`$5y$`, 'wrote-product-for-less-than'),
+      ],
+      solution: `"5 less than $y$" starts with $y$ and takes 5 away, so it is $y - 5$. The choice $5 - y$ reverses the order; "less than" puts the number being subtracted second.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `In the expression $8m + 3$, what is the coefficient of $m$?`,
+      choices: [
+        no(`$3$`, 'chose-the-constant'),
+        no(`$11$`, 'added-coefficient-and-constant'),
+        ok(`$8$`),
+        no(`$8m$`, 'gave-the-whole-term'),
+      ],
+      solution: `The coefficient is the number multiplied by the variable. In the term $8m$, that number is $8$. The choice $3$ is the constant term, which has no variable.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `How many terms are in the expression $4a + 7b + 2$?`,
+      choices: [
+        no(`$2$`, 'counted-only-variable-terms'),
+        no(`$1$`, 'treated-whole-expression-as-one-term'),
+        no(`$5$`, 'counted-each-number-and-letter'),
+        ok(`$3$`),
+      ],
+      solution: `Terms are the parts separated by plus or minus signs: $4a$, $7b$ and $2$. That makes $3$ terms. The choice $2$ leaves out the constant $2$, which is also a term.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which expression means "the quotient of $p$ and 4"?`,
+      choices: [
+        ok(`$\\frac{p}{4}$`),
+        no(`$\\frac{4}{p}$`, 'reversed-dividend-and-divisor'),
+        no(`$4p$`, 'wrote-product-for-quotient'),
+        no(`$p - 4$`, 'wrote-difference-for-quotient'),
+      ],
+      solution: `A quotient is the result of dividing. "The quotient of $p$ and 4" divides $p$ by 4, giving $\\frac{p}{4}$. The choice $\\frac{4}{p}$ divides in the wrong order.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `What is the value of $n^2$ when $n = 6$?`,
+      choices: [
+        no(`$12$`, 'multiplied-base-by-exponent'),
+        ok(`$36$`),
+        no(`$8$`, 'added-base-and-exponent'),
+        no(`$6$`, 'ignored-the-exponent'),
+      ],
+      solution: `$n^2$ means $n \\times n$, so $6 \\times 6 = 36$. The choice $12$ comes from $6 \\times 2$, but the exponent tells how many times to use $6$ as a factor.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Which expression means "twice the sum of $x$ and 4"?`,
+      choices: [
+        no(`$2x + 4$`, 'doubled-only-first-term'),
+        no(`$x + 8$`, 'doubled-only-second-term'),
+        ok(`$2(x + 4)$`),
+        no(`$2 + x + 4$`, 'added-two-instead-of-doubling'),
+      ],
+      solution: `First form the sum, $x + 4$, then take twice that whole sum: $2(x + 4)$. The parentheses show that both $x$ and $4$ are doubled. The choice $2x + 4$ doubles only $x$.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `Which description best fits the expression $3(w - 2)$?`,
+      choices: [
+        no(`The sum of 3 and $w - 2$`, 'read-product-as-sum'),
+        ok(`The product of two factors, 3 and $(w - 2)$`),
+        no(`The difference of $3w$ and 2`, 'ignored-parentheses'),
+        no(`The quotient of 3 and $(w - 2)$`, 'read-product-as-quotient'),
+      ],
+      solution: `A number written right next to parentheses means multiplication, so $3(w - 2)$ is the product of the factors $3$ and $(w - 2)$. The description "the difference of $3w$ and 2" would be $3w - 2$, which multiplies only the $w$ by 3.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `The volume of a cube with edge length $s$ is $V = s^3$. What is the volume, in cubic centimeters, of a cube with edges 4 centimeters long?`,
+      choices: [
+        no(`$12$`, 'multiplied-base-by-exponent'),
+        no(`$16$`, 'squared-instead-of-cubed'),
+        no(`$7$`, 'added-base-and-exponent'),
+        ok(`$64$`),
+      ],
+      solution: `Substitute $s = 4$: $4^3 = 4 \\times 4 \\times 4 = 64$ cubic centimeters. The choice $12$ comes from $4 \\times 3$, but the exponent 3 means use 4 as a factor three times.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `The surface area of a cube with edge length $s$ is $A = 6s^2$. What is the surface area, in square inches, of a cube with edges 3 inches long?`,
+      choices: [
+        ok(`$54$`),
+        no(`$324$`, 'multiplied-before-squaring'),
+        no(`$36$`, 'multiplied-base-by-exponent'),
+        no(`$18$`, 'ignored-the-exponent'),
+      ],
+      solution: `Exponents come before multiplication. First $3^2 = 9$, then $6 \\times 9 = 54$ square inches. The choice $324$ multiplies first, $6 \\times 3 = 18$, and then squares $18$.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `What is the value of $5 + 2y^2$ when $y = 3$?`,
+      choices: [
+        no(`$121$`, 'added-before-squaring'),
+        no(`$17$`, 'multiplied-base-by-exponent'),
+        ok(`$23$`),
+        no(`$41$`, 'squared-the-coefficient-too'),
+      ],
+      solution: `Square first: $3^2 = 9$. Then multiply: $2 \\times 9 = 18$. Then add: $5 + 18 = 23$. The choice $41$ squares $2 \\times 3 = 6$ to get $36$, but the exponent applies only to $y$.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `What is the value of $4a - b$ when $a = 5$ and $b = 7$?`,
+      choices: [
+        no(`$27$`, 'added-instead-of-subtracted'),
+        no(`$23$`, 'switched-the-values'),
+        no(`$38$`, 'wrote-4a-as-a-two-digit-number'),
+        ok(`$13$`),
+      ],
+      solution: `$4a$ means $4 \\times a$, so $4 \\times 5 = 20$, and $20 - 7 = 13$. The choice $38$ reads $4a$ as the number $45$ instead of $4 \\times 5$.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `The perimeter of a rectangle is $P = 2l + 2w$. What is the perimeter, in meters, of a garden bed with length $l = 9$ meters and width $w = 4$ meters?`,
+      choices: [
+        ok(`$26$`),
+        no(`$13$`, 'added-length-and-width-once'),
+        no(`$36$`, 'multiplied-length-and-width'),
+        no(`$22$`, 'doubled-only-the-length'),
+      ],
+      solution: `Substitute: $2 \\times 9 + 2 \\times 4 = 18 + 8 = 26$ meters. The choice $36$ is $9 \\times 4$, which is the area, not the perimeter.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `Which expression means "the quotient of $m$ and 3, increased by 7"?`,
+      choices: [
+        no(`$\\frac{m + 7}{3}$`, 'added-before-dividing'),
+        ok(`$\\frac{m}{3} + 7$`),
+        no(`$\\frac{3}{m} + 7$`, 'reversed-dividend-and-divisor'),
+        no(`$3m + 7$`, 'wrote-product-for-quotient'),
+      ],
+      solution: `First divide $m$ by 3 to get $\\frac{m}{3}$, then increase that result by 7: $\\frac{m}{3} + 7$. The choice $\\frac{m + 7}{3}$ adds 7 before dividing, so the 7 gets divided by 3 as well.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Museum tickets cost 8 dollars each, and parking costs 5 dollars for the whole group. Which expression gives the total cost, in dollars, for $t$ tickets and one parking fee?`,
+      choices: [
+        no(`$5t + 8$`, 'swapped-rate-and-fixed-cost'),
+        no(`$13t$`, 'combined-rate-and-fixed-cost'),
+        ok(`$8t + 5$`),
+        no(`$8(t + 5)$`, 'multiplied-fixed-cost-by-rate'),
+      ],
+      solution: `Each ticket costs 8 dollars, so $t$ tickets cost $8t$. Parking is paid once, so add 5: $8t + 5$. The choice $13t$ charges the parking fee again for every ticket.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `How many terms does the expression $5(n + 3) + 2n$ have, as it is written?`,
+      choices: [
+        no(`$3$`, 'counted-terms-inside-parentheses'),
+        ok(`$2$`),
+        no(`$1$`, 'treated-whole-expression-as-one-term'),
+        no(`$4$`, 'counted-each-number-and-letter'),
+      ],
+      solution: `Only the plus sign outside the parentheses separates terms. The terms are $5(n + 3)$ and $2n$, so there are $2$ terms. The first term is a product whose factor $(n + 3)$ is itself a sum, but that sum stays inside one term. The choice $3$ counts $n$, $3$ and $2n$ as separate terms.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `What is the value of $x^3 - 2x$ when $x = 4$?`,
+      choices: [
+        no(`$4$`, 'multiplied-base-by-exponent'),
+        no(`$8$`, 'squared-instead-of-cubed'),
+        ok(`$56$`),
+        no(`$40$`, 'wrote-2x-as-a-two-digit-number'),
+      ],
+      solution: `$4^3 = 4 \\times 4 \\times 4 = 64$ and $2x = 2 \\times 4 = 8$, so $64 - 8 = 56$. The choice $40$ reads $2x$ as the number $24$, but $2x$ means $2 \\times 4$.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `The formula $F = \\frac{9}{5}C + 32$ changes a Celsius temperature $C$ into degrees Fahrenheit. What is $F$ when $C = 20$?`,
+      choices: [
+        ok(`$68$`),
+        no(`$93.6$`, 'added-before-multiplying'),
+        no(`$52$`, 'ignored-the-coefficient'),
+        no(`$36$`, 'forgot-to-add-the-constant'),
+      ],
+      solution: `Multiply first: $\\frac{9}{5} \\times 20 = 36$. Then add: $36 + 32 = 68$ degrees Fahrenheit. The choice $93.6$ adds $20 + 32 = 52$ first and then multiplies by $\\frac{9}{5}$, which breaks the order of operations.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Which expression means "the square of the difference of $a$ and 3"?`,
+      choices: [
+        no(`$a^2 - 3$`, 'squared-only-the-variable'),
+        no(`$a - 3^2$`, 'squared-only-the-number'),
+        no(`$2(a - 3)$`, 'doubled-instead-of-squared'),
+        ok(`$(a - 3)^2$`),
+      ],
+      solution: `The difference of $a$ and 3 is $a - 3$. Squaring that whole difference needs parentheses: $(a - 3)^2$. The choice $a^2 - 3$ squares only $a$ and then subtracts 3, which is "3 less than the square of $a$".`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `What is the value of $\\frac{3p + q}{q - 2}$ when $p = 6$ and $q = 4$?`,
+      choices: [
+        no(`$17$`, 'ignored-fraction-bar-grouping'),
+        ok(`$11$`),
+        no(`$15$`, 'added-before-multiplying'),
+        no(`$22$`, 'forgot-to-divide'),
+      ],
+      solution: `The fraction bar groups the top and the bottom. Top: $3 \\times 6 + 4 = 22$. Bottom: $4 - 2 = 2$. Then $22 \\div 2 = 11$. The choice $17$ divides only $q$ by $q$, working $18 + 4 \\div 4 - 2$, instead of dividing the whole top by the whole bottom.`,
+    },
+  ],
+}
+
+export default skill
