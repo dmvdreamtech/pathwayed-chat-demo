@@ -50,14 +50,14 @@ const skill: ContentSkill = {
     {
       slot: 4,
       difficulty: 'easy',
-      stem: `Marcus is writing an email to his track coach: "Hey coach, can't make practice tmrw, sorry!!" Which revision best fits a formal email?`,
+      stem: `Marcus is writing an email to the track coach: "Hey coach, can't make practice tmrw, sorry!!" Which revision best fits a formal email?`,
       choices: [
         no(`Hey coach, I can't make it to practice tmrw, my bad.`, 'informal-word'),
         no(`Yo coach, no practice for me tomorrow, sorry about that!!`, 'informal-word'),
         no(`Coach, can't make practice tomorrow, sorry!!`, 'informal-punctuation'),
-        ok(`Dear Coach Alvarez, I am unable to attend practice tomorrow, and I apologize.`),
+        ok(`Dear Coach, I am unable to attend practice tomorrow, and I apologize.`),
       ],
-      solution: `The correct choice uses a formal greeting, complete words and a polite apology. The choice that only fixes "tmrw" still drops the subject and uses repeated exclamation points.`,
+      solution: `The correct choice uses a formal greeting, complete words and a polite apology. "Coach, can't make practice tomorrow, sorry!!" fixes only "tmrw" and still drops the subject and uses repeated exclamation points.`,
     },
     {
       slot: 5,
@@ -242,7 +242,7 @@ const skill: ContentSkill = {
     {
       slot: 20,
       difficulty: 'medium',
-      stem: `Aisha is ending a formal letter to her principal that asks for a student book swap. Which closing sentence best keeps the letter's formal style?`,
+      stem: `Aisha is ending a formal letter to the school principal that asks for a student book swap. Which closing sentence best keeps the letter's formal style?`,
       choices: [
         no(`Thanks a ton, and fingers crossed you say yes!`, 'informal-word'),
         ok(`Thank you for considering our proposal.`),
@@ -434,7 +434,7 @@ const skill: ContentSkill = {
     {
       slot: 36,
       difficulty: 'hard',
-      stem: `Diego is writing a letter to the city council asking for a crosswalk near his school on Pine Avenue. Which sentence best keeps a formal, respectful tone?`,
+      stem: `Diego is writing a letter to the city council asking for a crosswalk on Pine Avenue near Diego's school. Which sentence best keeps a formal, respectful tone?`,
       choices: [
         no(`You guys seriously need to put a crosswalk on Pine Avenue.`, 'informal-word'),
         no(`Anyone who thinks about it for one second knows Pine Avenue needs a crosswalk.`, 'insulting-tone'),
