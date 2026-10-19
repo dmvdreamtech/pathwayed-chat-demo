@@ -22,7 +22,9 @@
 --        (by design, a wrong tap gets warm spoken feedback, not a hint);
 --      - fill-in-the-blank stems that end at the blank;
 --      - instructions that end with a period ("Solve for $x$: ...");
---      - in math, a minus sign written between numbers or letters.
+--      - in math, a minus sign written between numbers or letters;
+--      - test-prep math (prep-quant, prep-sat-math) is math for the dash rule,
+--        like math, so $3x - 2$ is not a dash.
 --      Every other check is unchanged. The authoring checker (content/checks.ts)
 --      stays stricter for new text drafts.
 --
@@ -79,7 +81,7 @@ as $$
       (select string_agg(coalesce(c.v ->> 'text', ''), ' ') from c) as all_text,
       -- Math writes expressions as $...$, where a spaced minus is normal; the
       -- dash rule applies to the prose around them (content/checks.ts does the same).
-      coalesce((select s.subject = 'math' from public.skills s where s.id = q.skill_id), false) as is_math,
+      coalesce((select s.subject in ('math', 'prep-quant', 'prep-sat-math') from public.skills s where s.id = q.skill_id), false) as is_math,
       coalesce(q.render_mode, 'text') = 'audio_picture' as is_picture
   )
   select array_remove(array[

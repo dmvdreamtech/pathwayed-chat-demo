@@ -20,6 +20,7 @@ declare
   v_parent   uuid;
   v_math     uuid := gen_random_uuid();
   v_mparent  uuid;
+  v_prep     uuid := gen_random_uuid();
   v_good     jsonb := '[{"text":"right","is_correct":true},{"text":"wrong a","is_correct":false,"misconception_token":"x"},{"text":"wrong b","is_correct":false,"misconception_token":"y"},{"text":"wrong c","is_correct":false,"misconception_token":"z"}]';
   v_tiles    jsonb := '[{"text":"5","is_correct":true,"tile":{"kind":"number","value":"5"}},{"text":"2","is_correct":false,"tile":{"kind":"number","value":"2"}},{"text":"3","is_correct":false,"tile":{"kind":"number","value":"3"}}]';
   v_t        text;
@@ -93,6 +94,11 @@ begin
        '[{"text":"5","is_correct":true},{"text":"2","is_correct":false},{"text":"3","is_correct":false}]',
        '5', 'Five is more.', 'draft', 'text');
 
+  insert into public.skills (id, level, parent_id, subject, name, slug, grade_band, ccss_grade, ccss_grade_num)
+  values (v_prep, 'skill', v_mparent, 'prep-quant', 'Verify Prep Quant', 'v0044-verify-prep', '6-8', '7', 7);
+  insert into public.generated_questions (skill_id, difficulty, stem, choices, correct_answer, solution, status) values
+    (v_prep, 'easy', 'Given $x = 5$, which is greater, $2x + 3$ or $3x - 2$?', v_good, 'right', 'Both are $13$: $3x - 2 = 13$.', 'draft');
+
   create temp table v0044_results (
     n        serial,
     name     text,
@@ -136,6 +142,9 @@ begin
   ('checks: math, a spaced minus inside $...$ is not a dash', '0',
      (select cardinality(public.question_issues(q))::text from public.generated_questions q
        where q.skill_id = v_math and q.stem like 'What is%')),
+  ('checks: test-prep math, a spaced minus inside $...$ is not a dash', '0',
+     (select cardinality(public.question_issues(q))::text from public.generated_questions q
+       where q.skill_id = v_prep)),
   ('checks: math, a dash in the prose is still caught', 'no_dashes',
      (select array_to_string(public.question_issues(q), ',') from public.generated_questions q
        where q.skill_id = v_math and q.stem like 'Which value%')),
