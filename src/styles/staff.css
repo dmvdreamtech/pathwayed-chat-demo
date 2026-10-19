@@ -570,6 +570,11 @@
 .review-kid-view .picq-tile { cursor: default; }
 .review-picture-key { margin: 8px 0 8px 18px; padding: 0; }
 .review-correct { font-weight: 600; }
+/* The two parts of the review page: new skills, then fixes to live questions. */
+.shell .review-section { margin-top: 14px; }
+.shell .review-section > p { margin-bottom: 12px; }
+.review-queue-table td:last-child { white-space: nowrap; }
+.review-queue-table td:nth-last-child(2) { white-space: normal; min-width: 90px; }
 .review-passage { margin: 6px 0; }
 .review-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 @media (max-width: 640px) { .review-compare { grid-template-columns: 1fr; } }

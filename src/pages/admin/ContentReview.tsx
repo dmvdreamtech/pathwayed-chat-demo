@@ -197,8 +197,6 @@ export function ContentReview() {
         Content review
       </h1>
       <p className="muted staff-small">
-        Open a skill to read 5 questions drawn at random. If all 5 are clean, every passing draft in the skill is
-        published under your name. If any is flagged, nothing is published and the whole skill goes to full review.
         Coverage is on <Link to="/admin/coverage">its own page</Link>.
       </p>
       <label className="staff-small" style={{ display: 'block', margin: '10px 0' }}>
@@ -237,7 +235,7 @@ export function ContentReview() {
   )
 }
 
-function QueueView({
+export function QueueView({
   rows,
   name,
   onOpen,
@@ -250,49 +248,70 @@ function QueueView({
 }) {
   const noName = name.trim() === ''
   return (
-    <div className="panel staff-activity">
-      <p className="staff-small">
-        <button type="button" className="btn" onClick={onFixes}>
-          Review fixes to live questions
-        </button>
-      </p>
-      {noName && <p className="muted staff-small">Enter your name above to open a skill.</p>}
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">Skill</th>
-            <th scope="col">Subject</th>
-            <th scope="col">Grade</th>
-            <th scope="col">Passing drafts</th>
-            <th scope="col">Failing checks</th>
-            <th scope="col">Status</th>
-            <th scope="col" />
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r) => {
-            const canOpen = !noName && (r.state === 'open' || r.state === 'full_review' || r.drafts >= 5)
-            return (
-              <tr key={r.skillId}>
-                <td className="sat-cov-name" title={r.slug}>
-                  {r.name}
-                </td>
-                <td>{r.subject}</td>
-                <td>{r.grade === 0 ? 'K' : (r.grade ?? '')}</td>
-                <td>{r.drafts}</td>
-                <td>{r.draftsFailing}</td>
-                <td>{queueStatus(r)}</td>
-                <td>
-                  <button type="button" className="btn" disabled={!canOpen} onClick={() => onOpen(r)}>
-                    {r.state === 'full_review' ? 'Review one by one' : r.state === 'open' ? 'Continue' : 'Open sample'}
-                  </button>
-                </td>
+    <>
+      <section className="panel staff-activity review-section" aria-labelledby="review-new-skills">
+        <h2 className="staff-h2" id="review-new-skills" style={{ marginTop: 0 }}>
+          Review new skills
+        </h2>
+        <p className="muted staff-small">
+          Open a skill to read 5 questions drawn at random. If all 5 are clean, every passing draft in the skill is
+          published under your name. If any is flagged, nothing is published and the whole skill goes to full review.
+        </p>
+        {noName && <p className="muted staff-small">Enter your name above to open a skill.</p>}
+        <div className="staff-table-scroll">
+          <table className="cov-table review-queue-table">
+            <thead>
+              <tr>
+                <th scope="col">Skill</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Grade</th>
+                <th scope="col">Passing drafts</th>
+                <th scope="col">Failing checks</th>
+                <th scope="col">Status</th>
+                <th scope="col" />
               </tr>
-            )
-          })}
-        </tbody>
-      </table>
-    </div>
+            </thead>
+            <tbody>
+              {rows.map((r) => {
+                const canOpen = !noName && (r.state === 'open' || r.state === 'full_review' || r.drafts >= 5)
+                return (
+                  <tr key={r.skillId}>
+                    <td className="sat-cov-name" title={r.slug}>
+                      {r.name}
+                    </td>
+                    <td>{r.subject}</td>
+                    <td>{r.grade === 0 ? 'K' : (r.grade ?? '')}</td>
+                    <td>{r.drafts}</td>
+                    <td>{r.draftsFailing}</td>
+                    <td>{queueStatus(r)}</td>
+                    <td>
+                      <button type="button" className="btn" disabled={!canOpen} onClick={() => onOpen(r)}>
+                        {r.state === 'full_review' ? 'Review one by one' : r.state === 'open' ? 'Continue' : 'Open sample'}
+                      </button>
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="panel staff-activity review-section" aria-labelledby="review-live-fixes">
+        <h2 className="staff-h2" id="review-live-fixes" style={{ marginTop: 0 }}>
+          Review fixes to live questions
+        </h2>
+        <p className="muted staff-small">
+          Corrections to questions students already see. Each one shows the live question next to its fix. The live
+          question stays as it is until you approve the fix.
+        </p>
+        <p>
+          <button type="button" className="btn" onClick={onFixes}>
+            Open the fixes
+          </button>
+        </p>
+      </section>
+    </>
   )
 }
 

@@ -5,7 +5,24 @@ import type { ReviewItem } from '@/lib/contentReview'
 vi.mock('@/lib/voice', () => ({ speakWithNikki: vi.fn() }))
 vi.mock('@/lib/supabase', () => ({ supabase: {} }))
 
-const { PictureItem } = await import('./ContentReview')
+const { PictureItem, QueueView } = await import('./ContentReview')
+
+describe('the review page lists new skills and live fixes separately', () => {
+  it('puts the skill list under its own heading, with the live fixes in a section below it', () => {
+    const row = { skillId: 's1', slug: 's1', name: 'Shapes', subject: 'math', grade: 0, drafts: 40, draftsFailing: 0, state: 'none' as const, openReviewId: null, lastReviewer: null, lastDecidedAt: null }
+    const html = renderToStaticMarkup(<QueueView rows={[row]} name="Phil" onOpen={() => {}} onFixes={() => {}} />)
+    const skills = html.indexOf('Review new skills')
+    const table = html.indexOf('<table')
+    const fixes = html.indexOf('Review fixes to live questions')
+    expect(skills).toBeGreaterThan(-1)
+    expect(table).toBeGreaterThan(skills)
+    expect(fixes).toBeGreaterThan(html.indexOf('</table>'))
+    // The table scrolls inside its own box instead of running past the panel.
+    expect(html).toMatch(/class="staff-table-scroll"><table/)
+    expect(html).toContain('Open sample')
+    expect(html).toContain('Open the fixes')
+  })
+})
 
 const item = (choices: ReviewItem['choices'], prompt: ReviewItem['prompt'] = null): ReviewItem => ({
   id: 'q1',
