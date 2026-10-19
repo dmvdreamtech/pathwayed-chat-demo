@@ -184,7 +184,7 @@ const skill: ContentSkill = {
             wrong(`To explain why the historical society had stored the letters in a box.`, 'misses-purpose'),
             wrong(`To prove that schools in the early 1900s never had enough money for supplies.`, 'overgeneralization'),
           ],
-          solution: `The repeated requests make Amara "check the clock often," so her later interest stands out as a change. Ida writes "politely" and cares for her students, so calling her a poor teacher is unsupported.`,
+          solution: `The repeated requests leave Amara, who "checked the clock often," bored, so her later interest stands out as a change. Ida writes "politely" and cares for her students, so calling her a poor teacher is unsupported.`,
         },
         {
           slot: 14,
@@ -452,7 +452,7 @@ const skill: ContentSkill = {
             right(`It offers a tempting reason to stay silent, which makes Keoni's choice to report the error more meaningful.`),
             wrong(`It explains why the group earned an A on its report before the error was found.`, 'confuses-cause-effect'),
           ],
-          solution: `Rosa's view that "a county map would not change" gives Keoni an easy excuse he rejects. Her claim is only her opinion, and Keoni thinks a line would be drawn "in the wrong place," so it does not prove the error was harmless.`,
+          solution: `Rosa's view that "a county map would not change" gives Keoni an easy excuse he rejects. Rosa's claim is only an opinion, and Keoni thinks a line would be drawn "in the wrong place," so it does not prove the error was harmless.`,
         },
         {
           slot: 34,
