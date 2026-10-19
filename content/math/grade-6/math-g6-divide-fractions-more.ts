@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g6-divide-fractions-more',
+  extends: 'divide-fractions',
+  subject: 'math',
+  grade: 6,
+  group: 'The Number System',
+  name: 'Dividing Fractions',
+  standards: ['6.NS.A.1'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `What is $6 \\div \\frac{2}{3}$?`,
+      choices: [
+        no(`$4$`, 'multiplied-instead-of-divided'),
+        ok(`$9$`),
+        no(`$\\frac{1}{9}$`, 'divided-in-reverse-order'),
+        no(`$18$`, 'multiplied-by-denominator-only'),
+      ],
+      solution: `Dividing by $\\frac{2}{3}$ is the same as multiplying by $\\frac{3}{2}$: $6 \\times \\frac{3}{2} = 9$. You can check it: $9$ groups of $\\frac{2}{3}$ make $6$. The choice $18$ multiplies by $3$ but forgets to divide by $2$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `What is $\\frac{6}{7} \\div 3$?`,
+      choices: [
+        no(`$\\frac{18}{7}$`, 'multiplied-instead-of-divided'),
+        no(`$\\frac{7}{2}$`, 'divided-in-reverse-order'),
+        no(`$\\frac{2}{21}$`, 'divided-numerator-and-multiplied-denominator'),
+        ok(`$\\frac{2}{7}$`),
+      ],
+      solution: `Splitting $\\frac{6}{7}$ into $3$ equal parts gives $\\frac{6}{7} \\times \\frac{1}{3} = \\frac{6}{21} = \\frac{2}{7}$. The choice $\\frac{2}{21}$ divides the numerator by $3$ and also multiplies the denominator by $3$, which divides by $3$ twice.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `A coach plans practice in blocks of $\\frac{1}{4}$ hour. How many blocks fit into $3$ hours of practice?`,
+      choices: [
+        ok(`$12$`),
+        no(`$\\frac{3}{4}$`, 'multiplied-instead-of-divided'),
+        no(`$\\frac{1}{12}$`, 'divided-in-reverse-order'),
+        no(`$7$`, 'added-instead-of-multiplied'),
+      ],
+      solution: `Each hour holds $4$ quarter-hour blocks, so $3 \\div \\frac{1}{4} = 3 \\times 4 = 12$ blocks. The choice $\\frac{3}{4}$ multiplies $3$ by $\\frac{1}{4}$, which finds a quarter of the time instead of the number of blocks.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `Four students share $\\frac{1}{3}$ pound of clay equally. How many pounds of clay does each student get?`,
+      choices: [
+        no(`$\\frac{4}{3}$`, 'multiplied-instead-of-divided'),
+        ok(`$\\frac{1}{12}$`),
+        no(`$12$`, 'divided-in-reverse-order'),
+        no(`$\\frac{1}{7}$`, 'added-divisor-to-denominator'),
+      ],
+      solution: `Sharing $\\frac{1}{3}$ among $4$ means $\\frac{1}{3} \\div 4 = \\frac{1}{3} \\times \\frac{1}{4} = \\frac{1}{12}$ pound each. The choice $\\frac{1}{7}$ adds $4$ to the denominator $3$, but dividing by $4$ multiplies the denominator by $4$.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which expression has the same value as $\\frac{5}{9} \\div \\frac{2}{7}$?`,
+      choices: [
+        no(`$\\frac{9}{5} \\times \\frac{2}{7}$`, 'flipped-the-dividend'),
+        no(`$\\frac{5}{9} \\times \\frac{2}{7}$`, 'did-not-flip-the-divisor'),
+        ok(`$\\frac{5}{9} \\times \\frac{7}{2}$`),
+        no(`$\\frac{9}{5} \\times \\frac{7}{2}$`, 'flipped-both-fractions'),
+      ],
+      solution: `Dividing by a fraction is the same as multiplying by its reciprocal, so keep $\\frac{5}{9}$ and multiply by $\\frac{7}{2}$. The choice $\\frac{9}{5} \\times \\frac{2}{7}$ flips the first fraction, but only the divisor is flipped.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `What is $\\frac{8}{9} \\div \\frac{4}{9}$?`,
+      choices: [
+        no(`$\\frac{32}{81}$`, 'multiplied-instead-of-divided'),
+        no(`$\\frac{1}{2}$`, 'divided-in-reverse-order'),
+        no(`$\\frac{2}{9}$`, 'divided-numerators-kept-denominator'),
+        ok(`$2$`),
+      ],
+      solution: `Both fractions are in ninths, so the question is how many $4$ ninths fit in $8$ ninths: $8 \\div 4 = 2$. The choice $\\frac{2}{9}$ divides the numerators but keeps the ninths, yet the ninths cancel because both amounts use the same unit.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Which multiplication equation can be used to check that $\\frac{2}{3} \\div \\frac{3}{4} = \\frac{8}{9}$?`,
+      choices: [
+        ok(`$\\frac{8}{9} \\times \\frac{3}{4} = \\frac{2}{3}$`),
+        no(`$\\frac{8}{9} \\times \\frac{2}{3} = \\frac{3}{4}$`, 'multiplied-quotient-by-dividend'),
+        no(`$\\frac{2}{3} \\times \\frac{3}{4} = \\frac{8}{9}$`, 'multiplied-dividend-by-divisor'),
+        no(`$\\frac{8}{9} \\times \\frac{4}{3} = \\frac{2}{3}$`, 'used-reciprocal-in-the-check'),
+      ],
+      solution: `Division undoes multiplication: if $\\frac{2}{3} \\div \\frac{3}{4} = \\frac{8}{9}$, then the quotient times the divisor gives back the dividend, $\\frac{8}{9} \\times \\frac{3}{4} = \\frac{24}{36} = \\frac{2}{3}$. The equation $\\frac{2}{3} \\times \\frac{3}{4} = \\frac{8}{9}$ is false, since that product is $\\frac{1}{2}$.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A rectangular tile has an area of $\\frac{3}{5}$ square meter and a width of $\\frac{2}{3}$ meter. What is its length in meters?`,
+      choices: [
+        no(`$\\frac{2}{5}$`, 'multiplied-instead-of-divided'),
+        no(`$\\frac{10}{9}$`, 'divided-in-reverse-order'),
+        ok(`$\\frac{9}{10}$`),
+        no(`$\\frac{19}{15}$`, 'added-area-and-width'),
+      ],
+      solution: `Area equals length times width, so length $= \\frac{3}{5} \\div \\frac{2}{3} = \\frac{3}{5} \\times \\frac{3}{2} = \\frac{9}{10}$ meter. Check: $\\frac{9}{10} \\times \\frac{2}{3} = \\frac{3}{5}$. The choice $\\frac{2}{5}$ multiplies the area by the width instead of dividing.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Jalen walks $\\frac{3}{4}$ mile in $\\frac{1}{3}$ hour. At this pace, how many miles does Jalen walk in one hour?`,
+      choices: [
+        no(`$\\frac{1}{4}$`, 'multiplied-instead-of-divided'),
+        no(`$\\frac{4}{9}$`, 'found-hours-per-mile'),
+        no(`$1\\frac{1}{12}$`, 'added-the-quantities'),
+        ok(`$2\\frac{1}{4}$`),
+      ],
+      solution: `Miles per hour is miles divided by hours: $\\frac{3}{4} \\div \\frac{1}{3} = \\frac{3}{4} \\times 3 = \\frac{9}{4} = 2\\frac{1}{4}$ miles. That makes sense, since a full hour is three times as long as $\\frac{1}{3}$ hour. The choice $\\frac{4}{9}$ divides hours by miles, which gives hours per mile.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Pouring $\\frac{2}{3}$ cup of water into an empty bottle fills $\\frac{4}{5}$ of the bottle. How many cups does the whole bottle hold?`,
+      choices: [
+        ok(`$\\frac{5}{6}$`),
+        no(`$\\frac{8}{15}$`, 'multiplied-instead-of-divided'),
+        no(`$\\frac{6}{5}$`, 'divided-in-reverse-order'),
+        no(`$\\frac{22}{15}$`, 'added-the-quantities'),
+      ],
+      solution: `If $\\frac{4}{5}$ of the bottle is $\\frac{2}{3}$ cup, the whole bottle is $\\frac{2}{3} \\div \\frac{4}{5} = \\frac{2}{3} \\times \\frac{5}{4} = \\frac{10}{12} = \\frac{5}{6}$ cup. The whole bottle must hold more than $\\frac{2}{3}$ cup, and $\\frac{5}{6}$ does. The choice $\\frac{8}{15}$ is less than $\\frac{2}{3}$, so it cannot be the full bottle.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `Which problem can be solved with the expression $\\frac{3}{8} \\div 3$?`,
+      choices: [
+        no(`How many servings of $\\frac{3}{8}$ of a pizza can be made from $3$ pizzas?`, 'reversed-dividend-and-divisor'),
+        ok(`Three friends share $\\frac{3}{8}$ of a pizza equally. How much of a pizza does each friend get?`),
+        no(`Three friends each eat $\\frac{3}{8}$ of a pizza. How much pizza do they eat in all?`, 'chose-a-multiplication-situation'),
+        no(`Three friends each eat $\\frac{1}{8}$ of a pizza. How much of the pizza is left?`, 'chose-a-subtraction-situation'),
+      ],
+      solution: `$\\frac{3}{8} \\div 3$ splits $\\frac{3}{8}$ into $3$ equal shares, which is the pizza shared by three friends; each gets $\\frac{1}{8}$. The servings problem divides $3$ by $\\frac{3}{8}$, which puts the numbers in the opposite order.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `On a number line, Priya starts at $0$ and makes equal jumps of $\\frac{2}{5}$. How many jumps does it take to land exactly on $2\\frac{2}{5}$?`,
+      choices: [
+        no(`$\\frac{24}{25}$`, 'multiplied-instead-of-divided'),
+        no(`$\\frac{1}{6}$`, 'divided-in-reverse-order'),
+        ok(`$6$`),
+        no(`$12$`, 'counted-unit-fractions-not-jumps'),
+      ],
+      solution: `$2\\frac{2}{5} = \\frac{12}{5}$, and $\\frac{12}{5} \\div \\frac{2}{5} = 12 \\div 2 = 6$ jumps. The choice $12$ counts the fifths on the line, but each jump covers two fifths.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `What is $3\\frac{3}{4} \\div 5$?`,
+      choices: [
+        no(`$18\\frac{3}{4}$`, 'multiplied-instead-of-divided'),
+        no(`$1\\frac{1}{3}$`, 'divided-in-reverse-order'),
+        no(`$3\\frac{3}{20}$`, 'divided-only-the-fraction-part'),
+        ok(`$\\frac{3}{4}$`),
+      ],
+      solution: `Write the mixed number as $\\frac{15}{4}$, then $\\frac{15}{4} \\div 5 = \\frac{15}{4} \\times \\frac{1}{5} = \\frac{15}{20} = \\frac{3}{4}$. The choice $3\\frac{3}{20}$ divides only the $\\frac{3}{4}$ by $5$ and leaves the whole number $3$ undivided.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `What number makes the equation $\\frac{2}{3} \\times \\square = \\frac{5}{6}$ true?`,
+      choices: [
+        ok(`$\\frac{5}{4}$`),
+        no(`$\\frac{5}{9}$`, 'multiplied-instead-of-divided'),
+        no(`$\\frac{4}{5}$`, 'divided-in-reverse-order'),
+        no(`$\\frac{1}{6}$`, 'subtracted-instead-of-divided'),
+      ],
+      solution: `The missing factor is $\\frac{5}{6} \\div \\frac{2}{3} = \\frac{5}{6} \\times \\frac{3}{2} = \\frac{15}{12} = \\frac{5}{4}$. Check: $\\frac{2}{3} \\times \\frac{5}{4} = \\frac{10}{12} = \\frac{5}{6}$. The choice $\\frac{1}{6}$ is $\\frac{5}{6} - \\frac{2}{3}$, which would fit an addition equation, not a multiplication one.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Which quotient is greater than $\\frac{3}{4}$?`,
+      choices: [
+        no(`$\\frac{3}{4} \\div \\frac{5}{2}$`, 'thought-a-larger-divisor-gives-a-larger-quotient'),
+        no(`$\\frac{3}{4} \\div 1$`, 'treated-equal-as-greater'),
+        ok(`$\\frac{3}{4} \\div \\frac{2}{3}$`),
+        no(`$\\frac{3}{4} \\div 3$`, 'thought-division-always-makes-larger'),
+      ],
+      solution: `Dividing by a number less than $1$ gives a quotient larger than the starting number, and $\\frac{2}{3}$ is less than $1$: $\\frac{3}{4} \\div \\frac{2}{3} = \\frac{9}{8}$. Dividing by $\\frac{5}{2}$ or $3$, which are greater than $1$, makes the result smaller, and dividing by $1$ leaves it equal to $\\frac{3}{4}$.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `Ms. Okafor has $5\\frac{1}{3}$ yards of fabric. She first uses $\\frac{2}{3}$ yard for a pillow, then cuts all of the rest into pieces that are each $1\\frac{1}{6}$ yards long. How many pieces does she cut?`,
+      choices: [
+        no(`$4\\frac{4}{7}$`, 'forgot-to-subtract-the-pillow'),
+        ok(`$4$`),
+        no(`$5\\frac{4}{9}$`, 'multiplied-instead-of-divided'),
+        no(`$\\frac{1}{4}$`, 'divided-in-reverse-order'),
+      ],
+      solution: `First subtract: $5\\frac{1}{3} - \\frac{2}{3} = 4\\frac{2}{3} = \\frac{14}{3}$ yards are left. Then divide: $\\frac{14}{3} \\div \\frac{7}{6} = \\frac{14}{3} \\times \\frac{6}{7} = 4$ pieces. The choice $4\\frac{4}{7}$ divides the full $5\\frac{1}{3}$ yards and skips the fabric used for the pillow.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `A painter covers $\\frac{3}{8}$ of a wall in $\\frac{1}{2}$ hour. Working at the same rate, how many hours will it take to paint the whole wall?`,
+      choices: [
+        no(`$\\frac{3}{4}$`, 'found-walls-per-hour'),
+        no(`$\\frac{3}{16}$`, 'multiplied-instead-of-divided'),
+        ok(`$1\\frac{1}{3}$`),
+        no(`$\\frac{7}{8}$`, 'added-the-quantities'),
+      ],
+      solution: `Hours per whole wall is hours divided by walls: $\\frac{1}{2} \\div \\frac{3}{8} = \\frac{1}{2} \\times \\frac{8}{3} = \\frac{8}{6} = 1\\frac{1}{3}$ hours. The choice $\\frac{3}{4}$ divides the other way, $\\frac{3}{8} \\div \\frac{1}{2}$, which is how much wall is painted in one hour, not the time for the whole wall.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A container holds $4\\frac{1}{2}$ cups of yogurt. One serving is $\\frac{2}{3}$ cup. How many servings are in the container, counting any part of a serving?`,
+      choices: [
+        no(`$6\\frac{1}{2}$`, 'wrote-leftover-in-cups-not-servings'),
+        no(`$3$`, 'multiplied-instead-of-divided'),
+        no(`$\\frac{4}{27}$`, 'divided-in-reverse-order'),
+        ok(`$6\\frac{3}{4}$`),
+      ],
+      solution: `$4\\frac{1}{2} \\div \\frac{2}{3} = \\frac{9}{2} \\times \\frac{3}{2} = \\frac{27}{4} = 6\\frac{3}{4}$ servings. Six full servings use $4$ cups, leaving $\\frac{1}{2}$ cup, and $\\frac{1}{2}$ cup is $\\frac{3}{4}$ of a $\\frac{2}{3}$-cup serving. The choice $6\\frac{1}{2}$ writes the leftover as $\\frac{1}{2}$ cup instead of as part of a serving.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `A rectangular garden has an area of $10\\frac{1}{2}$ square yards and a length of $3\\frac{1}{2}$ yards. What is the perimeter of the garden in yards?`,
+      choices: [
+        ok(`$13$`),
+        no(`$3$`, 'stopped-at-the-width'),
+        no(`$6\\frac{1}{2}$`, 'added-length-and-width-once'),
+        no(`$36\\frac{3}{4}$`, 'multiplied-instead-of-divided'),
+      ],
+      solution: `The width is $10\\frac{1}{2} \\div 3\\frac{1}{2} = \\frac{21}{2} \\times \\frac{2}{7} = 3$ yards. The perimeter is $2 \\times (3\\frac{1}{2} + 3) = 13$ yards. The choice $6\\frac{1}{2}$ adds the length and width only once, which covers just two of the four sides.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A number divided by $\\frac{3}{5}$ equals $1\\frac{2}{3}$. What is the number?`,
+      choices: [
+        no(`$2\\frac{7}{9}$`, 'divided-instead-of-multiplied'),
+        no(`$2\\frac{4}{15}$`, 'added-instead-of-multiplied'),
+        ok(`$1$`),
+        no(`$\\frac{9}{25}$`, 'divided-in-reverse-order'),
+      ],
+      solution: `If $n \\div \\frac{3}{5} = 1\\frac{2}{3}$, then $n = 1\\frac{2}{3} \\times \\frac{3}{5} = \\frac{5}{3} \\times \\frac{3}{5} = 1$. Check: $1 \\div \\frac{3}{5} = \\frac{5}{3} = 1\\frac{2}{3}$. The choice $2\\frac{7}{9}$ divides $1\\frac{2}{3}$ by $\\frac{3}{5}$ again instead of undoing the division with multiplication.`,
+    },
+  ],
+}
+
+export default skill
