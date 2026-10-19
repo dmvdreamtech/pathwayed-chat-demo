@@ -86,40 +86,42 @@ export function ContentCoverage() {
               {g.complete} of {g.rows.length} complete, {g.exists} built
             </span>
           </summary>
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Skill</th>
-                <th scope="col">Group</th>
-                <th scope="col">Exists</th>
-                <th scope="col">Drafted</th>
-                <th scope="col">Checks passing</th>
-                <th scope="col">Reviewed</th>
-                <th scope="col">Published</th>
-                <th scope="col">Target</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {g.rows.map((r) => (
-                <tr key={r.name}>
-                  <td className="sat-cov-name" title={`${r.standards.join(', ')}  ${r.slugs.join(', ')}`}>
-                    {r.name}
-                  </td>
-                  <td>{r.group}</td>
-                  <td>{r.exists ? 'Yes' : 'No'}</td>
-                  <td>{r.drafted}</td>
-                  <td>{r.checksPassing}</td>
-                  <td>{r.reviewed}</td>
-                  <td>{r.published}</td>
-                  <td>{r.target}</td>
-                  <td>
-                    <span className={`staff-level staff-level-${isComplete(r) ? 'mastered' : 'not_started'}`}>{rowStatus(r)}</span>
-                  </td>
+          <div className="staff-table-scroll">
+            <table className="cov-table">
+              <thead>
+                <tr>
+                  <th scope="col">Skill</th>
+                  <th scope="col">Group</th>
+                  <th scope="col">Exists</th>
+                  <th scope="col">Drafted</th>
+                  <th scope="col">Checks passing</th>
+                  <th scope="col">Reviewed</th>
+                  <th scope="col">Published</th>
+                  <th scope="col">Target</th>
+                  <th scope="col">Status</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {g.rows.map((r) => (
+                  <tr key={r.name}>
+                    <td className="sat-cov-name" title={`${r.standards.join(', ')}  ${r.slugs.join(', ')}`}>
+                      {r.name}
+                    </td>
+                    <td className="cov-group">{r.group}</td>
+                    <td>{r.exists ? 'Yes' : 'No'}</td>
+                    <td className="cov-num">{r.drafted}</td>
+                    <td className="cov-num">{r.checksPassing}</td>
+                    <td className="cov-num">{r.reviewed}</td>
+                    <td className="cov-num">{r.published}</td>
+                    <td className="cov-num">{r.target}</td>
+                    <td>
+                      <span className={`staff-level staff-level-${isComplete(r) ? 'mastered' : 'not_started'}`}>{rowStatus(r)}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </details>
       ))}
     </StaffShell>

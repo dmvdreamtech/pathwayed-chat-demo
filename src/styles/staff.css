@@ -342,6 +342,24 @@
   white-space: normal;
   min-width: 180px;
 }
+/* A wide table scrolls inside its own box instead of running past the panel
+   (a <details> box does not scroll sideways reliably, so the table gets a wrapper). */
+.staff-table-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+}
+/* Coverage tables: the text columns wrap so the numbers and Status fit. */
+.cov-table th {
+  white-space: normal;
+}
+.cov-table td.cov-group {
+  white-space: normal;
+  min-width: 110px;
+}
+.cov-table td:last-child,
+.cov-table th:last-child {
+  padding-right: 0;
+}
 
 /* /staff dashboard */
 .shell .staff-snapshot {
@@ -543,12 +561,14 @@
 /* /admin/review (migration 0043) */
 .review-choices { margin: 6px 0 8px 18px; padding: 0; }
 .review-choices li { margin: 2px 0; }
-/* K-2 picture items on the review page: the tiles as the child sees them, each
-   with its spoken label underneath. The .picq rules come from app-screens.css. */
+/* K-2 picture items on the review page: the screen exactly as the child gets it,
+   at phone width, in the same practice card. The .picq rules come from
+   app-screens.css (the staff shell is already a .kid-screen). The key and the
+   tile labels show only after "Show the key". */
 .review-picture { max-width: 520px; }
-.review-picture .picq { margin: 8px 0; }
-.review-picture .picq-tile { flex-direction: column; gap: 6px; cursor: default; }
-.review-tile-label { color: #445; }
+.review-kid-view { max-width: 400px; margin: 8px 0; }
+.review-kid-view .picq-tile { cursor: default; }
+.review-picture-key { margin: 8px 0 8px 18px; padding: 0; }
 .review-correct { font-weight: 600; }
 .review-passage { margin: 6px 0; }
 .review-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }

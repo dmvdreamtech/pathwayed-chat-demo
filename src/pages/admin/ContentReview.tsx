@@ -67,47 +67,64 @@ function Choices({ choices }: { choices: Choice[] }) {
 }
 
 /**
- * A K-2 picture item as the child gets it: the stem is spoken, the tiles are
- * pictures. The reviewer hears it with the same voice and sees each tile with
- * its spoken label and the key.
+ * A K-2 picture item as the child gets it. The child never sees the stem: Nikki
+ * says it (plus "Your choices are: ..." when every tile is a single picture), and
+ * the screen shows only the prompt picture and the tiles, with no labels and no
+ * key. The reviewer starts in that view, hears exactly what the child hears, and
+ * then shows the key.
  */
-function PictureItem({ item }: { item: ReviewItem }) {
+export function PictureItem({ item }: { item: ReviewItem }) {
   const spoken = spokenPictureItem(item.stem, item.choices)
+  const [showKey, setShowKey] = useState(false)
+  // Tile names are read aloud only when the spoken text adds them.
+  const namesSpoken = spoken !== item.stem
   return (
-    <div className="kid-screen review-picture">
+    <div className="review-picture">
       <p>
         <button type="button" className="staff-btn staff-small" onClick={() => void speakWithNikki(spoken)}>
           Play the question
         </button>{' '}
         <button type="button" className="staff-btn staff-small" onClick={() => void speakWithNikki(item.solution)}>
           Play the feedback
+        </button>{' '}
+        <button type="button" className="staff-btn staff-small" aria-pressed={showKey} onClick={() => setShowKey((v) => !v)}>
+          {showKey ? 'Hide the key' : 'Show the key'}
         </button>
       </p>
-      <p>
-        <b>Spoken:</b> {item.stem}
+      <p className="muted staff-small">
+        The child sees only the screen below. Nikki says: <i>{spoken}</i>
       </p>
-      {item.prompt && (
+      <div className="panel practice-q review-kid-view">
         <div className="picq">
-          <div className="picq-prompt">
-            <PictureFigure figure={item.prompt} place="prompt" />
+          {item.prompt && (
+            <div className="picq-prompt">
+              <PictureFigure figure={item.prompt} place="prompt" />
+            </div>
+          )}
+          <div className="picq-tiles" data-count={item.choices.length}>
+            {item.choices.map((c, i) => (
+              <div key={i} className={`picq-tile ${showKey && c.correct ? 'correct' : ''}`}>
+                {c.tile ? <PictureFigure figure={c.tile} place="tile" label={c.text} /> : <span className="picq-num">{c.text}</span>}
+              </div>
+            ))}
           </div>
         </div>
-      )}
-      <div className="picq">
-        <div className="picq-tiles" data-count={item.choices.length}>
-          {item.choices.map((c, i) => (
-            <div key={i} className={`picq-tile ${c.correct ? 'correct' : ''}`}>
-              {c.tile ? <PictureFigure figure={c.tile} place="tile" label={c.text} /> : <span className="picq-num">{c.text}</span>}
-              <span className="staff-small review-tile-label">
-                {c.text} {c.correct ? <b>(key)</b> : null}
-              </span>
-            </div>
-          ))}
-        </div>
       </div>
-      <p className="staff-small">
-        <b>Spoken feedback:</b> {item.solution}
-      </p>
+      {showKey && (
+        <>
+          <ol className="staff-small review-picture-key">
+            {item.choices.map((c, i) => (
+              <li key={i} className={c.correct ? 'review-correct' : undefined}>
+                {c.text} {c.correct ? <b>(key)</b> : null}{' '}
+                <span className="muted">{namesSpoken ? '(read aloud)' : '(not read aloud)'}</span>
+              </li>
+            ))}
+          </ol>
+          <p className="staff-small">
+            <b>Spoken feedback</b> (after every tap, right or wrong): {item.solution}
+          </p>
+        </>
+      )}
       <p className="muted staff-small">Difficulty: {item.difficulty}</p>
     </div>
   )
