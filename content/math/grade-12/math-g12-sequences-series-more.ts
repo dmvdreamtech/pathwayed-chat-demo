@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g12-sequences-series-more',
+  extends: 'sequences-series',
+  subject: 'math',
+  grade: 12,
+  group: 'Functions',
+  name: 'Sequences & Series',
+  standards: ['HSF.BF.A.2'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `A sequence is defined recursively by $a_1 = 4$ and $a_n = a_{n-1} + 6$ for $n \\geq 2$. What is $a_3$?`,
+      choices: [
+        ok(`$16$`),
+        no(`$22$`, 'computed-one-term-too-far'),
+        no(`$10$`, 'computed-one-term-too-few'),
+        no(`$144$`, 'multiplied-instead-of-added'),
+      ],
+      solution: `Start at $a_1 = 4$ and add $6$ each step: $a_2 = 4 + 6 = 10$ and $a_3 = 10 + 6 = 16$. The choice $10$ is $a_2$, one step short of $a_3$.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `A sequence is defined by $a_1 = 2$ and $a_n = 3a_{n-1}$ for $n \\geq 2$. Which explicit formula, for $n \\geq 1$, gives the same sequence?`,
+      choices: [
+        ok(`$a_n = 2 \\cdot 3^{n-1}$`),
+        no(`$a_n = 2 \\cdot 3^{n}$`, 'exponent-off-by-one'),
+        no(`$a_n = 3 \\cdot 2^{n-1}$`, 'swapped-first-term-and-ratio'),
+        no(`$a_n = 2 + 3(n-1)$`, 'treated-geometric-as-arithmetic'),
+      ],
+      solution: `Each term is $3$ times the one before, so the sequence is geometric with first term $2$ and ratio $3$: $a_n = 2 \\cdot 3^{n-1}$. Check: $n = 1$ gives $2$. The formula $a_n = 2 \\cdot 3^{n}$ gives $6$ when $n = 1$, so its first term is wrong.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `An arithmetic sequence has explicit formula $a_n = 5 + 3(n-1)$ for $n \\geq 1$. Which recursive definition gives the same sequence?`,
+      choices: [
+        no(`$a_1 = 5$, $a_n = 3a_{n-1}$ for $n \\geq 2$`, 'treated-arithmetic-as-geometric'),
+        no(`$a_1 = 3$, $a_n = a_{n-1} + 5$ for $n \\geq 2$`, 'swapped-first-term-and-difference'),
+        ok(`$a_1 = 5$, $a_n = a_{n-1} + 3$ for $n \\geq 2$`),
+        no(`$a_1 = 2$, $a_n = a_{n-1} + 3$ for $n \\geq 2$`, 'used-constant-of-simplified-form-as-first-term'),
+      ],
+      solution: `When $n = 1$, $a_1 = 5 + 0 = 5$, and each increase in $n$ adds $3$. So $a_1 = 5$ and $a_n = a_{n-1} + 3$. The definition starting at $a_1 = 2$ uses the constant from $3n + 2$, but $2$ would be the term for $n = 0$, which is not in this sequence.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `What is the sum of the infinite geometric series $12 + 6 + 3 + \\frac{3}{2} + \\dots$?`,
+      choices: [
+        no(`$\\frac{45}{2}$`, 'added-only-the-terms-shown'),
+        ok(`$24$`),
+        no(`$8$`, 'used-one-plus-r-in-denominator'),
+        no(`The series has no finite sum`, 'thought-infinite-sums-always-diverge'),
+      ],
+      solution: `The ratio is $r = \\frac{6}{12} = \\frac{1}{2}$, and $|r| < 1$, so the sum exists: $S = \\frac{a_1}{1 - r} = \\frac{12}{1 - \\frac{1}{2}} = 24$. The value $8$ comes from dividing by $1 + r$ instead of $1 - r$.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `Which infinite geometric series has a finite sum?`,
+      choices: [
+        no(`$5 + 10 + 20 + 40 + \\dots$`, 'ignored-size-of-ratio'),
+        no(`$4 + 4 + 4 + 4 + \\dots$`, 'thought-ratio-of-one-converges'),
+        no(`$2 - 4 + 8 - 16 + \\dots$`, 'thought-alternating-signs-converge'),
+        ok(`$9 - 3 + 1 - \\frac{1}{3} + \\dots$`),
+      ],
+      solution: `An infinite geometric series has a finite sum only when $|r| < 1$. For $9 - 3 + 1 - \\dots$, $r = -\\frac{1}{3}$ and $|r| = \\frac{1}{3} < 1$, so it converges (to $\\frac{9}{1 + \\frac{1}{3}} = \\frac{27}{4}$). The series $2 - 4 + 8 - \\dots$ alternates in sign, but $|r| = 2$, so its terms grow and it has no finite sum.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A seedling is $3$ cm tall when it is planted (week $n = 0$) and grows $2$ cm each week. Which formula gives its height $h(n)$, in cm, after $n$ weeks, for $n \\geq 0$?`,
+      choices: [
+        ok(`$h(n) = 3 + 2n$`),
+        no(`$h(n) = 3 + 2(n-1)$`, 'used-n-minus-one-when-starting-at-zero'),
+        no(`$h(n) = 2 + 3n$`, 'swapped-start-and-rate'),
+        no(`$h(n) = 3 \\cdot 2^{n}$`, 'modeled-constant-growth-as-exponential'),
+      ],
+      solution: `At $n = 0$ the height must be $3$, and each week adds $2$, so $h(n) = 3 + 2n$. The formula $3 + 2(n-1)$ gives $1$ at $n = 0$; the $n - 1$ belongs in formulas whose first term is $n = 1$.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `A geometric sequence has explicit formula $a_n = 80\\left(\\frac{1}{2}\\right)^{n-1}$ for $n \\geq 1$. Which recursive definition gives the same sequence?`,
+      choices: [
+        no(`$a_1 = 40$, $a_n = \\frac{1}{2}a_{n-1}$ for $n \\geq 2$`, 'applied-ratio-to-first-term'),
+        ok(`$a_1 = 80$, $a_n = \\frac{1}{2}a_{n-1}$ for $n \\geq 2$`),
+        no(`$a_1 = 80$, $a_n = a_{n-1} - \\frac{1}{2}$ for $n \\geq 2$`, 'treated-ratio-as-difference'),
+        no(`$a_1 = 80$, $a_n = 2a_{n-1}$ for $n \\geq 2$`, 'inverted-ratio'),
+      ],
+      solution: `At $n = 1$ the exponent is $0$, so $a_1 = 80$. Raising the exponent by $1$ multiplies by $\\frac{1}{2}$, so $a_n = \\frac{1}{2}a_{n-1}$. The definition starting at $40$ multiplies by $\\frac{1}{2}$ once too often; that is $a_2$, not $a_1$.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `In an arithmetic sequence with first term $a_1$, $a_3 = 11$ and $a_8 = 31$. Which explicit formula, for $n \\geq 1$, describes the sequence?`,
+      choices: [
+        no(`$a_n = 4n + 3$`, 'used-first-term-as-constant-without-shifting'),
+        no(`$a_n = 11 + 4(n-1)$`, 'used-a-later-term-as-first-term'),
+        ok(`$a_n = 4n - 1$`),
+        no(`$a_n = 5n - 4$`, 'used-index-gap-as-difference'),
+      ],
+      solution: `From $a_3$ to $a_8$ is $5$ steps and the value rises by $31 - 11 = 20$, so $d = \\frac{20}{5} = 4$. Then $a_1 = 11 - 2(4) = 3$, and $a_n = 3 + 4(n-1) = 4n - 1$. Check: $4(8) - 1 = 31$. The formula $4n + 3$ gives $7$ at $n = 1$, because the $3$ is the first term and must go with $n - 1$, not $n$.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `In a geometric sequence with positive terms, $a_2 = 6$ and $a_5 = 162$. What is $a_1$?`,
+      choices: [
+        no(`$3$`, 'gave-ratio-instead-of-first-term'),
+        no(`$18$`, 'multiplied-by-ratio-instead-of-dividing'),
+        no(`$\\frac{2}{3}$`, 'divided-term-ratio-by-index-gap'),
+        ok(`$2$`),
+      ],
+      solution: `Going from $a_2$ to $a_5$ multiplies by $r$ three times, so $r^3 = \\frac{162}{6} = 27$ and $r = 3$. Step back one term: $a_1 = \\frac{6}{3} = 2$. The choice $18$ multiplies $6$ by $3$, which gives $a_3$ instead.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `What is the value of $\\sum_{k=1}^{12} (3k + 2)$?`,
+      choices: [
+        ok(`$258$`),
+        no(`$236$`, 'added-constant-only-once'),
+        no(`$220$`, 'stopped-one-term-early'),
+        no(`$38$`, 'gave-last-term-not-sum'),
+      ],
+      solution: `The terms run from $5$ (at $k = 1$) to $38$ (at $k = 12$), and there are $12$ of them, so the sum is $\\frac{12}{2}(5 + 38) = 6 \\cdot 43 = 258$. The value $236$ adds the $2$ only once instead of once for each of the $12$ terms.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `The index of this sum starts at $k = 0$. What is the value of $\\sum_{k=0}^{5} 3 \\cdot 2^{k}$?`,
+      choices: [
+        no(`$93$`, 'counted-five-terms-instead-of-six'),
+        no(`$96$`, 'gave-last-term-not-sum'),
+        ok(`$189$`),
+        no(`$381$`, 'counted-seven-terms-instead-of-six'),
+      ],
+      solution: `From $k = 0$ to $k = 5$ there are $6$ terms: $3, 6, 12, 24, 48, 96$. Using $S = \\frac{a(r^n - 1)}{r - 1} = \\frac{3(2^6 - 1)}{2 - 1} = 3 \\cdot 63 = 189$. The value $93$ treats the sum as having only $5$ terms, missing that $k = 0$ is a term too.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'medium',
+      stem: `A car is worth 24,000 dollars when it is bought (year $n = 0$), and its value drops by $15\\%$ each year. Which formula gives its value $V(n)$, in dollars, after $n$ years, for $n \\geq 0$?`,
+      choices: [
+        no(`$V(n) = 24000(0.15)^{n}$`, 'used-percent-lost-as-ratio'),
+        no(`$V(n) = 24000(0.85)^{n-1}$`, 'used-n-minus-one-when-starting-at-zero'),
+        no(`$V(n) = 24000 - 3600n$`, 'modeled-percent-decrease-as-linear'),
+        ok(`$V(n) = 24000(0.85)^{n}$`),
+      ],
+      solution: `Losing $15\\%$ leaves $85\\%$, so each year the value is multiplied by $0.85$, and $V(0)$ must be $24000$: $V(n) = 24000(0.85)^{n}$. The formula $24000 - 3600n$ subtracts the first year's loss every year, but later losses are $15\\%$ of a smaller value.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `What is the sum of the infinite geometric series $0.4 + 0.04 + 0.004 + \\dots$, written as a fraction?`,
+      choices: [
+        no(`$\\frac{2}{5}$`, 'used-first-term-only'),
+        no(`$\\frac{4}{11}$`, 'used-one-plus-r-in-denominator'),
+        ok(`$\\frac{4}{9}$`),
+        no(`$\\frac{2}{3}$`, 'used-first-term-as-ratio'),
+      ],
+      solution: `Here $a_1 = 0.4$ and $r = 0.1$, and $|r| < 1$, so $S = \\frac{0.4}{1 - 0.1} = \\frac{0.4}{0.9} = \\frac{4}{9}$. The value $\\frac{2}{3}$ comes from $\\frac{0.4}{1 - 0.4}$, which uses the first term in place of the ratio.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A function is defined by $f(0) = 50$ and $f(n) = f(n-1) - 7$ for $n \\geq 1$. What is $f(6)$?`,
+      choices: [
+        no(`$15$`, 'subtracted-one-time-too-few'),
+        ok(`$8$`),
+        no(`$1$`, 'subtracted-one-time-too-many'),
+        no(`$43$`, 'applied-rule-only-once'),
+      ],
+      solution: `Since the sequence starts at $n = 0$, reaching $n = 6$ takes $6$ steps of $-7$: $f(6) = 50 - 6(7) = 8$. The value $15$ uses only $5$ steps, as if $f(0)$ were the first of six terms.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `The geometric sequence $3, 6, 12, 24, \\dots$ has first term $a_1 = 3$. Which term number $n$ has the value $768$?`,
+      choices: [
+        no(`$8$`, 'forgot-to-add-one-to-exponent'),
+        ok(`$9$`),
+        no(`$256$`, 'gave-power-of-ratio-not-term-number'),
+        no(`$384$`, 'divided-by-ratio-instead-of-first-term'),
+      ],
+      solution: `Use $a_n = 3 \\cdot 2^{n-1}$. Setting $3 \\cdot 2^{n-1} = 768$ gives $2^{n-1} = 256 = 2^8$, so $n - 1 = 8$ and $n = 9$. The choice $8$ is the exponent $n - 1$, not $n$.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'hard',
+      stem: `An infinite geometric series has first term $12$ and sum $30$. What is its common ratio $r$?`,
+      choices: [
+        no(`$\\frac{2}{5}$`, 'gave-one-minus-r'),
+        no(`$\\frac{5}{2}$`, 'divided-sum-by-first-term'),
+        ok(`$\\frac{3}{5}$`),
+        no(`$-\\frac{3}{5}$`, 'sign-error-solving-for-r'),
+      ],
+      solution: `A finite sum requires $|r| < 1$ and then $\\frac{12}{1 - r} = 30$. So $1 - r = \\frac{12}{30} = \\frac{2}{5}$, giving $r = \\frac{3}{5}$. Check: $\\frac{12}{1 - \\frac{3}{5}} = \\frac{12}{\\frac{2}{5}} = 30$. The choice $\\frac{2}{5}$ is the value of $1 - r$, not $r$.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `Dev runs $2$ miles in week $1$ of a training plan and adds $0.5$ mile each week after that. How many miles does Dev run in total over the first $10$ weeks?`,
+      choices: [
+        no(`$6.5$`, 'gave-last-week-not-total'),
+        no(`$45$`, 'used-n-instead-of-n-minus-one-for-last-term'),
+        no(`$20$`, 'ignored-weekly-increase'),
+        ok(`$42.5$`),
+      ],
+      solution: `The weekly distances form an arithmetic sequence with $a_1 = 2$ and $d = 0.5$, so week $10$ is $a_{10} = 2 + 9(0.5) = 6.5$. The total is $\\frac{10}{2}(2 + 6.5) = 5 \\cdot 8.5 = 42.5$ miles. The value $45$ takes week $10$ as $2 + 10(0.5) = 7$, adding one increase too many.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `A ball is dropped from a height of $10$ feet. After each bounce it rises to $\\frac{3}{5}$ of the height it just fell, and it keeps bouncing forever in this model. What is the total vertical distance, in feet, the ball travels (all falls and all rises)?`,
+      choices: [
+        no(`$25$`, 'counted-only-the-falls'),
+        ok(`$40$`),
+        no(`$50$`, 'doubled-the-first-drop-too'),
+        no(`$15$`, 'counted-only-the-rises'),
+      ],
+      solution: `The falls are $10 + 6 + 3.6 + \\dots$, an infinite geometric series with $r = \\frac{3}{5}$ and $|r| < 1$, so they total $\\frac{10}{1 - \\frac{3}{5}} = 25$. The rises are $6 + 3.6 + \\dots = \\frac{6}{1 - \\frac{3}{5}} = 15$. Together the ball travels $25 + 15 = 40$ feet. The value $50$ doubles every fall, but the first $10$-foot drop has no matching rise before it.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `What is the value of $\\sum_{n=1}^{8} 5(-2)^{n-1}$?`,
+      choices: [
+        no(`$425$`, 'sign-error-with-negative-ratio'),
+        no(`$-640$`, 'gave-last-term-not-sum'),
+        ok(`$-425$`),
+        no(`$1275$`, 'used-positive-ratio-in-denominator'),
+      ],
+      solution: `This is a geometric sum with $a_1 = 5$, $r = -2$ and $8$ terms: $S = \\frac{5(1 - (-2)^8)}{1 - (-2)} = \\frac{5(1 - 256)}{3} = \\frac{-1275}{3} = -425$. The value $1275$ comes from using $1 - 2$ in the denominator, dropping the negative sign of $r$ there.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A sequence is given by $a_n = 7 \\cdot 4^{n}$ for $n \\geq 0$, so its first term is $a_0 = 7$. The same list of terms is to be written with the first term numbered $n = 1$. Which formula, for $n \\geq 1$, gives the same list?`,
+      choices: [
+        no(`$b_n = 7 \\cdot 4^{n}$`, 'kept-exponent-after-shifting-start'),
+        ok(`$b_n = 7 \\cdot 4^{n-1}$`),
+        no(`$b_n = 4 \\cdot 7^{n-1}$`, 'swapped-first-term-and-ratio'),
+        no(`$b_n = 7 \\cdot 4^{n+1}$`, 'shifted-index-in-wrong-direction'),
+      ],
+      solution: `The list is $7, 28, 112, \\dots$. With the first term at $n = 1$, the exponent must be $0$ when $n = 1$, so use $n - 1$: $b_n = 7 \\cdot 4^{n-1}$, which gives $b_1 = 7$ and $b_2 = 28$. The formula $7 \\cdot 4^{n}$ gives $28$ when $n = 1$, so its list starts one term late.`,
+    },
+  ],
+}
+
+export default skill
