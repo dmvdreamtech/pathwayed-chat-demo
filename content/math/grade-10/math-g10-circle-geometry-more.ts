@@ -1,0 +1,258 @@
+import type { ContentChoice, ContentSkill } from '../../types'
+
+const ok = (text: string): ContentChoice => ({ text, is_correct: true })
+const no = (text: string, misconception_token: string): ContentChoice => ({ text, is_correct: false, misconception_token })
+
+const skill: ContentSkill = {
+  slug: 'math-g10-circle-geometry-more',
+  extends: 'circle-geometry',
+  subject: 'math',
+  grade: 10,
+  group: 'Circles',
+  name: 'Circle Geometry',
+  standards: ['HSG.C.A.2'],
+  items: [
+    {
+      slot: 1,
+      difficulty: 'easy',
+      stem: `Points $A$, $B$, $C$ and $D$ lie on a circle. Inscribed angles $\\angle ACB$ and $\\angle ADB$ both intercept arc $AB$. If $\\angle ACB = 38^\\circ$, what is $\\angle ADB$?`,
+      choices: [
+        ok(`$38^\\circ$`),
+        no(`$76^\\circ$`, 'doubled-like-a-central-angle'),
+        no(`$19^\\circ$`, 'halved-an-inscribed-angle'),
+        no(`$142^\\circ$`, 'used-supplementary-angles'),
+      ],
+      solution: `Inscribed angles that intercept the same arc are equal, because each is half of that arc. So $\\angle ADB = 38^\\circ$. The value $76^\\circ$ is the measure of arc $AB$, not of the second inscribed angle.`,
+    },
+    {
+      slot: 2,
+      difficulty: 'easy',
+      stem: `An inscribed angle measures $27^\\circ$. What is the measure of the arc it intercepts?`,
+      choices: [
+        no(`$27^\\circ$`, 'arc-equals-inscribed-angle'),
+        no(`$13.5^\\circ$`, 'halved-instead-of-doubled'),
+        ok(`$54^\\circ$`),
+        no(`$153^\\circ$`, 'used-supplementary-angles'),
+      ],
+      solution: `An inscribed angle is half of its intercepted arc, so the arc is twice the angle: $2 \\times 27^\\circ = 54^\\circ$. The value $13.5^\\circ$ halves the angle, but the arc is the larger of the two.`,
+    },
+    {
+      slot: 3,
+      difficulty: 'easy',
+      stem: `Triangle $PQR$ is inscribed in a circle, and side $PR$ is a diameter of the circle. What is the measure of $\\angle Q$?`,
+      choices: [
+        no(`$180^\\circ$`, 'confused-diameter-with-straight-angle'),
+        no(`$60^\\circ$`, 'assumed-equilateral-triangle'),
+        no(`$45^\\circ$`, 'assumed-isosceles-right-split'),
+        ok(`$90^\\circ$`),
+      ],
+      solution: `Angle $Q$ is inscribed and intercepts a semicircle, which measures $180^\\circ$. Half of $180^\\circ$ is $90^\\circ$. The value $180^\\circ$ is the arc, not the inscribed angle.`,
+    },
+    {
+      slot: 4,
+      difficulty: 'easy',
+      stem: `From a point $P$ outside a circle, two tangent segments are drawn, touching the circle at $A$ and $B$. If $PA = 9$ cm, what is $PB$?`,
+      choices: [
+        ok(`$9$ cm`),
+        no(`$18$ cm`, 'doubled-the-tangent-length'),
+        no(`$4.5$ cm`, 'split-length-between-tangents'),
+        no(`$81$ cm`, 'squared-the-tangent-length'),
+      ],
+      solution: `Two tangent segments drawn to a circle from the same outside point are congruent, so $PB = PA = 9$ cm. The value $18$ cm is the total of both segments, not the length of one.`,
+    },
+    {
+      slot: 5,
+      difficulty: 'easy',
+      stem: `A radius of a circle is perpendicular to a chord that is $16$ inches long. Into what two lengths does the radius cut the chord:`,
+      choices: [
+        no(`$16$ inches and $16$ inches`, 'thought-chord-is-not-bisected'),
+        ok(`$8$ inches and $8$ inches`),
+        no(`$4$ inches and $4$ inches`, 'halved-twice'),
+        no(`$32$ inches and $32$ inches`, 'doubled-instead-of-halved'),
+      ],
+      solution: `A radius perpendicular to a chord bisects the chord, so each piece is $16 \\div 2 = 8$ inches. The pair $4$ and $4$ inches halves the length a second time, which adds up to only $8$ inches.`,
+    },
+    {
+      slot: 6,
+      difficulty: 'easy',
+      stem: `A central angle measures $64^\\circ$. An inscribed angle intercepts the same arc. What is the measure of the inscribed angle?`,
+      choices: [
+        no(`$64^\\circ$`, 'inscribed-equals-central'),
+        no(`$128^\\circ$`, 'doubled-instead-of-halved'),
+        ok(`$32^\\circ$`),
+        no(`$116^\\circ$`, 'used-supplementary-angles'),
+      ],
+      solution: `The central angle equals its arc, $64^\\circ$, and an inscribed angle is half of the arc: $64^\\circ \\div 2 = 32^\\circ$. The value $128^\\circ$ doubles the angle instead of halving it.`,
+    },
+    {
+      slot: 7,
+      difficulty: 'medium',
+      stem: `Tangent segments $PA$ and $PB$ touch a circle with center $O$ at points $A$ and $B$. Central angle $\\angle AOB$ measures $130^\\circ$. What is the measure of the circumscribed angle $\\angle APB$?`,
+      choices: [
+        no(`$130^\\circ$`, 'circumscribed-equals-central'),
+        no(`$65^\\circ$`, 'treated-circumscribed-as-inscribed'),
+        ok(`$50^\\circ$`),
+        no(`$230^\\circ$`, 'used-the-reflex-angle'),
+      ],
+      solution: `Each radius meets its tangent at $90^\\circ$, so quadrilateral $OAPB$ has angles $90^\\circ$, $90^\\circ$, $130^\\circ$ and $\\angle APB$, which add to $360^\\circ$. That gives $\\angle APB = 360^\\circ - 90^\\circ - 90^\\circ - 130^\\circ = 50^\\circ$. The value $65^\\circ$ halves the central angle, which is the rule for an inscribed angle, not a circumscribed one.`,
+    },
+    {
+      slot: 8,
+      difficulty: 'medium',
+      stem: `A tangent line touches a circle at point $T$. Chord $TV$ is drawn, and the arc $TV$ that lies inside the angle formed by the tangent and the chord measures $140^\\circ$. What is the measure of the angle between the tangent and the chord?`,
+      choices: [
+        no(`$140^\\circ$`, 'used-full-arc-measure'),
+        ok(`$70^\\circ$`),
+        no(`$110^\\circ$`, 'used-the-other-arc'),
+        no(`$40^\\circ$`, 'subtracted-arc-from-180'),
+      ],
+      solution: `An angle formed by a tangent and a chord at the point of tangency is half of the arc it intercepts: $140^\\circ \\div 2 = 70^\\circ$. The value $110^\\circ$ is half of the other arc, $360^\\circ - 140^\\circ = 220^\\circ$, which lies outside this angle.`,
+    },
+    {
+      slot: 9,
+      difficulty: 'medium',
+      stem: `Chords $AB$ and $CD$ of a circle intersect at point $E$. If $AE = 3$, $EB = 8$ and $CE = 4$, what is $ED$?`,
+      choices: [
+        ok(`$6$`),
+        no(`$7$`, 'used-sum-instead-of-product'),
+        no(`$\\frac{32}{3}$`, 'paired-the-wrong-segments'),
+        no(`$24$`, 'forgot-to-divide'),
+      ],
+      solution: `When two chords intersect, the products of their pieces are equal: $AE \\cdot EB = CE \\cdot ED$, so $3 \\cdot 8 = 4 \\cdot ED$ and $ED = 24 \\div 4 = 6$. The value $7$ comes from setting the sums equal, $3 + 8 = 4 + ED$, but the rule uses products.`,
+    },
+    {
+      slot: 10,
+      difficulty: 'medium',
+      stem: `Quadrilateral $ABCD$ is inscribed in a circle. Angle $A$ measures $(3x)^\\circ$ and the opposite angle $C$ measures $(x + 40)^\\circ$. What is the measure of angle $A$?`,
+      choices: [
+        no(`$35^\\circ$`, 'gave-x-instead-of-the-angle'),
+        no(`$60^\\circ$`, 'set-opposite-angles-equal'),
+        no(`$240^\\circ$`, 'used-360-for-opposite-angles'),
+        ok(`$105^\\circ$`),
+      ],
+      solution: `Opposite angles of an inscribed quadrilateral are supplementary: $3x + x + 40 = 180$, so $4x = 140$ and $x = 35$. Then angle $A = 3 \\cdot 35 = 105^\\circ$. The value $35^\\circ$ is $x$, not the angle.`,
+    },
+    {
+      slot: 11,
+      difficulty: 'medium',
+      stem: `In a circle, $AB$ is a diameter of length $10$ and point $C$ is on the circle with $AC = 6$. What is the length of $BC$?`,
+      choices: [
+        no(`$2\\sqrt{34}$`, 'treated-diameter-as-a-leg'),
+        ok(`$8$`),
+        no(`$4$`, 'subtracted-side-lengths'),
+        no(`$64$`, 'forgot-the-square-root'),
+      ],
+      solution: `Angle $C$ intercepts a semicircle, so it is a right angle and $AB$ is the hypotenuse. Then $BC = \\sqrt{10^2 - 6^2} = \\sqrt{64} = 8$. The value $2\\sqrt{34}$ adds the squares as if the diameter were a leg, but the side across from the right angle is the diameter.`,
+    },
+    {
+      slot: 12,
+      difficulty: 'hard',
+      stem: `Two secants are drawn to a circle from an outside point $P$. The far arc between them measures $130^\\circ$ and the near arc between them measures $30^\\circ$. What is the measure of the angle at $P$?`,
+      choices: [
+        no(`$100^\\circ$`, 'subtracted-arcs-without-halving'),
+        no(`$80^\\circ$`, 'averaged-the-arcs'),
+        no(`$65^\\circ$`, 'used-only-the-far-arc'),
+        ok(`$50^\\circ$`),
+      ],
+      solution: `An angle formed outside a circle by two secants is half the difference of the intercepted arcs: $\\frac{130^\\circ - 30^\\circ}{2} = 50^\\circ$. The value $80^\\circ$ is half the sum, which is the rule for chords meeting inside the circle.`,
+    },
+    {
+      slot: 13,
+      difficulty: 'medium',
+      stem: `A circle has radius $10$. Chords $AB$ and $CD$ are each $12$ units long. How far is chord $CD$ from the center of the circle?`,
+      choices: [
+        ok(`$8$`),
+        no(`$4$`, 'subtracted-lengths'),
+        no(`$6$`, 'gave-half-the-chord'),
+        no(`$64$`, 'forgot-the-square-root'),
+      ],
+      solution: `The perpendicular from the center bisects the chord into halves of $6$, and the radius $10$ is the hypotenuse, so the distance is $\\sqrt{10^2 - 6^2} = 8$. Congruent chords are the same distance from the center, so both chords are $8$ units away. The value $4$ comes from $10 - 6$, which skips the Pythagorean Theorem.`,
+    },
+    {
+      slot: 14,
+      difficulty: 'medium',
+      stem: `A circle with center $O$ has radius $8$. A tangent segment from an outside point $P$ touches the circle at $A$, and $PA = 15$. What is the distance $OP$?`,
+      choices: [
+        no(`$23$`, 'added-side-lengths'),
+        no(`$\\sqrt{161}$`, 'subtracted-the-squares'),
+        ok(`$17$`),
+        no(`$289$`, 'forgot-the-square-root'),
+      ],
+      solution: `The radius $OA$ is perpendicular to the tangent at $A$, so triangle $OAP$ is a right triangle with hypotenuse $OP$. Then $OP = \\sqrt{8^2 + 15^2} = \\sqrt{289} = 17$. The value $\\sqrt{161}$ subtracts the squares, which would treat $OP$ as a leg.`,
+    },
+    {
+      slot: 15,
+      difficulty: 'medium',
+      stem: `Points $A$, $B$ and $C$ lie on a circle. Arc $AB$ (not containing $C$) measures $84^\\circ$ and arc $BC$ (not containing $A$) measures $146^\\circ$. What is the measure of $\\angle ABC$?`,
+      choices: [
+        no(`$130^\\circ$`, 'forgot-to-halve-the-arc'),
+        ok(`$65^\\circ$`),
+        no(`$115^\\circ$`, 'used-the-arcs-beside-the-angle'),
+        no(`$73^\\circ$`, 'used-arc-across-from-another-vertex'),
+      ],
+      solution: `Angle $ABC$ intercepts arc $AC$, the arc that does not contain $B$. That arc is $360^\\circ - 84^\\circ - 146^\\circ = 130^\\circ$, so $\\angle ABC = 130^\\circ \\div 2 = 65^\\circ$. The value $115^\\circ$ halves the two arcs that touch $B$, but an inscribed angle uses the arc across from it.`,
+    },
+    {
+      slot: 16,
+      difficulty: 'medium',
+      stem: `Which statement about chords of a circle is always true?`,
+      choices: [
+        no(`Every chord passes through the center of the circle.`, 'confused-chord-with-diameter'),
+        no(`A longer chord is farther from the center than a shorter chord.`, 'reversed-chord-distance-relationship'),
+        ok(`The perpendicular bisector of any chord passes through the center of the circle.`),
+        no(`An inscribed angle that intercepts a chord's arc equals the central angle for that arc.`, 'inscribed-equals-central'),
+      ],
+      solution: `The center is the same distance from both endpoints of a chord, and the points that are equally far from two points lie on their perpendicular bisector. So the perpendicular bisector of any chord passes through the center. Only a diameter passes through the center, and a longer chord is closer to the center, not farther.`,
+    },
+    {
+      slot: 17,
+      difficulty: 'hard',
+      stem: `An inscribed angle measures $(2x + 10)^\\circ$ and a central angle that intercepts the same arc measures $(5x - 10)^\\circ$. What is the measure of the central angle?`,
+      choices: [
+        no(`$30^\\circ$`, 'gave-x-instead-of-the-angle'),
+        no(`$70^\\circ$`, 'gave-the-inscribed-angle'),
+        ok(`$140^\\circ$`),
+        no(`$220^\\circ$`, 'gave-the-major-arc'),
+      ],
+      solution: `A central angle is twice an inscribed angle on the same arc: $5x - 10 = 2(2x + 10)$, so $5x - 10 = 4x + 20$ and $x = 30$. The central angle is $5 \\cdot 30 - 10 = 140^\\circ$. The value $70^\\circ$ is the inscribed angle, $2 \\cdot 30 + 10$, not the central one.`,
+    },
+    {
+      slot: 18,
+      difficulty: 'hard',
+      stem: `Tangent segments $PA$ and $PB$ touch a circle at $A$ and $B$. The circumscribed angle $\\angle APB$ measures $(2x + 4)^\\circ$ and minor arc $AB$ measures $(3x + 16)^\\circ$. What is the measure of $\\angle APB$?`,
+      choices: [
+        ok(`$68^\\circ$`),
+        no(`$32^\\circ$`, 'gave-x-instead-of-the-angle'),
+        no(`$20^\\circ$`, 'treated-circumscribed-as-inscribed'),
+        no(`$140^\\circ$`, 'used-360-instead-of-180'),
+      ],
+      solution: `A circumscribed angle and the central angle of its minor arc are supplementary, since the two radii meet the tangents at right angles. So $2x + 4 + 3x + 16 = 180$, giving $5x = 160$ and $x = 32$. Then $\\angle APB = 2 \\cdot 32 + 4 = 68^\\circ$. The value $20^\\circ$ comes from setting the angle equal to half the arc, which is the rule for inscribed angles.`,
+    },
+    {
+      slot: 19,
+      difficulty: 'hard',
+      stem: `Two chords of a circle intersect. One chord is cut into pieces of length $x$ and $x + 5$, and the other chord is cut into pieces of length $6$ and $4$. What is the total length of the chord with pieces $x$ and $x + 5$?`,
+      choices: [
+        no(`$3$`, 'gave-x-instead-of-the-chord'),
+        no(`$10$`, 'set-chord-lengths-equal'),
+        ok(`$11$`),
+        no(`$21$`, 'sign-error-in-factored-root'),
+      ],
+      solution: `The products of the pieces are equal: $x(x + 5) = 6 \\cdot 4 = 24$, so $x^2 + 5x - 24 = 0$ and $(x + 8)(x - 3) = 0$. A length must be positive, so $x = 3$, and the chord is $3 + 8 = 11$. The value $21$ uses $x = 8$, which reverses the sign of the root $x = -8$.`,
+    },
+    {
+      slot: 20,
+      difficulty: 'hard',
+      stem: `A line is tangent to a circle at point $A$, and chord $AB$ makes a $58^\\circ$ angle with the tangent. Point $C$ is on the circle, on the arc $AB$ that lies outside that angle. What is the measure of $\\angle ACB$?`,
+      choices: [
+        no(`$116^\\circ$`, 'gave-the-arc-measure'),
+        ok(`$58^\\circ$`),
+        no(`$29^\\circ$`, 'halved-twice'),
+        no(`$122^\\circ$`, 'used-supplementary-angles'),
+      ],
+      solution: `The tangent and chord angle is half its intercepted arc, so arc $AB$ inside the angle is $2 \\cdot 58^\\circ = 116^\\circ$. Angle $ACB$ is inscribed and intercepts that same arc, so it is $116^\\circ \\div 2 = 58^\\circ$. The value $116^\\circ$ is the arc itself, not the inscribed angle.`,
+    },
+  ],
+}
+
+export default skill
