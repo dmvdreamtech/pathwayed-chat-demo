@@ -1,7 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 import { getCombinedSystemPrompt, type Mode, type StudentContext } from "./prompts.js"
-import { requireUser, requireOwnedStudent, requireLearningAccess } from "./require-auth.js"
+import { requireUser, requireOwnedStudent, requireLearningOrPrepSkillAccess } from "./require-auth.js"
 import { rateLimit } from "./rate-limit.js"
 
 interface ChatMessage {
@@ -42,8 +42,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // sessions by the time a request is made — see require-auth.ts.
   const auth = await requireUser(req, res)
   if (!auth) return
-  // Learning features need an active plan, trial or school coverage (0033).
-  if (!(await requireLearningAccess(res, auth))) return
+  // Learning access (plan, trial or school coverage, 0033) is checked below, once
+  // the body is read: a prep-only family may run a lesson on a skill its prep
+  // module uses (the prep Train tab), which needs the student and the skill.
 
   // Per-user cap. Cheap, in-memory, per-instance; see rate-limit.ts for what that
   // does and does not buy.
@@ -67,6 +68,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!mode) {
       return res.status(400).json({ error: "Mode is required" })
     }
+
+    // ACCESS. A plan, trial or school coverage opens every mode. Without one, only
+    // a kid-tutor lesson on a skill this child's active prep module uses
+    // (can_practice_skill, the same rule that grades their prep practice).
+    const prepSkill = mode === "kid-tutor" ? context?.focusSkill : undefined
+    if (!(await requireLearningOrPrepSkillAccess(res, auth, studentId, prepSkill))) return
 
     // AUTHORIZATION. A tutoring turn is ABOUT a specific child, and the prompt is
     // built from that child's name, grade, and level. Confirm the caller owns them

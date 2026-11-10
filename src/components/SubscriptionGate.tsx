@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react'
-import { useParams } from 'react-router'
+import { useParams, useSearchParams } from 'react-router'
 import { useAuth } from '@/context/AuthContext'
 import { isSchoolCovered } from '@/lib/schoolSession'
 import { getSubscription, type Subscription } from '@/lib/profile'
@@ -41,16 +41,22 @@ export function SubscriptionGate({
 }: {
   children: ReactNode
   /**
-   * On a Practice route (/students/:id/practice/:skill): also let through a child
-   * who has an active prep entitlement for a module that uses this skill, so a
-   * prep-only family can use prep Train/Practice. The server checks the same rule
-   * when each answer is submitted (can_practice_skill, migration 0033).
+   * On a Practice route (/students/:id/practice/:skill) or a skill lesson
+   * (/students/:id/session/:subject?skill=<slug>, the prep Train tab): also let
+   * through a child who has an active prep entitlement for a module that uses
+   * this skill, so a prep-only family can use prep Train and Practice. The server
+   * checks the same rule (can_practice_skill, migration 0033) on each answer and
+   * on each Nikki turn (api/chat.ts).
    */
   allowPrepSkill?: boolean
 }) {
   const { user } = useAuth()
   const sessionCovered = isSchoolCovered()
-  const { id: routeStudentId, skill: routeSkill } = useParams<{ id?: string; skill?: string }>()
+  const { id: routeStudentId, skill: pathSkill } = useParams<{ id?: string; skill?: string }>()
+  const [searchParams] = useSearchParams()
+  // Practice carries the skill in the path; a lesson carries it as ?skill=. A
+  // homework lesson is never a prep lesson.
+  const routeSkill = pathSkill ?? (searchParams.get('mode') === 'homework' ? null : searchParams.get('skill')) ?? undefined
   const wantsPrep = allowPrepSkill && !!routeStudentId && !!routeSkill
   // Whether the prep entitlement opens this route. Null until it has been read.
   const [prepAllowed, setPrepAllowed] = useState<boolean | null>(null)

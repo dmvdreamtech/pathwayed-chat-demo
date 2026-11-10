@@ -211,6 +211,116 @@ export async function requireOwnedStudent(
  * FAILS CLOSED: a failed check answers 503 rather than letting the call through.
  * On failure this SENDS the response and returns false.
  */
+// Prep entitlement statuses that grant access. Same set as ACTIVE_PREP_STATUSES
+// (src/lib/prep/access.ts) and can_practice_skill (migration 0033).
+const PREP_ACTIVE_STATUSES = ["active", "past_due"]
+
+/** account_has_learning_access, or "error" when the check itself failed. */
+async function learningAccess(auth: AuthedCaller): Promise<boolean | "error"> {
+  const { data, error } = await auth.svc.rpc("account_has_learning_access", { p_user_id: auth.userId })
+  if (error) {
+    console.error("learning access check failed", { error: error.message, userId: auth.userId })
+    return "error"
+  }
+  return data === true
+}
+
+/**
+ * Like requireLearningAccess, but a prep-only family (HSPT/ISEE/SAT bought on its
+ * own, no subscription) also gets through for a lesson on a skill its prep module
+ * uses: the prep Train tab is a Nikki lesson. The database decides with the same
+ * rule that grades their practice answers (can_practice_skill, migration 0033):
+ * the caller must own the student, and the student must hold an active prep
+ * entitlement for a module whose sections list that skill.
+ *
+ * FAILS CLOSED (503 on any failed read). On failure this SENDS the response and
+ * returns false.
+ */
+export async function requireLearningOrPrepSkillAccess(
+  res: VercelResponse,
+  auth: AuthedCaller,
+  studentId: unknown,
+  skillSlug: unknown,
+): Promise<boolean> {
+  const learning = await learningAccess(auth)
+  if (learning === "error") {
+    res.status(503).json({ error: "access_check_failed" })
+    return false
+  }
+  if (learning) return true
+
+  if (typeof studentId === "string" && studentId && typeof skillSlug === "string" && skillSlug) {
+    if (await ownsStudent(auth.svc, auth.userId, studentId)) {
+      const { data: skill, error: skillError } = await auth.svc
+        .from("skills")
+        .select("id")
+        .eq("slug", skillSlug)
+        .maybeSingle()
+      if (skillError) {
+        console.error("prep skill lookup failed", { error: skillError.message, skillSlug })
+        res.status(503).json({ error: "access_check_failed" })
+        return false
+      }
+      if (skill?.id) {
+        const { data: ok, error } = await auth.svc.rpc("can_practice_skill", {
+          p_student_id: studentId,
+          p_skill_id: skill.id,
+        })
+        if (error) {
+          console.error("can_practice_skill check failed", { error: error.message, studentId, skillSlug })
+          res.status(503).json({ error: "access_check_failed" })
+          return false
+        }
+        if (ok === true) return true
+      }
+    }
+  }
+  res.status(403).json({ error: "subscription_required" })
+  return false
+}
+
+/**
+ * Like requireLearningAccess, but also lets through an account with an active prep
+ * entitlement on any of its children. For the helpers a prep lesson or prep
+ * practice uses that carry no student or skill: Nikki's voice (tts), speaking to
+ * her (transcribe) and the workspace flashcards.
+ *
+ * FAILS CLOSED (503 on any failed read). On failure this SENDS the response and
+ * returns false.
+ */
+export async function requireLearningOrAnyPrepAccess(res: VercelResponse, auth: AuthedCaller): Promise<boolean> {
+  const learning = await learningAccess(auth)
+  if (learning === "error") {
+    res.status(503).json({ error: "access_check_failed" })
+    return false
+  }
+  if (learning) return true
+
+  const { data: kids, error: kidsError } = await auth.svc.from("students").select("id").eq("parent_id", auth.userId)
+  if (kidsError) {
+    console.error("prep access: students read failed", { error: kidsError.message, userId: auth.userId })
+    res.status(503).json({ error: "access_check_failed" })
+    return false
+  }
+  const ids = (kids ?? []).map((k: { id: string }) => k.id)
+  if (ids.length) {
+    const { data: ents, error } = await auth.svc
+      .from("prep_entitlements")
+      .select("id")
+      .in("student_id", ids)
+      .in("status", PREP_ACTIVE_STATUSES)
+      .limit(1)
+    if (error) {
+      console.error("prep access: entitlements read failed", { error: error.message, userId: auth.userId })
+      res.status(503).json({ error: "access_check_failed" })
+      return false
+    }
+    if ((ents ?? []).length > 0) return true
+  }
+  res.status(403).json({ error: "subscription_required" })
+  return false
+}
+
 export async function requireLearningAccess(res: VercelResponse, auth: AuthedCaller): Promise<boolean> {
   const { data, error } = await auth.svc.rpc("account_has_learning_access", { p_user_id: auth.userId })
   if (error) {

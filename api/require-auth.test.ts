@@ -5,6 +5,8 @@ import {
   ownsStudent,
   requireCronSecret,
   requireLearningAccess,
+  requireLearningOrAnyPrepAccess,
+  requireLearningOrPrepSkillAccess,
   requireOwnedStudent,
   type AuthedCaller,
 } from "./require-auth.js"
@@ -177,6 +179,142 @@ describe("requireLearningAccess", () => {
     const { auth } = caller({ data: null, error: { message: "boom" } })
     const { res, sent } = fakeRes()
     expect(await requireLearningAccess(res, auth)).toBe(false)
+    expect(sent.status).toBe(503)
+  })
+})
+
+// ---------------------------------------------------------------------------
+// Prep-only access (prep Train lessons and the voice/flashcard helpers)
+// ---------------------------------------------------------------------------
+
+type Result = { data: unknown; error: unknown }
+
+/**
+ * A service client stand-in: rpc(name) answers from `rpcs`, and from(table)
+ * returns a chain (select/eq/in/limit) that resolves to `tables[table]`, awaited
+ * or via maybeSingle. `calls` records which rpc names were called.
+ */
+function prepSvc(rpcs: Record<string, Result>, tables: Record<string, Result>) {
+  const calls: string[] = []
+  const chain = (r: Result) => {
+    const c: Record<string, unknown> = {}
+    for (const m of ["select", "eq", "in", "limit"]) c[m] = () => c
+    c.maybeSingle = () => Promise.resolve(r)
+    c.then = (ok: (v: Result) => unknown, bad?: (e: unknown) => unknown) => Promise.resolve(r).then(ok, bad)
+    return c
+  }
+  const client = {
+    rpc: (name: string) => {
+      calls.push(name)
+      return Promise.resolve(rpcs[name] ?? { data: null, error: { message: `unexpected rpc ${name}` } })
+    },
+    from: (table: string) => chain(tables[table] ?? { data: null, error: { message: `unexpected table ${table}` } }),
+  }
+  return { client: client as never, calls }
+}
+
+const caller = (svc: never): AuthedCaller => ({ userId: "parent-1", email: null, svc })
+const NO_PLAN = { data: false, error: null }
+
+describe("requireLearningOrPrepSkillAccess", () => {
+  it("lets a subscriber through without any prep reads", async () => {
+    const { client, calls } = prepSvc({ account_has_learning_access: { data: true, error: null } }, {})
+    const { res, sent } = fakeRes()
+    expect(await requireLearningOrPrepSkillAccess(res, caller(client), "kid-1", "main-idea")).toBe(true)
+    expect(sent.status).toBeUndefined()
+    expect(calls).toEqual(["account_has_learning_access"])
+  })
+
+  it("lets a prep-only family through for a skill its module uses", async () => {
+    const { client, calls } = prepSvc(
+      { account_has_learning_access: NO_PLAN, can_practice_skill: { data: true, error: null } },
+      { students: { data: { id: "kid-1" }, error: null }, skills: { data: { id: "skill-1" }, error: null } },
+    )
+    const { res, sent } = fakeRes()
+    expect(await requireLearningOrPrepSkillAccess(res, caller(client), "kid-1", "read-g6-vocabulary-in-context")).toBe(true)
+    expect(sent.status).toBeUndefined()
+    expect(calls).toEqual(["account_has_learning_access", "can_practice_skill"])
+  })
+
+  it("refuses a prep-only family on a skill outside its module", async () => {
+    const { client } = prepSvc(
+      { account_has_learning_access: NO_PLAN, can_practice_skill: { data: false, error: null } },
+      { students: { data: { id: "kid-1" }, error: null }, skills: { data: { id: "skill-1" }, error: null } },
+    )
+    const { res, sent } = fakeRes()
+    expect(await requireLearningOrPrepSkillAccess(res, caller(client), "kid-1", "quadratic-functions")).toBe(false)
+    expect(sent).toEqual({ status: 403, body: { error: "subscription_required" } })
+  })
+
+  it("refuses without a skill (homework and open chat need a plan)", async () => {
+    const { client, calls } = prepSvc({ account_has_learning_access: NO_PLAN }, {})
+    const { res, sent } = fakeRes()
+    expect(await requireLearningOrPrepSkillAccess(res, caller(client), "kid-1", undefined)).toBe(false)
+    expect(sent.status).toBe(403)
+    expect(calls).toEqual(["account_has_learning_access"])
+  })
+
+  it("refuses someone else's child before asking about the skill", async () => {
+    const { client, calls } = prepSvc(
+      { account_has_learning_access: NO_PLAN, can_practice_skill: { data: true, error: null } },
+      { students: { data: null, error: null } },
+    )
+    const { res, sent } = fakeRes()
+    expect(await requireLearningOrPrepSkillAccess(res, caller(client), "not-mine", "main-idea")).toBe(false)
+    expect(sent.status).toBe(403)
+    expect(calls).not.toContain("can_practice_skill")
+  })
+
+  it("FAILS CLOSED when a check errors", async () => {
+    const planDown = prepSvc({ account_has_learning_access: { data: null, error: { message: "down" } } }, {})
+    const a = fakeRes()
+    expect(await requireLearningOrPrepSkillAccess(a.res, caller(planDown.client), "kid-1", "main-idea")).toBe(false)
+    expect(a.sent).toEqual({ status: 503, body: { error: "access_check_failed" } })
+
+    const prepDown = prepSvc(
+      { account_has_learning_access: NO_PLAN, can_practice_skill: { data: null, error: { message: "down" } } },
+      { students: { data: { id: "kid-1" }, error: null }, skills: { data: { id: "skill-1" }, error: null } },
+    )
+    const b = fakeRes()
+    expect(await requireLearningOrPrepSkillAccess(b.res, caller(prepDown.client), "kid-1", "main-idea")).toBe(false)
+    expect(b.sent.status).toBe(503)
+  })
+})
+
+describe("requireLearningOrAnyPrepAccess", () => {
+  it("lets a subscriber through", async () => {
+    const { client } = prepSvc({ account_has_learning_access: { data: true, error: null } }, {})
+    const { res } = fakeRes()
+    expect(await requireLearningOrAnyPrepAccess(res, caller(client))).toBe(true)
+  })
+
+  it("lets an account with an active prep entitlement through", async () => {
+    const { client } = prepSvc(
+      { account_has_learning_access: NO_PLAN },
+      { students: { data: [{ id: "kid-1" }], error: null }, prep_entitlements: { data: [{ id: "e-1" }], error: null } },
+    )
+    const { res, sent } = fakeRes()
+    expect(await requireLearningOrAnyPrepAccess(res, caller(client))).toBe(true)
+    expect(sent.status).toBeUndefined()
+  })
+
+  it("refuses an account with no plan and no active prep", async () => {
+    const { client } = prepSvc(
+      { account_has_learning_access: NO_PLAN },
+      { students: { data: [{ id: "kid-1" }], error: null }, prep_entitlements: { data: [], error: null } },
+    )
+    const { res, sent } = fakeRes()
+    expect(await requireLearningOrAnyPrepAccess(res, caller(client))).toBe(false)
+    expect(sent).toEqual({ status: 403, body: { error: "subscription_required" } })
+  })
+
+  it("FAILS CLOSED when the entitlement read errors", async () => {
+    const { client } = prepSvc(
+      { account_has_learning_access: NO_PLAN },
+      { students: { data: [{ id: "kid-1" }], error: null }, prep_entitlements: { data: null, error: { message: "down" } } },
+    )
+    const { res, sent } = fakeRes()
+    expect(await requireLearningOrAnyPrepAccess(res, caller(client))).toBe(false)
     expect(sent.status).toBe(503)
   })
 })
