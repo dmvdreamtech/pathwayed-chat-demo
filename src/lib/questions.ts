@@ -158,6 +158,47 @@ export async function fetchPracticeQuestions(skillSlug: string, limit: number): 
 }
 
 /**
+ * Which of these skill slugs a student can practice right now: the skill exists
+ * and has at least one PUBLISHED question. Used by pickers that list skills from
+ * a static map (prep question types), so they never offer a set that would open
+ * an empty Practice screen.
+ *
+ * Returns null when the answer is unknown (a read failed). Callers then show
+ * everything, and Practice's own fallback to a Nikki lesson still catches a gap.
+ */
+export async function fetchPracticeableSlugs(slugs: string[]): Promise<Set<string> | null> {
+  const unique = [...new Set(slugs)]
+  if (!unique.length) return new Set()
+  // Read the skills here rather than through resolveSkillIdsBySlug, which returns
+  // an empty map on a failed read; that would look like "no skill" and hide everything.
+  const { data: skillRows, error: skillError } = await supabase.from('skills').select('id, slug').in('slug', unique)
+  if (skillError) {
+    console.error('fetchPracticeableSlugs: skills read failed', skillError)
+    return null
+  }
+  const idBySlug = new Map((skillRows ?? []).filter((r) => r.slug).map((r) => [r.slug as string, r.id as string]))
+  const checks = await Promise.all(
+    unique.map(async (slug) => {
+      const skillId = idBySlug.get(slug)
+      if (!skillId) return { slug, ok: false, failed: false }
+      const { data, error } = await supabase
+        .from('generated_questions')
+        .select('id')
+        .eq('skill_id', skillId)
+        .eq('status', 'published')
+        .limit(1)
+      if (error) {
+        console.error('fetchPracticeableSlugs failed', { slug, error })
+        return { slug, ok: false, failed: true }
+      }
+      return { slug, ok: (data ?? []).length > 0, failed: false }
+    }),
+  )
+  if (checks.some((c) => c.failed)) return null
+  return new Set(checks.filter((c) => c.ok).map((c) => c.slug))
+}
+
+/**
  * Published skills plus this student's evidence, for the grade-position panel.
  * One place so the panel cannot drift from what the picker considers published.
  *

@@ -22,6 +22,7 @@ import { useAnswerWrites } from '@/hooks/useAnswerWrites'
 import { speakWithNikki, stopNikkiSpeech } from '@/lib/voice'
 import '@/styles/app-screens.css'
 import { spokenPictureItem } from '@/lib/pictureModel'
+import { nikkiLessonFor, nikkiLessonPath, type NikkiLesson } from '@/lib/practiceFallback'
 
 /**
  * Assemble the read-aloud text for a served question. For audio-picture (K-2)
@@ -60,6 +61,8 @@ export function Practice() {
   const [shownAt, setShownAt] = useState(0)
   const [done, setDone] = useState(false)
   const [saving, setSaving] = useState(false)
+  // Set only when there are no questions: the Nikki lesson to fall back to.
+  const [lesson, setLesson] = useState<NikkiLesson | null>(null)
   // The end of the set waits for these so the database scores exactly the
   // answers this set recorded.
   const answerWrites = useAnswerWrites()
@@ -90,6 +93,13 @@ export function Practice() {
         navigate('/students', { replace: true })
         return
       }
+      // Nothing to practice: work out the Nikki lesson for this skill before the
+      // empty state renders, so its button already knows where to go.
+      if (qs.length === 0) {
+        const l = await nikkiLessonFor(skillSlug)
+        if (!active) return
+        setLesson(l)
+      }
       setStudent(s)
       setQuestions(qs)
       setShownAt(Date.now())
@@ -110,15 +120,27 @@ export function Practice() {
   }
 
   if (questions.length === 0) {
+    // No published set for this skill (yet). Never a dead end: Nikki teaches the
+    // same skill instead, and the practice set shows up here once it exists.
+    const lessonPath = nikkiLessonPath(student.id, skillSlug, lesson?.subject ?? null)
     return (
       <div className="kid-screen">
         <div className="shell">
           <TopMenu />
-          <h1 className="greet">Practice</h1>
-          <p className="muted">No practice questions are ready yet, check back soon!</p>
-          <button className="btn btn-navy" onClick={() => navigate(`/students/${student.id}`)}>
-            Back to my dashboard
-          </button>
+          <h1 className="greet">Let’s learn this one with Nikki first</h1>
+          <p className="muted">
+            {lesson
+              ? `The practice set for ${lesson.label} is still on its way. Nikki can teach it to you right now, one step at a time.`
+              : 'Getting things ready…'}
+          </p>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 8 }}>
+            <button className="btn btn-primary" disabled={!lesson} onClick={() => navigate(lessonPath)}>
+              {lesson?.subject ? 'Learn it with Nikki' : 'Pick a lesson with Nikki'}
+            </button>
+            <button className="btn btn-soft" onClick={() => navigate(`/students/${student.id}`)}>
+              Back to my dashboard
+            </button>
+          </div>
         </div>
       </div>
     )

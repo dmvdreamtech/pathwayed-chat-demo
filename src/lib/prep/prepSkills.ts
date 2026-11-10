@@ -30,8 +30,10 @@ export const PREP_SKILLS: Record<string, PrepSkillRef> = {
   reading_comprehension: { slug: 'main-idea', sessionSubject: 'reading' },
   main_idea: { slug: 'main-idea', sessionSubject: 'reading' },
   supporting_details: { slug: 'evidence-based-reading', sessionSubject: 'reading' },
-  inference: { slug: 'inference', sessionSubject: 'reading' },
-  vocabulary_in_context: { slug: 'author-purpose', sessionSubject: 'reading' }, // THIN: no vocab-in-context skill yet
+  // 'inference' had no skill row. Evidence-Based Reading (grade 9, passage-based)
+  // covers inference by spec and already stands in for supporting_details.
+  inference: { slug: 'evidence-based-reading', sessionSubject: 'reading' },
+  vocabulary_in_context: { slug: 'read-g6-vocabulary-in-context', sessionSubject: 'reading' }, // grades 6-8 words in context (migration 0046)
 
   // ---- REAL EXISTING (achievement math section) ----
   arithmetic: { slug: 'multiplication', sessionSubject: 'math' },
@@ -45,7 +47,9 @@ export const PREP_SKILLS: Record<string, PrepSkillRef> = {
   grammar_usage: { slug: 'modifier-placement', sessionSubject: 'writing' },
   punctuation: { slug: 'advanced-punctuation', sessionSubject: 'writing' },
   capitalization: { slug: 'advanced-punctuation', sessionSubject: 'writing' }, // THIN: no capitalization skill
-  spelling: { slug: 'author-purpose', sessionSubject: 'reading' }, // THIN: no spelling skill
+  // spelling: deliberately UNMAPPED, so its card is hidden. It pointed at
+  // 'author-purpose', which does not exist. The write-g*-spelling skills are K-5
+  // drafts with nothing published; map it here once a grade 6-8 set is published.
   composition: { slug: 'modifier-placement', sessionSubject: 'writing' }, // THIN: essay handled separately later
 
   // ---- REAL PREP (authored, iteration 2) ----

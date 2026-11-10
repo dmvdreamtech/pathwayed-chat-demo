@@ -23,6 +23,7 @@ import { getAvatarLarge, isAvatarCompact, setAvatarLarge } from '@/lib/avatarSiz
 import { stripMarkdownForTTS } from '@/lib/stripMarkdownForTTS'
 import { transcribeAudio, NO_SPEECH_MESSAGE } from '@/lib/transcribe'
 import { buildTranscriptionPrompt } from '@/lib/transcriptionPrompt'
+import { humanize } from '@/lib/practiceFallback'
 import '@/styles/app-screens.css'
 
 const VALID_SUBJECTS = new Set(['math', 'reading', 'writing', 'science', 'homework'])
@@ -93,6 +94,7 @@ export function Session() {
   const focusSlug = searchParams.get('skill')
   const isHomework = searchParams.get('mode') === 'homework'
   const fromSat = searchParams.get('from') === 'sat'
+  const fromPractice = searchParams.get('from') === 'practice'
   const navigate = useNavigate()
   const [ready, setReady] = useState<ReadyState | null>(null)
 
@@ -115,7 +117,9 @@ export function Session() {
       // chat can't render picture questions, so a pre-reader must never land here
       // as text — divert any k-2 skill lesson to the Practice audio-picture UI.
       // (SkillsBuilding already routes there; this guards every other entry.)
-      if (focusSlug && !isHomework && scopeBandForGrade(s.grade) === 'k-2') {
+      // Except when Practice sent them here because that skill has no practice set
+      // yet (from=practice): diverting back would loop, so Nikki teaches it.
+      if (focusSlug && !isHomework && !fromPractice && scopeBandForGrade(s.grade) === 'k-2') {
         navigate(`/students/${id}/practice/${encodeURIComponent(focusSlug)}`, { replace: true })
         return
       }
@@ -131,6 +135,12 @@ export function Session() {
         if (!active) return
       } else if (focusSlug && band && isScopeSubject(subject)) {
         focusLabel = skillLabel(band, subject, focusSlug)
+        // Not in the static lists (e.g. a coverage skill reached from Practice's
+        // fallback): use the taxonomy name rather than greet with the raw slug.
+        if (focusLabel === focusSlug) {
+          focusLabel = (await getSkillNameBySlug(focusSlug)) ?? humanize(focusSlug)
+          if (!active) return
+        }
       }
       // Writing-composition lessons run the writing studio: pick the original
       // prompt (stable per student+skill) shown in the writing space and coached
@@ -151,7 +161,7 @@ export function Session() {
     return () => {
       active = false
     }
-  }, [id, subject, focusSlug, isHomework, fromSat, navigate])
+  }, [id, subject, focusSlug, isHomework, fromSat, fromPractice, navigate])
 
   if (!ready || !subject) {
     return (

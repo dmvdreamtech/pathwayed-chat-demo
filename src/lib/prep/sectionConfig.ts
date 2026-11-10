@@ -8,8 +8,8 @@ import { prepSkillFor } from './prepSkills.js'
  *
  * Since migration 0033 the database picks a timed section's questions and its
  * time limit (prep_start_section), so it needs each section's question count,
- * time limit and skills. Migration 0033 seeds public.prep_section_config with
- * exactly the VALUES list this file produces, and sectionConfig.test.ts fails if
+ * time limit and skills. Migration 0033 seeded public.prep_section_config, and 0046
+ * re-seeds it, with exactly the VALUES list this file produces, and sectionConfig.test.ts fails if
  * the two drift. To change a section: edit the TypeScript module, then add a
  * migration that upserts the regenerated rows.
  *

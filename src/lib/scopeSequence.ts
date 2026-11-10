@@ -48,7 +48,18 @@ export const scopeSequence: Record<ScopeBand, Record<ScopeSubject, string[]>> = 
       'coordinate-plane',
     ],
     reading: ['vocabulary', 'main-idea', 'reading-comprehension', 'story-elements'],
-    writing: ['sentence-writing', 'short-response', 'paragraph-writing', 'creative-writing'],
+    // Every slug has published questions (grade 4-5 conventions), except
+    // paragraph-writing: the Nikki writing studio, coached with no question bank.
+    // It goes last because it can never be marked known. Removed 2026-11-09
+    // (no published questions, so the walk stalled on them): sentence-writing,
+    // short-response, creative-writing.
+    writing: [
+      'punctuation-basics',
+      'sentence-structure',
+      'subject-verb-agreement',
+      'verb-tense-and-form',
+      'paragraph-writing',
+    ],
   },
   '6-8': {
     // Grade-7 skills (rational-number-operations … probability-models) added with
@@ -77,8 +88,13 @@ export const scopeSequence: Record<ScopeBand, Record<ScopeSubject, string[]>> = 
       'pythagorean-theorem',
       'transformations-8',
     ],
-    reading: ['vocabulary-in-context', 'inference', 'text-analysis', 'author-purpose'],
-    writing: ['essay-writing', 'research-skills', 'persuasive-writing', 'narrative-writing'],
+    // Removed 2026-11-09, no skill row at all, so the walk stalled on them:
+    // inference, text-analysis, author-purpose (reading); essay-writing,
+    // research-skills, persuasive-writing, narrative-writing (writing). Add them
+    // back as each gets a published set. Writing is the grade 6-7 conventions
+    // skills that have one.
+    reading: ['read-g6-vocabulary-in-context'],
+    writing: ['pronoun-agreement', 'sentence-boundaries', 'modifier-placement'],
   },
   '9-12': {
     // Full HS band, grade-ordered, every slug question-backed (seeds 0011 + 0012):
@@ -113,13 +129,9 @@ export const scopeSequence: Record<ScopeBand, Record<ScopeSubject, string[]>> = 
       'conic-sections',
       'combinatorics-probability',
     ],
-    reading: [
-      'evidence-based-reading',
-      'critical-analysis',
-      'rhetorical-analysis',
-      'source-evaluation',
-      'literary-devices',
-    ],
+    // Removed 2026-11-09, no skill row (the walk stalled on them): critical-analysis,
+    // rhetorical-analysis, source-evaluation, literary-devices.
+    reading: ['evidence-based-reading', 'read-g9-vocabulary-in-context'],
     writing: [
       // Standard-English-Conventions skills lead the HS writing track: these are
       // the only HS writing skills with a published question bank (20 each), so
@@ -130,11 +142,8 @@ export const scopeSequence: Record<ScopeBand, Record<ScopeSubject, string[]>> = 
       'possessives-and-apostrophes',
       'modifier-placement',
       'sentence-boundaries',
-      'writing-structure',
-      'thesis-development',
-      'argumentative-essays',
-      'analytical-writing',
-      'research-papers',
+      // Removed 2026-11-09: writing-structure (0 published), thesis-development,
+      // argumentative-essays, analytical-writing, research-papers (no skill row).
     ],
   },
 }

@@ -32,11 +32,14 @@ export const focusAreasByGrade: Record<GradeBand, {
       { value: 'reading-comprehension', label: 'Reading Comprehension' },
       { value: 'story-elements', label: 'Story Elements' },
     ],
+    // Lockstep with scopeSequence['3-5'].writing. Paragraph Writing is the Nikki
+    // writing studio (no question bank by design); the rest have published sets.
     writing: [
-      { value: 'sentence-writing', label: 'Sentence Writing' },
-      { value: 'short-response', label: 'Short Response' },
+      { value: 'punctuation-basics', label: 'Commas & End Punctuation' },
+      { value: 'sentence-structure', label: 'Sentence Structure' },
+      { value: 'subject-verb-agreement', label: 'Subject-Verb Agreement' },
+      { value: 'verb-tense-and-form', label: 'Verb Tense & Form' },
       { value: 'paragraph-writing', label: 'Paragraph Writing' },
-      { value: 'creative-writing', label: 'Creative Writing' },
     ],
   },
   '6-8': {
@@ -64,17 +67,14 @@ export const focusAreasByGrade: Record<GradeBand, {
       { value: 'pythagorean-theorem', label: 'Pythagorean Theorem' },
       { value: 'transformations-8', label: 'Transformations' },
     ],
-    reading: [
-      { value: 'inference', label: 'Inference' },
-      { value: 'text-analysis', label: 'Text Analysis' },
-      { value: 'vocabulary-in-context', label: 'Vocabulary in Context' },
-      { value: 'author-purpose', label: "Author's Purpose" },
-    ],
+    // Only skills with a published set (2026-11-09). Inference, Text Analysis,
+    // Author's Purpose and the essay, persuasive, research and narrative writing
+    // entries had no skill row; add them back as each gets one.
+    reading: [{ value: 'read-g6-vocabulary-in-context', label: 'Vocabulary in Context' }],
     writing: [
-      { value: 'essay-writing', label: 'Essay Writing' },
-      { value: 'persuasive-writing', label: 'Persuasive Writing' },
-      { value: 'research-skills', label: 'Research Skills' },
-      { value: 'narrative-writing', label: 'Narrative Writing' },
+      { value: 'pronoun-agreement', label: 'Pronoun-Antecedent Agreement' },
+      { value: 'sentence-boundaries', label: 'Sentence Boundaries' },
+      { value: 'modifier-placement', label: 'Modifier Placement' },
     ],
   },
   '9-12': {
@@ -107,21 +107,15 @@ export const focusAreasByGrade: Record<GradeBand, {
       { value: 'conic-sections', label: 'Conic Sections' },
       { value: 'combinatorics-probability', label: 'Combinatorics & Probability' },
     ],
+    // Only skills with a published set (2026-11-09). Critical Analysis, Rhetorical
+    // Analysis, Literary Devices, Source Evaluation and the essay and research
+    // writing entries had no skill row; Writing Structure had no published questions.
     reading: [
-      { value: 'critical-analysis', label: 'Critical Analysis' },
-      { value: 'rhetorical-analysis', label: 'Rhetorical Analysis' },
-      { value: 'literary-devices', label: 'Literary Devices' },
-      { value: 'source-evaluation', label: 'Source Evaluation' },
       // SAT 6-12 ladder (seed 0002)
       { value: 'evidence-based-reading', label: 'Evidence-Based Reading' },
+      { value: 'read-g9-vocabulary-in-context', label: 'Vocabulary in Context' },
     ],
     writing: [
-      { value: 'argumentative-essays', label: 'Argumentative Essays' },
-      { value: 'research-papers', label: 'Research Papers' },
-      { value: 'analytical-writing', label: 'Analytical Writing' },
-      { value: 'thesis-development', label: 'Thesis Development' },
-      // SAT 6-12 ladder (seed 0002)
-      { value: 'writing-structure', label: 'Writing Structure' },
       // Standard-English-Conventions (seed 0005/0007) — the served HS writing bank
       { value: 'advanced-punctuation', label: 'Advanced Punctuation' },
       { value: 'possessives-and-apostrophes', label: 'Possessives & Apostrophes' },

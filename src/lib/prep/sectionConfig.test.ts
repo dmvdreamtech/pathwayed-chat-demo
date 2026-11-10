@@ -11,7 +11,8 @@ import { prepModulesUsingSkill } from './entitlements'
  * the countdown a student sees and the one the server enforces drift apart, so
  * this fails the moment either side changes alone.
  */
-const MIGRATION = join(process.cwd(), 'migrations', '0033_server_side_answer_keys.sql')
+// The LATEST migration that seeds prep_section_config (0033 first, re-seeded by 0046).
+const MIGRATION = join(process.cwd(), 'migrations', '0046_vocabulary_coverage.sql')
 
 describe('prep_section_config matches the TypeScript modules', () => {
   it('the migration seeds exactly the generated rows', () => {

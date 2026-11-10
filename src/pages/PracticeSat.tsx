@@ -14,6 +14,7 @@ import { recordSatMisses } from '@/lib/focusSkills'
 import { explainMisconception } from '@/lib/misconceptions'
 import { MathText } from '@/components/MathText'
 import { TopMenu } from '@/components/TopMenu'
+import { nikkiLessonPath } from '@/lib/practiceFallback'
 import '@/styles/app-screens.css'
 
 type Phase = 'loading' | 'intro' | 'test' | 'scoring' | 'done'
@@ -91,11 +92,22 @@ export function PracticeSat() {
       <div className="kid-screen">
         <div className="shell">
           <TopMenu />
-          <h1 className="greet">SAT Practice</h1>
-          <p className="muted">No practice questions are ready yet, check back soon!</p>
-          <button className="btn btn-navy" onClick={backToDashboard}>
-            Back to my dashboard
-          </button>
+          <h1 className="greet">Let’s warm up with Nikki first</h1>
+          <p className="muted">
+            This practice test is still being put together. Nikki can work through SAT words in context with you right
+            now.
+          </p>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 8 }}>
+            <button
+              className="btn btn-primary"
+              onClick={() => navigate(nikkiLessonPath(student.id, 'prep-sat-words-in-context', 'reading'))}
+            >
+              Learn with Nikki
+            </button>
+            <button className="btn btn-soft" onClick={backToDashboard}>
+              Back to my dashboard
+            </button>
+          </div>
         </div>
       </div>
     )

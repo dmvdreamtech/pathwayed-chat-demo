@@ -16,6 +16,7 @@ import { computePrepProgress, type PracticeEvidence, type PrepProgress } from '@
 import { daysUntilDate } from '@/lib/prep/entitlements'
 import { getSkillMastery } from '@/lib/mastery'
 import { resolveSkillIdsBySlug } from '@/lib/skills'
+import { fetchPracticeableSlugs } from '@/lib/questions'
 import { TopMenu } from '@/components/TopMenu'
 import '@/styles/app-screens.css'
 
@@ -67,6 +68,10 @@ export function PrepModuleHome() {
   // Slugs already at 'advanced' or 'mastered'. Keeps "what to work on next" from
   // sending a student back to a skill they have demonstrably cleared.
   const [clearedSlugs, setClearedSlugs] = useState<Set<string>>(new Set())
+  // Slugs with at least one published question. The Practice tab lists only
+  // these, so it never opens an empty set. null = not known (loading or a failed
+  // read): list everything, and Practice's own Nikki fallback covers a gap.
+  const [practiceable, setPracticeable] = useState<Set<string> | null>(null)
 
   const rawTab = searchParams.get('tab')
   const tab: Tab = TABS.some((t) => t.id === rawTab) ? (rawTab as Tab) : 'train'
@@ -110,6 +115,9 @@ export function PrepModuleHome() {
       ),
     )
     if (slugs.length === 0) return
+    fetchPracticeableSlugs(slugs).then((set) => {
+      if (active) setPracticeable(set)
+    })
     Promise.all([resolveSkillIdsBySlug(slugs), getSkillMastery(student.id)]).then(([idBySlug, mastery]) => {
       if (!active) return
       const evById = new Map<string, PracticeEvidence | null>(
@@ -154,15 +162,27 @@ export function PrepModuleHome() {
     )
   }
 
+  const canPractice = (slug: string | null | undefined) => !!slug && (practiceable === null || practiceable.has(slug))
+
   const launchType = (questionType: string) => {
     const ref = prepSkillFor(questionType)
     if (!ref || !id) return
-    if (tab === 'train') {
+    // A Practice tap on a type with no published set goes to the Nikki lesson on it.
+    if (tab === 'train' || !canPractice(ref.slug)) {
       navigate(`/students/${id}/session/${ref.sessionSubject}?skill=${encodeURIComponent(ref.slug)}`)
     } else {
       navigate(`/students/${id}/practice/${encodeURIComponent(ref.slug)}`)
     }
   }
+
+  // Train lists every mapped type (Nikki can teach any of them); Practice lists only the
+  // types with a published set, so no card opens an empty screen.
+  // A type with no skill mapped (spelling, word_problems) is hidden on both tabs.
+  const visibleTypes = (sec: PrepSection) =>
+    sec.questionTypes.filter((t) => {
+      const slug = prepSkillFor(t)?.slug
+      return tab === 'train' ? !!slug : canPractice(slug)
+    })
 
   const renderSections = () => (
     <div style={{ display: 'grid', gap: 14 }}>
@@ -173,11 +193,11 @@ export function PrepModuleHome() {
       </p>
       {/* Essay sections are excluded here, the essay is written through its own
           server-timed flow (Test tab -> Practice essay), never the MCQ Train/Practice. */}
-      {module.sections.filter((sec) => !sec.essay).map((sec: PrepSection) => (
+      {module.sections.filter((sec) => !sec.essay && visibleTypes(sec).length > 0).map((sec: PrepSection) => (
         <div key={sec.id} className="panel" style={{ padding: '14px 16px' }}>
           <h3 style={{ margin: '0 0 8px' }}>{sec.name}</h3>
           <div style={{ display: 'grid', gap: 6 }}>
-            {sec.questionTypes.map((type) => {
+            {visibleTypes(sec).map((type) => {
               const slug = prepSkillFor(type)?.slug ?? null
               const acc = slug ? slugAccuracy.get(slug)?.accuracy ?? null : null
               return (

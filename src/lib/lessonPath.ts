@@ -6,7 +6,8 @@ import { focusAreasByGrade } from '@/lib/focusAreas'
 import { scopeSequence, type ScopeBand, type ScopeSubject } from '@/lib/scopeSequence'
 import { isRecheckDue } from '@/lib/mastery'
 import { canPromoteToNextBand, type LadderStudent } from '@/lib/gradeLadder'
-import { listPracticeableSkills, fetchSkillEvidence } from '@/lib/questions'
+import { listPracticeableSkills, fetchSkillEvidence, fetchPracticeableSlugs } from '@/lib/questions'
+import { isCompositionSkill } from '@/lib/writingComposition'
 
 /**
  * Learning path — picks the day's lesson by walking the approved per-subject
@@ -78,6 +79,20 @@ export function skillLabel(band: ScopeBand, subject: ScopeSubject, slug: string)
  * mastered, returns the last skill with trackComplete=true (kept for review).
  * Returns null only when the grade has no track (k-2).
  */
+/**
+ * The track without slugs that cannot be taught to mastery: a skill counts as
+ * known only on graded evidence, and evidence needs published questions, so a
+ * slug with no skill row or no published set would hold the walk on itself
+ * forever. Writing-studio skills (COMPOSITION_SKILLS) are Nikki-coached with no
+ * question bank by design and stay in. If the read fails, the track is used
+ * as written (Practice's Nikki fallback still covers any gap).
+ */
+export async function teachableSequence(seq: string[]): Promise<string[]> {
+  const practiceable = await fetchPracticeableSlugs(seq.filter((s) => !isCompositionSkill(s)))
+  if (!practiceable) return seq
+  return seq.filter((s) => isCompositionSkill(s) || practiceable.has(s))
+}
+
 export async function nextLesson(
   studentId: string,
   student: LadderStudent,
@@ -85,7 +100,7 @@ export async function nextLesson(
 ): Promise<Lesson | null> {
   const band = scopeBandForGrade(student.grade)
   if (!band) return null
-  const seq = scopeSequence[band][subject]
+  const seq = await teachableSequence(scopeSequence[band][subject])
   if (!seq.length) return null
 
   const [idBySlug, focusIds, masteryRes] = await Promise.all([
@@ -202,7 +217,7 @@ async function promoteBand(
   const next = canPromoteToNextBand(student, band, subject, skills, evidence)
   if (!next) return null
 
-  const nextSeq = scopeSequence[next][subject]
+  const nextSeq = await teachableSequence(scopeSequence[next][subject])
   if (!nextSeq.length) return null
 
   const idBySlug = await resolveSkillIdsBySlug(nextSeq)
